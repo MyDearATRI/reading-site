@@ -1,0 +1,633 @@
+/* Reading OS vendored file atlas.css
+   Source: Atlas OS 0.2.2, "Atlas OS.html" lines 7-637 (sha256 0c9f4b58319f7303...).
+   Patches: none (each marked rdg: Pn). Do not edit by hand; regenerate with .scripts/os/vendor.py. */
+/* Layout: a macOS-shaped desktop made of Atlas materials. Warm paper underneath; windows are plates; the menu bar, Dock and every floating panel are the one Atlas glass. Single light theme on purpose. */
+@property --amp { syntax: "<length>"; inherits: true; initial-value: 0px; }
+@property --rot { syntax: "<angle>"; inherits: true; initial-value: 0deg; }
+:root {
+  color-scheme: light;
+  /* Atlas tokens, unchanged from MMLA */
+  --board: #ecebe6; --dot: #d3d0c7; --board-lit: #d9d6ce;
+  --plate: #ffffff; --surface: #faf9f6; --well: #f1efe9;
+  --ink: #23221d; --muted: #67635a; --line: #dedad1; --line-strong: #8a8474;
+  --wire: #9c988e; --wire-hot: #2f2d27;
+  --olive: #626c55; --wine: #875e60; --focus: #2b5d86;
+  --todo: #d1493a; --todo-ink: #ffffff; --todo-chip: #c03f30;
+  --reading: #e9b10c; --reading-ink: #2a2100;
+  --done: #3a9660; --done-ink: #ffffff; --done-chip: #2d7d4e;
+  --swiss: #e3000f;
+  --sans: "Helvetica Neue", "Neue Haas Grotesk Text Pro", Helvetica, "Inter Tight", Arial, "PingFang TC", "Noto Sans TC", sans-serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", Menlo, "PingFang TC", "Noto Sans Mono CJK TC", monospace;
+  --ease: cubic-bezier(0.2, 0, 0, 1);
+  --spring: cubic-bezier(.2, .9, .3, 1.25);
+  --r-xs: 7px; --r-s: 10px; --r-m: 14px; --r-l: 22px; --r-xl: 34px;
+  --glass: rgba(255,255,255,.56); --glass-line: rgba(255,255,255,.7);
+  /* MMLA's own thickenings of the one glass, and the HUD */
+  --glass-thick: rgba(255,255,255,.66); --glass-tip: rgba(255,255,255,.62); --hud: rgba(35,34,29,.78);
+  --glass-fx: blur(24px) saturate(180%); --glass-thick-fx: blur(26px) saturate(180%); --glass-tip-fx: blur(18px) saturate(180%); --hud-fx: blur(16px);
+  --pop: cubic-bezier(.2,.9,.3,1.4); --back: cubic-bezier(.34,1.4,.64,1); --camera: cubic-bezier(.65,0,.35,1);
+  --rise: cubic-bezier(.33,.67,.67,1); --fall: cubic-bezier(.33,0,.67,.33);
+  --shadow-drag: 0 1px 0 rgba(34,33,28,.06), 0 24px 48px rgba(34,33,28,.24);
+  --shadow: 0 1px 0 rgba(34,33,28,.05), 0 8px 22px rgba(34,33,28,.10);
+  --shadow-lift: 0 1px 0 rgba(34,33,28,.06), 0 16px 36px rgba(34,33,28,.18);
+  /* the terminal's sixteen colours on the Atlas palette */
+  --a0: #23221d; --a1: #c03f30; --a2: #2d7d4e; --a3: #8f6a00; --a4: #2b5d86; --a5: #875e60; --a6: #2c5c58; --a7: #8a8474;
+  --a8: #67635a; --a9: #d1493a; --a10: #3a9660; --a11: #a87c00; --a12: #1f5fbf; --a13: #74404d; --a14: #3e5561; --a15: #67635a;
+  --hl: rgba(233,177,12,.38); --sel: rgba(35,34,29,.14);
+  /* desktop geometry */
+  --menubar-h: 28px; --title-h: 28px; --toolbar-h: 52px;
+}
+html { height: 100%; box-sizing: border-box }
+*, *::before, *::after { box-sizing: inherit }
+body { height: 100%; margin: 0; background: var(--board); color: var(--ink); font: 14px/20px var(--sans); -webkit-font-smoothing: antialiased; overflow: hidden; letter-spacing: -0.003em; font-feature-settings: "ss01" 1; user-select: none; -webkit-user-select: none }
+input, textarea, [contenteditable], .selectable, .term, .doc-body, .rich { user-select: text; -webkit-user-select: text }
+[hidden] { display: none !important }
+button { font: inherit; color: inherit; cursor: default; background: none; border: 0; padding: 0 }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; letter-spacing: 0 }
+.dm { color: var(--muted) }
+::selection { background: var(--sel) }
+.lbl { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink) }
+.ic { display: block; flex: none }
+
+/* ---------- the screen and the paper desk ---------- */
+#os { position: fixed; inset: 0; overflow: hidden }
+#desktop { position: absolute; inset: 0; background-color: var(--board); background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 24px 24px; transition: background-color .6s var(--ease) }
+#desktop.lit { background-color: var(--board-lit) }
+#glow { position: absolute; left: 0; top: 0; width: 520px; height: 520px; margin: -260px 0 0 -260px; border-radius: 50%; background: radial-gradient(circle, rgba(255,253,244,.85) 0, rgba(255,251,238,.35) 35%, rgba(255,250,235,0) 68%); pointer-events: none; opacity: 0; transition: opacity .5s var(--ease); will-change: transform }
+#glow.on { opacity: 1 }
+#windows { position: absolute; inset: 0; pointer-events: none }
+/* zero specificity, so state rules (.win.ov, .win.aside, .win.closing…) can take the pointer away */
+:where(#windows) > * { pointer-events: auto }
+#overlays, #menus { position: absolute; inset: 0; pointer-events: none; z-index: 40000 }
+/* zero specificity too, so a floating thing's own pointer-events: none wins (the drag ghost, hover cards, tips) */
+:where(#overlays, #menus) > * { pointer-events: auto }
+#menus { z-index: 60000 }
+
+/* ---------- the one glass ---------- */
+.glass-thick { background: var(--glass-thick); -webkit-backdrop-filter: var(--glass-thick-fx); backdrop-filter: var(--glass-thick-fx); border: 1px solid var(--glass-line); border-radius: var(--r-l); box-shadow: 0 10px 34px rgba(34,33,28,.14), inset 0 1px 0 rgba(255,255,255,.75) }
+.glass-tip { background: var(--glass-tip); -webkit-backdrop-filter: var(--glass-tip-fx); backdrop-filter: var(--glass-tip-fx); border: 1px solid var(--glass-line); border-radius: 999px; box-shadow: 0 4px 14px rgba(34,33,28,.12) }
+.hovercard { position: absolute; left: 0; top: 0; z-index: 45000; min-width: 200px; max-width: 360px; padding: 14px 16px; opacity: 0; transform: scale(.97); transform-origin: 0 50%; pointer-events: none; transition: opacity .18s var(--ease), transform .25s var(--spring) }
+.hovercard.show { opacity: 1; transform: none }
+.hovercard .hc-rows { display: grid; gap: 3px; margin-top: 8px; min-width: 200px }
+/* exactly three lines (1 px rule + 8 px air + 3 × 16 px), the third ending in an ellipsis when there is more */
+.hovercard .hc-pre { margin: 10px 0 0; padding-top: 8px; border-top: 1px solid var(--line); font: 400 11.5px/16px var(--mono); color: var(--muted); white-space: pre-wrap; overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; max-height: calc(1px + 8px + 3 * 16px); overflow: hidden }
+.hovercard .hc-row { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 8px; font: 500 12.5px/17px var(--sans) } .hovercard .hc-row span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap } .hovercard .hc-m { color: var(--muted); font-size: 11.5px }
+.hovercard .hc-t { font: 700 23px/1.02 var(--sans); letter-spacing: -0.025em; color: var(--ink); margin: 2px 0 8px; overflow-wrap: anywhere }
+.hovercard .hc-kv { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font: 400 12.5px/17px var(--sans) } .hovercard .hc-kv dt { font: 700 10.5px/17px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted) } .hovercard .hc-kv dd { margin: 0; min-width: 0; overflow-wrap: anywhere; font-family: var(--mono); font-size: 12px }
+.glass { background: var(--glass); -webkit-backdrop-filter: var(--glass-fx); backdrop-filter: var(--glass-fx); border: 1px solid var(--glass-line); border-radius: var(--r-l); box-shadow: 0 10px 34px rgba(34,33,28,.14), inset 0 1px 0 rgba(255,255,255,.75) }
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) { .glass, .glass-thick, .glass-menu, #menubar { background: rgba(255,255,255,.94) !important } }
+
+/* ==========================================================================
+   Windows: plates whose top rim holds the traffic lights and the title
+   ========================================================================== */
+.win { position: absolute; left: 0; top: 0; transition: opacity .45s var(--ease), filter .45s var(--ease) }
+.win-pop { width: 100%; height: 100%; transform-origin: 50% 50%; transition: transform .52s cubic-bezier(.2,.8,.2,1), opacity .45s var(--ease) }
+.win.opening .win-pop { animation: winpop .5s var(--spring) both }
+@keyframes winpop { from { opacity: 0; transform: scale(.92) translateY(10px) } }
+.win.closing { pointer-events: none }
+.win.closing .win-pop { animation: winsink .3s var(--ease) both }
+@keyframes winsink { to { opacity: 0; transform: scale(.94) translateY(14px) } }
+.win.min-hidden, .win.app-hidden { visibility: hidden; pointer-events: none }
+.win.app-hiding { opacity: 0; transition: opacity .18s var(--ease); pointer-events: none }
+.win.minimizing .win-pop { transition: transform .5s cubic-bezier(.4,0,.2,1), opacity .5s var(--ease) }
+.win.morph { transition: transform .45s var(--spring), width .45s var(--spring), height .45s var(--spring) }
+.win.aside .win-pop { transition: transform .5s var(--ease) }
+/* windows hold still at 1:1 (DESIGN.md §2.2); they breathe only when the camera steps back (Mission Control) */
+.win-bob { width: 100%; height: 100% }
+.win.ov .win-bob { --amp: 2px; --rot: var(--rot0, .06deg); animation: bob var(--bt, 8s) ease-in-out infinite; animation-delay: var(--bd, 0s) }
+@keyframes bob { 0%, 100% { transform: translateY(calc(var(--amp) * -1)) rotate(calc(var(--rot) * -1)) } 50% { transform: translateY(var(--amp)) rotate(var(--rot)) } }
+#os.still .win.ov .win-bob, .win.ov.ov-hot .win-bob { animation: none }
+.win-plate { position: relative; width: 100%; height: 100%; display: flex; flex-direction: column; background: var(--plate); border: 3px solid var(--plate); border-radius: var(--r-m); box-shadow: var(--shadow); transition: box-shadow .25s var(--ease), border-color .35s var(--ease) }
+.win-plate::after { content: ""; position: absolute; left: 16px; right: 16px; bottom: -2px; height: 2.5px; border-radius: 3px; background: var(--ch, transparent); opacity: .85; pointer-events: none }
+.win.focused .win-plate { box-shadow: var(--shadow-lift) }
+.win.dragging .win-plate { box-shadow: var(--shadow-drag) }
+.win.s-reading .win-plate { border-color: var(--reading) }
+.win.s-todo .win-plate { border-color: var(--todo) }
+.win.s-done .win-plate { border-color: var(--done) }
+.win.nudge .win-plate { animation: nudge .5s cubic-bezier(.2,.9,.3,1.5) }
+@keyframes nudge { 25% { transform: translateX(-5px) } 55% { transform: translateX(4px) } 80% { transform: translateX(-2px) } }
+.win-bar { flex: none; height: var(--title-h); display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 10px; padding: 0 8px 0 9px; position: relative; touch-action: none }
+/* the title is the column that gives way: it ellipsizes before the tools shrink, and never runs under them
+   (an auto title column took its whole width and pushed a toolbar out of the window) */
+.win.has-toolbar .win-bar { height: var(--toolbar-h); grid-template-columns: auto minmax(0, 1fr) auto }
+.win.has-toolbar .win-title { text-align: left; font-size: 14px; font-weight: 700; letter-spacing: -0.01em; padding-left: 6px }
+.win.has-toolbar .win-tools { justify-self: stretch }
+.win-title { text-align: center; font: 600 13px/16px var(--sans); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; pointer-events: none; transition: color .25s var(--ease) }
+.win:not(.has-toolbar) .win-title { padding-right: 62px }
+.win:not(.focused) .win-title { color: var(--muted) }
+.win-tools { display: flex; align-items: center; gap: 4px; justify-content: flex-end; min-width: 0 }
+.win-body { position: relative; flex: 1 1 auto; min-height: 0; margin: 0 2px 2px; border-radius: var(--r-xs); background: var(--surface); overflow: hidden; box-shadow: inset 0 0 0 1px rgba(35,34,29,.045) }
+.win.bare .win-body { background: var(--plate); box-shadow: none }
+/* traffic lights: the three Atlas state discs; glyphs only when you reach for them */
+.lights { display: flex; gap: 8px; padding: 0 4px 0 1px; align-items: center }
+.win.has-toolbar .lights { padding-left: 7px }
+.tl { position: relative; width: 12px; height: 12px; border-radius: 50%; background: var(--line); box-shadow: inset 0 0 0 .5px rgba(35,34,29,.14); transition: background .2s var(--ease), transform .2s var(--spring) }
+.tl svg { position: absolute; inset: 0; width: 12px; height: 12px; opacity: 0; transition: opacity .12s; stroke: rgba(35,34,29,.62); stroke-width: 1.4; stroke-linecap: round; fill: none }
+.tl svg .fill { fill: rgba(35,34,29,.62); stroke: none }
+/* the lights are neutral at rest on every window (state lives on the rim); hovering the group colours them */
+.lights:hover .tl.close, .lights:focus-within .tl.close { background: var(--todo) }
+.lights:hover .tl.min, .lights:focus-within .tl.min { background: var(--reading) }
+.lights:hover .tl.zoom, .lights:focus-within .tl.zoom { background: var(--done) }
+.lights:hover .tl svg { opacity: 1 }
+.tl:active { transform: scale(.9) }
+.win.fixed .tl.zoom { background: var(--line) !important; pointer-events: none }
+.win.edited .tl.close::after { content: ""; position: absolute; left: 4px; top: 4px; width: 4px; height: 4px; border-radius: 50%; background: rgba(35,34,29,.55) }
+.lights:hover .tl.close::after { display: none }
+/* resize handles live just outside the plate */
+.rz { position: absolute; z-index: 3; touch-action: none }
+.rz.n { top: -4px; left: 12px; right: 12px; height: 8px; cursor: ns-resize } .rz.s { bottom: -4px; left: 12px; right: 12px; height: 8px; cursor: ns-resize }
+.rz.e { right: -4px; top: 12px; bottom: 12px; width: 8px; cursor: ew-resize } .rz.w { left: -4px; top: 12px; bottom: 12px; width: 8px; cursor: ew-resize }
+.rz.ne { right: -5px; top: -5px; width: 16px; height: 16px; cursor: nesw-resize } .rz.sw { left: -5px; bottom: -5px; width: 16px; height: 16px; cursor: nesw-resize }
+.rz.nw { left: -5px; top: -5px; width: 16px; height: 16px; cursor: nwse-resize } .rz.se { right: -5px; bottom: -5px; width: 18px; height: 18px; cursor: nwse-resize }
+body.dragging-win, body.dragging-win * { cursor: default !important }
+body.resizing-win iframe, body.dragging-win iframe { pointer-events: none }
+#tilepv { position: absolute; left: 0; top: 0; border-radius: var(--r-m); background: color-mix(in srgb, var(--board-lit) 45%, transparent); border: 1.5px dashed var(--line-strong); opacity: 0; transform-origin: 50% 50%; transition: opacity .2s var(--ease), transform .25s var(--ease), width .25s var(--ease), height .25s var(--ease); pointer-events: none }
+#tilepv.on { opacity: 1 }
+/* Mission Control */
+/* the camera pulls back: the paper's dots shrink with the windows, the edge glass fades */
+#desktop { transition: background-color .6s var(--ease), background-size .65s cubic-bezier(.65,0,.35,1) }
+#os.overview #desktop { background-size: calc(24px * var(--ovk, 1)) calc(24px * var(--ovk, 1)) }
+#os.overview #dticons { opacity: 0; transition: opacity .3s var(--ease) }
+#os.overview #menubar, #os.overview #dock { opacity: .25; transition: opacity .35s var(--ease) }
+@keyframes fadein { from { opacity: 0 } }
+.win.ov { cursor: pointer }
+.win.ov.ov-live .win-pop { transition: none }
+.win.ov .win-plate { box-shadow: var(--shadow); transition: transform .4s var(--spring), box-shadow .25s var(--ease), opacity .3s var(--ease) }
+.win.ov.ov-hot .win-plate { box-shadow: 0 0 0 calc(3px / var(--ovk, 1)) var(--ink), var(--shadow-lift) }
+.win.ov.ov-hot { z-index: 39000 !important }
+#os.ov-dwell .win.ov:not(.ov-hot) .win-plate { opacity: .16; filter: saturate(.3) }
+/* in an overview and while the desktop is shown, only the moved plate takes the pointer, not the box left at its 1:1 frame */
+.win.ov, .win.aside, .win.minimizing { pointer-events: none } .win.ov .win-pop, .win.aside .win-pop { pointer-events: auto } .win.ov .rz, .win.aside .rz { display: none }
+.win.ov .win-body > * { pointer-events: none }
+/* typing filters (DESIGN §3.7): plates that do not match fade to .14, Return's choice wears an ink ring, and what is
+   typed sits in a capsule where Launchpad's search sits, with a ring in --todo when nothing matches */
+.win.ov.ov-miss:not(.ov-hot) .win-plate { opacity: .14; filter: saturate(.3) }
+.win.ov.ov-pick .win-plate { box-shadow: 0 0 0 calc(2px / var(--ovk, 1)) var(--ink), var(--shadow-lift) }
+#overlays > .ov-q { position: absolute; left: 0; right: 0; top: calc(var(--menubar-h) + 18px); z-index: 2; display: flex; align-items: center; gap: 8px; box-sizing: border-box; width: min(300px, calc(100% - 32px)); height: 34px; margin: 0 auto; padding: 0 14px; border-radius: 999px; background: var(--plate); box-shadow: 0 0 0 1.5px var(--ink), var(--shadow); color: var(--muted); font: 500 13px/18px var(--sans); opacity: 0; pointer-events: none; transition: opacity .15s var(--ease), box-shadow .2s var(--ease) }
+#overlays > .ov-q.show { opacity: 1 }
+#overlays > .ov-q.none { box-shadow: 0 0 0 1.5px var(--todo), var(--shadow) }
+.ov-q .ov-qt { flex: 1 1 auto; min-width: 0; overflow: hidden; white-space: pre; color: var(--ink) }
+.ov-q.none .ov-qt { color: var(--muted) }
+.ov-q .ov-caret { display: inline-block; width: 1.5px; height: 15px; margin: 0 -.75px; vertical-align: -3px; background: var(--ink); animation: ovcaret 1.06s steps(1) infinite }
+@keyframes ovcaret { 50% { opacity: 0 } }
+.ov-q.nudge { animation: nudge .5s cubic-bezier(.2,.9,.3,1.5) }
+/* panels (Quick Look): above every window while their app is in front, gone while it is not; no minimise light.
+   The title is ink while the panel has the keyboard (the key window behind keeps its own look) */
+.win.panel { transition: opacity .2s var(--ease), filter .45s var(--ease) }
+.win.panel:not(.dragging) .win-plate { box-shadow: var(--shadow-lift) }
+.win.panel .tl.min { display: none }
+.win.panel.key .win-title { color: var(--ink) }
+.win.panel-off { visibility: hidden; opacity: 0; pointer-events: none; transition: opacity .15s var(--ease), visibility 0s linear .15s }
+#ovLabel { position: absolute; left: 0; top: 0; display: grid; justify-items: center; gap: 1px; padding: 7px 14px 8px; border-radius: var(--r-m); max-width: 340px; opacity: 0; transition: opacity .2s var(--ease); pointer-events: none }
+#ovLabel.on { opacity: 1 }
+#ovLabel span { font: 500 12.5px/16px var(--sans); color: var(--ink); max-width: 312px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap }
+
+/* ==========================================================================
+   Controls
+   ========================================================================== */
+.btn { font: 500 13px/18px var(--sans); padding: 6px 14px; border: 1px solid rgba(138,132,116,.5); border-radius: var(--r-s); background: rgba(255,255,255,.7); color: var(--ink); white-space: nowrap; transition: background .15s, transform .15s }
+.btn:hover { background: #fff }
+.btn:active { transform: scale(.97) }
+.btn.primary { background: var(--ink); color: var(--plate); border-color: var(--ink) }
+.btn.primary:hover { background: color-mix(in srgb, var(--ink) 88%, var(--plate)) }
+.btn.danger[data-armed] { background: var(--ink); border-color: var(--ink); color: var(--plate) }
+.btn.small { padding: 3px 10px; font-size: 12px; border-radius: var(--r-xs) }
+.btn:disabled { opacity: .45; pointer-events: none }
+.ibtn { width: 30px; height: 28px; display: inline-grid; place-items: center; border-radius: var(--r-s); color: var(--ink); transition: background .15s, color .15s }
+.ibtn:hover { background: rgba(35,34,29,.07) }
+.ibtn[aria-pressed="true"], .ibtn.on { background: var(--ink); color: var(--plate) }
+.ibtn:disabled { opacity: .35; pointer-events: none }
+.seg { display: inline-flex; padding: 2px; gap: 2px; border-radius: var(--r-s); background: rgba(35,34,29,.06) }
+.seg button { font: 500 12.5px/16px var(--sans); padding: 4px 10px; border-radius: var(--r-xs); color: var(--muted); display: inline-grid; place-items: center; min-width: 28px }
+.seg.icons button { padding: 4px 7px }
+.seg button:hover { color: var(--ink) }
+.seg button[aria-pressed="true"] { background: var(--plate); color: var(--ink); box-shadow: 0 1px 2px rgba(34,33,28,.14) }
+.search { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 9px; border-radius: var(--r-s); background: rgba(35,34,29,.06); color: var(--muted); min-width: 0 }
+.search input { flex: 1 1 auto; min-width: 0; border: 0; outline: 0; background: transparent; font: 13px/18px var(--sans); color: var(--ink) }
+.search:focus-within { background: var(--plate); box-shadow: 0 0 0 1.5px var(--ink) }
+.field { font: 13px/18px var(--sans); color: var(--ink); border: 1px solid rgba(138,132,116,.5); border-radius: var(--r-s); background: rgba(255,255,255,.75); padding: 6px 10px; outline: 0; min-width: 0 }
+.field:focus { border-color: var(--ink) }
+textarea.field { font-family: var(--mono); resize: vertical }
+.switch { display: inline-flex; align-items: center; gap: 8px; font-size: 13px }
+.switch input { position: absolute; opacity: 0; width: 1px; height: 1px }
+.switch i { position: relative; width: 32px; height: 19px; border-radius: 999px; background: var(--line); transition: background .2s var(--ease); flex: none }
+.switch i::after { content: ""; position: absolute; left: 2px; top: 2px; width: 15px; height: 15px; border-radius: 50%; background: #fff; box-shadow: 0 1px 3px rgba(34,33,28,.3); transition: transform .3s var(--spring) }
+.switch input:checked + i { background: var(--ink) }
+.switch input:checked + i::after { transform: translateX(13px) }
+.switch input:focus-visible + i { outline: 2px solid var(--focus); outline-offset: 2px }
+.slider { accent-color: var(--ink); width: 100% }
+/* sidebar: paper, not glass */
+.side { display: flex; flex-direction: column; gap: 1px; padding: 10px 8px 14px; background: var(--well); overflow: auto; min-height: 0 }
+.side-h { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 12px 8px 5px }
+.side-h:first-child { padding-top: 2px }
+.side-i { display: flex; align-items: center; gap: 8px; padding: 5px 8px; border-radius: var(--r-xs); font: 500 13px/18px var(--sans); color: var(--ink); text-align: left; min-width: 0 }
+.side-i:hover { background: rgba(35,34,29,.06) }
+.side-i.on { background: var(--ink); color: var(--plate) }
+.side-ic { width: 16px; display: grid; place-items: center; flex: none; color: var(--muted) }
+.side-i.on .side-ic { color: var(--plate) }
+.side-l { flex: 1 1 auto; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.side-b { font: 500 11px/1 var(--mono); color: var(--muted) }
+.side-i.on .side-b { color: rgba(255,255,255,.7) }
+.side-i.drop-over { box-shadow: inset 0 0 0 1.5px var(--ink) }
+/* Swiss table */
+.tbl { display: flex; flex-direction: column; min-height: 0; height: 100%; outline: 0; font-size: 13px; line-height: 18px }
+.tbl .tr { display: flex; align-items: center; gap: 0; padding: 0 12px; min-height: 28px; border-bottom: 1px solid rgba(222,218,209,.7) }
+.tbl .th { flex: none; min-height: 30px; border-bottom: 1.5px solid var(--ink); position: sticky; top: 0 }
+.tbl .th .td { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); cursor: default }
+.tbl .th .td.sorted { color: var(--ink) }
+.tbl .td { padding: 4px 10px 4px 0; min-width: 0; white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.tbl .td.r { text-align: right; justify-content: flex-end }
+.tbl .tb { flex: 1 1 auto; overflow: auto; min-height: 0 }
+.tbl .tb .tr:hover { background: rgba(35,34,29,.035) }
+.tbl .tb .tr.sel { background: var(--ink); color: var(--plate) }
+.tbl .tb .tr.sel .dm, .tbl .tb .tr.sel .mono { color: inherit }
+.tbl:focus-within .tb .tr.sel { background: var(--ink) }
+.tbl-empty { padding: 28px 16px; color: var(--muted); text-align: center }
+.tbl .tr.drop-over { box-shadow: inset 0 0 0 1.5px var(--ink) }
+/* sheets */
+.sheet-veil { position: absolute; inset: var(--title-h) 0 0 0; border-radius: 0 0 var(--r-m) var(--r-m); background: rgba(35,34,29,.12); animation: fadein .2s var(--ease) both; z-index: 20 }
+.sheet { position: absolute; left: 50%; top: calc(var(--title-h) - 2px); transform: translateX(-50%); width: min(420px, calc(100% - 40px)); padding: 18px 20px 16px; display: grid; gap: 12px; z-index: 21; animation: sheetin .32s var(--spring) both; border-radius: 0 0 var(--r-l) var(--r-l) }
+.sheet.floating { position: fixed; top: 22%; border-radius: var(--r-l); z-index: 50000 }
+@keyframes sheetin { from { transform: translate(-50%, -24px); opacity: 0 } }
+.sheet.out, .sheet-veil.out { animation: fadeout .2s var(--ease) both }
+@keyframes fadeout { to { opacity: 0 } }
+.sheet-t { font: 700 17px/1.15 var(--sans); letter-spacing: -0.015em }
+.sheet-m { margin: 0; font-size: 13px; line-height: 19px; color: var(--ink) }
+.fq-list { display: grid; gap: 2px; max-height: 260px; overflow: auto; padding: 4px; border-radius: var(--r-m); background: var(--well) }
+.fq-i { display: flex; align-items: center; gap: 10px; padding: 5px 8px; border: 0; border-radius: var(--r-s); background: none; font: 500 13px var(--sans); color: var(--ink); text-align: left; cursor: default }
+.fq-i.on { background: var(--ink); color: var(--plate) }
+.sheet-f { display: flex; justify-content: flex-end; gap: 8px; padding-top: 4px }
+.sheet-field { display: grid; gap: 6px }
+.sheet-field .field { width: 100% }
+/* menus: the glass, one level thicker */
+/* menus use the one glass recipe; only their shadow is deeper because they sit above windows */
+.glass-menu { background: var(--glass-thick); -webkit-backdrop-filter: var(--glass-thick-fx); backdrop-filter: var(--glass-thick-fx); border: 1px solid var(--glass-line); border-radius: var(--r-m); box-shadow: 0 16px 44px rgba(34,33,28,.2), 0 0 0 .5px rgba(35,34,29,.08), inset 0 1px 0 rgba(255,255,255,.75) }
+.menu { position: absolute; left: 0; top: 0; min-width: 210px; max-width: 340px; padding: 5px; font: 500 13px/18px var(--sans); animation: menuin .14s var(--ease) both }
+@keyframes menuin { from { opacity: 0; transform: translateY(-3px) } }
+.mi { display: grid; grid-template-columns: 16px auto 1fr auto; align-items: center; gap: 6px; padding: 3px 9px 3px 6px; border-radius: 7px; white-space: nowrap }
+.mi.hot { background: var(--ink); color: var(--plate) }
+.mi.off { color: var(--line-strong); pointer-events: none }
+.mi-c { display: grid; place-items: center; width: 16px }
+.mi-ic { display: grid; place-items: center; width: 16px; color: var(--muted) }
+.mi.hot .mi-ic { color: inherit }
+.mi-k { font: 500 12px/18px var(--sans); color: var(--muted); padding-left: 16px; text-align: right }
+.mi.hot .mi-k { color: rgba(255,255,255,.75) }
+.mi.danger .mi-l { color: var(--ink) }
+.mi.danger.hot .mi-l { color: inherit }
+.mi-l { overflow: hidden; text-overflow: ellipsis }
+/* the command under every click: shown after a dwell, or instead of the label while ⌥ is held */
+.mi-t, .mi-cmd { display: block; overflow: hidden; text-overflow: ellipsis }
+.mi-cmd { display: none; max-width: 320px; font: 500 11px/16px var(--mono); color: var(--muted) }
+.mi.dwell .mi-cmd { display: block; animation: menuin .18s var(--ease) both }
+.menu.alt .mi.has-cmd .mi-t { display: none }
+.menu.alt .mi.has-cmd .mi-cmd { display: block; font-size: 12px; line-height: 18px; color: inherit; animation: none }
+.mi.hot .mi-cmd { color: rgba(255,255,255,.72) }
+.mi-search { padding: 4px 4px 6px; min-width: 240px } .mi-search input { width: 100%; height: 26px; padding: 0 10px; border: 1px solid rgba(138,132,116,.45); border-radius: 999px; background: rgba(255,255,255,.7); font: 500 13px/18px var(--sans); color: var(--ink); outline: 0 } .mi-search input:focus { box-shadow: 0 0 0 2px var(--focus) }
+.mi-results:not(:empty) { margin-top: 4px; padding-top: 4px; border-top: 1px solid rgba(35,34,29,.1) }
+.mi.armed .mi-t { color: var(--ink); font-weight: 700 } .mi.armed.hot .mi-t { color: inherit }
+.menu.alt .mi.armed .mi-t { display: block } .menu.alt .mi.armed .mi-cmd { display: none }
+.mi-sep { height: 1px; margin: 5px 8px; background: rgba(35,34,29,.12) }
+.mi-h { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--muted); padding: 6px 9px 3px }
+
+/* ==========================================================================
+   Files as objects: folders, paper sheets with a type strip, photographs
+   ========================================================================== */
+.fi { --s: 56px; position: relative; display: inline-block; flex: none; width: var(--s); height: var(--s) }
+.fi.doc { width: calc(var(--s) * .76); margin: 0 calc(var(--s) * .12); background: var(--plate); border-radius: calc(var(--s) * .09); box-shadow: 0 0 0 1px rgba(35,34,29,.1), 0 2px 6px rgba(34,33,28,.1); overflow: hidden }
+.fi.doc::after { content: ""; position: absolute; left: 18%; right: 18%; bottom: 7%; height: max(2px, calc(var(--s) * .04)); border-radius: 2px; background: var(--t) }
+.fi.doc .ear { position: absolute; right: 0; top: 0; width: 26%; height: 26%; background: linear-gradient(225deg, var(--board) 0 50%, var(--well) 50%); box-shadow: -1px 1px 0 rgba(35,34,29,.08) }
+.fi.doc b { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); text-align: center; font: 700 calc(var(--s) * .14)/1 var(--sans); letter-spacing: .1em; color: var(--muted) }
+.fi.doc::before { content: ""; position: absolute; left: 18%; right: 30%; top: 18%; height: 2px; border-radius: 1px; background: rgba(35,34,29,.18); box-shadow: 0 calc(var(--s) * .07) 0 rgba(35,34,29,.12) }
+/* covers: the page itself, drawn at 2.5x and scaled down so browser minimum font sizes never bloat it */
+.fi.doc.cover:not(.alias)::before { display: none }
+.fi.doc .cv { position: absolute; left: 12%; top: 13%; width: 185%; height: 180%; transform: scale(.4); transform-origin: 0 0; overflow: hidden; font: 500 calc(var(--s) * .17)/1.32 var(--mono); color: rgba(35,34,29,.5); white-space: pre-wrap; word-break: break-all; pointer-events: none }
+/* the greeked lines break anywhere; the title is type, and breaks between words */
+.fi.doc .cv-h { display: block; position: static; transform: none; margin: 0 0 .3em; text-align: left; font: 700 calc(var(--s) * .27)/1.08 var(--sans); letter-spacing: -0.02em; color: var(--ink); word-break: normal; overflow-wrap: break-word }
+.fi.folder .tab { position: absolute; left: 8%; top: 16%; width: 38%; height: 16%; border-radius: calc(var(--s) * .05) calc(var(--s) * .05) 0 0; background: color-mix(in srgb, var(--t) 72%, white) }
+.fi.folder .body { position: absolute; left: 4%; right: 4%; top: 26%; bottom: 12%; border-radius: calc(var(--s) * .07); background: linear-gradient(180deg, color-mix(in srgb, var(--t) 86%, white), var(--t)); box-shadow: inset 0 1px 0 rgba(255,255,255,.25), 0 2px 6px rgba(34,33,28,.16) }
+.fi.photo { width: var(--s); height: calc(var(--s) * .78); margin: calc(var(--s) * .11) 0; background: var(--well); border: max(2px, calc(var(--s) * .05)) solid var(--plate); border-radius: calc(var(--s) * .08); box-shadow: 0 2px 7px rgba(34,33,28,.16); overflow: hidden; display: grid; place-items: center; color: var(--muted) }
+.fi.photo img { width: 100%; height: 100%; object-fit: cover; pointer-events: none }
+.fi.exec { width: calc(var(--s) * .8); height: calc(var(--s) * .8); margin: calc(var(--s) * .1); border-radius: calc(var(--s) * .2); background: var(--ink); color: var(--surface); display: grid; place-items: center; box-shadow: 0 2px 6px rgba(34,33,28,.18) }
+/* a state tag recolours a cover's rim (DESIGN.md §2.3, §9): a sheet's hairline, a photograph's white border, a
+   program's edge. A folder has no rim, so it wears the state as a dot */
+.fi.doc.tagged { box-shadow: 0 0 0 clamp(1.5px, calc(var(--s) * .04), 3px) var(--tg), 0 2px 6px rgba(34,33,28,.1) }
+.fi.photo.tagged { border-color: var(--tg) }
+.fi.exec.tagged { box-shadow: 0 0 0 clamp(1.5px, calc(var(--s) * .04), 3px) var(--tg), 0 2px 6px rgba(34,33,28,.18) }
+.fi.folder.tagged::after, .fi.app.tagged::after { content: ""; position: absolute; right: -2px; bottom: 2px; z-index: 3; width: max(7px, calc(var(--s) * .16)); height: max(7px, calc(var(--s) * .16)); border-radius: 50%; background: var(--tg); box-shadow: 0 0 0 1.5px var(--plate) }
+.fi.tg-todo { --tg: var(--todo) } .fi.tg-reading { --tg: var(--reading) } .fi.tg-done { --tg: var(--done) }
+.fi.alias::before { content: "↗"; position: absolute; left: 4%; bottom: 4%; z-index: 2; width: 34%; height: 34%; border-radius: 30%; background: var(--plate); box-shadow: 0 0 0 1px rgba(35,34,29,.12); font: 700 calc(var(--s) * .2)/1 var(--sans); display: grid; place-items: center; color: var(--ink) }
+/* app icons: a small plate, ink glyph, the app's colour as the bottom strip */
+.appicon { --s: 50px; position: relative; display: inline-grid; place-items: center; flex: none; width: var(--s); height: var(--s); border-radius: var(--r, 14px); background: var(--plate); color: var(--ink); box-shadow: 0 0 0 1px rgba(35,34,29,.08), var(--shadow); overflow: hidden }
+.appicon::after { content: ""; position: absolute; left: 24%; right: 24%; bottom: 9%; height: max(2px, calc(var(--s) * .05)); border-radius: 2px; background: var(--ch, transparent) }
+.appicon svg { width: 52%; height: 52%; stroke-width: var(--sw, 2) }
+.appicon svg [stroke-width] { stroke-width: var(--sw, 2) }
+.appicon.ink { background: var(--ink); color: var(--surface) }
+.appicon.ink::after { background: var(--ch, rgba(255,255,255,.4)) }
+.appicon .cal-d { font: 700 calc(var(--s) * .42)/1 var(--sans); letter-spacing: -0.04em; margin-top: 12% }
+.appicon .cal-w { position: absolute; top: 12%; left: 0; right: 0; text-align: center; font: 700 calc(var(--s) * .15)/1 var(--sans); letter-spacing: .1em; color: var(--muted) }
+
+/* drag and drop */
+.dnd-ghost { position: fixed; left: 0; top: 0; z-index: 70000; pointer-events: none; filter: drop-shadow(0 12px 18px rgba(34,33,28,.25)); opacity: .92 }
+.dnd-ghost.back { transition: opacity .24s var(--ease); opacity: 0 }
+.dnd-n { position: absolute; right: -4px; top: -4px; z-index: 2; min-width: 20px; height: 20px; padding: 0 5px; border-radius: 999px; background: var(--ink); color: #fff; font: 600 11px/20px var(--sans); text-align: center }
+body.dnd-on, body.dnd-on * { cursor: default !important }
+.drop-over { box-shadow: inset 0 0 0 2px var(--ink) }
+
+/* toast HUD */
+#toast { position: absolute; left: 50%; bottom: 96px; transform: translate(-50%, 12px); z-index: 45000; background: var(--hud); -webkit-backdrop-filter: var(--hud-fx); backdrop-filter: var(--hud-fx); color: var(--plate); font: 500 13px/18px var(--sans); padding: 9px 16px; border-radius: 999px; opacity: 0; pointer-events: none; transition: opacity .25s var(--ease), transform .25s var(--ease); white-space: nowrap; max-width: calc(100% - 32px); overflow: hidden; text-overflow: ellipsis }
+#toast.show { opacity: 1; transform: translate(-50%, 0) }
+
+/* scrollbars: thin, warm */
+* { scrollbar-width: thin; scrollbar-color: rgba(35,34,29,.2) transparent }
+::-webkit-scrollbar { width: 9px; height: 9px } ::-webkit-scrollbar-thumb { background: rgba(35,34,29,.18); border-radius: 9px; border: 2px solid transparent; background-clip: padding-box } ::-webkit-scrollbar-track { background: transparent }
+
+#os.reduce *, #os.reduce *::before, #os.reduce *::after { transition-duration: 0s !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important }
+@media (prefers-reduced-motion: reduce) {
+  .win-bob, .win.opening .win-pop, .win.closing .win-pop, .win.nudge .win-plate, .menu, .sheet, .sheet-veil { animation: none !important }
+  *, *::before, *::after { transition-duration: 0s !important; animation-duration: 1ms !important; animation-iteration-count: 1 !important }
+}
+
+/* ==========================================================================
+   Menu bar: the glass along the top edge
+   ========================================================================== */
+/* one floating glass capsule, 6 px from the top and sides, mirroring the Dock (DESIGN.md §3.1) */
+#menubar { position: absolute; left: max(6px, env(safe-area-inset-left, 0px)); right: max(6px, env(safe-area-inset-right, 0px)); top: 6px; height: var(--menubar-h); z-index: 30000; display: flex; align-items: center; justify-content: space-between; gap: 8px; padding: 0 4px; border-radius: 999px; background: var(--glass); -webkit-backdrop-filter: var(--glass-fx); backdrop-filter: var(--glass-fx); border: 1px solid var(--glass-line); box-shadow: 0 6px 22px rgba(34,33,28,.1), inset 0 1px 0 rgba(255,255,255,.75); font: 500 13px/18px var(--sans) }
+.mb-l, .mb-r { display: flex; align-items: center; gap: 1px; min-width: 0; height: 100% }
+/* the status items keep their width and the titles give way: what does not fit is cut at the status group's edge,
+   never laid under it, and the clock never leaves the capsule */
+.mb-l { flex: 0 1 auto; overflow: hidden }
+.mb-r { flex: none }
+.mb-atlas, .mb-m, .mb-s, .mb-clock { height: 22px; padding: 0 9px; border-radius: 999px; display: inline-flex; align-items: center; color: var(--ink); white-space: nowrap }
+.mb-atlas { padding: 0 8px 0 7px }
+.mb-m.bold { font-weight: 700; letter-spacing: -0.01em }
+.mb-atlas.on, .mb-m.on, .mb-s:hover, .mb-clock:hover, .mb-atlas:hover, .mb-m:hover { background: rgba(35,34,29,.08) }
+.mb-atlas.on, .mb-m.on { background: var(--ink); color: var(--plate) }
+.mb-s { padding: 0 7px }
+.mb-claude { color: var(--swiss) }
+.mb-clock { gap: 8px; font-size: 12.5px; letter-spacing: 0 }
+.mb-clock .mono { font: 500 12px/16px var(--mono); font-variant-numeric: tabular-nums }
+/* the three state discs */
+.mb-jobs { display: inline-flex; align-items: center; gap: 2px; margin-right: 4px }
+.mb-disc { width: 18px; height: 22px; padding: 0; border: 0; border-radius: var(--r-xs); background: none; display: inline-grid; place-items: center; cursor: default }
+.mb-disc i { width: 10px; height: 10px; border-radius: 50%; box-shadow: inset 0 0 0 1.5px var(--line-strong); background: transparent; transition: background .3s var(--ease), box-shadow .3s var(--ease), transform .3s var(--spring) }
+.mb-disc.has i { box-shadow: inset 0 0 0 1.5px var(--c); background: color-mix(in srgb, var(--c) calc(var(--k) * 100%), transparent) }
+.mb-disc.d-todo { --c: var(--todo) } .mb-disc.d-reading { --c: var(--reading) } .mb-disc.d-done { --c: var(--done) }
+.mb-disc:hover, .mb-disc.on { background: rgba(35,34,29,.08) } .mb-disc.on i { transform: scale(1.25) }
+.mb-disc.bump i { animation: discbump .55s var(--pop) }
+@keyframes discbump { 40% { transform: scale(1.18) } }
+.jobs-card { position: absolute; left: 0; top: 0; z-index: 31000; width: 280px; padding: 8px; border-radius: var(--r-m); opacity: 0; pointer-events: none; transition: opacity .18s var(--ease) }
+.jobs-card.show { opacity: 1 }
+.jc-r { display: grid; grid-template-columns: 10px 1fr auto; align-items: center; gap: 8px; padding: 4px 6px; font: 500 12.5px/16px var(--sans) } .jc-r span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap } .jc-t { color: var(--muted); font-size: 11px }
+.jc-e { padding: 4px 6px; font-size: 12.5px; color: var(--muted) }
+.win.job-dim .win-plate { opacity: .14; transition: opacity .3s var(--ease) }
+/* the disk image gauge, where a Mac shows its battery */
+.mb-gauge { position: relative; width: 22px; height: 10px; border-radius: 999px; box-shadow: inset 0 0 0 1.5px var(--ink); padding: 2px; display: block }
+.mb-gauge::after { content: ""; position: absolute; right: -3px; top: 3px; width: 2px; height: 4px; border-radius: 0 1px 1px 0; background: var(--ink) }
+.mb-gauge i { display: block; height: 100%; border-radius: 999px; background: var(--ink) }
+.mb-disk.low .mb-gauge i { background: var(--todo) }
+
+/* ==========================================================================
+   Dock: glass along the bottom edge; icons are small plates
+   ========================================================================== */
+#dock { position: absolute; left: 50%; bottom: 8px; transform: translateX(-50%); z-index: 29000; display: flex; align-items: flex-end; gap: 4px; padding: 6px 8px; border-radius: var(--r-l); max-width: calc(100% - 24px); transition: transform .42s var(--spring) }
+@media (max-width: 719px) { #dock { overflow-x: auto; overscroll-behavior: contain; scrollbar-width: none } #dock::-webkit-scrollbar { display: none } }
+#dock.dropping { transform: translate(-50%, 160%); transition: transform .4s cubic-bezier(.6,0,.9,.6) }
+#dock.rising { animation: dockrise .65s var(--spring) both }
+#os.arrive #menubar { animation: mbdrop .6s var(--spring) .15s both }
+#os.arrive #dock { animation: dockrise .7s var(--spring) .3s both }
+@keyframes mbdrop { from { transform: translateY(-110%) } }
+@keyframes dockrise { from { transform: translate(-50%, 160%) } }
+#dock.autohide:not(.peek) { transform: translate(-50%, calc(100% + 16px)); transition-timing-function: var(--ease) }
+.dk { position: relative; display: grid; place-items: center; width: calc(var(--ds) * var(--m, 1)); height: var(--ds); flex: none; transform-origin: 50% 100% }
+.dk > .appicon, .dk > .dk-thumb { transform: scale(var(--m, 1)); transform-origin: 50% 100% }
+.dk.bounce > .appicon { animation: dockhops .8s linear }
+.dk.hop > .appicon { animation: dockhop .36s linear }
+.trash-ghost { position: absolute; z-index: 32000; pointer-events: none; display: grid; place-items: center }
+/* true parabolas: rise on an ease-out, fall on an ease-in; 22, 11 and 5 px over 360, 255 and 180 ms */
+@keyframes dockhops {
+  0% { translate: 0 0; animation-timing-function: cubic-bezier(.33,.67,.67,1) } 22.6% { translate: 0 -22px; animation-timing-function: cubic-bezier(.33,0,.67,.33) }
+  45.3% { translate: 0 0; animation-timing-function: cubic-bezier(.33,.67,.67,1) } 61.3% { translate: 0 -11px; animation-timing-function: cubic-bezier(.33,0,.67,.33) }
+  77.4% { translate: 0 0; animation-timing-function: cubic-bezier(.33,.67,.67,1) } 88.7% { translate: 0 -5px; animation-timing-function: cubic-bezier(.33,0,.67,.33) } 100% { translate: 0 0 } }
+@keyframes dockhop { 0% { translate: 0 0; animation-timing-function: cubic-bezier(.33,.67,.67,1) } 50% { translate: 0 -22px; animation-timing-function: cubic-bezier(.33,0,.67,.33) } 100% { translate: 0 0 } }
+.dk-dot { position: absolute; left: 50%; bottom: -5px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--ink); opacity: 0; transition: opacity .3s var(--ease) }
+.dk.run .dk-dot { opacity: .9 }
+.dk.st-reading .dk-dot { background: var(--reading); opacity: 1; animation: dotbreathe 2.4s ease-in-out infinite }
+.dk.st-todo .dk-dot { background: var(--todo); opacity: 1; width: 6px; height: 6px; margin-left: -3px; bottom: -6px }
+@keyframes dotbreathe { 50% { transform: scale(1.5) } }
+.dk-sep { width: 1px; align-self: stretch; margin: 4px 4px; background: rgba(35,34,29,.16) }
+.dk.drop-over > .appicon { box-shadow: 0 0 0 2px var(--ink), 0 6px 14px rgba(34,33,28,.18) }
+.dk-thumb { --s: 50px; position: relative; display: block; width: var(--s); height: calc(var(--s) * .78); border-radius: var(--r-s); background: var(--plate); border: 2px solid var(--plate); box-shadow: 0 0 0 1px rgba(35,34,29,.1), 0 4px 10px rgba(34,33,28,.16) }
+.dk-thumb-in { position: absolute; left: 3px; top: 3px; width: calc((100% - 6px) / .4); height: calc((100% - 6px) / .4); transform: scale(.4); transform-origin: 0 0; overflow: hidden; display: grid; align-content: start; gap: 4px }
+.dk-thumb-in b { font: 600 15px/18px var(--sans); color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
+.dk-thumb-in pre { margin: 0; font: 400 12px/16px var(--mono); color: var(--muted); white-space: pre; overflow: hidden }
+.dk-thumb-in .dk-thumb-ic { position: static; display: grid; place-items: center; padding-top: 6px; color: var(--muted) }
+.dk-thumb .sdot { position: absolute; right: 3px; bottom: 3px; width: 6px; height: 6px }
+.dk-thumb-bar::before { content: ""; position: absolute; left: 5px; top: 50%; width: 4px; height: 4px; margin-top: -2px; border-radius: 50%; background: var(--line-strong); box-shadow: 6px 0 0 var(--line-strong), 12px 0 0 var(--line-strong) }
+.dk-thumb-ic { position: absolute; left: 0; right: 0; top: 30%; display: grid; place-items: center; color: var(--muted) }
+.dk-thumb::after { content: ""; position: absolute; left: 22%; right: 22%; bottom: -3px; height: 2px; border-radius: 2px; background: var(--ch) }
+.dock-tip { position: absolute; left: 0; top: 0; z-index: 31000; pointer-events: none; padding: 4px 10px; border-radius: 999px; background: var(--glass-tip); -webkit-backdrop-filter: var(--glass-tip-fx); backdrop-filter: var(--glass-tip-fx); border: 1px solid var(--glass-line); box-shadow: 0 4px 14px rgba(34,33,28,.12); font: 600 12.5px/16px var(--sans); white-space: nowrap; opacity: 0; transition: opacity .15s var(--ease) }
+/* the Downloads stack: the ten newest files fanned upward from the tile */
+.dl-fan { position: absolute; left: 0; top: 0; z-index: 31500; width: 300px; height: 420px; pointer-events: none }
+.dl-fan .fan-i { position: absolute; left: 0; bottom: 0; display: flex; align-items: center; gap: 10px; pointer-events: auto; cursor: pointer; transform-origin: 0 100%; opacity: 0; transition: transform .45s var(--spring), opacity .25s var(--ease) }
+.dl-fan.open .fan-i { opacity: 1 }
+.dl-fan .fan-n { padding: 3px 10px; border-radius: 999px; background: var(--glass-tip); -webkit-backdrop-filter: var(--glass-tip-fx); backdrop-filter: var(--glass-tip-fx); border: 1px solid var(--glass-line); font: 500 12px/16px var(--sans); white-space: nowrap; max-width: 200px; overflow: hidden; text-overflow: ellipsis }
+.dl-fan .fan-i:hover .fan-n { background: var(--ink); color: var(--plate) }
+.dl-fan .fan-more { font-weight: 600 }
+.dock-tip.show { opacity: 1 }
+
+/* ==========================================================================
+   Desktop objects
+   ========================================================================== */
+#dticons { position: absolute; inset: 0; pointer-events: none }
+.dt-i { position: absolute; left: 0; top: 0; width: 92px; display: grid; justify-items: center; gap: 4px; padding: 6px 2px; border-radius: 10px; pointer-events: auto; outline: 0 }
+#dticons.tidying .dt-i { transition: transform .65s cubic-bezier(.34,1.4,.64,1) }
+/* covers breathe (±2 px, ±.5°) and lift under the pointer; reduced motion stills them */
+.dt-c { display: block; animation: bob var(--bt, 8s) ease-in-out infinite; animation-delay: var(--bd, 0s); --amp: 2px; --rot: .5deg }
+#os.still .dt-c { animation: none }
+.dt-i .fi { transition: transform .2s var(--ease), box-shadow .2s var(--ease) }
+.dt-i:hover .fi { transform: translateY(-3px) scale(1.035) }
+.dt-l { max-width: 90px; padding: 1px 6px; border-radius: var(--r-xs); font: 500 12px/15px var(--sans); text-align: center; color: var(--ink); overflow-wrap: anywhere; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-shadow: 0 1px 0 rgba(255,255,255,.6) }
+.dt-i.sel .dt-l { background: var(--ink); color: var(--plate); text-shadow: none }
+.dt-i.sel .fi { filter: brightness(.94) }
+.dt-i.drop-over .fi { transform: scale(1.08) }
+.band { position: absolute; left: 0; top: 0; background: rgba(35,34,29,.06); box-shadow: inset 0 0 0 1px rgba(35,34,29,.35); pointer-events: none }
+
+/* app switcher */
+.switcher { position: absolute; left: 50%; top: 42%; transform: translate(-50%, -50%); z-index: 41000; padding: 18px; border-radius: var(--r-xl); display: grid; justify-items: center; gap: 10px; max-width: calc(100vw - 32px); animation: fadein .16s var(--ease) both }
+.sw-row { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center }
+.sw-i { position: relative; padding: 6px; border-radius: var(--r-l); transition: transform .2s var(--ease), background .2s var(--ease); cursor: default }
+.sw-i.on { transform: translateY(-3px) scale(1.035); background: rgba(35,34,29,.07) }
+.sw-i.on .appicon { box-shadow: var(--shadow-lift) }
+.sw-i.hid { opacity: .55 }
+.sw-i .sdot { position: absolute; left: 50%; bottom: -1px; margin-left: -4px; opacity: 0 } .sw-i .sdot.s-todo { opacity: 1 }
+.sw-n { font: 600 13px/18px var(--sans) }
+
+/* About This Atlas */
+.about-atlas-b { height: 100%; display: grid; justify-items: center; align-content: start; gap: 6px; padding: 18px 22px 18px; background: var(--plate); text-align: center }
+.ab-logo { color: var(--ink); margin: 6px 0 2px }
+.ab-t { font: 700 40px/1 var(--sans); letter-spacing: -0.03em }
+.ab-kv { width: 100%; margin: 14px 0 6px; display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; text-align: left; font-size: 12.5px; line-height: 17px; border-top: 1.5px solid var(--ink); padding-top: 10px }
+.ab-kv dt { font: 700 10.5px/17px var(--sans); letter-spacing: .12em; text-transform: uppercase } .ab-kv dd { margin: 0; color: var(--ink) }
+.ab-f { display: flex; gap: 8px; margin-top: 8px }
+
+/* ==========================================================================
+   Boot, login, lock, power
+   ========================================================================== */
+#boot, #login, #power { position: fixed; inset: 0; z-index: 90000; background: var(--board); background-image: radial-gradient(var(--dot) 1px, transparent 1.2px); background-size: 24px 24px }
+#boot { display: grid; place-items: center; transition: opacity .4s var(--ease) }
+#boot.out, #login.out { opacity: 0; pointer-events: none }
+.bt-c { display: grid; justify-items: center; gap: 26px }
+.bt-logo { color: var(--ink); transition: transform .65s var(--camera) }
+#boot.flying .bt-bar, #boot.flying .bt-line { opacity: 0; transition: opacity .3s var(--ease) }
+.bt-seed { fill: currentColor; transform-box: fill-box; transform-origin: center; transform: scale(0); transition: transform .5s var(--spring) }
+.bt-seed.on { transform: scale(1) }
+.bt-line { width: min(560px, 80vw); height: 16px; overflow: hidden; text-align: center; white-space: nowrap; text-overflow: ellipsis; font: 500 11px/16px var(--mono); color: var(--muted) }
+.bt-bar { width: 160px; height: 4px; border-radius: 999px; background: var(--line); overflow: hidden }
+.bt-bar i { display: block; height: 100%; width: 0; background: var(--ink); border-radius: 2px }
+.bt-log { position: fixed; left: 24px; right: 24px; bottom: 20px; max-height: 50vh; overflow: hidden; display: none; font: 11.5px/17px var(--mono); color: var(--muted); white-space: pre }
+#boot.verbose .bt-log { display: block }
+#login { display: grid; grid-template-rows: 1fr auto auto; justify-items: center; padding: 10vh 20px 6vh; transition: opacity .5s var(--ease), transform .5s var(--ease) }
+/* locking keeps the desk alive under glass: jobs keep running, the Dock dots keep counting */
+#login.over-desk { background: var(--glass); background-image: none; -webkit-backdrop-filter: var(--glass-fx); backdrop-filter: var(--glass-fx) }
+.lg-go { width: 30px; height: 30px; border: 0; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--plate); cursor: pointer; transition: transform .25s var(--spring) }
+.lg-go:hover { transform: translateX(2px) }
+.lg-row { display: flex; align-items: center; gap: 10px }
+#login canvas.saver { position: fixed; inset: 0; z-index: 2; opacity: 0; transition: opacity .8s var(--ease); pointer-events: none }
+#login.saving canvas.saver { opacity: 1 }
+#login.saving > :not(canvas) { opacity: 0; transition: opacity .6s var(--ease) }
+#login.out { transform: translateY(-14px) }
+.lg-clock { text-align: center; align-self: start }
+.lg-t { font: 700 104px/0.95 var(--sans); letter-spacing: -0.045em; color: var(--ink); font-variant-numeric: tabular-nums }
+.lg-d { margin: 0 0 8px; font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink) }
+.lg-user { display: grid; justify-items: center; gap: 10px; margin-bottom: 26px }
+.lg-av { width: 68px; height: 68px; border-radius: 50%; display: grid; place-items: center; color: var(--plate); font: 700 28px/1 var(--sans); box-shadow: 0 0 0 3px var(--plate), var(--shadow-lift) }
+.lg-n { font: 700 15px/18px var(--sans); letter-spacing: -0.01em }
+.lg-pw { display: flex; align-items: center; width: 220px; height: 34px; padding: 0 4px 0 14px; border-radius: 999px }
+.lg-pw input { flex: 1; min-width: 0; border: 0; outline: 0; background: transparent; font: 13px/18px var(--sans); color: var(--ink) }
+.lg-pw input::placeholder { color: var(--muted) }
+.lg-pw button { width: 26px; height: 26px; border-radius: 50%; display: grid; place-items: center; background: var(--ink); color: var(--plate) }
+.lg-h { font-size: 11.5px; color: var(--muted) }
+.lg-p { display: flex; gap: 28px }
+.lg-p button.armed span { color: var(--ink); font-weight: 700 }
+.lg-p button { display: grid; justify-items: center; gap: 6px; font: 500 11.5px/14px var(--sans); color: var(--muted) }
+.lg-p button svg { width: 34px; height: 34px; padding: 8px; border-radius: 50%; background: rgba(255,255,255,.55); box-shadow: 0 0 0 1px rgba(255,255,255,.7), var(--shadow); color: var(--ink) }
+.lg-p button:hover svg { background: #fff }
+#power { display: grid; place-items: center }
+#power .glass { padding: 26px 30px; display: grid; gap: 10px; justify-items: start; max-width: 380px }
+#power h2 { margin: 0; font: 700 40px/1 var(--sans); letter-spacing: -0.03em }
+#power p { margin: 0; color: var(--muted) }
+#os.off { opacity: 0; filter: blur(6px); transition: opacity .6s var(--ease), filter .6s var(--ease) }
+/* from 720 px up the titles stay (DESIGN.md §3.1), so the bar makes room for them. Terminal's eight titles beside
+   the whole status group need about 860 px with the ✦: under 900 px the bar is set as tightly as on a phone (about
+   790 px), and under 820 px the date leaves the clock (about 705 px), which holds that widest set down to 720 px */
+@media (min-width: 720px) and (max-width: 899px) {
+  .mb-jobs { margin-right: 0 } .mb-disc { width: 16px }
+  .mb-atlas, .mb-m, .mb-s, .mb-clock { padding: 0 6px }
+}
+@media (min-width: 720px) and (max-width: 819px) { .mb-clock .lbl { display: none } }
+@media (max-width: 719px) {
+  .mb-m:not(.bold) { display: none }
+  /* the app name gives way to the status items: a long one ends in an ellipsis (System Settings at 320 px) */
+  .mb-m.bold { display: block; flex: 0 1 auto; min-width: 0; line-height: 22px; overflow: hidden; text-overflow: ellipsis }
+}
+@media (max-width: 559px) {
+  .dt-i { width: 76px } .dt-l { max-width: 74px; font-size: 11px; line-height: 14px }
+}
+@media (max-width: 519px) {
+  .mb-clock .lbl { display: none }
+  .mb-jobs { margin-right: 0 } .mb-disc { width: 16px }
+  .mb-atlas, .mb-m, .mb-s, .mb-clock { padding: 0 6px }
+  .lg-t { font-size: 72px }
+}
+/* on a phone the app name is every menu, so the status items draw closer and leave it its letters: every name
+   fits at 375 px beside the ✦; under 360 px the last paddings go as well */
+@media (max-width: 399px) { #menubar { gap: 4px } .mb-disc { width: 14px } .mb-disk, .mb-clock { padding: 0 4px } }
+@media (max-width: 359px) { .mb-s { padding: 0 4px } }
+.fi.app { display: grid; place-items: center }
+
+/* Atlas OS · the terminal surface and the Swiss layer inside it (carried over from the first build). */
+/* ---------- the terminal: a sheet of paper inside the plate ---------- */
+/* --lh is the height of one line. Everything that sits on the line grid reads it, so a host that sets another
+   size (a Terminal window: View › Bigger, Control Center's Text size) only has to set the font size and --lh */
+.term { --lh: 20px; position: absolute; inset: 0; border-radius: var(--r-xs); background: var(--surface); overflow: hidden; color: var(--ink); font: 400 13px/var(--lh) var(--mono); letter-spacing: 0; font-variant-ligatures: none; cursor: text; box-shadow: inset 0 0 0 1px rgba(35,34,29,.045) }
+.tscroll { position: absolute; inset: 0; overflow-y: auto; overflow-x: hidden; padding: 14px 16px 16px 22px; overscroll-behavior: contain; scrollbar-width: thin; scrollbar-color: rgba(35,34,29,.2) transparent }
+.tscroll::-webkit-scrollbar { width: 8px } .tscroll::-webkit-scrollbar-thumb { background: rgba(35,34,29,.18); border-radius: 8px; border: 2px solid var(--surface) }
+.blk { position: relative; margin-top: 12px }
+.blk:first-child { margin-top: 0 }
+.blk.empty.loose { display: none }
+.bh { white-space: pre-wrap; word-break: break-all; font-weight: 500; padding-right: 76px }
+.bh .tp { font-weight: 400 }
+.ln { white-space: pre-wrap; word-break: break-all; min-height: var(--lh) }
+/* a line spoken with the ✦ is a sentence to read, not a grid: on a narrow screen it breaks between words */
+.ln:has(.t-star) { word-break: normal; overflow-wrap: anywhere }
+.blk::before { content: ""; position: absolute; left: -14px; top: calc(var(--lh) / 2 - 3px); width: 6px; height: 6px; border-radius: 50%; background: transparent; transition: background .3s var(--ease) }
+.blk.live:not(.loose)::before { background: var(--reading); animation: pulse 1.1s ease-in-out infinite }
+.blk.fail::before { background: var(--todo) }
+@keyframes pulse { 50% { opacity: .35 } }
+.bdrop { color: var(--muted); font-size: 11px }
+.btools { position: absolute; right: 0; top: calc(var(--lh) / 2 - 11px); display: flex; gap: 3px; opacity: 0; transition: opacity .15s var(--ease); pointer-events: none }
+.blk:not(.loose):not(.live):hover .btools { opacity: 1; pointer-events: auto }
+.btools button { width: 22px; height: 22px; border-radius: 7px; display: grid; place-items: center; color: var(--muted); background: rgba(255,255,255,.88); box-shadow: 0 0 0 1px var(--line), 0 2px 6px rgba(34,33,28,.06) }
+.btools button:hover { color: var(--ink); background: #fff }
+.btools .ex { display: none; color: #fff; background: var(--swiss); box-shadow: none; font: 600 12px/1 var(--sans) }
+.btools .ex:hover { color: #fff; background: var(--swiss); transform: scale(1.06) }
+#os.claude .blk.fail .btools .ex { display: grid }
+.tin { white-space: pre-wrap; word-break: break-all; margin-top: 12px; font-weight: 500; position: relative }
+.tin .tp { font-weight: 400 }
+.blk + .tin, .tblocks:empty + .tin { }
+/* text marks are square (DESIGN.md §2.1): the cursor here, inverse video and the highlighter below */
+.cur { background: var(--ink); color: var(--surface); animation: breathe 1.15s ease-in-out .7s infinite }
+@keyframes breathe { 50% { opacity: .32 } }
+.term:not(.focused) .cur { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px var(--ink); animation: none }
+.talt { position: absolute; inset: 0; padding: 12px 16px; white-space: pre; overflow: hidden; background: var(--surface) }
+.talt .gl { height: var(--lh); white-space: pre; overflow: hidden }
+.talt .cur { animation: none }
+.tkbd { position: absolute; left: 0; bottom: 0; width: 1px; height: 1px; opacity: 0; border: 0; padding: 0; margin: 0; resize: none; overflow: hidden; caret-color: transparent; font-size: 16px; pointer-events: none }
+.tmeasure { position: absolute; left: 0; top: -200px; visibility: hidden; white-space: pre; font: inherit }
+.bh .w, .ln:not(.t-p):not(.t-md):not(.t-h):not(.t-lbl) .w, .tin .w, .talt .w { display: inline-block; width: 2ch; text-align: center }
+
+/* terminal colours and attributes */
+.b { font-weight: 700 } .u { text-decoration: underline; text-underline-offset: 2px } .s { text-decoration: line-through }
+.iv { background: var(--ink); color: var(--surface) }
+.f0 { color: var(--a0) } .f1 { color: var(--a1) } .f2 { color: var(--a2) } .f3 { color: var(--a3) } .f4 { color: var(--a4) } .f5 { color: var(--a5) } .f6 { color: var(--a6) } .f7 { color: var(--a7) }
+.f8 { color: var(--a8) } .f9 { color: var(--a9) } .f10 { color: var(--a10) } .f11 { color: var(--a11) } .f12 { color: var(--a12) } .f13 { color: var(--a13) } .f14 { color: var(--a14) } .f15 { color: var(--a15) }
+.fe { color: var(--wine) }
+.k0 { background: rgba(35,34,29,.12) } .k1, .k9 { background: rgba(209,73,58,.16) } .k2, .k10 { background: rgba(58,150,96,.16) } .k3, .k11 { background: var(--hl) } .k4, .k12 { background: rgba(43,93,134,.14) } .k5, .k13 { background: rgba(135,94,96,.16) } .k6, .k14 { background: rgba(44,92,88,.14) } .k7, .k15 { background: rgba(35,34,29,.07) } .k8 { background: rgba(35,34,29,.1) }
+
+/* rich rows: the Swiss layer inside the terminal */
+.ln.t-lbl { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink); border-top: 1.5px solid var(--ink); padding-top: 7px; margin: 14px 0 7px; min-height: 0; white-space: normal; max-width: 68ch }
+.bo > .ln.t-lbl:first-child { margin-top: 4px }
+.ln.t-h { font: 700 28px/1.02 var(--sans); letter-spacing: -0.025em; margin: 6px 0 10px; white-space: normal; word-break: normal; text-wrap: balance; min-height: 0 }
+.ln.t-p { font: 400 14px/21px var(--sans); letter-spacing: -0.003em; max-width: 64ch; white-space: normal; word-break: normal; margin: 0 0 8px; min-height: 0 }
+.ln.t-hr { border-top: 1.5px solid var(--ink); min-height: 0; margin: 10px 0; max-width: 68ch }
+.ln.t-md { white-space: normal; word-break: normal; min-height: 0; max-width: 72ch; margin: 2px 0 6px }
+.t-dot, .sdot { display: inline-block; width: 8px; height: 8px; border-radius: 50%; background: var(--line-strong); vertical-align: 1px }
+.t-dot.s-todo, .sdot.s-todo { background: var(--todo) } .t-dot.s-reading, .sdot.s-reading { background: var(--reading) } .t-dot.s-done, .sdot.s-done { background: var(--done) } .sdot.s-idle { background: var(--line) }
+.t-bar { display: inline-block; width: 72px; height: 3px; border-radius: 2px; background: var(--line); vertical-align: 3px; overflow: hidden; margin-right: 4px }
+.t-bar i { display: block; height: 100%; border-radius: 2px; background: var(--ink) } .t-bar.s-todo i { background: var(--todo) }
+.t-chip { font: 500 11px/15px var(--mono); padding: 1px 7px; border: 1px solid var(--line-strong); border-radius: 999px }
+.t-link { cursor: pointer; text-decoration: underline; text-decoration-color: transparent; text-underline-offset: 3px; transition: text-decoration-color .15s var(--ease) }
+.t-link:hover { text-decoration-color: currentColor }
+.t-link.b { font-weight: 700 } .t-link.dm { color: var(--muted) }
+.t-star { color: var(--swiss); font-family: var(--sans); font-weight: 600 }
+.t-sw { display: inline-block; width: 14px; height: 14px; border-radius: 50%; margin-right: 5px; vertical-align: -2px; box-shadow: inset 0 0 0 1.5px rgba(255,255,255,.65), 0 0 0 1px rgba(35,34,29,.08) }
+
+/* Markdown, set in the Swiss layer: used by answers, man pages and paper documents */
+.rich { font: 400 14px/1.62 var(--sans); letter-spacing: -0.003em; overflow-wrap: anywhere; min-width: 0; color: var(--ink) }
+.rich > :first-child { margin-top: 0 } .rich > :last-child { margin-bottom: 0 }
+.rich p { margin: .55em 0 } .rich ul, .rich ol { margin: .45em 0; padding-left: 1.3em } .rich li { margin: .15em 0 }
+.rich li.ck { list-style: none; margin-left: -1.2em } .rich li.ck::before { content: ""; display: inline-block; width: 10px; height: 10px; margin-right: 8px; border-radius: 3px; box-shadow: inset 0 0 0 1.5px var(--ink); vertical-align: -1px } .rich li.ck.on::before { background: var(--ink) }
+.rich h1 { font: 700 34px/1 var(--sans); letter-spacing: -0.03em; margin: .2em 0 .45em; text-wrap: balance }
+.rich h2 { font: 700 22px/1.08 var(--sans); letter-spacing: -0.02em; margin: 1.1em 0 .35em; text-wrap: balance }
+.rich h3 { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; border-top: 1.5px solid var(--ink); padding-top: 7px; margin: 1.4em 0 .5em }
+.rich b, .rich strong { font-weight: 700 } .rich em { font-style: normal; font-weight: 600 }
+.rich code { font: 12.5px var(--mono); background: rgba(35,34,29,.06); padding: 1px 5px; border-radius: var(--r-xs) }
+.rich pre { font: 12.5px/1.55 var(--mono); background: rgba(35,34,29,.05); padding: 10px 12px; border-radius: 10px; overflow: auto; white-space: pre }
+.rich pre code { background: none; padding: 0 }
+.rich blockquote { margin: .6em 0; padding: 1px 12px; border-left: 3px solid rgba(98,108,85,.5); color: var(--muted) }
+.rich hr { border: 0; border-top: 1.5px solid var(--ink); margin: 1.2em 0 }
+.rich a { color: inherit; text-decoration: underline; text-decoration-color: var(--line-strong); text-underline-offset: 2px }
+.rich .tw { overflow-x: auto } .rich table { border-collapse: collapse; font-size: 13px; line-height: 18px; margin: .6em 0 }
+.rich th { text-align: left; font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; padding: 6px 12px 5px 0; border-bottom: 1.5px solid var(--ink) }
+.rich td { padding: 6px 12px 6px 0; border-bottom: 1px solid var(--line); vertical-align: top }

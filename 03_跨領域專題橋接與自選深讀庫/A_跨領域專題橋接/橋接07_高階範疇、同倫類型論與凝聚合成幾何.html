@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>橋接07｜高階範疇、同倫類型論與凝聚合成幾何（無窮 Topos、單價公理、切範疇與弦圖） · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f4430386">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">A_跨領域專題橋接</a><a class="find" href="../../index.html#n=n-f4430386">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · A_跨領域專題橋接</span>
+<article>
+
+<h1 id="橋接07高階範疇同倫類型論與凝聚合成幾何無窮-topos單價公理切範疇與弦圖">橋接07｜高階範疇、同倫類型論與凝聚合成幾何（無窮 Topos、單價公理、切範疇與弦圖）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 橋接總索引：<a class="wl" href="../01_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E7%B8%BD%E7%B4%A2%E5%BC%95%E8%88%87%E5%AD%B8%E7%BF%92%E8%B7%AF%E7%B7%9A.html">01_跨領域專題橋接總索引與學習路線</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span> ｜ L5 旗艦庫：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>
+連接領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>
+對應研究主脊：<a class="wl" href="../../NOTES/00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A2_%E7%B5%84%E5%90%88%E6%80%A7%E8%88%87%E7%AF%84%E7%96%87.html">主脊2_組合性與範疇</a></p>
+</aside>
+<h2 id="g1橋接核心命題與概念對譯">G1｜橋接核心命題與概念對譯</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">為什麼這幾個領域共享同一套結構</p>
+<p><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>、<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>、<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a>、<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a>與<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>在底層共享同一套結構語言：以局部笛卡兒閉 <span class="math inline">(\infty,1)</span>-範疇或 <span class="math inline">(\infty,1)</span>-Topos 作為空間與系統的語意宇宙，並在其內語言中使用依賴類型、單價宇宙與伴隨模態進行推理。將這五個領域合讀，能看清單一領域常被遮蔽的邊界條件：例如單純的同倫類型論沒有內聚模態就無法區分連續路徑與抽象同倫路徑，高階範疇論脫離類型內語言就必須背負繁複的雙單純模型細節，而應用範疇論中的么半與多項式系統若不經 Rezk 完備化便難以在單價證明助理中保持同構不變性。</p>
+</aside>
+<h3 id="跨領域概念對譯表">跨領域概念對譯表</h3>
+<table>
+<thead>
+<tr>
+<th>共同數學或計算結構</th>
+<th>領域 A 的語言與對象</th>
+<th>領域 B 的語言與對象</th>
+<th>對譯成立的前提與失效邊界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>(∞,1)-Topos 與單價類型宇宙 (Univalent Universe)</strong></td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 中具備局部笛卡兒閉性質與對象分類器的呈現性 <span class="math inline">(\infty,1)</span>-Topos。</td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 中滿足單價公理的類型宇宙 <span class="math inline">\mathcal{U}</span> 與路徑相等類型 <span class="math inline">\mathrm{Id}_A(x,y)</span>。</td>
+<td>僅當 <span class="math inline">(\infty,1)</span>-範疇具備有界局部態射類與下降性質時，才存在對應的單價族（Gepner–Kock）；缺乏有限極限與局部笛卡兒閉結構的範疇無法解釋依賴積類型。</td>
+</tr>
+<tr>
+<td><strong>內聚伴隨四元組與模態語境 (Cohesive Adjoint Quadruple)</strong></td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 中從凝聚 <span class="math inline">(\infty,1)</span>-Topos 映向無窮群胚的形狀、離散與餘離散函子 <span class="math inline">\Pi \dashv \mathrm{Disc} \dashv \Gamma \dashv \mathrm{coDisc}</span>。</td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 中透過清晰變數（crisp variables）規則運作的離散模態 <span class="math inline">\flat</span>、餘離散模態 <span class="math inline">\sharp</span> 與形狀模態 <span class="math inline">\int</span>。</td>
+<td>要求形狀函子 <span class="math inline">\Pi</span> 保持有限積；若要在類型論內證得 Brouwer 不動點定理等古典拓撲結果，還須額外加入實內聚公理使 <span class="math inline">\int \mathbb{R} \simeq 1</span>，普通內聚公理不足以固定實數拓撲。</td>
+</tr>
+<tr>
+<td><strong>合成無窮範疇與無窮小鄰域 (Synthetic Directions and Infinitesimals)</strong></td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 中的雙單純空間 Segal/Rezk 條件，以及 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 中滿足 Kock–Lawvere 公理的冪零無窮小對象 <span class="math inline">D = \{d \in R \mid d^2 = 0\}</span>。</td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 中結合單純方向層與擴展類型的 Segal 類型與 Rezk 類型（Riehl–Shulman）。</td>
+<td>Riehl–Shulman 系統的方向層不滿足單價公理，僅同倫空間層滿足單價；Kock–Lawvere 公理只在平滑 Topos 的直覺主義內語言成立，若併入古典排中律會直接推出 <span class="math inline">D=\{0\}</span>。</td>
+</tr>
+<tr>
+<td><strong>依賴多項式函子與雙向系統介面 (Polynomial Functors and Lenses)</strong></td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 中表達開放動態系統與 Mealy 機介面的多項式函子 <span class="math inline">p(y) = \sum_{i \in I} y^{P[i]}</span> 與接線圖。</td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 中對應的容器類型、自由單子 Kleisli 態射以及編碼前後置規格的依賴多項式（Aberlé）。</td>
+<td>以餘代數賦予組合操作語意時，基底範疇須具備拉回與依賴和；若要讓單價系統自動將範疇等價轉為類型相等，必須先對么半或充實結構作 Rezk 完備化。</td>
+</tr>
+<tr>
+<td><strong>凝聚景觀層與導出同調基底 (Condensed Site and Derived Algebra)</strong></td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 中定義在極端不連通射影集景觀上的層（凝聚集合與凝聚阿貝爾群），用來取代點集拓撲群。</td>
+<td><a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 中可進行導出函子與譜計算的穩定 <span class="math inline">(\infty,1)</span>-範疇 <span class="math inline">D(\mathrm{Cond}(\mathrm{Ab}))</span>。</td>
+<td>必須對景觀的緊 Hausdorff 空間基數作 <span class="math inline">\kappa</span>-截斷以避免集合論尺寸爆炸；未截斷的所有緊 Hausdorff 空間景觀不構成小範疇。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="g2結構傳遞機制與演進圖">G2｜結構傳遞機制與演進圖</h2>
+<pre class="mermaid">flowchart LR
+    N1[&quot;高階 Topos 與 LCCC (11A/11B)&quot;]
+    N2[&quot;同倫類型論與單價宇宙 (12A/12C)&quot;]
+    N3[&quot;合成無窮範疇 Segal 與 Rezk 類型&quot;]
+    N4[&quot;內聚伴隨四元組與清晰模態 (12B/30C)&quot;]
+    N5[&quot;凝聚層與合成微分幾何 (30A/30B)&quot;]
+    N6[&quot;形狀函子與拓撲不變數 (14B/14C)&quot;]
+    N7[&quot;多項式函子與雙向介面 (15B/15C)&quot;]
+    N1 --&gt;|&quot;Gepner-Kock 對象分類器&quot;| N2
+    N1 --&gt;|&quot;雙單純結構內部化&quot;| N3
+    N2 --&gt;|&quot;方向層與空間層配合&quot;| N3
+    N2 --&gt;|&quot;加入清晰模態 Π ⊣ ♭ ⊣ ♯&quot;| N4
+    N4 --&gt;|&quot;實內聚形狀抽出&quot;| N6
+    N4 --&gt;|&quot;平滑與凝聚景觀語意&quot;| N5
+    N2 --&gt;|&quot;容器與 Rezk 完備化&quot;| N7
+</pre>
+<h3 id="關鍵橋接機制">關鍵橋接機制</h3>
+<ol>
+<li>
+<p><strong>對象分類器與單價公理的模型獨立對應</strong></p>
+<ul>
+<li>結構對應：在呈現性局部笛卡兒閉 <span class="math inline">(\infty,1)</span>-範疇 <span class="math inline">\mathcal{E}</span> 中，Gepner 與 Kock 證明 Voevodsky 定義的單價族與 Lurie 定義的有界局部態射類構成同構的偏序集。這項等價性說明任意 <span class="math inline">(\infty,1)</span>-Topos 都能按正則基數分層地在內部解釋 <span class="wl-missing">12A_同倫類型論、單價公理與高階歸納類型HIT</span> 的單價公理。搭配 <span class="wl-missing">11A_擬範疇、完備Segal空間與無窮範疇模型獨立基礎</span> 的 Rezk 完備化與 <span class="wl-missing">11B_高階Topos、穩定無窮範疇、t結構與無窮Operad</span> 的理論工具，範疇論者可以在不指定單純集合或模型範疇細節的前提下推導高階性質。</li>
+<li>推導或核心表達式：<span class="math inline">(A \simeq B) \xrightarrow{\sim} \mathrm{Id}_{\mathcal{U}}(A, B), \qquad \mathrm{UnivalentFam}(\mathcal{E}) \cong \mathrm{LocalClass}_{\mathrm{bdd}}(\mathcal{E})</span></li>
+<li>斷裂點（類比在哪裡失效）：單價宇宙無法落入任何固定的有限同倫截斷層級。若基底僅為一般局部笛卡兒閉 <span class="math inline">(\infty,1)</span>-範疇而缺乏完整的下降（descent）與余極限構造，則無法解釋高階歸納類型或確保局部類在伴隨拉回下封閉。</li>
+</ul>
+</li>
+<li>
+<p><strong>內聚伴隨模態與清晰變數的拓撲同倫分離</strong></p>
+<ul>
+<li>結構對應：標準同倫類型論中的等式類型編碼的是抽象同倫空間的無窮群胚路徑，無法區別帶拓撲結構的連續映射與一般函數。<span class="wl-missing">30C_內聚無窮Topos、微分上同調與高階規範場幾何</span> 透過在 <span class="math inline">(\infty,1)</span>-Topos 上附加伴隨四元組將空間的拓撲黏著性與同倫形狀拆開，而在 <span class="wl-missing">12B_立方類型論、計算性單價與定向模態類型論</span> 的實作形式中，這組伴隨體現為附帶清晰變數規則的模態類型系統（Shulman）。藉此機制，類型論內部能抽取拓撲流形的基本無窮群胚（連結至 <span class="wl-missing">14B_穩定同倫論、色層同倫論與拓撲模形式TMF</span> 與 <span class="wl-missing">14C_等變同倫論、Goodwillie函子微積分與合成譜</span> 的譜與同倫不變數），也能形式化高階規範場的微分上同調閉鏈（Schreiber）。</li>
+<li>推導或核心表達式：<span class="math inline">\Pi \dashv \flat \dashv \sharp, \qquad \Pi(X \times Y) \simeq \Pi(X) \times \Pi(Y), \qquad \int \mathbb{R} \simeq \mathbf{1}</span></li>
+<li>斷裂點（類比在哪裡失效）：清晰語境規則嚴格限制哪些變數可被 <span class="math inline">\flat</span> 與 <span class="math inline">\int</span> 引用，普通依賴類型消去規則不能隨意跨越模態邊界。此外，若缺乏實內聚公理（如實數區間可縮與連續性條件），僅憑一般內聚公理無法推出 <span class="math inline">\pi_1(S^1_{\mathrm{top}}) \cong \mathbb{Z}</span> 或 Brouwer 不動點定理。</li>
+</ul>
+</li>
+<li>
+<p><strong>多項式函子接線圖與單價充實範疇工程</strong></p>
+<ul>
+<li>結構對應：在 <span class="wl-missing">15B_Markov範疇、多項式函子與開放動態系統網路</span> 中，開放系統介面以多項式函子表達，並透過接線圖進行複合；<span class="wl-missing">12C_依賴類型論範疇語意與Agda及Rocq證明工程</span> 將該結構直接寫入依賴類型論，以多項式對應容器介面、自由單子 Kleisli 態射對應實作、依賴多項式編碼前後置規格，並以 Mealy 機給出餘代數操作語意（Aberlé）。另一方面，若要在 UniMath 或 Agda 內對 <span class="wl-missing">15A_弦圖演算、對稱么半範疇與範疇量子力學ZX演算</span> 與 <span class="wl-missing">15C_雙向Lens與Optics、開放賽局與充實範疇組合學</span> 進行不變性推理，則須建立單價么半範疇與充實範疇的 Rezk 完備化，將結構等價收斂為類型相等。</li>
+<li>推導或核心表達式：<span class="math inline">p(y) = \sum_{i \in I} y^{P[i]}, \qquad \mathrm{Spec} \xrightarrow{\text{monoidal}} \mathrm{Intf}, \qquad \mathcal{C} \xrightarrow{\text{Rezk}} \widehat{\mathcal{C}}_{\mathrm{univ}}</span></li>
+<li>斷裂點（類比在哪裡失效）：當組合系統從一般容器擴展至嚴格不可複製資源（如量子電路或線性博弈策略）時，依賴類型語境預設的自由複製與弱化結構規則會失效，必須與線性類型或模態子結構邏輯配合才能保持物理守恆律。</li>
+</ul>
+</li>
+</ol>
+<h3 id="跨域遷移思考題">跨域遷移思考題</h3>
+<ol>
+<li><strong>合成無窮範疇中方向層與空間層的單價隔離</strong>：在 Riehl–Shulman 的單純同倫類型論中，方向維度（simplicial layer）不能滿足單價公理，而類型宇宙所在的空間維度必須滿足單價。請分析若把單價強制施加在方向箭頭上會發生什麼退化，並對照雙單純空間模型中的 Segal 與 Rezk 條件如何配合這套分層。</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>第一步先檢查單價公理對等價與相等的強迫作用：若方向箭頭對應的類型族具有單價性，則任何同構於某箭頭的對象都會與其路徑相等，進而使所有 1-態射被迫可逆，範疇退化為群胚。第二步改從雙單純空間模型出發，觀察垂直方向的 Kan 纖維化條件如何保證空間層單價，而水平方向的 Segal 條件負責無窮箭頭複合。第三步檢視 Rezk 完備性如何確保空間中的同構路徑與水平可逆箭頭一致。</p>
+</details>
+<ol start="2">
+<li><strong>凝聚阿貝爾群與內聚 Topos 處理拓撲商空間的差異</strong>：在點集拓撲群中，從離散實數群映向標準拓撲實數群的連續雙射其核與餘核皆為零卻非同構，導致拓撲群不構成阿貝爾範疇。請比較 Clausen–Scholze 凝聚數學與內聚 <span class="math inline">(\infty,1)</span>-Topos 分別如何修補這種病態商結構。</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>先在極端不連通射影集景觀上寫出兩個群的 Yoneda 層化對象，計算映射的層化餘核，確認該餘核作為層並非零，而是記錄了無法從實數點列讀出的離散與連續拓撲差異。接著轉向內聚 Topos 中的典範映射 <span class="math inline">\flat \mathbb{R} \to \mathbb{R}</span>，觀察其同倫纖維或餘纖維如何透過離散模態保留拓撲黏著結構。最後比較兩者在處理無窮維局部凸向量空間與分析疊時的基數限制與計算便利性。</p>
+</details>
+<ol start="3">
+<li><strong>單價基礎中 Rezk 完備化對應用範疇形式化的實際代價</strong>：當研究人員在 Agda 或 Rocq/UniMath 中形式化多項式函子驗證框架或雙向 Lens 網路時，直接採用未經 Rezk 完備化的預範疇（precategory）定義與全面採用單價 Rezk 完備化各會帶來什麼證明負擔？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>先列舉非單價預範疇中必須顯式攜帶同構轉運（transport along isomorphism）的場景，例如么半結合律自然同構的相干性確認。接著追蹤 Wullaert 等人與 van der Weide 對么半與充實 Kleisli 範疇進行 Rezk 完備化的具體構造，看等價關係如何轉化為標準相等。最後檢查在多項式函子容器的具體實例計算中，Rezk 完備化是否會阻礙直接歸約求值（computational canonicity），以及立方類型論如何緩解該問題。</p>
+</details>
+<h2 id="g3跨領域橋接代表作精讀卡">G3｜跨領域橋接代表作精讀卡</h2>
+<h4 id="1-a-type-theory-for-synthetic-infinity-categories2017">1. A type theory for synthetic infinity-categories（2017）</h4>
+<ul>
+<li>作者與出處：Emily Riehl, Michael Shulman · <em>Higher Structures</em></li>
+<li>核心問題：橫跨 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>，解決 <span class="math inline">(\infty,1)</span>-範疇論高度依賴特定點集模型組合細節、難以進行模型獨立合成推理的問題。</li>
+<li>關鍵做法：提出單純同倫類型論，在同倫空間層保留單價性的同時引入方向層與擴展類型，定義出 Segal 類型與 Rezk 類型，並在類型論內部給出合成 <span class="math inline">(\infty,1)</span>-範疇的 Yoneda 引理與伴隨理論。</li>
+<li>跨領域啟發：建立無窮範疇與依賴類型語法的直接對譯，使高階範疇推導無需逐層展開模型範疇或單純組合條件。</li>
+<li>連結：<a href="zotero://select/library/items/KCV7JTJX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1705.07442" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-differential-cohomology-in-a-cohesive-infinity-topos2013">2. Differential cohomology in a cohesive infinity-topos（2013）</h4>
+<ul>
+<li>作者與出處：Urs Schreiber · <em>arXiv / Mathematical Physics &amp; Higher Topos Theory</em></li>
+<li>核心問題：橫跨 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>、<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>，解決光滑流形幾何、高階規範場與微分上同調缺乏統一高階範疇公理基底的問題。</li>
+<li>關鍵做法：在 <span class="math inline">(\infty,1)</span>-Topos 上附加伴隨四元組公理以建構內聚 <span class="math inline">(\infty,1)</span>-Topos，將主叢、聯絡、曲率與 Wess–Zumino–Witten 項統一表為模疊態射與微分上同調閉鏈。</li>
+<li>跨領域啟發：示範如何藉由伴隨模態把純同倫高階 Topos 轉化為帶拓撲與幾何結構的合成微分幾何平台。</li>
+<li>連結：<a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1310.7930" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-brouwers-fixed-point-theorem-in-real-cohesive-homotopy-type-theory2015">3. Brouwer's fixed-point theorem in real-cohesive homotopy type theory（2015）</h4>
+<ul>
+<li>作者與出處：Michael Shulman · <em>Mathematical Structures in Computer Science</em></li>
+<li>核心問題：橫跨 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>，解決標準同倫類型論無法區分連續拓撲路徑與抽象同倫等同（identifications）的結構限制。</li>
+<li>關鍵做法：透過帶清晰變數的伴隨邏輯把內聚與實內聚公理系統化為模態類型論（real-cohesive HoTT），從形狀模態抽離實數線拓撲的同倫型態，並在系統內嚴格證明 Brouwer 不動點定理。</li>
+<li>跨領域啟發：提供從內聚模態語法提取古典代數拓撲不變數的具體範例，釐清連續性與同倫性在伴隨邊界上的分工。</li>
+<li>連結：<a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1509.07584" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-lectures-on-condensed-mathematics2019">4. Lectures on Condensed Mathematics（2019）</h4>
+<ul>
+<li>作者與出處：Peter Scholze · <em>University of Bonn (Author Official Lecture Notes)</em></li>
+<li>核心問題：橫跨 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>，解決古典拓撲阿貝爾群與拓撲向量空間無法構成阿貝爾範疇、進而阻礙同調代數與導出範疇應用的問題。</li>
+<li>關鍵做法：定義極端不連通射影集景觀上的層為凝聚集合與凝聚阿貝爾群，並建構固體模（Solid Modules）理論，使拓撲代數對象納入完整的阿貝爾範疇與導出 <span class="math inline">(\infty,1)</span>-範疇體系。</li>
+<li>跨領域啟發：從 Grothendieck 景觀與層論角度提供另一條幾何與代數整合路徑，補足經典點集拓撲在同調極限與商物件上的缺口。</li>
+<li>連結：<a href="zotero://select/library/items/AWXPXFI7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.03658" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-synthetic-differential-geometry2006">5. Synthetic Differential Geometry（2006）</h4>
+<ul>
+<li>作者與出處：Anders Kock · <em>Cambridge University Press (London Mathematical Society Lecture Note Series, 2nd Open Edition)</em></li>
+<li>核心問題：橫跨 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a>，解決古典微分幾何必須依賴座標圖卡與極限逼近、難以直接以函數空間與代數關係推導切空間與微分形式的問題。</li>
+<li>關鍵做法：公理化冪零無窮小對象 <span class="math inline">D</span> 與 Kock–Lawvere 公理，在平滑 Topos 的直覺主義內語言中把流形切叢直接定義為指數對象 <span class="math inline">M^D</span>，進而建構向量場、Lie 括號與微分形式。</li>
+<li>跨領域啟發：揭示內語言微分幾何與範疇函子結構的直接對應，同時明確標定直覺主義邏輯相對於古典排中律的必要邊界。</li>
+<li>連結：<a href="zotero://select/library/items/854E8GTD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://users-math.au.dk/kock/sdg99.pdf" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-compositional-program-verification-with-polynomial-functors-in-dependent-type-theory2026">6. Compositional Program Verification with Polynomial Functors in Dependent Type Theory（2026）</h4>
+<ul>
+<li>作者與出處：C. B. Aberlé · <em>arXiv</em></li>
+<li>核心問題：橫跨 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 與 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>，解決組合式程式與互動系統驗證中，介面、實作與前後置規格難以在統一類型系統內組合與驗證的問題。</li>
+<li>關鍵做法：以多項式函子定義程式介面、自由單子的 Kleisli 態射表達實作、依賴多項式編碼前後置規格，透過接線圖複合並以 Mealy 機賦予餘代數操作語意，且於 Agda 完成形式化。</li>
+<li>跨領域啟發：將應用範疇論的接線組合與餘代數語意直接落實為依賴類型工程，驗證多項式範疇在規格組合驗證上的實際效用。</li>
+<li>連結：<a href="zotero://select/library/items/E74GPZUC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.01303" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g4本橋接共現與核心關聯文獻清單共-21-篇">G4｜本橋接共現與核心關聯文獻清單（共 21 篇）</h2>
+<ul>
+<li><strong>2016｜Category Theory in Context</strong>，Emily Riehl（<em>Dover Publications (Author Official Open Edition)</em>，1200 引）：進入高階範疇論之前適合先讀的一階範疇論公開教材，用萬有性質與米田引理貫穿代數、拓撲與同調的實例。 <a href="zotero://select/library/items/7R7V4X4T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://emilyriehl.github.io/files/context.pdf" rel="noopener">官方連結</a></li>
+<li><strong>2017｜A type theory for synthetic infinity-categories</strong>，Emily Riehl, Michael Shulman（<em>Higher Structures</em>，350 引）：在單純同倫類型論中引入有向區間、Segal 類型與 Rezk 類型，率先用類型論直接做合成 <span class="math inline">(\infty,1)</span>-範疇論。 <a href="zotero://select/library/items/KCV7JTJX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1705.07442" rel="noopener">官方連結</a></li>
+<li><strong>2006｜Synthetic Differential Geometry</strong>，Anders Kock（<em>Cambridge University Press (London Mathematical Society Lecture Note Series, 2nd Open Edition)</em>，280 引）：合成微分幾何的標準教材，可公開取得。書中只用 <span class="math inline">d^2=0</span> 無窮小公理，像做國中代數一樣推導切叢、微分形式與聯絡曲率。 <a href="zotero://select/library/items/854E8GTD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://users-math.au.dk/kock/sdg99.pdf" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Differential cohomology in a cohesive infinity-topos</strong>，Urs Schreiber（<em>arXiv / Mathematical Physics &amp; Higher Topos Theory</em>，83 引）：在內聚 <span class="math inline">(\infty,1)</span>-Topos 內以合成方式重構微分幾何、高階規範場與微分上同調，顯示高階範疇可以當作理論物理的基礎語言。 <a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1310.7930" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Brouwer's fixed-point theorem in real-cohesive homotopy type theory</strong>，Michael Shulman（<em>Mathematical Structures in Computer Science</em>，71 引）：用伴隨模態與清脆變數（Crisp Variables）區分連續拓撲路徑與抽象同倫相等，在純類型論中構造性證明 Brouwer 不動點定理。 <a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1509.07584" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Quantum Gauge Field Theory in Cohesive Homotopy Type Theory</strong>，Urs Schreiber, Michael Shulman（<em>EPTCS 158, 2014, pp. 109-126</em>，18 引）：一篇簡短的綜述，說明如何在內聚同倫類型論中形式化量子規範場論的核心結構，適合當作長篇專著的導讀。 <a href="zotero://select/library/items/QQHDUPBC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1408.0054" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Compositional Program Verification with Polynomial Functors in Dependent Type Theory</strong>，C. B. Aberlé（<em>arXiv</em>）：在 Giry 單子的 Kleisli 範疇 <span class="math inline">\mathsf{Stoch}</span> 與一般 Markov 範疇中，證明統計模型精確對應於從實驗設計範疇打向 <span class="math inline">\mathsf{Stoch}</span> 的兩個函子之間的自然變換。「統計量有意義」就等價於自然性（Naturality）。文中並統一推導出 Tjur 準則與貝氏先驗態。 <a href="zotero://select/library/items/E74GPZUC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.01303" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Univalent Enriched Categories and the Enriched Rezk Completion</strong>，Niels van der Weide（<em>Logical Methods in Computer Science, Volume 22, Issue 2 (June 2, 2026) lmcs:15947</em>）：在單價基礎下研究充實範疇，證明單價充實範疇間的本質滿射且全忠實函子即為等價，並證明任意充實範疇皆具備 Rezk 完備化，進而以此構造單價充實 Kleisli 範疇。 <a href="zotero://select/library/items/5RENHGEC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.11752" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Univalent Monoidal Categories</strong>，Kobe Wullaert, Ralph Matthes, Benedikt Ahrens（<em>arXiv</em>）：在單價基礎下建立單價么半範疇理論，證明單價么半範疇構成的雙範疇具單價性、構造任意么半範疇的泛 Rezk 完備化，並將全部結果於 Coq 的 UniMath 程式庫中完成形式化驗證。 <a href="zotero://select/library/items/6NKJ86UV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.03146" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Lectures on Condensed Mathematics</strong>，Peter Scholze（<em>University of Bonn (Author Official Lecture Notes)</em>）：凝聚數學的奠基講義。第一講就用很直白的語言說明傳統拓撲阿貝爾群為什麼失敗，以及緊探針上的層怎麼補救。 <a href="zotero://select/library/items/AWXPXFI7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.03658" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Univalence in locally cartesian closed infinity-categories</strong>，David Gepner, Joachim Kock（<em>Forum Math. 29 (2017), 617-652</em>）：在可展示局部笛卡兒閉無窮範疇中建立等價的表示性，證明 Voevodsky 單價族與 Lurie 有界局部類構成同構偏序集，進而指出每個無窮 Topos 皆具有以正則基數指標化的通用單價族層級。 <a href="zotero://select/library/items/K463X679" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1208.1749" rel="noopener">官方連結</a></li>
+<li><strong>1973｜Metric spaces, generalized logic, and closed categories</strong>，F. William Lawvere（<em>Rendiconti del Seminario Matematico e Fisico di Milano (TAC Reprint 2002)</em>，705 引）：揭示「度量空間就是充實範疇（Enriched Category）」且三角不等式即態射複合，Kantorovich 對偶本質上就是 Kan 擴展，直接將「兩概念空間平移的最小代價」定性為充實函子的伴隨與距離。 <a href="zotero://select/library/items/WPZCQHGB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="http://www.tac.mta.ca/tac/reprints/articles/1/tr1abs.html" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Gromov-Wasserstein Distances between Enriched Categories</strong>，Facundo Mémoli, Zhengchao Wan（<em>arXiv / Applied Topology &amp; Category Theory</em>，281 引）：把 Lawvere 充實範疇（C11）與 Mémoli 的 Gromov-Wasserstein（A3）合流，討論一般充實範疇之間的 GW 距離與近似函子，為結構化概念體系的範疇平移提供嚴格度量。 <a href="zotero://select/library/items/7TJ7R8AM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.00496" rel="noopener">官方連結</a></li>
+<li><strong>2001｜Locus Solum: From the rules of logic to the logic of rules</strong>，Jean-Yves Girard（<em>Mathematical Structures in Computer Science</em>，268 引）：線性邏輯創始人 Girard 推翻自己舊框架的一部不尋常的哲學與數學著作（被引 268 次）：提出跡論（Ludics），從純粹的互動位址與正交對偶重新導出邏輯規則。 <a href="zotero://select/library/items/XEPMW4DN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0004088" rel="noopener">官方連結</a></li>
+<li><strong>2019｜A synthetic approach to Markov kernels, conditional independence and theorems on sufficient statistics</strong>，Tobias Fritz（<em>Adv. Math. 370, 107239 (2020)</em>，143 引）：建立 Markov 範疇（Markov Categories）公理體系，把隨機映射／傳輸計畫（Couplings）抽象為對稱么半範疇態射，為跨學科概念轉換中的資訊流失與充分統計量提供純合成語言。 <a href="zotero://select/library/items/58R72PRB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1908.07021" rel="noopener">官方連結</a></li>
+<li><strong>2019｜A probability monad as the colimit of spaces of finite samples</strong>，Tobias Fritz, Paolo Perrone（<em>Theory and Applications of Categories</em>，23 引）：將 Kantorovich / Wasserstein 機率空間構造為範疇論中的單子（Kantorovich Monad，有限樣本空間的餘極限），賦予「概念機率分佈平移與複合」嚴格的函子化結構。 <a href="zotero://select/library/items/44E8TEC7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.05363" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Quantitative concept analysis</strong>，Dusko Pavlovic（<em>Formal Concept Analysis (ICFCA / arXiv)</em>，17 引）：將基於 Galois 連接與概念格的形式概念分析（FCA）由布林二元關係推廣至定量與賦範向量及度量空間，建立矩陣奇異值分解（SVD）與範疇論 Chu 空間之間的對應連結。 <a href="zotero://select/library/items/UPXD2XKC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1204.5802" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Lectures on Analytic Spaces</strong>，Peter Scholze（<em>University of Bonn (Author Official Lecture Notes)</em>，2 引）：凝聚數學的第二部講義，正式引入實／複數上的液態向量空間（Liquid Vector Spaces）與核性，並發起 Lean 形式化挑戰。 <a href="zotero://select/library/items/EV6EE487" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.math.uni-bonn.de/people/scholze/Analytic.pdf" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Dagger linear logic and categorical quantum mechanics</strong>，Priyaa Varshinee Srinivasan（<em>arXiv</em>）：博士論文發展非緊緻乘法匕首線性邏輯的範疇證明論，在線性分配範疇與 <span class="math inline">*</span>-自伴範疇基礎上建構「混合么正範疇」，藉此將僅適用有限維的範疇量子力學推廣至無窮維量子系統。 <a href="zotero://select/library/items/URCWMHXK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.14231" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Monads, matrices and generalized metric spaces</strong>，Tobias Fritz, Paolo Perrone（<em>Applied Categorical Structures (Kantorovich Monad &amp; Lawvere Metric Spaces)</em>）：將 Wasserstein 最優傳輸直接提升到充實範疇（Lawvere 廣義度量空間）上的單子分佈算子，使不對稱的概念平移代價具備範疇組合性。 <a href="zotero://select/library/items/XJHZZ2F6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1804.03042" rel="noopener">官方連結</a></li>
+<li><strong>2017｜An Existence Theorem of Nash Equilibrium in Coq and Isabelle</strong>，Stéphane Le Roux, Érik Martin-Dorel, Jan-Georg Smaus（<em>EPTCS 256, 2017, pp. 46-60</em>）：在 Coq 與 Isabelle 中形式化證明一個關於有限結果賽局 Nash 均衡存在性的定理，透過推廣定義省去原證明所需的嚴格偏序線性擴張步驟，並指出該定理同時蘊含模型檢查中的安全均衡（secure equilibrium）存在性。 <a href="zotero://select/library/items/BXBX4Q7X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1709.02096" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -13,7 +13,13 @@
    Time labels come only from the heading text ("3 分鐘" -> "3 min"); no number is invented (K4).
 
    Storage: localStorage "rdg-depth" = "G1" | "G2" | "G3" | "G4" | "All" (plain text, global).
-   Only explicit clicks write it. Opening a link into a hidden section shows all for this view only. */
+   Only explicit clicks write it. Opening a link into a hidden section shows all for this view only.
+
+   window.RDGDepth (used by the Reading OS Reader window):
+     levels()   the G levels this page has, e.g. ["G1", "G2", "G4"]; [] when the page has fewer than two
+     get()      what the control shows now: "G1".."G4" or "All"
+     set(v, o)  apply "G1".."G4" or "All" as a click would (saved to rdg-depth unless o.persist === false);
+                returns get(), or null when v is not a level or the page has no control */
 (function () {
   "use strict";
 
@@ -22,6 +28,13 @@
   var MINUTES = /[｜|]\s*(\d{1,3})\s*分鐘/;
   var UI = "data-rdg-ui";
   var MARK = "data-depth-hidden";
+
+  // a page without a control still answers, so a caller never has to test for it
+  window.RDGDepth = {
+    levels: function () { return []; },
+    get: function () { return "All"; },
+    set: function () { return null; }
+  };
 
   var article = document.querySelector("body.doc main article") || document.querySelector("main article");
   if (!article) return;
@@ -225,6 +238,7 @@
 
   // ---- apply a choice
   var current = "All";
+  var pressedNow = "All";
 
   function effective(choice) {
     if (choice === "All") return Infinity;
@@ -253,6 +267,7 @@
     if (!article.querySelector("[" + MARK + '="hold"]')) stopHolds();
 
     var pressed = choice === "All" ? "All" : "G" + eff;
+    pressedNow = pressed;
     buttons.forEach(function (b) {
       b.setAttribute("aria-pressed", String(b.getAttribute("data-depth") === pressed));
     });
@@ -371,6 +386,16 @@
     var target = byHash(location.hash);
     if (target) reveal(target, true);
   });
+
+  window.RDGDepth = {
+    levels: function () { return levels.map(function (lv) { return "G" + lv; }); },
+    get: function () { return pressedNow; },
+    set: function (v, o) {
+      if (!valid(v)) return null;
+      apply(v, { persist: !(o && o.persist === false), announce: true });
+      return pressedNow;
+    }
+  };
 
   // another tab changed the choice
   window.addEventListener("storage", function (e) {
