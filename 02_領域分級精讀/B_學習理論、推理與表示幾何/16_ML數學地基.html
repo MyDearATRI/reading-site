@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
 <title>16｜機器學習數學地基（統計泛化界、PAC-Bayes、凸與非凸最佳化、高維機率與計算複雜度） · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 </head>
-<body>
-<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a></nav></header>
+<body class="doc">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a></header>
 <main>
+<span class="kicker">領域分級精讀 · B_學習理論、推理與表示幾何</span>
 <article>
 
 <h1 id="16機器學習數學地基統計泛化界pac-bayes凸與非凸最佳化高維機率與計算複雜度">16｜機器學習數學地基（統計泛化界、PAC-Bayes、凸與非凸最佳化、高維機率與計算複雜度）</h1>
@@ -34,10 +39,10 @@
 <li>直覺模型（不用公式也能懂的比喻）：
 想像你在濃霧籠罩的連綿山脈中尋找最低的湖泊：
 <ul>
-<li>**計算複雜度（Arora–Barak / Håstad）**先畫出禁區地圖：如果山脈是惡意設計的迷宮，任何尋路法都注定失敗。</li>
-<li>**最佳化理論（Bubeck / Sun）**研究登山杖與步法：在光滑的碗狀山谷裡，帶著慣性衝刺（Nesterov 加速）已經是理論上最快的走法；在彎曲地形上，換一雙貼合地貌的鞋子（鏡像下降 Mirror Descent）比走直線快得多。</li>
-<li>**高維機率與隨機矩陣（Vershynin / Anderson et al.）**告訴你一件違反直覺的事：十萬維空間裡幾乎沒有局部深坑，絕大多數看似平坦的地方都是鞍點，某個方向還能往下滑。隨機噪音的特徵值則會排成標準半圓或 Marchenko–Pastur 分佈。一旦某個特徵值超出這個噪音邊界，那就是真正的知識訊號，甚至可以用來即時抓出大模型的幻覺。</li>
-<li>**現代統計學習（PAC-Bayes / 資訊泛化界）**最後檢查你的背包：只要最終找到的路徑沒有死背沿途每一顆碎石的精確座標（模型與訓練集之間的互資訊夠低），就算地圖再大張（參數再多），仍然保證能安全泛化。</li>
+<li><strong>計算複雜度（Arora–Barak / Håstad）</strong>先畫出禁區地圖：如果山脈是惡意設計的迷宮，任何尋路法都注定失敗。</li>
+<li><strong>最佳化理論（Bubeck / Sun）</strong>研究登山杖與步法：在光滑的碗狀山谷裡，帶著慣性衝刺（Nesterov 加速）已經是理論上最快的走法；在彎曲地形上，換一雙貼合地貌的鞋子（鏡像下降 Mirror Descent）比走直線快得多。</li>
+<li><strong>高維機率與隨機矩陣（Vershynin / Anderson et al.）</strong>告訴你一件違反直覺的事：十萬維空間裡幾乎沒有局部深坑，絕大多數看似平坦的地方都是鞍點，某個方向還能往下滑。隨機噪音的特徵值則會排成標準半圓或 Marchenko–Pastur 分佈。一旦某個特徵值超出這個噪音邊界，那就是真正的知識訊號，甚至可以用來即時抓出大模型的幻覺。</li>
+<li><strong>現代統計學習（PAC-Bayes / 資訊泛化界）</strong>最後檢查你的背包：只要最終找到的路徑沒有死背沿途每一顆碎石的精確座標（模型與訓練集之間的互資訊夠低），就算地圖再大張（參數再多），仍然保證能安全泛化。</li>
 </ul>
 </li>
 <li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
@@ -225,9 +230,9 @@
 <!-- DAILY_UPDATES_END -->
 </article>
 </main>
-<footer class="site">建置於 2026-11-20</footer>
+<footer class="site">Built 2026-11-20</footer>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
-<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
 </body>
 </html>

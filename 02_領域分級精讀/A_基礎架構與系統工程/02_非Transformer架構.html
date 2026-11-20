@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
 <title>02｜非 Transformer 架構（狀態空間 Mamba、連續微分方程、KAN、JEPA、脈衝與超維計算） · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 </head>
-<body>
-<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<body class="doc">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></header>
 <main>
+<span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
 <article>
 
 <h1 id="02非-transformer-架構狀態空間-mamba連續微分方程kanjepa脈衝與超維計算">02｜非 Transformer 架構（狀態空間 Mamba、連續微分方程、KAN、JEPA、脈衝與超維計算）</h1>
@@ -81,8 +86,8 @@
 <ul>
 <li>直覺理解：這兩項工作一個改底層的神經元連線，一個改頂層的自監督目標：
 <ul>
-<li>**KAN（Kolmogorov–Arnold Networks）**的依據是蘇聯數學家 Kolmogorov 與 Arnold 的多元連續函數分解定理：任何複雜的多元函數，都能拆成有限個單變數連續函數的複合與相加。把可學習的 B-樣條（B-Splines）放到邊上之後，科學家可以直接看出每條邊學到的是 <span class="math inline">\sin(x)</span> 還是 <span class="math inline">x^2</span>，還能做符號公式修剪。</li>
-<li>**JEPA（Joint-Embedding Predictive Architecture）**來自 Yann LeCun 對自迴歸／擴散生成路線的批評：真實世界有大量不可預測的微觀隨機性，要模型在像素空間重建被遮住的區域，只會讓它去背雜訊。改在抽象嵌入空間裡，從上下文區塊 <span class="math inline">s_x</span> 預測目標區塊的表徵 <span class="math inline">s_y</span>，才學得到高階因果與解剖結構。</li>
+<li><strong>KAN（Kolmogorov–Arnold Networks）</strong>的依據是蘇聯數學家 Kolmogorov 與 Arnold 的多元連續函數分解定理：任何複雜的多元函數，都能拆成有限個單變數連續函數的複合與相加。把可學習的 B-樣條（B-Splines）放到邊上之後，科學家可以直接看出每條邊學到的是 <span class="math inline">\sin(x)</span> 還是 <span class="math inline">x^2</span>，還能做符號公式修剪。</li>
+<li><strong>JEPA（Joint-Embedding Predictive Architecture）</strong>來自 Yann LeCun 對自迴歸／擴散生成路線的批評：真實世界有大量不可預測的微觀隨機性，要模型在像素空間重建被遮住的區域，只會讓它去背雜訊。改在抽象嵌入空間裡，從上下文區塊 <span class="math inline">s_x</span> 預測目標區塊的表徵 <span class="math inline">s_y</span>，才學得到高階因果與解剖結構。</li>
 </ul>
 </li>
 <li>機制或核心表達式：
@@ -255,9 +260,9 @@
 <!-- DAILY_UPDATES_END -->
 </article>
 </main>
-<footer class="site">建置於 2026-11-20</footer>
+<footer class="site">Built 2026-11-20</footer>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
-<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
 </body>
 </html>

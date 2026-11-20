@@ -1,107 +1,231 @@
-/* Reading 網站：極簡樣式 */
+/* Reading · Atlas theme
+   Tokens follow the Atlas design language (MMLA README §2) and the Atlas OS document view:
+   note pages are a serif reading column on warm paper; home and folders are a glass sheet on the dotted desk.
+   Single light theme on purpose (README §2). Red is never used: it belongs to "unread" and "ask Claude". */
+
 :root {
-  --bg: #fcfcfb;
-  --fg: #1c1c1e;
-  --muted: #74747a;
-  --line: #e7e7e4;
-  --accent: #2c5a85;
-  --code: #f3f3f0;
-  --max: 44rem;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #131313;
-    --fg: #e6e6e3;
-    --muted: #96969b;
-    --line: #2a2a2a;
-    --accent: #8db3d9;
-    --code: #1c1c1c;
-  }
+  color-scheme: light;
+  --board: #ecebe6;
+  --dot: #d3d0c7;
+  --paper: #f7f6f0;
+  --plate: #ffffff;
+  --well: #f1efe9;
+  --ink: #23221d;
+  --muted: #67635a;
+  --faint: #8a8474;
+  --line: #dedad1;
+  --line-strong: #8a8474;
+  --wire: #9c988e;
+  --reading: #e9b10c;
+  --done: #3a9660;
+  --wine: #875e60;
+  --focus: #2b5d86;
+
+  --sans: "Helvetica Neue", "Neue Haas Grotesk Text Pro", Helvetica, "Inter Tight", Arial, "PingFang TC", "Noto Sans TC", sans-serif;
+  --serif: Georgia, "Times New Roman", "Songti TC", "Noto Serif TC", serif;
+  --mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
+
+  --r-xs: 7px; --r-s: 10px; --r-m: 14px; --r-l: 22px; --r-xl: 34px;
+  --shadow: 0 1px 0 rgba(34,33,28,.05), 0 8px 22px rgba(34,33,28,.10);
+  --shadow-lift: 0 1px 0 rgba(34,33,28,.06), 0 16px 36px rgba(34,33,28,.18);
+  --glass: rgba(255,255,255,.56);
+  --glass-line: rgba(255,255,255,.7);
+  --ease: cubic-bezier(.2, 0, 0, 1);
+  --pop: cubic-bezier(.2, .9, .3, 1.25);
+
+  --doc: 19px;
 }
 
 * { box-sizing: border-box; }
 html { -webkit-text-size-adjust: 100%; }
 body {
   margin: 0;
-  background: var(--bg);
-  color: var(--fg);
-  font: 17px/1.8 -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Helvetica Neue", sans-serif;
-  text-rendering: optimizeLegibility;
+  color: var(--ink);
+  font: 400 14px/20px var(--sans);
+  letter-spacing: -.003em;
+  -webkit-font-smoothing: antialiased;
+}
+body.doc { background: var(--paper); }
+body.desk {
+  min-height: 100vh;
+  background-color: var(--board);
+  background-image: radial-gradient(var(--dot) 1px, transparent 1.2px);
+  background-size: 24px 24px;
+}
+::selection { background: rgba(233,177,12,.32); }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; border-radius: var(--r-xs); }
+
+/* ---------- the one Atlas glass ---------- */
+.glass {
+  background: var(--glass);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid var(--glass-line);
+  border-radius: var(--r-l);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.9), var(--shadow);
+}
+@supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
+  .glass { background: rgba(255,255,255,.94); }
 }
 
-header.site, main, footer.site { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
-
-header.site {
-  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .2rem;
-  padding-top: 2.5rem; padding-bottom: .5rem;
-  font-size: .88rem; color: var(--muted);
+/* ---------- top bar: a glass pill, tools at the edge ---------- */
+.bar {
+  position: sticky; top: 12px; z-index: 10;
+  display: flex; align-items: center; gap: 2px;
+  max-width: 880px; min-height: 40px;
+  margin: 12px max(16px, calc((100% - 880px) / 2)) 0;
+  padding: 5px 14px;
+  border-radius: 999px;
+  overflow-x: auto; white-space: nowrap; scrollbar-width: none;
 }
-.brand { color: var(--fg); font-weight: 600; letter-spacing: .03em; margin-right: .2rem; }
-.crumbs a { color: var(--muted); }
-.crumbs .sep { margin: 0 .45em; opacity: .45; }
+.bar::-webkit-scrollbar { display: none; }
+.bar a { color: var(--muted); text-decoration: none; font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; padding: 6px 4px; border-radius: var(--r-s); transition: color .2s var(--ease); }
+.bar a:hover { color: var(--ink); }
+.bar .brand { color: var(--ink); padding-left: 0; }
+.bar .sep { color: var(--line-strong); margin: 0 4px; font-size: 11px; }
 
-main { padding-bottom: 4rem; overflow-wrap: break-word; }
+/* ---------- labels ---------- */
+.lbl, .kicker {
+  font: 700 10.5px/14px var(--sans);
+  letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted);
+}
+.kicker { display: block; margin: 0 0 14px; }
 
-h1, h2, h3, h4, h5, h6 { line-height: 1.35; font-weight: 600; }
-h1 { font-size: 1.85rem; margin: 1.6rem 0 1.4rem; }
-h2 { font-size: 1.3rem; margin: 2.8rem 0 .8rem; }
-h3 { font-size: 1.1rem; margin: 2.1rem 0 .6rem; }
-h4, h5, h6 { font-size: 1rem; margin: 1.7rem 0 .5rem; }
+/* ---------- note pages: the Atlas document ---------- */
+body.doc main { max-width: 720px; margin: 0 auto; padding: 56px 24px 120px; }
 
-a { color: var(--accent); text-decoration: none; }
-a:hover { text-decoration: underline; text-underline-offset: .2em; }
-.brand:hover, .list a:hover { text-decoration: none; opacity: .7; }
+article {
+  font: 400 var(--doc)/1.68 var(--serif);
+  letter-spacing: 0;
+  overflow-wrap: break-word;
+  hyphens: auto;
+}
+article > :first-child { margin-top: 0; }
+article h1, article h2, article h3, article h4, article h5, article h6 { font-family: var(--sans); font-weight: 700; color: var(--ink); }
+article h1 { font-size: clamp(28px, 4.2vw, 40px); line-height: 1.08; letter-spacing: -.03em; margin: 0 0 30px; }
+article h2 { font-size: 23px; line-height: 1.15; letter-spacing: -.022em; margin: 58px 0 16px; padding-top: 10px; border-top: 1.5px solid var(--ink); }
+article h3 { font-size: 18px; line-height: 1.25; letter-spacing: -.015em; margin: 38px 0 10px; }
+article h4 { font-size: 15.5px; line-height: 1.3; letter-spacing: -.01em; margin: 30px 0 8px; }
+article h5, article h6 { font-size: 10.5px; line-height: 14px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 26px 0 8px; }
 
-p, ul, ol, dl, table, pre, blockquote, .callout { margin: 0 0 1.1rem; }
-ul, ol { padding-left: 1.4rem; }
-li { margin: .15rem 0; }
-li > ul, li > ol { margin: .15rem 0 0; }
-hr { border: 0; border-top: 1px solid var(--line); margin: 2.6rem 0; }
-img { max-width: 100%; }
-strong { font-weight: 600; }
+article p, article ul, article ol, article dl, article table, article pre, article blockquote { margin: 0 0 1.05em; }
+article ul, article ol { padding-left: 1.35em; }
+article li { margin: .2em 0; }
+article li > ul, article li > ol { margin: .2em 0 0; }
+article li::marker { color: var(--faint); }
+article strong { font-weight: 700; }
+article hr { border: 0; border-top: 1px solid var(--line); margin: 2.6em 0; }
+article img { max-width: 100%; border-radius: var(--r-s); }
 
-code { font: .86em/1.5 ui-monospace, "SF Mono", Menlo, monospace; background: var(--code); padding: .1em .35em; border-radius: 4px; }
-pre { background: var(--code); padding: 1rem 1.1rem; border-radius: 6px; overflow-x: auto; }
-pre code { background: none; padding: 0; font-size: .84rem; }
+article a { color: inherit; text-decoration: underline; text-decoration-thickness: 1px; text-decoration-color: rgba(35,34,29,.3); text-underline-offset: 3px; transition: text-decoration-color .2s var(--ease); }
+article a:hover { text-decoration-color: var(--ink); }
+.wl-missing { color: var(--faint); }
 
-blockquote { padding-left: 1rem; margin-left: 0; border-left: 2px solid var(--line); color: var(--muted); }
+article blockquote { font: 400 15px/1.55 var(--sans); color: #4a473f; border-left: 2px solid var(--line); padding-left: 12px; }
 
-table { border-collapse: collapse; display: block; overflow-x: auto; font-size: .92rem; }
-th, td { border-bottom: 1px solid var(--line); padding: .45rem .75rem .45rem 0; text-align: left; vertical-align: top; }
-th { font-weight: 600; white-space: nowrap; }
+article code { font: 500 .8em/1.4 var(--mono); background: var(--well); padding: .12em .38em; border-radius: var(--r-xs); }
+article pre { font: 400 13px/1.55 var(--mono); background: var(--well); padding: 14px 16px; border-radius: var(--r-s); overflow-x: auto; }
+article pre code { background: none; padding: 0; font-size: inherit; }
 
-/* Obsidian callout */
-.callout { border-left: 2px solid var(--accent); padding: .1rem 0 .1rem 1rem; }
-.callout-title, .callout > summary { font-weight: 600; margin: 0 0 .35rem; }
-.callout > summary { cursor: pointer; list-style: none; }
-.callout > summary::-webkit-details-marker { display: none; }
-.callout > summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--muted); transition: transform .15s; }
-.callout[open] > summary::before { transform: rotate(90deg); }
-.callout > p:empty { display: none; }
+article table { display: block; overflow-x: auto; border-collapse: collapse; font: 400 14px/20px var(--sans); font-feature-settings: "tnum"; }
+article thead th { border-bottom: 1.5px solid var(--ink); }
+article th { font-weight: 700; white-space: nowrap; text-align: left; }
+article th, article td { padding: 8px 14px 8px 0; border-bottom: 1px solid var(--line); vertical-align: top; text-align: left; }
+
+/* callouts = Atlas margin notes: translucent white, coloured 3px edge, warm double shadow */
+.callout {
+  --c: var(--focus);
+  margin: 0 0 1.4em;
+  padding: 12px 16px 12px 15px;
+  border-radius: var(--r-s);
+  background: rgba(255,255,255,.72);
+  border: 1px solid rgba(255,255,255,.8);
+  border-left: 3px solid var(--c);
+  box-shadow: 0 1px 0 rgba(34,33,28,.05), 0 8px 22px rgba(34,33,28,.08);
+  font: 400 15px/1.62 var(--sans);
+}
 .callout > :last-child { margin-bottom: 0; }
-.callout[data-kind="nav"] { border-left-color: var(--line); font-size: .93rem; }
-.callout[data-kind="warning"] { border-left-color: #c58a2a; }
+.callout > p:empty { display: none; }
+.callout ul, .callout ol { padding-left: 1.25em; }
+.callout-title, .callout > summary {
+  margin: 0 0 6px;
+  font: 700 12px/16px var(--sans); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--muted);
+}
+.callout > summary { cursor: pointer; list-style: none; margin-bottom: 0; }
+.callout[open] > summary { margin-bottom: 6px; }
+.callout > summary::-webkit-details-marker { display: none; }
+.callout > summary::before { content: "›"; display: inline-block; width: 1em; font-size: 15px; transition: transform .25s var(--ease); }
+.callout[open] > summary::before { transform: rotate(90deg); }
+.callout[data-kind="tip"], .callout[data-kind="example"], .callout[data-kind="success"], .callout[data-kind="check"], .callout[data-kind="done"], .callout[data-kind="hint"] { --c: var(--done); }
+.callout[data-kind="warning"], .callout[data-kind="caution"], .callout[data-kind="attention"], .callout[data-kind="important"] { --c: var(--reading); }
+.callout[data-kind="question"], .callout[data-kind="faq"], .callout[data-kind="help"], .callout[data-kind="quote"], .callout[data-kind="cite"], .callout[data-kind="danger"], .callout[data-kind="bug"], .callout[data-kind="failure"] { --c: var(--wine); }
+.callout[data-kind="nav"] { --c: var(--line); background: rgba(255,255,255,.42); box-shadow: none; font-size: 13px; line-height: 1.6; }
 
-.wl-missing { color: var(--muted); }
-a.zotero { white-space: nowrap; }
+/* diagrams sit on a plate, like the books do */
+pre.mermaid {
+  font: 400 13px/1.4 var(--sans);
+  text-align: center;
+  background: var(--plate);
+  border: 3px solid var(--plate);
+  border-radius: var(--r-m);
+  padding: 18px 12px;
+  box-shadow: var(--shadow);
+  margin: 1.4em 0;
+}
+.math.block { overflow-x: auto; overflow-y: hidden; margin: 1.2em 0; }
 
-pre.mermaid { background: none; text-align: center; padding: .5rem 0; }
-.math.block { overflow-x: auto; margin: 1.2rem 0; }
+/* ---------- desk pages: home and folders ---------- */
+body.desk main { max-width: 760px; margin: 0 auto; padding: 40px 16px 72px; }
+.sheet { padding: 30px 32px 22px; border-radius: var(--r-xl); animation: rise .6s var(--pop) both; }
+.sheet h1 { font: 700 40px/1 var(--sans); letter-spacing: -.03em; margin: 0 0 12px; }
+.lede { font: 400 15px/22px var(--sans); color: var(--muted); margin: 0; }
+.sec { margin-top: 30px; padding-top: 9px; border-top: 1.5px solid var(--ink); }
+.sec > .lbl { display: block; margin-bottom: 4px; }
 
-/* 清單頁 */
-.lede { color: var(--muted); margin-top: -.6rem; }
-ul.list { list-style: none; padding: 0; margin-top: .4rem; }
-ul.list li { display: flex; align-items: baseline; gap: .9rem; margin: 0; padding: .6rem 0; border-bottom: 1px solid var(--line); }
-ul.list li:first-child { border-top: 1px solid var(--line); }
-ul.list a { color: var(--fg); }
-.num { color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; min-width: 1.6rem; }
-.dated .num { min-width: 5.6rem; }
-.count { margin-left: auto; color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; }
+ul.rows { list-style: none; margin: 0; padding: 0; }
+ul.rows li { border-bottom: 1px solid var(--line); }
+ul.rows li:last-child { border-bottom: 0; }
+ul.rows a {
+  display: flex; align-items: center; gap: 12px;
+  margin: 0 -10px; padding: 11px 10px;
+  border-radius: var(--r-s);
+  color: var(--ink); text-decoration: none;
+  font: 500 15px/20px var(--sans); letter-spacing: -.005em;
+  transition: background .2s var(--ease), transform .2s var(--ease);
+}
+ul.rows a:hover { background: rgba(35,34,29,.05); }
+ul.rows .t { min-width: 0; overflow: hidden; text-overflow: ellipsis; }
+.num { flex: none; min-width: 22px; font: 500 11px/1 var(--mono); font-feature-settings: "tnum"; color: var(--faint); }
+.dated .num { min-width: 76px; }
+.dot { flex: none; width: 8px; height: 8px; border-radius: 50%; background: var(--ch, var(--wire)); }
+.count { margin-left: auto; flex: none; font: 500 11px/1 var(--mono); font-feature-settings: "tnum"; color: var(--muted); }
 
-footer.site { color: var(--muted); font-size: .78rem; padding-top: 1.2rem; padding-bottom: 3rem; border-top: 1px solid var(--line); }
+@keyframes rise { from { opacity: 0; transform: translateY(12px) scale(.985); } }
 
-@media (max-width: 600px) {
-  body { font-size: 16px; }
-  header.site { padding-top: 1.6rem; }
-  h1 { font-size: 1.55rem; }
+/* ---------- footer ---------- */
+footer.site {
+  max-width: 720px; margin: 0 auto; padding: 16px 24px 40px;
+  font: 500 11px/1 var(--mono); letter-spacing: .04em; text-transform: uppercase;
+  color: var(--faint);
+}
+body.doc footer.site { border-top: 1px solid var(--line); }
+body.desk footer.site { max-width: 760px; text-align: center; padding-top: 0; }
+
+/* ---------- narrow windows ---------- */
+@media (max-width: 640px) {
+  :root { --doc: 17px; }
+  .bar { top: 8px; margin: 8px 16px 0; padding: 4px 12px; }
+  body.doc main { padding: 34px 16px 96px; }
+  body.desk main { padding: 24px 16px 56px; }
+  .sheet { padding: 22px 18px 16px; border-radius: var(--r-l); }
+  .sheet h1 { font-size: 32px; }
+  article h2 { font-size: 21px; margin-top: 46px; }
+  footer.site { padding-left: 16px; padding-right: 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sheet { animation: none !important; }
+  * { transition-duration: 0s !important; }
 }

@@ -3,13 +3,18 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
 <title>31｜認識邏輯與信念修正（Epistemic Logic, Dynamic Updates &amp; AGM Belief Revision） · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 </head>
-<body>
-<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<body class="doc">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></header>
 <main>
+<span class="kicker">領域分級精讀 · C_純數學、範疇論與邏輯基礎</span>
 <article>
 
 <h1 id="31認識邏輯與信念修正epistemic-logic-dynamic-updates-agm-belief-revision">31｜認識邏輯與信念修正（Epistemic Logic, Dynamic Updates &amp; AGM Belief Revision）</h1>
@@ -31,7 +36,7 @@
 </li>
 <li>直覺模型（不用公式也能懂的比喻）：
 <ul>
-<li>**認識可能世界圖（Kripke Model）**像是把每個玩家腦中的平行宇宙連成一張圖。桌上蓋著幾張牌，對於真實世界是哪一種組合，愛麗絲分不清世界 <span class="math inline">w_1</span> 與 <span class="math inline">w_2</span>（畫一條藍色無向邊），鮑勃分不清 <span class="math inline">w_2</span> 與 <span class="math inline">w_3</span>（畫一條紅色邊）。公開宣告（Public Announcement <span class="math inline">[!\varphi]</span>）像一把大剪刀：裁判當眾宣布「至少有一張紅心」，所有人就同時把不符合 <span class="math inline">\varphi</span> 的平行宇宙剪掉。剪掉一個宇宙可能會切斷愛麗絲和鮑勃之間的模糊邊，引發連鎖反應。如果是私下偷看或竊聽（Action Models，Baltag–Moss–Solecki），就要把原世界圖和偷看動作圖做張量乘積更新，這樣能精確追蹤「鮑勃以為愛麗絲不知道他偷看了」這種任意階的欺騙與懷疑。</li>
+<li><strong>認識可能世界圖（Kripke Model）</strong>像是把每個玩家腦中的平行宇宙連成一張圖。桌上蓋著幾張牌，對於真實世界是哪一種組合，愛麗絲分不清世界 <span class="math inline">w_1</span> 與 <span class="math inline">w_2</span>（畫一條藍色無向邊），鮑勃分不清 <span class="math inline">w_2</span> 與 <span class="math inline">w_3</span>（畫一條紅色邊）。公開宣告（Public Announcement <span class="math inline">[!\varphi]</span>）像一把大剪刀：裁判當眾宣布「至少有一張紅心」，所有人就同時把不符合 <span class="math inline">\varphi</span> 的平行宇宙剪掉。剪掉一個宇宙可能會切斷愛麗絲和鮑勃之間的模糊邊，引發連鎖反應。如果是私下偷看或竊聽（Action Models，Baltag–Moss–Solecki），就要把原世界圖和偷看動作圖做張量乘積更新，這樣能精確追蹤「鮑勃以為愛麗絲不知道他偷看了」這種任意階的欺騙與懷疑。</li>
 <li><strong>AGM 信念修正</strong>像一圈圈同心圓防波堤（Gärdenfors 認識固守度 Epistemic Entrenchment）。把信念按有多核心、多捨不得放棄排成同心圓：數學公理在最內圈，剛聽說的小道消息在最外圈。反常的新證據進來時，不必把整座城堡炸掉，只要沿著最靠近核心的那圈合適可能世界（Plausibility Grove Spheres）切一刀，做最小的修補。</li>
 </ul>
 </li>
@@ -206,9 +211,9 @@ LLM 知識編輯（Model Editing / 機器遺忘 <a class="wl" href="../A_%E5%9F%
 <!-- DAILY_UPDATES_END -->
 </article>
 </main>
-<footer class="site">建置於 2026-11-20</footer>
+<footer class="site">Built 2026-11-20</footer>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
-<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
 </body>
 </html>

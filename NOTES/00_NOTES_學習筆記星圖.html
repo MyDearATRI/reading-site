@@ -3,12 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
 <title>NOTES 學習筆記星圖 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../assets/style.css">
 </head>
-<body>
-<header class="site"><a class="brand" href="../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="index.html">NOTES</a></nav></header>
+<body class="doc">
+<header class="bar glass"><a class="brand" href="../index.html">Reading</a><span class="sep">/</span><a href="index.html">NOTES</a></header>
 <main>
+<span class="kicker">NOTES</span>
 <article>
 
 <h1 id="notes學習筆記星圖">NOTES｜學習筆記星圖</h1>
@@ -300,7 +305,7 @@
 <p>骨幹由 <code>NOTES/.meta/parse_routes.py</code>（解析路線檔）與 <code>NOTES/.meta/gen_skeleton.py</code>（產生筆記、索引、主脊與本頁）產生。重跑時已存在的章節筆記不會被覆寫；索引、主脊與本頁會依各章的狀態重算。</p>
 </article>
 </main>
-<footer class="site">建置於 2026-11-20</footer>
-<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+<footer class="site">Built 2026-11-20</footer>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
 </body>
 </html>
