@@ -83,6 +83,7 @@ body.desk {
 .bar a:hover { color: var(--ink); }
 .bar .brand { color: var(--ink); padding-left: 0; }
 .bar .sep { color: var(--line-strong); margin: 0 4px; font-size: 11px; }
+.bar .find { margin-left: auto; padding-left: 16px; color: var(--ink); }
 
 /* ---------- labels ---------- */
 .lbl, .kicker {
