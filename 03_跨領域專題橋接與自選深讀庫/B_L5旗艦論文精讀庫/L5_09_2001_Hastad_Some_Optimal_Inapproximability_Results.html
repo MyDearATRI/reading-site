@@ -1,0 +1,533 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_09｜Some Optimal Inapproximability Results · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-570bfeea">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-570bfeea">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-some-optimal-inapproximability-results2001">🏆 Some Optimal Inapproximability Results（2001）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>
+細分子方向：<span class="wl-missing">05B_自動形式化Autoformalization與論文級證明編譯</span> · <span class="wl-missing">16B_凸最佳化、加速梯度法與Bregman鏡像下降</span> · <span class="wl-missing">41G_PCP機率可檢驗證明、Sum-of-Squares階層與不可近似下界</span>
+跨領域橋接：<span class="wl-missing">橋接01_最優傳輸相變與計算複雜度邊界</span> · <span class="wl-missing">橋接03_隨機熱力學、Wasserstein梯度流與生成擴散</span> · <span class="wl-missing">橋接04_神經符號實值邏輯、自動形式化與信念修正</span> · <span class="wl-missing">橋接05_演算法資訊論、壓縮預測與元複雜度</span> · <span class="wl-missing">橋接06_代數幾何、李群算子縮放與幾何複雜度理論GCT</span> · <span class="wl-missing">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</span>
+作者與出處：Johan Håstad（2001，<em>Journal of the ACM (JACM), Vol. 48, No. 4, pp. 798-859 (STOC 1997; Gödel Prize 2011)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/N689ZC5T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://people.kth.se/~johanh/optimalinap.pdf" rel="noopener">官方連結</a></p>
+</aside>
+<blockquote>
+<p><strong>知識來源與認識論標記規範</strong>：本文嚴格區分四類知識來源並於關鍵命題顯式標註，<code>[原文內容]</code>（具精確章節與 <code>[P#:L#]</code> 頁行定位）、<code>[AI 推導]</code>（補全原文省略之代數步驟、隱含前提與正負號／絕對值修復）、<code>[外部知識]</code>（論文引用之先修定理與後續文獻脈絡）、<code>[未驗證假設]</code>（複雜度假設如 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> 或開放猜想，絕不標記為已證明）。</p>
+</blockquote>
+<h2 id="h0-多層次研究摘要">H0 多層次研究摘要</h2>
+<h2 id="一句話核心命題">一句話核心命題</h2>
+<p><code>[原文內容, P1:L8-L16]</code> 在僅假設 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> 的最弱複雜度前提下，Johan Håstad 首度結合長碼（Long Code）的離散傅立葉分析（Discrete Fourier Transform）、摺疊與條件化投影以及微小雜訊高頻阻尼機制，證明了 <code>Max-E3-Lin-2</code>（近似比 <span class="math inline">2-\epsilon</span>）、任意有限交換群上的 <span class="math inline">\text{Max-E3-Lin-}\Gamma</span>（近似比 <span class="math inline">|\Gamma|-\epsilon</span>）、可滿足實例上的 <code>Max-E3-Sat</code>（近似比 <span class="math inline">8/7-\epsilon</span>）與單調 <code>E4-Set-Splitting</code>（近似比 <span class="math inline">8/7-\epsilon</span>）在多項式時間內均無法超越隨機賦值演算法（Random Assignment Threshold）。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<p>在計算複雜度與組合最佳化領域中，判定一個 <span class="math inline">\mathrm{NP}</span>-hard 最佳化問題在多項式時間內能近似到何種常數倍數 <span class="math inline">C \ge 1</span>，是自 1970 年代 Johnson <code>[25]</code> 與 Garey–Johnson <code>[19]</code> 以來的核心難題 <code>[原文內容, P1:L28-P2:L11]</code>。1990 年代初著名的 PCP 定理（Arora, Lund, Motwani, Sudan, Szegedy <code>[3]</code>）雖證明了 <code>Max-3-Sat</code> 存在某個常數 <span class="math inline">C &gt; 1</span> 的不可近似下界，但早期基於漢明距離（Hamming distance）局部自校正與碼字測試（codeword testing）的雙階段架構，始終無法抵達精確的最佳常數（在此之前最佳紀錄為 Bellare, Goldreich 與 Sudan <code>[9]</code> 的 <code>Max-E3-Sat</code> 下界 <span class="math inline">80/77-\epsilon</span> 與 <code>Max-E3-Lin-2</code> 下界 <span class="math inline">8/7-\epsilon</span>）<code>[原文內容, P3:L20-P5:L20]</code>。</p>
+<p>Håstad 在這篇榮獲 2011 年哥德爾獎（Gödel Prize）的經典長文（全文共 71 頁，10 章加附錄 A）中完成了兩項根本性的典範轉移 <code>[原文內容, P4:L6-L25]</code>：</p>
+<ol>
+<li><strong>任務完全整合的專用型內部驗證器（Integrated Special-Purpose PCP Verifiers）</strong>：放棄「先檢查表格是否接近合法長碼、再檢查雙證明者一致性」的分離測試，直接把 <span class="math inline">u</span>-平行雙證明者博弈（由 Raz 平行重複定理 <code>[32]</code> 保證指數級健全性衰減 <span class="math inline">c_c^u</span>）轉寫成在標準書面證明 <span class="math inline">\mathrm{SWP}(u)</span> 上僅依目標問題原生謂詞（如 3 個位元的 XOR 或 3 個文字的 OR）決策的測試。</li>
+<li><strong>完整離散傅立葉譜解碼與頻率阻尼（Full Fourier Spectrum Decoding &amp; Noise Damping）</strong>：不再尋找距離最近的單一合法長碼字，而是直接展開證明表 <span class="math inline">A : \mathcal{F}_U \to \{-1,1\}</span> 與 <span class="math inline">B : \mathcal{F}_W \to \{-1,1\}</span> 的完整 Walsh–Fourier（或有限交換群 Pontryagin 特徵標）級數，利用 Parseval 恆等式 <span class="math inline">\sum_\alpha \hat{A}_\alpha^2 = 1</span> 將傅立葉係數平方直接視為機率分佈以隨機抽取證明者策略；並透過引入獨立 <span class="math inline">\epsilon</span>-雜訊函數 <span class="math inline">\mu</span>（第四、五、七節）或幾何多尺度相關雜訊階梯 <span class="math inline">\mathrm{Test}\ F3S_\delta(u)</span>（第六、七節），對高頻大集合 <span class="math inline">|\beta|</span> 施加指數阻尼 <span class="math inline">(1-2\epsilon)^{|\beta|}</span> 或 <span class="math inline">e^{-S_\epsilon^U(\beta)/2}</span>，迫使非平凡相關性完全集中在低頻小集合上。</li>
+</ol>
+<p>藉由此框架，本文不僅同時解決了 <code>Max-Ek-Lin-2</code>（<span class="math inline">2-\epsilon</span>）、<span class="math inline">\text{Max-E3-Lin-}\Gamma</span>（<span class="math inline">|\Gamma|-\epsilon</span>）、可滿足 <code>Max-Ek-Sat</code>（<span class="math inline">2^k/(2^k-1)-\epsilon, k \ge 3</span>）與可滿足 <code>E4-Set-Splitting</code>（<span class="math inline">8/7-\epsilon</span>）的緊緻最佳下界，更透過自由位元（free bits）與 Trevisan–Sorkin–Sudan–Williamson（TSSW <code>[35]</code>）線性規劃 Gadget，將 <code>Vertex Cover</code>（<span class="math inline">7/6-\delta</span>）、無向 <code>Max-Cut</code>（<span class="math inline">17/16-\epsilon</span>）、有向 <code>Max-di-Cut</code>（<span class="math inline">13/12-\epsilon</span>）、<code>Max-E2-Lin-2</code>（<span class="math inline">12/11-\epsilon</span>）與 <code>Max-E2-Sat</code>（<span class="math inline">22/21-\epsilon</span>）的下界全面刷新 <code>[原文內容, P5:L11-L34, P62:L14-P63:L3]</code>。</p>
+<h2 id="技術全景深讀摘要technical-deep-read-panorama">技術全景深讀摘要（Technical Deep-Read Panorama）</h2>
+<ul>
+<li><strong>代數編碼與摺疊／條件化機制（Sec 2–3）</strong>：以 <span class="math inline">\{-1,1\}</span> 表示布林值（<span class="math inline">-1 \equiv \mathrm{true}, +1 \equiv \mathrm{false}</span>，乘法即 XOR）<code>[原文內容, P6:L23-L29]</code>。對滿足每個變數恰出現 5 次的 Gap-<code>E3-CNF</code> 公式 <span class="math inline">\varphi</span>（定理 2.24），執行 <span class="math inline">u</span> 次平行雙證明者協議（引理 3.2：健全性 <span class="math inline">\le c_c^u</span>）<code>[原文內容, P19:L45-P20:L37]</code>。書面證明 <span class="math inline">\mathrm{SWP}(u)</span> 為所有大小 <span class="math inline">\le 3u</span> 子集 <span class="math inline">V</span> 提供函數表 <span class="math inline">A_V : \mathcal{F}_V \to \{-1,1\}</span>。透過對真值摺疊（Folding over true）強制 <span class="math inline">A_{\mathrm{true}}(-f) = -A_{\mathrm{true}}(f)</span>，消滅所有偶數大小（特別是空集合 <span class="math inline">\emptyset</span>）的傅立葉權重（引理 2.32）；透過對子句合取 <span class="math inline">h</span> 條件化（Conditioning upon <span class="math inline">h</span>）定義 <span class="math inline">A_h(f) = A(f \wedge h)</span>，消滅所有包含違反 <span class="math inline">h</span> 之賦值的傅立葉支撐集（引理 2.34）<code>[原文內容, P15:L1-P16:L20]</code>。</li>
+<li><strong>線性方程組與有限交換群推廣（Sec 4–5）</strong>：在 <span class="math inline">\mathrm{Test}\ L_2^\epsilon(u)</span> 中取獨立均勻 <span class="math inline">f \in \mathcal{F}_U, g_1 \in \mathcal{F}_W</span> 與獨立偏置雜訊 <span class="math inline">\mu \in \mathcal{F}_W</span>（<span class="math inline">\Pr[\mu(y)=1]=1-\epsilon</span>），令 <span class="math inline">g_2 = f g_1 \mu</span>，檢查 <span class="math inline">A_{U,\mathrm{true}}(f) A_{W,h,\mathrm{true}}(g_1) A_{W,h,\mathrm{true}}(g_2) = 1</span> <code>[原文內容, P24:L33-P25:L6]</code>。傅立葉正交性將接受機率精確化約為 <span class="math inline">\frac{1}{2} + \frac{1}{2}\mathbb{E}_{U,W,h}[\sum_\beta \hat{A}_{\pi_2^U(\beta)} \hat{B}_\beta^2 (1-2\epsilon)^{|\beta|}]</span>（式 12–13）。結合基本不等式 <span class="math inline">x^{-s} \ge e^{-sx}</span>（引理 5.3）與 Cauchy–Schwarz 不等式，一旦接受機率達 <span class="math inline">(1+\delta)/2</span>，依機率 <span class="math inline">\hat{A}_\alpha^2, \hat{B}_\beta^2</span> 抽樣的雙證明者策略成功機率至少為 <span class="math inline">4\epsilon\delta^2</span>（引理 5.2），當 <span class="math inline">c_c^u &lt; 4\delta^3</span> 時導出矛盾，證得 <code>Max-E3-Lin-2</code> 之 <span class="math inline">2-\epsilon</span> 不可近似性（定理 5.4）<code>[原文內容, P25:L18-P29:L8]</code>。此分析進而推廣至固定右端項 <span class="math inline">-1</span> 的無摺疊 4 變數測試（定理 5.6）、任意有限交換群 <span class="math inline">\Gamma = \prod C_{i_\ell}</span> 上的對偶特徵標傅立葉展開（定理 5.9，健全性下界 <span class="math inline">2\epsilon\delta^2|\Gamma|^{-2}</span>）及所有由奇偶性蘊含的 <span class="math inline">k</span>-CSP（定理 5.15–5.16）<code>[原文內容, P30:L1-P38:L40]</code>。</li>
+<li><strong>完全完備性（<span class="math inline">c=1</span>）下的可滿足 <code>Max-E3-Sat</code> 與 <code>E4-Set-Splitting</code>（Sec 6–7 &amp; Appendix A）</strong>：線性方程組在 <span class="math inline">c=1</span> 時可由高斯消去法於多項式時間求解，故 <span class="math inline">c=1-\epsilon &lt; 1</span> 不可避免 <code>[原文內容, P29:L9-L14]</code>；但 <code>Max-E3-Sat</code> 在可滿足實例上仍應保持 <span class="math inline">8/7-\epsilon</span> 難度（定理 6.5）。為維持 <span class="math inline">c=1</span>，<span class="math inline">\mathrm{Test}\ 3S_\epsilon(u)</span> 在 <span class="math inline">f(y|_U)=+1</span> 時強制 <span class="math inline">g_2(y)=-g_1(y)</span>，僅在 <span class="math inline">f(y|_U)=-1</span> 時以機率 <span class="math inline">\epsilon</span> 翻轉符號 <code>[原文內容, P43:L12-L15]</code>。這引入了棘手的二次耦合項 <span class="math inline">\mathbb{E}[B(g_1)B(g_2)]</span>，且在 <span class="math inline">|\beta| \approx \epsilon^{-1}</span> 處存在無法單靠單一 <span class="math inline">\epsilon</span> 壓制的配對子句反例（式 37）<code>[原文內容, P44:L20-L63]</code>。Håstad 定義截斷投影泛函 <span class="math inline">S_\epsilon^U(\beta) = \epsilon \sum_x \min(s_x, \epsilon^{-1})</span>，於附錄 A 構造耦合下界隨機變數與調和凸性超鞅（<span class="math inline">c = 1/35</span>，引理 6.9）壓制大集合 <span class="math inline">|\beta|</span>，再以 <span class="math inline">\mathrm{Test}\ F3S_\delta(u)</span> 在 <span class="math inline">t = \lceil \delta^{-1} \rceil</span> 個幾何遞減雜訊尺度 <span class="math inline">\epsilon_1, \dots, \epsilon_t</span> 上均勻抽樣，利用 Parseval 能量互斥性將中頻帶誤差攤銷至 <span class="math inline">\le 1/t \le \delta</span>，成功達成 <span class="math inline">c=1</span> 與 <span class="math inline">s = 7/8 + O(\delta)</span>（引理 6.13）<code>[原文內容, P45:L4-P49:L46, P68:L16-P71:L36]</code>。第七節再以雙子句區塊 <span class="math inline">(W_1, W_2)</span> 對稱耦合消去單調 <code>E4-Set-Splitting</code> 中無法摺疊的障礙（定理 7.1、7.6）<code>[原文內容, P51:L17-P59:L32]</code>。</li>
+</ul>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<h2 id="11-問題演進與研究脈絡">1.1 問題演進與研究脈絡</h2>
+<p><code>[原文內容, P2:L35-P4:L43]</code> 近似演算法的不可近似性理論經歷了三代關鍵突破：</p>
+<ol>
+<li><strong>多證明者互動式證明與基礎 PCP 定理（1988–1992）</strong>：Ben-Or 等人 <code>[12]</code> 提出雙證明者模型；Babai–Fortnow–Lund <code>[5]</code> 證明 <span class="math inline">\mathrm{MIP}=\mathrm{NEXP}</span>；Feige–Goldwasser–Lovász–Safra–Szegedy（FGLSS <code>[16]</code>）揭示 PCP 與團問題（Clique）不可近似性的等價橋樑；Arora–Safra <code>[4]</code> 與 Arora–Lund–Motwani–Sudan–Szegedy（ALMSS <code>[3]</code>）建立著名的 PCP 定理：<span class="math inline">\mathrm{NP} = \mathrm{PCP}(O(\log n), O(1))</span>（定理 2.22）<code>[外部知識]</code>。</li>
+<li><strong>平行重複定理與長碼的誕生（1994–1998）</strong>：為壓低常數查詢 PCP 的健全性誤差，Raz <code>[32]</code> 證明了單輪雙證明者博弈的平行重複定理（定理 2.26），使健全性隨平行次數 <span class="math inline">u</span> 指數下降（<span class="math inline">\le c_{d,s}^u</span>）；Bellare–Goldreich–Sudan（BGS <code>[9]</code>）發明了極度冗餘卻代數結構純粹的長碼（Long Code）（長度 <span class="math inline">2^{2^u}</span>），將 <code>Max-E3-Sat</code> 推至 <span class="math inline">80/77-\epsilon</span>、<code>Max-E3-Lin-2</code> 推至 <span class="math inline">8/7-\epsilon</span> <code>[原文內容, P3:L28-L44, P5:L13-L20]</code>。</li>
+<li><strong>Håstad 的傅立葉譜整合革命（1997/2001）</strong>：BGS <code>[9]</code> 受限於「先做低誤差線性／長碼測試、再做一致性測試」，額外的碼字檢查子句稀釋了不可近似比。Håstad 將 Blum–Luby–Rubinfeld（BLR <code>[13]</code>）線性測試的傅立葉分析（Bellare et al. <code>[8]</code>）直接嵌入跨表查詢 <span class="math inline">(A_U, A_W, A_W)</span>，讓每一個 PCP 測試條件本身就是目標 CSP 的單一約束，消除了碼字檢查的稀釋損耗 <code>[原文內容, P4:L6-L25]</code>。</li>
+</ol>
+<h2 id="12-先修知識與全文論證依賴圖">1.2 先修知識與全文論證依賴圖</h2>
+<pre class="mermaid">flowchart TD
+    subgraph EXT[&quot;外部先修基石 (Sec 2.3-2.6)&quot;]
+        PCP[&quot;ALMSS PCP 定理 + Feige 5-正則化 (THM-2.24)&quot;]
+        RAZ[&quot;Raz 平行重複定理 (THM-2.26)&quot;]
+        FOURIER[&quot;Walsh / Pontryagin 離散傅立葉分析 (EQN-1, Sec 2.4 &amp; 2.6)&quot;]
+        TSSW[&quot;TSSW 線性規劃最佳 Gadget 理論 (LEM-5.13)&quot;]
+    end
+
+    subgraph CORE_PREP[&quot;標準書面證明與頻譜約束 (Sec 2.5 &amp; Sec 3)&quot;]
+        GAME[&quot;u-平行雙證明者協議: 健全性 &lt;= c_c^u (LEM-3.2)&quot;]
+        SWP[&quot;標準書面證明 SWP(u) / SWGammaP(u) (DEF-4)&quot;]
+        FOLD[&quot;對真值摺疊 A_true: 奇支撐集 (LEM-2.32)&quot;]
+        COND[&quot;對子句 h 條件化 A_h: 滿足賦值支撐集 (LEM-2.34)&quot;]
+    end
+
+    subgraph LIN[&quot;第五節：線性方程組核心引擎&quot;]
+        DAMP[&quot;指數-多項式阻尼不等式 x^{-s} &gt;= e^{-sx} (LEM-5.3)&quot;]
+        L2[&quot;Test L_2^eps(u) 傅立葉解碼 &gt;= 4 eps delta^2 (LEM-5.1, LEM-5.2)&quot;]
+        THM54[&quot;Max-Ek-Lin-2 不可近似下界 2 - eps (THM-5.4, THM-5.5)&quot;]
+        THM56[&quot;無摺疊 Max-E4-Lin-2 (RHS=-1) 下界 2 - eps (THM-5.6)&quot;]
+        THM59[&quot;有限交換群 Max-E3-Lin-Gamma 下界 |Gamma| - eps (THM-5.9)&quot;]
+        THM515[&quot;奇偶蘊含之一般 k-CSP 緊緻下界 (THM-5.15, THM-5.16)&quot;]
+    end
+
+    subgraph SAT_SS[&quot;第六、七節與附錄 A：完全完備性 (c = 1) 突破&quot;]
+        THM62[&quot;Test 4S(u): 可滿足 Max-E4-Sat 下界 16/15 - eps (THM-6.2)&quot;]
+        LEM69[&quot;附錄 A 截斷投影調和矩界 c = 1/35 (LEM-6.9)&quot;]
+        THM65[&quot;Test F3S_delta(u): 可滿足 Max-E3-Sat 下界 8/7 - eps (THM-6.5)&quot;]
+        THM76[&quot;Test FSS_delta(u): 可滿足單調 E4-Set-Splitting 下界 8/7 - eps (THM-7.6)&quot;]
+    end
+
+    subgraph GRAPH_SUB[&quot;第八、九節：圖最佳化歸約與次常數間隙&quot;]
+        VC[&quot;Vertex Cover 下界 7/6 - delta (f=2 自由位元, THM-8.1)&quot;]
+        MC[&quot;Max-Cut 17/16 - eps / Max-di-Cut 13/12 - eps / E2-Lin-2 12/11 - eps (THM-8.2, 8.3, 5.14)&quot;]
+        SUB[&quot;次常數 eps(n) 下界 (NP not in DTIME(2^{O(log n loglog n)}), THM-9.1, 9.3)&quot;]
+    end
+
+    PCP --&gt; GAME
+    RAZ --&gt; GAME
+    GAME --&gt; SWP
+    FOURIER --&gt; FOLD
+    FOURIER --&gt; COND
+    SWP --&gt; L2
+    FOLD --&gt; L2
+    COND --&gt; L2
+    DAMP --&gt; L2
+    GAME --&gt; THM54
+    L2 --&gt; THM54
+    THM54 --&gt; THM515
+    COND --&gt; THM56
+    DAMP --&gt; THM56
+    GAME --&gt; THM56
+    FOURIER --&gt; THM59
+    GAME --&gt; THM59
+    DAMP --&gt; THM59
+    FOLD --&gt; THM62
+    COND --&gt; THM62
+    GAME --&gt; THM62
+    LEM69 --&gt; THM65
+    FOLD --&gt; THM65
+    COND --&gt; THM65
+    GAME --&gt; THM65
+    LEM69 --&gt; THM76
+    PCP --&gt; THM76
+    COND --&gt; THM76
+    GAME --&gt; THM76
+    L2 --&gt; VC
+    THM54 --&gt; TSSW
+    TSSW --&gt; MC
+    THM54 --&gt; SUB
+    THM65 --&gt; SUB
+</pre>
+<h2 id="13-分層閱讀路線建議">1.3 分層閱讀路線建議</h2>
+<ol>
+<li><strong>核心突破速通路線（約 25 頁）</strong>：讀 Sec 1 → Sec 2.1–2.5 → Sec 3 → Sec 4（掌握雜訊阻尼直覺）→ Sec 5 至定理 5.4（<code>[P24:L25-P29:L15]</code>）→ Sec 8（<code>[P62:L11-P63:L3]</code>）。此路線已完整涵蓋哥德爾獎最核心的 3-XOR 傅立葉解碼與 <code>Max-Cut</code> / <code>Vertex Cover</code> 推論。</li>
+<li><strong>完全完備性與多尺度技術深潛路線（約 25 頁）</strong>：在路線 1 基礎上，精讀 Sec 6（先讀較簡潔的 <code>Test 4S(u)</code> 定理 6.2，再攻克配對子句反例 <code>Eq. (37)</code>、<span class="math inline">\mathrm{Test}\ 3S_\epsilon(u)</span> 與多尺度 <code>Test F3S</code>$ _\delta(u)<code> 定理 6.5）→ 附錄 A（</code>[P68:L16-P71:L36]` 引理 6.9 的超鞅耦合證明）。</li>
+<li><strong>代數群論與無負號單調超圖路線（約 20 頁）</strong>：讀 Sec 2.6 + 定理 5.9（有限交換群對偶特徵標展開）→ Sec 7（無摺疊對稱雙區塊 <span class="math inline">\mathrm{Test}\ SS^\epsilon(u)</span> 與 <span class="math inline">\mathrm{Test}\ FSS_\delta(u)</span>）→ Sec 9–10（次常數間隙與開放問題）。</li>
+</ol>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<h2 id="21-全局符號與型別字典含重載警示與精確定位">2.1 全局符號與型別字典（含重載警示與精確定位）</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">語義定義與關鍵性質</th>
+<th style="text-align:left">符號重載與審核警示</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">\{-1, 1\}</span></td>
+<td style="text-align:left">乘法布林域</td>
+<td style="text-align:left"><strong><span class="math inline">-1</span> 代表 <code>true</code>（真），<span class="math inline">+1</span> 代表 <code>false</code>（假）</strong>；乘法 <span class="math inline">xy</span> 等價於互斥或（XOR），合取滿足 <span class="math inline">(-1)\wedge(-1)=-1,  1\wedge b = 1</span></td>
+<td style="text-align:left"><strong>極易混淆點</strong>：因 <span class="math inline">+1</span> 為假，子句 <span class="math inline">x\vee y\vee z</span> 為假的指示函數為 <span class="math inline">\frac{1}{8}(1+x)(1+y)(1+z)</span>（全為 <span class="math inline">+1</span> 時取 <span class="math inline">1</span>），與常見 <span class="math inline">\{+1=\text{真}\}</span> 符號相反。</td>
+<td style="text-align:left"><code>[Sec 2.1, P6:L23-L29]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">U \subseteq W \subseteq [n]</span></td>
+<td style="text-align:left">變數索引子集</td>
+<td style="text-align:left"><span class="math inline">W</span> 為 <span class="math inline">u</span> 個隨機 3-子句所含變數集（$</td>
+<td style="text-align:left">W</td>
+<td style="text-align:left">\le 3u<span class="math inline">，</span>P_1$ 受詢）；<span class="math inline">U</span> 為每子句隨機挑一變數所成集合（$</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\pi^U(\beta),  \pi_2^U(\beta)</span></td>
+<td style="text-align:left">子集投影算子 <span class="math inline">\mathcal{P}(\{-1,1\}^W) \to \mathcal{P}(\{-1,1\}^U)</span></td>
+<td style="text-align:left">$\pi^U(\beta)={y</td>
+<td style="text-align:left">_U : y\in\beta}<span class="math inline">；模 2 投影</span>\pi_2^U(\beta)={x :</td>
+<td style="text-align:left">{y\in\beta : y</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\mathcal{F}_U,  A_x</span></td>
+<td style="text-align:left">函數空間與長碼</td>
+<td style="text-align:left"><span class="math inline">\mathcal{F}_U = \{f:\{-1,1\}^U \to \{-1,1\}\}</span>（大小 <span class="math inline">2^{2^u}</span>）；賦值 <span class="math inline">x</span> 的長碼 <span class="math inline">A_x(f)=f(x)</span>（長度 <span class="math inline">2^{2^u}</span> 位元串）</td>
+<td style="text-align:left"><span class="math inline">A_x</span> 下標為賦值 <span class="math inline">x</span>，而 <span class="math inline">\mathrm{SWP}(u)</span> 中 <span class="math inline">A_V</span> 下標為變數集 <span class="math inline">V</span>，<span class="math inline">A_h</span> 下標為條件函數 <span class="math inline">h</span></td>
+<td style="text-align:left"><code>[Sec 2.1, P6:L42-P7:L5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">w(P, k)</span></td>
+<td style="text-align:left">有理數 <span class="math inline">\in [0,1]</span></td>
+<td style="text-align:left"><span class="math inline">k</span> 元謂詞 <span class="math inline">P</span> 的滿足賦值比例 $</td>
+<td style="text-align:left">P^{-1}(-1)</td>
+<td style="text-align:left">\cdot 2^{-k}<span class="math inline">，即隨機賦值期望滿足率；定理 2.15 給出</span>w(P,k)^{-1}$-近似演算法</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\chi_\alpha(f),  \hat{A}_\alpha</span></td>
+<td style="text-align:left">傅立葉基底與係數</td>
+<td style="text-align:left">對 <span class="math inline">\alpha \subseteq \{-1,1\}^U</span>，<span class="math inline">\chi_\alpha(f)=\prod_{x\in\alpha} f(x)</span>，<span class="math inline">\hat{A}_\alpha = 2^{-2^u}\sum_f A(f)\chi_\alpha(f) \in [-1,1]</span>，滿足 <span class="math inline">\sum_\alpha \hat{A}_\alpha^2 = 1</span></td>
+<td style="text-align:left"><span class="math inline">\hat{A}_\alpha^2 \ge 0</span> 為機率分佈，但 <span class="math inline">\hat{A}_\alpha</span> <strong>可正可負</strong>（在引理 5.2 <code>[P27:L61]</code> 漏寫絕對值時會引發不等式反號。）</td>
+<td style="text-align:left"><code>[Sec 2.4, P13:L5-L39]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">A_{\mathrm{true}},  A_{h,\mathrm{true}}</span></td>
+<td style="text-align:left">摺疊與條件化表</td>
+<td style="text-align:left">摺疊強制 <span class="math inline">A_{\mathrm{true}}(-f)=-A_{\mathrm{true}}(f)</span>（僅儲存每對 <span class="math inline">\{f,-f\}</span> 之一代表元）；條件化 <span class="math inline">A_h(f)=A(f\wedge h)</span> 僅依賴滿足 <span class="math inline">h(x)=-1</span> 之點</td>
+<td style="text-align:left">摺疊代表元的選取決定了歸約後線性方程右端常數 <span class="math inline">b_0 \in \{-1,1\}</span>（<code>[P28:L19-L24]</code>）</td>
+<td style="text-align:left"><code>[Sec 2.5, P15:L7-P16:L20]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\Gamma,  \Gamma^*,  \pi_\Gamma^U(\beta)</span></td>
+<td style="text-align:left">有限交換群與對偶群</td>
+<td style="text-align:left"><span class="math inline">\Gamma = \prod_{\ell=1}^k C_{i_\ell}</span>（單位元 <span class="math inline">1^k</span>），對偶群 <span class="math inline">\Gamma^* = \prod_{\ell=1}^k \mathbb{Z}_{i_\ell}</span>（單位元 <span class="math inline">0^k</span>），配對 <span class="math inline">\gamma^{\gamma^*}=\prod \gamma_j^{\gamma_j^*} \in \mathbb{C}</span>；$\pi_\Gamma^U(\beta)(x)=\sum_{y</td>
+<td style="text-align:left">_U=x}\beta(y)$</td>
+<td style="text-align:left"><code>[P16:L36]</code> 原文誤印 <span class="math inline">\mathbb{Z}_{i_1}\times \mathbb{Z}_{i_1}</span>；<code>[P19:L3, P33:L22]</code> 混寫為 <span class="math inline">G</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\mu</span></td>
+<td style="text-align:left">隨機雜訊擾動函數</td>
+<td style="text-align:left">布林測試中獨立取 <span class="math inline">\mu(y)=1</span>（機率 <span class="math inline">1-\epsilon</span>）或 <span class="math inline">-1</span>（機率 <span class="math inline">\epsilon</span>），故 <span class="math inline">\mathbb{E}[\mu(y)]=1-2\epsilon</span>；群 <span class="math inline">\Gamma</span> 測試中機率 <span class="math inline">1-\epsilon</span> 取 <span class="math inline">1^k</span>，機率 <span class="math inline">\epsilon</span> 均勻取自 <span class="math inline">\Gamma</span>，故非平凡特徵標期望為 <span class="math inline">1-\epsilon</span></td>
+<td style="text-align:left">在 TeX 字型中 <span class="math inline">\mu</span> 與否定橫線 <span class="math inline">\bar{z}</span> 共用編碼槽，須依語境嚴格區分</td>
+<td style="text-align:left"><code>[Sec 5, P25:L3, P32:L34]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">s_x,  S_\epsilon^U(\beta)</span></td>
+<td style="text-align:left">纖維重數與截斷投影</td>
+<td style="text-align:left">$s_x =</td>
+<td style="text-align:left">{y\in\beta : y</td>
+<td style="text-align:left">_U = x}</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-三大核心直觀模型">2.2 三大核心直觀模型</h2>
+<ol>
+<li><strong>長碼即「獨裁者（Dictatorship）= 一階傅立葉單項式」</strong>：一般長度 <span class="math inline">n</span> 的編碼把輸入放在座標上，而長碼把所有 <span class="math inline">2^u</span> 個賦值 <span class="math inline">x \in \{-1,1\}^U</span> 變成超立方體 <span class="math inline">\mathcal{F}_U = \{-1,1\}^{2^u}</span> 的座標軸。合法的長碼 <span class="math inline">A_{x_0}(f) = f(x_0) = \chi_{\{x_0\}}(f)</span> 恰好就是大小為 <span class="math inline">1</span> 的單點傅立葉基底，因此 <span class="math inline">\widehat{(A_{x_0})}_{\{x_0\}} = 1</span>、其餘係數全為 <span class="math inline">0</span> <code>[原文內容, P13:L58-L60]</code>。相對地，作弊證明者寫下的任意布林表 <span class="math inline">A</span>，其傅立葉能量 <span class="math inline">\sum_\alpha \hat{A}_\alpha^2 = 1</span> 可能散佈在任意大小 <span class="math inline">|\alpha|</span> 的「奇偶混合集（Juntas / Parities）」上。</li>
+<li><strong>為何「BLR 線性測試 + 微小雜訊 <span class="math inline">\mu</span>」能迫使頻譜局部化（Sec 4 教學模型）</strong>：
+<ul>
+<li>在無雜訊 BLR 測試 <span class="math inline">A(f_0)A(f_1)A(f_0 f_1)=1</span> 中，期望值為 <span class="math inline">\sum_\alpha \hat{A}_\alpha^3</span> <code>[原文內容, P23:L11-L13]</code>。若作弊者取 <span class="math inline">A = \chi_\alpha</span>，不論集合 <span class="math inline">|\alpha|</span> 有多大（例如 <span class="math inline">|\alpha|=2^{u-1}</span>），都有 <span class="math inline">\hat{A}_\alpha = 1</span> 且測試以機率 <span class="math inline">1</span> 通過。但從指數級大的集合 <span class="math inline">\alpha</span> 中隨機挑一個 <span class="math inline">x \in \alpha</span>，與另一證明者對齊的機率僅 <span class="math inline">|\alpha|^{-1} = 2^{-(u-1)}</span>，無法抵抗平行重複的健全性要求 <code>[原文內容, P23:L27-L33]</code>。</li>
+<li>一旦把第三個查詢改為 <span class="math inline">f_2 = f_0 f_1 \mu</span>（每個輸入點 <span class="math inline">x</span> 以獨立機率 <span class="math inline">\epsilon</span> 翻轉符號），合法獨裁者 <span class="math inline">\chi_{\{x_0\}}</span> 只看單一點 <span class="math inline">\mu(x_0)</span>，故仍以 <span class="math inline">1-\epsilon</span> 高機率通過；但包含 <span class="math inline">|\alpha|</span> 個點的高次特徵標 <span class="math inline">\chi_\alpha(\mu) = \prod_{x\in\alpha}\mu(x)</span> 必須承擔 <span class="math inline">|\alpha|</span> 次獨立雜訊，其期望值劇烈衰減為 <span class="math inline">(1-2\epsilon)^{|\alpha|}</span> <code>[原文內容, P24:L10-L15]</code>。這就是離散調和分析中的 Beckner–Bonami 雜訊算子 <span class="math inline">T_{1-2\epsilon}</span> <code>[外部知識]</code>：它像低通濾波器（Low-Pass Filter）一樣抹平所有 <span class="math inline">|\alpha| \gg \epsilon^{-1}</span> 的高頻作弊態，只留下小集合低頻態供證明者抽樣解碼。</li>
+</ul>
+</li>
+<li><strong>摺疊（Folding）與條件化（Conditioning）的雙重頻譜守門員</strong>：
+<ul>
+<li>雜訊濾波器 <span class="math inline">(1-2\epsilon)^{|\beta|}</span> 有一個致命漏洞：在 <span class="math inline">|\beta|=0</span>（空集合 <span class="math inline">\beta=\emptyset</span>）處，<span class="math inline">(1-2\epsilon)^0 = 1</span> 完全不受阻尼。對真值摺疊強制 <span class="math inline">A(-f) = -A(f)</span>，使所有偶數 <span class="math inline">|\alpha|</span>（特別是 <span class="math inline">|\alpha|=0</span>）的傅立葉係數恆為 <span class="math inline">0</span>（引理 2.32），完全封死常數函數作弊路徑 <code>[原文內容, P15:L14-L28]</code>。</li>
+<li><strong>對子句 <span class="math inline">h</span> 條件化</strong>只向神諭查詢 <span class="math inline">g \wedge h</span>，使表格完全看不見違反子句 <span class="math inline">h</span>（即 <span class="math inline">h(y)=+1</span>）的座標，從而在傅立葉域上將所有含不滿足賦值的 <span class="math inline">\beta</span> 係數歸零（引理 2.34），保證證明者 <span class="math inline">P_1</span> 從 <span class="math inline">\beta</span> 抽出的任何賦值 <span class="math inline">y</span> 100% 自動滿足全部 <span class="math inline">u</span> 個被選子句 <code>[原文內容, P15:L38-P16:L14, P26:L30-L31]</code>。</li>
+</ul>
+</li>
+</ol>
+<h2 id="h3-具體正例演算與邊界反例構造">H3 具體正例演算與邊界反例構造</h2>
+<p>本節結合我們撰寫並執行的可執行驗證套件（<code>verify_math.py</code>，涵蓋 <code>VER-1</code> 至 <code>VER-6</code>）給出精確數值演算與三個破壞假設時的結構性反例。</p>
+<h2 id="31-正例演算有限宇宙-上的-精確傅立葉恆等式ver-1">3.1 正例演算：有限宇宙 <span class="math inline">|U|=2, |W|=3</span> 上的 <span class="math inline">\mathrm{Test}\ L_2^\epsilon(u)</span> 精確傅立葉恆等式（<code>VER-1</code>）</h2>
+<p><code>[AI 推導, VER-1]</code> 考慮單一子句 <span class="math inline">u=1</span> 的最小非平凡投影實例（為展示 <span class="math inline">|U|=2</span> 的跨維度效果，取 <span class="math inline">U=\{x_1, x_2\}</span> 含 <span class="math inline">2^2=4</span> 個賦值、<span class="math inline">|\mathcal{F}_U|=2^4=16</span>；<span class="math inline">W=\{x_1, x_2, x_3\}</span> 含 <span class="math inline">2^3=8</span> 個賦值、<span class="math inline">|\mathcal{F}_W|=2^8=256</span>；子句 <span class="math inline">h(y) = y_1 \vee y_2 \vee y_3</span> 僅在全假賦值 <span class="math inline">y_{\mathrm{bad}}=(+1,+1,+1)</span> 處取 <span class="math inline">+1</span>，其餘 7 點取 <span class="math inline">-1</span>）：</p>
+<ul>
+<li><strong>情況 A（誠實長碼證明）</strong>：設全局滿足賦值為 <span class="math inline">x^* = (-1, +1, +1)</span>（滿足 <span class="math inline">h(x^*)=-1</span>），則 <span class="math inline">A_{U,\mathrm{true}}(f) = f(-1,+1)</span>，<span class="math inline">B(g) = A_{W,h,\mathrm{true}}(g) = g(-1,+1,+1)</span>。傅立葉展開中僅單點集 <span class="math inline">\alpha^* = \{(-1,+1)\}</span> 與 <span class="math inline">\beta^* = \{(-1,+1,+1)\}</span> 係數為 <span class="math inline">\hat{A}_{\alpha^*} = 1, \hat{B}_{\beta^*} = 1</span>（滿足 <span class="math inline">\pi_2^U(\beta^*) = \alpha^*</span> 且 <span class="math inline">|\beta^*|=1</span>）。代入式 (12) 得期望乘積 <span class="math inline">(1-2\epsilon)^1 = 1-2\epsilon</span>，接受機率為 <span class="math inline">\frac{1}{2} + \frac{1}{2}(1-2\epsilon) = 1-\epsilon</span>（當 <span class="math inline">\epsilon=0.15</span> 時為 <span class="math inline">0.85</span>），與引理 5.1 完全吻合。雙證明者抽樣必抽出 <span class="math inline">y=(-1,+1,+1)</span> 與 <span class="math inline">x=(-1,+1)</span>，一致性機率為 <span class="math inline">|\beta^*|^{-1} = 1</span>。</li>
+<li><strong>情況 B（任意作弊證明表的精確全枚舉對照）</strong>：對隨機生成並經摺疊與 <span class="math inline">h</span>-條件化的布林表 <span class="math inline">A_{\mathrm{fold}} \in \{-1,1\}^{16}</span>、<span class="math inline">B_{\mathrm{cond,fold}} \in \{-1,1\}^{256}</span>，在 <span class="math inline">\epsilon=0.15</span> 下直接枚舉全部 <span class="math inline">16 \times 256 \times 256 = 1{,}048{,}576</span> 組查詢三元組 <span class="math inline">(f, g_1, \mu)</span> 計算精確接受機率，並與引理 5.2 式 (12) 傅立葉公式比對：
+<div class="math inline">\Pr_{f,g_1,\mu}[\text{Accept}] = 0.511473295312, \qquad \frac{1}{2} + \frac{1}{2}\sum_{\beta \subseteq \{-1,1\}^W} \hat{A}_{\pi_2^U(\beta)} \hat{B}_\beta^2 (1 - 2\epsilon)^{|\beta|} = 0.511473295312</div>
+兩者絕對誤差為 <code>0.0</code>（機器精度完全零誤差）。同時驗證得：所有偶數 <span class="math inline">|\alpha|, |\beta|</span> 的傅立葉係數最大絕對值為 <code>0.0</code>（引理 2.32），所有包含 <span class="math inline">y_{\mathrm{bad}}=(+1,+1,+1)</span> 的 <span class="math inline">\hat{B}_\beta</span> 最大絕對值亦為 <code>0.0</code>（引理 2.34）。</li>
+</ul>
+<h2 id="32-反例一cex-1移除對真值摺疊導致常數表以機率-擊潰健全性">3.2 反例一（<code>CEX-1</code>）：移除「對真值摺疊」導致常數表以機率 <span class="math inline">1</span> 擊潰健全性</h2>
+<p><code>[AI 推導, VER-1]</code> 若在 <span class="math inline">\mathrm{Test}\ L_2^\epsilon(u)</span> 中省略對真值摺疊（改查未摺疊的 <span class="math inline">A_U(f)</span> 與 <span class="math inline">A_{W,h}(g)</span>）：</p>
+<ul>
+<li><strong>反例構造</strong>：令作弊證明者對所有 <span class="math inline">f \in \mathcal{F}_U</span> 寫下 <span class="math inline">A_U(f) = +1</span>，對所有 <span class="math inline">g \in \mathcal{F}_W</span> 寫下 <span class="math inline">A_W(g) = +1</span>。</li>
+<li><strong>崩潰機制</strong>：無論公式 <span class="math inline">\varphi</span> 是否可滿足、無論驗證器抽出何種 <span class="math inline">(f, g_1, \mu)</span>，測試條件皆為 <span class="math inline">(+1)\cdot(+1)\cdot(+1) = +1</span>，驗證器以機率 <span class="math inline">1.0</span> 接受（甚至高於誠實證明的完備性 <span class="math inline">1-\epsilon</span>）。從傅立葉角度看，此時 <span class="math inline">\hat{A}_\emptyset = \hat{B}_\emptyset = 1</span>（其餘係數全為 <span class="math inline">0</span>），而空集合 <span class="math inline">|\emptyset| = 0</span> 使雜訊阻尼因子 <span class="math inline">(1-2\epsilon)^{|\emptyset|} = (1-2\epsilon)^0 = 1</span> 完全失效；雙證明者按 <span class="math inline">\hat{A}_\alpha^2, \hat{B}_\beta^2</span> 必抽中空集合 <span class="math inline">\alpha=\beta=\emptyset</span>，無法輸出任何變數賦值，雙證明者成功機率為 <span class="math inline">0.0</span>，引理 5.2 完全失效。</li>
+</ul>
+<h2 id="33-反例二cex-2håstad-引理-52-p27l61-l62-遺漏-絕對值之正負號反例與修復">3.3 反例二（<code>CEX-2</code>）：Håstad 引理 5.2 <code>[P27:L61-L62]</code> 遺漏 <span class="math inline">|\hat{A}_{\pi_2^U(\beta)}|</span> 絕對值之正負號反例與修復</h2>
+<p><code>[AI 推導, VER-2]</code> 在審核引理 5.2 證明結尾 <code>[P27:L56-L62]</code> 時，我們發現原文寫道：由 <span class="math inline">|\beta|^{-1/2} \ge (4\epsilon)^{1/2}(1-2\epsilon)^{|\beta|}</span> 結合式 (15) 與式 (13)，推得
+<div class="math inline">\mathbb{E}\left[\sum_\beta \hat{A}_{\pi_2^U(\beta)}^2 \hat{B}_\beta^2 |\beta|^{-1}\right] \ge \left(\mathbb{E}\left[\sum_\beta \hat{A}_{\pi_2^U(\beta)} \hat{B}_\beta^2 |\beta|^{-1/2}\right]\right)^2 \stackrel{\text{原文誤寫}}{\ge} 4\epsilon \left(\mathbb{E}\left[\sum_\beta \hat{A}_{\pi_2^U(\beta)} \hat{B}_\beta^2 (1-2\epsilon)^{|\beta|}\right]\right)^2 \ge 4\epsilon\delta^2.</div></p>
+<ul>
+<li><strong>反例構造</strong>：因為傅立葉係數 <span class="math inline">\hat{A}_\alpha \in [-1,1]</span> 可取負值，將不等式 <span class="math inline">|\beta|^{-1/2} \ge (4\epsilon)^{1/2}(1-2\epsilon)^{|\beta|}</span> 乘上負數 <span class="math inline">\hat{A}_{\pi_2(\beta)} &lt; 0</span> 會使不等號反向。具體取 <span class="math inline">\epsilon = 0.2</span>（故 <span class="math inline">1-2\epsilon = 0.6</span>），單一固定 <span class="math inline">(U,W,h)</span>，設 <span class="math inline">\hat{B}</span> 集中在兩個奇數大小支撐集：
+<ul>
+<li><span class="math inline">|\beta_1| = 1</span>：<span class="math inline">\hat{B}_{\beta_1}^2 = 0.4</span>，且 <span class="math inline">\hat{A}_{\pi_2(\beta_1)} = +1.0</span>；</li>
+<li><span class="math inline">|\beta_2| = 3</span>：<span class="math inline">\hat{B}_{\beta_2}^2 = 0.6</span>，且 <span class="math inline">\hat{A}_{\pi_2(\beta_2)} = -1.0</span>。</li>
+</ul>
+</li>
+<li><strong>數值檢驗</strong>：
+<ol>
+<li>測試偏置 <span class="math inline">\delta = 0.4(+1)(0.6)^1 + 0.6(-1)(0.6)^3 = 0.24 - 0.1296 = +0.1104 &gt; 0</span>，故右端目標值為 <span class="math inline">4\epsilon\delta^2 = 0.8 \times 0.1104^2 = \mathbf{0.009751}</span>。</li>
+<li>原文未加絕對值的中間項為 <span class="math inline">\left(0.4(+1)(1)^{-1/2} + 0.6(-1)(3)^{-1/2}\right)^2 = (0.4 - 0.346410)^2 = \mathbf{0.002872} &lt; \mathbf{0.009751}</span>。原文印出的第二個不等號在此反例下嚴格不成立。</li>
+<li><strong>嚴格修復</strong>：先對式 (13) 取三角不等式 <span class="math inline">\delta \le \mathbb{E}[\sum_\beta |\hat{A}_{\pi_2^U(\beta)}| \hat{B}_\beta^2 (1-2\epsilon)^{|\beta|}]</span>（要求 <span class="math inline">0 &lt; \epsilon \le 1/2</span>，這在定理 5.4 取 <span class="math inline">\epsilon=\delta=2^{-q} &lt; 1/2</span> 時恆成立），再代入式 (16) 與含 <span class="math inline">|\hat{A}_{\pi_2^U(\beta)}|</span> 的 Cauchy–Schwarz 不等式，中間項即變為 <span class="math inline">(0.4 + 0.346410)^2 = \mathbf{0.557128}</span>，而真實雙證明者接受率下界為 <span class="math inline">0.4(1) + 0.6(1/3) = \mathbf{0.600000} \ge 0.557128 \ge 0.009751</span>，引理 5.2 的最終結論 <span class="math inline">4\epsilon\delta^2</span> 獲得 100% 嚴密恢復（詳見引理 6.4 <code>[P41:L54]</code>，Håstad 在該處便記得加上了絕對值 <span class="math inline">|\hat{A}_{\pi_2(\beta)}|</span>）。</li>
+</ol>
+</li>
+</ul>
+<h2 id="34-反例三cex-3可滿足-max-e3-sat-單尺度測試-的配對子句障礙式-37">3.4 反例三（<code>CEX-3</code>）：可滿足 <code>Max-E3-Sat</code> 單尺度測試 <span class="math inline">\mathrm{Test}\ 3S_\epsilon(u)</span> 的配對子句障礙（式 37）</h2>
+<p><code>[原文內容, P44:L23-L63]</code> <code>[AI 推導, VER-3]</code> 在第六節 <span class="math inline">\mathrm{Test}\ 3S_\epsilon(u)</span> 中，二次項 <span class="math inline">\mathbb{E}[B(g_1)B(g_2)] = \sum_\beta \hat{B}_\beta^2 \prod_{x\in\pi(\beta)} \frac{1}{2}((-1)^{s_x} + (1-2\epsilon)^{s_x})</span> 能否單靠把 <span class="math inline">\epsilon \to 0</span> 壓到 <span class="math inline">0</span>？Håstad 構造了精妙反例予以否定：</p>
+<ul>
+<li>取 <span class="math inline">k = \lceil \epsilon^{-1} \rceil</span>，令 <span class="math inline">W</span> 由 <span class="math inline">k+1</span> 個互斥子句 <span class="math inline">(3i-2, 3i-1, 3i)</span>（<span class="math inline">i=1,\dots,k+1</span>）組成，並取大小為 <span class="math inline">2k+1</span>（奇數。）的集合 <span class="math inline">\beta = \{1^{3k+3}\} \cup \bigcup_{i=2}^{k+1} \{e_{1,3i}, e_{2,3i}\}</span>（其中 <span class="math inline">e_{a,b}</span> 僅在第 <span class="math inline">a,b</span> 座標取 <span class="math inline">-1</span>，餘取 <span class="math inline">+1</span>），令 <span class="math inline">B = \chi_\beta</span>（故 <span class="math inline">\hat{B}_\beta^2 = 1</span>）。</li>
+<li>當 <span class="math inline">U</span> 在第 1 個子句選中變數 <span class="math inline">3</span>（機率 <span class="math inline">1/3</span>）時，對所有 <span class="math inline">i \ge 2</span>，<span class="math inline">e_{1,3i}</span> 與 <span class="math inline">e_{2,3i}</span> 在 <span class="math inline">U</span> 上的投影完全重合（偶數重數配對。），約 <span class="math inline">2k/3</span> 對落入全 <span class="math inline">+1</span> 纖維（使該纖維重數 <span class="math inline">s_{\mathbf{1}} \approx 1 + 4k/3</span> 為奇數，乘積因子約 <span class="math inline">\frac{1}{2}(-1 + e^{-8/3}) &lt; 0</span>），其餘約 <span class="math inline">k/3</span> 對形成重數 <span class="math inline">s_x=2</span> 的正因子 <span class="math inline">(1-2\epsilon+2\epsilon^2)^{k/3} \approx e^{-2/3}</span>。</li>
+<li>我們在 <code>VER-3</code> 中以精確二項分佈算出當 <span class="math inline">\epsilon = 0.05</span>（<span class="math inline">k=20</span>）時，<span class="math inline">\mathbb{E}_U[B(g_1)B(g_2)] = \mathbf{-0.082845}</span>（絕對值有獨立於 <span class="math inline">\epsilon</span> 的正下界），由於式 (34) 為 <span class="math inline">\frac{7}{8} - \frac{1}{8}(\mathbb{E}[B(g_1)B(g_2)] + \mathbb{E}[A(f)B(g_1)B(g_2)])</span>，這個負的二次期望值會讓純依賴 <span class="math inline">W</span> 的作弊表（即使 <span class="math inline">\mathbb{E}[AB B]=0</span>）獲得 <span class="math inline">\frac{7}{8} + \frac{0.082845}{8} &gt; \frac{7}{8} + 0.01</span> 的非法優勢。這正是為何第六節必須引入幾何多尺度隨機測試 <span class="math inline">\mathrm{Test}\ F3S_\delta(u)</span> 的根本原因。</li>
+</ul>
+<h2 id="h4-核心定理五層註釋逐步補全證明與推理缺口分析">H4 核心定理五層註釋、逐步補全證明與推理缺口分析</h2>
+<h2 id="41-定理-54及定理-5556max-e3-lin-2-的最佳-不可近似性">4.1 定理 5.4（及定理 5.5、5.6）：<code>Max-E3-Lin-2</code> 的最佳 <span class="math inline">2-\epsilon</span> 不可近似性</h2>
+<h3 id="直觀理解">直觀理解</h3>
+<p><code>[原文內容, P2:L12-L28, P24:L26-L32]</code> 解 <span class="math inline">\mathbb{F}_2</span> 上的線性方程組呈現出計算複雜度中最劇烈的「脆弱相變」：若所有方程可同時滿足，高斯消去法可在 <span class="math inline">O(n^3)</span> 時間內精確求解；但只要系統過度決定（over-determined）且允許極小比例 <span class="math inline">\delta &gt; 0</span> 的方程不相容，Håstad 證明任何多項式時間演算法都無法保證找出滿足超過 <span class="math inline">\frac{1}{2}+\delta</span> 比例方程的解，亦即連最愚蠢的「對每個變數擲公平硬幣」（期望滿足率 <span class="math inline">1/2</span>，給出 <span class="math inline">2</span>-近似）都無法超越。其設計巧思是把第四節帶雜訊長碼測試 <span class="math inline">A(f_0)A(f_1)A(f_0 f_1 \mu)=1</span> 的三個查詢拆成「一個查小表 <span class="math inline">A_{U,\mathrm{true}}(f)</span>、兩個查大表 <span class="math inline">A_{W,h,\mathrm{true}}(g_1), A_{W,h,\mathrm{true}}(g_2)</span>」，使每一個測試動作本身就是一條剛好含 3 個布林變數的模 2 線性方程。</p>
+<h3 id="嚴格表述">嚴格表述</h3>
+<p><code>[原文內容, 定理 5.4 &amp; 5.5, P27:L79-L81, P29:L16-L18]</code> 設 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> <code>[未驗證假設]</code>。對任意常數 <span class="math inline">\epsilon &gt; 0</span> 及任意整數 <span class="math inline">k \ge 3</span>，在多項式時間內將 <code>Max-Ek-Lin-2</code> 近似至因子 <span class="math inline">2 - \epsilon</span> 以內是 <span class="math inline">\mathrm{NP}</span>-hard 的（等價地，對任意 <span class="math inline">\delta &gt; 0</span>，區分至少 <span class="math inline">(1-\delta)</span>-可滿足與至多 <span class="math inline">\frac{1+\delta}{2}</span>-可滿足的 <code>Ek-Lin-2</code> 系統為 <span class="math inline">\mathrm{NP}</span>-hard）。此外（定理 5.6，<code>[P30:L1-L4]</code>），對 <code>Max-E4-Lin-2</code>，即使強制所有方程右端常數皆為 <span class="math inline">-1</span>（即 <span class="math inline">x_{i_1}x_{i_2}x_{i_3}x_{i_4} = -1</span>），<span class="math inline">2-\epsilon</span> 不可近似性依然成立。</p>
+<h3 id="完整推導">完整推導</h3>
+<ol>
+<li><strong>驗證器 <span class="math inline">\mathrm{Test}\ L_2^\delta(u)</span> 構造</strong> <code>[原文內容, P24:L33-P25:L6]</code>：給定定理 2.24 產生的 5-正則 <code>E3-CNF</code> 公式 <span class="math inline">\varphi = C_1 \wedge \dots \wedge C_m</span>，驗證器均勻獨立抽取 <span class="math inline">u</span> 個子句 <span class="math inline">(C_{j_i})_{i=1}^u</span>（變數聯集為 <span class="math inline">W</span>，合取為 <span class="math inline">h = \bigwedge_{i=1}^u C_{j_i}</span>），再從每個 <span class="math inline">C_{j_i}</span> 均勻獨立抽一個變數 <span class="math inline">x_{k_i}</span> 組成 <span class="math inline">U</span>。接著均勻獨立抽取 <span class="math inline">f \in \mathcal{F}_U</span>、<span class="math inline">g_1 \in \mathcal{F}_W</span>，並逐點獨立抽取雜訊 <span class="math inline">\mu \in \mathcal{F}_W</span>（<span class="math inline">\Pr[\mu(y)=1]=1-\delta,  \Pr[\mu(y)=-1]=\delta</span>），令 <span class="math inline">g_2(y) = f(y|_U) g_1(y) \mu(y)</span>，若 <span class="math inline">A_{U,\mathrm{true}}(f) A_{W,h,\mathrm{true}}(g_1) A_{W,h,\mathrm{true}}(g_2) = 1</span> 則接受。</li>
+<li><strong>完備性 <span class="math inline">\ge 1-\delta</span>（引理 5.1）</strong> <code>[原文內容, P25:L9-L15]</code>：若 <span class="math inline">\varphi</span> 有滿足賦值 <span class="math inline">x</span>，誠實長碼在 <span class="math inline">h(x|_W)=-1</span> 下不受摺疊與條件化影響，故乘積等於 <span class="math inline">f(x|_U) g_1(x|_W) f(x|_U) g_1(x|_W) \mu(x|_W) = \mu(x|_W)</span>，以機率 <span class="math inline">1-\delta</span> 等於 <span class="math inline">1</span>。</li>
+<li><strong>健全性傅立葉展開與策略抽取 <span class="math inline">\ge 4\delta_{\text{noise}} \delta_{\text{bias}}^2</span>（引理 5.2，含正負號修復）</strong> <code>[原文內容, P25:L18-P27:L75]</code> <code>[AI 推導, STEP-1 &amp; STEP-2]</code>：設測試接受機率為 <span class="math inline">(1+\delta')/2</span>（在定理 5.4 證明中取 <span class="math inline">\epsilon_{\text{noise}} = \delta' = \delta</span>），則固定 <span class="math inline">(U,W,h)</span> 時記 <span class="math inline">A=A_{U,\mathrm{true}}, B=A_{W,h,\mathrm{true}}</span>，展開傅立葉級數：
+<div class="math inline">\mathbb{E}_{f,g_1,\mu}[A(f)B(g_1)B(fg_1\mu)] = \sum_{\alpha,\beta_1,\beta_2} \hat{A}_\alpha \hat{B}_{\beta_1} \hat{B}_{\beta_2} \mathbb{E}_f[\chi_{\alpha \Delta \pi_2^U(\beta_2)}(f)] \mathbb{E}_{g_1}[\chi_{\beta_1 \Delta \beta_2}(g_1)] \mathbb{E}_\mu[\chi_{\beta_2}(\mu)].</div>
+由引理 2.29–2.30，非零項必滿足 <span class="math inline">\beta_1 = \beta_2 = \beta</span> 且 <span class="math inline">\alpha = \pi_2^U(\beta)</span>，且 <span class="math inline">\mathbb{E}_\mu[\chi_\beta(\mu)] = (1-2\epsilon)^{|\beta|}</span>，對 <span class="math inline">(U,W,h)</span> 取期望即得式 (13)：
+<div class="math inline">\mathbb{E}_{U,W,h}\left[\sum_{\beta \subseteq \{-1,1\}^W} \hat{A}_{\pi_2^U(\beta)} \hat{B}_\beta^2 (1 - 2\epsilon)^{|\beta|}\right] = \delta'.</div>
+定義雙證明者隨機策略：<span class="math inline">P_2</span> 收 <span class="math inline">U</span> 後依機率 <span class="math inline">\hat{A}_\alpha^2</span> 選 <span class="math inline">\alpha</span> 並均勻回傳 <span class="math inline">x \in \alpha</span>；<span class="math inline">P_1</span> 收 <span class="math inline">(W,h)</span> 後依機率 <span class="math inline">\hat{B}_\beta^2</span> 選 <span class="math inline">\beta</span> 並均勻回傳 <span class="math inline">y \in \beta</span>。由引理 2.32（摺疊），<span class="math inline">\alpha,\beta</span> 必為奇數大小（非空）；由引理 2.34（條件化），<span class="math inline">y</span> 必滿足 <span class="math inline">h</span>。當 <span class="math inline">\alpha = \pi_2^U(\beta)</span> 時，每個 <span class="math inline">x \in \alpha</span> 在 <span class="math inline">\beta</span> 中至少有 1 個（奇數個）原像，故 <span class="math inline">\Pr[y|_U = x \mid \alpha=\pi_2^U(\beta)] \ge \frac{|\alpha|}{|\alpha|\cdot|\beta|} = |\beta|^{-1}</span>。結合三角不等式修復（<code>STEP-2</code>，要求 <span class="math inline">0 &lt; \epsilon \le 1/2</span>）與引理 5.3（<span class="math inline">(4\epsilon|\beta|)^{-1/2} \ge e^{-2\epsilon|\beta|} \ge (1-2\epsilon)^{|\beta|}</span>）：
+<div class="math inline">\delta' \le \mathbb{E}\left[\sum_\beta |\hat{A}_{\pi_2^U(\beta)}| \hat{B}_\beta^2 (1-2\epsilon)^{|\beta|}\right] \le (4\epsilon)^{-1/2} \mathbb{E}\left[\sum_\beta |\hat{A}_{\pi_2^U(\beta)}| \hat{B}_\beta^2 |\beta|^{-1/2}\right] \le (4\epsilon)^{-1/2} \left(\mathbb{E}\left[\sum_\beta \hat{A}_{\pi_2^U(\beta)}^2 \hat{B}_\beta^2 |\beta|^{-1}\right]\right)^{1/2},</div>
+兩邊平方即得雙證明者接受率 <span class="math inline">\mathrm{Acc}_{2P} \ge 4\epsilon(\delta')^2</span>（取 <span class="math inline">\epsilon=\delta'=\delta</span> 即 <span class="math inline">4\delta^3</span>）。</li>
+<li><strong>代數轉譯、摺疊常數 <span class="math inline">b_0</span> 與有理權重消去</strong> <code>[原文內容, P28:L1-P29:L8]</code> <code>[AI 推導, STEP-3]</code>：取二進分數 <span class="math inline">\delta = 2^{-q} &lt; 1/2</span> 使 <span class="math inline">\frac{1-\delta}{(1+\delta)/2} \ge 2-\epsilon</span>，再固定常數 <span class="math inline">u</span> 使 <span class="math inline">c_c^u &lt; 4\delta^3</span>（引理 3.2）。對 <span class="math inline">\mathrm{SWP}(u)</span> 中每個代表元位元設變數 <span class="math inline">x_b \in \{-1,1\}</span>；因摺疊將 <span class="math inline">-f</span> 映射為 <span class="math inline">-A_{\mathrm{true}}(f)</span>，測試條件轉化為 <span class="math inline">x_{b_{U,f}} x_{b_{W,h,g_1}} x_{b_{W,h,g_2}} = b_0 \in \{-1,1\}</span>（其中 <span class="math inline">b_0</span> 為由 <span class="math inline">(f,g_1,g_2)</span> 是否取負代表元決定的已知常數）。因 <span class="math inline">\delta=2^{-q}</span>，每個方程式的驗證器抽中機率皆為公分母 <span class="math inline">M = m^u 3^u 2^{O_u(1)}</span> 的整數倍，複製相應次數即得多項式大小的無權重 <code>E3-Lin-2</code> 系統。對 <span class="math inline">k &gt; 3</span>（定理 5.5），在所有方程同乘相同的 <span class="math inline">k-3</span> 個新變數 <span class="math inline">y_1 \cdots y_{k-3}</span>，若其乘積為 <span class="math inline">-1</span> 則將原變數全體取反即可保持最佳滿足數不變 <code>[原文內容, P29:L19-L37]</code>。</li>
+<li><strong>定理 5.6（無摺疊 <code>Max-E4-Lin-2</code> 固定右端項 <span class="math inline">-1</span>）與 <code>IMP-2</code> 審核修補</strong> <code>[原文內容, P30:L1-P32:L4]</code> <code>[AI 推導, STEP-4]</code>：在 <span class="math inline">\mathrm{Test}\ L_{2,-1}^\epsilon(u)</span> 中抽獨立 <span class="math inline">f_1, f_2 \in \mathcal{F}_U, g_1 \in \mathcal{F}_W</span>，令 <span class="math inline">g_2 = -f_1 f_2 g_1 \mu</span>，不摺疊而直接檢查 <span class="math inline">A_U(f_1)A_U(f_2)A_{W,h}(g_1)A_{W,h}(g_2) = -1</span>。展開得式 (19)：<span class="math inline">\sum_\beta \hat{A}_{\pi_2^U(\beta)}^2 \hat{B}_\beta^2 (-1)^{|\beta|+1} (1-2\epsilon)^{|\beta|}</span>。<code>[AI 推導]</code> 注意原文 <code>[P31:L21-L44]</code> 僅丟棄了 <span class="math inline">\beta=\emptyset</span> 項，卻忽略了當 <span class="math inline">\beta \ne \emptyset</span> 但 <span class="math inline">\pi_2^U(\beta) = \emptyset</span> 時（因未摺疊，<span class="math inline">\hat{A}_\emptyset^2</span> 可為正。），證明者 <span class="math inline">P_2</span> 亦會因抽中空集而放棄；幸而 <span class="math inline">\pi_2^U(\beta)=\emptyset</span> 蘊含每個纖維重數 <span class="math inline">s_x</span> 皆為偶數，故 <span class="math inline">|\beta| = \sum_x s_x</span> 必為偶數，從而 <span class="math inline">(-1)^{|\beta|+1} = -1 \le 0</span>。因此將所有滿足 <span class="math inline">\pi_2^U(\beta)=\emptyset</span> 的項一併丟棄只會使總和更大，嚴密修復式 (20)–(21) 並給出 <span class="math inline">\mathrm{Acc}_{2P} \ge 2\epsilon\delta</span>。</li>
+</ol>
+<h3 id="局限分析">局限分析</h3>
+<ol>
+<li><strong>無法達成完全完備性（<span class="math inline">c=1</span>）</strong>：誠如 Håstad 於 <code>[P29:L9-L14]</code> 指出，若完備性為 <span class="math inline">1</span>，則當 <span class="math inline">x \in L</span> 時生成的線性方程組完全相容，可用高斯消去法在多項式時間判定，直接導致 <span class="math inline">\mathrm{P}=\mathrm{NP}</span>。因此雜訊 <span class="math inline">\mu</span> 造成的 <span class="math inline">1-\delta</span> 不完全完備性在線性方程組問題上是本質不可消除的。</li>
+<li><strong>奇數元方程無法固定右端常數</strong>：在 <code>Max-E3-Lin-2</code> 中，右端項 <span class="math inline">b_0</span> 必須同時出現 <span class="math inline">+1</span> 與 <span class="math inline">-1</span>：若全為 <span class="math inline">+1</span>，全賦 <span class="math inline">+1</span> 即滿足 100% 方程；若全為 <span class="math inline">-1</span>，因 <span class="math inline">k=3</span> 為奇數，全賦 <span class="math inline">-1</span> 亦滿足 <span class="math inline">(-1)^3 = -1</span>（100% 方程）<code>[原文內容, P29:L42-L46]</code>。唯有偶數元 <span class="math inline">2k \ge 4</span> 且右端全為 <span class="math inline">-1</span>（定理 5.6）才能避開常數解。</li>
+</ol>
+<h3 id="研究拓展">研究拓展</h3>
+<p>定理 5.4 直接成為整個近似難度領域最萬用的「硬核起點（Canonical Hardness Source）」<code>[外部知識]</code>：一方面催生了 Khot (2002) 將雙證明者一致性提煉為 Unique Games Conjecture (UGC) 的綱領；另一方面在密碼學與學習理論中，定理 5.4 是稀疏帶雜訊奇偶學習問題（Learning Parity with Noise, Sparse LPN / XORSAT Refutation）在最壞情況下不可近似的基石。</p>
+<h2 id="42-定理-59任意有限交換群-上的-最佳-不可近似性">4.2 定理 5.9：任意有限交換群 <span class="math inline">\Gamma</span> 上的 <span class="math inline">\text{Max-E3-Lin-}\Gamma</span> 最佳 <span class="math inline">|\Gamma|-\epsilon</span> 不可近似性</h2>
+<h3 id="直觀理解-1">直觀理解</h3>
+<p><code>[原文內容, P16:L21-L55, P32:L11-L18]</code> 當線性方程組從二元域 <span class="math inline">\mathbb{Z}_2</span> 推廣到模素數 <span class="math inline">\mathbb{Z}_p</span> 乃至任意有限交換群 <span class="math inline">\Gamma</span> 時，隨機賦值滿足單一方程的機率降為 <span class="math inline">1/|\Gamma|</span>（給出平凡的 <span class="math inline">|\Gamma|</span>-近似演算法）。為證明沒有任何多項式時間演算法能做到 <span class="math inline">|\Gamma|-\epsilon</span> 近似，Håstad 將布林 Walsh 展開升級為有限交換群上的複數特徵標（Pontryagin Dual Characters）傅立葉分析：將群元素表示為單位根元組，利用非平凡特徵標對群平移的齊次性（<span class="math inline">\gamma^*</span>-homogeneity）取代奇偶摺疊，使非零傅立葉係數自動避開零頻率 <span class="math inline">0^k</span>。</p>
+<h3 id="嚴格表述-1">嚴格表述</h3>
+<p><code>[原文內容, 定理 5.9, P32:L16-L18]</code> 設 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> <code>[未驗證假設]</code>。對任意常數 <span class="math inline">\epsilon &gt; 0</span> 及任意有限交換群 <span class="math inline">\Gamma</span>，在多項式時間內將 <span class="math inline">\text{Max-E3-Lin-}\Gamma</span> 近似至因子 <span class="math inline">|\Gamma| - \epsilon</span> 以內是 <span class="math inline">\mathrm{NP}</span>-hard 的。</p>
+<h3 id="完整推導-1">完整推導</h3>
+<ol>
+<li><strong>群結構與對偶傅立葉基底（Sec 2.6）</strong> <code>[原文內容, P16:L25-P19:L31]</code>：由有限交換群結構定理，<span class="math inline">\Gamma \cong C_{i_1} \times \dots \times C_{i_k}</span>（將 <span class="math inline">C_r</span> 表為複數 <span class="math inline">r</span> 次單位根乘法群，單位元 <span class="math inline">1^k</span>），對偶群 <span class="math inline">\Gamma^* = \mathbb{Z}_{i_1} \times \dots \times \mathbb{Z}_{i_k}</span>（加法群，零元 <span class="math inline">0^k</span>），配對記為 <span class="math inline">\gamma^{\gamma^*} = \prod_{j=1}^k \gamma_j^{\gamma_j^*} \in \mathbb{C}</span>。對 <span class="math inline">A : \mathcal{F}_U^\Gamma \to \mathbb{C}</span> 及頻率函數 <span class="math inline">\alpha : \{-1,1\}^U \to \Gamma^*</span>，基底為 <span class="math inline">\chi_\alpha(f) = \prod_{x\in\{-1,1\}^U} f(x)^{\alpha(x)}</span>，內積 <span class="math inline">(A, B) = |\Gamma|^{-2^u}\sum_f A(f)\overline{B(f)}</span>，滿足 Parseval 恆等式 <span class="math inline">\sum_\alpha |\hat{A}_\alpha|^2 = 1</span>（當 <span class="math inline">|A(f)|=1</span>）。對 <span class="math inline">\Gamma</span> 摺疊定義 <span class="math inline">A_\Gamma(\gamma f) = \gamma \gamma_0^{-1} A(\gamma_0 f)</span>，使 <span class="math inline">B^{\gamma^*}</span> 滿足 <span class="math inline">\gamma^*</span>-齊次性：<span class="math inline">B^{\gamma^*}(\gamma f) = \gamma^{\gamma^*} B^{\gamma^*}(f)</span>（引理 2.43）。當 <span class="math inline">\gamma^* \ne 0^k</span> 時，<span class="math inline">\hat{A}_\alpha \ne 0 \implies \sum_x \alpha(x) = \gamma^* \ne 0^k</span>，故必存在 <span class="math inline">x</span> 使 <span class="math inline">\alpha(x) \ne 0^k</span>（引理 2.44）。</li>
+<li><strong>測試 <span class="math inline">\mathrm{Test}\ L_\Gamma^\epsilon(u)</span> 與單位根正交指示器（引理 5.10–5.12）</strong> <code>[原文內容, P32:L22-P33:L43]</code>：抽均勻 <span class="math inline">f \in \mathcal{F}_U^\Gamma, g_1 \in \mathcal{F}_W^\Gamma</span>；雜訊 <span class="math inline">\mu(y)</span> 以機率 <span class="math inline">1-\epsilon</span> 取 <span class="math inline">1^k</span>，以機率 <span class="math inline">\epsilon</span> 在 <span class="math inline">\Gamma</span> 中均勻隨機抽取；令 <span class="math inline">g_2 = (f g_1 \mu)^{-1}</span>，當 <span class="math inline">X := A_{U,\Gamma}(f) A_{W,h,\Gamma}(g_1) A_{W,h,\Gamma}(g_2) = 1^k</span> 時接受（完備性 <span class="math inline">\ge 1-\epsilon</span>）。若接受機率為 <span class="math inline">(1+\delta)/|\Gamma|</span>，由引理 5.12：
+<div class="math inline">\sum_{\gamma^* \in \Gamma^* \setminus \{0^k\}} \gamma^{\gamma^*} = \begin{cases} |\Gamma| - 1, &amp; \gamma = 1^k, \\ -1, &amp; \gamma \ne 1^k, \end{cases} \implies \mathbb{E}\left[\sum_{\gamma^* \ne 0^k} X^{\gamma^*}\right] = \frac{1+\delta}{|\Gamma|}(|\Gamma|-1) + \left(1 - \frac{1+\delta}{|\Gamma|}\right)(-1) = \delta.</div></li>
+<li>複數傅立葉展開與鴿籠選取非零特徵標 <span class="math inline">\gamma_0^*</span> <code>[原文內容, P33:L44-P35:L5]</code> <code>[AI 推導, STEP-5 &amp; VER-6]</code>：對每個固定 <span class="math inline">\gamma^* \ne 0^k</span>，令 <span class="math inline">A = A_{U,\Gamma}^{\gamma^*}, B = A_{W,h,\Gamma}^{\gamma^*}</span>。展開 <span class="math inline">A(f)B(g_1)B((fg_1\mu)^{-1})</span> 並利用引理 2.36–2.40，僅當 <span class="math inline">\beta_1 = \beta_2 = \beta</span>（注意：在複共軛內積定義下，<span class="math inline">\chi_{\beta_2}(g_1^{-1}) = \overline{\chi_{\beta_2}(g_1)} = \chi_{-\beta_2}(g_1)</span>。讓我們核對 <code>[P34:L19-L28]</code>：因 <span class="math inline">A(f)=\sum \hat{A}_\alpha \chi_\alpha(f)</span> 無共軛，故 <span class="math inline">\chi_{\beta_1}(g_1)\chi_{\beta_2}(g_1^{-1}) = \chi_{\beta_1 - \beta_2}(g_1)</span>，非零項確實要求 <span class="math inline">\beta_1 = \beta_2 = \beta</span> 且 <span class="math inline">\alpha = \pi_\Gamma^U(\beta)</span>。這已在 <code>VER-6</code> 的 <span class="math inline">\Gamma=C_3</span> 全枚舉中驗證至 <span class="math inline">5.55\times 10^{-17}</span> 誤差。）。對 <span class="math inline">s(\beta) = |\{y : \beta(y)\ne 0^k\}|</span> 個非零點，<span class="math inline">\mathbb{E}[\mu(y)^{-\beta(y)}] = (1-\epsilon)\cdot 1 + \epsilon \cdot 0 = 1-\epsilon</span>，故式 (23) 為 <span class="math inline">\mathbb{E}_{U,W,h}[\sum_\beta \hat{A}_{\pi_\Gamma(\beta)} \hat{B}_\beta^2 (1-\epsilon)^{s(\beta)}]</span>。由三角不等式，必存在某個 <span class="math inline">\gamma_0^* \ne 0^k</span> 使該期望的絕對值 <span class="math inline">\ge \frac{\delta}{|\Gamma|-1} &gt; \frac{\delta}{|\Gamma|}</span>。</li>
+<li><strong>複數模長修補與解碼下界</strong> <code>[AI 推導, STEP-5]</code>：證明者固定此 <span class="math inline">\gamma_0^*</span>，分別按 <span class="math inline">|\hat{B}_\beta|^2</span> 與 <span class="math inline">|\hat{A}_\alpha|^2</span> 抽取 <span class="math inline">\beta, \alpha</span>，再從支撐集 <span class="math inline">\{y:\beta(y)\ne 0^k\}</span> 與 <span class="math inline">\{x:\alpha(x)\ne 0^k\}</span> 均勻抽樣（由引理 2.44 皆非空）。原文 <code>[P34:L78-L85]</code> 在平方下界中漏寫複數模長符號（誤寫為 <span class="math inline">\hat{A}\hat{B}^2</span>）；補上三角不等式 <span class="math inline">|\sum \hat{A}\hat{B}^2(1-\epsilon)^{s(\beta)}| \le \sum |\hat{A}_{\pi_\Gamma(\beta)}| |\hat{B}_\beta|^2 (1-\epsilon)^{s(\beta)}</span> 並結合引理 5.3（<span class="math inline">(2\epsilon s(\beta))^{-1/2} \ge e^{-\epsilon s(\beta)} \ge (1-\epsilon)^{s(\beta)}</span>），即得 <span class="math inline">\mathrm{Acc}_{2P} \ge 2\epsilon \left(\frac{\delta}{|\Gamma|}\right)^2 = 2\epsilon\delta^2 |\Gamma|^{-2}</span>。</li>
+</ol>
+<h3 id="局限分析-1">局限分析</h3>
+<ol>
+<li><strong>群階數 <span class="math inline">|\Gamma|</span> 必須為獨立於 <span class="math inline">n</span> 的有限常數（或緩慢增長）</strong>：書面證明 <span class="math inline">\mathrm{SW}\Gamma\mathrm{P}(u)</span> 的長度為 <span class="math inline">O(n^{3u} |\Gamma|^{2^{3u}})</span> <code>[原文內容, P21:L28-L31]</code>，其中 <span class="math inline">|\Gamma|</span> 位於雙重指數的底數位置，因此當 <span class="math inline">|\Gamma| = \mathrm{poly}(n)</span> 時無法在多項式時間內枚舉整個證明表（大素數域上的線性方程組需改用低次多項式碼而非長碼）。</li>
+<li><strong>非交換群（Non-Abelian Groups）的斷裂</strong>：證明高度依賴「所有不可約表示皆為一維特徵標」與乘法交換律 <span class="math inline">(fg_1\mu)^{-1} = f^{-1}g_1^{-1}\mu^{-1}</span>。對非交換有限群 <span class="math inline">G</span>，後來 Engebretsen–Holmerin–Russell (2004) 證明 <span class="math inline">\text{Max-E3-Lin-}G</span> 亦具 <span class="math inline">|G|-\epsilon</span>（或正規子群商集）難度，但必須引入高維不可約酉表示與矩陣跡傅立葉分析 <code>[外部知識]</code>。</li>
+</ol>
+<h3 id="研究拓展-1">研究拓展</h3>
+<p>定理 5.9 開創了在非二元字母表 <span class="math inline">[q]</span> 上使用複數／群特徵標分析長碼的標準範式，直接啟發了 Khot 的 <span class="math inline">d</span>-to-1 Games、Dinur–Khot–Kindler–Minzer–Safra 關於高維擴展圖與 Grassmann 圖上的傅立葉分析，以及代數 CSP 的複雜度分類理論 <code>[外部知識]</code>。</p>
+<h2 id="43-定理-6162-與-65含附錄-a-引理-69可滿足實例上-max-e3-sat-的最佳-不可近似性">4.3 定理 6.1、6.2 與 6.5（含附錄 A 引理 6.9）：可滿足實例上 <code>Max-E3-Sat</code> 的最佳 <span class="math inline">8/7-\epsilon</span> 不可近似性</h2>
+<h3 id="直觀理解-2">直觀理解</h3>
+<p><code>[原文內容, P38:L42-P39:L8]</code> 若不要求公式本身可滿足（允許不完全完備性），定理 6.1 只需將每條線性方程 <span class="math inline">xyz=1</span> 代換為 4 條 3-SAT 子句 <span class="math inline">(x\vee y\vee \bar{z}), (x\vee \bar{y}\vee z), (\bar{x}\vee y\vee z), (\bar{x}\vee \bar{y}\vee \bar{z})</span>（滿足方程時 4 條全真，否則恰 3 條為真），立即可由定理 5.4 得到 <span class="math inline">(4-\delta)/(3.5+\delta) \to 8/7</span> 不可近似性。然而，對於保證 100% 可滿足的 <code>3-SAT</code> 公式（<span class="math inline">c=1</span>），能否在多項式時間內滿足超過 <span class="math inline">7/8+\epsilon</span> 比例的子句？ 這是本文技術難度最高的巔峰之作。因為要求 <span class="math inline">c=1</span>，測試絕對不能對滿足賦值拒絕，故雜訊只能「有條件地」施加在已由第一個文字 <span class="math inline">f(y|_U)=-1</span>（真）保底滿足的分枝上；這導致查詢函數 <span class="math inline">(g_1, g_2)</span> 之間產生強烈相關性，並在單一雜訊尺度 <span class="math inline">\epsilon</span> 下出現 <code>CEX-3</code>（式 37）的共振逃逸現象。Håstad 以兩大武器攻克此難關：(1) 附錄 A 的截斷投影調和矩不等式（引理 6.9，<span class="math inline">c=1/35</span>）壓制高頻尾巴；(2) 幾何多尺度隨機測試 <span class="math inline">\mathrm{Test}\ F3S_\delta(u)</span> 將中頻共振區間拆散到 <span class="math inline">t = \lceil\delta^{-1}\rceil</span> 個互不相交的頻率殼層中，用鴿籠原理同時消滅共振峰值。</p>
+<h3 id="嚴格表述-2">嚴格表述</h3>
+<p><code>[原文內容, 定理 6.2 &amp; 定理 6.5, P39:L9-L12, P42:L48-L51]</code> 設 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> <code>[未驗證假設]</code>。對任意常數 <span class="math inline">\epsilon &gt; 0</span>：</p>
+<ol>
+<li>（定理 6.2）區分可滿足（<span class="math inline">1</span>-可滿足）與至多 <span class="math inline">(15/16+\epsilon)</span>-可滿足的 <code>E4-CNF</code> 公式是 <span class="math inline">\mathrm{NP}</span>-hard 的（可滿足 <code>Max-E4-Sat</code> 近似下界 <span class="math inline">16/15 - \epsilon'</span>）。</li>
+<li>（定理 6.5）區分可滿足（<span class="math inline">1</span>-可滿足）與至多 <span class="math inline">(7/8+\epsilon)</span>-可滿足的 <code>E3-CNF</code> 公式是 <span class="math inline">\mathrm{NP}</span>-hard 的（可滿足 <code>Max-E3-Sat</code> 近似下界 <span class="math inline">8/7 - \epsilon'</span>）。</li>
+</ol>
+<h3 id="完整推導-2">完整推導</h3>
+<ol>
+<li><strong>暖身：4-查詢測試 <code>Test 4S(u)</code>（定理 6.2）</strong> <code>[原文內容, P39:L14-P42:L45]</code>：抽均勻獨立 <span class="math inline">f \in \mathcal{F}_U</span> 及 <span class="math inline">g_1, g_2 \in \mathcal{F}_W</span>；對每個 <span class="math inline">y</span>，若 <span class="math inline">g_1(y)=-1</span>（已使析取為真）則均勻隨機設 <span class="math inline">g_3(y) \in \{-1,1\}</span>，若 <span class="math inline">g_1(y)=+1</span> 則設 <span class="math inline">g_3(y) = -f(y|_U)g_2(y)</span>（確保 <span class="math inline">f(y|_U), g_2(y), g_3(y)</span> 不可能全為 <span class="math inline">+1</span>。），故完備性恆為 <span class="math inline">1</span>（引理 6.3）。展開接受指示器 <span class="math inline">1 - \frac{1}{16}(1+A(f))(1+B(g_1))(1+B(g_2))(1+B(g_3))</span>，利用三元組獨立性與 <span class="math inline">(f,g_1,g_2,g_3) \stackrel{d}{=} (-f,g_1,g_2,-g_3)</span> 奇對稱消去大部分交叉項，僅剩 <span class="math inline">-\frac{1}{16}(\mathbb{E}[A(f)B(g_2)B(g_3)] + \mathbb{E}[A(f)B(g_1)B(g_2)B(g_3)])</span>。對四階項展開傅立葉級數，僅當 <span class="math inline">\beta_2=\beta_3=\beta,  \beta_1 \subseteq \beta,  \alpha=\pi_2^U(\beta)</span> 時非零，對子集 <span class="math inline">\beta_1 \subseteq \beta</span> 用 Cauchy–Schwarz（<span class="math inline">\sum_{\beta_1\subseteq\beta}|\hat{B}_{\beta_1}| \le 2^{|\beta|/2}(\sum \hat{B}_{\beta_1}^2)^{1/2} \le 2^{|\beta|/2}</span>）將 <span class="math inline">2^{-|\beta|}</span> 衰減放寬為 <span class="math inline">2^{-|\beta|/2}</span>，直接得到內建指數阻尼 <span class="math inline">\frac{15}{16} + \frac{1}{8}\sum_\beta |\hat{A}_{\pi_2(\beta)}|\hat{B}_\beta^2 2^{-|\beta|/2}</span>，由 <span class="math inline">x^{-1/2} \ge 2^{-x/2}</span>（<span class="math inline">\forall x \in \mathbb{Z}_{\ge 1}</span>）證得 <span class="math inline">\mathrm{Acc}_{2P} \ge \epsilon^2/4</span>（引理 6.4）。</li>
+<li><strong>核心戰場：<span class="math inline">\mathrm{Test}\ 3S_\epsilon(u)</span> 的纖維相關性展開</strong> <code>[原文內容, P42:L55-P44:L19]</code>：在 3 個查詢位元下，抽均勻獨立 <span class="math inline">f \in \mathcal{F}_U, g_1 \in \mathcal{F}_W</span>；對每個 <span class="math inline">y</span>，若 <span class="math inline">f(y|_U)=+1</span>（假）則強制 <span class="math inline">g_2(y) = -g_1(y)</span>（必有一真，保證 <span class="math inline">c=1</span>。），若 <span class="math inline">f(y|_U)=-1</span>（真）則以機率 <span class="math inline">1-\epsilon</span> 設 <span class="math inline">g_2(y)=g_1(y)</span>、機率 <span class="math inline">\epsilon</span> 設 <span class="math inline">g_2(y)=-g_1(y)</span>。展開接受指示器式 (33)–(34) 得接受率為 <span class="math inline">\frac{7}{8} - \frac{1}{8}(\mathbb{E}[B(g_1)B(g_2)] + \mathbb{E}[A(f)B(g_1)B(g_2)])</span>。對任意纖維 <span class="math inline">x \in \pi^U(\beta)</span>（設重數 <span class="math inline">s_x = |\{y\in\beta : y|_U=x\}|</span>），條件於 <span class="math inline">f(x)=+1</span> 時 <span class="math inline">\prod g_1 g_2 = (-1)^{s_x}</span>，條件於 <span class="math inline">f(x)=-1</span> 時 <span class="math inline">\mathbb{E}[\prod g_1 g_2] = (1-2\epsilon)^{s_x}</span>，平均即得式 (36) 乘積因子 <span class="math inline">\frac{1}{2}((-1)^{s_x} + (1-2\epsilon)^{s_x})</span> 與式 (42) 核函數 <span class="math inline">p(\alpha,\beta)</span>。</li>
+<li><strong>凹函數阻尼不等式（式 39）與三區段頻率切分（引理 6.7–6.8）</strong> <code>[原文內容, P45:L4-P46:L42]</code> <code>[AI 推導, STEP-7]</code>：
+<ul>
+<li>先證式 (39)：<span class="math inline">\left|\frac{1}{2}((-1)^s + (1-2\epsilon)^s)\right| \le e^{-\min(1, s\epsilon)/2}</span>。對偶數 <span class="math inline">0 \le s \le \epsilon^{-1}</span>，令 <span class="math inline">x = s\epsilon \in [0,1]</span>，需證 <span class="math inline">\phi(x) = 2e^{-x/2} - (1 + e^{-2x}) \ge 0</span>；因二階導數 <span class="math inline">\phi''(x) = \frac{1}{2}e^{-x/2} - 4e^{-2x} = e^{-2x}(\frac{1}{2}e^{3x/2} - 4) &lt; 0</span>（<span class="math inline">\forall x \in [0,1]</span>，因 <span class="math inline">\frac{1}{2}e^{1.5} \approx 2.24 &lt; 4</span>），<span class="math inline">\phi</span> 在 <span class="math inline">[0,1]</span> 上嚴格凹，且端點 <span class="math inline">\phi(0)=0,  \phi(1)=2e^{-1/2}-1-e^{-2} \approx 0.0777 &gt; 0</span>，得證。連乘所有纖維即得 <span class="math inline">|\prod_x \cdots| \le e^{-S_\epsilon^U(\beta)/2}</span>。</li>
+<li>將式 (36) 按 <span class="math inline">|\beta|</span> 切成三段：
+<ul>
+<li><strong>低頻區 <span class="math inline">|\beta| \le \delta\epsilon^{-1}</span></strong>（引理 6.8）：因摺疊使 <span class="math inline">|\beta|</span> 為奇數，必有某個 <span class="math inline">x</span> 之 <span class="math inline">s_x</span> 為奇數，該因子落在 <span class="math inline">[-s_x\epsilon, 0] \subseteq [-\delta, 0]</span>，其餘因子絕對值 <span class="math inline">\le 1</span>，總和絕對值 <span class="math inline">\le \delta</span>。</li>
+<li><strong>中頻共振區 <span class="math inline">\delta\epsilon^{-1} &lt; |\beta| \le (2\delta^{-2})^{1/c}\epsilon^{-1}</span></strong>：直接以 Parseval 殼層質量 <span class="math inline">\sum \hat{B}_\beta^2</span> 上界估計。</li>
+<li><strong>高頻區 <span class="math inline">|\beta| \ge (2\delta^{-2})^{1/c}\epsilon^{-1}</span></strong>：利用推論 6.10（引理 6.9 + Markov 不等式），除至多 <span class="math inline">\delta</span> 機率的壞 <span class="math inline">U</span> 外皆有 <span class="math inline">S_\epsilon^U(\beta) \ge 2\delta^{-1}</span>，故期望衰減 <span class="math inline">\le \delta + e^{-\delta^{-1}} \le 2\delta</span>。三區合計得 <span class="math inline">|\mathbb{E}[B(g_1)B(g_2)]| \le 3\delta + \text{中頻殼層質量}</span>。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>附錄 A 關鍵引理 6.9 的調和超鞅證明（<span class="math inline">c = 1/35</span>）</strong> <code>[原文內容, P68:L16-P71:L36]</code> <code>[AI 推導, STEP-6 &amp; VER-3]</code>：假設定義 <span class="math inline">W</span> 的 <span class="math inline">u</span> 個子句變數互斥。逐次揭露第 <span class="math inline">j</span> 個子句選入 <span class="math inline">U</span> 的變數 <span class="math inline">k_j \in \{3j-2, 3j-1, 3j\}</span>，將 <span class="math inline">\beta</span> 按前 <span class="math inline">j</span> 個座標值分成群組 <span class="math inline">G_x^j</span>（剩餘未決座標上的相異投影數記為 <span class="math inline">d_x^j</span>，總元素數 <span class="math inline">s_x^j</span>）。定義權重 <span class="math inline">W(G_x^j) = (\epsilon d_x^j)^c</span>（當 <span class="math inline">d_x^j \ge \epsilon^{-1}</span>）或 <span class="math inline">\min(1, \epsilon s_x^j)</span>（當 <span class="math inline">d_x^j &lt; \epsilon^{-1}</span>），並令 <span class="math inline">X_j = \sum_x W(G_x^j),  F_j = X_j^{-1}</span>。則 <span class="math inline">F_0 = (\epsilon|\beta|)^{-c}</span> 且 <span class="math inline">F_u = S_\epsilon^U(\beta)^{-1}</span>。在第 <span class="math inline">j+1</span> 步，<span class="math inline">G_x^j</span> 按新子句 3 個變數的賦值分成 8 類 <span class="math inline">D_{x,\alpha}^j</span>；任何最大的兩類在新選變數上取值相異（「被分離」）的機率至少為 <span class="math inline">1/3</span>。構造耦合下界 <span class="math inline">Y_x^{j+1} \le W(G_{x^+}^{j+1}) + W(G_{x^-}^{j+1})</span>（未分離時取 <span class="math inline">w_x</span>，分離時取 <span class="math inline">w_x + b_x</span>，且 <span class="math inline">0 \le b_x \le w_x</span>）。因 <span class="math inline">z \mapsto 1/z</span> 嚴格凸且遞減，在固定邊界與期望限制 <span class="math inline">\mathbb{E}[Y^{j+1}] \ge \sum w_x + \frac{1}{3}\sum b_x</span> 下，使 <span class="math inline">\mathbb{E}[1/Y^{j+1}]</span> 最大的極端分佈是以機率 <span class="math inline">2/3</span> 取 <span class="math inline">w=\sum w_x</span>、機率 <span class="math inline">1/3</span> 取 <span class="math inline">w+b=\sum(w_x+b_x)</span>（注意原文 <code>[P70:L44]</code> 筆誤將 <span class="math inline">1/z</span> 寫作「concave and decreasing」，實為 convex and decreasing，其端點極值方向則完全正確。）。接著利用精確有理不等式：
+<div class="math inline">\frac{2}{3w} + \frac{1}{3(w+b)} \le \frac{1}{w + b/5} \iff (3w+2b)\left(w+\frac{b}{5}\right) \le 3w(w+b) \iff \frac{2}{5}b^2 \le \frac{2}{5}wb \iff b \le w,</div>
+再檢驗三種情況下當 <span class="math inline">0 &lt; c \le \min\bigl(\frac{1}{35},  \frac{1}{3}\log_2\frac{6}{5}\bigr) = \frac{1}{35}</span> 時皆有 <span class="math inline">w_x + b_x/5 \ge W(G_x^j)</span>，證得超鞅性質 <span class="math inline">\mathbb{E}[F_{j+1}\mid F_j] \le F_j</span>，從而 <span class="math inline">\mathbb{E}_U[1/S_\epsilon^U(\beta)] = \mathbb{E}[F_u] \le F_0 = (\epsilon|\beta|)^{-1/35}</span>。</li>
+<li><strong>三次相關項解碼（引理 6.11）與多尺度平均 <span class="math inline">\mathrm{Test}\ F3S_\delta(u)</span>（引理 6.13）</strong> <code>[原文內容, P47:L1-P49:L46]</code> <code>[AI 推導, STEP-8 &amp; STEP-9]</code>：對三次項 <span class="math inline">\mathbb{E}[A(f)B(g_1)B(g_2)]</span>，利用 <span class="math inline">\sum_{\alpha\subseteq\pi(\beta)} p(\alpha,\beta)^2 = \prod_x (a_x^2 + b_x^2) \le \prod_x \max(|a_x|,|b_x|) \le e^{-S_\epsilon^U(\beta)/2}</span>（因 <span class="math inline">|a_x|+|b_x|=1</span>，式 44–45），截斷 <span class="math inline">|\beta| \ge S := (64\delta^{-2})^{1/c}\epsilon^{-1}</span> 尾巴（誤差 <span class="math inline">\le \delta/2</span>），對 <span class="math inline">|\beta| &lt; S</span> 用 Cauchy–Schwarz 得雙證明者成功機率 <span class="math inline">\ge S^{-1}(\delta/2)^2 = \epsilon(\delta^2/64)^{1+1/c}</span>。最後 <span class="math inline">\mathrm{Test}\ F3S_\delta(u)</span> 令 <span class="math inline">t = \lceil\delta^{-1}\rceil,  \epsilon_1=\delta,  \epsilon_i = \delta^{1+2/c}2^{-1/c}\epsilon_{i-1}</span>，均勻抽 <span class="math inline">j \in [t]</span> 執行 <span class="math inline">\mathrm{Test}\ 3S_{\epsilon_j}(u)</span>。由於半開區間 <span class="math inline">(\delta\epsilon_i^{-1}, (2\delta^{-2})^{1/c}\epsilon_i^{-1}]</span> 兩兩互斥，對 <span class="math inline">j</span> 平均後中頻殼層誤差至多 <span class="math inline">\frac{1}{t}\sum_\beta \hat{B}_\beta^2 \le \frac{1}{t} \le \delta</span>。若總接受率 <span class="math inline">\ge \frac{7+5\delta}{8}</span>，必存在某尺度 <span class="math inline">j \le t</span> 使 <span class="math inline">|\mathbb{E}[A(f)B(g_1)B(g_2)]| \ge \delta</span>，抽出成功機率 <span class="math inline">\ge \epsilon_j (\delta^2/64)^{36} = 2^{-O(\delta^{-1}\log\delta^{-1})}</span> 的雙證明者策略。</li>
+</ol>
+<h3 id="局限分析-2">局限分析</h3>
+<ol>
+<li><strong>雙指數級的平行重複次數損耗</strong>：因 <span class="math inline">\epsilon_t = \delta^{\Theta(t)} = 2^{-\Theta(\delta^{-1}\log\delta^{-1})}</span>，為壓過該下界，平行次數必須取 <span class="math inline">u = \Theta(\delta^{-1}\log\delta^{-1})</span>（而在 <code>Max-E3-Lin-2</code> 與 <code>Max-E4-Sat</code> 中僅需 <span class="math inline">u = \Theta(\log\delta^{-1})</span>）。這直接導致第九節定理 9.3 在準多項式假設下，<code>Max-E3-Sat</code> 只能得到極緩慢的雙重對數次常數間隙 <span class="math inline">\epsilon(N) = \Theta(\frac{\log\log\log N}{\log\log N})</span>，遠弱於 <code>Max-E3-Lin-2</code> 的 <span class="math inline">(\log N)^{-c}</span> <code>[原文內容, P64:L9-L30]</code>。</li>
+<li><strong>隨機子句互斥性條件的省略（<code>IMP-3</code>）</strong>：<code>[P46:L7-L9]</code> 將 <span class="math inline">u</span> 個隨機子句互斥的機率簡寫為 <span class="math inline">1 - O(1)/n</span> 並略去不計；嚴格而言碰撞機率為 <span class="math inline">O(u^2/n)</span>，對常數 <span class="math inline">u</span>（取充分大 <span class="math inline">n</span>）及 <span class="math inline">u = O(\log\log n)</span> 均遠小於 <span class="math inline">\delta</span>，但若試圖將 <span class="math inline">u</span> 推向 <span class="math inline">n^{\Omega(1)}</span>（例如在指數時間假設 ETH 下分析精確亞指數大小），就必須改用預先正則化的互斥子句抽樣器 <code>[AI 推導]</code>。</li>
+</ol>
+<h3 id="研究拓展-2">研究拓展</h3>
+<ul>
+<li><strong>更嚴格謂詞與 <code>OXR</code> 的免費附贈緊緻性（Sec 6.1 定理 6.14–6.18 &amp; Sec 7.1 定理 7.15–7.18）</strong> <code>[原文內容, P50:L2-P51:L16, P59:L34-P62:L10]</code>：因為 <code>Test 3S_eps(u)</code> 對誠實長碼同時避開了 <span class="math inline">(1,1,1)</span> 與 <span class="math inline">(1,-1,-1)</span> 兩種輸出（見 <code>VER-3</code> 驗證），將接受判準收緊為 <span class="math inline">\mathrm{OXR}(x_1,x_2,x_3) = x_1 \vee (x_2 \oplus x_3)</span>（權重 <span class="math inline">3/4</span>）仍保持完全完備性 <span class="math inline">c=1</span>，立即證得可滿足 <code>Max-OXR</code> 的 <span class="math inline">4/3-\epsilon</span> 最佳不可近似性（定理 6.18）；同理，<code>Test 4S(u)</code> 推廣至所有拒絕集包含於 <span class="math inline">\{(1,1,1,1),(1,1,-1,-1),(-1,1,1,-1),(-1,1,-1,1)\}</span> 的 4 元謂詞（定理 6.17），而雙區塊測試則推廣至拒絕全同賦值且蘊含奇偶或對稱配對的單調／一般 4 元謂詞（定理 7.15–7.18），並為定理 5.6 提供了另一套獨立的雙區塊 PCP 證明 <code>[原文內容, P61:L16-L18]</code>。</li>
+<li><strong>單調集合分割（Section 7，<code>E4-Set-Splitting</code> 定理 7.6）</strong>：在無負號的集合分割中無法摺疊，Håstad 改從 <span class="math inline">U</span> 對稱延展出兩個獨立子句集 <span class="math inline">(W_1,h_1)</span> 與 <span class="math inline">(W_2,h_2)</span>（利用定理 2.24 的 5-正則性保證邊際分佈一致，<code>STEP-10</code>），以完全平行的幾何尺度測試 <code>Test FSS_delta(u)</code> 證得可滿足 <code>E4-Set-Splitting</code> 的 <span class="math inline">8/7-\epsilon</span> 緊緻下界（註：<code>[P59:L1]</code> 引理 7.14 題幹將 <span class="math inline">(7+12\delta)/8</span> 誤植為 <span class="math inline">(7+112\delta)/8</span>，見審核紀錄）<code>[原文內容, P55:L1-P59:L32]</code>。</li>
+<li><strong>改進次常數間隙</strong>：後續 Moshkovitz–Raz (2010) 透過代數幾何碼構造雙證明者投影博弈，將 <code>Max-3-Sat</code> 的次常數不可近似間隙推進至多項式對數級 <span class="math inline">o(1)</span>，解決了定理 9.3 的雙對數瓶頸 <code>[外部知識]</code>。</li>
+</ul>
+<h2 id="44-定理-8183定理-514-與第九節圖最佳化-gadget-歸約與次常數間隙擴展">4.4 定理 8.1–8.3、定理 5.14 與第九節：圖最佳化 Gadget 歸約與次常數間隙擴展</h2>
+<h3 id="直觀理解-3">直觀理解</h3>
+<p><code>[原文內容, P35:L8-L27, P62:L11-P63:L3]</code> 當每個約束只含 2 個變數時（如 <code>Max-Cut</code>、<code>Max-di-Cut</code>、<code>Max-E2-Lin-2</code>、<code>Max-E2-Sat</code>、<code>Vertex Cover</code>），Goemans–Williamson <code>[20]</code> 的半正定規劃（SDP）演算法已經證明隨機賦值不再是最佳演算法（例如 <code>Max-Cut</code> 隨機賦值為 <span class="math inline">2</span>-近似，但 GW 達到 <span class="math inline">1/0.878567 \approx 1.1382</span>-近似）。即便如此，Håstad 的 <code>Max-E3-Lin-2</code> (<span class="math inline">2-\epsilon</span>) 緊緻定理仍能作為最強大的歸約引擎：透過局部辅助變數構成的 <span class="math inline">\alpha</span>-Gadget（引理 5.13），將每條 3-XOR 方程無損放大轉譯為二元圖約束，或透過 <span class="math inline">\mathrm{Test}\ L_2^\epsilon(u)</span> 僅使用 <span class="math inline">f=2</span> 個自由位元的特性直接轉化為 FGLSS 衝突圖上的最小點覆蓋問題。</p>
+<h3 id="嚴格表述-3">嚴格表述</h3>
+<p><code>[原文內容, 定理 5.14, 6.16, 8.1-8.3, 9.1-9.3]</code></p>
+<ol>
+<li>在 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> <code>[未驗證假設]</code> 下，對任意常數 <span class="math inline">\epsilon, \delta &gt; 0</span>，下列多項式時間近似下界成立：
+<ul>
+<li><strong>Minimum Vertex Cover</strong>：<span class="math inline">7/6 - \delta</span>（定理 8.1，<code>[P62:L14-L15]</code>）；</li>
+<li><strong>Undirected Max-Cut</strong>：<span class="math inline">17/16 - \epsilon</span>（定理 8.2，<code>[P62:L41-L42]</code>）；</li>
+<li><strong>Directed Max-di-Cut</strong>：<span class="math inline">13/12 - \epsilon</span>（定理 8.3，<code>[P63:L1-L2]</code>；注意第一章總表 <code>[P5:L27]</code> 誤植為 <span class="math inline">12/11-\epsilon</span>）；</li>
+<li><strong>Max-E2-Lin-2</strong>：<span class="math inline">12/11 - \epsilon</span>（定理 5.14，<code>[P35:L41-L42]</code>）；</li>
+<li><strong>Max-E2-Sat</strong>：<span class="math inline">22/21 - \epsilon</span>（定理 6.16，<code>[P50:L19-L20]</code>）。</li>
+</ul>
+</li>
+<li>在 <span class="math inline">\mathrm{NP} \not\subseteq \mathrm{DTIME}(2^{O(\log n \log\log n)})</span> <code>[未驗證假設]</code> 下，存在常數 <span class="math inline">c &gt; 0</span>，使 <code>Max-E3-Lin-2</code> 在 <span class="math inline">\epsilon = (\log N)^{-c}</span> 下不可近似至 <span class="math inline">2-\epsilon</span>（定理 9.1），可滿足 <code>Max-E3-Sat</code> 在 <span class="math inline">\epsilon = \frac{c\log\log\log N}{\log\log N}</span> 下不可區分 <span class="math inline">1</span> 與 <span class="math inline">7/8+\epsilon</span>（定理 9.3，<code>[P63:L12-P64:L30]</code>）。</li>
+</ol>
+<h3 id="完整推導-3">完整推導</h3>
+<ol>
+<li><strong>引理 5.13（<span class="math inline">\alpha</span>-Gadget 傳遞公式）</strong> <code>[原文內容, P35:L24-L39]</code>：設一道 3-XOR 方程 <span class="math inline">xyz=c</span> 被替換為帶權目標約束組，當 <span class="math inline">xyz=c</span> 時調適輔助變數可得最大權重 <span class="math inline">\alpha</span>，當 <span class="math inline">xyz \ne c</span> 時最大可得權重 <span class="math inline">\le \alpha - 1</span>。對總權重為 <span class="math inline">1</span> 的 <code>Max-E3-Lin-2</code> 實例：完備性情況（滿足 <span class="math inline">1-\delta</span> 權重）目標值 <span class="math inline">\ge (1-\delta)\alpha + \delta(\alpha-1) = \alpha - \delta</span>；健全性情況（至多滿足 <span class="math inline">1/2+\delta</span> 權重）目標值 <span class="math inline">\le (\frac{1}{2}+\delta)\alpha + (\frac{1}{2}-\delta)(\alpha-1) = \alpha - \frac{1}{2} + \delta</span>。兩者比值當 <span class="math inline">\delta \to 0^+</span> 時趨近於 <span class="math inline">\frac{\alpha}{\alpha - 1/2} = \frac{2\alpha}{2\alpha - 1}</span>。
+<ul>
+<li>代入 <span class="math inline">\alpha = 6</span>（Sorkin 三維立方體 Gadget，定理 5.14，<code>[P36:L1-L25]</code>：8 個立方體頂點 <span class="math inline">y_\alpha,  \alpha\in\{0,1\}^3</span>，12 條邊方程 <span class="math inline">y_\alpha y_{\alpha'}=-1</span> 與 4 條主對角線方程 <span class="math inline">y_\alpha y_{\alpha''}=+1</span> 各賦權 <span class="math inline">1/2</span>，固定全局共用變數 <span class="math inline">y_{000}=z=+1</span>，令 <span class="math inline">x_1,x_2,x_3</span> 對應 <span class="math inline">y_{011},y_{101},y_{110}</span>；在 <code>VER-4</code> 中全枚舉驗證 <span class="math inline">x_1x_2x_3=+1</span> 時恰滿足 12 條得權重 <span class="math inline">6.0</span>，<span class="math inline">x_1x_2x_3=-1</span> 時至多滿足 10 條得權重 <span class="math inline">5.0</span>），即得 <span class="math inline">\frac{12}{11}-\epsilon</span>。</li>
+<li>代入 <span class="math inline">\alpha = 6.5</span>（TSSW <code>[35]</code> 有向割 Gadget，定理 8.3）得 <span class="math inline">\frac{13}{12}-\epsilon</span>；代入 <span class="math inline">\alpha = 11</span>（定理 6.16）得 <span class="math inline">\frac{22}{21}-\epsilon</span>。</li>
+</ul>
+</li>
+<li><strong>定理 8.2（無向 <code>Max-Cut</code> 的 <span class="math inline">(8,9)</span>-混合 Gadget 精確構造與極值推導）</strong> <code>[原文內容, P62:L41-L45]</code> <code>[AI 推導, STEP-12 &amp; VER-4]</code>：原文僅三句話略述：「對 <span class="math inline">abc=1</span> 用 8-gadget，對 <span class="math inline">abc=-1</span> 用 9-gadget；若第二類方程較多則將所有變數取反。」我們在 <code>STEP-12</code> 與 <code>VER-4</code> 完整還原並窮舉驗證了其代數構造：
+<ul>
+<li>引入一個全局共用參考頂點 <span class="math inline">F</span>（由無向割對稱性，設 <span class="math inline">F</span> 所在側代表 <span class="math inline">+1</span>，對側代表 <span class="math inline">-1</span>；將 <span class="math inline">+1 \mapsto 0, -1 \mapsto 1</span>）：
+<ul>
+<li><strong>9-Gadget（對應 <span class="math inline">abc=-1</span>，即 <span class="math inline">\{a,b,c\}</span> 中有奇數個 <span class="math inline">1</span>）</strong>：僅需 1 個局部輔助頂點 <span class="math inline">w</span>（共 5 頂點 <span class="math inline">\{F,a,b,c,w\}</span>），在 <span class="math inline">\{F,a,b,c\}</span> 間連權重 <span class="math inline">1</span> 的完全圖 <span class="math inline">K_4</span>（6 條邊），並從 <span class="math inline">w</span> 向 <span class="math inline">\{F,a,b,c\}</span> 各連權重 <span class="math inline">2</span> 的星狀邊（4 條邊）。窮舉驗證：當 <span class="math inline">a+b+c \equiv 1 \pmod 2</span> 時最大割恆為 <span class="math inline">9.0</span>，當 <span class="math inline">a+b+c \equiv 0 \pmod 2</span> 時最大割恆為 <span class="math inline">8.0</span>。</li>
+<li><strong>8-Gadget（對應 <span class="math inline">abc=+1</span>，即 <span class="math inline">S_0=\{(0,0,0),(0,1,1),(1,0,1),(1,1,0)\}</span>）</strong>：取 4 個固定頂點 <span class="math inline">\{F,a,b,c\}</span>（在 <span class="math inline">S_0</span> 上為偶權重模式）與 <span class="math inline">S_0</span> 上全部 8 個奇權重模式組成的局部輔助頂點（共 12 頂點），在漢明距離為 <span class="math inline">1</span> 的雙分對（16 條邊）與奇權重集內漢明距離為 <span class="math inline">4</span> 的對蹠配對（4 條邊）共 20 條邊上全賦權重 <span class="math inline">0.5</span>（總邊權 <span class="math inline">10.0</span>）。窮舉全部 <span class="math inline">8 \times 256 = 2{,}048</span> 種割配置驗證：當 <span class="math inline">abc=+1</span> 時最大割恆為 <span class="math inline">8.0</span>，當 <span class="math inline">abc=-1</span> 時最大割恆為 <span class="math inline">7.0</span>。</li>
+</ul>
+</li>
+<li><strong>全局取反與最壞比例極小化</strong>：設 <code>Max-E3-Lin-2</code> 系統中 <span class="math inline">abc=+1</span> 佔權重 <span class="math inline">\gamma</span>，<span class="math inline">abc=-1</span> 佔權重 <span class="math inline">1-\gamma</span>。若 <span class="math inline">\gamma &lt; 1/2</span>，先在線性系統中令所有變數 <span class="math inline">x_i \mapsto -x_i</span>，因 <span class="math inline">(-a)(-b)(-c)=-abc</span>，兩類方程互換，從而保證 <span class="math inline">\gamma \in [1/2, 1]</span>。套用兩組 Gadget 後，完備性割值 <span class="math inline">\ge 8\gamma + 9(1-\gamma) - \delta = 9 - \gamma - \delta</span>，健全性割值 <span class="math inline">\le 8\gamma + 9(1-\gamma) - \frac{1}{2} + \delta = 8.5 - \gamma + \delta</span>。因函數 <span class="math inline">g(\gamma) = \frac{9-\gamma}{8.5-\gamma}</span> 導數 <span class="math inline">g'(\gamma) = \frac{0.5}{(8.5-\gamma)^2} &gt; 0</span> 在 <span class="math inline">[1/2, 1]</span> 上嚴格遞增，最壞情況發生在 <span class="math inline">\gamma = 1/2</span>，比值為 <span class="math inline">\frac{8.5}{8.0} = \mathbf{\frac{17}{16}}</span>。</li>
+</ul>
+</li>
+<li><strong>定理 8.1（<code>Vertex Cover</code> 的 <span class="math inline">f=2</span> 自由位元衝突圖）</strong> <code>[原文內容, P62:L16-L38]</code> <code>[AI 推導, STEP-11]</code>：將 <span class="math inline">\mathrm{Test}\ L_2^\epsilon(u)</span> 的隨機硬幣正規化為 <span class="math inline">2^r</span> 個等權隨機串；對每個隨機串，前 2 個讀取位元可自由取 <span class="math inline">\{-1,1\}^2</span> 共 4 種組合，第 3 個位元由接受條件唯一決定（<span class="math inline">f=2</span> 自由位元），故衝突圖共 <span class="math inline">|V_G| = 4 \cdot 2^r = 2^{r+2}</span> 個頂點。將查詢同一證明位置卻賦予相異值的兩個接受視圖連邊，則最大獨立集 <span class="math inline">\alpha(G) = 2^r \max_\pi \Pr[\text{Accept}]</span>。由點覆蓋與獨立集互補 <span class="math inline">\mathrm{VC}(G) = |V_G| - \alpha(G)</span>：
+<ul>
+<li>可滿足時：<span class="math inline">\mathrm{VC}(G) \le 2^r(4 - (1-\epsilon)) = 2^r(3 + \epsilon)</span>；</li>
+<li>不可滿足時：<span class="math inline">\mathrm{VC}(G) \ge 2^r(4 - (\frac{1}{2}+\epsilon)) = 2^r(\frac{7}{2} - \epsilon)</span>；
+比值為 <span class="math inline">\frac{7/2 - \epsilon}{3 + \epsilon} = \frac{7}{6} - O(\epsilon)</span>。</li>
+</ul>
+</li>
+<li><strong>第九節次常數 <span class="math inline">\epsilon(n)</span> 漸近推導</strong> <code>[原文內容, P63:L12-P64:L30]</code>：在定理 9.1 中取 <span class="math inline">\epsilon = \delta = (\log n)^{-c'}</span> 及 <span class="math inline">u = d c' \log\log n</span>（選 <span class="math inline">d</span> 使 <span class="math inline">c_c^u &lt; 2\delta^3</span>，註：引理 5.2 實給出 <span class="math inline">4\delta^3</span>，取 <span class="math inline">&lt; 2\delta^3</span> 更保守安全）。此時新系統規模 <span class="math inline">N \le m^u 2^{2^{3u}+1} n^u 2^{2^u}</span>；當常數 <span class="math inline">c'</span> 夠小時，<span class="math inline">2^{3u} = (\log n)^{3dc'} = o(\log n)</span>，故 <span class="math inline">2^{2^{3u}} = 2^{o(\log n)} = n^{o(1)}</span>，而 <span class="math inline">m^u = 2^{O(\log n \log\log n)}</span> 主導總規模 <span class="math inline">N = 2^{O(\log n \log\log n)}</span>（滿足 <span class="math inline">\log N = O(\log n \log\log n) = o((\log n)^2)</span>，故 <span class="math inline">(\log N)^{-c'/2} \le (\log n)^{-c'}</span>），任何多項式時間 <span class="math inline">N^{O(1)}</span>-演算法若達到 <span class="math inline">2 - (\log N)^{-c'/2}</span> 近似，即可在 <span class="math inline">2^{O(\log n \log\log n)}</span> 時間判定 <span class="math inline">\mathrm{NP}</span> 語言。</li>
+</ol>
+<h3 id="局限分析-3">局限分析</h3>
+<ol>
+<li><strong>Gadget 歸約的固有損耗（Lossiness of Gadget Reductions）</strong>：由引理 5.13 公式 <span class="math inline">\frac{2\alpha}{2\alpha-1}</span> 可見，因為 <span class="math inline">\alpha \ge 4</span>，Gadget 歸約在二元圖問題上永遠會把 <code>Max-E3-Lin-2</code> 的 <span class="math inline">2</span> 倍間隙壓縮到極接近 <span class="math inline">1</span> 的分數（如 <span class="math inline">17/16 \approx 1.0625</span> 遠低於 GW 的 <span class="math inline">1.1382</span>，<span class="math inline">7/6 \approx 1.1667</span> 遠低於點覆蓋的 <span class="math inline">2</span>）。這是局部组合 Gadget 的線性規劃對偶極限（TSSW <code>[35]</code> 證明 <span class="math inline">\alpha=8, 9</span> 已是 <code>Max-Cut</code> 的絕對最小可能 LP 值），無法靠改良 Gadget 突破。</li>
+<li><strong>第一章總表筆誤（<code>VER-5</code> 審核發現）</strong>：<code>[P5:L27]</code> 總表將 <code>Max-di-Cut</code> 的本文下界誤印為 <span class="math inline">12/11-\epsilon</span>（誤抄自 <code>E2-LIN-2</code> 列），正文中定理 8.3 <code>[P63:L1-L3]</code> 實際證明的數值為 <span class="math inline">13/12-\epsilon</span>。</li>
+</ol>
+<h3 id="研究拓展-3">研究拓展</h3>
+<p>為繞開 Gadget 損耗，後續研究不再從 <code>Max-E3-Lin-2</code> 做局部歸約，而是直接在長碼上設計原生 2-查詢測試（如 Khot–Kindler–Mossel–O'Donnell 2007 的多數決穩定性定理 Majority Is Stablest），在 Unique Games 假設下精確抵達 Goemans–Williamson 常數 <span class="math inline">1/\alpha_{\mathrm{GW}} \approx 1.138217</span>；而在純 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> 假設下，Dinur–Safra (2005) 與 Khot–Minzer–Safra (2017, 2-to-2 Games Theorem) 將 <code>Vertex Cover</code> 推進至 <span class="math inline">1.3606</span> 與 <span class="math inline">\sqrt{2}-\epsilon \approx 1.4142</span> <code>[外部知識]</code>。</p>
+<h2 id="h5-批判性學術評論與研究延伸">H5 批判性學術評論與研究延伸</h2>
+<h2 id="51-方法論歷史地位與核心優勢">5.1 方法論歷史地位與核心優勢</h2>
+<p>Johan Håstad 的這篇論文是計算複雜度史上罕見「既開創全新分析工具、又在同一篇論文內將多個核心問題完全推進至理論終點」的代表作：</p>
+<ul>
+<li><strong>分析典範的簡潔與普適</strong>：在 BGS <code>[9]</code> 長達百餘頁的組合碼字距離分析之後，Håstad 展示只需兩頁半的離散傅立葉展開與 Cauchy–Schwarz 不等式（<code>[P25:L18-P27:L75]</code>），就能把 <code>Max-E3-Lin-2</code> 從 <span class="math inline">8/7</span> 直接推到最佳極限 <span class="math inline">2-\epsilon</span>。</li>
+<li><strong>「緊緻性（Optimality）」的雙重封閉</strong>：對 <code>Max-Ek-Lin-2</code>（<span class="math inline">k\ge 3</span>）、<span class="math inline">\text{Max-E3-Lin-}\Gamma</span>、<code>Max-Ek-Sat</code>（<span class="math inline">k\ge 3</span>，含可滿足實例）與 <code>E4-Set-Splitting</code>（含可滿足實例），其 <span class="math inline">\mathrm{NP}</span>-hardness 下界與最簡單的去隨機化條件期望演算法（定理 2.15）之間僅差任意小常數 <span class="math inline">\epsilon &gt; 0</span>，宣告這些問題的多項式時間近似常數問題在 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span> 下完全終結。</li>
+</ul>
+<h2 id="52-l5-深度審核發現之推理細節缺口與勘誤總結">5.2 L5 深度審核發現之推理細節缺口與勘誤總結</h2>
+<p>經全篇 71 頁逐式核驗與程式驗證，論文整體主定理完全正確堅實，但存在以下值得研究者注意的原文筆誤與省略步驟（均已於本知識庫 <code>STEP-*</code> 與 <code>IMP-*</code> 給出嚴密修補）：</p>
+<ol>
+<li><strong>引理 5.2 <code>[P27:L61-L62]</code> 與引理 5.11 <code>[P34:L78-L85]</code> 遺漏傅立葉係數絕對值／複模長</strong>：如 <code>CEX-2</code> 所示，實係數 <span class="math inline">\hat{A}_{\pi_2^U(\beta)}</span> 可取負值、複係數 <span class="math inline">\hat{A}, \hat{B}</span> 具相位，必須先對式 (13)/(23) 取絕對值三角不等式再套用式 (16)/(24)（且須顯式限制 <span class="math inline">0 &lt; \epsilon \le 1/2</span>）。</li>
+<li><strong>引理 5.8 <code>[P31:L25-L44]</code> 無摺疊 4-XOR 測試遺漏 <span class="math inline">\beta \ne \emptyset</span> 但 <span class="math inline">\pi_2^U(\beta)=\emptyset</span> 的放棄事件</strong>：原文僅排除 <span class="math inline">\beta=\emptyset</span>，漏掉非空偶纖維集亦會導致 <span class="math inline">P_2</span> 抽中空集放棄；幸而 <span class="math inline">\pi_2^U(\beta)=\emptyset \implies |\beta|</span> 為偶數 <span class="math inline">\implies (-1)^{|\beta|+1}=-1 \le 0</span>，可一併在式 (19) 中安全捨去（<code>IMP-2</code>）。</li>
+<li><strong>跨章節印刷筆誤</strong>：
+<ul>
+<li><code>[P5:L27]</code> 總表 <code>Max-di-Cut</code> 下界印為 <code>12/11 - eps</code>，與正文定理 8.3 <code>[P63:L1]</code> 的 <code>13/12 - eps</code>（由 6.5-gadget 導出）不符；</li>
+<li><code>[P16:L36]</code> 對偶群印為 <span class="math inline">\mathbb{Z}_{i_1}\times \mathbb{Z}_{i_1}\dots\mathbb{Z}_{i_k}</span>（應為 <span class="math inline">\mathbb{Z}_{i_1}\times \mathbb{Z}_{i_2}\dots\mathbb{Z}_{i_k}</span>），且 <code>[P19:L3, P33:L22]</code> 將群 <span class="math inline">\Gamma</span> 誤寫為 <span class="math inline">G</span>；</li>
+<li><code>[P42:L41]</code> 引理 6.4 結尾誤印為 <span class="math inline">\hat{A}_{\pi_\Gamma(\beta)} B^2</span>（應為 <span class="math inline">|\hat{A}_{\pi_2^U(\beta)}|\hat{B}_\beta^2</span>）；</li>
+<li><code>[P58:L1-L6]</code> 第七節證明者策略將 <span class="math inline">P_1</span> 與 <span class="math inline">P_2</span> 角色對調；</li>
+<li><code>[P59:L1]</code> 引理 7.14 題幹將 <span class="math inline">(7+12\delta)/8</span> 誤印為 <span class="math inline">(7+112\delta)/8</span>；</li>
+<li><code>[P64:L22]</code> 定理 9.3 證明將 <code>F3S</code><span class="math inline">_\delta(u)</span> 誤印為 <code>FSS</code><span class="math inline">_\delta(u)</span>；</li>
+<li><code>[P70:L44]</code> 附錄 A 將函數 <span class="math inline">f(z)=1/z</span> 的凸性誤寫為「concave and decreasing」（實為 convex and decreasing）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="53-後續二十五年研究延伸脈絡">5.3 後續二十五年研究延伸脈絡</h2>
+<p><code>[外部知識]</code> 本文第十節提出的三大開放方向塑造了 2001 年後的整個近似複雜度版圖：</p>
+<ol>
+<li><strong>Unique Games Conjecture 與二元 CSP 的幾何二分法</strong>：為什麼 <span class="math inline">\pi_2^U(\beta) = \alpha</span> 在雙證明者端是非單射（<span class="math inline">3u</span> 個變數對 <span class="math inline">u</span> 個變數，需處理重數 <span class="math inline">s_x &gt; 1</span> 與附錄 A 的複雜投影分析）？Khot (2002) 提出若外層雙證明者約束本身就是 <span class="math inline">1</span>-對-<span class="math inline">1</span> 雙射置換（Unique Games），則所有繁複的重數障礙瞬間消失，Raghavendra (2008) 進而證明在 UGC 下每一個 CSP 的最佳多項式時間近似演算法都恰好由標準半正定規劃（SDP）給出。</li>
+<li><strong>近似抗性謂詞（Approximation Resistance）分類學</strong>：本文第十節詢問哪些謂詞無法超越隨機賦值（特別是可滿足的 <code>not-two</code> 謂詞）。此問題引發了 Zwick <code>[36]</code>、Austrin–Mossel (2009)（成對獨立分佈充分條件）、Håstad (2014) 與 Chan (2016) 等一系列深刻工作。</li>
+</ol>
+<h1 id="跨層研究分析全局依賴網絡脆弱節點與數理哲學跨域橋接">跨層研究分析：全局依賴網絡、脆弱節點與數理哲學跨域橋接</h1>
+<h2 id="61-全局脆弱推理節點與假設敏感度矩陣">6.1 全局脆弱推理節點與假設敏感度矩陣</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">節點定位</th>
+<th style="text-align:left">核心機制</th>
+<th style="text-align:left">脆弱性根源</th>
+<th style="text-align:left">破壞後果與修補狀態</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>THM-5.4</code> 完備性邊界 <span class="math inline">c=1-\epsilon</span></td>
+<td style="text-align:left">雜訊擾動 <span class="math inline">\mu</span> 阻尼高頻 $</td>
+<td style="text-align:left">\beta</td>
+<td style="text-align:left">$</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>LEM-5.2</code> <code>[P27:L61-L62]</code></td>
+<td style="text-align:left">連接傅立葉偏置 <span class="math inline">\delta</span> 與雙證明者一致性 $</td>
+<td style="text-align:left">\beta</td>
+<td style="text-align:left">^{-1}$</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>LEM-5.8</code> <code>[P31:L25-L44]</code></td>
+<td style="text-align:left">無摺疊 4-XOR 真空項消去</td>
+<td style="text-align:left">僅排除 <span class="math inline">\beta=\emptyset</span>，未處理 <span class="math inline">\beta\ne\emptyset</span> 但 <span class="math inline">\pi_2^U(\beta)=\emptyset</span></td>
+<td style="text-align:left"><strong>隱含缺口（已完全修復）</strong>：於 <code>STEP-4</code> 證明 $\pi_2^U(\beta)=\emptyset \implies</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>LEM-6.9</code> <span class="math inline">\to</span> <code>THM-6.5</code> <code>[P46:L7-L9]</code></td>
+<td style="text-align:left">截斷投影調和矩界 <span class="math inline">c=1/35</span></td>
+<td style="text-align:left">依賴 <span class="math inline">u</span> 個被選子句變數兩兩互斥，忽略 <span class="math inline">O(u^2/n)</span> 碰撞率</td>
+<td style="text-align:left"><strong>漸近無礙但限制參數外推</strong>：對常數 <span class="math inline">u</span> 與 <span class="math inline">u=O(\log\log n)</span> 完全成立，惟不可直接代入 <span class="math inline">u = n^{\Omega(1)}</span></td>
+</tr>
+</tbody>
+</table>
+<h2 id="62-跨學科結構橋接數學最優傳輸-自旋玻璃統計物理-邏輯知識論">6.2 跨學科結構橋接（數學最優傳輸 × 自旋玻璃統計物理 × 邏輯知識論）</h2>
+<h3 id="橋接一數學最佳化幾何最優傳輸optimal-transport局部邊際耦合與-sheraliadams-lasserre-偽期望多胞形-ai-推導-外部知識">橋接一（數學／最佳化幾何）：最優傳輸（Optimal Transport）局部邊際耦合與 Sherali–Adams / Lasserre 偽期望多胞形 <code>[AI 推導 / 外部知識]</code></h3>
+<ul>
+<li><strong>結構映射</strong>：在引理 5.2、6.11 與 7.12 中，經正規化的傅立葉平方權重 <span class="math inline">P_2(\alpha) = \hat{A}_\alpha^2</span>（定義於 <span class="math inline">\mathcal{P}(\{-1,1\}^U)</span>）與 <span class="math inline">P_1(\beta) = \hat{B}_\beta^2</span>（定義於 <span class="math inline">\mathcal{P}(\{-1,1\}^W)</span>）本質上在每個局部變數視窗 <span class="math inline">(U, W)</span> 上誘導出一對局部機率測度（由「先依 Parseval 權重選支撐集、再於集內均勻抽樣」定義）。雙證明者博弈的拒絕機率 <span class="math inline">1 - \Pr[y|_U = x]</span> 正是將局部測度在限制映射 <span class="math inline">\pi^U : \{-1,1\}^W \to \{-1,1\}^U</span> 下進行 Kantorovich 離散耦合（<span class="math inline">W_0</span> 全變差耦合誤差） 的障礙量度。對偶地看，是否存在全局一致的機率分佈以融合所有大小 <span class="math inline">\le 3u</span> 的局部邊際分佈，等價於 Sherali–Adams 線性規劃階層與 Lasserre 平方和（Sum-of-Squares, SoS）半正定階層在第 <span class="math inline">3u</span> 層的局部一致性條件；Håstad 的 <code>Max-E3-Lin-2</code> 與 Grigoriev (2001) / Schoenebeck (2008) 的奇偶校驗偽期望（pseudo-expectation）共同揭示了局部傅立葉低頻一致性與全局可積性之間的深刻對偶鴻溝。</li>
+<li><strong>成立條件</strong>：當目標約束為有限體／交換群線性方程且局部視窗大小 <span class="math inline">3u = O(1)</span> 時，局部邊際多胞形與低階傅立葉矩完全對應；惟注意 SoS 整數間隙是無條件的凸幾何性質（可於隨機 3-XOR 上成立），而 Håstad 的計算不可近似性則必須仰賴最壞情況 PCP 歸約與摺疊編碼。</li>
+<li><strong>推導依據</strong>：直接對應引理 5.2 <code>[P26:L23-L42]</code> 的 Parseval 隨機抽樣耦合構造與多面體鬆弛階層定義。</li>
+<li><strong>不確定性</strong>：低（Low），局部邊際耦合與 SoS/PCP 的對偶關係已在當代近似複雜度理論中獲得嚴格定理支撐。</li>
+</ul>
+<h3 id="橋接二理論物理統計力學受挫--spin-自旋玻璃frustrated--spin-glasses基態能量與重疊間隙性質ogpai-推導-外部知識">橋接二（理論物理／統計力學）：受挫 <span class="math inline">p</span>-Spin 自旋玻璃（Frustrated <span class="math inline">p</span>-Spin Glasses）基態能量與重疊間隙性質（OGP）<code>[AI 推導 / 外部知識]</code></h3>
+<ul>
+<li><strong>結構映射</strong>：在 Håstad 的 <span class="math inline">\sigma_i \in \{-1, +1\}</span> 乘法編碼下，一個含 <span class="math inline">m</span> 條方程 <span class="math inline">\sigma_{i_e}\sigma_{j_e}\sigma_{k_e} = J_e \in \{-1,+1\}</span> 的 <code>Max-E3-Lin-2</code> 實例，其目標函數 <span class="math inline">N(L, \sigma) = \frac{m}{2} - \frac{1}{2} H(\sigma)</span> 與稀釋三體伊辛自旋玻璃（Diluted 3-Spin Ising Spin Glass / XORSAT 模型）的零溫哈密頓量
+<div class="math inline">H(\sigma) = -\sum_{e=(i,j,k)} J_e \sigma_i \sigma_j \sigma_k</div>
+<strong>精確恆等</strong>。物理上：
+<ol>
+<li>當系統無受挫（unfrustrated，即存在規範變換 Mattis gauge <span class="math inline">J_{ijk} = \tau_i \tau_j \tau_k</span>，對應完備性 <span class="math inline">c=1</span>）時，哈密頓量退化為平凡鐵磁體並可由 <span class="math inline">\mathbb{F}_2</span> 線性代數瞬間求得零能基態 <span class="math inline">H(\tau) = -m</span>；</li>
+<li>一旦注入任意小比例 <span class="math inline">\delta &gt; 0</span> 的受挫交互作用（frustrated plaquettes，對應 <span class="math inline">c = 1-\delta</span>），代數規範對稱性瞬間破裂，能量地景碎裂為具指數多個亞穩態與一階複本對稱破缺（1-RSB）／重疊間隙性質（Overlap Gap Property, OGP）的玻璃相。定理 5.4 從最壞情況複雜度證明：任何多項式時間演算法在此受挫相中能保證找到的能量密度上限，完全無法低於無窮高溫順磁隨機態的平均能量 <span class="math inline">H = 0</span>（滿足率 <span class="math inline">1/2</span>）。而 <span class="math inline">k=2</span>（二體 Edwards–Anderson 自旋玻璃，即 <code>Max-E2-Lin-2</code> / <code>Max-Cut</code>）屬於連續複本對稱破缺（Full RSB / Parisi 公式），缺乏 <span class="math inline">p \ge 3</span> 的硬性一階凍結相變，這在物理直覺上精確呼應了為何 <span class="math inline">k=2</span> 可透過連續球面向量鬆弛（Goemans–Williamson SDP）超越順磁隨機態，而 <span class="math inline">k \ge 3</span> 卻嚴格卡死在隨機賦值閾值。</li>
+</ol>
+</li>
+<li><strong>成立條件</strong>：哈密頓量代數恆等式對任意實例無條件成立；但物理文獻中的 1-RSB 與 OGP 定理主要針對隨機超圖系綜（average-case Erdős–Rényi 3-XORSAT，其真實基態滿足率高於 <span class="math inline">1/2</span> 但演算法受阻），而定理 5.4 構造的是使真實健全性基態本身就壓回 <span class="math inline">\frac{1}{2}+\delta</span> 的最壞情況結構化超圖。</li>
+<li><strong>推導依據</strong>：<code>[P6:L23-L26, P28:L5-L7]</code> 乘法布林編碼與 <span class="math inline">p</span>-spin 哈密頓量的精確代數同構，以及 <span class="math inline">p=2</span> vs <span class="math inline">p \ge 3</span> 自旋玻璃相變階數對比。</li>
+<li><strong>不確定性</strong>：低至中（Low–Medium），哈密頓量映射為精確同構；最壞情況 PCP 難度與平均情況隨機自旋玻璃演算法極限之間的精確等價關係仍是當前統計物理與理論電腦科學前沿的活躍課題。</li>
+</ul>
+<h3 id="橋接三數理邏輯與知識論演繹整體論之脆弱性-vs-機率局部抽檢的語義對偶-ai-推導">橋接三（數理邏輯與知識論）：演繹整體論之脆弱性 vs. 機率局部抽檢的語義對偶 <code>[AI 推導]</code></h3>
+<ul>
+<li><strong>結構映射</strong>：傳統 Frege–Hilbert 形式演繹系統呈現極端的「局部脆弱性與全局耦合」：如高斯消去法所示，即使百萬條公理／前提完全相容時可快速推導全局真值，只要混入單一條矛盾方程，歸結與消去程序便能推導出爆炸性矛盾而無法穩健分離「最大相容信念子集」<code>[原文內容, P2:L13-L18]</code>。Håstad 的最佳 3-查詢 PCP 定理揭示了一組深刻的知識論對偶律：
+<ul>
+<li><strong>正向驗證效能極大化</strong>：任何複雜的 <span class="math inline">\mathrm{NP}</span> 數學命題皆可經由高維度概念閉包（長碼評估所有布林謂詞 <span class="math inline">f \in \mathcal{F}_U</span>）重新編碼，使資源受限的審核者僅憑隨機抽查 3 個命題位元的原生邏輯關係（一條 3-XOR 或一條 3-OR），就能以最高統計對比度（<span class="math inline">1-\epsilon</span> 對 <span class="math inline">1/2+\epsilon</span>，或 <span class="math inline">1</span> 對 <span class="math inline">7/8+\epsilon</span>）識破全局偽證；</li>
+<li><strong>反向信念修訂極限化</strong>：作為同一枚硬幣的反面，當面對一套未知真偽的一般命題網絡時，任何多項式時間理性主體若想在不一致的知識庫中執行「最大程度保留真命題的信念修訂（Maximal Consistent Belief Revision）」，其最壞情況保證率絕對無法優於完全放棄推理的盲目擲幣猜測（<span class="math inline">1/2</span> 或 <span class="math inline">7/8</span>）。</li>
+</ul>
+</li>
+<li><strong>成立條件</strong>：適用於計算資源受限於多項式時間圖靈機（且假設 <span class="math inline">\mathrm{P} \ne \mathrm{NP}</span>）、並以一階命題／有限域約束網絡表徵信念系統的認知主體。</li>
+<li><strong>推導依據</strong>：PCP 抽樣驗證（定義 2.19）與近似最佳化（定義 2.12、定理 5.4、定理 6.5）之間的雙向歸約等價性。</li>
+<li><strong>不確定性</strong>：概念詮釋級（Conceptual / Interpretive），數學內核完全嚴密，哲學外推範圍取決於將人類或 AI 認知主體建模為多項式時間演算法的知識論前提。</li>
+</ul>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-d8f24b84">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a><a class="find" href="../../index.html#n=n-d8f24b84">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · B_學習理論、推理與表示幾何</span>
@@ -191,6 +193,21 @@ Lu et al.（DeepONet, 2019）則用分支網路（Branch Net 編碼輸入函數�
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Xhaeyorin - The Four-Point Obstruction to Continuous 3D Rotation Canonicalization and Linear-Size Frames for Unordered Point Clouds</strong>，Maciej Nowicki, Artificial Hyperintelligence, Eve, wife of Maciej Nowicki
+<ul>
+<li>重點：證明中心化三維無序點雲存在全域連續單一旋轉正規化的充要條件為 <span class="math inline">n \le 3</span>，並從四點起構造不可縮 <span class="math inline">SO(3)</span> 迴路拓撲阻礙（最小最壞位移為 Frobenius 範數的 22.0062%）。改以有向凸包邊朝向搭配邊長乘外二面角的連續加權分佈取代單一姿態，只需至多 <span class="math inline">6n-12</span> 個朝向即可將向量與張量骨幹轉為旋轉與置換等變預測器。</li>
+<li>連結：<a href="zotero://select/library/items/KPEBRJCJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.24326772" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Symmetry Fingerprinting with Geometric Learnable Invariants Transformers</strong>，Bart Smets, Gijs Bellaard, Pieter Wils
+<ul>
+<li>重點：提出軟等變架構 Geometric Learnable Invariants Transformers，讓網路從預選對稱群集合中自動收斂出訓練資料實際滿足的對稱等變性，避免硬性幾何偏置限制效能或依賴大量資料增強。訓練後可提取對稱指紋（symmetry fingerprint），定量檢視各對稱群在影像分類任務中的參與程度。</li>
+<li>連結：<a href="zotero://select/library/items/MPBQCRKW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20150" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Equivariant Modeling with Polynomial Features via Minimal Homogeneous Generators</strong>，Michael Liaofan Liu, Joe Kileel：為有限維半單實群表示之間的等變函數建立統一的多項式建模框架，並提供開源 Python 套件。它以不變代數與協變模的極小齊次生成元為基底，用顯式同型分解與 Clebsch–Gordan 分解加速計算，只需很少的可訓練參數就能做高精度的科學預測。（<a href="zotero://select/library/items/SJNZVUFJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24896" rel="noopener">官方連結</a>）</li>
@@ -221,6 +238,9 @@ Lu et al.（DeepONet, 2019）則用分支網路（Branch Net 編碼輸入函數�
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

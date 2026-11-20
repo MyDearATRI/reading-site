@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-f944d2d7">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-f944d2d7">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
@@ -206,6 +208,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜OpticalRAG: Pixel-Space Compression for Token-Efficient Retrieval-Augmented Generation</strong>，Senhao Liu et al.
+<ul>
+<li>重點：將文件渲染為頁面影像並以凍結視覺編碼器編碼，透過共享投影層的編碼器橋接檢索（無需對比訓練）與輕量交叉注意力查詢驅動蒸餾，把檢索到的視覺詞元壓縮至最少 16 個注入詞元送入 LLM。在 LongBench-v2、BAMBOO 與 LooGLE-v2 均取得最佳壓縮感知準確率（CAP），並使閉卷 Qwen2.5-7B-Instruct 在 LongBench-v2 提升 5.17 分。</li>
+<li>連結：<a href="zotero://select/library/items/ZQ7C59ZK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.13675" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜PCG-RAG: Progressive Compositional Grounding for Retrieval-Augmented Generation in Complex Web Question Answering</strong>，Linyao Zheng et al.
+<ul>
+<li>重點：提出基於漸進組合接地（PCG）的網頁問答 RAG 框架，沿子問題有向無環圖（DAG）分離候選引導檢索與證據作答，在推進依賴檢索時保留未解識別條件供原始問題核對，再整合識別與關係段落生成答案。在 BrowseComp-Plus 與 WebWalkerQA 分別超越領先基線 5.43 與 5.15 個百分點。</li>
+<li>連結：<a href="zotero://select/library/items/2B6ECS8V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.11113" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜LSP-RAG: Latent Scoring Perspectives for Knowledge Graph Retrieval-Augmented Generation</strong>，Haochen Liu et al.：提出知識圖譜檢索增強生成框架 LSP-RAG。它把視角專屬軟提示，和隨推理跳數演化的脈絡軟提示耦合起來，自適應地聚合多視角的三元組評分。輕量級語言模型因此在多跳 KGQA 基準上，勝過靠大型商用 LLM 引導的高成本檢索系統。（<a href="zotero://select/library/items/B4I2D8KI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25229" rel="noopener">官方連結</a>）</li>
@@ -246,6 +263,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

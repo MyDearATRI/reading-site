@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_07｜Logical Neural Networks · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-457f96ff">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-457f96ff">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-logical-neural-networks2020">🏆 Logical Neural Networks（2020）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>
+細分子方向：<span class="wl-missing">05D_程式合成、神經符號推理與因果表示可識別性</span> · <span class="wl-missing">42D_實值加權邏輯神經網路與全向真值區間推理</span>
+跨領域橋接：<span class="wl-missing">橋接02_連續時間動力學、狀態空間與液態神經網路</span> · <span class="wl-missing">橋接04_神經符號實值邏輯、自動形式化與信念修正</span>
+作者與出處：Ryan Riegel, Alexander Gray, Francois Luus, Naweed Khan, Ndivhuwo Makondo, Ismail Yunus Akhalwaya et al.（2020，<em>arXiv / IBM Research Neuro-Symbolic AI</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/MSX7CB5B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.13155" rel="noopener">官方連結</a></p>
+</aside>
+<blockquote>
+<p><strong>論文資訊</strong>：Ryan Riegel, Alexander Gray, Francois Luus, Naweed Khan, Ndivhuwo Makondo, Ismail Yunus Akhalwaya, Haifeng Qian, Ronald Fagin, Francisco Barahona, Udit Sharma, Shajith Ikbal, Hima Karanam, Sumit Neelam, Ankita Likhyani, Santosh Srivastava (IBM Research, 2020)<br />
+<strong>標準識別碼</strong>：<code>arxiv:2006.13155</code> · 篇幅：正文 10 頁 + 附錄 A–H 共 48 頁（含完整 LaTeX 原始碼交叉核驗）<br />
+<strong>知識來源標記規範</strong>：<code>[原文內容]</code>（附精確頁行定位）、<code>[AI 推導]</code>（補全省略步驟、可行域充要條件、正反例與勘誤證明）、<code>[外部知識]</code>（領域背景定理與文獻對照）、<code>[未驗證假設]</code>（未證猜想或啟發式近似）</p>
+</blockquote>
+<h2 id="h0-多層次研究摘要">H0 多層次研究摘要</h2>
+<h3 id="00-關鍵術語辨析兩種同縮寫lnn之結構區隔-外部知識">0.0 關鍵術語辨析：兩種同縮寫「LNN」之結構區隔 <code>[外部知識]</code></h3>
+<p>在本研究庫 <code>42_LNN液態與邏輯神經網路</code> 領域中，縮寫 LNN 同時對應兩類數學本質截然不同的神經架構，閱讀時必須嚴格區分：</p>
+<ol>
+<li><strong>邏輯神經網路（Logical Neural Networks, Riegel et al., IBM Research, 2020，本文）</strong>：建立神經元與加權實值邏輯語法樹（Syntax Tree）之間的一對一同構映射，每個神經元輸出真值上下界區間 <span class="math inline">[L_v, U_v] \subseteq [0, 1]^2</span>，透過離散步單調上下行傳播（Upward–Downward Pass）執行全向邏輯演繹，並以最小化邏輯矛盾損失 <span class="math inline">\sum_k \max\{0, L_k - U_k\}</span> 進行端到端可微參數學習。</li>
+<li><strong>液態神經網路（Liquid Neural Networks / Liquid Time-Constant Networks, Hasani et al., MIT CSAIL, 2020/2021）</strong>：受線蟲神經系統啟發之連續時間非自治常微分方程（ODE）網路 <span class="math inline">\frac{d\mathbf{x}}{dt} = -\left[\frac{1}{\boldsymbol{\tau}} + f(\mathbf{x}, \mathbf{I}, t; \theta)\right]\mathbf{x}(t) + \mathbf{A} \odot f(\mathbf{x}, \mathbf{I}, t; \theta)</span>，核心在於狀態依賴的動態有效時間常數與連續時間因果表徵（詳見末章 <code>BRIDGE-3</code> 之動力學橋接分析）。</li>
+</ol>
+<h3 id="01-一句話核心命題">0.1 一句話核心命題</h3>
+<p><code>[原文內容, Sec 1–2, P1:L33–P2:L43]</code> 邏輯神經網路（LNN）將邏輯公式語法樹中的每個命題／謂詞與邏輯連接詞直接實例化為受約束的可微神經元，並在每個節點維護開放世界真值區間 <span class="math inline">[L, U]</span>，藉此在單一架構中同時實現逐神經元符號可解釋性、有限步單調收斂的全向演繹推理（含機率界可靠性），以及基於矛盾損失最小化的抗不一致知識庫學習。</p>
+<h3 id="02-執行摘要executive-summary">0.2 執行摘要（Executive Summary）</h3>
+<p>傳統神經網路擅長從含噪數據進行梯度學習，但內部表徵高度糾纏（entangled），缺乏精確的多步邏輯演繹與規則可控性；反之，古典符號定理證明器與描述邏輯推理機雖具備精確演繹能力，卻在面對知識不完整（Incomplete Knowledge）與本體不一致／雜訊規則（Inconsistent Knowledge）時極易崩潰（原理爆炸 <em>Ex Falso Quodlibet</em>），而馬可夫邏輯網路（MLN）或機率軟邏輯（PSL）等圖模型則將子句視為原子勢函數、依賴封閉世界假設（Closed-World Assumption）或昂貴的 MCMC 採樣 <code>[原文內容, Sec 1, P1:L57–P2:L25]</code>。</p>
+<p>Riegel 等人提出的 LNN 透過四項核心設計打破上述對立：</p>
+<ol>
+<li><strong>語法樹一對一神經同構与加權實值邏輯</strong> <code>[原文內容, Sec 3, P3:L34–P4:L65; App B, P14–16]</code>：每個邏輯連接詞（<span class="math inline">\neg, \land, \lor, \to</span>）對應一個權重受約束（或採用動態定製激活函數）的神經元，一階量詞（<span class="math inline">\forall, \exists</span>）對應在有限接地表（grounding tables）上執行 <span class="math inline">\min / \max</span> 聚合的無參數節點 <code>[原文內容, App A, P11–13]</code>。</li>
+<li><strong>開放世界真值上下界 <span class="math inline">[L_v, U_v]</span> 與四態語義</strong> <code>[原文內容, Sec 3, Table 1, P3:L45–L59; App F.2, Table 3, P27]</code>：以真值閾值 <span class="math inline">\frac{1}{2} &lt; \alpha \le 1</span> 區分古典真 <span class="math inline">[\alpha, 1]</span>、古典假 <span class="math inline">[0, 1-\alpha]</span>、開放世界未知（如 <span class="math inline">[0, 1]</span>）以及顯式邏輯矛盾 <span class="math inline">L_v &gt; U_v</span>。</li>
+<li><strong>全向雙向推論演算法（Upward–Downward Algorithm）與理論保證</strong> <code>[原文內容, Sec 4–5, P5–7; App C–D, P16–25]</code>：上行傳播依子公式求母公式真值界，下行傳播利用連接詞之伴隨殘差／函數逆（對應 <em>Modus Ponens</em>、<em>Modus Tollens</em>、選言／聯言三段論）反向收緊子公式真值界。Theorem 1 證明單調連接詞下命題 LNN 必在有限步內 <span class="math inline">\epsilon</span>-收斂；Theorem 2 證明採用非對稱 Fréchet–Boole 更新規則時，收斂區間必然包絡所有滿足初始理論 <span class="math inline">\Gamma_0</span> 之古典機率測度的真實機率上下確界。</li>
+<li><strong>矛盾損失驅動之可微學習與梯度透明截斷</strong> <code>[原文內容, Sec 6, P7; App E–G, P25–42]</code>：引入全網矛盾懲罰項 <span class="math inline">\sum_{k \in N} \max\{0, L_k - U_k\}</span>，並提供兩套保持邏輯門語義的最佳化路徑，（a）帶鬆弛互補懲罰 <span class="math inline">\mathbf{s}_k \cdot \mathbf{w}_k</span> 的線性約束規劃與直通梯度截斷（Gradient-Transparent Clamping），或（b）依權重動態平移四個控制節點的無約束定製激活函數（Tailored Activation Function） <span class="math inline">f_{\mathbf{w}}</span>。</li>
+</ol>
+<h3 id="03-技術全景深讀摘要與審核核心發現">0.3 技術全景深讀摘要與審核核心發現</h3>
+<p>經全篇 48 頁正文與附錄 LaTeX 原始碼逐行審核及 SymPy／NumPy 符號與數值計算驗證（<code>VER-1</code> 至 <code>VER-6</code>），本報告確認論文主體數學架構嚴謹且極具原創性，同時揭示四項關鍵理論邊界與原文勘誤 <code>[AI 推導]</code>：</p>
+<ul>
+<li><strong>古典性線性約束之精確非空充要條件（<code>PRP-2</code>）</strong>：正文第 6 節僅寫出 <span class="math inline">\frac{1}{2} &lt; \alpha \le 1</span>，未指出當無鬆弛變數（<span class="math inline">s_{ik}=0</span>）且元數 <span class="math inline">n \ge 2</span> 時，線性不等式組 Eqs. (6)–(7) / Eqs. (86)–(89) 有非負解當且僅當 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span>（或 <span class="math inline">\alpha = 1</span>）；若 <span class="math inline">\frac{1}{2} &lt; \alpha \le \frac{n}{n+1}</span>，可行多面體嚴格為空集。同時，附錄 F.3 <code>[P28:L60]</code> 建議將全局 <span class="math inline">\alpha</span> 初始化為 <span class="math inline">\frac{1}{2}</span>，在 <span class="math inline">n \ge 2</span> 等權重下會導致 <span class="math inline">x_{\mathrm{F}} &gt; x_{\mathrm{T}}</span> 而破壞激活函數單調性。</li>
+<li><strong>有環命題圖之多項式時間 LP 鬆弛不完備性（<code>CEX-1</code>–<code>CEX-3</code>）</strong>：Theorem 2 僅給出單向包含不等式 <span class="math inline">L_\sigma \le \inf p(S_\sigma)</span> 與 <span class="math inline">U_\sigma \ge \sup p(S_\sigma)</span>。在含共享原子環路的命題公式（如排中律菱形 <span class="math inline">\{P \to R, \neg P \to R\}</span>、分案推理 <span class="math inline">\{P \lor Q, P \to R, Q \to R\}</span>、以及不可滿足 2-CNF 四子句環）上，LNN 雙向傳播等價於無分案（branching-free）的區間弧一致性／第一層 Sherali–Adams 線性規劃鬆弛，恆停留在 <span class="math inline">[L_R, U_R] = [0, 1]</span> 且無法偵測該類全局不可滿足性，這正確保證了多項式時間的單輪傳播不會違背 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span>。正文第 7 節在 LUBM 上取得 100% 召回率，實質依賴於 LUBM 本體屬於確定性 Horn／OWL-Horst 規則（無析取分案環）。</li>
+<li><strong>原文三處具體代數／排版錯誤之精確勘誤（<code>ATOM-2</code>, <code>ATOM-3</code>, <code>EQN-6</code>）</strong>：（1）附錄 B.1 Eq. (9) 二元加權 Łukasiewicz 合取誤將 <span class="math inline">-w_2(1-x_2)</span> 印為 <span class="math inline">+w_2(1-x_2)</span>；（2）附錄 F.6／F.7 中 <span class="math inline">m_{\mathrm{T}}</span> 分母誤印為 <span class="math inline">x_{\max} - y_{\mathrm{T}}</span>（應為 <span class="math inline">x_{\max} - x_{\mathrm{T}}</span>，惟其化簡結果 <span class="math inline">\frac{1}{\sum_i w_i}</span> 對合取門確實正確）；（3）附錄 G.3.3 Eq. (119) 對反向傳播公式 Eq. (112) 求 <span class="math inline">\frac{\partial x_j}{\partial w_j}</span> 時，同時出現 <span class="math inline">-\frac{\beta}{w_j^2}</span> 符號反轉與商法則／乘積法則誤寫為乘積 <span class="math inline">-\frac{z}{w_j^2}\frac{\partial z}{\partial w_j}</span> 的雙重微分錯誤。</li>
+</ul>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<h3 id="11-神經符號整合neuro-symbolic-ai的三難困境">1.1 神經符號整合（Neuro-Symbolic AI）的三難困境</h3>
+<p>在 Riegel et al. (2020) 之前，結合統計學習與符號邏輯的主流路線各自面臨結構性瓶頸 <code>[原文內容, Sec 1, P1:L45–P2:L25]</code>：</p>
+<ul>
+<li><strong>路線 A：規則轉譯型早期連線主義（如 KBANN [22]、Pinkas [14]、CILP [9]）</strong>：雖能將命題規則編譯為初始神經網路權重，但經無約束反向傳播訓練後，隱藏層神經元的決策超平面發生漂移，不再對應原本的 AND／OR 邏輯門，喪失事後符號可讀性。</li>
+<li><strong>路線 B：馬可夫隨機場與統計關係學習（如 MLN [15]、PSL [1]、TensorLog [3]）</strong>：將每條一階子句視為單一純量權重的團勢函數（clique potential），遮蔽了子句內部的語法樹結構；且普遍依賴封閉世界假設（未觀測事實預設為假）或點估計軟真值，無法區分「高確信度中立真值 <span class="math inline">0.5</span>」與「完全無資訊之未知 <span class="math inline">[0, 1]</span>」。</li>
+<li><strong>路線 C：向量嵌入型可微證明器（如 LTN [19]、NTP [17]、Neural Logic Machines [5]）</strong>：將常元與謂詞映射為高維稠密向量，雖可微但屬「類邏輯（logic-like）」近似，難以保證古典演繹的嚴格可靠性（例如在 Smokers &amp; Friends 實驗中，LTN 無法完整推出朋友關係對稱性的邏輯後果 <code>[原文內容, Sec 7, P8:L89–L92]</code>），或僅限於 Horn 子句向後鏈結。</li>
+</ul>
+<h3 id="12-先修知識與全文論證依賴圖譜">1.2 先修知識與全文論證依賴圖譜</h3>
+<p>理解並審核本文所需的數學工具橫跨四個基礎分支：（1）模糊數理邏輯與伴隨殘差格（Hájek t-norm 理論）；（2）實分析與序理論（單調算子與緊區間 Cauchy 收斂）；（3）機率邏輯與多面體線性規劃（Nilsson / Boole–Fréchet 機率界與互補鬆弛規劃）；（4）一階關聯代數與自動微分（Relational Joins 與 Straight-Through Clamping）。</p>
+<pre class="mermaid">flowchart TD
+    subgraph PREREQ[&quot;先修數學基礎 (Prerequisites)&quot;]
+        P1[&quot;伴隨殘差 t-模模糊邏輯 (Lukasiewicz / Godel / Residuum)&quot;]
+        P2[&quot;實分析與序格理論 (緊區間單調序列 / Tarski 不動點)&quot;]
+        P3[&quot;Frechet-Boole 機率邏輯與多面體 LP (Boole 聯集界 / Fourier-Motzkin)&quot;]
+        P4[&quot;關聯代數與自動微分 (Natural Join / Stop-Gradient STE)&quot;]
+    end
+
+    subgraph MODEL[&quot;LNN 模型與表徵層 (Sec 3, App A, B)&quot;]
+        D1[&quot;DEF-1 語法樹 1-to-1 神經圖同構 (命題節點 + 連接詞節點)&quot;]
+        D2[&quot;DEF-2 開放世界真值界 [L, U] (True / False / Unknown / Contradiction)&quot;]
+        D3[&quot;DEF-3 加權非線性與 Lukasiewicz 連接詞 (Eqs. 1-3, 10-14)&quot;]
+        PRP1[&quot;PRP-1 加權 Godel 弱合取恆等式 (App B.2, Eqs. 15-18)&quot;]
+        D6[&quot;DEF-6 無函數一階接地表與量詞 min/max (App A.1-A.6)&quot;]
+    end
+
+    subgraph INFER[&quot;全向演繹與語義可靠性層 (Sec 4-5, App C, D)&quot;]
+        D4[&quot;DEF-4 雙向 Upward-Downward 區間傳播 (Algs. 1-6, Eqs. 4-5)&quot;]
+        ASM1[&quot;ASM-1 有限接地宇宙假設&quot;]
+        THM1[&quot;THM-1 命題 LNN 有限步 epsilon-收斂定理 (Sec 4.3, App C.1)&quot;]
+        D5[&quot;DEF-5 機率模型多面體 P_Gamma&quot;]
+        LEM1[&quot;LEM-1 18 式單步更新模型集不變性 (App D, Eqs. 25-84)&quot;]
+        THM2[&quot;THM-2 機率真值界可靠性定理 (Sec 5, App D, Eq. 85)&quot;]
+        COR1[&quot;COR-1 矛盾區間 L &gt; U 證偽機率一致性 (AI 推導推論)&quot;]
+        CEX[&quot;CEX-1..3 有環圖 LP 鬆弛不完備性反例 (排中律菱形 / 2-CNF 環)&quot;]
+    end
+
+    subgraph LEARN[&quot;可微約束學習與定製激活層 (Sec 6-7, App E-H)&quot;]
+        PRP2[&quot;PRP-2 古典性多面體非空充要條件 alpha &gt; n/(n+1) (Eqs. 6-7, 86-89)&quot;]
+        EQN5[&quot;EQN-5 矛盾損失 + 鬆弛互補優化 sum max(0, L-U) + s*w (App E.3)&quot;]
+        D7[&quot;DEF-7 動態四節點定製激活函數 f_w (Sec 6.1, App F)&quot;]
+        PRP3[&quot;PRP-3 零權重自動退化為恆等映射 (App F.7, Eq. 97)&quot;]
+        D8[&quot;DEF-8 梯度透明截斷與梯度替代 (App G, Eqs. 100-121)&quot;]
+        CONC4[&quot;CONC-4 實證驗證 (Smokers / LUBM 100% Recall / TPTP)&quot;]
+    end
+
+    P1 --&gt; D3
+    P1 --&gt; PRP1
+    P2 --&gt; D4
+    P2 --&gt; THM1
+    P3 --&gt; D5
+    P3 --&gt; PRP2
+    P4 --&gt; D6
+    P4 --&gt; D8
+
+    D1 --&gt; D4
+    D2 --&gt; D4
+    D3 --&gt; D4
+    D3 --&gt; PRP1
+    D1 --&gt; D6
+    D4 --&gt; D6
+    D1 --&gt; ASM1
+    D3 --&gt; THM1
+    D4 --&gt; THM1
+    ASM1 --&gt; THM1
+
+    D5 --&gt; LEM1
+    LEM1 --&gt; THM2
+    THM2 --&gt; COR1
+    D2 --&gt; COR1
+    THM2 -.-&gt;|&quot;有環無分案時不等式嚴格鬆弛&quot;| CEX
+
+    D2 --&gt; PRP2
+    D3 --&gt; PRP2
+    PRP2 --&gt; EQN5
+    D7 --&gt; PRP3
+    EQN5 --&gt; CONC4
+    PRP3 --&gt; CONC4
+    D8 --&gt; CONC4
+    D6 --&gt; CONC4
+</pre>
+<h3 id="13-分層閱讀路線建議">1.3 分層閱讀路線建議</h3>
+<ol>
+<li><strong>快速掌握核心機制（約 45 分鐘）</strong>：閱讀正文第 2–4 節（語法樹神經映射、真值區間 <span class="math inline">[L, U]</span>、雙向推論 Algorithms 1–3）<span class="math inline">\to</span> 第 6 節（矛盾損失與定製激活函數 Eq. 8）<span class="math inline">\to</span> 本導讀 H3 正例一與反例一。</li>
+<li><strong>形式化理論與機率語義深讀（約 90 分鐘）</strong>：精讀正文第 5 節與附錄 D（<code>LEM-1</code> 之 18 種連接詞鄰居更新不變性與 <code>THM-2</code> 完整證明）、附錄 B（加權 Łukasiewicz 與加權 Gödel 殘差代數）、附錄 C.1（<code>THM-1</code> 收斂證明）<span class="math inline">\to</span> 對照本導讀 H4 四大核心定理五層註釋。</li>
+<li><strong>神經符號系統實作與最佳化工程（約 90 分鐘）</strong>：研讀附錄 A（一階關係表 Join 與量詞廣播）、附錄 E–G（鬆弛變數互補懲罰、定製激活函數之「無中生有學習 Learning from nothing」修正 Eqs. 98–99、直通梯度截斷 Eqs. 100–121）及附錄 H 實驗細節 <span class="math inline">\to</span> 對照本導讀 H5 批判評論與跨層橋接分析。</li>
+</ol>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<h3 id="21-全局核心符號與多義重載警示字典">2.1 全局核心符號與多義重載警示字典</h3>
+<p>下表整合全篇 48 頁之核心數學對象，特別標出跨章節閱讀最易混淆的四處符號重載與慣例切換 <code>[原文內容 + AI 推導]</code>：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號</th>
+<th style="text-align:left">數學型別與定義域</th>
+<th style="text-align:left">語義定義與角色</th>
+<th style="text-align:left">原文定位與重載／慣例切換警示</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">[L_z, U_z]</span></td>
+<td style="text-align:left"><span class="math inline">[0, 1]^2</span></td>
+<td style="text-align:left">節點 <span class="math inline">z</span>（命題、子公式或一階接地元組）之真值／機率下界與上界</td>
+<td style="text-align:left"><code>[Sec 3–4, P3:L38, P5:L36]</code>；第 5 節／附錄 D 寫作 <span class="math inline">(L(v), U(v))</span>；表 2、7、8 以百分比 <span class="math inline">[0, 100]</span> 呈現</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\alpha</span></td>
+<td style="text-align:left"><span class="math inline">(\frac{1}{2}, 1]</span>（<span class="math inline">n</span> 元無鬆弛古典門需 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span>）</td>
+<td style="text-align:left">古典真值判定閾值：<span class="math inline">[\alpha, 1]</span> 為古典真，<span class="math inline">[0, 1-\alpha]</span> 為古典假，<span class="math inline">(1-\alpha, \alpha)</span> 為模糊過渡區</td>
+<td style="text-align:left"><code>[Sec 3, P3:L40; App F.3, P28:L45]</code>；正文 P3 文字寫嚴格不等號 <span class="math inline">&gt;\alpha, &lt;1-\alpha</span>，但 Table 1 用閉區間，Table 3 將 False 下界寫為半開 <span class="math inline">[0, 1-\alpha)</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\beta, \beta_k, \beta_C</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}_{\ge 0}</span></td>
+<td style="text-align:left">連接詞神經元偏置，控制滿足門檻難易度</td>
+<td style="text-align:left"><code>[Sec 3.2, P4:L29; App B.2, P15; App F.3, P29:L11]</code>；前置上標 <span class="math inline">{}^\beta(\cdot)</span> 為連接詞偏置，加權 Gödel 為逐輸入 <span class="math inline">\beta_i</span>，定製激活定義規範偏置 <span class="math inline">\beta_C = \sum_{i \in I} w_i</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">w_i, w_{ik}, w_{\max}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}_{\ge 0}</span></td>
+<td style="text-align:left">輸入邊 <span class="math inline">i</span> 之絕對重要性權重；<span class="math inline">w_{\max} = \max_{i \in I} w_i</span></td>
+<td style="text-align:left"><code>[Sec 3.2, P4:L29; Sec 6.1, P7:L58]</code>；上標寫法 <span class="math inline">x_i^{\otimes w_i}, x_i^{\oplus w_i}</span> 源於整數權重 <span class="math inline">k</span> 等價於無權重 Łukasiewicz 運算重複 <span class="math inline">k</span> 次</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">f, f_{\mathbf{w}}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R} \to [0, 1]</span></td>
+<td style="text-align:left">單調非減截斷／激活函數；標準 Łukasiewicz 取 <span class="math inline">f(u) = \max\{0, \min\{1, u\}\}</span></td>
+<td style="text-align:left"><code>[Sec 3.2, P4:L29; Sec 6.1, P7:L48; App F.6, P32]</code>；第 3.2 節要求靜態對稱 <span class="math inline">f(1-u)=1-f(u)</span>，而定製激活 <span class="math inline">f_{\mathbf{w}}</span> 隨權重動態調整控制節點</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">(x_{\mathrm{F}}, x_{\mathrm{T}})</span></td>
+<td style="text-align:left"><span class="math inline">[x_{\min}, x_{\max}]^2</span></td>
+<td style="text-align:left">定製激活函數之「假，模糊」與「模糊，真」定義域動態分界點</td>
+<td style="text-align:left"><strong>重大慣例切換</strong> <code>[AI 推導]</code>：正文 Eq. (8) <code>[P7:L56]</code> 針對<strong>析取 OR</strong> 定義 <span class="math inline">x_{\mathrm{F}} = \sum w_i(1-\alpha), x_{\mathrm{T}} = \alpha w_{\max}</span>；附錄 F Eqs. (94)–(95) <code>[P29:L18, P31:L26]</code> 則針對<strong>合取 AND</strong> 定義 <span class="math inline">x_{\mathrm{F}} = \sum w_i - \alpha w_{\max}, x_{\mathrm{T}} = \alpha \sum w_i</span>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\Lambda, S_\sigma, P_\Gamma</span></td>
+<td style="text-align:left"><span class="math inline">\Lambda = \{\mathrm{T}, \mathrm{F}\}^A</span>, <span class="math inline">P_\Gamma \subseteq \Delta(\Lambda)</span></td>
+<td style="text-align:left">古典賦值全集 <span class="math inline">\Lambda</span>、公式 <span class="math inline">\sigma</span> 之滿足世界集 <span class="math inline">S_\sigma</span>、滿足區間約束理論 <span class="math inline">\Gamma</span> 之機率測度多面體 <span class="math inline">P_\Gamma</span></td>
+<td style="text-align:left"><code>[Sec 5, P6:L86–P7:L5; App D, P21]</code>；注意符號 <span class="math inline">g</span> 在第 5 節代表賦值 <span class="math inline">g: A \to \{\mathrm{T}, \mathrm{F}\}</span>，但在附錄 A/C 演算法 4–5 代表一階常元接地元組 <span class="math inline">g \in G</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">s_{ik}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}_{\ge 0}</span></td>
+<td style="text-align:left">鬆弛變數（Slack Variable），允許單輸入古典約束隨 <span class="math inline">w_{ik} \to 0</span> 關閉</td>
+<td style="text-align:left"><code>[App E.2–E.3, P26:L6–L40]</code>；搭配雙線性互補懲罰項 <span class="math inline">\sum s_{ik} w_{ik}</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">x^*, \min(\cdot)^{(a)}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R} \to \mathbb{R}</span></td>
+<td style="text-align:left"><span class="math inline">x^* = \mathrm{detach}(x)</span> 為切斷自動微分歷史之數值副本；上標 <span class="math inline">(a)</span>（圖 7 記為 <span class="math inline">c_{\text{grad}}</span>）為截斷區梯度替代縮放係數</td>
+<td style="text-align:left"><code>[App G.2.3, P39:L50; App G.3.4, P42:L26; App H.1, P45:L154]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">n</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left"><strong>四重語境重載整數</strong></td>
+<td style="text-align:left">（1）FOL 子公式自由變數個數／元數 <code>[P3:L74]</code>；（2）命題網路上下界總純量數 <code>[P19:L16]</code>；（3）知識圖譜最大連接詞元數 <code>[P28:L58]</code>；（4）MLN 無友人數 <code>[P8:L85]</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="22-真值區間幾何-上的四主態與三次態開放世界與矛盾分離">2.2 真值區間幾何：<span class="math inline">[0, 1]^2</span> 上的四主態與三次態（開放世界與矛盾分離）</h3>
+<p>一般神經網路或模糊邏輯僅輸出單一標量 <span class="math inline">x \in [0, 1]</span>，導致「完全未知（Ignorance）」與「半真半假／證據衝突」在標量 <span class="math inline">0.5</span> 處完全混淆。LNN 將每個節點狀態提升至二維區間空間 <span class="math inline">(L, U) \in [0, 1]^2</span> <code>[原文內容, Sec 3, Table 1, P3:L45–L59; App F.2, Table 3, P27:L36–L74]</code>：</p>
+<ul>
+<li><strong>四個主態（Primary States）</strong>：
+<ol>
+<li><code>Unknown</code>（未知）：<span class="math inline">L \in [0, 1-\alpha]</span> 且 <span class="math inline">U \in [\alpha, 1]</span>（最典型開放世界預設值為 <span class="math inline">[0, 1]</span>，區間寬度 <span class="math inline">U - L</span> 度量資訊缺失程度）。</li>
+<li><code>True</code>（古典真）：<span class="math inline">[\alpha, 1] \ni L \le U \in [\alpha, 1]</span>。</li>
+<li><code>False</code>（古典假）：<span class="math inline">[0, 1-\alpha] \ni L \le U \in [0, 1-\alpha]</span>（註：Table 3 將下界記為 <span class="math inline">[0, 1-\alpha)</span> 以區隔端點）。</li>
+<li><code>Contradiction</code>（邏輯矛盾）：<span class="math inline">L &gt; U</span>。當來自不同推理路徑的下界證明（要求真值至少為 <span class="math inline">L</span>）超越上界反證（要求真值至多為 <span class="math inline">U</span>）時，區間發生翻轉，差值 <span class="math inline">L - U &gt; 0</span> 直接量化局部邏輯衝突強度。</li>
+</ol>
+</li>
+<li><strong>三個次態（Secondary States，當 <span class="math inline">\frac{1}{2} &lt; \alpha \le 1</span> 時）</strong>：
+<ul>
+<li><code>~Unknown</code>：<span class="math inline">L \in [0, 0.5], U \in [0.5, 1]</span>（排除古典極端後仍跨過 <span class="math inline">0.5</span>，無法收斂至古典態但可收斂至傾向態）；</li>
+<li><code>~True</code>（傾向真）：<span class="math inline">L \in (0.5, \alpha), U \in (0.5, 1]</span>；</li>
+<li><code>~False</code>（傾向假）：<span class="math inline">L \in [0, 0.5), U \in (1-\alpha, 0.5)</span>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="23-加權非線性邏輯與伴隨殘差蘊涵weighted-nonlinear-residuated-logic">2.3 加權非線性邏輯與伴隨殘差蘊涵（Weighted Nonlinear &amp; Residuated Logic）</h3>
+<p>給定輸入指標集 <span class="math inline">I</span>、輸入真值 <span class="math inline">x_i \in [0, 1]</span>、非負權重 <span class="math inline">w_i \ge 0</span>、偏置 <span class="math inline">\beta \ge 0</span> 以及滿足中心反對稱 <span class="math inline">f(1 - u) = 1 - f(u)</span> 的單調函數 <span class="math inline">f: \mathbb{R} \to [0, 1]</span>，LNN 定義 <span class="math inline">n</span> 元加權合取、析取與二元伴隨殘差蘊涵 <code>[原文內容, Sec 3.2, Eqs. (1)–(3), P4:L23–L46; App B.1, Eqs. (10)–(14), P14–15]</code>：
+<div class="math inline">{}^{\beta}\left(\bigotimes_{i \in I} x_i^{\otimes w_i}\right) = f\left(\beta - \sum_{i \in I} w_i (1 - x_i)\right), \qquad
+{}^{\beta}\left(\bigoplus_{i \in I} x_i^{\oplus w_i}\right) = f\left(1 - \beta + \sum_{i \in I} w_i x_i\right),</div>
+<div class="math inline">{}^{\beta}(x^{\otimes w_x} \to y^{\oplus w_y}) = f\left(1 - \beta + w_x (1 - x) + w_y y\right) = {}^{\beta}\left((1 - x)^{\oplus w_x} \oplus y^{\oplus w_y}\right).</div>
+<strong>直觀幾何模型</strong>：</p>
+<ul>
+<li>在合取門（AND）中，<span class="math inline">1 - x_i</span> 度量輸入 <span class="math inline">x_i</span>「偏離完全真 <span class="math inline">1</span> 的缺陷量（falsity defect）」，權重 <span class="math inline">w_i</span> 放大該缺陷對輸出的扣分幅度：若 <span class="math inline">w_i = 0</span>，該輸入的缺陷完全不扣分（等價於從合取子句中刪除該文字） <code>[原文內容, App B.3, P16:L32–L36]</code>。</li>
+<li>在蘊涵門（IMPLIES）中，前件標記為 <span class="math inline">x^{\otimes w_x}</span>（AND 型加權：放大 <span class="math inline">1-x</span>），後件標記為 <span class="math inline">y^{\oplus w_y}</span>（OR 型加權：放大 <span class="math inline">y</span>）。當取標準截斷 <span class="math inline">f(u) = \max\{0, \min\{1, u\}\}</span> 時：<span class="math inline">\beta = 1</span> 最接近對稱析取 <span class="math inline">\neg x \lor y</span>；<span class="math inline">\beta = w_y</span> 精確給出 <span class="math inline">x^{\otimes w_x/w_y} \otimes z^{\otimes 1/w_y}</span> 的伴隨殘差（使正向 <em>Modus Ponens</em> 最自然）；<span class="math inline">\beta = w_x</span> 則對應逆否命題 <span class="math inline">\neg y \to \neg x</span> 的伴隨殘差 <code>[原文內容, App B.1, P15:L35–L40]</code>。</li>
+</ul>
+<h3 id="24-一階邏輯擴展無函數接地表自然連接join與量詞約簡">2.4 一階邏輯擴展：無函數接地表、自然連接（Join）與量詞約簡</h3>
+<p>附錄 A 將命題 LNN 擴展至無函數符號（function-free）、無等詞（equality-free）且滿足唯一名稱假設（Unique-Names Assumption）的一階邏輯 <code>[原文內容, App A.1–A.6, P11:L6–P14:L28]</code>：</p>
+<ol>
+<li><strong>關係接地表（Relational Grounding Tables）</strong>：若子公式含 <span class="math inline">n</span> 個相異自由變數，對應神經元維護一張以 <span class="math inline">n</span> 元常元元組 <span class="math inline">g \in G</span> 為鍵、真值界 <span class="math inline">[L(g), U(g)]</span> 為值的稀疏資料表。</li>
+<li><strong>連接詞上／下行之關聯連接</strong>：上行求值時，母連接詞對各子節點接地表沿共享變數欄位執行關聯自然連接（Natural Join），對缺失元組按開放世界預設賦予 <span class="math inline">[0, 1]</span>；下行求值時，除計算函數逆外，還需對目標子公式未出現的多餘變數欄位執行最緊界歸約（<span class="math inline">\max L, \min U</span>）。</li>
+<li><strong>量詞節點</strong>：<span class="math inline">\forall_{g \in G} x(g)</span> 上行取 <span class="math inline">(\min_{g \in G} L_{x(g)}, \min_{g \in G} U_{x(g)})</span>，下行向所有 <span class="math inline">g \in G</span> 廣播 <span class="math inline">(L_z, 1)</span>；<span class="math inline">\exists_{g \in G} x(g)</span> 上行取 <span class="math inline">(\max_{g \in G} L_{x(g)}, \max_{g \in G} U_{x(g)})</span>，下行向所有 <span class="math inline">g \in G</span> 廣播 <span class="math inline">(0, U_z)</span> <code>[原文內容, App C, Algs. 4–5, P17:L66–L73, P18:L134–L149]</code>。因不支援 Skolem 函數，存在量詞真下界 <span class="math inline">L_z &gt; 0</span> 無法在無候選常元時憑空創造具名見證常元 <code>[原文內容, App A.2, P11:L44–P12:L2]</code>。</li>
+</ol>
+<h2 id="h3-具體正例演算與邊界反例構造">H3 具體正例演算與邊界反例構造</h2>
+<h3 id="31-正例演算一figure-1a-知識圖譜之全向演繹與衝突爆炸追蹤對應-ver-2">3.1 正例演算一：Figure 1a 知識圖譜之全向演繹與衝突爆炸追蹤（對應 <code>VER-2</code>）</h3>
+<p>考慮正文圖 1a <code>[P3:L1–L16]</code> 之兩條動物識別規則（採用標準無權重 Łukasiewicz 連接詞 <span class="math inline">\beta = w_i = 1, \alpha = 1</span>）：</p>
+<ul>
+<li>規則 <span class="math inline">R_1</span>：<span class="math inline">(\text{Whiskers} \otimes \text{Tail} \otimes (\text{Laser} \to \text{Chases})) \to \text{Cat}</span>，先驗界設為 <span class="math inline">[0.9, 1.0]</span>；</li>
+<li>規則 <span class="math inline">R_2</span>：<span class="math inline">(\text{Cat} \oplus \text{Dog}) \to \text{Pet}</span>，先驗界設為 <span class="math inline">[1.0, 1.0]</span>。</li>
+</ul>
+<h4 id="a全向逆向演繹同時觸發-modus-tollens選言否定聯言三段論與蘊涵前件反推-ai-推導-經-ver-2-驗證">（A）全向逆向演繹（同時觸發 <em>Modus Tollens</em>、選言否定、聯言三段論與蘊涵前件反推） <code>[AI 推導, 經 VER-2 驗證]</code></h4>
+<p>設觀測事實為：<span class="math inline">\text{Pet} = [0.0, 0.1]</span>（幾乎確定不是寵物）、<span class="math inline">\text{Whiskers} = [1.0, 1.0]</span>（有鬍鬚）、<span class="math inline">\text{Tail} = [0.95, 1.0]</span>（幾乎確定有尾巴）、<span class="math inline">\text{Chases} = [0.0, 0.0]</span>（絕不追逐），其餘節點 <code>Cat</code>, <code>Dog</code>, <code>Laser</code> 皆初始化為開放世界未知 <span class="math inline">[0.0, 1.0]</span>。我們逐步手算演算法 4–6 之區間收緊過程：</p>
+<ol>
+<li>從 <span class="math inline">R_2 = [1.0, 1.0]</span> 與 <span class="math inline">\text{Pet} = [0.0, 0.1]</span> 下行（<em>Modus Tollens</em>）：
+對蘊涵 <span class="math inline">z = (\text{Cat} \oplus \text{Dog}) \to \text{Pet}</span>，由演算法 5 左輸入上界公式（當 <span class="math inline">L_{R_2} = 1.0 &gt; 0</span>）：
+<div class="math inline">U'_{\text{Cat} \oplus \text{Dog}} = \max\{0, \min\{1, 1 - 1 + 1\cdot(1 - L_{R_2}) + 1\cdot U_{\text{Pet}}\}\} = 1 - 1.0 + 0.1 = 0.1.</div>
+聚合得 <span class="math inline">[ L_{\text{Cat}\oplus\text{Dog}}, U_{\text{Cat}\oplus\text{Dog}} ] = [0.0, 0.1]</span>。</li>
+<li><strong>從析取 <span class="math inline">\text{Cat} \oplus \text{Dog} = [0.0, 0.1]</span> 下行至 <code>Cat</code> 與 <code>Dog</code></strong>：
+因 <span class="math inline">U_{\text{Cat}\oplus\text{Dog}} = 0.1 &lt; 1</span> 且 <span class="math inline">L_{\text{Dog}} = 0, L_{\text{Cat}} = 0</span>：
+<div class="math inline">U'_{\text{Cat}} = 1 - L_{\text{Dog}} - (1 - U_{\text{Cat}\oplus\text{Dog}}) = 1 - 0 - 0.9 = 0.1, \qquad U'_{\text{Dog}} = 0.1.</div>
+聚合得 <span class="math inline">\text{Cat} = [0.0, 0.1]</span>、<span class="math inline">\text{Dog} = [0.0, 0.1]</span>。</li>
+<li><strong>從 <span class="math inline">R_1 = [0.9, 1.0]</span> 與 <span class="math inline">\text{Cat} = [0.0, 0.1]</span> 下行至合取體 <span class="math inline">B_{\text{cat}} = \text{Whiskers} \otimes \text{Tail} \otimes (\text{Laser} \to \text{Chases})</span></strong>：
+由 <em>Modus Tollens</em>，<span class="math inline">U'_{B_{\text{cat}}} = 1 - L_{R_1} + U_{\text{Cat}} = 1 - 0.9 + 0.1 = 0.2</span>，故 <span class="math inline">B_{\text{cat}} = [0.0, 0.2]</span>。</li>
+<li><strong>從三元合取 <span class="math inline">B_{\text{cat}} = [0.0, 0.2]</span> 下行至子公式 <span class="math inline">I_{LC} = (\text{Laser} \to \text{Chases})</span>（聯言三段論 Eq. 112）</strong>：
+已知 <span class="math inline">L_{\text{Whiskers}} = 1.0, L_{\text{Tail}} = 0.95, U_{B_{\text{cat}}} = 0.2 &lt; 1</span>，代入 Eq. (112)：
+<div class="math inline">U'_{I_{LC}} = \max\{0, \min\{1, 1 - 1 + (1 - 1.0) + (1 - 0.95) + 0.2\}\} = 0.25.</div>
+故 <span class="math inline">I_{LC} = [0.0, 0.25]</span>。</li>
+<li><strong>從蘊涵 <span class="math inline">I_{LC} = (\text{Laser} \to \text{Chases}) = [0.0, 0.25]</span> 與 <span class="math inline">\text{Chases} = [0.0, 0.0]</span> 下行至 <code>Laser</code></strong>：
+由演算法 5 左輸入下界公式（當 <span class="math inline">U_{I_{LC}} = 0.25 &lt; 1</span>）：
+<div class="math inline">L'_{\text{Laser}} = \max\{0, \min\{1, 1 - 1 + (1 - U_{I_{LC}}) + L_{\text{Chases}}\}\} = 1 - 0.25 + 0.0 = 0.75!</div>
+聚合得 <code>Laser = [0.75, 1.0]</code>。第 2 輪遍歷時 <span class="math inline">\sum (|\delta L| + |\delta U|) = 0</span>，精確達到不動點，全網總矛盾為 <span class="math inline">0.0</span>。
+<strong>語義直觀</strong>：因為這隻動物不是寵物（所以不是貓），但牠又有鬍鬚又有尾巴，若當時沒有拿雷射筆照牠（<code>Laser = 0</code>），則 <code>Laser -&gt; Chases</code> 為真空真（<code>1</code>），將迫使牠是貓。因此 LNN 純靠局部反向傳播自動推演出：「當時必定有人拿雷射筆照了牠（真值至少 <span class="math inline">0.75</span>），而牠沒追。」</li>
+</ol>
+<h4 id="b注入衝突事實後之矛盾偵測與原理爆炸-ai-推導-經-ver-2-驗證">（B）注入衝突事實後之矛盾偵測與原理爆炸 <code>[AI 推導, 經 VER-2 驗證]</code></h4>
+<p>若在上述知識庫中額外注入觀測事實 <span class="math inline">\text{Laser} = [0.0, 0.2]</span>（確定沒開雷射筆）：</p>
+<ul>
+<li>第 1 輪上行傳播得出 <span class="math inline">L_{I_{LC}} = 1 - 0.2 + 0 = 0.8 \implies L_{B_{\text{cat}}} = 1 - 0 - 0.05 - 0.2 = 0.75 \implies L_{\text{Cat}} = 0.65 \implies L_{\text{Pet}} = 0.65 &gt; U_{\text{Pet}} = 0.1</span>，且下行傳播使 <code>Laser</code> 出現 <span class="math inline">L_{\text{Laser}} = 0.75 &gt; U_{\text{Laser}} = 0.2</span>（交叉矛盾。）。</li>
+<li>若不啟動附錄 F.9 <code>[P37:L1–L3]</code> 所提之「偵測矛盾即中止傳播（arresting inference）」，後續第 2–4 輪中已翻轉的 <span class="math inline">L &gt; U</span> 會透過反向單調更新互相推升下界至 <span class="math inline">1.0</span>、壓低下界對應之上界至 <span class="math inline">0.0</span>，在 4 輪後使連通分量全部鎖死於極端矛盾態 <code>[1.0, 0.0]</code>（12 個節點總矛盾達 <code>12.0</code>）。這在代數上完美重現了古典邏輯的原理爆炸（Ex Falso Quodlibet），同時解釋了為何附錄 F.9 強調在矛盾源處截斷傳播並就地更新權重的重要性。</li>
+</ul>
+<h3 id="32-正例演算二鬆弛互補約束下之抗雜訊規則自修正對應-ver-4">3.2 正例演算二：鬆弛互補約束下之抗雜訊規則自修正（對應 <code>VER-4</code>）</h3>
+<p>考慮附錄 E.3 <code>[P26:L27–L40]</code> 之帶鬆弛變數約束最佳化問題。設目標概念 <span class="math inline">y</span> 真實上僅由乾淨特徵 <span class="math inline">x_1</span> 決定（<span class="math inline">y \equiv x_1</span>），但初始專家規則誤寫為二元合取 <span class="math inline">R: {}^{\beta}(x_1^{\otimes w_1} \otimes x_2^{\otimes w_2})</span>，其中 <span class="math inline">x_2</span> 為損壞感測器雜訊。取古典閾值 <span class="math inline">\alpha = 0.8</span>（故古典真為 <span class="math inline">[0.8, 1.0]</span>，古典假為 <span class="math inline">[0.0, 0.2]</span>）：</p>
+<ol>
+<li><strong>嚴格無鬆弛初始化</strong>：由我們在 <code>PRP-2</code> 導出的最小對稱可行解公式 <span class="math inline">w^* = \frac{2\alpha - 1}{(n+1)\alpha - n} = \frac{0.6}{2.4 - 2} = 1.5</span>，<span class="math inline">\beta^* = 1 - \alpha + \alpha w^* = 1.4</span>，此時 <span class="math inline">s_1 = s_2 = 0</span> 嚴格滿足二元 AND 古典約束。</li>
+<li><strong>矛盾暴發</strong>：當輸入樣本為 <span class="math inline">(x_1 = 1.0, x_2 = 0.0)</span> 且真實標籤為 <span class="math inline">y = [1.0, 1.0]</span> 時，初始合取門輸出 <span class="math inline">\max\{0, \min\{1, 1.4 - 1.5(0) - 1.5(1)\}\} = 0.0</span>，與 <span class="math inline">L_y = 1.0</span> 產生高達 <span class="math inline">1.0</span> 的單點矛盾（四點資料集總初始矛盾損失為 <span class="math inline">1.8</span>）。若禁止鬆弛變數（Section 6 Eqs. 6–7），因約束強制 <span class="math inline">w_2 \ge \frac{\beta - 0.2}{0.8} \ge \frac{0.8 - 0.2}{0.8} = 0.75 &gt; 0</span>，權重 <span class="math inline">w_2</span> 永遠無法降至 <span class="math inline">0</span>。</li>
+<li><strong>引入鬆弛變數與梯度透明截斷後之收斂解（<code>VER-4</code> 實測）</strong>：最小化 <span class="math inline">\mathcal{L}_{\text{contra}} + 0.5(s_1 w_1 + s_2 w_2)</span> 後，參數收斂至：
+<div class="math inline">\beta = 1.3817, \qquad (w_1, w_2) = (2.1297,  0.0000), \qquad (s_1, s_2) = (0.0000,  1.1817).</div>
+檢驗互補鬆弛條件：<span class="math inline">s_1 w_1 = 0 \times 2.1297 = 0</span>，<span class="math inline">s_2 w_2 = 1.1817 \times 0 = 0</span>。雜訊輸入 <span class="math inline">x_2</span> 被完全剪枝（<span class="math inline">w_2 = 0</span>），而保留輸入 <span class="math inline">x_1</span> 在邊界 <span class="math inline">x_1 = 0.8</span> 時輸出 <span class="math inline">1.3817 - 2.1297(0.2) = 0.9558 \ge 0.8</span>（古典真），在 <span class="math inline">x_1 = 0.2</span> 時輸出 <span class="math inline">\max\{0, 1.3817 - 2.1297(0.8)\} = 0.0 \le 0.2</span>（古典假），全資料集矛盾損失降至 <code>0.000000</code>。</li>
+</ol>
+<h3 id="33-邊界反例構造有環命題圖之推論不完備性與原文代數勘誤對應-ver-1-ver-3-ver-6">3.3 邊界反例構造：有環命題圖之推論不完備性與原文代數勘誤（對應 <code>VER-1</code>, <code>VER-3</code>, <code>VER-6</code>）</h3>
+<h4 id="反例組一cex-1-cex-2-cex-3無分案雙向傳播在有環圖上的結構性盲區-ai-推導-經-ver-3-驗證">反例組一（<code>CEX-1</code>, <code>CEX-2</code>, <code>CEX-3</code>）：無分案雙向傳播在有環圖上的結構性盲區 <code>[AI 推導, 經 VER-3 驗證]</code></h4>
+<p>正文多處將 LNN 描述為具備「完整定理證明器之通用問題求解能力」<code>[P1:L48, P2:L21]</code> 或「推導出所有邏輯後果」<code>[P8:L91]</code>。我們構造三個極小命題網路，嚴格證明無論採用加權 Łukasiewicz LNN 或第 5 節機率界 LNN，雙向傳播在有環圖上皆不具備演繹完備性或反駁完備性：</p>
+<ol>
+<li><strong><code>CEX-1</code>（排中律菱形環 <span class="math inline">\{P \to R,  \neg P \to R\}</span>）</strong>：
+設原子 <span class="math inline">P, R</span> 初始為未知 <span class="math inline">[0, 1]</span>，兩條公理 <span class="math inline">C_1: P \to R</span> 與 <span class="math inline">C_2: (\neg P) \to R</span> 均設為真 <span class="math inline">[1, 1]</span>。
+<ul>
+<li><strong>真實古典與機率語義</strong>：在所有賦值下 <span class="math inline">S_{C_1} \cap S_{C_2} = (S_{\neg P} \cup S_R) \cap (S_P \cup S_R) = S_R</span>，故對任意機率模型 <span class="math inline">p \in P_{\Gamma_0}</span> 恆有 <span class="math inline">p(S_R) = 1</span>，即 <span class="math inline">\inf_{p \in P_{\Gamma_0}} p(S_R) = 1.0</span>。</li>
+<li><strong>LNN 雙向傳播結果</strong>：在 <span class="math inline">C_1</span> 處，因 <span class="math inline">L_P = 0</span>，下行 <em>Modus Ponens</em> 給出 <span class="math inline">L'_R = \max\{0, L_P + L_{C_1} - 1\} = \max\{0, 0 + 1 - 1\} = 0</span>；因 <span class="math inline">U_R = 1</span>，下行 <em>Modus Tollens</em> 給出 <span class="math inline">U'_P = \min\{1, 1 - L_{C_1} + U_R\} = 1</span>。同理 <span class="math inline">C_2</span> 給出 <span class="math inline">L'_R = 0, L'_{\neg P} = 0</span>。演算法在第 1 輪即停止於不動點 <span class="math inline">[L_R, U_R] = [0.0, 1.0]</span>，與真實下確界 <span class="math inline">1.0</span> 存在最大鬆弛間隙 <span class="math inline">1.0</span>。</li>
+</ul>
+</li>
+<li><strong><code>CEX-2</code>（析取分案消去環 <span class="math inline">\{P \lor Q,  P \to R,  Q \to R\}</span>）</strong>：
+公理均為 <span class="math inline">[1, 1]</span>，<span class="math inline">P, Q, R</span> 初始為 <span class="math inline">[0, 1]</span>。古典語義必有 <span class="math inline">R = 1</span>；但在 <span class="math inline">P \lor Q = [1, 1]</span> 下行時，因 <span class="math inline">U_Q = 1</span> 故 <span class="math inline">L'_P = \max\{0, 1 - U_Q\} = 0</span>，因 <span class="math inline">U_P = 1</span> 故 <span class="math inline">L'_Q = 0</span>，導致 <span class="math inline">P \to R</span> 與 <span class="math inline">Q \to R</span> 完全無法啟動，最終 <span class="math inline">[L_R, U_R] = [0.0, 1.0]</span>。</li>
+<li><strong><code>CEX-3</code>（不可滿足 2-CNF 四子句環之「矛盾失明」<span class="math inline">\{P \lor Q,  P \lor \neg Q,  \neg P \lor Q,  \neg P \lor \neg Q\}</span>）</strong>：
+四條子句皆斷言為 <span class="math inline">[1, 1]</span>，顯然在古典邏輯與機率邏輯中皆無解（<span class="math inline">P_{\Gamma_0} = \emptyset</span>）。然而在每條二元析取子句中，由於兩個文字的初始上界皆為 <span class="math inline">1</span>，下行更新 <span class="math inline">\max\{0, 1 - 1\} = 0</span> 完全不改變任何原子或文字的 <span class="math inline">[0, 1]</span> 區間，上行更新 <span class="math inline">\min\{1, 1 + 1\} = 1</span> 亦與子句根節點 <span class="math inline">[1, 1]</span> 相容。全網在 1 輪後收斂，總矛盾損失 <span class="math inline">\sum_k \max\{0, L_k - U_k\} = 0.0</span>。這證明 <code>COR-1</code> 的逆命題在有環圖上不成立。</li>
+</ol>
+<h4 id="反例組二cex-4-與原文公式勘誤伴隨殘差邊界失效與反向偏導數錯誤-ai-推導-經-ver-1-ver-6-驗證">反例組二（<code>CEX-4</code> 與原文公式勘誤）：伴隨殘差邊界失效與反向偏導數錯誤 <code>[AI 推導, 經 VER-1, VER-6 驗證]</code></h4>
+<ol>
+<li><strong><code>CEX-4</code>（<span class="math inline">\beta &gt; w_y</span> 時 Eq. 13 與 Eq. 14 在 <span class="math inline">y=1</span> 處不等價）</strong>：取 <span class="math inline">\beta = 2.0, w_x = 1.0, w_y = 0.5, x = 1.0, y = 1.0</span>。在伴隨殘差定義式 Eq. (13) <code>[P15:L29]</code> 中，<span class="math inline">{}^{\beta/w_y}(x^{\otimes w_x/w_y} \otimes z^{\otimes 1/w_y}) = \max\{0, \min\{1, 4 - 2(1-z)\}\} \le 1 = y</span> 對所有 <span class="math inline">z \in [0, 1]</span> 恆成立（因左式被 <span class="math inline">\min\{1, \cdot\}</span> 截斷在 <span class="math inline">1</span> 以下），故真實最大解為 <span class="math inline">z = 1.0</span>；然而閉式公式 Eq. (14) 卻算出 <span class="math inline">\max\{0, \min\{1, 1 - 2.0 + 0 + 0.5\}\} = 0.0 \neq 1.0</span>。只有當 <span class="math inline">\beta \le w_y + w_x(1-x)</span>（對所有 <span class="math inline">x</span> 恆成立即 <span class="math inline">\beta \le w_y</span>）時，Eq. (14) 才精確等於 Eq. (13) 在 <span class="math inline">[0, 1]</span> 上的伴隨殘差。</li>
+<li><strong>原文三處排版與微分筆誤核實</strong>：
+<ul>
+<li>附錄 B.1 Eq. (9) <code>[P14:L65]</code> 將二元合取印為 <span class="math inline">\max\{0, \min\{1, \beta - w_1(1-x_1) \mathbf{+} w_2(1-x_2)\}\}</span>，代入 <span class="math inline">\beta=w_1=w_2=1, (x_1, x_2)=(1, 0)</span> 得 <span class="math inline">1.0</span>（錯誤。應依 Eq. 10 為 <span class="math inline">-w_2(1-x_2)</span> 得 <span class="math inline">0.0</span>）。</li>
+<li>附錄 F.6 <code>[P31:L51]</code> 與 F.7 <code>[P33:L30]</code> 將斜率 <span class="math inline">m_{\mathrm{T}}</span> 寫為 <span class="math inline">\frac{y_{\max} - y_{\mathrm{T}}}{x_{\max} - \mathbf{y_{\mathrm{T}}}}</span>（分母應為 <span class="math inline">x_{\max} - \mathbf{x_{\mathrm{T}}}</span>；幸而在合取定義 <span class="math inline">x_{\mathrm{T}} = \alpha \sum_i w_i</span> 下，<span class="math inline">\frac{1-\alpha}{(1-\alpha)\sum_i w_i} = \frac{1}{\sum_i w_i}</span>，故其最右端化簡式仍然正確）。</li>
+<li>附錄 G.3.3 Eq. (119) <code>[P41:L136–L160]</code> 對未截斷反向傳播式 Eq. (112) <span class="math inline">x_j = 1 - \frac{\beta}{w_j} + \sum_{i \neq j} \frac{w_i(1-x_i)}{w_j} + \frac{z}{w_j}</span> 求 <span class="math inline">\frac{\partial x_j}{\partial w_j}</span> 時，原文寫成 <span class="math inline">-\frac{\beta}{w_j^2} - \sum_{i \neq j} \frac{w_i(1-x_i)}{w_j^2} - \frac{z}{w_j^2}\frac{\partial z}{\partial w_j}</span>；經 SymPy 符號微分驗證，正確導數應為：
+<div class="math inline">\frac{\partial x_j}{\partial w_j} = +\frac{\beta}{w_j^2} - \sum_{i \in I \setminus \{j\}} \frac{w_i(1 - x_i)}{w_j^2} - \frac{z}{w_j^2} + \frac{1}{w_j}\frac{\partial z}{\partial w_j}</div>
+（且在實際下行傳播中母節點界 <span class="math inline">z = L_\otimes</span> 或 <span class="math inline">U_\otimes</span> 對局部逆運算視為外生常數 <span class="math inline">\frac{\partial z}{\partial w_j} = 0</span>，故第三項應為 <span class="math inline">-\frac{z}{w_j^2}</span> 而非乘積項）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="h4-核心定理五層註釋逐步補全證明與推理缺口分析">H4 核心定理五層註釋、逐步補全證明與推理缺口分析</h2>
+<h2 id="41-核心結果一theorem-1命題邏輯雙向推論之單調性與有限步--收斂定理">4.1 核心結果一（Theorem 1）：命題邏輯雙向推論之單調性與有限步 <span class="math inline">\epsilon</span>-收斂定理</h2>
+<h3 id="直觀理解">直觀理解</h3>
+<p>傳統循環神經網路（RNN）在有環圖上反覆傳遞訊號時，極易因負回饋（如邏輯否定環 <span class="math inline">A \leftrightarrow \neg A</span>）產生無窮震盪或混沌發散。LNN 之所以絕不震盪 <code>[原文內容, Sec 2, P2:L40–L41]</code>，關鍵在於每個節點更新真值界時採用的是單調收緊聚合算子 <span class="math inline">(L_z, U_z) \leftarrow (\max\{L_z, L'_z\}, \min\{U_z, U'_z\})</span>：下界 <span class="math inline">L_z</span> 只能單調遞增且被 <span class="math inline">1</span> 封頂，上界 <span class="math inline">U_z</span> 只能單調遞減且被 <span class="math inline">0</span> 托底（即使發生 <span class="math inline">L_z &gt; U_z</span> 矛盾，兩者依然各自朝 <span class="math inline">[0, 1]</span> 端點單調推進而不會往返跳動）。在有限個命題節點上，一組有界單調實數序列不可能無窮次邁出大於 <span class="math inline">\delta &gt; 0</span> 的步伐，因此總變化量必然在有限輪內小於任意給定容差 <span class="math inline">\epsilon &gt; 0</span>。</p>
+<h3 id="嚴格表述">嚴格表述</h3>
+<p><code>[原文內容, Sec 4.3, P6:L69; App C.1, P19:L5–L17]</code> 結合隱含有限性前提 <code>[AI 推導, ASM-1]</code>：
+設命題邏輯神經網路 <span class="math inline">G_{\mathrm{LNN}}</span> 包含有限個公式與原子節點，總計維護 <span class="math inline">n = 2|V| &lt; \infty</span> 個上下界純量變數 <span class="math inline">(L_z, U_z) \in [0, 1]^2</span>。若否定算子 <span class="math inline">\neg:[0,1]\to[0,1]</span>（單調非增）、加權析取算子 <span class="math inline">\oplus:[0,1]^{|I|}\to[0,1]</span>（對各元單調非減）與非線性函數 <span class="math inline">f:\mathbb{R}\to[0,1]</span>（單調非減）皆滿足單調性，且節點更新透過 <code>aggregate</code> 算子執行，則對任意容差 <span class="math inline">\epsilon &gt; 0</span>，演算法 3（<code>inference</code>）必在有限次迭代 <span class="math inline">T(\epsilon) &lt; \infty</span> 內終止，滿足單輪總變動量：
+<div class="math inline">\sum_{z \in V} \left(|\delta L_z^{(T)}| + |\delta U_z^{(T)}|\right) \le \epsilon,</div>
+且每個序列 <span class="math inline">(L_z^{(t)})_{t \ge 0}</span> 與 <span class="math inline">(U_z^{(t)})_{t \ge 0}</span> 各自收斂至極限點 <span class="math inline">L_z^*, U_z^* \in [0, 1]</span>。</p>
+<h3 id="完整推導">完整推導</h3>
+<ol>
+<li><strong>連接詞與上下行算子之區間保序性</strong> <code>[原文內容 + AI 推導補全, STEP-1]</code>：
+由第 4.2 節 <code>[P5:L45–L50]</code>，合取與蘊涵皆可由 <span class="math inline">\neg</span> 與 <span class="math inline">\oplus</span> 複合表出。當子公式區間收緊（即 <span class="math inline">L_x</span> 增大、<span class="math inline">U_x</span> 減小）時：
+<ul>
+<li>在上行傳播（演算法 1／4）中：對 <span class="math inline">\neg x</span>，<span class="math inline">1 - U_x</span> 隨 <span class="math inline">U_x</span> 減小而增大、<span class="math inline">1 - L_x</span> 隨 <span class="math inline">L_x</span> 增大而減小；對 <span class="math inline">\oplus</span>，<span class="math inline">{}^\beta(\bigoplus_i L_{x_i}^{\oplus w_i})</span> 隨 <span class="math inline">L_{x_i}</span> 增大而非減，<span class="math inline">{}^\beta(\bigoplus_i U_{x_i}^{\oplus w_i})</span> 隨 <span class="math inline">U_{x_i}</span> 減小而非增；對蘊涵 <span class="math inline">x \to y</span>，<span class="math inline">L'_z = {}^\beta(U_x^{\otimes w_x} \to L_y^{\oplus w_y})</span> 對 <span class="math inline">U_x</span> 單調非增、對 <span class="math inline">L_y</span> 單調非減。</li>
+<li>在 <code>aggregate</code> 步驟中，對任意節點 <span class="math inline">z</span> 與第 <span class="math inline">t</span> 輪迭代，定義為：
+<div class="math inline">L_z^{(t+1)} = \max\left\{L_z^{(t)},  L_z^{\prime(t+1)}\right\} \ge L_z^{(t)}, \qquad U_z^{(t+1)} = \min\left\{U_z^{(t)},  U_z^{\prime(t+1)}\right\} \le U_z^{(t)}.</div></li>
+<li>由於激活函數 <span class="math inline">f</span> 與下行截斷值域均落在 <span class="math inline">[0, 1]</span> 內，且初始界 <span class="math inline">L_z^{(0)}, U_z^{(0)} \in [0, 1]</span>，故對一切 <span class="math inline">t \ge 0</span> 恆有：
+<div class="math inline">0 \le L_z^{(0)} \le L_z^{(1)} \le \cdots \le L_z^{(t)} \le 1, \qquad 1 \ge U_z^{(0)} \ge U_z^{(1)} \ge \cdots \ge U_z^{(t)} \ge 0.</div></li>
+</ul>
+</li>
+<li><strong>單調有界序列之 Cauchy 收斂性</strong> <code>[原文內容, App C.1, P19:L9–L13]</code>：
+由實數完備性（單調收斂定理），每個有界單調序列必為 Cauchy 序列並收斂於唯一極限 <span class="math inline">L_z^* = \sup_t L_z^{(t)} \in [0, 1]</span> 與 <span class="math inline">U_z^* = \inf_t U_z^{(t)} \in [0, 1]</span>。（反證：若某序列非 Cauchy，則存在步長 <span class="math inline">\delta &gt; 0</span> 使該界在無窮多個時刻發生 <span class="math inline">\ge \delta</span> 的躍升或下降，累積超過 <span class="math inline">\lceil 1/\delta \rceil + 1</span> 次後必越出 <span class="math inline">[0, 1]</span>，矛盾。）</li>
+<li><strong>有限維一致收斂與演算法終止</strong> <code>[原文內容 + AI 推導補全, STEP-2]</code>：
+記全網共有 <span class="math inline">n = 2|V| &lt; \infty</span> 個上下界純量 <span class="math inline">\{b_1^{(t)}, \dots, b_n^{(t)}\}</span>。對給定 <span class="math inline">\epsilon &gt; 0</span>，對每個座標 <span class="math inline">k \in \{1, \dots, n\}</span>，由 <span class="math inline">\lim_{t \to \infty} b_k^{(t)} = b_k^*</span>，存在有限整數 <span class="math inline">T_k(\epsilon)</span> 使得當 <span class="math inline">t \ge T_k(\epsilon)</span> 時 <span class="math inline">|b_k^* - b_k^{(t)}| \le \frac{\epsilon}{n}</span>。取 <span class="math inline">T_{\max} = \max_{1 \le k \le n} T_k(\epsilon) &lt; \infty</span>（此步關鍵依賴 <span class="math inline">n &lt; \infty</span>，即 <code>ASM-1</code>。）。當 <span class="math inline">t \ge T_{\max}</span> 時，由單調性 <span class="math inline">|b_k^{(t+1)} - b_k^{(t)}| \le |b_k^* - b_k^{(t)}| \le \frac{\epsilon}{n}</span>，求和得：
+<div class="math inline">\sum_{z \in V} \left(|L_z^{(t+1)} - L_z^{(t)}| + |U_z^{(t+1)} - U_z^{(t)}|\right) = \sum_{k=1}^{n} |b_k^{(t+1)} - b_k^{(t)}| \le n \cdot \frac{\epsilon}{n} = \epsilon.</div>
+因此演算法 3 的 <code>while</code> 迴圈至多在 <span class="math inline">T_{\max}</span> 輪內必然終止。<span class="math inline">\blacksquare</span></li>
+</ol>
+<h3 id="局限分析">局限分析</h3>
+<ol>
+<li><strong>「單步變動量 <span class="math inline">\le \epsilon</span>」不等於「距真實極限誤差 <span class="math inline">\le \epsilon</span>」</strong> <code>[AI 推導, IMP-2]</code>：附錄 C.1 證明了當 <span class="math inline">t</span> 足夠大時必有 <span class="math inline">\sum_k |b_k^* - b_k^{(t)}| \le \epsilon</span>（從而觸發停止條件 <span class="math inline">\sum_k |\delta b_k^{(t)}| \le \epsilon</span>）；但反過來，演算法 3 在首次滿足 <span class="math inline">\sum_k |\delta b_k^{(t)}| \le \epsilon</span> 時即停機。若某有環加權圖的更新算子收縮因子接近 <span class="math inline">1</span>（例如每輪推進 <span class="math inline">\epsilon/2</span> 持續百輪），提早停機時的累積殘差 <span class="math inline">\|b^* - b^{(t)}\|_1</span> 可能大於 <span class="math inline">\epsilon</span>。唯有在無環語法樹（最多 1–2 輪精確達 <span class="math inline">\delta = 0</span>）或有理分母離散格（如無權重布林／Łukasiewicz 整數權重，步長有正下界故有限步精確達 <span class="math inline">\delta = 0</span>）上，兩者才完全等價。</li>
+<li><strong>一階邏輯含函數符號時不可判定</strong> <code>[原文內容, App C.1, P19:L18–L22]</code>：若允許後繼函數 <span class="math inline">s(x)</span>，推論過程會不斷生成新接地項 <span class="math inline">P(a), P(s(a)), P(s(s(a))), \dots</span>，使 <span class="math inline">n \to \infty</span>，各接地雖獨立單調收斂，但全局網路可能永不終止（對應一階邏輯之半可判定／不可判定性）。</li>
+</ol>
+<h3 id="研究拓展">研究拓展</h3>
+<ul>
+<li><strong>異步與優先佇列排程不變性（Knaster–Tarski 不動點視角）</strong> <code>[原文內容, App A.6, P14:L3–L5 + AI 推導]</code>：若下行與上行更新算子 <span class="math inline">F: \mathcal{I}^V \to \mathcal{I}^V</span> 在乘積區間格上全域保序（order-preserving），則由 Knaster–Tarski／Kleene 不動點定理，無論採用何種節點更新順序（深度優先、最短路徑優先或稀疏張量批次更新），只要公平遍歷所有活躍邊，其最小不動點皆唯一且相同。但須注意：正文 Eqs. (4)–(5) 在 <span class="math inline">L_{\oplus} = 1 - \alpha</span> 處含條件跳躍，實作時須確保閾值門控不破壞跨步保序性。</li>
+</ul>
+<h2 id="42-核心結果二lemma-1-theorem-2-corollary-cor-1fréchetboole-機率語義下之模型集不變性與機率界可靠性定理">4.2 核心結果二（Lemma 1 &amp; Theorem 2 + Corollary COR-1）：Fréchet–Boole 機率語義下之模型集不變性與機率界可靠性定理</h2>
+<h3 id="直觀理解-1">直觀理解</h3>
+<p>當我們說某命題 <span class="math inline">\sigma</span> 的真值界是 <span class="math inline">[0.7, 0.9]</span> 時，這在機率上究竟代表什麼？第 5 節給出了相當漂亮的精確機率語義（Nilsson Probabilistic Logic Semantics）：把所有 <span class="math inline">2^{|A|}</span> 個古典真值賦值世界視為樣本空間 <span class="math inline">\Lambda</span>，每個「模型」就是 <span class="math inline">\Lambda</span> 上的一個機率分佈 <span class="math inline">p</span>。初始知識庫 <span class="math inline">\Gamma_0</span> 給定部分公式的機率上下界，定義出一個滿足約束的機率分佈多面體 <span class="math inline">P_{\Gamma_0}</span>。為什麼不能直接用標準 Gödel 或 Łukasiewicz 連接詞來算機率上下界？因為兩個事件 <span class="math inline">S_x, S_y</span> 的聯集機率滿足 <span class="math inline">\max\{p(S_x), p(S_y)\} \le p(S_x \cup S_y) \le \min\{1, p(S_x) + p(S_y)\}</span>，下界遵循 Gödel t-conorm（<span class="math inline">\max</span>），上界卻遵循 Łukasiewicz t-conorm（Boole 聯集界）。第 5 節巧妙地讓下界與上界採用這對非對稱激活函數，從而使每一次局部上下行收緊都不丟失任何一個合法機率分佈（<span class="math inline">P_{\Gamma'} = P_\Gamma</span>，即 <code>LEM-1</code>），最終保證 LNN 算出的 <span class="math inline">[L_\sigma, U_\sigma]</span> 必定安全包絡真實機率極值區間 <span class="math inline">[\inf p(S_\sigma), \sup p(S_\sigma)]</span>。</p>
+<h3 id="嚴格表述-1">嚴格表述</h3>
+<p><code>[原文內容, Sec 5, P6:L71–P7:L9; App D, Lemma 1 &amp; Theorem 2, P19:L24–P25:L29]</code>：
+設 <span class="math inline">A</span> 為原子公式集合，<span class="math inline">\Lambda = \{\mathrm{T}, \mathrm{F}\}^A</span> 為所有古典解釋之集合，對任意公式 <span class="math inline">\sigma</span> 定義事件 <span class="math inline">S_\sigma \triangleq \{g \in \Lambda \mid g(\sigma) = \mathrm{T}\}</span>。對區間句子集合 <span class="math inline">\Gamma = \{(\sigma_i, l_i, u_i)\}_{i=1}^k</span>，定義模型集 <span class="math inline">P_\Gamma = \{p \in \Delta(\Lambda) \mid \forall i,  l_i \le p(S_{\sigma_i}) \le u_i\}</span>。設二分圖 <span class="math inline">G = \langle V_1 \cup V_2, E \rangle</span> 中連接詞鄰居更新函數 <span class="math inline">\tilde{L}, \tilde{U}</span> 由附錄 D Eqs. (25)–(42) 給出（等價於正文第 6 頁析取與否定更新式 <code>EQN-4</code>）：</p>
+<ol>
+<li><strong>（Lemma 1：單步模型集不變性）</strong> 對任意 <span class="math inline">L, U: V_1 \to [0, 1]</span>、任意公式節點 <span class="math inline">\phi \in V_1</span> 與鄰居指標 <span class="math inline">i \in \{1, \dots, d_\phi\}</span>，將 <span class="math inline">(\phi, L(\phi), U(\phi))</span> 替換為收緊句子 <span class="math inline">\left(\phi, \max(L(\phi), \tilde{L}_{L,U,n_{\phi,i},j_{\phi,i}}), \min(U(\phi), \tilde{U}_{L,U,n_{\phi,i},j_{\phi,i}})\right)</span> 所得新理論記為 <span class="math inline">\Gamma'_{\phi,i}</span>，則恆有：
+<div class="math inline">P_\Gamma = P_{\Gamma'_{\phi, i}}.</div></li>
+<li><strong>（Theorem 2：機率界全局可靠性）</strong> 設初始知識 <span class="math inline">\Gamma_0 = \{(v, L_0(v), U_0(v)) \mid v \in V_0\}</span> 滿足 <span class="math inline">P_{\Gamma_0} \neq \emptyset</span>，且 <span class="math inline">L_\sigma, U_\sigma</span> 為機率界 LNN 收斂後對查詢公式 <span class="math inline">\sigma</span> 輸出之上下界，則：
+<div class="math inline">L_\sigma \le \inf_{p \in P_{\Gamma_0}} p(S_\sigma) \qquad \text{且} \qquad U_\sigma \ge \sup_{p \in P_{\Gamma_0}} p(S_\sigma).</div></li>
+<li><strong>（Corollary COR-1：矛盾證偽推論）</strong> <code>[AI 推導]</code> 若機率界 LNN 在任一節點 <span class="math inline">\sigma \in V_1</span> 推導出 <span class="math inline">L_\sigma &gt; U_\sigma</span>，則必有 <span class="math inline">P_{\Gamma_0} = \emptyset</span>（初始機率知識庫嚴格不一致）。</li>
+</ol>
+<h3 id="完整推導-1">完整推導</h3>
+<ol>
+<li><strong>證明雙向包含簡化（<code>STEP-3</code>）</strong> <code>[原文內容, P21:L35–L69]</code>：
+因 <span class="math inline">\max(L(\phi), \tilde{L}) \ge L(\phi)</span> 且 <span class="math inline">\min(U(\phi), \tilde{U}) \le U(\phi)</span>，<span class="math inline">\Gamma'_{\phi,i}</span> 對 <span class="math inline">p(S_\phi)</span> 的區間約束比 <span class="math inline">\Gamma</span> 更緊而其餘句子完全相同，故顯然 <span class="math inline">P_{\Gamma'_{\phi,i}} \subseteq P_\Gamma</span>。若 <span class="math inline">P_\Gamma = \emptyset</span> 則等式自動成立；若 <span class="math inline">P_\Gamma \neq \emptyset</span>，任取 <span class="math inline">p \in P_\Gamma</span>，欲證 <span class="math inline">p \in P_{\Gamma'_{\phi,i}}</span> 僅需驗證：
+<div class="math inline">\tilde{L}_{L,U,n_{\phi,i},j_{\phi,i}} \le p(S_\phi) \le \tilde{U}_{L,U,n_{\phi,i},j_{\phi,i}}.</div></li>
+<li><strong>十八種連接詞方向之 Fréchet–Boole 測度不等式核驗（<code>STEP-4</code>）</strong> <code>[原文內容, P21:L70–P25:L15]</code>：
+附錄 D 將 <code>NOT</code>（4 式）、<code>AND-k</code>（4 式）、<code>OR-k</code>（4 式）、<code>IMPLIES</code>（6 式）共 18 條更新規則逐一展開，其核心集合論與機率公理推導可統一歸納為四組對偶機制：
+<ul>
+<li><strong>NOT（Eqs. 25–28）</strong>：若 <span class="math inline">\gamma = \neg \phi</span>，由互補事件可加性 <span class="math inline">p(S_\phi) = 1 - p(S_\gamma)</span> 及 <span class="math inline">L(\gamma) \le p(S_\gamma) \le U(\gamma)</span>，立得 <span class="math inline">1 - U(\gamma) \le p(S_\phi) \le 1 - L(\gamma)</span>。</li>
+<li><strong>AND-<span class="math inline">k</span> 上行（Eqs. 31–32）</strong>：設 <span class="math inline">\phi = \bigwedge_{j=1}^k \xi_j</span>。上界由交集單調性 <span class="math inline">S_\phi = \bigcap_{j=1}^k S_{\xi_j} \subseteq S_{\xi_j}</span> 得 <span class="math inline">p(S_\phi) \le \min_{j} p(S_{\xi_j}) \le \min_{j} U(\xi_j)</span>；下界由 De Morgan 定律 <span class="math inline">S_{\neg\phi} = \bigcup_{j=1}^k S_{\neg\xi_j}</span> 與 Boole 次可加性得 <span class="math inline">p(S_{\neg\phi}) \le \sum_{j=1}^k (1 - p(S_{\xi_j})) \le \sum_{j=1}^k (1 - L(\xi_j))</span>，故 <span class="math inline">p(S_\phi) \ge \max\left(0, 1 - \sum_{j=1}^k (1 - L(\xi_j))\right)</span>。</li>
+<li><strong>AND-<span class="math inline">k</span> 下行至第 <span class="math inline">i</span> 個輸入 <span class="math inline">\phi</span>（Eqs. 29–30）</strong>：設母公式 <span class="math inline">\gamma = \phi \land \bigwedge_{j \neq i} \xi_j</span>。下界由 <span class="math inline">S_\gamma \subseteq S_\phi \implies p(S_\phi) \ge p(S_\gamma) \ge L(\gamma)</span>；上界利用集合差分解 <span class="math inline">S_\phi \subseteq S_\gamma \cup \bigcup_{j \neq i} S_{\neg \xi_j}</span>，由次可加性與 <span class="math inline">p(S_\phi) \le 1</span> 得 <span class="math inline">p(S_\phi) \le \min\left(1, U(\gamma) + \sum_{j \neq i}(1 - L(\xi_j))\right)</span>。</li>
+<li><strong>OR-<span class="math inline">k</span>（Eqs. 33–36）與 IMPLIES（Eqs. 37–42）</strong>：完全對偶。對 <span class="math inline">\phi = \bigvee_{j=1}^k \xi_j</span>，上行下界為 <span class="math inline">\max_j L(\xi_j)</span>、上界為 <span class="math inline">\min(1, \sum_j U(\xi_j))</span>；下行至輸入 <span class="math inline">\phi</span> 利用 <span class="math inline">S_{\neg\phi} \subseteq S_{\neg\gamma} \cup \bigcup_{j \neq i} S_{\xi_j}</span> 得下界 <span class="math inline">\max(0, L(\gamma) - \sum_{j \neq i} U(\xi_j))</span>、上界 <span class="math inline">U(\gamma)</span>。對蘊涵 <span class="math inline">\xi \to \gamma \equiv (\neg\xi) \lor \gamma</span>，直接代入二元 OR 與 NOT 即得 Eqs. (37)–(42)（含 <em>Modus Ponens</em> 下界 <span class="math inline">\max(0, L(\xi) + L(\xi \to \gamma) - 1)</span> 與 <em>Modus Tollens</em> 上界 <span class="math inline">\min(1, 1 - L(\xi \to \gamma) + U(\gamma))</span>）。至此 18 式全部證畢，<code>LEM-1</code> 成立。</li>
+</ul>
+</li>
+<li><strong>數學歸納法完成 Theorem 2 與 COR-1（<code>STEP-5</code>）</strong> <code>[原文內容, P25:L17–L29 + AI 推導]</code>：
+初始化時對未指定節點 <span class="math inline">v \in V_1 \setminus V_0</span> 賦予平凡區間 <span class="math inline">[0, 1]</span>，因任何機率測度皆滿足 <span class="math inline">0 \le p(S_v) \le 1</span>，故 <span class="math inline">P_{\Gamma^0} = P_{\Gamma_0}</span>。由 <code>LEM-1</code> 對迭代步數 <span class="math inline">k</span> 歸納，每一步更新皆滿足 <span class="math inline">P_{\Gamma^{k+1}} = P_{\Gamma^k}</span>，故收斂時 <span class="math inline">P_{\Gamma^k} = P_{\Gamma_0}</span>。若 <span class="math inline">P_{\Gamma_0} \neq \emptyset</span>，對任意 <span class="math inline">p \in P_{\Gamma_0} = P_{\Gamma^k}</span> 皆有 <span class="math inline">L_\sigma = L^k(\sigma) \le p(S_\sigma) \le U^k(\sigma) = U_\sigma</span>；對 <span class="math inline">p \in P_{\Gamma_0}</span> 分別取下確界與上確界即得 Theorem 2。反之，若收斂（或任一中間步 <span class="math inline">k</span>）出現 <span class="math inline">L^k(\sigma) &gt; U^k(\sigma)</span>，因不存在實數 <span class="math inline">p(S_\sigma)</span> 同時大於等於 <span class="math inline">L^k(\sigma)</span> 且小於等於 <span class="math inline">U^k(\sigma)</span>，必有 <span class="math inline">P_{\Gamma^k} = P_{\Gamma_0} = \emptyset</span>，<code>COR-1</code> 得證。<span class="math inline">\blacksquare</span></li>
+</ol>
+<h3 id="局限分析-1">局限分析</h3>
+<ol>
+<li><strong>僅有可靠性（Soundness），無緊緻性／完備性（Tightness/Completeness）</strong> <code>[AI 推導, VER-3]</code>：如 H3 <code>CEX-1</code>–<code>CEX-3</code> 所示，Theorem 2 的不等號在含環圖上可能出現高達 <span class="math inline">1.0</span> 的鬆弛間隙，且當 <span class="math inline">P_{\Gamma_0} = \emptyset</span> 時 LNN 未必能推導出 <span class="math inline">L_\sigma &gt; U_\sigma</span>。求精確機率上下界 <span class="math inline">\inf_{p \in P_{\Gamma_0}} p(S_\sigma)</span> 是經典的機率可滿足性（PSAT）線性規劃問題，變數維度高達 <span class="math inline">2^{|A|}</span>，屬 <span class="math inline">\mathrm{NP}</span>-hard 問題 <code>[外部知識: Nilsson 1986; Georgakopoulos et al. 1988]</code>。</li>
+<li><strong>第 5 節無權重形式與第 6 節可微權重學習尚未統一</strong> <code>[AI 推導]</code>：Theorem 2 的更新公式 Eqs. (25)–(42) 不含邊權重 <span class="math inline">w_i</span> 與偏置 <span class="math inline">\beta</span>（相當於固定無權重 Fréchet–Boole 算子），若直接插入任意權重 <span class="math inline">w_i \neq 1</span>，Boole 聯集不等式將不再直接對應古典世界上的測度，論文未給出帶權重機率語義的推廣證明。</li>
+</ol>
+<h3 id="研究拓展-1">研究拓展</h3>
+<ul>
+<li><strong>高階區間傳播與列生成（Column Generation）混合架構</strong>：可將第 5 節極速收斂的局部 Fréchet–Boole 界作為 PSAT／MILP 求解器的預處理收緊層（Bound Tightening Presolver），僅在殘留模糊度 <span class="math inline">U_\sigma - L_\sigma</span> 過大的局部子圖上觸發單純形列生成或 DPLL 分支。</li>
+</ul>
+<h2 id="43-核心結果三proposition-prp-2-appendix-e1e3加權非線性邏輯古典真值表保持性與精確可行域臨界閾值-定理">4.3 核心結果三（Proposition PRP-2 &amp; Appendix E.1–E.3）：加權非線性邏輯古典真值表保持性與精確可行域臨界閾值 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span> 定理</h2>
+<h3 id="直觀理解-2">直觀理解</h3>
+<p>若允許神經網路在訓練中隨意調整 <span class="math inline">(\beta, \mathbf{w})</span>，一個標記為「AND」的神經元很可能在梯度下降後變成「OR」甚至多數決門（Majority Gate），完全摧毀符號可解釋性。為了讓每個連接詞在面對古典輸入（真 <span class="math inline">\in [\alpha, 1]</span>，假 <span class="math inline">\in [0, 1-\alpha]</span>）時百分之百忠於布林真值表，第 6 節與附錄 E.1 將真值表最極端的邊界情形寫成線性不等式：對 <span class="math inline">n</span> 元合取門而言，「全為最弱真 <span class="math inline">(\alpha, \dots, \alpha)</span> 時輸出仍須 <span class="math inline">\ge \alpha</span>」，而「僅一個為最弱假 <span class="math inline">1-\alpha</span>、其餘全為最強真 <span class="math inline">1</span> 時輸出仍須 <span class="math inline">\le 1-\alpha</span>」。這兩股力量形成尖銳拉鋸：元數 <span class="math inline">n</span> 越大，<span class="math inline">n</span> 個「最弱真」累積的扣分 <span class="math inline">n w(1-\alpha)</span> 越重，迫使閾值 <span class="math inline">\alpha</span> 必須足夠接近 <span class="math inline">1</span>（嚴格大於 <span class="math inline">\frac{n}{n+1}</span>），否則世界上根本不存在能同時守住這兩條底線的靜態超平面。</p>
+<h3 id="嚴格表述-2">嚴格表述</h3>
+<p><code>[原文內容, Sec 6, Eqs. (6)–(7), P7:L18–L31; App E.1, Eqs. (86)–(89), P25:L83–L106]</code> 結合充要可行域證明 <code>[AI 推導, PRP-2, STEP-7]</code>：
+設 <span class="math inline">f(u) = \max\{0, \min\{1, u\}\}</span>，<span class="math inline">n = |I| \ge 2</span>，<span class="math inline">\frac{1}{2} &lt; \alpha \le 1</span>。考慮無鬆弛變數（<span class="math inline">s_i = 0</span>）之 <span class="math inline">n</span> 元合取線性約束組：
+<div class="math inline">w_i \ge 0, \quad \beta \ge 0, \qquad
+\beta - \alpha w_i \le 1 - \alpha    (\forall i \in I), \qquad
+\beta - (1 - \alpha)\sum_{i \in I} w_i \ge \alpha,</div>
+（以及由 De Morgan 對偶完全等價之 <span class="math inline">n</span> 元析取約束組 Eqs. 6–7 / Eqs. 88–89）：</p>
+<ol>
+<li><strong>（古典真值表可靠性）</strong> 若 <span class="math inline">(\beta, \mathbf{w})</span> 滿足上述約束，則對任意輸入 <span class="math inline">\mathbf{x} \in ([0, 1-\alpha] \cup [\alpha, 1])^n</span>，當 <span class="math inline">\mathbf{x} \in [\alpha, 1]^n</span> 時合取輸出落在 <span class="math inline">[\alpha, 1]</span>，否則必落在 <span class="math inline">[0, 1-\alpha]</span>。</li>
+<li><strong>（可行多面體非空充要條件）</strong> <code>[AI 推導]</code> 上述線性不等式組存在非負解 <span class="math inline">(\beta, \mathbf{w}) \ge 0</span> 當且僅當 <span class="math inline">\alpha = 1</span>（此時解為 <span class="math inline">\beta = 1, w_i \ge 1</span>）或 <span class="math inline">\frac{n}{n+1} &lt; \alpha &lt; 1</span>。當 <span class="math inline">\frac{n}{n+1} &lt; \alpha &lt; 1</span> 時，所有可行解滿足嚴格正下界：
+<div class="math inline">w_i \ge w_{\min}(\alpha, n) = \frac{2\alpha - 1}{(n + 1)\alpha - n} &gt; 1, \qquad \beta \ge \beta_{\min}(\alpha, n) = \frac{\alpha^2 + (n - 1)\alpha(1 - \alpha)}{(n + 1)\alpha - n} &gt; 1.</div></li>
+</ol>
+<h3 id="完整推導-2">完整推導</h3>
+<ol>
+<li><strong>古典真值表保持性驗證</strong> <code>[原文內容, App E.1, P25:L36–P26:L5]</code>：
+設 <span class="math inline">\mathbf{x} \in ([0, 1-\alpha] \cup [\alpha, 1])^n</span>。
+<ul>
+<li>若所有 <span class="math inline">i \in I</span> 皆為古典真（<span class="math inline">x_i \ge \alpha</span>，即 <span class="math inline">1 - x_i \le 1 - \alpha</span>），由 <span class="math inline">w_i \ge 0</span> 與約束 <span class="math inline">\beta - (1-\alpha)\sum_i w_i \ge \alpha</span>：
+<div class="math inline">\beta - \sum_{i \in I} w_i(1 - x_i) \ge \beta - (1 - \alpha)\sum_{i \in I} w_i \ge \alpha \implies f(\cdots) \in [\alpha, 1].</div></li>
+<li>若至少存在某個 <span class="math inline">j \in I</span> 為古典假（<span class="math inline">x_j \le 1 - \alpha</span>，即 <span class="math inline">1 - x_j \ge \alpha</span>），且其餘 <span class="math inline">i \neq j</span> 滿足 <span class="math inline">1 - x_i \ge 0</span>，由約束 <span class="math inline">\beta - \alpha w_j \le 1 - \alpha</span>：
+<div class="math inline">\beta - \sum_{i \in I} w_i(1 - x_i) \le \beta - w_j(1 - x_j) \le \beta - \alpha w_j \le 1 - \alpha \implies f(\cdots) \in [0, 1 - \alpha].</div></li>
+</ul>
+</li>
+<li><strong>Fourier–Motzkin 變數消去證明充要條件 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span>（<code>STEP-7</code>）</strong> <code>[AI 推導, 經 VER-1 SymPy 驗證]</code>：
+<ul>
+<li>當 <span class="math inline">\alpha = 1</span> 時，約束化為 <span class="math inline">\beta - w_i \le 0</span> 與 <span class="math inline">\beta \ge 1</span>，取 <span class="math inline">\beta = 1, w_i \ge 1</span> 顯然可行。</li>
+<li>現設 <span class="math inline">\frac{1}{2} &lt; \alpha &lt; 1</span>。由最後一條約束與 <span class="math inline">w_i \ge 0</span> 知 <span class="math inline">\beta \ge \alpha &gt; \frac{1}{2}</span>，從而 <span class="math inline">\beta - (1 - \alpha) \ge 2\alpha - 1 &gt; 0</span>。由單輸入約束 <span class="math inline">\alpha w_i \ge \beta - 1 + \alpha</span> 對 <span class="math inline">i \in I</span>（<span class="math inline">|I| = n</span>）求和得：
+<div class="math inline">\sum_{i \in I} w_i \ge \frac{n(\beta - 1 + \alpha)}{\alpha} &gt; 0.</div>
+乘以正數 <span class="math inline">(1 - \alpha) &gt; 0</span> 並代入全真約束 <span class="math inline">\beta - \alpha \ge (1 - \alpha)\sum_{i \in I} w_i</span>，消去 <span class="math inline">\mathbf{w}</span> 得 <span class="math inline">\beta</span> 必須滿足之必要條件：
+<div class="math inline">\beta - \alpha \ge \frac{n(1 - \alpha)}{\alpha}(\beta - 1 + \alpha) \iff \bigl((n + 1)\alpha - n\bigr)\beta \ge \alpha^2 - n(1 - \alpha)^2.</div></li>
+<li>考察線性函數 <span class="math inline">\Phi(\beta) \triangleq \bigl((n + 1)\alpha - n\bigr)\beta - \bigl(\alpha^2 - n(1 - \alpha)^2\bigr)</span> 在定義域 <span class="math inline">\beta \ge \alpha</span> 上的正負性。先計算左端點 <span class="math inline">\beta = \alpha</span> 處的值：
+<div class="math inline">\Phi(\alpha) = (n + 1)\alpha^2 - n\alpha - \alpha^2 + n(1 - 2\alpha + \alpha^2) = n(2\alpha^2 - 3\alpha + 1) = n(\alpha - 1)(2\alpha - 1).</div>
+因 <span class="math inline">\frac{1}{2} &lt; \alpha &lt; 1</span> 且 <span class="math inline">n \ge 2</span>，恆有 <span class="math inline">\alpha - 1 &lt; 0</span> 且 <span class="math inline">2\alpha - 1 &gt; 0</span>，故 <span class="math inline">\Phi(\alpha) &lt; 0</span> 嚴格為負。</li>
+<li>若 <span class="math inline">\alpha \le \frac{n}{n+1}</span>，則斜率 <span class="math inline">(n + 1)\alpha - n \le 0</span>，故對一切 <span class="math inline">\beta \ge \alpha</span> 恆有 <span class="math inline">\Phi(\beta) \le \Phi(\alpha) &lt; 0</span>，原線性約束組無解（可行域為空集）。</li>
+<li>反之，若 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span>，斜率 <span class="math inline">(n + 1)\alpha - n &gt; 0</span>，解 <span class="math inline">\Phi(\beta) \ge 0</span> 得最小可行偏置 <span class="math inline">\beta_{\min} = \frac{\alpha^2 - n(1-\alpha)^2}{(n+1)\alpha - n} = 1 - \alpha + \frac{\alpha(2\alpha - 1)}{(n+1)\alpha - n} &gt; \alpha</span>，配對等權重 <span class="math inline">w_i = w_{\min} = \frac{2\alpha - 1}{(n+1)\alpha - n} &gt; 1</span> 即同時取等滿足全部約束。<span class="math inline">\blacksquare</span></li>
+</ul>
+</li>
+</ol>
+<h3 id="局限分析-2">局限分析</h3>
+<ol>
+<li><strong>正文第 6 節遺漏元數下界與零權重死鎖</strong> <code>[原文內容 + AI 推導]</code>：正文第 6 節僅要求 <span class="math inline">\frac{1}{2} &lt; \alpha \le 1</span>，未提醒讀者在無鬆弛變數時若取如 <span class="math inline">\alpha = 0.7</span> 而子句含 <span class="math inline">n = 3</span> 個文字（<span class="math inline">\frac{3}{4} = 0.75 &gt; 0.7</span>），Frank–Wolfe 最佳化器將直接面對空可行多面體。此外，即便 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span>，上述證明亦顯示 <span class="math inline">w_i \ge \frac{2\alpha-1}{(n+1)\alpha-n} &gt; 1</span>（或 <span class="math inline">\alpha=1</span> 時 <span class="math inline">w_i \ge 1</span>），權重永遠被擋在 <span class="math inline">1</span> 以上而無法歸零剪枝。</li>
+<li><strong>附錄 E.3 雙線性鬆弛懲罰破壞凸性</strong> <code>[AI 推導]</code>：引入鬆弛變數 <span class="math inline">s_{ik} \ge 0</span> 與懲罰項 <span class="math inline">\sum s_{ik} w_{ik}</span> 雖優雅解決了 <span class="math inline">w_{ik} \to 0</span> 的剪枝問題（見 <code>VER-4</code>），但目標函數中的雙線性乘積 <span class="math inline">s_{ik} w_{ik}</span> 為不定二次型（Hessian 特徵值為 <span class="math inline">\pm 1</span>），使最佳化問題從凸多面體規劃退化為非凸互補約束規劃（MPCC），局部極小值風險隨網路深度上升。</li>
+</ol>
+<h3 id="研究拓展-2">研究拓展</h3>
+<ul>
+<li>將雙線性互補項 <span class="math inline">s_{ik} w_{ik}</span> 替換為定製激活函數 <span class="math inline">f_{\mathbf{w}}</span>（見下節 4.4），或採用連續同倫退火（Homotopy Annealing）從 <span class="math inline">\alpha \to 1^-</span> 逐步調整，是避開 MPCC 鞍點的關鍵工程改進。</li>
+</ul>
+<h2 id="44-核心結果四proposition-prp-1-prp-3hájek-弱合取導出之加權-gödel-邏輯與定製激活函數零權重恆等退化定理">4.4 核心結果四（Proposition PRP-1 &amp; PRP-3）：Hájek 弱合取導出之加權 Gödel 邏輯與定製激活函數零權重恆等退化定理</h2>
+<h3 id="直觀理解-3">直觀理解</h3>
+<p>本組結果展現了 LNN 在代數構造上的兩項精巧設計：</p>
+<ol>
+<li><strong>加權 Gödel 邏輯（<code>PRP-1</code>）</strong>：在標準 Gödel 邏輯中，<span class="math inline">x \land y = \min\{x, y\}</span> 具冪等性（<span class="math inline">x \land x = x</span>），因此無法像 Łukasiewicz 那樣透過「重複累加 <span class="math inline">x</span>」來定義權重。作者借用 Hájek 模糊邏輯元數學中的恆等式 <span class="math inline">\min\{x, y\} = x \otimes (x \to y)</span>，將加權 Łukasiewicz 合取與蘊涵以特定耦合權重 <span class="math inline">\kappa = \beta_x - \beta_y + w_y</span> 組合，自動導出完全對稱的加權最小值算子。</li>
+<li><strong>定製激活零權重恆等退化（<code>PRP-3</code>）</strong>：為擺脫第 6 節的線性約束與鬆弛變數，定製激活函數改將「假，模糊」邊界設為依賴最大權重 <span class="math inline">w_{\max}</span> 的動態點 <span class="math inline">x_{\mathrm{F}} = \sum_i w_i - \alpha w_{\max}</span>。如此一來，當 <span class="math inline">n</span> 元合取中有 <span class="math inline">n-1</span> 個無關輸入權重全部衰減至 <span class="math inline">0</span>、僅剩一個有效輸入 <span class="math inline">B</span>（權重 <span class="math inline">w_B &gt; 0</span>）時，四個分段轉折點奇蹟般地共線排列在直線 <span class="math inline">y = x / w_B</span> 上，三段折線斜率全部收斂為 <span class="math inline">1/w_B</span>，使 <span class="math inline">f_{\mathbf{w}}(w_B B) \equiv B</span> 精確退化為恆等函數。</li>
+</ol>
+<h3 id="嚴格表述-3">嚴格表述</h3>
+<ol>
+<li><strong><code>PRP-1</code>（加權 Gödel 弱合取恆等式）</strong> <code>[原文內容, App B.2, Eqs. (15)–(18), P15:L55–L76]</code> 補充定義域條件 <code>[AI 推導, IMP-4]</code>：
+在加權 Łukasiewicz 邏輯中，令 <span class="math inline">\kappa = \beta_x - \beta_y + w_y &gt; 0</span>，且設內部蘊涵未下溢截斷於 <span class="math inline">0</span>（即 <span class="math inline">w_x(1-x) + w_y y \ge 0</span>，對 <span class="math inline">w_x, w_y \ge 0, x, y \in [0, 1]</span> 恆自動成立。），則：
+<div class="math inline">{}^{\beta_x}\left(x^{\otimes w_x} \otimes \bigl(x^{\otimes w_x/\kappa} \to y^{\oplus w_y/\kappa}\bigr)^{\otimes \kappa}\right) = \max\bigl\{0,  \min\{1,  \beta_x - w_x(1 - x),  \beta_y - w_y(1 - y)\}\bigr\}.</div></li>
+<li><strong><code>PRP-3</code>（定製激活零權重恆等退化）</strong> <code>[原文內容, App F.7, Eq. (97), P32:L52–P33:L44]</code>：
+對附錄 F.6 Eq. (95) 定義之 <span class="math inline">n</span> 元分段線性合取定製激活函數 <span class="math inline">f_{\mathbf{w}}</span>（其中 <span class="math inline">\alpha \in (\frac{1}{2}, 1)</span>），若對所有 <span class="math inline">i \in I \setminus \{B\}</span> 皆有 <span class="math inline">w_i = 0</span> 且 <span class="math inline">w_B &gt; 0</span>，則對任意 <span class="math inline">B \in [0, 1]</span> 恆有：
+<div class="math inline">f_{\mathbf{w}}\left(\sum_{i \in I} w_i x_i\right) = f_{\mathbf{w}}(w_B B) = B.</div></li>
+</ol>
+<h3 id="完整推導-3">完整推導</h3>
+<ol>
+<li><strong><code>PRP-1</code> 分段代數推導（<code>STEP-6</code>）</strong> <code>[AI 推導補全, 經 VER-1 驗證]</code>：
+記 <span class="math inline">A = \beta_x - w_x(1 - x)</span>，<span class="math inline">B = \beta_y - w_y(1 - y)</span>。因 <span class="math inline">\kappa = \beta_x - \beta_y + w_y &gt; 0</span> 且 <span class="math inline">w_x, w_y \ge 0, x, y \in [0, 1]</span>，考察內層蘊涵（預設偏置為 <span class="math inline">1</span>，見 <code>[P15:L16]</code>）：
+<div class="math inline">I_{\text{inner}} = \max\left\{0,  \min\left\{1,  1 - 1 + \frac{w_x}{\kappa}(1 - x) + \frac{w_y}{\kappa} y\right\}\right\}.</div>
+注意分子 <span class="math inline">w_x(1-x) + w_y y \ge 0</span> 且 <span class="math inline">\kappa &gt; 0</span>，故 <span class="math inline">\max\{0, \cdot\}</span> 永不觸發。再利用恆等變形：
+<div class="math inline">w_x(1 - x) + w_y y = \kappa - \kappa + w_x(1 - x) + w_y - w_y(1 - y) = \kappa + \bigl(\beta_y - w_y(1-y)\bigr) - \bigl(\beta_x - w_x(1-x)\bigr) = \kappa + B - A,</div>
+得未截斷商為 <span class="math inline">\frac{w_x(1-x) + w_y y}{\kappa} = 1 + \frac{B - A}{\kappa}</span>。分兩類情形：
+<ul>
+<li><strong>情形 1（<span class="math inline">A \le B</span>）</strong>：此時 <span class="math inline">1 + \frac{B - A}{\kappa} \ge 1</span>，故 <span class="math inline">I_{\text{inner}} = 1</span>。代入外層合取：
+<div class="math inline">\max\{0, \min\{1, A - \kappa(1 - 1)\}\} = \max\{0, \min\{1, A\}\} = \max\{0, \min\{1, A, B\}\}.</div></li>
+<li><strong>情形 2（<span class="math inline">A &gt; B</span>）</strong>：此時 <span class="math inline">0 \le 1 + \frac{B - A}{\kappa} &lt; 1</span>，故 <span class="math inline">I_{\text{inner}} = 1 + \frac{B - A}{\kappa}</span>。代入外層合取：
+<div class="math inline">\max\left\{0, \min\left\{1, A - \kappa\left(1 - 1 - \frac{B - A}{\kappa}\right)\right\}\right\} = \max\{0, \min\{1, A + (B - A)\}\} = \max\{0, \min\{1, B\}\} = \max\{0, \min\{1, A, B\}\}.</div>
+兩情形合一即得 Eq. (17)，推廣至 <span class="math inline">n</span> 元即得 Eq. (18)。</li>
+</ul>
+</li>
+<li><strong><code>PRP-3</code> 四控制節點共線性證明（<code>STEP-8</code>）</strong> <code>[原文內容 + AI 推導勘誤補全, 經 VER-6 驗證]</code>：
+設 <span class="math inline">w_i = 0   (\forall i \neq B)</span> 且 <span class="math inline">w_B &gt; 0</span>，則 <span class="math inline">\sum_{i \in I} w_i = w_B</span> 且 <span class="math inline">w_{\max} = w_B</span>。代入附錄 F.6 控制節點公式 <code>[P31:L25–L37]</code>：
+<div class="math inline">x_{\min} = 0,\quad x_{\mathrm{F}} = w_B - \alpha w_B = w_B(1 - \alpha),\quad x_{\mathrm{T}} = \alpha w_B,\quad x_{\max} = w_B.</div>
+修正原文 <code>[P31:L51, P33:L30]</code> 中 <span class="math inline">m_{\mathrm{T}}</span> 分母筆誤（將 <span class="math inline">x_{\max} - y_{\mathrm{T}}</span> 修正為 <span class="math inline">x_{\max} - x_{\mathrm{T}}</span>）後，計算三段斜率：
+<div class="math inline">m_{\mathrm{F}} = \frac{1 - \alpha}{w_B(1 - \alpha)} = \frac{1}{w_B}, \qquad m_{\mathrm{Z}} = \frac{2\alpha - 1}{\alpha w_B - w_B(1 - \alpha)} = \frac{2\alpha - 1}{(2\alpha - 1)w_B} = \frac{1}{w_B}, \qquad m_{\mathrm{T}} = \frac{1 - \alpha}{w_B - \alpha w_B} = \frac{1}{w_B}.</div>
+對輸入點積 <span class="math inline">x = w_B B \in [0, w_B]</span>：
+<ul>
+<li>當 <span class="math inline">0 \le x \le x_{\mathrm{F}}</span> 時，<span class="math inline">f_{\mathbf{w}}(x) = (w_B B)\cdot \frac{1}{w_B} = B</span>；</li>
+<li>當 <span class="math inline">x_{\mathrm{F}} &lt; x &lt; x_{\mathrm{T}}</span> 時，<span class="math inline">f_{\mathbf{w}}(x) = (1 - \alpha) + \bigl(w_B B - w_B(1-\alpha)\bigr)\frac{1}{w_B} = B</span>；</li>
+<li>當 <span class="math inline">x_{\mathrm{T}} \le x \le x_{\max}</span> 時，<span class="math inline">f_{\mathbf{w}}(x) = \alpha + (w_B B - \alpha w_B)\frac{1}{w_B} = B</span>。
+全區間恆等於 <span class="math inline">B</span>。<span class="math inline">\blacksquare</span></li>
+</ul>
+</li>
+</ol>
+<h3 id="局限分析-3">局限分析</h3>
+<ol>
+<li><strong>隱含正耦合權重條件 <span class="math inline">\kappa &gt; 0</span> 未聲明</strong> <code>[AI 推導, IMP-4]</code>：附錄 B.2 Eq. (16) <code>[P15:L59–L61]</code> 未指明 <span class="math inline">\kappa = \beta_x - \beta_y + w_y</span> 必須嚴格大於 <span class="math inline">0</span>（即 <span class="math inline">\beta_x + w_y &gt; \beta_y</span>）；若 <span class="math inline">\beta_y \ge \beta_x + w_y</span>，則 <span class="math inline">\kappa \le 0</span> 會違反加權 Łukasiewicz 非負權重公理或在 <span class="math inline">\kappa = 0</span> 處觸發除以零奇異性。</li>
+<li><strong>全零權重死態（Dead-State Impulse）之自相矛盾</strong> <code>[原文內容, App F.7, P33:L45–L53]</code>：當所有輸入權重同時降為 <span class="math inline">0</span>（<span class="math inline">w_i = 0, \forall i</span>）時，<span class="math inline">x_{\min} = x_{\mathrm{F}} = x_{\mathrm{T}} = x_{\max} = 0</span>，斜率出現 <span class="math inline">0/0</span> 奇異點（在 Autograd 中易產生 <code>NaN</code> 梯度 <code>[P32:L20–L23]</code>），且空合取預設返回 <code>True</code>、空析取與空蘊涵返回 <code>False</code>，若外層被全稱量詞強制初始化為 <code>True</code> 將觸發無法靠權重消除的死態矛盾。</li>
+<li><strong><span class="math inline">n</span> 元直接形式與二元嵌套分解不等價</strong> <code>[原文內容, App F.4.3, P30:L16–L24]</code>：以 <span class="math inline">w_{\max}</span> 定義 <span class="math inline">x_{\mathrm{F}}</span> 的代價是：當權重不相等時，低權重輸入為古典假不再強制整個合取為古典假（作者視之為符合預期的軟重要性特性），且 <span class="math inline">n</span> 元定製激活不等價於二元門的樹狀組合。</li>
+</ol>
+<h3 id="研究拓展-3">研究拓展</h3>
+<ul>
+<li>附錄 F.6 <code>[P32:L28–L38]</code> 提出之平滑定製 Sigmoid <span class="math inline">f_{\mathbf{w}}^{\mathrm{sig}}(x) = (1 + e^{-Ax+B})^{-1}</span>（其中 <span class="math inline">A = \frac{2\ln((1-\alpha)/\alpha)}{x_{\mathrm{F}} - x_{\mathrm{T}}} &gt; 0</span>, <span class="math inline">B = \ln\frac{\alpha}{1-\alpha} + A x_{\mathrm{F}}</span>）經代數檢驗確實在 <span class="math inline">\alpha \in (\frac{1}{2}, 1)</span> 下精確通過 <span class="math inline">(x_{\mathrm{F}}, 1-\alpha)</span> 與 <span class="math inline">(x_{\mathrm{T}}, \alpha)</span> <code>[AI 推導, EQN-10]</code>；進一步將其推廣至單調有理樣條（Monotonic Rational Splines），可同時保持 <span class="math inline">C^1</span> 光滑梯度與精確端點 <span class="math inline">f_{\mathbf{w}}(0)=0, f_{\mathbf{w}}(\beta_C)=1</span>，消除漸近尾端誤差。</li>
+</ul>
+<h2 id="h5-批判性學術評論與研究延伸">H5 批判性學術評論與研究延伸</h2>
+<h3 id="51-核心方法論貢獻評價">5.1 核心方法論貢獻評價</h3>
+<p>Riegel 等人的《Logical Neural Networks》是神經符號人工智慧（Neuro-Symbolic AI）發展史上的關鍵架構設計。相較於同期依賴高維嵌入內積近似邏輯規則的方法（如 LTN、NTP），本文最重要的三個原創洞察具有長遠生命力：</p>
+<ol>
+<li><strong>以二維真值界 <span class="math inline">[L, U]</span> 解耦「開放世界無知」與「邏輯衝突」</strong>：使邏輯矛盾不再是導致推理機當機的災難，而轉化為可微損失函數 <span class="math inline">\sum_k \max\{0, L_k - U_k\}</span> 的一階驅動訊號。</li>
+<li>將演繹元規則（<em>Modus Ponens</em> / <em>Modus Tollens</em>）內化為神經元局部逆向算子：誠如附錄 F.8.2 <code>[P35:L48–L55]</code> 所深刻指出的，在古典邏輯中 <em>Modus Ponens</em> 是獨立於真值表之外的後設推論規則（meta-rule），而在 LNN 中透過區間聚合與伴隨殘差結構，下行演繹被自然統一為重標度參數下的正向門求值。</li>
+<li><strong>以「動態定義域節點（Tailored Activations）」取代「靜態定義域＋昂貴多面體投影」</strong>：精準抓住了帶約束神經邏輯門訓練困難的幾何根源。</li>
+</ol>
+<h3 id="52-嚴格審核下之方法論弱點與實證代表性檢視">5.2 嚴格審核下之方法論弱點與實證代表性檢視</h3>
+<ol>
+<li><strong>實驗基準之邏輯複雜度篩選偏差（Selection Bias in LUBM &amp; TPTP）</strong> <code>[AI 推導]</code>：
+<ul>
+<li><strong>LUBM 100% Recall 之結構原因</strong>：LUBM 14 條查詢對應 OWL-Horst／描述邏輯 <span class="math inline">\mathcal{ALEHI}^+</span> 的確定性規則片段（Definite Horn / Datalog-like rules），不含正析取頭 <span class="math inline">A(x) \lor B(x)</span>。在確定性 Horn 邏輯上，前向／後向單位傳播本來就是完備的；因此 LUBM 實驗嚴格證明了 LNN 能完美模擬關聯式 Datalog 不動點引擎（超越因規則實作不全而漏解的 Virtuoso 與 Blazegraph），但不能外推為對含正析取一般一階理論的完備性證明（見 <code>CEX-1</code>–<code>CEX-3</code>）。</li>
+<li><strong>TPTP 覆蓋率瓶頸</strong>：TPTP 全庫 22,686 題中有 77% 含等詞 <code>=</code>，FOF 子集 8,630 題中有 78% 含等詞；作者在 CSR 領域 937 道 FOF 題中濾除函數與等詞後僅剩 25 題，且全部為難度等級 1（最低難度，範圍 1–100） <code>[原文內容, App H.3, P48:L6–L20]</code>。缺乏函數（Skolemization）與等詞（Congruence Closure / Paramodulation）是一階 LNN 邁向通用自動定理證明（ATP）的最大結構障礙。</li>
+</ul>
+</li>
+<li><strong>Smokers &amp; Friends 分式損失之「Flip-Flop」震盪病理</strong> <code>[原文內容, App H.1, P43:L83–P46:L6 + AI 推導]</code>：
+實驗並未直接使用正文第 6 節乾淨的線性加總損失，而是改用非凸分式損失 <span class="math inline">\frac{1 + \mathtt{contradiction}}{1 + \mathtt{factalign} + \mathtt{tightbounds}}</span>（且固定 <span class="math inline">\alpha = 1, \beta = 1</span> 搭配權重正規化與梯度替代 <span class="math inline">c_{\text{grad}}</span>）。由於當某節點矛盾剛被消除（<span class="math inline">L_i \le U_i</span>）時，分子 <span class="math inline">\max\{0, L_i - U_i\}</span> 的梯度瞬間歸零切斷，分母的 <span class="math inline">\mathtt{tightbounds} = \mathbb{E}[\exp(L_i - U_i)]</span> 立即將上下界重新推近，下一輪又越界產生微幅矛盾，形成圖 7 明顯的奇偶輪鋸齒震盪（flip-flop）。作者在 <code>[P46:L3–L6]</code> 假設透過遞減學習率與梯度裁剪即可收斂至接近真實全局最優解，並在 <code>[P31:L1–L5]</code> 設想以兩階段交替更新穩定逐節點可學習閾值 <span class="math inline">\alpha_k</span>，這兩項非凸收斂聲明在原文中均無理論收斂保證，應歸類為 <code>[未驗證假設, ASM-3]</code>。這說明在 <span class="math inline">L_i = U_i</span> 處不可微的硬截斷損失仍有待平滑障礙函數（如平滑 Huber／Log-Barrier 矛盾懲罰）改進。</li>
+<li><strong>一階接地組合爆炸（Grounding Combinatorial Blowup）</strong>：
+在含多個無共享變數（disjoint variables）的子句（如 Smokers &amp; Friends 第 7、8 條四變數公理 <span class="math inline">w, x, y, z</span>）中，全接地表規模為 <span class="math inline">|C|^4</span>；雖然 <span class="math inline">8</span> 個常元僅有 <span class="math inline">8^4 = 4096</span> 組，但在百萬實體知識圖譜上，若遇到非安全規則（unsafe rules）或長鏈未知常元傳播 <code>[App A.5, P13:L10–L25]</code>，稀疏表連接仍面臨指數級記憶體瓶頸。</li>
+</ol>
+<h3 id="53-後續研究演進方向">5.3 後續研究演進方向</h3>
+<ul>
+<li><strong>LNN 規則結構歸納（Rule Induction）</strong>：後續 IBM 團隊（Sen et al., AAAI 2022 <em>Neuro-Symbolic Inductive Logic Programming with Logical Neural Networks</em>）正是利用本文 <code>PRP-3</code> 的零權重剪枝與模板擴展，實現了從數據自動學習邏輯規則結構。</li>
+<li><strong>神經符號分支定界（Neuro-Symbolic Branch-and-Bound）</strong>：為克服 <code>CEX-1</code>–<code>CEX-3</code> 的有環不完備性，可在 LNN 收斂後挑選模糊度 <span class="math inline">U_p - L_p</span> 最大之關鍵命題執行可微軟分案（Soft Case-Splitting：<span class="math inline">p=1</span> 分支與 <span class="math inline">p=0</span> 分支取交集 <span class="math inline">\min/\max</span>），即可逐層逼近 Sherali–Adams 階層直至完整 SAT 完備性。</li>
+</ul>
+<h1 id="跨層研究分析全局依賴網絡脆弱節點與數理哲學跨域橋接">跨層研究分析：全局依賴網絡、脆弱節點與數理哲學跨域橋接</h1>
+<h3 id="61-原文內在張力與跨章節不一致清單tens-1tens-3-ai-推導">6.1 原文內在張力與跨章節不一致清單（<code>TENS-1</code>–<code>TENS-3</code>） <code>[AI 推導]</code></h3>
+<p>經全篇交叉比對，我們記錄三處正文與附錄之間的內部張力（詳見 <code>audit_verification.json</code>）：</p>
+<ol>
+<li><strong><code>TENS-1</code>（LUBM 收斂輪數不一致）</strong>：正文第 7 節 <code>[P8:L98]</code> 記載「<em>After three passes of bidirectional inferences for the network to converge</em>」，但附錄 H.2 <code>[P46:L44]</code> 對同一實驗記載「<em>It took 4 bidirectional passes for the network to converge</em>」。</li>
+<li><strong><code>TENS-2</code>（<span class="math inline">\alpha = \frac{1}{2}</span> 初始化建議與單調性下界衝突）</strong>：附錄 F.3 <code>[P28:L58–L61]</code> 先正確指出全局 <span class="math inline">\alpha</span> 必須滿足下界 <span class="math inline">n / (n + 1)</span>（源自 Eq. 91 <span class="math inline">x_{\mathrm{F}} &lt; x_{\mathrm{T}}</span>），緊接著下一句卻寫道「<em>this global <span class="math inline">\alpha</span> can therefore be initialised to <span class="math inline">\alpha = \frac{1}{2}</span></em>」，在任何 <span class="math inline">n \ge 2</span> 等權重節點上，<span class="math inline">\alpha = \frac{1}{2} &lt; \frac{n}{n+1}</span> 會導致 <span class="math inline">x_{\mathrm{F}} &gt; x_{\mathrm{T}}</span>（例如 <span class="math inline">n=2, w=1</span> 時 <span class="math inline">x_{\mathrm{F}} = 1.5 &gt; 1.0 = x_{\mathrm{T}}</span>），使中間段分母異號、破壞單調性。</li>
+<li><strong><code>TENS-3</code>（下行推論門控條件之三種版本）</strong>：正文 Eqs. (4)–(5) 以 <span class="math inline">L &gt; 1-\alpha</span> 與 <span class="math inline">U &lt; \alpha</span> 作為下行更新門控；附錄 C 演算法 5 改以 <span class="math inline">L &gt; 0</span> 與 <span class="math inline">U &lt; 1</span> 門控；附錄 F.8 Eqs. (98)–(99) 則提出取邏輯重言式與函數逆較寬鬆者的第三套條件，並重新定義「忽略古典區間內部矛盾（intra-classical contradictions, 如 <span class="math inline">\alpha &lt; U &lt; L \le 1</span>）」<code>[P35:L40–L46]</code>。</li>
+</ol>
+<h3 id="62-跨域理論橋接interdisciplinary-bridges">6.2 跨域理論橋接（Interdisciplinary Bridges）</h3>
+<h4 id="橋接一bridge-1範疇論與數理邏輯lawvere-廣義度量豐富範疇與-chu-雙格對偶">橋接一（<code>BRIDGE-1</code>）：範疇論與數理邏輯，Lawvere 廣義度量豐富範疇與 Chu 雙格對偶</h4>
+<ul>
+<li><strong>結構映射</strong>：將無權重 Łukasiewicz 真值空間 <span class="math inline">([0, 1], \le, \otimes, 1, \to)</span> 透過缺陷對偶變換 <span class="math inline">u = 1 - x \in [0, 1]</span> 映射至截斷距離空間 <span class="math inline">([0, 1], \ge, +_1, 0, \dot{-})</span>（其中 <span class="math inline">a +_1 b = \min\{1, a + b\}</span>，<span class="math inline">b \dot{-} a = \max\{0, b - a\}</span>），恰好同構於 F. W. Lawvere (1973) 著名的截斷廣義度量豐富範疇（<span class="math inline">[0, 1]</span>-Enriched Category）。在此同構下：
+<ul>
+<li>Łukasiewicz 合取 <span class="math inline">x \otimes y = \max\{0, x + y - 1\}</span> 正是截斷距離加法 <span class="math inline">u_x +_1 u_y</span>（三角不等式組合）；</li>
+<li>伴隨殘差條件 <span class="math inline">y \ge x \otimes z \iff z \le (x \to y)</span> 正是么半閉範疇（Symmetric Monoidal Closed Category）中的 Tensor–Hom 伴隨同構 <span class="math inline">\mathrm{Hom}(X \otimes Z, Y) \cong \mathrm{Hom}(Z, [X, Y])</span>；</li>
+<li>LNN 維護的二維區間空間 <span class="math inline">(L, U) \in [0, 1]^2</span>（允許 <span class="math inline">L + (1 - U) &gt; 1</span> 即 <span class="math inline">L &gt; U</span> 矛盾態），在代數邏輯上精確對應 Belnap 四值邏輯之連續實值雙格（Continuous Bilattice）與 Chu 空間 <span class="math inline">\mathrm{Chu}(\mathbf{Set}, [0, 1])</span>：其中知識序（Knowledge Order）為 <span class="math inline">(L_1, U_1) \sqsubseteq_k (L_2, U_2) \iff L_1 \le L_2 \land U_1 \ge U_2</span>，而 LNN 的 <code>aggregate</code> 算子 <span class="math inline">(\max\{L_1, L_2\}, \min\{U_1, U_2\})</span> 恰為知識格上的最小上界（Join <span class="math inline">\sqcup_k</span>）。</li>
+</ul>
+</li>
+<li><strong>成立條件</strong>：Tensor–Hom 嚴格伴隨與么半結合律要求 <span class="math inline">f(u) = \max\{0, \min\{1, u\}\}</span> 且 <span class="math inline">\beta = w_y = 1</span>（么半單位元為真值 <span class="math inline">1</span>／距離 <span class="math inline">0</span>）；當引入非單位偏置 <span class="math inline">\beta \neq 1</span> 時，二元運算偏離嚴格么半結合律，轉化為帶偏置虧格（graded/lax）之擬豐富結構。</li>
+<li><strong>推導依據</strong>：直接對本文 Eqs. (10)–(14) 施行對偶座標變換 <span class="math inline">u_i = 1 - x_i</span>，並結合 Hájek (2013) <code>[11]</code> 伴隨殘差格公理與 Belnap／Fitting 雙格語義推導得出。</li>
+<li><strong>不確定性</strong>：低（Low），在標準參數 <span class="math inline">\beta = 1</span> 下為嚴格代數同構。</li>
+</ul>
+<h4 id="橋接二bridge-2計算複雜度與多面體最佳化sheraliadams-線性規劃鬆弛與-證明複雜度屏障對接-41_最優傳輸與p_neq_np計算複雜度">橋接二（<code>BRIDGE-2</code>）：計算複雜度與多面體最佳化，Sherali–Adams 線性規劃鬆弛與 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span> 證明複雜度屏障（對接 <code>41_最優傳輸與P_neq_NP計算複雜度</code>）</h4>
+<ul>
+<li><strong>結構映射</strong>：將命題 LNN 置於多面體組合最佳化與證明複雜度（Proof Complexity）視角下審視：給定 <span class="math inline">m</span> 條 CNF 子句（初始化為 <span class="math inline">[1, 1]</span>），古典可滿足性問題（SAT）要求在超立方體頂點 <span class="math inline">\{0, 1\}^{|A|}</span> 中尋找整數解，其凸包為整數多面體 <span class="math inline">P_{\mathrm{SAT}} = \mathrm{conv}(\{0, 1\}^{|A|} \cap \mathcal{F})</span>。LNN 的第 5 節／第 4 節局部上下行傳播，等價於在每個子句局部邊際多面體上執行座標軸投影（區間弧一致性／單位傳播鬆弛，弱於或等價於第 1 層 Sherali–Adams 線性規劃鬆弛）。我們在 <code>CEX-3</code> 構造的四子句不可滿足實例 <span class="math inline">\{P \lor Q, P \lor \neg Q, \neg P \lor Q, \neg P \lor \neg Q\}</span>，其分數線性規劃鬆弛多面體包含內點 <span class="math inline">(P, Q) = (0.5, 0.5)</span>（滿足每條子句 <span class="math inline">0.5 + 0.5 = 1 \ge 1</span>），因此任何僅依賴局部線性不等式與區間投影的多項式時間演算法都必然看不見矛盾（Integrality Gap）。欲消滅此整數性間隙（例如在鴿籠原理 Pigeonhole Principle <span class="math inline">\mathrm{PHP}_n^{n+1}</span> 或隨機 3-XOR-SAT 上偵測 <span class="math inline">L &gt; U</span>），必須引入對應高階 Sherali–Adams 提升（同時追蹤 <span class="math inline">k</span> 元組聯合真值表，恰如一階 LNN 附錄 A 中的高元連接表，代價為 <span class="math inline">O(|V|^k)</span> 記憶體與時間）或指數級分案樹。這從計算複雜度底層精確界定了 LNN 單次收斂遍歷的能力天花板。</li>
+<li><strong>成立條件</strong>：適用於一切在多項式時間內執行局部訊息傳遞、不進行指數級變數賦值分支或高階元組提升的命題 LNN 變體。</li>
+<li><strong>推導依據</strong>：結合本文 Theorem 2 模型多面體 <span class="math inline">P_{\Gamma_0}</span>、標準線性規劃鬆弛分數解 <span class="math inline">(0.5, \dots, 0.5)</span>，以及本審核 <code>VER-3</code> 實證之 <code>CEX-1</code>–<code>CEX-3</code> 嚴格鬆弛間隙。</li>
+<li><strong>不確定性</strong>：低（Low），多面體鬆弛包含關係與分數不動點均可精確驗證。</li>
+</ul>
+<h4 id="橋接三bridge-3連續時間神經動力系統邏輯神經網路logicalnn與液態神經網路liquidnn-ltc之統一微分包含框架對接-42_lnn液態與邏輯神經網路">橋接三（<code>BRIDGE-3</code>）：連續時間神經動力系統，邏輯神經網路（LogicalNN）與液態神經網路（LiquidNN / LTC）之統一微分包含框架（對接 <code>42_LNN液態與邏輯神經網路</code>）</h4>
+<ul>
+<li><strong>結構映射</strong>：本領域資料夾同時收錄 IBM 的 Logical Neural Networks 與 MIT 的 Liquid Neural Networks (Hasani et al.)。表面上兩者僅因縮寫相同而並列，但在非線性動力系統層面存在深刻的互補對偶性：
+<ul>
+<li><strong>IBM LogicalNN</strong> 在離散步 <span class="math inline">t \in \mathbb{N}</span> 上演化知識格單調映射 <span class="math inline">\mathbf{b}^{(t+1)} = \Pi_{\mathcal{K}}\bigl(\mathbf{b}^{(t)}, \mathcal{T}(\mathbf{b}^{(t)}; W)\bigr)</span>，具備嚴格邏輯語義與單調無震盪保證（Theorem 1），但缺乏處理連續時間非均勻採樣序列與動態時間尺度的能力；</li>
+<li><strong>MIT LiquidNN (LTC)</strong> 演化連續時間常微分方程 <span class="math inline">\frac{d\mathbf{x}}{dt} = -\bigl[\boldsymbol{\tau}^{-1} + g(\mathbf{x}, \mathbf{I}(t))\bigr] \odot \mathbf{x}(t) + \mathbf{A} \odot g(\mathbf{x}, \mathbf{I}(t))</span>，具備狀態依賴的動態收縮率與有界軌跡穩定性，但隱藏神經元完全喪失一階邏輯門語義與開放世界區間界。</li>
+<li><strong>跨域合成構造（Liquid-Logical Differential System）</strong>：若將 LogicalNN 的上下界收緊算子嵌入具有狀態依賴液態電導率 <span class="math inline">\gamma_v(L_v, U_v, t) &gt; 0</span> 的連續時間單調動力系統：
+<div class="math inline">\frac{dL_v(t)}{dt} = \gamma_v(t) \cdot \bigl[\max_{e \in \partial v} \tilde{L}_{e}(L(t), U(t)) - L_v(t)\bigr]_+, \qquad \frac{dU_v(t)}{dt} = -\gamma_v(t) \cdot \bigl[U_v(t) - \min_{e \in \partial v} \tilde{U}_{e}(L(t), U(t))\bigr]_+,</div>
+則對任意正電導率場 <span class="math inline">\gamma_v(t) &gt; 0</span>，<span class="math inline">\dot{L}_v \ge 0, \dot{U}_v \le 0</span> 嚴格保持知識格 Lyapunov 單調性，其平衡點集合與原始離散 LogicalNN 不動點完全一致，同時允許透過伴隨靈敏度法（Adjoint Sensitivity Method）對連續時間串流邏輯事件進行非均勻步長推論與訓練。</li>
+</ul>
+</li>
+<li><strong>成立條件</strong>：要求連接詞更新函數 <span class="math inline">\tilde{L}_e, \tilde{U}_e</span> 在 <span class="math inline">[0, 1]^{2|V|}</span> 上為全域 Lipschitz 連續（例如採用 <span class="math inline">\alpha &gt; \frac{n}{n+1}</span> 之分段線性定製激活 Eq. 95 或平滑定製 Sigmoid，排除在 <span class="math inline">L = 1-\alpha</span> 處不連續跳躍之硬門控），以確保 Picard–Lindelöf 常微分方程解的存在唯一性。</li>
+<li><strong>推導依據</strong>：結合本文 Theorem 1 單調區間算子結構、定製激活函數之分段線性 Lipschitz 性質，以及正不變緊集上合作／單調動力系統（Monotone Dynamical Systems, Hirsch 1988）理論。</li>
+<li><strong>不確定性</strong>：中（Medium），此連續時間液態，邏輯融合系統屬於本報告提出之跨論文理論合成拓展 <code>[AI 推導]</code>，其伴隨梯度在剛性（stiff）矛盾邊界處的數值穩定性有待後續實證檢驗。</li>
+</ul>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

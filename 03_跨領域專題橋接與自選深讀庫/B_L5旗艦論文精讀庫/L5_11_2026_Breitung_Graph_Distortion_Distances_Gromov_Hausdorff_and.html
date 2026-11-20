@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_11｜Graph Distortion Distances, Gromov-Hausdorff and the Hardness of Gromov-Wasserstein · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-8d53c7b6">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-8d53c7b6">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-graph-distortion-distances-gromov-hausdorff-and-the-hardness-of-gromov-wasserstein2026">🏆 Graph Distortion Distances, Gromov-Hausdorff and the Hardness of Gromov-Wasserstein（2026）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a>
+細分子方向：<span class="wl-missing">33A_Gromov-Hausdorff收斂、Alexandrov空間與非光滑度量幾何</span> · <span class="wl-missing">41A_二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</span> · <span class="wl-missing">OTD_Gromov-Wasserstein與異構概念及圖譜無監督對齊</span>
+跨領域橋接：<span class="wl-missing">橋接01_最優傳輸相變與計算複雜度邊界</span> · <span class="wl-missing">橋接03_隨機熱力學、Wasserstein梯度流與生成擴散</span> · <span class="wl-missing">橋接05_演算法資訊論、壓縮預測與元複雜度</span> · <span class="wl-missing">橋接06_代數幾何、李群算子縮放與幾何複雜度理論GCT</span> · <span class="wl-missing">橋接08_幾何拓撲深度學習、跨空間表示對齊與概念多胞形</span> · <span class="wl-missing">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</span>
+作者與出處：Jens Breitung, Timo Gervens, Julius Pörzgen（2026，<em>arXiv (Cornell University)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/AJ2NRADH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.16926" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[原文內容]</code> 本論文在度量幾何與計算複雜度交叉地帶取得重大突破：證明了圖之間的最大加性扭曲度（Gromov–Hausdorff 距離）即便在樹圖之間也是 NP-hard 且不可近似，並解決了最優傳輸學界長期懸而未決的難題，證明了所有 <span class="math inline">p \in [1, \infty]</span> 下的 Gromov–Wasserstein 距離計算均為 NP-hard <code>[sections/07_gromov_wasserstein.tex:L58 | PDF P14]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>問題背景</strong>：圖匹配與跨域表示對齊的核心數學工具是圖扭曲距離（Graph Distortion Distances）與 Gromov–Wasserstein（GW）最優傳輸。過去文獻僅在特定非連通圖或帶邊權重下討論過硬度，對於均勻測度無權樹圖是否可多項式求解一直存在猜想。</li>
+<li><strong>核心定理 1（路徑圖閉式解）</strong>：任意連通圖 <span class="math inline">G</span> 到路徑圖 <span class="math inline">P_n</span> 的最大加性扭曲度具有精確閉式解：<span class="math inline">\mathcal{D}_\infty(G, P_n) = n - 1 - \operatorname{diam}(G)</span>，可在 <span class="math inline">O(n^\omega)</span> 矩陣乘法時間內求得。</li>
+<li><strong>核心定理 2（樹圖硬度與不可近似性）</strong>：在樹圖之間，最大扭曲度不可在多項式時間內達到加性 <span class="math inline">(4/3 - \epsilon)</span> 或乘性 <span class="math inline">(2 - \epsilon)</span> 近似（除非 P=NP）。</li>
+<li><strong>核心定理 3（Gromov–Wasserstein 普遍 NP 硬度）</strong>：對於任意 <span class="math inline">p \in [1, \infty]</span>，均勻測度圖上的 <span class="math inline">\mathrm{GW}_p</span> 計算皆為 NP-hard。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<h2 id="先修知識與依賴圖">先修知識與依賴圖</h2>
+<pre class="mermaid">flowchart TD
+    P1[&quot;度量幾何: 最短路徑度量 d_G&quot;] --&gt; D1[&quot;DEF-BREIT-MAXDIST: 最大加性扭曲度&quot;]
+    P2[&quot;最優傳輸: Kantorovich 耦合多胞形&quot;] --&gt; D2[&quot;DEF-BREIT-GW: Gromov-Wasserstein 距離&quot;]
+    D1 --&gt; T1[&quot;THM-BREIT-PATH: 路徑圖閉式解&quot;]
+    D1 --&gt; T2[&quot;THM-BREIT-TREE-HARD: 樹圖 (4/3-eps) 不可近似&quot;]
+    D2 --&gt; T3[&quot;THM-BREIT-GW-HARD: GW_p 全區間 NP-hard&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>意義</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">G, H</span></td>
+<td>Graph</td>
+<td>階數為 <span class="math inline">n</span> 的有限連通無向圖</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\pi</span></td>
+<td><span class="math inline">\mathrm{Bij}(V(G), V(H))</span></td>
+<td>頂點雙射</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\mathcal{D}_\infty(G, H)</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td>最大加性扭曲度</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\mathrm{GW}_p(G, H)</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td><span class="math inline">L_p</span> Gromov–Wasserstein 距離</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理路徑圖最大扭曲度閉式解">核心定理：路徑圖最大扭曲度閉式解</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>將任意圖 <span class="math inline">G</span> 展平到一維線段（路徑圖 <span class="math inline">P_n</span>）時，拉伸最嚴重的必然是直徑端點。直徑端點在 <span class="math inline">G</span> 中距離為 <span class="math inline">\operatorname{diam}(G)</span>，但在路徑圖中至多被拉伸至兩端端點（距離 <span class="math inline">n-1</span>）。因此最少必須付出 <span class="math inline">(n - 1) - \operatorname{diam}(G)</span> 的代價。反之，沿著直徑進行廣度優先分層即可完美達成此下界。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設 <span class="math inline">G</span> 為 <span class="math inline">n</span> 階連通無向圖，<span class="math inline">P_n</span> 為 <span class="math inline">n</span> 頂點路徑圖。則：
+<div class="math inline">\mathcal{D}_\infty(G, P_n) = n - 1 - \operatorname{diam}(G)</div></p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>下界</strong>：設 <span class="math inline">u, v \in V(G)</span> 滿足 <span class="math inline">d_G(u, v) = \operatorname{diam}(G)</span>。對任意雙射 <span class="math inline">\pi: V(G) \to V(P_n)</span>，因為 <span class="math inline">P_n</span> 的直徑為 <span class="math inline">n-1</span>，必有 <span class="math inline">d_{P_n}(\pi(u), \pi(v)) \leq n - 1</span>。因此：
+<div class="math inline">\mathrm{dis}_\infty(\pi) \geq |d_{P_n}(\pi(u), \pi(v)) - d_G(u, v)| \geq (n - 1) - \operatorname{diam}(G)</div></li>
+<li><strong>上界</strong>：選取直徑端點 <span class="math inline">u</span> 作為根節點，對 <span class="math inline">G</span> 進行 BFS 分層，將第 <span class="math inline">k</span> 層頂點映射到 <span class="math inline">P_n</span> 上連續的整數區間。所有樹邊的拉伸量均不超過 <span class="math inline">n - 1 - \operatorname{diam}(G)</span>。上下界重合，證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>該精確閉式解高度依賴目標圖為一維簡單路徑圖 <span class="math inline">P_n</span>。一旦目標圖推廣至樹圖，問題立即變為 NP-hard。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>啟發了在圖表示學習中利用 1D 骨架進行快速粗對齊、再進行局部微調的分層啟發式演算法。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有定理依賴 DAG 嚴格無環。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

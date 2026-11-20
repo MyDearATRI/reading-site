@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-87df9844">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a><a class="find" href="../../index.html#n=n-87df9844">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · F_腦認知、生命形態、哲學與社會演化</span>
@@ -196,6 +198,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Comparison of Catastrophic Forgetting Mitigation Strategies in Continual Learning Systems</strong>，V.L. Kiranmai, Krishna Reddy Seelam, Manikandan A.
+<ul>
+<li>重點：在標準基準資料集上比較正則化（EWC、LwF）、重播（Experience Replay、Generative Replay）、架構修改（PNN、Dynamic Networks）與混合方法對抗災難性遺忘的效果。結果顯示正則化方法以中等資源維持舊知識，重播方法保留效果最佳但計算成本高，架構方法可擴展但複雜度高，混合策略則在保留率與新任務表現間取得平衡。</li>
+<li>連結：<a href="zotero://select/library/items/49NU7WZC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.33425/3066-1226.1185" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜CyDeBoost: A SHAP-Guided Boosting Strategy Framework for Cyberbullying Detection through Mistake-Driven Learning</strong>，Shih-Wei Guo, Yao-Chung Fan
+<ul>
+<li>重點：提出錯誤驅動框架 CyDeBoost，先以 SHAP 找出網路霸凌誤判樣本的關鍵詞彙特徵，再由大型語言模型生成語意對比增強樣本，最後透過堆疊輕量適配器模組進行模組化持續學習以模擬提升過程並抑制遺忘。實驗顯示此架構能提高多類別偵測穩健性並在低資源條件下維持泛化。</li>
+<li>連結：<a href="zotero://select/library/items/NGRG82EJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3831585" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -238,6 +255,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

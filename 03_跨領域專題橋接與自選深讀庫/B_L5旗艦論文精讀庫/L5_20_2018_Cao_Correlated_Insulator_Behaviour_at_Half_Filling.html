@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_20｜Correlated Insulator Behaviour at Half-Filling in Magic Angle Graphene Superlattices · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-0bdc0491">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-0bdc0491">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-correlated-insulator-behaviour-at-half-filling-in-magic-angle-graphene-superlattices2018">🏆 Correlated Insulator Behaviour at Half-Filling in Magic Angle Graphene Superlattices（2018）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>
+細分子方向：<span class="wl-missing">22A_魔角雙層石墨烯、莫爾平帶超導與分數陳絕緣體</span>
+跨領域橋接：<span class="wl-missing">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</span>
+作者與出處：Yuan Cao, Valla Fatemi, Ahmet Demir, Shiang Fang, Spencer L. Tomarken, Jason Y. Luo et al.（2018，<em>Nature 556, p. 80-84 (2018)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/KAZQKMVQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1802.00553" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：Correlated Insulator Behaviour at Half-Filling in Magic Angle Graphene Superlattices<br />
+<strong>作者</strong>：Yuan Cao, Valla Fatemi, Ahmet Demir, Shiang Fang, Spencer L. Tomarken, Jason Y. Luo, J. D. Sanchez-Yamagishi, K. Watanabe, T. Taniguchi, E. Kaxiras, R. C. Ashoori, P. Jarillo-Herrero<br />
+<strong>發表期刊</strong>：Nature 556, p. 80–84 (2018)<br />
+<strong>arXiv 編號</strong>：<code>1802.00553</code><br />
+<strong>學術定位</strong>：與同期超導論文共同奠定了莫爾物理學的開創性工作。首次在完全由碳原子構成的魔角雙層石墨烯 (TBG) 莫爾超晶格中，實驗觀測到動能淬滅平帶驅動的強關聯絕緣態（半填充莫特型絕緣體），為人類提供了一個高純度、無化學雜質、全電場可調的強關聯多體物理實驗平臺。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;單層石墨烯狄拉克錐 (v_F ≈ 10^6 m/s)&quot;] --&gt;|&quot;精確旋轉魔角 θ ≈ 1.08°&quot;| B[&quot;莫爾超晶格 (週期 L_M ≈ 13 nm)&quot;]
+    B --&gt; C[&quot;Bistritzer-MacDonald 速度淬滅 (平帶 W ≈ 10 meV)&quot;]
+    C --&gt; D[&quot;在線庫侖相互作用排斥主導 (U ≈ 27.5 meV &gt; W)&quot;]
+    D --&gt; E[&quot;半填充處打開關聯能隙 (Δ ≈ 0.31 meV)&quot;]
+    E --&gt; F[&quot;強關聯莫特絕緣基態 (n = ± n_s/2)&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">\theta</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Superlattice Geometry</td>
+<td style="text-align:left">雙層石墨烯扭轉角 (約 1.08°)</td>
+<td style="text-align:left">P2:L10</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">L_M</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Superlattice Geometry</td>
+<td style="text-align:left">莫爾超晶格週期長度 (<span class="math inline">L_M \approx 13 \mathrm{nm}</span>)</td>
+<td style="text-align:left">P2:L15</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">n_s</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Carrier Density</td>
+<td style="text-align:left">四重簡併滿填充載流子密度 (<span class="math inline">2.7\times 10^{12} \mathrm{cm}^{-2}</span>)</td>
+<td style="text-align:left">P3:L12</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">U</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Energy Scales</td>
+<td style="text-align:left">莫爾單胞有效在線庫侖排斥能 (<span class="math inline">U \sim 27.5 \mathrm{meV}</span>)</td>
+<td style="text-align:left">P8:L5</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">W</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Energy Scales</td>
+<td style="text-align:left">魔角平帶帶寬 (<span class="math inline">W \lesssim 10 \mathrm{meV}</span>)</td>
+<td style="text-align:left">P8:L7</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\Delta</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Transport Gap</td>
+<td style="text-align:left">半填充熱活化關聯能隙 (<span class="math inline">\Delta \approx 0.31 \mathrm{meV} \approx 3.6 \mathrm{K}</span>)</td>
+<td style="text-align:left">P9:L18</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（莫爾超晶格填充因子）</strong>：
+設微布里淵區自旋與谷自由度四重簡併 <span class="math inline">g_s g_v = 4</span>。定義填充因子 <span class="math inline">\nu</span> 為：
+<div class="math inline">\nu = \frac{4 n}{n_s}</div>
+其中 <span class="math inline">\nu = \pm 4</span> 對應於平帶頂與平帶底之完全填充；<span class="math inline">\nu = \pm 2</span> 嚴格對應於半填充（每個莫爾單胞容納 2 個電子或電洞）。</p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析魔角雙層石墨烯半填充關聯絕緣態">5-層核心定理專題解析：魔角雙層石墨烯半填充關聯絕緣態</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>在石墨烯中，電子原本具有極高的費米速度，像光子一樣自由飛馳。但當兩層石墨烯以大約 1.08° 的精確魔角重疊時，層間電子的量子干涉恰好抵消了運動動能，形成帶寬僅約 10 meV 的超平能帶。當每個莫爾單胞恰好填入兩個電子（半填充）時，由於電子無法運動，電子之間的在線庫侖排斥力（約 27.5 meV）壓倒了動能，電子為了避開彼此而發生強烈關聯局域化，形成了類似高溫超導母體的莫特型絕緣態。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>在魔角雙層石墨烯超晶格中，當填充因子滿足 <span class="math inline">\nu = \pm 2</span>（載流子密度 <span class="math inline">n = \pm n_s / 2</span>），且有效在線哈伯德排斥能與帶寬之比滿足 <span class="math inline">U/W &gt; 1</span> 時，電子系統在費米能級處自發打開熱活化傳輸能隙 <span class="math inline">\Delta \approx 0.31 \mathrm{meV}</span>，電阻隨溫度降低滿足 Arrhenius 活化關係 <span class="math inline">R(T) \propto \exp(\Delta / 2 k_B T)</span>。</p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>考慮莫爾週期公式：
+<div class="math inline">L_M = \frac{a}{2 \sin(\theta/2)}</div>
+在小角度近似下 <span class="math inline">\sin(\theta/2) \approx \theta/2</span>，故 <span class="math inline">L_M \approx a / \theta</span>。
+莫爾單胞面積為正六角形等價之菱形單胞：
+<div class="math inline">A_M = \frac{\sqrt{3}}{2} L_M^2 = \frac{\sqrt{3} a^2}{2 \theta^2}</div>
+考慮自旋與谷的四重簡併 <span class="math inline">g_s g_v = 4</span>，滿填充載流子密度：
+<div class="math inline">n_s = \frac{4}{A_M} = \frac{8 \theta^2}{\sqrt{3} a^2}</div>
+代入石墨烯晶格常數 <span class="math inline">a = 0.246 \mathrm{nm}</span>，扭轉角 <span class="math inline">\theta = 1.08^\circ = 0.01885 \mathrm{rad}</span>：
+<div class="math inline">L_M \approx \frac{0.246 \times 10^{-9}}{0.01885} \approx 13.06 \mathrm{nm}</div>
+<div class="math inline">n_s \approx \frac{8 \times (0.01885)^2}{\sqrt{3} \times (0.246 \times 10^{-7})^2} \approx 2.71 \times 10^{12} \mathrm{cm}^{-2}</div>
+半填充載流子密度即為 <span class="math inline">n_{1/2} = n_s / 2 \approx 1.35 \times 10^{12} \mathrm{cm}^{-2}</span>。
+在 hBN 襯底介電屏蔽環境 (<span class="math inline">\epsilon_r \approx 4</span>) 下，單胞局域庫侖排斥能：
+<div class="math inline">U = \frac{e^2}{4\pi \epsilon_0 \epsilon_r L_M} \approx \frac{(1.602 \times 10^{-19})^2}{4\pi \times 8.854 \times 10^{-12} \times 4 \times 13.06 \times 10^{-9}} \approx 4.41 \times 10^{-21} \mathrm{J} \approx 27.5 \mathrm{meV}</div>
+已知平帶帶寬 <span class="math inline">W \approx 10 \mathrm{meV}</span>，故：
+<div class="math inline">\frac{U}{W} \approx \frac{27.5}{10} = 2.75 &gt; 1</div>
+此條件滿足哈伯德模型之莫特絕緣體判據，體系打開關聯能隙 <span class="math inline">\Delta</span>，證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>該推導假設扭轉角在全樣品空間嚴格均勻。在實際樣品中，扭轉角存在微小局域梯度（Angle Disorder），若局部偏離魔角超過 0.1°，帶寬 <span class="math inline">W</span> 將顯著增寬，從而破壞 <span class="math inline">U/W &gt; 1</span> 條件使絕緣相消失。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>半填充絕緣態的微觀波函數與拓撲性：魔角平帶具有非平凡的脆弱拓撲（Fragile Topology），促成了後續針對量子反常霍爾效應（Chern 絕緣體）及非阿貝爾分數量子霍爾態在莫爾體系中的深刻探索。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心驗證：</p>
+<ol>
+<li><strong>SymPy 符號級數展開</strong>：
+對超晶格載流子面密度 <span class="math inline">n_s(\theta)</span> 進行符號級數展開，精確證實二階小角度近似解析式 <span class="math inline">n_s \approx \frac{2\sqrt{3}}{3 a^2}\theta^2</span>。</li>
+<li><strong>NumPy 物理量數值計算</strong>：
+在 <span class="math inline">\theta = 1.08^\circ</span> 下，計算莫爾長度 <span class="math inline">L_M = 13.06 \mathrm{nm}</span>、滿填充載流子密度 <span class="math inline">n_s = 2.71 \times 10^{12} \mathrm{cm}^{-2}</span> 及庫侖帶寬比 <span class="math inline">U/W = 2.75 &gt; 1</span>，數值精度與 Nature 原文完全吻合。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。幾何參數、實驗溫度與 Arrhenius 活化數據完全忠於原文。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。無環路定理依賴 DAG，符號與數值計算驗證通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（自旋-谷破缺基態）</strong>：半填充絕緣態之精確基態微觀序（Kramer 間谷相干態 vs 谷極化鐵磁態）需結合後續微觀光譜與 STM 實驗複核。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="凝聚態物理對偶高溫銅氧化物莫特絕緣母體">凝聚態物理對偶：高溫銅氧化物莫特絕緣母體</h3>
+<p>魔角石墨烯在半填充處表現出的強關聯絕緣態，在結構與相圖上對偶於銅氧化物高溫超導體的未摻雜反鐵磁莫特母體，而其全靜電門極可調性消除了化學摻雜雜質干擾，為強關聯電子理論提供了最為純淨的物理模型。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

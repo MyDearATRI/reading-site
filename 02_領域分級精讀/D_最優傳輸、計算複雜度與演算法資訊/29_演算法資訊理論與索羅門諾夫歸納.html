@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-2758d705">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a><a class="find" href="../../index.html#n=n-2758d705">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · D_最優傳輸、計算複雜度與演算法資訊</span>
@@ -203,6 +205,23 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li>
+<p><strong>2026｜Complete bipartite embeddings, lattice non-embeddability, and non-Euclidean powers of information distance</strong>，Fengqi Hou</p>
+<ul>
+<li>重點：為任意有限完全二分圖建立具尺度無關常數加性誤差的二元字串資訊距離嵌入與對數誤差的無窮序列嵌入，結合二分圖障礙證明資訊距離的任意正冪次皆無法精確表示為實 Hilbert 空間距離，並透過條件前綴複雜度中間字串數界排除整數格與 <span class="math inline">(\mathbb{R}^m,\|\cdot\|_1)</span> 的尺度嵌入。</li>
+<li>連結：<a href="zotero://select/library/items/48F9P5P6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.38919" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>2026｜What Can Language Models Inherit from Solomonoff Induction? Limits, Attainable Properties, and What Served Conditionals Reveal</strong>，Luan Ozelim, Abicumaran Uthamacumaran, Hector Zenil</p>
+<ul>
+<li>重點：證明任何可計算模型皆無法一致逼近 Solomonoff 歸納且有限或漸近評估亦無法認證此趨勢；透過預測器 Kraft 不等式說明各模型具相同的預測成功總預算而差異在於配置位置，並分析脈絡內學習作為攤銷貝氏推論、脈絡視窗性質與線上服務條件機率所揭示的可繼承性質。</li>
+<li>連結：<a href="zotero://select/library/items/ACBVRQ5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.14007" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -248,6 +267,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

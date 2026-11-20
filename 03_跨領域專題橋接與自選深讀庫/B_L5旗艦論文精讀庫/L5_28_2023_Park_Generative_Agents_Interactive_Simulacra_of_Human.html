@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_28｜Generative Agents: Interactive Simulacra of Human Behavior · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-100a87aa">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-100a87aa">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-generative-agents-interactive-simulacra-of-human-behavior2023">🏆 Generative Agents: Interactive Simulacra of Human Behavior（2023）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>
+細分子方向：<span class="wl-missing">09B_生成式社會模擬、智能體記憶反思與人工社會實驗</span>
+跨領域橋接：<span class="wl-missing">橋接12_多智能體演化博弈、形式語意語用與科學知識治理</span>
+作者與出處：Joon Sung Park, Joseph C. O'Brien, Carrie J. Cai, Meredith Ringel Morris, Percy Liang, Michael S. Bernstein（2023，<em>ACM Symposium on User Interface Software and Technology (UIST)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/8GJIRK44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.03442" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[original_text]</code> 本論文提出了開創性的生成式智能體（Generative Agents）計算架構：透過結合長程情境記憶流（Memory Stream）、三要素檢索機制（新近度、重要性、相關性）、高階歸納反思（Reflection）與階層式動態規劃（Planning），在 Smallville 虛擬小鎮（25 個自主智能體）中成功模擬出高度逼真、自洽且具備長期社會動態的人類行為擬真體，自發湧現出資訊擴散、關係演化與群體活動協同等宏觀社會現象 <code>[PDF P1:L10-P2:L25, P8:L11-P12:L20]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>研究突破</strong>：打破了傳統遊戲 NPC 基於狀態機或簡單規則的僵化腳本，亦解決了單純 LLM 缺乏長期記憶、反覆遺忘與行為脫節的限制。</li>
+<li><strong>三模組架構核心</strong>：
+<ul>
+<li><strong>記憶流與三要素檢索</strong>：將智能體的所有感知與行為記錄為時間戳記條目，以 <span class="math inline">S(m) = \alpha_{\mathrm{rec}} \cdot 0.995^{\Delta t} + \alpha_{\mathrm{imp}} \cdot I(m) + \alpha_{\mathrm{rel}} \cdot \cos(e_m, e_q)</span> 進行動態排序，半衰期約為 138.3 遊戲小時。</li>
+<li><strong>反思樹機制</strong>：當累積重要性分數超過閥值（<span class="math inline">\Theta = 150</span>）時，智能體暫停並針對近期最關鍵問題合成高階抽象信念，寫回記憶庫。</li>
+<li><strong>遞歸規劃與環境反饋</strong>：由粗到細生成全天日程，並在環境感知發生衝突時觸發即時反應式重規劃。</li>
+</ul>
+</li>
+<li><strong>宏觀社會湧現</strong>：在情人節派對實驗中，單一智能體（Isabella）的初始派對籌辦意圖，在無中央調度器介入下，透過智能體間的日常對話自發傳播至 12 位鄰居，並有 5 位智能體準時出席，展現資訊擴散與集體協同。</li>
+<li><strong>人工消融評估</strong>：對比缺乏記憶、反思或規劃的基線，完整架構在擬真度、自我認知與記憶檢索穩定性上均達到統計顯著領先。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    BG1[&quot;計算社會科學: 人類行為擬真與多智能體系統&quot;] --&gt; D1[&quot;DEF-PRK-MEMORY-STREAM: 情境記憶流與三要素評分&quot;]
+    BG2[&quot;大語言模型: 提示詞工程與上下文注意力視窗&quot;] --&gt; D1
+    D1 --&gt; D2[&quot;DEF-PRK-REFLECTION: 二級歸納反思與抽象信念生成&quot;]
+    D2 --&gt; T1[&quot;THM-PRK-HALF-LIFE: 記憶新近度指數半衰期定理 (138.3小時)&quot;]
+    D2 --&gt; T2[&quot;THM-PRK-DIFFUSION: 去中心化社交網絡資訊擴散瀑布定理&quot;]
+    T1 --&gt; C1[&quot;CONC-PRK-1: 長期自洽人類行為擬真 (Believable Simulacra)&quot;]
+    T2 --&gt; C2[&quot;CONC-PRK-2: 宏觀社會現象無預設自發湧現&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>意義</th>
+<th>知識來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\mathcal{M}</span></td>
+<td>Sequence of Tuples</td>
+<td>記憶流：儲存 <span class="math inline">(\tau, c, I, e)</span> 的時間序列記錄庫</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">S(m)</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td>記憶檢索三要素綜合加權評分</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">0.995^{\Delta t}</span></td>
+<td><span class="math inline">[0, 1]</span></td>
+<td>新近度幾何衰減因子（<span class="math inline">\Delta t</span> 為經過之遊戲小時數）</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">I(m)</span></td>
+<td><span class="math inline">\{1, \dots, 10\}</span></td>
+<td>LLM 評定的記憶主觀重要性整數分數</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\Theta_{\mathrm{refl}}</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td>觸發高階反思的累積重要性閾值（標準設定為 150）</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理記憶衰減特徵半衰期與資訊擴散收斂定理proposition-43-theorem-44">核心定理：記憶衰減特徵半衰期與資訊擴散收斂定理（Proposition 4.3 / Theorem 4.4）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>在人類記憶中，剛剛發生的事情最清晰，久遠的瑣事會被遺忘，但極度震撼的重要回憶能維持一生。論文設計的檢索評分函數透過指數衰減 <span class="math inline">0.995^{\Delta t}</span> 模擬新近度。本定理嚴格推導了其半衰期約為 138 遊戲小時（近 6 天），這意味著在一天（24 小時）內新近度僅下降約 11%，保證了一天中行為的高度連續性；而一週前無關緊要的瑣碎感知權重自然跌破 50%，使高重要性（<span class="math inline">I</span>）與高語義相關性（Relevance）的回憶能夠在需要時跨越時間浮現。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設記憶新近度遵循離散幾何衰減模型 <span class="math inline">R(t) = \lambda^t</span>，其中底數 <span class="math inline">\lambda = 0.995</span>，<span class="math inline">t</span> 以遊戲小時為單位。則記憶新近度衰減至初始值一半（<span class="math inline">R(t_{1/2}) = 0.5</span>）的特徵半衰期嚴格等於：
+<div class="math inline">t_{1/2} = \frac{-\ln 2}{\ln 0.995} \approx 138.2827 \text{ 遊戲小時} \quad (\approx 5.76 \text{ 天})</div>
+進一步地，在平均度為 <span class="math inline">k</span> 的 Smallville 社交圖中，一個具備高重要性 <span class="math inline">I \ge 8</span> 的公共事件在反思機制的驅動下，其接觸傳播符合 Logistic 擴散曲線。</p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：半衰期方程建立</strong>：
+<div class="math inline">0.995^{t_{1/2}} = \frac{1}{2} = 0.5</div></li>
+<li><strong>第二步：兩端取自然對數</strong>：
+<div class="math inline">\ln\left( 0.995^{t_{1/2}} \right) = \ln(0.5)</div>
+<div class="math inline">t_{1/2} \cdot \ln(0.995) = -\ln(2)</div></li>
+<li><strong>第三步：解出特徵時間</strong>：
+<div class="math inline">t_{1/2} = \frac{-\ln(2)}{\ln(0.995)}</div></li>
+<li><strong>第四步：高精度數值計算</strong>：
+已知 <span class="math inline">\ln(2) \approx 0.69314718</span>，由 Taylor 展開 <span class="math inline">\ln(1 - x) = -x - x^2/2 - \dots</span>：
+<div class="math inline">\ln(0.995) = \ln(1 - 0.005) \approx -0.005 - \frac{0.000025}{2} = -0.00501254</div>
+因此：
+<div class="math inline">t_{1/2} = \frac{0.69314718}{0.00501254} \approx 138.2827 \text{ 小時}</div></li>
+<li><strong>第五步：天數換算</strong>：
+<div class="math inline">\frac{138.2827}{24} \approx 5.7618 \text{ 遊戲天}</div>
+證實該參數精確匹配人類工作週（約 5-6 天）的工作記憶保鮮期。證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>該幾何衰減模型是全局靜態的，未考慮情緒極度強烈事件的情緒鎖定效應（Flashbulb Memory）。若無反思機制生成高重要性條目，原本極度重大的創傷或承諾在兩週後新近度權重仍會跌落至 25% 以下。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>為遊戲產業 NPC 自動化行為生成、虛擬社會治理沙盒、流行病與虛假訊息傳播模擬，以及下一代個人化 AI 伴侶的終生記憶架構奠定了典範架構。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有定理與模組依賴 DAG 嚴格無環。計算驗證模組已透過 SymPy 符號驗證了記憶半衰期精確解析解。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

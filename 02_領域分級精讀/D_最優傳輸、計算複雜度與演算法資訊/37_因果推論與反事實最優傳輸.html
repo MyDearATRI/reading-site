@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-77312670">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a><a class="find" href="../../index.html#n=n-77312670">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · D_最優傳輸、計算複雜度與演算法資訊</span>
@@ -194,6 +196,23 @@ Bartl &amp; Wiesel (2023) 給出多期隨機最佳化與最優停時對 <span cl
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li>
+<p><strong>2026｜Well-Posedness of Semimartingale Optimal Transport with Partial Marginal Constraints for Model Calibration</strong>，Jean-François Chassagneux et al.</p>
+<ul>
+<li>重點：在 Benamou–Brenier 架構下建立具多期部分邊際約束的半鞅最優傳輸之強對偶與適定性，結合 HJB 解映射的正則性與局部強凸性證明容許價格集具非空內部與局部 Lipschitz 連續對偶唯一性，並證明對固定初始狀態路徑最優律在二階適應 Wasserstein 距離下隨價格連續變化。</li>
+<li>連結：<a href="zotero://select/library/items/AEFG4N8X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17902" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>2026｜Stability, discretization, and optimality of continuous-time causal optimal transport</strong>，Yifan Jiang, Fang Rui Lim</p>
+<ul>
+<li>重點：證明當邊際分佈在共同趨零時間平移的適應 Wasserstein 距離下收斂時，即使邊際律、濾波與成本同時變動，連續時間因果與雙因果最優傳輸仍穩定收斂，從而保證時間離散化與分數階 SDE 的 Wong–Zakai 逼近；並給出涵蓋全 Hurst 參數 <span class="math inline">H \in (0,1)</span> 的次模成本下同步耦合最優性條件。</li>
+<li>連結：<a href="zotero://select/library/items/QQAF9GMM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.00353" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -239,6 +258,9 @@ Bartl &amp; Wiesel (2023) 給出多期隨機最佳化與最優停時對 <span cl
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

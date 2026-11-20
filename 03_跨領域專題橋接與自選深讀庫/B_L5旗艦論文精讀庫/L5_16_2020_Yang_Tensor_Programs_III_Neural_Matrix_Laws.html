@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_16｜Tensor Programs III: Neural Matrix Laws · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f619afe4">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-f619afe4">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-tensor-programs-iii-neural-matrix-laws2020">🏆 Tensor Programs III: Neural Matrix Laws（2020）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a>
+細分子方向：<span class="wl-missing">34C_張量程式Tensor Programs、重尾自正則化與深度網路隨機矩陣律</span>
+跨領域橋接：<span class="wl-missing">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</span>
+作者與出處：Greg Yang（2020，<em>arXiv (Cornell University)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/QIDVGPAG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2009.10685" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[原文內容]</code> 本論文在深度學習數學地基領域建立了革命性框架：提出了支援矩陣轉置與反向傳播的計算語言 NetsorT，並證明了張量程序主定理（Tensor Programs Master Theorem），從而將隨機矩陣理論（如 Wigner 半圓律與 Marchenko–Pastur 律）與 Voiculescu 的非對易自由獨立性原理（Free Independence Principle）統一為神經網路無限寬度極限下的純粹代數推論 <code>[NetsorT.tex:L80, FIP.tex:L30 | PDF P7, P13]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>問題核心</strong>：在現代深度學習理論中，分析大模型權重矩陣的奇異值譜分佈、梯度爆炸／消失及泛化能力往往仰賴經驗性隨機矩陣理論（RMT）。然而經典 RMT 難以處理帶有反向傳播、殘差連接與複雜非線性激活的多層交織計算。</li>
+<li><strong>NetsorT 計算語言</strong>：定義了一種嚴格的形式化語言，支援輸入隨機矩陣、矩陣轉置乘法以及座標級非線性函數。</li>
+<li><strong>張量程序主定理（Theorem 2.2）</strong>：對於任何 NetsorT 程序，在寬度 <span class="math inline">n \to \infty</span> 極限下，任何純量標記統計量几乎必然收斂至遞歸高斯隨機變數的期望值 <span class="math inline">\mathbb{E}[\phi(Z^1, \dots, Z^k)]</span>。</li>
+<li><strong>自由獨立性原理（Theorem 4.1）</strong>：證明了獨立初始化的權重矩陣在反向傳播過程中漸近滿足非對易自由獨立性（Free Independence），解決了多層神經網路譜分析的理論瓶頸。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    P1[&quot;高維機率: 高斯條件投影技術&quot;] --&gt; D1[&quot;DEF-YANG-NETSORT: NetsorT 程式語言&quot;]
+    P2[&quot;隨機矩陣: Wigner 半圓律與矩法&quot;] --&gt; T1[&quot;THM-YANG-MASTER: 張量程序主定理&quot;]
+    D1 --&gt; T1
+    T1 --&gt; T2[&quot;THM-YANG-FIP: 自由獨立性原理&quot;]
+    T2 --&gt; C1[&quot;CONC-YANG-1: 任意架構無限寬極限解析求解&quot;]
+    T2 --&gt; C2[&quot;CONC-YANG-2: 自由機率與反向傳播統一&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>意義</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\pi</span></td>
+<td>NetsorT</td>
+<td>支援矩陣乘法與轉置的張量程序</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">W</span></td>
+<td><span class="math inline">\mathbb{R}^{n \times n}</span></td>
+<td>i.i.d. 高斯權重矩陣，方差 <span class="math inline">\sigma^2/n</span></td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">Z^v</span></td>
+<td><span class="math inline">\mathcal{N}(0, \Sigma)</span></td>
+<td>向量變數對應的漸近高斯隨機變數</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理netsort-主定理theorem-22">核心定理：NetsorT 主定理（Theorem 2.2）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>在無限寬度神經網路中，每當一個向量乘以一個獨立隨機高斯權重矩陣 <span class="math inline">W v</span> 時，中心極限定理使得輸出向量的每個坐標都漸近服從高斯分佈。但更為微妙的是，當該向量後續再次乘以 <span class="math inline">W^\top</span> 時，由於資訊已被 <span class="math inline">W</span> 記錄，傳統的獨立性被破壞。主定理的核心發現在於：只要將先前引入的資訊作為條件扣除（利用高斯條件分佈正交投影），剩餘部分仍然是完全獨立的高斯創新，而投影殘差在坐標均值中剛好構成一個確定的 Onsager 反應項。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設 <span class="math inline">\pi</span> 為 NetsorT 程序，包含向量 <span class="math inline">v^1, \dots, v^k</span>。對任意滿足多項式增長條件的測試函數 <span class="math inline">\phi: \mathbb{R}^k \to \mathbb{R}</span>，當 <span class="math inline">n \to \infty</span> 時，幾乎必然滿足：
+<div class="math inline">\lim_{n \to \infty} \frac{1}{n} \sum_{\alpha=1}^n \phi(v^1_\alpha, \dots, v^k_\alpha) = \mathbb{E}[\phi(Z^{v^1}, \dots, Z^{v^k})]</div>
+其中 <span class="math inline">(Z^{v^1}, \dots, Z^{v^k})</span> 是由遞歸協方差矩陣 <span class="math inline">\Sigma</span> 決定的聯合高斯向量。</p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：高斯矩陣條件分解</strong>。當 <span class="math inline">W</span> 受到已有約束 <span class="math inline">Z = W Q</span> 和 <span class="math inline">X = W^\top P</span> 限制時，其條件分佈等於確定性部分加上投影到 <span class="math inline">Q^\perp</span> 和 <span class="math inline">P^\perp</span> 上的獨立高斯矩陣。</li>
+<li><strong>第二步：Stein 引理展開</strong>。對於非線性項 <span class="math inline">\phi</span>，利用高斯分部積分公式 <span class="math inline">\mathbb{E}[Z \phi(Z)] = \operatorname{Cov}(Z, Z) \mathbb{E}[\phi'(Z)]</span>，將非線性坐標操作簡化為標量期望。</li>
+<li><strong>第三步：矩收斂與几乎必然收斂</strong>。利用多項式矩界引理（Lemma 2026），證明有限維經驗分佈到極限分佈的誤差以 <span class="math inline">O(n^{-1-\lambda})</span> 快速衰減，由 Borel–Cantelli 引理確立几乎必然收斂。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>定理假設程序的長度 <span class="math inline">L</span> 是固定的常數。若網絡深度 <span class="math inline">L</span> 與寬度 <span class="math inline">n</span> 同階增加（如深度 ResNet，當 <span class="math inline">L/n \to c &gt; 0</span>），高階誤差項的累積將破壞單純的高斯極限。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>張量程序主定理奠定了現代大語言模型（如 <span class="math inline">\mu</span>P 最大更新參數化）跨規模超參數無縫遷移的理論基礎。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有定理依賴 DAG 嚴格無環。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

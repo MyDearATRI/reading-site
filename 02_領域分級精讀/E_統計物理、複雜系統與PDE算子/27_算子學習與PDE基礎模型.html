@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-7a3319d6">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">E_統計物理、複雜系統與PDE算子</a><a class="find" href="../../index.html#n=n-7a3319d6">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · E_統計物理、複雜系統與PDE算子</span>
@@ -186,6 +188,23 @@ SympNets 則直接構造離散時間流映射 <span class="math inline">\Psi_\th
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li>
+<p><strong>2026｜PANO: Parallel Latent Space Neural Operator for Solving PDEs</strong>，Zijiang Yang et al.</p>
+<ul>
+<li>重點：提出平行潛在空間神經算子 PANO，透過獨立映射將觀測轉換為多個互異的壓縮表徵，在參數共享的平行潛在空間中以耦合指派投影（CAP）與成對潛在空間注意力層（PaLA）學習並融合跨空間交互作用。在九個基準測試中，於 Unilateral Stamping 將等效塑性應變誤差降低至少 28.3%，於 AirCraft 將升力係數誤差降低至少 21.4%。</li>
+<li>連結：<a href="zotero://select/library/items/5XVXA6PQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.22782" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>2026｜Variationally correct physics-informed operator learning for nonlinear partial differential equations</strong>，Yuan Qiu, Wolfgang Dahmen, Peng Chen</p>
+<ul>
+<li>重點：將非線性 PDE 寫為一階系統，證明在線性化殘差穩定與導數 Lipschitz 連續條件下，一階系統最小二乘殘差在解分支鄰域內與 PDE 相容範數誤差等價，並在單調反應、非線性擴散與可壓縮 Neo-Hookean 超彈性體問題上驗證。據此於協調有限元素空間訓練縮減基底神經算子，推論期可直接以殘差估計誤差，精準度優於同空間網格基線。</li>
+<li>連結：<a href="zotero://select/library/items/TCAQXUMT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21469" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -233,6 +252,9 @@ SympNets 則直接構造離散時間流映射 <span class="math inline">\Psi_\th
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-3bb63738">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-3bb63738">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
@@ -183,6 +185,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜TacInno: Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action</strong>，Weile Li et al.
+<ul>
+<li>重點：分離出視覺觀察與已執行動作無法預測的觸覺殘餘變化（觸覺創新），經條件式分詞器壓縮為離散碼後僅在訓練期監督 TacInno-VLA，部署時無需額外模組。在六項模擬與四項真實接觸操作任務分別達到 87.5% 與 70.5% 平均成功率，超越最強視觸覺基線 10.7 與 9.0 個百分點。</li>
+<li>連結：<a href="zotero://select/library/items/D9PQWSQB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26405" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Thinking in Streams: Proactive Spatial Reasoning with Vision-Language Models</strong>，Junyoung Hong et al.
+<ul>
+<li>重點：針對串流視訊的主動空間推理提出九項任務基準 ProSpace-Bench、訓練集 ProSpace-Train 及模型 ProSpace-VLM。該模型從傳入影格因果估計顯式幾何編碼並注入中間層，複用既有 KV 快取作為空間記憶並輔以空間詞元選擇，提升及時回應與正確棄權表現，惟與人類水準仍存顯著落差。</li>
+<li>連結：<a href="zotero://select/library/items/4A6C5I25" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25865" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Probing the &quot;Conscious&quot; Mind: Selective Access and Global Workspace in Vision-Language Models</strong>，Jiahao Huang, Jun Wang：借用意識科學的全局工作空間理論（GWT），提出多模態雅可比透鏡 MC-Lens 與詞元集反事實干預。結果證實 VLM 中間層的概念經查詢選擇性提取後，確實參與下游推理。在訓練過程的發育時序上，選擇性提取比原始概念可及性晚成熟。（<a href="zotero://select/library/items/I5G72KGT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26590" rel="noopener">官方連結</a>）</li>
@@ -214,6 +231,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

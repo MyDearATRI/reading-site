@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_05｜AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-01ba5617">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-01ba5617">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-ag-jepa-anatomically-guided-joint-embedding-predictive-architecture-for-neurodegenerative-representation-learning2026">🏆 AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning（2026）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a>
+細分子方向：<span class="wl-missing">02F_超維計算、向量符號架構與非自迴歸潛預測JEPA</span>
+跨領域橋接：<span class="wl-missing">橋接02_連續時間動力學、狀態空間與液態神經網路</span>
+作者與出處：Azad Singh, Ayantika Das, Amog Rao, Aiman Farooq, Anirban Porya, Ananya Shukla et al.（2026，<em>arXiv</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/7SPUP9HF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.18097" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[original_text]</code> 本論文提出解剖學引導之聯合嵌入預測架構（AG-JEPA）與縱向軌跡模型（Prog-AG-JEPA），利用無須人工診斷標籤的軟解剖覆蓋矩陣（Soft Coverage Matrix, <span class="math inline">C</span>）與解剖引導上下文取樣，將神經退化關鍵腦區（海馬體、杏仁核、內嗅皮質等）的細粒度歸納偏置注入非對比 JEPA 特徵空間，在 ADNI/AIBL 基準上取得 0.886 之 CN/AD 診斷 AUROC 與優異的阿茲海默症縱向病程預測能力 <code>[PDF P4:L21-P5:L92, P25:L53-P25:L75]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>臨床與架構問題</strong>：標準視覺遮蔽模型（MAE / I-JEPA）在 3D 腦部 MRI 上採用均勻立方體遮蔽，極易將體積微小的內嗅皮質（Entorhinal Cortex）等核心早發病變區 100% 遮蔽，造成無可見線索與梯度坍縮；反之，傳統監督分割模型又高度依賴耗時的人工密集標註。</li>
+<li><strong>軟覆蓋矩陣與解剖 Token 流</strong>：利用 FastSurfer 預先計算 5 對雙側關鍵腦區在空間 Patch 上的佔比分佈 <span class="math inline">C \in \mathbb{R}^{R \times N}</span>，建立雙軌 Transformer 編碼器：空間 Patch 流 <span class="math inline">z^p</span> 與專屬解剖 Token 流 <span class="math inline">z^a</span>。</li>
+<li><strong>四向互補預測目標</strong>：透過 Patch 預測器 <span class="math inline">M_{pp}</span>、解剖引導 Patch 預測器 <span class="math inline">M_{ap}</span>、解剖預測器 <span class="math inline">M_{pa}</span> 與區域對齊映射 <span class="math inline">M_{ar}</span>，迫使解剖 Token 壓縮全腦宏觀資訊，空間 Token 保持高解析細節。</li>
+<li><strong>縱向預測架構（Prog-AG-JEPA）</strong>：引入時間間隔 <span class="math inline">\Delta t</span>、年齡與腦體積共變量條件化預測器，在特徵潛空間直接模擬隨時間退化的病程漂移，認知分數下降與腦區萎縮預測顯著超越靜態模型。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    BG1[&quot;自監督表徵學習: I-JEPA (LeCun, Assran et al.)&quot;] --&gt; D1[&quot;DEF-SNG-COVERAGE: 軟解剖覆蓋矩陣 C&quot;]
+    BG2[&quot;神經影像學: FastSurfer 腦區分割與 Braak 病理分期&quot;] --&gt; D1
+    D1 --&gt; D2[&quot;DEF-SNG-AGJEPA: AG-JEPA 雙軌四頭預測架構&quot;]
+    D2 --&gt; T1[&quot;THM-SNG-RECON: 軟覆蓋加權區域特徵誤差有界性&quot;]
+    D2 --&gt; T2[&quot;THM-SNG-PROG: 縱向病程漂移次可加性定理&quot;]
+    T1 --&gt; C1[&quot;CONC-SNG-1: 無標籤零樣本腦退化精確診斷 (AUROC 0.886)&quot;]
+    T2 --&gt; C2[&quot;CONC-SNG-2: 連續時間認知與體積萎縮動態預測&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>解剖／機器學習意義</th>
+<th>知識來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">C</span></td>
+<td><span class="math inline">\mathbb{R}^{R \times N}</span></td>
+<td>隨機矩陣：腦區 <span class="math inline">r</span> 在 Patch <span class="math inline">n</span> 中之體積佔比（每行和為 1）</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">z_{g,r}^{\mathrm{reg}}</span></td>
+<td><span class="math inline">\mathbb{R}^d</span></td>
+<td>目標腦區 <span class="math inline">r</span> 的軟加權代表性特徵向量 <span class="math inline">\sum_n C_{r,n} z_{g,n}</span></td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">z_c^a, z_c^p</span></td>
+<td><span class="math inline">\mathbb{R}^{R \times d}, \mathbb{R}^{N_c \times d}</span></td>
+<td>上下文編碼器輸出的解剖 Token 與可見 Patch Token</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">M_{ap}</span></td>
+<td>ViT Module</td>
+<td>僅接收解剖 Token 與目標坐標以重建遮蔽 Patch 的預測頭</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">P_t</span></td>
+<td>Latent Predictor</td>
+<td>條件化於 <span class="math inline">(\Delta t, \mathrm{Age}_t, \mathrm{Vol}_t)</span> 的病程預測器</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理軟解剖加權區域特徵誤差有界性定理proposition-31-theorem-34">核心定理：軟解剖加權區域特徵誤差有界性定理（Proposition 3.1 / Theorem 3.4）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>在神經退化分析中，臨床醫生關心的是特定解剖結構（例如海馬體）的整體退化信號，而非單一網格像素。若將每個網格特徵進行粗暴的硬分配（Hard Assignment），邊界處微小結構的特徵會被鄰近的大腦白質稀釋。本定理證明，透過將解剖區域連續體積比率作為凸組合權重 <span class="math inline">\sum_n C_{r,n} = 1</span>，區域特徵誤差嚴格受限於 Patch 特徵的最大誤差，絕不會發生誤差放大，並能平滑抑制單一 Patch 的假影噪聲。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設 <span class="math inline">C \in \mathbb{R}^{R \times N}</span> 為非負軟解剖覆蓋矩陣，滿足 <span class="math inline">\sum_{n=1}^N C_{r,n} = 1</span>。對任意解剖區域 <span class="math inline">r</span>，設目標區域特徵定義為 <span class="math inline">z_r^{\mathrm{reg}} = \sum_{n=1}^N C_{r,n} z_n</span>。若神經網路在各 Patch 上的預測誤差均勻有界 <span class="math inline">\|\hat{z}_n - z_n\| \le \epsilon</span>，則重構區域特徵滿足：
+<div class="math inline">\|\hat{z}_r^{\mathrm{reg}} - z_r^{\mathrm{reg}}\| \le \epsilon</div></p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：誤差向量展開</strong>。考察區域特徵差值向量：
+<div class="math inline">\hat{z}_r^{\mathrm{reg}} - z_r^{\mathrm{reg}} = \sum_{n=1}^N C_{r,n} (\hat{z}_n - z_n)</div></li>
+<li><strong>第二步：三角不等式放縮</strong>。對兩端取賦範向量空間上的歐氏範數 <span class="math inline">\|\cdot\|</span>：
+<div class="math inline">\left\| \sum_{n=1}^N C_{r,n} (\hat{z}_n - z_n) \right\| \le \sum_{n=1}^N \|C_{r,n} (\hat{z}_n - z_n)\|</div></li>
+<li><strong>第三步：利用係數非負性</strong>。因為 <span class="math inline">C_{r,n} \ge 0</span>，可將標量提出範數外：
+<div class="math inline">\sum_{n=1}^N \|C_{r,n} (\hat{z}_n - z_n)\| = \sum_{n=1}^N C_{r,n} \|\hat{z}_n - z_n\|</div></li>
+<li><strong>第四步：利用均勻上界與隨機矩陣行和約束</strong>。代入 <span class="math inline">\|\hat{z}_n - z_n\| \le \epsilon</span>：
+<div class="math inline">\sum_{n=1}^N C_{r,n} \|\hat{z}_n - z_n\| \le \epsilon \sum_{n=1}^N C_{r,n} = \epsilon \cdot 1 = \epsilon</div></li>
+<li><strong>結論</strong>：區域聚合映射的 Lipschitz 常數嚴格等於 1，保證特徵表示在區域尺度上的穩定性。證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>該界限成立於給定確定性覆蓋矩陣 <span class="math inline">C</span> 的前提下。若在患有極度嚴重的腦積水或末期腦萎縮患者中，FastSurfer 的自動分割產生系統性形變漂移，則 <span class="math inline">C</span> 本身可能產生幾何失真，此時需引入不確定性加權。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>可推廣至心臟 4D MRI 動態血流重建、腹部多器官癌症病竈轉移自監督學習，以及多模態影像基因組學（Imaging Genomics）的特徵共對齊。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有定理與模組依賴 DAG 嚴格無環。計算驗證模組透過 SymPy 符號驗證了凸組合的嚴格有界性。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

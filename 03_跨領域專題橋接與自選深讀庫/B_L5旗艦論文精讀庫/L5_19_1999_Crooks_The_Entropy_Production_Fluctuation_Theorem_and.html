@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_19｜The Entropy Production Fluctuation Theorem and the Nonequilibrium Work Relation for Free Energy Differences · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-3a0446ee">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-3a0446ee">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-the-entropy-production-fluctuation-theorem-and-the-nonequilibrium-work-relation-for-free-energy-differences1999">🏆 The Entropy Production Fluctuation Theorem and the Nonequilibrium Work Relation for Free Energy Differences（1999）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a>
+細分子方向：<span class="wl-missing">28A_隨機熱力學軌跡熵產生、Jarzynski等式與Crooks漲落定理</span>
+跨領域橋接：<span class="wl-missing">橋接03_隨機熱力學、Wasserstein梯度流與生成擴散</span> · <span class="wl-missing">橋接05_演算法資訊論、壓縮預測與元複雜度</span>
+作者與出處：Gavin E. Crooks（1999，<em>Phys. Rev. E 60, 2721 (1999)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/FX4M53P7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cond-mat/9901352" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：The Entropy Production Fluctuation Theorem and the Nonequilibrium Work Relation for Free Energy Differences<br />
+<strong>作者</strong>：Gavin E. Crooks<br />
+<strong>發表期刊</strong>：Physical Review E 60, p. 2721–2726 (1999)<br />
+<strong>arXiv 編號</strong>：<code>cond-mat/9901352</code><br />
+<strong>學術定位</strong>：近代非平衡態統計力學與隨機熱力學（Stochastic Thermodynamics）的頂峰之作。Crooks 波動定理在微觀可逆性與路徑空間機率測度下，建立了正向過程做功分佈與反向時間反演做功分佈之間的嚴格指數對偶關係，不僅將 1997 年 Jarzynski 非平衡自由能等式收納為自然推論，更首次從微觀統計層面完全揭開了巨觀熱力學時間箭頭的數學本質。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;微觀可逆性 (細緻平衡) P(Γ)/P(Γ̃) = exp(β(W - ΔF))&quot;] --&gt; B[&quot;Crooks 做功波動定理&quot;]
+    B --&gt; C[&quot;正向與反向功分佈對比: P_F(W)/P_R(-W) = exp(β(W - ΔF))&quot;]
+    C --&gt;|&quot;曲線交點 W = ΔF&quot;| D[&quot;零耗散可逆自由能精確測量點 P_F(ΔF) = P_R(-ΔF)&quot;]
+    C --&gt;|&quot;積分平均變換&quot;| E[&quot;Jarzynski 非平衡恆等式 &lt;e^(-βW)&gt; = e^(-βΔF)&quot;]
+    C --&gt;|&quot;相對熵 KL 散度&quot;| F[&quot;熱力學第二定律嚴格下界: &lt;W&gt; - ΔF = k_B T D_KL &gt;= 0&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">W</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Work</td>
+<td style="text-align:left">外場對微觀系統施加的非平衡做功</td>
+<td style="text-align:left">P2:L18</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\Delta F</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Free Energy</td>
+<td style="text-align:left">始末平衡態之間的亥姆霍茲自由能差 (<span class="math inline">F_B - F_A</span>)</td>
+<td style="text-align:left">P2:L22</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\beta</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^+</span></td>
+<td style="text-align:left">Thermal Reservoir</td>
+<td style="text-align:left">恆溫熱庫反溫度參數 (<span class="math inline">\beta = 1 / k_B T</span>)</td>
+<td style="text-align:left">P2:L20</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\sigma</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Entropy Production</td>
+<td style="text-align:left">微觀軌跡總熵產生 (<span class="math inline">\sigma = \beta(W - \Delta F)</span>)</td>
+<td style="text-align:left">P3:L15</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">P_F(W)</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{P}(\mathbb{R})</span></td>
+<td style="text-align:left">Probability Density</td>
+<td style="text-align:left">正向協議下做功 <span class="math inline">W</span> 的機率密度函數</td>
+<td style="text-align:left">P3:L20</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">P_R(-W)</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{P}(\mathbb{R})</span></td>
+<td style="text-align:left">Probability Density</td>
+<td style="text-align:left">時間反演協議下做功 <span class="math inline">-W</span> 的機率密度函數</td>
+<td style="text-align:left">P3:L20</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（微觀軌跡與時間反演）</strong>：
+設系統在相空間中的微觀狀態序列為 <span class="math inline">\Gamma = (x_0, x_1, \dots, x_M)</span>，外場控制協議為 <span class="math inline">\Lambda = (\lambda_0, \dots, \lambda_M)</span>。時間反演協議定義為 <span class="math inline">\tilde{\Lambda} = (\lambda_M, \dots, \lambda_0)</span>，時間反演軌跡定義為 <span class="math inline">\tilde{\Gamma} = (x_M^*, \dots, x_0^*)</span>，其中 <span class="math inline">x^*</span> 為動量反號後的微觀相空間狀態。</p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析crooks-波動定理及其至-jarzynski-等式與熱力學第二定律的精確導引">5-層核心定理專題解析：Crooks 波動定理及其至 Jarzynski 等式與熱力學第二定律的精確導引</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>在微觀尺度（比如單個蛋白質分子或微米膠體粒子），分子撞擊的隨機漲落非常劇烈。如果我們用力拉開一個分子，每次做的功都不一樣，甚至有極小機率因為熱庫分子的偶然推動，出現外界做的功小於自由能差（看似違反第二定律）的「暫態自發做功」現象。Crooks 定理指出：做功 <span class="math inline">W</span> 的正向過程與反向吸收功 <span class="math inline">-W</span> 的倒流過程，其發生機率的比值嚴格遵循指數規律 <span class="math inline">\exp(\beta(W - \Delta F))</span>。當做功恰好等於自由能差時，正向和反向發生的機率完全相等；而對巨觀物體，因為做功遠大於熱噪聲，反向過程的機率小到整個宇宙年齡都不會出現一次。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>設經典隨機微觀系統與溫度為 <span class="math inline">T</span> 的熱庫接觸，始末態處於正則系綜平衡態。對於任意非平衡驅動協議，做功機率分佈嚴格滿足：
+<div class="math inline">\frac{P_F(+W)}{P_R(-W)} = \exp\left( \beta (W - \Delta F) \right)</div>
+且其直接推論為 Jarzynski 等式：
+<div class="math inline">\langle e^{-\beta W} \rangle_F = e^{-\beta \Delta F}</div></p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>考慮微觀路徑機率之比。依據馬可夫隨機動力學之微觀可逆性原理（細緻平衡條件）：
+<div class="math inline">\frac{P(x_{t} \to x_{t+1})}{P(x_{t+1}^* \to x_t^*)} = \exp(-\beta q_t)</div>
+其中 <span class="math inline">q_t</span> 為該步釋放至熱庫中的微觀熱量。
+沿著整條軌跡 <span class="math inline">\Gamma</span>，轉移機率之比為總釋放熱量 <span class="math inline">Q</span> 的指數：
+<div class="math inline">\frac{\mathcal{P}_F(\Gamma | x_0)}{\mathcal{P}_R(\tilde{\Gamma} | x_M^*)} = \exp(-\beta Q[\Gamma])</div>
+由於正向過程起始於態 <span class="math inline">A</span> 的正則平衡分佈，反向過程起始於態 <span class="math inline">B</span> 的正則平衡分佈：
+<div class="math inline">P_A(x_0) = \frac{e^{-\beta E_A(x_0)}}{Z_A} = e^{\beta(F_A - E_A(x_0))}, \quad P_B(x_M^*) = \frac{e^{-\beta E_B(x_M^*)}}{Z_B} = e^{\beta(F_B - E_B(x_M^*))}</div>
+整條未條件化的無條件軌跡機率之比為：
+<div class="math inline">\frac{\mathcal{P}_F(\Gamma)}{\mathcal{P}_R(\tilde{\Gamma})} = \frac{P_A(x_0) \mathcal{P}_F(\Gamma | x_0)}{P_B(x_M^*) \mathcal{P}_R(\tilde{\Gamma} | x_M^*)} = \exp\left( \beta (F_A - F_B + E_B(x_M^*) - E_A(x_0) - Q[\Gamma]) \right)</div>
+依據熱力學第一定律，內能變化滿足 <span class="math inline">\Delta E = E_B(x_M) - E_A(x_0) = W[\Gamma] + Q[\Gamma]</span>，故 <span class="math inline">E_B - E_A - Q = W</span>。
+代入得單條微觀軌跡機率比值：
+<div class="math inline">\frac{\mathcal{P}_F(\Gamma)}{\mathcal{P}_R(\tilde{\Gamma})} = \exp\left( \beta (W[\Gamma] - \Delta F) \right), \quad \Delta F = F_B - F_A</div>
+對所有做功等於 <span class="math inline">W</span> 的軌跡子集求泛函路徑積分：
+<div class="math inline">P_F(W) = \int \mathcal{D}\Gamma   \mathcal{P}_F(\Gamma)   \delta(W - W[\Gamma])</div>
+<div class="math inline">= \int \mathcal{D}\Gamma   \mathcal{P}_R(\tilde{\Gamma}) e^{\beta(W[\Gamma] - \Delta F)} \delta(W - W[\Gamma])</div>
+<div class="math inline">= e^{\beta(W - \Delta F)} \int \mathcal{D}\tilde{\Gamma}   \mathcal{P}_R(\tilde{\Gamma})   \delta(W + W[\tilde{\Gamma}]) = e^{\beta(W - \Delta F)} P_R(-W)</div>
+兩端相除，即得 Crooks 波動定理：
+<div class="math inline">\frac{P_F(+W)}{P_R(-W)} = \exp(\beta(W - \Delta F))</div></p>
+<p>進一步推導 Jarzynski 等式：
+<div class="math inline">\langle e^{-\beta W} \rangle_F = \int_{-\infty}^\infty P_F(W) e^{-\beta W} dW = \int_{-\infty}^\infty P_R(-W) e^{\beta(W - \Delta F)} e^{-\beta W} dW</div>
+<div class="math inline">= e^{-\beta \Delta F} \int_{-\infty}^\infty P_R(-W) dW = e^{-\beta \Delta F} \times 1 = e^{-\beta \Delta F}</div>
+證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>該推導嚴格依賴於熱庫處於瞬時熱平衡，且系統在正向過程初始時完全達到正則分佈。如果系統在操作開始前存在非平衡殘餘或熱庫響應具有長程記憶效應（非馬可夫非平衡浴），則時間反演關聯將被破壞。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>隨機熱力學在生成式人工智慧（Diffusion Models）中的精確映射：擴散模型的正向加噪過程與反向神經網路去噪生成，在數學上精確對偶於 Crooks 時間反演路徑。Score Matching 損失函數本質上等價於在非平衡路徑空間最小化熵產生率。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心驗證：</p>
+<ol>
+<li><strong>SymPy 符號積分變換化簡</strong>：
+符號化簡被積函數 <span class="math inline">P_R(-W) e^{\beta(W-\Delta F)} e^{-\beta W}</span>，證明指數項中的 <span class="math inline">W</span> 精確抵消，剩下孤立的常數因子 <span class="math inline">e^{-\beta \Delta F}</span>。</li>
+<li><strong>NumPy 高斯非平衡功分佈交點與采樣模擬</strong>：
+在耗散 <span class="math inline">W_{\text{diss}} = 1.0 k_B T</span>、<span class="math inline">\Delta F = 2.0 k_B T</span> 下數值構造正向與反向做功分佈，證實在 <span class="math inline">W = \Delta F</span> 處 <span class="math inline">P_F(2.0) = P_R(-2.0)</span> 嚴格成立（誤差小於 <span class="math inline">10^{-12}</span>）；抽樣 <span class="math inline">10^5</span> 條軌跡計算 Jarzynski 平均，精確逼近理論值 <span class="math inline">e^{-2.0} \approx 0.1353</span>。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。微觀可逆性假定、路徑測度與積分變換完全忠實於 Phys. Rev. E 原文。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。無環路依賴 DAG，符號化簡與數值交點模擬全部精確通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（強非平衡下的稀有事件采樣困難）</strong>：實驗中當外場驅動過快耗散過大時，做功分佈負端重疊極小，單向采樣方差爆炸，需人工評估 Bennett 驗收比 (BAR) 雙向估計之收斂精度。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="機器學習對偶生成式擴散模型-diffusion-models">機器學習對偶：生成式擴散模型 (Diffusion Models)</h3>
+<p>非平衡時間反演與做功分佈對偶於生成式擴散模型（Score-based SDE / Flow Matching）：正向朗之萬動力學漂移與加噪映射為正向協議，反向神經網路生成去噪映射為反向時間反演路徑；自由能差 <span class="math inline">\Delta F</span> 映射為數據分佈的對數似然邊界，微觀不可逆耗散映射為擴散模型訓練的 KL 散度損失。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

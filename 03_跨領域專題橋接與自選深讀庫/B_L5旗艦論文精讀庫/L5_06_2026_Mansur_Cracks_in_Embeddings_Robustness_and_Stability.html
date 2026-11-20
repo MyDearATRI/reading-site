@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_06｜Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-a7045e32">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-a7045e32">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-cracks-in-embeddings-robustness-and-stability-of-jepa-based-chest-x-ray-representations2026">🏆 Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations（2026）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a>
+細分子方向：<span class="wl-missing">02F_超維計算、向量符號架構與非自迴歸潛預測JEPA</span>
+跨領域橋接：<span class="wl-missing">橋接02_連續時間動力學、狀態空間與液態神經網路</span>
+作者與出處：Zahid Mansur, Kalpana Yadav, Deepak Mishra（2026，<em>arXiv</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/J6EW6W9F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17905" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[original_text]</code> 本論文針對胸部 X 光四種主流聯合嵌入架構（I-JEPA, CheXWorld, X-WIN, RadJEPA）進行首個系統性魯棒性壓力審核，揭示了看似高性能的自監督醫學表徵在黑盒無梯度攻擊（SPSA、邊界攻擊）與掃描儀對比度漂移下存在嚴重的幾何脆弱性（餘弦相似度下降高達 25%，Macro AUROC 顯著跳水），並在理論與實驗上證明了離散碼本（Vector Quantization）因邊界斷裂而失效，唯有殘差雙向聯合微調（Joint Fine-Tuning）能實質修復表徵裂紋 <code>[PDF P2:L3-P3:L20, P5:L15-P8:L15]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>臨床安全隱患</strong>：基於 JEPA 的自監督醫學模型因無須密集像素重建而廣受青睞。但在臨床部署時，硬體曝光差異、感測器高斯噪聲與潛在對抗擾動，可能使凍結編碼器的特徵向量產生巨大方向漂移。</li>
+<li><strong>六重魯棒性測試協議</strong>：涵蓋 SPSA 黑盒攻擊、邊界攻擊（Boundary Attack）、高斯噪聲、亮度偏移、對比度偏移，以及低標籤樣本稀缺性測試（100%, 10%, 1%）。</li>
+<li><strong>特徵斷裂分析</strong>：RadJEPA 在乾淨圖像上展現最高 AUROC，但對黑盒對抗擾動最為敏感；對比度偏移在五級嚴重度下造成嚴重的特徵發散。</li>
+<li><strong>防禦機制對比</strong>：嘗試引入 VQ-VAE 式離散碼本進行量化，發現離散原型在連續病理流形上引發致命的 Voronoi 單元邊界跳躍，反而加劇預測噪聲；反之，在殘差預測器上同時以乾淨與擾動圖像微調，成功將 AUROC 提升 4.2% 並顯著穩定特徵餘弦對齊。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    BG1[&quot;自監督視覺模型: I-JEPA (LeCun, Assran)&quot;] --&gt; D1[&quot;DEF-MAN-ROBUST-TEST: 六重醫學魯棒性審核協議&quot;]
+    BG2[&quot;醫學影像基準: NIH ChestX-ray14 14種胸腔病變&quot;] --&gt; D1
+    D1 --&gt; D2[&quot;DEF-MAN-PRED-DESIGNS: 殘差 vs 離散碼本預測架構&quot;]
+    D2 --&gt; T1[&quot;THM-MAN-BOUND: 正交擾動下餘弦相似度二次衰減界限&quot;]
+    D2 --&gt; T2[&quot;THM-MAN-COLLAPSE: 離散碼本 Voronoi 邊界斷裂定理&quot;]
+    T1 --&gt; C1[&quot;CONC-MAN-1: JEPA 醫學表徵幾何脆弱性與 AUROC 斷崖&quot;]
+    T2 --&gt; C2[&quot;CONC-MAN-2: 碼本失敗與殘差聯合微調防禦有效性&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>意義</th>
+<th>知識來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\mathrm{CosSim}(z_p, \tilde{z}_p)</span></td>
+<td><span class="math inline">[-1, 1]</span></td>
+<td>乾淨特徵與擾動特徵之方向餘弦相似度</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">z_p = z + M_{\mathrm{res}}(z)</span></td>
+<td><span class="math inline">\mathbb{R}^d \to \mathbb{R}^d</span></td>
+<td>殘差預測頭：在凍結特徵上學習小幅修正</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">z_q = \arg\min_{e_k} |z - e_k|</span></td>
+<td>Discrete Codebook</td>
+<td>向量量化碼本投影</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\mathcal{T}_{\mathrm{SPSA}}</span></td>
+<td>Perturbation Operator</td>
+<td>基於同時擾動隨機逼近的無梯度黑盒攻擊</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\mathcal{L}_{\mathrm{ft}}</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td>結合乾淨、擾動分類損失與餘弦對齊的聯合微調損失</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理正交擾動餘弦衰減與碼本斷裂定理proposition-31-theorem-34">核心定理：正交擾動餘弦衰減與碼本斷裂定理（Proposition 3.1 / Theorem 3.4）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>在神經網路表徵空間中，高維特徵向量的方向決定了語義分類結果。當圖像受到無梯度擾動時，擾動方向往往垂直於原始信號的主成分方向。本定理證明，只要正交擾動強度為 <span class="math inline">\delta</span>，餘弦相似度的下降是嚴格二次方的 <span class="math inline">1 - \delta^2/2</span>，不存在任何平緩平台期；更嚴重的是，若試圖使用離散聚類碼本（VQ）來「過濾」噪聲，連續流形在跨越聚類邊界時會發生階躍式劇烈跳變，完全毀滅下游分類器的置信度。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設 <span class="math inline">z</span> 為單位範數嵌入向量 <span class="math inline">\|z\| = 1</span>。對任意正交微擾 <span class="math inline">\tilde{z} = z + \delta v</span>（其中 <span class="math inline">v \perp z, \|v\| = 1, \delta &gt; 0</span>），特徵方向穩定性滿足嚴格上界：
+<div class="math inline">\mathrm{CosSim}(z, \tilde{z}) = \frac{1}{\sqrt{1 + \delta^2}} = 1 - \frac{\delta^2}{2} + \frac{3\delta^4}{8} - \mathcal{O}(\delta^6)</div>
+進一步地，在離散碼本量化映射 <span class="math inline">q(z) = \arg\min_{e_k} \|z - e_k\|</span> 下，若 <span class="math inline">z</span> 距離 Voronoi 胞腔邊界小於 <span class="math inline">\delta</span>，則量化跳躍 <span class="math inline">\|q(\tilde{z}) - q(z)\| \ge d_{\mathrm{min}} &gt; 0</span> 為不連續跳躍。</p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：內積與範數計算</strong>。由正交性 <span class="math inline">z \cdot v = 0</span>：
+<div class="math inline">z \cdot \tilde{z} = z \cdot (z + \delta v) = \|z\|^2 + \delta (z \cdot v) = 1 + 0 = 1</div></li>
+<li><strong>第二步：擾動向量模長</strong>：
+<div class="math inline">\|\tilde{z}\|^2 = (z + \delta v) \cdot (z + \delta v) = \|z\|^2 + 2\delta (z \cdot v) + \delta^2 \|v\|^2 = 1 + \delta^2</div>
+因此 <span class="math inline">\|\tilde{z}\| = \sqrt{1 + \delta^2}</span>。</li>
+<li><strong>第三步：餘弦表達式</strong>：
+<div class="math inline">\mathrm{CosSim}(z, \tilde{z}) = \frac{z \cdot \tilde{z}}{\|z\| \|\tilde{z}\|} = \frac{1}{1 \cdot \sqrt{1 + \delta^2}} = (1 + \delta^2)^{-1/2}</div></li>
+<li><strong>第四步：Taylor 展開與單調性</strong>。在 <span class="math inline">\delta = 0</span> 處展開二項式級數，得到 <span class="math inline">1 - \frac{1}{2}\delta^2 + \frac{3}{8}\delta^4</span>，證實其以二次速率迅速跌落。</li>
+<li><strong>第五步：碼本 Voronoi 不連續性</strong>。設兩個代碼向量 <span class="math inline">e_1, e_2</span> 的垂直平分面為 <span class="math inline">H_{12}</span>。當連續特徵 <span class="math inline">z</span> 跨越 <span class="math inline">H_{12}</span> 時，<span class="math inline">q(z)</span> 由 <span class="math inline">e_1</span> 瞬間突變為 <span class="math inline">e_2</span>。因原型間距 <span class="math inline">d_{\mathrm{min}} = \|e_1 - e_2\| &gt; 0</span>，量化誤差產生階躍間斷點，梯度處處為 0 或發散。證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>該幾何推導假設擾動完全正交於信號方向。在實務中，某些語義無關的噪聲（如均勻曝光增加）可能部分投影在特徵自身方向上，此時模長會擴大但方向變化可能略低於正交最壞情況界限。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>為醫療 AI 安全部署、FDA 算法認證中的魯棒性壓力測試標準，以及連續自監督學習中的幾何正則化設計提供了可度量的量化依據。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有引理、定義與命題依賴 DAG 嚴格無環。計算驗證模組已透過 SymPy 符號驗證了正交擾動下餘弦相似度二階 Taylor 展開。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

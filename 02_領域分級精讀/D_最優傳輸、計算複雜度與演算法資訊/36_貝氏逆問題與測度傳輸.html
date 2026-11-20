@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-d458c7b5">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a><a class="find" href="../../index.html#n=n-d458c7b5">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · D_最優傳輸、計算複雜度與演算法資訊</span>
@@ -197,6 +199,23 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li>
+<p><strong>2026｜Bayesian Inverse Problems for EUV reflectometry with regularized JKO scheme</strong>，Vitalii Aksenov, Oliver Henze</p>
+<ul>
+<li>重點：以傳輸矩陣法為正演模型求解 EUV 反射量測貝氏逆問題，採用熵正則化 JKO 格式並經 Benamou–Brenier 動態形式與 Hopf–Cole 變換化為耦合熱方程固定點問題，再以張量鏈格式與後驗矩預條件化實現高維密度求解；在 <span class="math inline">\mathrm{Ru}</span> 覆 <span class="math inline">\mathrm{Si}</span> 實驗中驗證與 MCMC 相當並支持位移目標的後驗重用。</li>
+<li>連結：<a href="zotero://select/library/items/ZD8ZI9NR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.09574" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>2026｜PDE-based Bayesian Inverse Problems in All-at-once Framework</strong>，Tram Thi Ngoc Nguyen, Fabian Schneider, Leila Taghizadeh</p>
+<ul>
+<li>重點：將 PDE 殘差作為具殘差共變異數的軟約束直接納入混合似然函數以提出整體同步（all-at-once）貝氏反演框架，省去傳統約化方法的反覆 PDE 求解；證明後驗與不確定性量化的適定性，並提出 Metropolis-within-Gibbs 與聯合採樣兩種演算法，在半導體逆問題達成約兩倍加速且重建品質相當。</li>
+<li>連結：<a href="zotero://select/library/items/ISBUK5K5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.39783" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -259,6 +278,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

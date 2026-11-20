@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_01｜Attention Is All You Need · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-9f1819b6">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-9f1819b6">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-attention-is-all-you-need2017">🏆 Attention Is All You Need（2017）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a>
+細分子方向：<span class="wl-missing">01A_自注意力機制、長脈絡外推與位置幾何</span>
+跨領域橋接：<span class="wl-missing">橋接02_連續時間動力學、狀態空間與液態神經網路</span>
+作者與出處：Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez et al.（2017，<em>arXiv</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/CT7B2X44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.03762" rel="noopener">官方連結</a></p>
+</aside>
+<ul>
+<li><strong>論文標題</strong>：<em>Attention Is All You Need</em></li>
+<li><strong>作者</strong>：Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones, Aidan N. Gomez, Łukasz Kaiser, Illia Polosukhin（全體八位作者同等貢獻 <code>[ms.tex:L84-L116]</code>）</li>
+<li><strong>發表場域</strong>：Advances in Neural Information Processing Systems 30 (NIPS 2017) / <code>arXiv:1706.03762</code></li>
+<li><strong>審核模式</strong>：L5 深度審核模式（全篇覆蓋、符號型別嚴格化、省略推導補全、雙輪獨立檢驗、零未標記臆測）</li>
+</ul>
+<h2 id="h0-多層次研究摘要">H0 多層次研究摘要</h2>
+<h2 id="01-一句話核心命題">0.1 一句話核心命題</h2>
+<p><code>[原文內容]</code> Transformer 證明了純粹基於「縮放點積多頭自注意力（Scaled Dot-Product Multi-Head Self-Attention）」與「逐位置前饋網路（Position-wise FFN）」的編碼器，解碼器架構，無需任何循環（Recurrence）或卷積（Convolution）算子，即可同時實現 <span class="math inline">O(1)</span> 訓練序列深度、<span class="math inline">O(1)</span> 全局依賴路徑長度，並在機器翻譯與句法剖析任務上以更低訓練算力刷新當時所有單模型與集成模型之最高紀錄 <code>[ms.tex:L126-L128, background.tex:L1]</code>。</p>
+<h2 id="02-執行摘要executive-summary">0.2 執行摘要（Executive Summary）</h2>
+<p>在 Transformer 提出之前，神經序列轉換（Sequence Transduction）由兩大範式主導：其一是以 LSTM/GRU 為核心的循環神經網路（RNN），其狀態遞迴 <span class="math inline">h_t = f(h_{t-1}, x_t)</span> 將序列位置強行綁定至計算時間步，導致訓練階段無法在單一樣本內跨時間步並行（序列操作數 <span class="math inline">O(n)</span>）<code>[introduction.tex:L3]</code>；其二是以 ByteNet、ConvS2S 為代表的卷積序列模型，雖可並行計算各位置表徵，但任意兩遠距位置間的信號傳遞路徑長度仍隨距離呈線性 <span class="math inline">O(n/k)</span> 或對數 <span class="math inline">O(\log_k n)</span> 增長，阻礙長程依賴學習 <code>[background.tex:L1]</code>。</p>
+<p>Vaswani 等人提出 Transformer 架構，捨棄循環與卷積：</p>
+<ol>
+<li><strong>縮放點積注意力（Scaled Dot-Product Attention）</strong>：透過矩陣乘法批次計算全局查詢，鍵相容性，並乘上縮放因子 <span class="math inline">1/\sqrt{d_k}</span>，防止高維點積變異數 <span class="math inline">\operatorname{Var}(q^\top k) = d_k</span> 推升導致 Softmax 落入飽和與梯度消失區 <code>[Sec 3.2.1, P4]</code>。</li>
+<li><strong>多頭子空間分解（Multi-Head Attention, MHA）</strong>：將 <span class="math inline">d_{\text{model}}=512</span> 拆分為 <span class="math inline">h=8</span> 個 <span class="math inline">d_k=d_v=64</span> 的並行投影子空間，在總參數與核心算力與全維度單頭注意力完全等價（<span class="math inline">4 d_{\text{model}}^2</span>）的前提下，消除單一注意力權重平均造成的「有效解析度下降（Reduced Effective Resolution）」<code>[background.tex:L1; Sec 3.2.2, P4-P5]</code>。</li>
+<li><strong>無參數幾何級數正弦位置編碼（Sinusoidal Positional Encoding）</strong>：在嵌入層疊加波長從 <span class="math inline">2\pi</span> 至 <span class="math inline">10000 \cdot 2\pi</span> 的正餘弦基函數，打破純自注意力與逐位置 FFN 的嚴格對稱群 <span class="math inline">S_n</span> 排列等變性，並賦予任意固定位移 <span class="math inline">k</span> 精確的 <span class="math inline">SO(2)^{d_{\text{model}}/2}</span> 正交線性算子表徵 <code>[Sec 3.5, P5-P6]</code>。</li>
+<li><strong>實證突破</strong>：於 WMT 2014 英德翻譯取得 28.4 BLEU（超越此前含集成模型之最佳結果逾 2.0 BLEU），於 WMT 2014 英法翻譯僅用 8 張 P100 GPU 訓練 3.5 天即達 41.8 BLEU 單模型新高，並於 Penn Treebank WSJ 句法成分剖析達到 91.3 F1（純監督）與 92.7 F1（半監督）<code>[ms.tex:L128; Sec 6.1-6.3, P8-P10]</code>。</li>
+</ol>
+<h2 id="03-技術全景深讀摘要technical-deep-dive-panorama">0.3 技術全景深讀摘要（Technical Deep-Dive Panorama）</h2>
+<p>從算子分解（Operator Splitting）視角審視，<code>[AI 推導]</code> Transformer 的每一層實質上交替執行兩種正交的張量運算：</p>
+<ul>
+<li><strong>跨位置序列混合（Token-Mixing via MHA）</strong>：對輸入張量 <span class="math inline">X \in \mathbb{R}^{n \times d_{\text{model}}}</span>，在 <span class="math inline">h</span> 個低秩雙線性核空間中動態構造行隨機親和矩陣 <span class="math inline">A^{(i)}(X) = \mathrm{softmax}\left(\frac{X W_i^Q (W_i^K)^\top X^\top}{\sqrt{d_k}} + M\right)</span>，對值向量執行凸組合聚合；此步在位置維度 <span class="math inline">n</span> 上非線性耦合，但在聚合階段對特徵通道呈線性組合。</li>
+<li><strong>逐位置通道混合（Channel-Mixing via Position-wise FFN）</strong>：以兩層核寬為 1 的逐點非線性映射 <span class="math inline">\mathrm{FFN}(x_t) = \max(0, x_t W_1 + b_1) W_2 + b_2</span>（內維度擴張 4 倍至 <span class="math inline">d_{\text{ff}}=2048</span>）對每個位置獨立注入高容量逐點非線性表徵能力 <code>[Sec 3.3, P5]</code>。</li>
+</ul>
+<p>本 L5 審核同時揭示了原文四項關鍵隱含假設與理論張力：</p>
+<ol>
+<li><strong>Footnote 4 的獨立同分佈零均值單位變異數假設（<code>ASM-1</code> / <code>ASM-2</code>）</strong>：原文假設 <span class="math inline">q_i, k_i</span> 獨立且零均值單位變異數；然而經過 Post-LN 仿射參數與學習投影矩陣 <span class="math inline">W_i^Q, W_i^K</span> 後，座標既非統計獨立亦不保證零均值單位變異數（見反例 <code>CEX-2</code>）。</li>
+<li><strong>Table 1 複雜度表記的省略項（<code>IMP-2</code> / <code>TENS-1</code>）</strong>：原文將自注意力層複雜度簡記為 <span class="math inline">O(n^2 d)</span>，省略了 <span class="math inline">Q,K,V,O</span> 四組線性投影所需的 <span class="math inline">4 n d^2</span> 項；在短序列翻譯場景（<span class="math inline">n \approx 35 \ll d = 512</span>），線性投影與 FFN 的 <span class="math inline">12 n d^2</span> 算力實際上遠大於 <span class="math inline">2 n^2 d</span>，Transformer 訓練速度飛躍的真正主因是 <span class="math inline">O(1)</span> 序列深度帶來的 GPU 稠密矩陣並行吞吐率，而非單純加法乘法總次數更少。</li>
+<li><strong>嵌入層 <span class="math inline">\sqrt{d_{\text{model}}}</span> 縮放的未明言機制（<code>IMP-3</code>）</strong>：當詞嵌入與輸出 Softmax 權重共享（Weight Tying）且按方差 <span class="math inline">1/d_{\text{model}}</span> 初始化時，詞向量元素量級僅 <span class="math inline">O(d_{\text{model}}^{-1/2}) \approx 0.044</span>；若不乘上 <span class="math inline">\sqrt{d_{\text{model}}}</span>，詞義信號將被振幅為 <span class="math inline">[-1,1]</span> 的正弦位置編碼完全淹沒。</li>
+<li><strong>Post-LN 與 4000 步 Warmup 的隱性耦合（<code>IMP-4</code> / <code>TENS-2</code>）</strong>：<span class="math inline">\mathrm{LayerNorm}(x + \mathrm{Sublayer}(x))</span> 置於殘差主幹上，破壞了恆等殘差梯度直通性，使模型在無 Warmup 時極易於訓練初期梯度爆炸或注意力崩潰。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<h2 id="11-研究脈絡與問題起源">1.1 研究脈絡與問題起源</h2>
+<p>2014–2017 年間，序列到序列（Seq2Seq）學習經歷了從「純固定向量瓶頸（Sutskever et al., 2014; Cho et al., 2014）」到「RNN + 加性/乘性跨序列注意力（Bahdanau et al., 2014; Luong et al., 2015）」的演進 <code>[introduction.tex:L1-L9]</code>。儘管注意力機制已成為連接編碼器與解碼器的核心橋樑，研究者仍普遍依賴 RNN（如 GNMT 的 8 層 LSTM）或深度卷積（如 ByteNet 的膨脹卷積、ConvS2S 的門控卷積）來提取序列內部表徵 <code>[background.tex:L1-L7]</code>。</p>
+<p><code>[原文內容]</code> Hochreiter et al. (2001) 的梯度流理論指出：在計算圖中，任意兩個輸入或輸出位置之間的前向與反向傳播路徑越短，學習長距離依賴關係越容易 <code>[background.tex:L1; Sec 4, P6]</code>。因此，能否構造一個同時具備 <span class="math inline">O(1)</span> 序列深度（完全可並行訓練）與 <span class="math inline">O(1)</span> 最大信號路徑長度（任意遠距詞元一步直連）的純注意力轉換網路，遂成為本研究的核心問題。</p>
+<h2 id="12-先修知識與全文論證依賴圖mermaid">1.2 先修知識與全文論證依賴圖（Mermaid）</h2>
+<pre class="mermaid">flowchart TD
+    subgraph P[&quot;先修數學與深度學習基礎 (Prerequisites)&quot;]
+        P1[&quot;線性代數與張量縮併 低秩雙線性形式、正交群 SO(2)&quot;]
+        P2[&quot;機率論與高維統計 獨立乘積變異數、次序統計量集中性&quot;]
+        P3[&quot;數值最佳化與正規化 Softmax 雅可比矩陣、Post-LN、Adam Warmup&quot;]
+        P4[&quot;序列轉換先驅架構 Seq2Seq, Bahdanau 加性注意力, ConvS2S/ByteNet&quot;]
+    end
+
+    subgraph L2[&quot;核心形式化定義與假設 (Definitions &amp; Assumptions)&quot;]
+        DEF1[&quot;DEF-1: 縮放點積注意力 Eq.(1)&quot;]
+        DEF2[&quot;DEF-2: 解碼器上三角負無窮遮罩&quot;]
+        DEF3[&quot;DEF-3: 多頭子空間注意力 MHA&quot;]
+        DEF4[&quot;DEF-4: 逐位置前饋網路 FFN Eq.(2)&quot;]
+        DEF5[&quot;DEF-5: 幾何級數正弦位置編碼 PE&quot;]
+        ASM1[&quot;ASM-1: q,k 零均值單位變異數獨立假設&quot;]
+        ASM2[&quot;ASM-2 (缺口標記): 投影後分佈保持假設&quot;]
+        ASM3[&quot;ASM-3 (未驗證假設): 正弦編碼長度外推假說&quot;]
+    end
+
+    subgraph THMS[&quot;核心理論命題與推導 (Propositions &amp; Theorems)&quot;]
+        PRP1[&quot;PRP-1: 1/sqrt(d_k) 變異數歸一化與梯度穩定&quot;]
+        PRP2[&quot;PRP-2: PE 位移之 SO(2) 區塊對角線性表示&quot;]
+        PRP3[&quot;PRP-3: 原始 PE 內積平移不變偶對稱性&quot;]
+        PRP4[&quot;PRP-4: MHA 與單頭全維度等參數/等算力等價&quot;]
+        PRP5[&quot;PRP-5: 無 PE 編碼器之 S_n 排列等變性&quot;]
+        PRP6[&quot;PRP-6: 遮罩解碼器之下三角嚴格自回歸因果性&quot;]
+        THM1[&quot;THM-1: Table 1 複雜度、序列深度與路徑長度定理&quot;]
+    end
+
+    subgraph CONCS[&quot;核心實證與科學結論 (Conclusions)&quot;]
+        CONC1[&quot;CONC-1: 純注意力架構取代循環與卷積刷新 SOTA&quot;]
+        CONC2[&quot;CONC-2: n &lt; d 區間算力優勢與 O(1) 全局路徑&quot;]
+        CONC3[&quot;CONC-3: 縮放因子消除高維 Softmax 飽和&quot;]
+        CONC4[&quot;CONC-4: 多頭子空間恢復平均化損失之解析度&quot;]
+        CONC5[&quot;CONC-5: 正弦與學習式位置編碼同效但外推待驗&quot;]
+    end
+
+    P1 --&gt; DEF3 &amp; DEF5 &amp; PRP2 &amp; PRP4
+    P2 --&gt; ASM1 &amp; PRP1
+    P3 --&gt; DEF1 &amp; PRP1 &amp; PRP6
+    P4 --&gt; THM1
+
+    DEF1 --&gt; DEF2 &amp; DEF3 &amp; PRP1 &amp; THM1
+    ASM1 --&gt; PRP1 &amp; ASM2
+    DEF3 --&gt; ASM2 &amp; PRP4 &amp; PRP5
+    DEF5 --&gt; ASM3 &amp; PRP2
+    PRP2 --&gt; PRP3
+    DEF4 --&gt; PRP5 &amp; PRP6
+    DEF2 --&gt; PRP6
+    PRP4 --&gt; THM1
+
+    THM1 &amp; PRP1 &amp; PRP4 &amp; PRP6 --&gt; CONC1
+    THM1 --&gt; CONC2
+    PRP1 &amp; ASM2 --&gt; CONC3
+    PRP4 --&gt; CONC4
+    PRP2 &amp; ASM3 --&gt; CONC5
+</pre>
+<h2 id="13-分層閱讀路線建議">1.3 分層閱讀路線建議</h2>
+<ol>
+<li><strong>快速架構掌握路線（60 分鐘）</strong>：閱讀 <code>H0</code> <span class="math inline">\to</span> <code>H2</code> 符號型別字典 <span class="math inline">\to</span> <code>H3.1</code> 三詞元低維手算正例 <span class="math inline">\to</span> <code>H4.5 (THM-1)</code> 複雜度與路徑長度分析。</li>
+<li><strong>數理嚴格審核路線（120 分鐘）</strong>：精讀 <code>H2.2</code> 符號重載警告 <span class="math inline">\to</span> <code>H4.1–H4.4</code> 五層完整推導（特別關注 Softmax 雅可比範數退化與 <span class="math inline">SO(2)</span> 群同態證明）<span class="math inline">\to</span> <code>H3.2</code> 四組破壞假設之邊界反例（<code>CEX-1</code> 至 <code>CEX-4</code>）。</li>
+<li><strong>前沿研究延伸路線（90 分鐘）</strong>：研讀 <code>H5</code> 消融實驗與現代架構演進（Pre-LN、QK-Norm、FlashAttention、RoPE）<span class="math inline">\to</span> <code>跨層研究分析</code> 之核平滑統計、連續 Hopfield 自由能相變與形式語義學橋接。</li>
+</ol>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<h2 id="21-全域符號與張量型別字典symbol-type-table">2.1 全域符號與張量型別字典（Symbol &amp; Type Table）</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">編號</th>
+<th style="text-align:left">符號（LaTeX）</th>
+<th style="text-align:left">嚴格數學型別 / 張量維度</th>
+<th style="text-align:left">作用域與物理意義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>SYM-1</code></td>
+<td style="text-align:left"><span class="math inline">(x_1, \dots, x_n)</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{V}^n</span></td>
+<td style="text-align:left">長度為 <span class="math inline">n</span> 之輸入源語言離散詞元序列</td>
+<td style="text-align:left"><code>[model_architecture.tex:L12]; P2</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-2</code></td>
+<td style="text-align:left"><span class="math inline">\mathbf{z} = (z_1, \dots, z_n)</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^{n \times d_{\text{model}}}</span></td>
+<td style="text-align:left">編碼器頂層輸出之連續上下文表徵矩陣</td>
+<td style="text-align:left"><code>[model_architecture.tex:L12]; P2</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-3</code></td>
+<td style="text-align:left"><span class="math inline">(y_1, \dots, y_m)</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{V}^m</span></td>
+<td style="text-align:left">長度為 <span class="math inline">m</span> 之目標語言自回歸輸出詞元序列</td>
+<td style="text-align:left"><code>[model_architecture.tex:L12]; P2</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-4</code></td>
+<td style="text-align:left"><span class="math inline">N</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">編碼器與解碼器堆疊層數（翻譯 base/big 為 <span class="math inline">6</span>；WSJ 剖析為 <span class="math inline">4</span>）</td>
+<td style="text-align:left"><code>[model_architecture.tex:L18-L20]; P2-P3</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-5</code></td>
+<td style="text-align:left"><span class="math inline">d_{\text{model}}</span>（或 <span class="math inline">d</span>）</td>
+<td style="text-align:left"><span class="math inline">2\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">模型主幹與殘差流特徵維度（base 為 <span class="math inline">512</span>，big 為 <span class="math inline">1024</span>；須為偶數）</td>
+<td style="text-align:left"><code>[ms.tex:L57, model_architecture.tex:L18]; P3</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-6</code></td>
+<td style="text-align:left"><span class="math inline">d_{\text{ff}}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">逐位置 FFN 隱藏層維度（base 為 <span class="math inline">2048</span>，big 為 <span class="math inline">4096</span>）</td>
+<td style="text-align:left"><code>[ms.tex:L59]; Sec 3.3, P5</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-7</code></td>
+<td style="text-align:left"><span class="math inline">h</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">並行注意力頭數（base 為 <span class="math inline">8</span>，big 為 <span class="math inline">16</span>）</td>
+<td style="text-align:left"><code>[Sec 3.2.2, P4-P5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-8</code></td>
+<td style="text-align:left"><span class="math inline">d_k</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">單頭查詢（Query）與鍵（Key）子空間維度（預設 <span class="math inline">d_{\text{model}}/h = 64</span>）</td>
+<td style="text-align:left"><code>[Sec 3.2.1-3.2.2, P4-P5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-9</code></td>
+<td style="text-align:left"><span class="math inline">d_v</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">單頭值（Value）子空間維度（預設 <span class="math inline">d_{\text{model}}/h = 64</span>）</td>
+<td style="text-align:left"><code>[Sec 3.2.1-3.2.2, P4-P5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-10</code></td>
+<td style="text-align:left"><span class="math inline">Q, K, V</span></td>
+<td style="text-align:left">見下方<strong>型別重載警告</strong></td>
+<td style="text-align:left">批次打包之查詢、鍵、值矩陣</td>
+<td style="text-align:left"><code>[Sec 3.2.1-3.2.2, Eq.(1), P4-P5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-11</code></td>
+<td style="text-align:left"><span class="math inline">W_i^Q, W_i^K, W_i^V, W^O</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^{d_{\text{model}}\times d_k}, \mathbb{R}^{d_{\text{model}}\times d_k}, \mathbb{R}^{d_{\text{model}}\times d_v}, \mathbb{R}^{hd_v\times d_{\text{model}}}</span></td>
+<td style="text-align:left">第 <span class="math inline">i</span> 頭之查詢/鍵/值投影矩陣與多頭拼接輸出投影矩陣</td>
+<td style="text-align:left"><code>[Sec 3.2.2, P5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-12</code></td>
+<td style="text-align:left"><span class="math inline">M</span></td>
+<td style="text-align:left"><span class="math inline">\{0, -\infty\}^{m \times m}</span></td>
+<td style="text-align:left"><code>[AI 推導]</code> 解碼器自注意力上三角因果遮罩矩陣（<span class="math inline">j &gt; i</span> 處為 <span class="math inline">-\infty</span>）</td>
+<td style="text-align:left"><code>[model_architecture.tex:L20]; Sec 3.2.3, P5</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-13</code></td>
+<td style="text-align:left"><span class="math inline">W_1, b_1, W_2, b_2</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^{d_{\text{model}}\times d_{\text{ff}}}, \mathbb{R}^{d_{\text{ff}}}, \mathbb{R}^{d_{\text{ff}}\times d_{\text{model}}}, \mathbb{R}^{d_{\text{model}}}</span></td>
+<td style="text-align:left">逐位置兩層 ReLU 前饋網路之權重與偏置參數</td>
+<td style="text-align:left"><code>[Sec 3.3, Eq.(2), P5]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-14</code></td>
+<td style="text-align:left"><span class="math inline">PE_{(pos,2i)}, PE_{(pos,2i+1)}</span></td>
+<td style="text-align:left"><span class="math inline">[-1, 1]</span></td>
+<td style="text-align:left">位置 <span class="math inline">pos \in \mathbb{Z}_{\ge 0}</span> 在頻率索引 <span class="math inline">i \in \{0,\dots,d_{\text{model}}/2-1\}</span> 之正餘弦編碼</td>
+<td style="text-align:left"><code>[Sec 3.5, P6]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-15</code></td>
+<td style="text-align:left"><span class="math inline">n, d, k, r</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">Table 1 之序列長度 <span class="math inline">n</span>、維度 <span class="math inline">d</span>、卷積核寬 <span class="math inline">k</span>、受限注意力視窗大小 <span class="math inline">r</span></td>
+<td style="text-align:left"><code>[Sec 4, Table 1, P6]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-16</code></td>
+<td style="text-align:left"><span class="math inline">step\_num, warmup\_steps</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{Z}_{\ge 1}</span></td>
+<td style="text-align:left">最佳化步數（須 <span class="math inline">\ge 1</span>）與線性預熱步數（<span class="math inline">4000</span>）</td>
+<td style="text-align:left"><code>[Sec 5.3, Eq.(3), P7]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-17</code></td>
+<td style="text-align:left"><span class="math inline">P_{\text{drop}}, \epsilon_{ls}</span></td>
+<td style="text-align:left"><span class="math inline">[0, 1)</span></td>
+<td style="text-align:left">殘差/嵌入層 Dropout 率（<span class="math inline">0.1</span> 或 <span class="math inline">0.3</span>）與標籤平滑係數（<span class="math inline">0.1</span>）</td>
+<td style="text-align:left"><code>[Sec 5.4, P7-P8; Table 3, P9]</code></td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-18</code></td>
+<td style="text-align:left"><span class="math inline">\beta_1, \beta_2, \epsilon</span></td>
+<td style="text-align:left"><span class="math inline">(0,1)^2 \times \mathbb{R}_{&gt;0}</span></td>
+<td style="text-align:left">Adam 動量超參數 <span class="math inline">(0.9, 0.98, 10^{-9})</span>；注意 <span class="math inline">\epsilon</span> 與 <span class="math inline">\epsilon_{ls}</span> 符號重載</td>
+<td style="text-align:left"><code>[Sec 5.3, P7]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-關鍵符號多重重載審核警告symbol-overload-warnings">2.2 關鍵符號多重重載審核警告（Symbol Overload Warnings）</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">Warning</p>
+<p>原文在簡潔敘述中存在四處極易引發實作或推導混淆的符號重載（Notation Overloads），L5 審核明確區分如下：</p>
+<ol>
+<li><span class="math inline">Q, K, V</span> 的列寬維度重載：在 <code>[Sec 3.2.1, Eq.(1)]</code> 中，<span class="math inline">Q \in \mathbb{R}^{n_q \times d_k}, K \in \mathbb{R}^{n_{kv} \times d_k}, V \in \mathbb{R}^{n_{kv} \times d_v}</span> 為投影後的子空間矩陣；但在 <code>[Sec 3.2.2]</code> 的 <span class="math inline">\mathrm{MultiHead}(Q,K,V)</span> 定義式中，輸入參數 <span class="math inline">Q, K, V</span> 的列寬卻是 <span class="math inline">d_{\text{model}}</span>（投影前的主幹表徵矩陣）。</li>
+<li>符號 <span class="math inline">k</span> 的三重重載：(a) <code>[Sec 3.2.1 Footnote 4]</code> 中 <span class="math inline">k \in \mathbb{R}^{d_k}</span> 代表單一鍵向量；(b) <code>[Sec 3.5, P6]</code> 中 <span class="math inline">k \in \mathbb{Z}</span> 代表相對位置位移量 <span class="math inline">PE_{pos+k}</span>；(c) <code>[Sec 4, Table 1, P6]</code> 中 <span class="math inline">k \in \mathbb{Z}_{\ge 1}</span> 代表一維卷積核寬度（Kernel Size）。</li>
+<li>下標 <span class="math inline">i</span> 的三重重載：(a) <code>[Sec 3.1, P3]</code> 中代表解碼器預測位置索引；(b) <code>[Sec 3.2.2, P5]</code> 中代表注意力頭索引 <span class="math inline">i \in \{1,\dots,h\}</span>；(c) <code>[Sec 3.5, P6]</code> 中代表頻率對索引 <span class="math inline">i \in \{0,\dots,d_{\text{model}}/2-1\}</span>。</li>
+<li>符號 <span class="math inline">n</span> 的作用域滑移：在 <code>[Sec 3, P2]</code> 中區分源序列長度 <span class="math inline">n</span> 與目標序列長度 <span class="math inline">m</span>；在 <code>[Sec 4, Table 1]</code> 中則以 <span class="math inline">n</span> 統稱單一序列層的通用序列長度。</li>
+</ol>
+</aside>
+<h2 id="23-核心機制的幾何與物理直觀模型">2.3 核心機制的幾何與物理直觀模型</h2>
+<ol>
+<li><strong>軟性可微關聯記憶體（Soft Associative Dictionary）</strong>：將編碼器或上下文視為一組鍵值對 <span class="math inline">\{(k_s, v_s)\}_{s=1}^{n_{kv}}</span>。當查詢向量 <span class="math inline">q_r</span> 發出檢索請求時，內積 <span class="math inline">\langle q_r, k_s \rangle / \sqrt{d_k}</span> 度量兩者在學習到的語義子空間中的定向相似度，Softmax 將其轉化為機率分佈（凸組合權重），輸出則為值向量的期望值 <span class="math inline">\sum_s \alpha_{rs} v_s</span>。</li>
+<li><strong>多頭注意力的「多視角平行投影儀」直觀</strong>：單一 Softmax 分佈若同時關注「主詞名詞」與「遠距副詞補語」，其輸出只能是兩者的線性平均，導致語義混疊 <code>[background.tex:L1]</code>。多頭機制如同將 512 維空間正交或斜交拆解為 8 個 64 維投影幕：第 5 頭可專注指代消解（如 <code>&quot;its&quot;</code> <span class="math inline">\to</span> <code>&quot;The Law&quot;</code>，<code>[Appendix Fig. 4]</code>），第 6 頭可專注動詞片語結構（如 <code>&quot;making&quot;</code> <span class="math inline">\to</span> <code>&quot;more difficult&quot;</code>，<code>[Appendix Fig. 3]</code>），最後再經 <span class="math inline">W^O</span> 線性融合回主幹殘差流。</li>
+<li><strong>正弦位置編碼的「多指針連續時鐘（Multi-Hand Clock）」直觀</strong>：離散整數位置 <span class="math inline">pos</span> 若直接數值輸入會隨序列增長發散；二進位編碼則不連續。正弦編碼設定 <span class="math inline">d_{\text{model}}/2 = 256</span> 根轉速呈幾何級數遞減的時鐘指針（角頻率 <span class="math inline">\omega_i = 10000^{-2i/d_{\text{model}}}</span>）：最快指針每 <span class="math inline">2\pi \approx 6.28</span> 個詞元轉一圈以區分相鄰詞序，最慢指針每 <span class="math inline">2\pi \times 10000 \approx 62,832</span> 個詞元轉一圈以標定全局段落座標；而任意撥快 <span class="math inline">k</span> 個詞元，等價於對每根指針獨立施加一個僅依賴 <span class="math inline">k</span> 的二維剛體旋轉 <span class="math inline">M_k^{(i)} \in SO(2)</span>。</li>
+</ol>
+<h2 id="h3-具體正例演算與邊界反例構造">H3 具體正例演算與邊界反例構造</h2>
+<h2 id="31-具體低維正例完整手算演算worked-micro-example">3.1 具體低維正例完整手算演算（Worked Micro-Example）</h2>
+<p><code>[AI 推導]</code> 考慮序列長度 <span class="math inline">n = 3</span>、子空間維度 <span class="math inline">d_k = d_v = 2</span> 之微型具體數值正例，同時演示 Scaled Dot-Product Attention、解碼器因果遮罩 與 <span class="math inline">SO(2)</span> 位置編碼旋轉。</p>
+<h3 id="a-縮放點積注意力與因果遮罩逐步演算">(a) 縮放點積注意力與因果遮罩逐步演算</h3>
+<p>設投影後之查詢、鍵、值矩陣分別為：
+<div class="math inline">Q = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 2 \\ 1 &amp; 1 \end{pmatrix}, \quad K = \begin{pmatrix} 2 &amp; 0 \\ 0 &amp; 2 \\ -1 &amp; 1 \end{pmatrix}, \quad V = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 3 \\ 2 &amp; 2 \end{pmatrix}, \quad \sqrt{d_k} = \sqrt{2}.</div></p>
+<ol>
+<li><strong>原始內積矩陣 <span class="math inline">QK^\top</span></strong>：
+<div class="math inline">QK^\top = \begin{pmatrix} 4 &amp; 0 &amp; -2 \\ 0 &amp; 4 &amp; 2 \\ 2 &amp; 2 &amp; 0 \end{pmatrix}.</div></li>
+<li><strong>乘上縮放因子 <span class="math inline">1/\sqrt{2} \approx 0.7071</span></strong>：
+<div class="math inline">S = \frac{QK^\top}{\sqrt{2}} = \begin{pmatrix} 2\sqrt{2} &amp; 0 &amp; -\sqrt{2} \\ 0 &amp; 2\sqrt{2} &amp; \sqrt{2} \\ \sqrt{2} &amp; \sqrt{2} &amp; 0 \end{pmatrix} \approx \begin{pmatrix} 2.8284 &amp; 0 &amp; -1.4142 \\ 0 &amp; 2.8284 &amp; 1.4142 \\ 1.4142 &amp; 1.4142 &amp; 0 \end{pmatrix}.</div></li>
+<li><strong>對比「編碼器無遮罩」與「解碼器因果遮罩」</strong>：
+<ul>
+<li><strong>無遮罩第 1 列（位置 <span class="math inline">r=1</span>）</strong>：對 <span class="math inline">(2\sqrt{2}, 0, -\sqrt{2})</span> 取 Softmax，得權重 <span class="math inline">\alpha_{1,:} \approx (0.9317, 0.0551, 0.0134)</span>，輸出為 <span class="math inline">0.9317(1,0) + 0.0551(0,3) + 0.0134(2,2) \approx (0.9585, 0.1921)</span>。</li>
+<li><strong>解碼器因果遮罩 <span class="math inline">M</span> 作用後</strong>：加上 <span class="math inline">M = \begin{pmatrix} 0 &amp; -\infty &amp; -\infty \\ 0 &amp; 0 &amp; -\infty \\ 0 &amp; 0 &amp; 0 \end{pmatrix}</span>，縮放分數矩陣變為：
+<div class="math inline">S_{\text{masked}} = \begin{pmatrix} 2\sqrt{2} &amp; -\infty &amp; -\infty \\ 0 &amp; 2\sqrt{2} &amp; -\infty \\ \sqrt{2} &amp; \sqrt{2} &amp; 0 \end{pmatrix} \xrightarrow{\text{row-softmax}} A_{\text{masked}} \approx \begin{pmatrix} 1 &amp; 0 &amp; 0 \\ 0.0558 &amp; 0.9442 &amp; 0 \\ 0.4484 &amp; 0.4484 &amp; 0.1032 \end{pmatrix}.</div></li>
+<li><strong>因果輸出矩陣 <span class="math inline">A_{\text{masked}} V</span></strong>：
+<ul>
+<li>位置 1 僅能看到位置 1：輸出 <span class="math inline">(1, 0)</span>（對位置 2、3 之偏導嚴格為 <span class="math inline">0</span>）；</li>
+<li>位置 2 僅混合位置 1、2：<span class="math inline">0.0558(1,0) + 0.9442(0,3) = (0.0558, 2.8326)</span>；</li>
+<li>位置 3 可觀測全部位置 1、2、3：<span class="math inline">0.4484(1,0) + 0.4484(0,3) + 0.1032(2,2) = (0.6548, 1.5516)</span>。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="b-正弦位置編碼線性位移驗證">(b) 正弦位置編碼線性位移驗證（<span class="math inline">d_{\text{model}}=2, i=0 \implies \omega_0 = 1</span>）</h3>
+<p>取位置 <span class="math inline">pos = 1</span> 與位移 <span class="math inline">k = 2</span>（目標位置 <span class="math inline">pos+k = 3</span>）：
+<div class="math inline">PE_1 = \begin{pmatrix} \sin 1 \\ \cos 1 \end{pmatrix} \approx \begin{pmatrix} 0.841471 \\ 0.540302 \end{pmatrix}, \quad M_{k=2}^{(0)} = \begin{pmatrix} \cos 2 &amp; \sin 2 \\ -\sin 2 &amp; \cos 2 \end{pmatrix} \approx \begin{pmatrix} -0.416147 &amp; 0.909297 \\ -0.909297 &amp; -0.416147 \end{pmatrix}.</div>
+矩陣相乘得：
+<div class="math inline">M_{2}^{(0)} PE_1 \approx \begin{pmatrix} (-0.416147)(0.841471) + (0.909297)(0.540302) \\ (-0.909297)(0.841471) + (-0.416147)(0.540302) \end{pmatrix} = \begin{pmatrix} 0.141120 \\ -0.989992 \end{pmatrix} = \begin{pmatrix} \sin 3 \\ \cos 3 \end{pmatrix} = PE_3.</div>
+此旋轉矩陣 <span class="math inline">M_2^{(0)}</span> 完全不依賴起始位置 <span class="math inline">pos</span>。</p>
+<h2 id="32-破壞假設之邊界反例構造sharp-counterexamples">3.2 破壞假設之邊界反例構造（Sharp Counterexamples）</h2>
+<h3 id="反例-cex-1移除位置編碼-詞袋排列塌縮驗證-def-5-之必要性">反例 <code>CEX-1</code>（移除位置編碼 <span class="math inline">\implies</span> 詞袋排列塌縮，驗證 <code>DEF-5</code> 之必要性）</h3>
+<ul>
+<li><strong>構造</strong>：<code>[AI 推導]</code> 令 <span class="math inline">PE \equiv 0</span>，考慮兩個語義完全相反但詞元集合相同的英文序列：<span class="math inline">S_1 = (\text{&quot;dog&quot;}, \text{&quot;bites&quot;}, \text{&quot;man&quot;})</span> 與 <span class="math inline">S_2 = (\text{&quot;man&quot;}, \text{&quot;bites&quot;}, \text{&quot;dog&quot;})</span>。兩者輸入嵌入矩陣滿足 <span class="math inline">X^{(2)} = \Pi X^{(1)}</span>，其中置換矩陣 <span class="math inline">\Pi = \begin{pmatrix} 0&amp;0&amp;1 \\ 0&amp;1&amp;0 \\ 1&amp;0&amp;0 \end{pmatrix}</span>。</li>
+<li><strong>嚴格後果</strong>：由 <code>PRP-5</code>（並經 <code>VER-3</code> 數值檢驗最大誤差 <code>0.0</code>），無遮罩編碼器對任意層數 <span class="math inline">N</span> 恆滿足 <span class="math inline">Z^{(2)} = \mathrm{Encoder}(\Pi X^{(1)}) = \Pi   \mathrm{Encoder}(X^{(1)}) = \Pi Z^{(1)}</span>。更關鍵的是，在解碼器的編碼器，解碼器跨注意力層（Cross-Attention，<code>STEP-12</code>）中，因 <span class="math inline">\Pi^\top \Pi = I_3</span> 精確對消：
+<div class="math inline">\mathrm{CrossAttn}(Q_{\text{dec}}, \Pi Z^{(1)} W^K, \Pi Z^{(1)} W^V) = \mathrm{softmax}\left(\frac{Q_{\text{dec}}(W^K)^\top (Z^{(1)})^\top}{\sqrt{d_k}}\right) \underbrace{\Pi^\top \Pi}_{I_3} Z^{(1)} W^V = \mathrm{CrossAttn}(Q_{\text{dec}}, Z^{(1)} W^K, Z^{(1)} W^V)!</div>
+無需任何額外池化假設，即使解碼器本身保留完整位置編碼與因果遮罩，整個 Transformer 對 <code>&quot;dog bites man&quot;</code> 與 <code>&quot;man bites dog&quot;</code> 仍輸出 100% 恆等條件機率分佈 <span class="math inline">P_\theta(y_{1:m} \mid S_1) \equiv P_\theta(y_{1:m} \mid S_2)</span>。</li>
+</ul>
+<h3 id="反例-cex-2非零均值查詢鍵破壞-變異數穩定化揭露-asm-1-asm-2-邊界">反例 <code>CEX-2</code>（非零均值查詢/鍵破壞 <span class="math inline">1/\sqrt{d_k}</span> 變異數穩定化，揭露 <code>ASM-1</code> / <code>ASM-2</code> 邊界）</h3>
+<ul>
+<li><strong>構造</strong>：<code>[AI 推導]</code> 破壞 <code>ASM-1</code> 中的零均值條件 <span class="math inline">\mathbb{E}[q_i]=\mathbb{E}[k_i]=0</span>，設 <span class="math inline">q_i, k_i \stackrel{\text{i.i.d.}}{\sim} \mathcal{N}(\mu, 1)</span>，取非零均值 <span class="math inline">\mu = 0.5</span>、維度 <span class="math inline">d_k = 512</span>（仍保留單位變異數 <span class="math inline">\operatorname{Var}(q_i)=\operatorname{Var}(k_i)=1</span>）。</li>
+<li><strong>嚴格後果</strong>：對單一座標乘積，精確有理數計算（<code>VER-1</code>）給出：
+<div class="math inline">\mathbb{E}[q_i k_i] = \mu^2 = \frac{1}{4}, \quad \operatorname{Var}(q_i k_i) = (1+\mu^2)^2 - \mu^4 = 1 + 2\mu^2 = \frac{3}{2} \neq 1.</div>
+因此縮放後內積 <span class="math inline">Z = \frac{q^\top k}{\sqrt{d_k}}</span> 滿足：
+<div class="math inline">\mathbb{E}[Z] = \frac{d_k \mu^2}{\sqrt{d_k}} = \mu^2 \sqrt{d_k} = 0.25 \sqrt{512} \approx 5.6569 = \Theta(\sqrt{d_k}), \quad \operatorname{Var}(Z) = 1.5.</div>
+<code>VER-1</code> 蒙地卡羅模擬實測均值 <code>5.6396</code>、變異數 <code>1.4495</code>。當不同鍵向量具有不同非零均值偏移 <span class="math inline">\mu_{k^{(s)}}</span> 時，鍵與鍵之間的分數差距 <span class="math inline">\Delta Z = \mu_q (\mu_{k^{(1)}} - \mu_{k^{(2)}}) \sqrt{d_k}</span> 即使除以 <span class="math inline">\sqrt{d_k}</span> 仍隨 <span class="math inline">\Theta(\sqrt{d_k})</span> 發散，再次將 Softmax 推入梯度消失區。這證明了 <code>ASM-1</code> 中「零均值」比「單位變異數」更為關鍵。</li>
+</ul>
+<h3 id="反例-cex-3頭數-過度切分導致單頭對數親和矩陣低秩瓶頸解釋-table-3-row-a-退化">反例 <code>CEX-3</code>（頭數 <span class="math inline">h</span> 過度切分導致單頭對數親和矩陣低秩瓶頸，解釋 Table 3 Row A 退化）</h3>
+<ul>
+<li><strong>構造</strong>：<code>[AI 推導]</code> 固定 <span class="math inline">d_{\text{model}} = 512</span>，在長度 <span class="math inline">n = 64</span> 的序列上將頭數擴增至 <span class="math inline">h = 64</span>（此時每頭 <span class="math inline">d_k = 512/64 = 8 &lt; n = 64</span>）。</li>
+<li><strong>嚴格後果</strong>：單一注意力頭在 Softmax 之前的分數矩陣 <span class="math inline">L_i = \frac{(X W_i^Q)(X W_i^K)^\top}{\sqrt{d_k}} \in \mathbb{R}^{64 \times 64}</span> 的秩受限於內維度：
+<div class="math inline">\operatorname{rank}(L_i) \le \min(n, d_k) = 8 \ll 64.</div>
+因此，任何秩大於 8 的目標對數親和模式（例如要求每個詞元精確對齊某個唯一配對詞元的滿秩置換對角優勢矩陣 <span class="math inline">\tau I_{64}</span>）在代數上不可能在單頭子空間內精確實現。這直接從線性代數秩上界解釋了為何 Table 3 Row (A) 中 <span class="math inline">h=32, d_k=16</span> 的 BLEU 由 <span class="math inline">25.8</span> 倒退至 <span class="math inline">25.4</span>，以及 Row (B) 單獨縮小 <span class="math inline">d_k=16</span> 時退化至 <span class="math inline">25.1</span>。</li>
+</ul>
+<h3 id="反例-cex-4正弦位置編碼在訓練長度凸包外的非線性激活失配質疑-asm-3">反例 <code>CEX-4</code>（正弦位置編碼在訓練長度凸包外的非線性激活失配，質疑 <code>ASM-3</code>）</h3>
+<ul>
+<li><strong>構造</strong>：<code>[外部知識]</code> 設模型僅在長度 <span class="math inline">pos \le L_{\text{train}} = 64</span> 的序列上訓練，考慮低頻通道（如 <span class="math inline">2i = 480, d_{\text{model}} = 512 \implies \omega_{240} = 10000^{-480/512} \approx 1.778 \times 10^{-4}</span>）。</li>
+<li><strong>嚴格後果</strong>：在整個訓練集上，<span class="math inline">\omega_{240} \cdot pos \in [0, 0.0114]</span>，故第 <span class="math inline">480</span> 維恆在 <span class="math inline">[0, 0.0114]</span> 極窄正區間，第 <span class="math inline">481</span> 維恆在 <span class="math inline">[0.9999, 1.0]</span> 近乎常數區間；第一層 FFN 的偏置 <span class="math inline">b_1</span> 與權重 <span class="math inline">W_1</span> 會將該通道當作準常數偏置項擬合。當測試序列外推至 <span class="math inline">pos = 16,384</span> 時，<span class="math inline">\omega_{240} \cdot pos \approx 2.91 \text{ rad}</span>，第 <span class="math inline">481</span> 維突變為負值 <span class="math inline">\cos(2.91) \approx -0.974</span>，觸發訓練期從未見過的 ReLU 門控翻轉，導致外推困惑度暴增，說明單靠嵌入空間的 <span class="math inline">SO(2)</span> 線性性質（<code>PRP-2</code>）不足以保證深度非線性網路的長度外推（<code>ASM-3</code>）。</li>
+</ul>
+<h2 id="h4-核心定理五層註釋逐步補全證明與推理缺口分析">H4 核心定理五層註釋、逐步補全證明與推理缺口分析</h2>
+<p>本章對論文五組核心理論支柱逐一展開 「直觀理解，嚴格表述，完整推導，局限分析，研究拓展」 五層深度註釋，並將原文省略的代數與機率步驟完整補齊。</p>
+<h2 id="41-命題-prp-1縮放點積變異數歸一化與-softmax-雅可比穩定化定理">4.1 命題 <code>PRP-1</code>：縮放點積變異數歸一化與 Softmax 雅可比穩定化定理</h2>
+<h3 id="直觀理解">直觀理解</h3>
+<p>當查詢向量 <span class="math inline">q</span> 與鍵向量 <span class="math inline">k</span> 的維度 <span class="math inline">d_k</span> 很大（例如單頭 <span class="math inline">d_k = 512</span>）時，<span class="math inline">d_k</span> 個隨機座標乘積相加會像高維隨機漫步一樣，使總和的波動幅度按 <span class="math inline">\sqrt{d_k}</span> 放大（變異數變為 <span class="math inline">d_k</span>）。一旦最大內積比次大內積高出十幾個標準差，Softmax 指數運算會將機率分佈擠壓成近乎 One-Hot 的極端尖峰（例如 <span class="math inline">(0.99999, 0.00001, \dots)</span>），此時輸出對輸入分數的導數幾乎處處為零，反向傳播梯度瞬間窒息。除以 <span class="math inline">\sqrt{d_k}</span> 相當於把隨機漫步拉回標準尺度 <span class="math inline">\mathcal{O}(1)</span>，使 Softmax 維持平滑可微的梯度流。</p>
+<h3 id="嚴格表述">嚴格表述</h3>
+<p><code>[原文內容]</code> <code>[Sec 3.2.1 &amp; Footnote 4, P4]</code> 設查詢向量 <span class="math inline">q \in \mathbb{R}^{d_k}</span> 與 <span class="math inline">n</span> 個鍵向量 <span class="math inline">k^{(1)}, \dots, k^{(n)} \in \mathbb{R}^{d_k}</span> 滿足假設 <code>ASM-1</code>（所有座標分量互為獨立隨機變數，且 <span class="math inline">\mathbb{E}[q_i] = \mathbb{E}[k_i^{(s)}] = 0</span>、<span class="math inline">\operatorname{Var}(q_i) = \operatorname{Var}(k_i^{(s)}) = 1</span>）。記未縮放分數 <span class="math inline">z_s = q^\top k^{(s)}</span>，縮放分數 <span class="math inline">\tilde{z}_s = z_s / \sqrt{d_k}</span>，Softmax 輸出 <span class="math inline">p = \mathrm{softmax}(z)</span>。則：</p>
+<ol>
+<li><span class="math inline">\mathbb{E}[z_s] = 0,\ \operatorname{Var}(z_s) = d_k</span>，而 <span class="math inline">\mathbb{E}[\tilde{z}_s] = 0,\ \operatorname{Var}(\tilde{z}_s) = 1</span>（對一切 <span class="math inline">d_k \ge 1</span> 恆成立）；</li>
+<li><code>[AI 推導]</code> Softmax 雅可比矩陣 <span class="math inline">J(p) = \nabla_z \mathrm{softmax}(z) = \operatorname{diag}(p) - p p^\top</span> 的 Frobenius 範數平方為：
+<div class="math inline">\|J(p)\|_F^2 = \sum_{r=1}^{n} p_r^2 (1 - p_r)^2 + \sum_{r \neq s} p_r^2 p_s^2 = \sum_{r=1}^{n} p_r^2 - 2\sum_{r=1}^{n} p_r^3 + \left(\sum_{r=1}^{n} p_r^2\right)^2;</div>
+在未縮放情形下，隨 <span class="math inline">d_k \to \infty</span>，<span class="math inline">\max_r p_r \stackrel{P}{\to} 1</span> 且 <span class="math inline">\|J(\mathrm{softmax}(z))\|_F \stackrel{P}{\to} 0</span>；而在 <span class="math inline">1/\sqrt{d_k}</span> 縮放後，<span class="math inline">\|J(\mathrm{softmax}(\tilde{z}))\|_F</span> 收斂於非退化正隨機變數分佈。</li>
+</ol>
+<h3 id="完整推導">完整推導</h3>
+<ol>
+<li><strong>單座標乘積矩展開（補全 <code>STEP-1</code>）</strong>：<code>[AI 推導]</code> 由 <span class="math inline">q_i</span> 與 <span class="math inline">k_i</span> 相互獨立，
+<div class="math inline">\mathbb{E}[q_i k_i] = \mathbb{E}[q_i]\mathbb{E}[k_i] = 0 \cdot 0 = 0,</div>
+<div class="math inline">\operatorname{Var}(q_i k_i) = \mathbb{E}[q_i^2 k_i^2] - (\mathbb{E}[q_i k_i])^2 = \mathbb{E}[q_i^2]\mathbb{E}[k_i^2] - 0 = (\operatorname{Var}(q_i) + 0)(\operatorname{Var}(k_i) + 0) = 1.</div></li>
+<li><strong>跨座標獨立性與縮放（補全 <code>STEP-2</code>）</strong>：<code>[AI 推導]</code> 當 <span class="math inline">i \neq j</span> 時，<span class="math inline">(q_i, k_i)</span> 與 <span class="math inline">(q_j, k_j)</span> 相互獨立，故 <span class="math inline">\operatorname{Cov}(q_i k_i, q_j k_j) = 0</span>。由 Bienaymé 變異數可加性：
+<div class="math inline">\operatorname{Var}(q^\top k) = \sum_{i=1}^{d_k} \operatorname{Var}(q_i k_i) + 2\sum_{1 \le i &lt; j \le d_k} \operatorname{Cov}(q_i k_i, q_j k_j) = d_k + 0 = d_k.</div>
+除以常數 <span class="math inline">\sqrt{d_k}</span> 得 <span class="math inline">\operatorname{Var}(q^\top k / \sqrt{d_k}) = (\sqrt{d_k})^{-2} \operatorname{Var}(q^\top k) = d_k / d_k = 1</span>。</li>
+<li><strong>雅可比飽和漸近分析（補全 <code>STEP-3</code>）</strong>：<code>[AI 推導]</code> 由中央極限定理（對給定典型單位範數查詢 <span class="math inline">\|q\|_2 / \sqrt{d_k} \to 1</span>），條件於 <span class="math inline">q</span> 時 <span class="math inline">z_s / \sqrt{d_k}</span> 漸近服從標準常態分佈 <span class="math inline">\mathcal{N}(0, 1)</span>。對 <span class="math inline">n \ge 2</span> 個獨立鍵，最大值與次大值間距 <span class="math inline">\gamma_n = \tilde{z}_{(1)} - \tilde{z}_{(2)} &gt; 0</span> 以機率 <span class="math inline">1</span> 嚴格為正。在未縮放情形下，<span class="math inline">z_{(1)} - z_{(2)} = \sqrt{d_k} \gamma_n \to +\infty</span>，故：
+<div class="math inline">1 - p_{(1)} \le (n-1) e^{-\sqrt{d_k}\gamma_n} \implies \|J(p)\|_F = \mathcal{O}\left(e^{-\sqrt{d_k}\gamma_n}\right) \xrightarrow{d_k \to \infty} 0.</div>
+計算檢驗 <code>VER-1</code>（<span class="math inline">n=10</span> 個鍵，10,000 次試驗）證實：未縮放時 <span class="math inline">\mathbb{E}[\|J\|_F]</span> 由 <span class="math inline">d_k=16</span> 的 <code>0.2600</code> 一路崩跌至 <span class="math inline">d_k=512</span> 的 <code>0.0682</code> 與 <span class="math inline">d_k=1024</span> 的 <code>0.0449</code>；而加上 <span class="math inline">1/\sqrt{d_k}</span> 縮放後，在所有維度恆穩定於 <code>0.3447–0.3483</code>。</li>
+</ol>
+<h3 id="局限分析">局限分析</h3>
+<ul>
+<li><strong>推理缺口標記（<code>ASM-2</code>：<code>gap_flagged</code>）</strong>：<code>[AI 推導]</code> 在真實網路中，<span class="math inline">\tilde{q} = \mathrm{LayerNorm}(u) W_i^Q</span>。即便 LayerNorm 將輸入規範化為經驗均值 <span class="math inline">0</span>、經驗方差 <span class="math inline">1</span>，乘上可訓練矩陣 <span class="math inline">W_i^Q, W_i^K</span> 後，<span class="math inline">\operatorname{Cov}(\tilde{q}) = \frac{1}{d_{\text{model}}}(W_i^Q)^\top (I - \frac{1}{d_{\text{model}}}\mathbf{1}\mathbf{1}^\top) W_i^Q</span> 隨訓練步數增長可能遠大於單位矩陣（即所謂 Attention Logit Growth），導致超大模型訓練後期重新出現注意力熵崩潰（Entropy Collapse）。</li>
+<li><strong>非零均值脆弱性</strong>：如反例 <code>CEX-2</code> 所示，一旦均值 <span class="math inline">\mu \neq 0</span>，<span class="math inline">1/\sqrt{d_k}</span> 無法抵消 <span class="math inline">\Theta(\sqrt{d_k})</span> 的均值偏移。</li>
+</ul>
+<h3 id="研究拓展">研究拓展</h3>
+<p><code>[外部知識]</code> 為完全修復 <code>ASM-2</code> 的缺口，現代大規模視覺與語言 Transformer（如 Dehghani et al., 2023 ViT-22B; Gemma-2; Chameleon）引入 QK-Norm（在點積前對 <span class="math inline">\tilde{q}, \tilde{k}</span> 顯式施加 LayerNorm 或 RMSNorm），或採用溫度可學習的餘弦注意力（Cosine Attention, Liu et al., 2022 Swin-v2）。</p>
+<h2 id="42-命題-prp-2-prp-3正弦位置編碼之-李群同態與內積偶對稱性">4.2 命題 <code>PRP-2</code> &amp; <code>PRP-3</code>：正弦位置編碼之 <span class="math inline">SO(2)</span> 李群同態與內積偶對稱性</h2>
+<h3 id="直觀理解-1">直觀理解</h3>
+<p>原文第 3.5 節提出選擇正弦與餘弦成對編碼的核心假說是：「對於任意固定相對位移 <span class="math inline">k</span>，<span class="math inline">PE_{pos+k}</span> 可以表示為 <span class="math inline">PE_{pos}</span> 的線性函數，從而讓模型輕易學會按相對位置進行關注」。幾何上，這意味著把序列位置映射到了 <span class="math inline">d_{\text{model}}/2</span> 個相互正交的二維圓周流形 <span class="math inline">(S^1)^{d_{\text{model}}/2}</span> 上，平移 <span class="math inline">k</span> 步完全等價於在每個二維平面上做一次角度為 <span class="math inline">\omega_i k</span> 的剛體旋轉。</p>
+<h3 id="嚴格表述-1">嚴格表述</h3>
+<p><code>[AI 推導]</code>（補全 <code>[Sec 3.5, P6]</code> 原文命題）設 <span class="math inline">d_{\text{model}} \in 2\mathbb{Z}_{\ge 1}</span>，定義 <span class="math inline">PE_{pos} \in \mathbb{R}^{d_{\text{model}}}</span> 如 <code>DEF-5</code>，其中 <span class="math inline">\omega_i = 10000^{-2i/d_{\text{model}}}</span>。則：</p>
+<ol>
+<li><strong>（<code>PRP-2</code>：區塊對角正交旋轉同態）</strong> 對任意實數位移 <span class="math inline">k \in \mathbb{R}</span>，存在唯一與 <span class="math inline">pos</span> 無關之區塊對角正交矩陣
+<div class="math inline">M_k = \bigoplus_{i=0}^{d_{\text{model}}/2 - 1} \begin{pmatrix} \cos(\omega_i k) &amp; \sin(\omega_i k) \\ -\sin(\omega_i k) &amp; \cos(\omega_i k) \end{pmatrix} \in SO(2)^{d_{\text{model}}/2} \subset SO(d_{\text{model}}),</div>
+使得對一切 <span class="math inline">pos</span> 恆有 <span class="math inline">PE_{pos+k} = M_k PE_{pos}</span>，且映射 <span class="math inline">k \mapsto M_k</span> 構成加法群 <span class="math inline">(\mathbb{R}, +)</span> 到特殊正交李群 <span class="math inline">SO(d_{\text{model}})</span> 的連續群同態：<span class="math inline">M_{k_1} M_{k_2} = M_{k_1 + k_2},\ M_0 = I,\ M_{-k} = M_k^\top</span>。</li>
+<li><strong>（<code>PRP-3</code>：原始位置內積之平移不變偶對稱核）</strong> 對任意 <span class="math inline">pos</span> 與 <span class="math inline">k</span>，未投影位置編碼之歐氏內積恆為：
+<div class="math inline">\langle PE_{pos}, PE_{pos+k} \rangle = \sum_{i=0}^{d_{\text{model}}/2 - 1} \cos(\omega_i k) = \langle PE_{pos}, PE_{pos-k} \rangle.</div></li>
+</ol>
+<h3 id="完整推導-1">完整推導</h3>
+<ol>
+<li><strong>三角和角公式矩陣化（<code>STEP-4</code>）</strong>：<code>[AI 推導]</code> 對第 <span class="math inline">i</span> 對偶奇座標 <span class="math inline">(2i, 2i+1)</span>，由三角恆等式：
+<div class="math inline">\begin{aligned}
+PE_{(pos+k, 2i)} &amp;= \sin(\omega_i pos + \omega_i k) = \cos(\omega_i k) \sin(\omega_i pos) + \sin(\omega_i k) \cos(\omega_i pos), \\
+PE_{(pos+k, 2i+1)} &amp;= \cos(\omega_i pos + \omega_i k) = -\sin(\omega_i k) \sin(\omega_i pos) + \cos(\omega_i k) \cos(\omega_i pos).
+\end{aligned}</div>
+寫成 <span class="math inline">2 \times 2</span> 矩陣乘法即為 <span class="math inline">PE_{pos+k}^{(i)} = M_k^{(i)} PE_{pos}^{(i)}</span>。</li>
+<li><strong>正交性與群同態驗證（<code>STEP-5</code>）</strong>：<code>[AI 推導]</code> 直接計算 <span class="math inline">(M_k^{(i)})^\top M_k^{(i)} = (\cos^2(\omega_i k)+\sin^2(\omega_i k)) I_2 = I_2</span> 且 <span class="math inline">\det M_k^{(i)} = 1</span>；再由旋轉角可加性得 <span class="math inline">M_{k_1}^{(i)} M_{k_2}^{(i)} = M_{k_1+k_2}^{(i)}</span>。直和後即得全局 <span class="math inline">M_k \in SO(d_{\text{model}})</span>（<code>VER-2</code> 數值檢驗最大誤差 <code>7.25e-13</code>）。</li>
+<li><strong>平移不變內積與方向對稱性（<code>STEP-6</code>）</strong>：<code>[AI 推導]</code> 由正交不變性與餘弦差角公式：
+<div class="math inline">\langle PE_{pos}, PE_{pos+k} \rangle = \sum_{i=0}^{d_{\text{model}}/2-1} \big(\sin(\omega_i pos)\sin(\omega_i(pos+k)) + \cos(\omega_i pos)\cos(\omega_i(pos+k))\big) = \sum_{i=0}^{d_{\text{model}}/2-1} \cos(\omega_i k).</div>
+因 <span class="math inline">\cos(-\omega_i k) = \cos(\omega_i k)</span>，原始內積僅依賴距離 <span class="math inline">|k|</span>，無法區分「前 <span class="math inline">k</span> 個詞」與「後 <span class="math inline">k</span> 個詞」。模型若要區分前後方向（有向位移 <span class="math inline">+k</span> 與 <span class="math inline">-k</span>），必須藉由非對稱雙線性投影矩陣 <span class="math inline">(W_r^Q)(W_r^K)^\top</span> 選取 <span class="math inline">\sin(\omega_i k)</span> 反對稱交叉項：若令 <span class="math inline">(W_r^Q)(W_r^K)^\top = M_{-k_0}</span>，則 <span class="math inline">PE_{pos}^\top (W_r^Q)(W_r^K)^\top PE_{pos+k} = \langle M_{k_0} PE_{pos}, PE_{pos+k} \rangle = \langle PE_{pos+k_0}, PE_{pos+k} \rangle</span> 在唯一有向位移 <span class="math inline">k = k_0</span> 處達到全域最大值 <span class="math inline">d_{\text{model}}/2</span>。</li>
+</ol>
+<h3 id="局限分析-1">局限分析</h3>
+<ul>
+<li><strong>加性混疊交叉項污染</strong>：在實際輸入 <span class="math inline">x_{pos} = \sqrt{d_{\text{model}}} e_{pos} + PE_{pos}</span> 中，注意力內積展開會產生四項：內容，內容、內容，位置、位置，內容、位置，位置；位置信號在經過第一層非線性 FFN 後會與詞義通道混雜，不再保持純粹的區塊對角 <span class="math inline">SO(2)</span> 結構。</li>
+<li><strong>外推假說未經原論文實證（<code>ASM-3</code>：<code>plausible_unverified</code>）</strong>：Table 3 Row (E) 僅在開發集 <code>newstest2013</code> 同分佈長度上比較了正弦編碼（25.8 BLEU）與學習式位置嵌入（25.7 BLEU），並未進行超長序列外推測試 <code>[Sec 6.2, P9]</code>。</li>
+</ul>
+<h3 id="研究拓展-1">研究拓展</h3>
+<p><code>[外部知識]</code> Su et al. (2021) 提出的 旋轉位置編碼（RoPE, Rotary Position Embedding） 正是將 <code>PRP-2</code> 的 <span class="math inline">SO(2)^{d_k/2}</span> 算子從「輸入層加法」改為「每一層查詢與鍵的乘法旋轉」<span class="math inline">\tilde{q}_m = M_m W_q x_m,\ \tilde{k}_n = M_n W_k x_n</span>，從而消除了加性交叉項，使內積 <span class="math inline">\langle \tilde{q}_m, \tilde{k}_n \rangle = x_m^\top W_q^\top M_{n-m} W_k x_n</span> 嚴格只依賴有向相對位移 <span class="math inline">n-m</span>，成為當代 LLaMA、Qwen、DeepSeek 等主流大語言模型的標準配備。</p>
+<h2 id="43-命題-prp-4多頭注意力之等參數與等算力子空間分解定理">4.3 命題 <code>PRP-4</code>：多頭注意力之等參數與等算力子空間分解定理</h2>
+<h3 id="直觀理解-2">直觀理解</h3>
+<p>表面上看，把 1 個注意力頭變成 <span class="math inline">h=8</span> 個平行注意力頭似乎會讓參數與計算量暴增 8 倍；但因為每個頭的查詢、鍵、值維度同步縮小了 <span class="math inline">1/h</span>（<span class="math inline">d_k = d_v = d_{\text{model}}/h = 64</span>），<span class="math inline">h</span> 個小矩陣的參數總和與乘法總數剛好與 1 個全維度大矩陣完全抵消，等於「免費」獲得了 <span class="math inline">h</span> 個獨立的注意力機率分佈。</p>
+<h3 id="嚴格表述-2">嚴格表述</h3>
+<p><code>[AI 推導]</code>（嚴格化 <code>[Sec 3.2.2, P5]</code>）設 <span class="math inline">h \mid d_{\text{model}}</span> 且令 <span class="math inline">d_k = d_v = d_{\text{model}} / h</span>，序列長度 <span class="math inline">n_q = n_{kv} = n</span>。則：</p>
+<ol>
+<li>多頭注意力總可訓練參數數為 <span class="math inline">\#\Theta_{\text{MHA}} = 4 d_{\text{model}}^2</span>（不含偏置），與含輸出線性投影 <span class="math inline">W^O \in \mathbb{R}^{d_{\text{model}}\times d_{\text{model}}}</span> 之單頭全維度注意力（<span class="math inline">h=1, d_k'=d_v'=d_{\text{model}}</span>）精確相等；</li>
+<li>主導乘加運算次數（MACs）恆為 <span class="math inline">\mathrm{MACs}(n, d_{\text{model}}, h) = 4 n d_{\text{model}}^2 + 2 n^2 d_{\text{model}}</span>，與頭數 <span class="math inline">h</span> 完全無關（僅 Softmax 正規化開銷由 <span class="math inline">O(n^2)</span> 增為 <span class="math inline">O(h n^2)</span>）。</li>
+</ol>
+<h3 id="完整推導-2">完整推導</h3>
+<ol>
+<li><strong>參數精確計數（<code>STEP-7</code>）</strong>：<code>[AI 推導]</code> 每一頭擁有 <span class="math inline">W_i^Q \in \mathbb{R}^{d_{\text{model}}\times d_k}</span>、<span class="math inline">W_i^K \in \mathbb{R}^{d_{\text{model}}\times d_k}</span>、<span class="math inline">W_i^V \in \mathbb{R}^{d_{\text{model}}\times d_v}</span>，加上共享拼接投影 <span class="math inline">W^O \in \mathbb{R}^{(h d_v)\times d_{\text{model}}}</span>：
+<div class="math inline">\#\Theta_{\text{MHA}} = \sum_{i=1}^{h} (2 d_{\text{model}} d_k + d_{\text{model}} d_v) + (h d_v) d_{\text{model}} = h \cdot 3 d_{\text{model}} \frac{d_{\text{model}}}{h} + d_{\text{model}}^2 = 4 d_{\text{model}}^2.</div>
+代入 <span class="math inline">d_{\text{model}} = 512, h = 8</span>，得 <span class="math inline">\#\Theta_{\text{MHA}} = 4 \times 512^2 = 1,048,576</span>（<code>VER-3</code> 已核驗）。</li>
+<li><strong>算力與低秩分解等價形式（<code>STEP-8</code>）</strong>：<code>[AI 推導]</code> 將 <span class="math inline">W^O</span> 按列分塊為 <span class="math inline">W^O = \begin{bmatrix} W_1^O \\ \vdots \\ W_h^O \end{bmatrix}</span>，其中 <span class="math inline">W_i^O \in \mathbb{R}^{d_v \times d_{\text{model}}}</span>，則多頭輸出可寫為加性算子分解：
+<div class="math inline">\mathrm{MultiHead}(Q, K, V) = \sum_{i=1}^{h} \underbrace{\mathrm{softmax}\left(\frac{Q W_i^Q (W_i^K)^\top K^\top}{\sqrt{d_k}}\right)}_{A^{(i)} \in \mathbb{R}^{n \times n}} V \underbrace{(W_i^V W_i^O)}_{\operatorname{rank} \le d_v}.</div>
+計算四組投影耗費 <span class="math inline">4 n d_{\text{model}}^2</span> MACs；計算 <span class="math inline">h</span> 組 <span class="math inline">QK^\top</span> 與 <span class="math inline">A^{(i)}V</span> 耗費 <span class="math inline">\sum_{i=1}^h (n^2 d_k + n^2 d_v) = 2 n^2 d_{\text{model}}</span> MACs，兩項皆與 <span class="math inline">h</span> 無關。</li>
+</ol>
+<h3 id="局限分析-2">局限分析</h3>
+<ul>
+<li><strong>KV-Cache 記憶體頻寬瓶頸與頭數上限</strong>：雖然算力與 <span class="math inline">h</span> 無關，但每個頭的雙線性核 <span class="math inline">W_i^Q (W_i^K)^\top</span> 與值通道映射 <span class="math inline">W_i^V W_i^O</span> 的秩上限均被壓縮為 <span class="math inline">d_{\text{model}}/h</span>（見反例 <code>CEX-3</code>）；此外在自回歸推論時，<span class="math inline">h</span> 個頭的鍵值快取（KV-Cache）佔據大量高頻寬記憶體（HBM）。</li>
+</ul>
+<h3 id="研究拓展-2">研究拓展</h3>
+<p><code>[外部知識]</code> Shazeer (2019) 提出 Multi-Query Attention (MQA) 與 Ainslie et al. (2023) 提出 Grouped-Query Attention (GQA)，令多個查詢頭共享同一組鍵值投影 <span class="math inline">W^K, W^V</span>，在幾乎不損翻譯/生成品質的前提下將推論階段 KV-Cache 頻寬需求降低 <span class="math inline">4\sim 8</span> 倍。</p>
+<h2 id="44-命題-prp-5-prp-6無位置編碼排列等變性與遮罩解碼器嚴格自回歸因果性">4.4 命題 <code>PRP-5</code> &amp; <code>PRP-6</code>：無位置編碼排列等變性與遮罩解碼器嚴格自回歸因果性</h2>
+<h3 id="直觀理解-3">直觀理解</h3>
+<p><code>PRP-5</code> 揭示了純注意力網路的本質幾何對稱性：若不加位置編碼與遮罩，Transformer 就是一個作用於「點雲 / 集合（Set）」上的深度網路，把輸入詞元順序任意洗牌，輸出也會跟著精確洗牌；<code>PRP-6</code> 則證明透過「目標序列右移一位 + 上三角 <span class="math inline">-\infty</span> 遮罩」，解碼器可以在訓練時用單次並行矩陣運算同時算出全部 <span class="math inline">m</span> 個位置的損失，卻在數學上嚴格等價於一步一步不偷看未來的自回歸機率分解。</p>
+<h3 id="嚴格表述-3">嚴格表述</h3>
+<p><code>[AI 推導]</code></p>
+<ol>
+<li><strong>（<code>PRP-5</code>：<span class="math inline">S_n</span> 排列等變性）</strong> 設無位置編碼且無遮罩之 <span class="math inline">N</span> 層編碼器為 <span class="math inline">\mathcal{T}_{\text{no-PE}}: \mathbb{R}^{n \times d_{\text{model}}} \to \mathbb{R}^{n \times d_{\text{model}}}</span>。對任意 <span class="math inline">n \times n</span> 置換矩陣 <span class="math inline">\Pi \in S_n</span>（滿足 <span class="math inline">\Pi^\top \Pi = I_n</span>），恆有 <span class="math inline">\mathcal{T}_{\text{no-PE}}(\Pi X) = \Pi   \mathcal{T}_{\text{no-PE}}(X)</span>。</li>
+<li><strong>（<code>PRP-6</code>：嚴格下三角雅可比因果性）</strong> 設解碼器輸入為右移序列 <span class="math inline">\tilde{Y} = (\langle\mathrm{bos}\rangle, y_1, \dots, y_{m-1})</span>，且每一層自注意力皆施加 <code>DEF-2</code> 遮罩 <span class="math inline">M_{ij} = -\infty \cdot \mathbb{I}[j &gt; i]</span>。記第 <span class="math inline">i</span> 位置輸出之詞表預測分佈為 <span class="math inline">\hat{p}_i</span>，則對一切 <span class="math inline">r \ge i</span>，雅可比塊恆為零：<span class="math inline">\frac{\partial \hat{p}_i}{\partial e(y_r)} = \mathbf{0}</span>。</li>
+</ol>
+<h3 id="完整推導-3">完整推導</h3>
+<ol>
+<li><strong>排列等變性歸納證明（<code>STEP-9</code>）</strong>：<code>[AI 推導]</code> 對單頭自注意力，因行方向 Softmax 對行置換與列置換雙重共變（<span class="math inline">\mathrm{softmax}(\Pi Z \Pi^\top) = \Pi   \mathrm{softmax}(Z)   \Pi^\top</span>）：
+<div class="math inline">\mathrm{Attn}(\Pi X W^Q, \Pi X W^K, \Pi X W^V) = \mathrm{softmax}\left(\frac{\Pi X W^Q (W^K)^\top X^\top \Pi^\top}{\sqrt{d_k}}\right) \Pi X W^V = \Pi   \mathrm{softmax}(\cdots) \underbrace{\Pi^\top \Pi}_{I_n} X W^V = \Pi   \mathrm{Attn}(X W^Q, X W^K, X W^V).</div>
+拼接與右乘 <span class="math inline">W^O</span>、殘差相加、逐行 LayerNorm 與逐行 FFN 皆在行方向獨立作用，故每一子層與整個 <span class="math inline">N</span> 層複合映射皆嚴格與左乘 <span class="math inline">\Pi</span> 可交換。</li>
+<li><strong>下三角因果性歸納證明（<code>STEP-10</code>）</strong>：<code>[AI 推導]</code> 在第 <span class="math inline">l</span> 層遮罩自注意力中，當 <span class="math inline">j &gt; i</span> 時，<span class="math inline">\exp((QK^\top)_{ij}/\sqrt{d_k} - \infty) = 0 \implies A_{ij}^{(l)} = 0</span>，故第 <span class="math inline">i</span> 列輸出僅是前 <span class="math inline">i</span> 列輸入 <span class="math inline">\{h_1^{(l-1)}, \dots, h_i^{(l-1)}\}</span> 的函數（其位置間雅可比矩陣為下三角）。跨注意力層對固定編碼器輸出 <span class="math inline">\mathbf{z}</span> 逐行獨立作用（對解碼器位置呈對角雅可比），FFN 與 LayerNorm 亦呈對角雅可比。有限個下三角矩陣之乘積仍為下三角矩陣。結合第 <span class="math inline">i</span> 個輸入位置存放的是 <span class="math inline">y_{i-1}</span>（當 <span class="math inline">i=1</span> 為 <span class="math inline">\langle\mathrm{bos}\rangle</span>），知 <span class="math inline">\hat{p}_i</span> 僅依賴 <span class="math inline">(\langle\mathrm{bos}\rangle, y_1, \dots, y_{i-1}, \mathbf{z})</span>，嚴格滿足鏈式法則 <span class="math inline">P_\theta(y_{1:m} \mid \mathbf{z}) = \prod_{i=1}^m P_\theta(y_i \mid y_{&lt;i}, \mathbf{z})</span>。</li>
+</ol>
+<h3 id="局限分析-3">局限分析</h3>
+<ul>
+<li><strong>訓練與推論並行度不對稱（<code>TENS-3</code>）</strong>：<code>PRP-6</code> 雖讓訓練階段（已知真實 <span class="math inline">y_{1:m-1}</span>，即 Teacher Forcing）享有 <span class="math inline">O(1)</span> 序列深度，但在測試解碼階段，因 <span class="math inline">y_i</span> 須由 <span class="math inline">\hat{p}_i</span> 採樣/束搜尋產生後才能填入第 <span class="math inline">i+1</span> 步，推論仍需 <span class="math inline">O(m)</span> 次序列迭代 <code>[ms.tex:L171]</code>。</li>
+<li><strong>意外發現：因果遮罩本身即隱含位置資訊</strong>：<code>[外部知識]</code> 注意到因果遮罩 <span class="math inline">M</span> 破壞了 <code>PRP-5</code> 中的 <span class="math inline">\Pi^\top \Pi</span> 對稱性。後續研究（Haviv et al., 2022 <em>Transformer Language Models without Positional Encodings Still Learn Positional Information</em>）證明，僅靠下三角因果遮罩與多個詞元的方差差異，無位置編碼的解碼器也能隱式推算絕對位置。</li>
+</ul>
+<h3 id="研究拓展-3">研究拓展</h3>
+<p><code>[外部知識]</code> <code>PRP-5</code> 直接催生了集合學習架構 Set Transformer（Lee et al., 2019），刻意移除位置編碼以處理點雲與無序多重集；而為突破 <code>PRP-6</code> 推論階段的 <span class="math inline">O(m)</span> 瓶頸，Gu et al. (2018) 發展了非自回歸翻譯（NAT），Leviathan et al. (2023) 則利用訓練期與驗證期的並行因果性提出了無損加速的 投機解碼（Speculative Decoding）。</p>
+<h2 id="45-定理-thm-1序列轉換層之漸近複雜度序列深度與最大信號路徑長度定理table-1">4.5 定理 <code>THM-1</code>：序列轉換層之漸近複雜度、序列深度與最大信號路徑長度定理（Table 1）</h2>
+<h3 id="直觀理解-4">直觀理解</h3>
+<p>Table 1 是全篇最具戰略高度的理論對照表：它將各種序列建模算子放進「每層總算力」、「最少序列等待步數（決定能否塞滿 GPU 並行單元）」與「最遠兩詞通信步數（決定長程記憶難度）」三個正交座標軸中，揭示唯有自注意力能同時將後兩者壓到理論極限 <span class="math inline">O(1)</span>。</p>
+<h3 id="嚴格表述-4">嚴格表述</h3>
+<p><code>[原文內容]</code> <code>[Sec 4, Table 1, P6]</code> 設序列長度為 <span class="math inline">n</span>，表徵維度為 <span class="math inline">d = d_{\text{model}}</span>，卷積核寬度為 <span class="math inline">k</span>，受限自注意力鄰域寬度為 <span class="math inline">r</span>。四類序列層之漸近複雜度特性如下表所示（右側補充欄為 <code>[AI 推導]</code> 精確非漸近修正項）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">序列層類型（Layer Type）</th>
+<th style="text-align:center">原文每層複雜度</th>
+<th style="text-align:center"><code>[AI 推導]</code> 含投影完整複雜度</th>
+<th style="text-align:center">最少序列操作數</th>
+<th style="text-align:center">原文最大路徑長度</th>
+<th style="text-align:center"><code>[AI 推導]</code> 精確圖直徑步數</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Self-Attention</strong></td>
+<td style="text-align:center"><span class="math inline">O(n^2 \cdot d)</span></td>
+<td style="text-align:center"><span class="math inline">O(n^2 d + n d^2)</span></td>
+<td style="text-align:center"><span class="math inline">O(1)</span></td>
+<td style="text-align:center"><span class="math inline">O(1)</span></td>
+<td style="text-align:center"><span class="math inline">1</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Recurrent</strong></td>
+<td style="text-align:center"><span class="math inline">O(n \cdot d^2)</span></td>
+<td style="text-align:center"><span class="math inline">O(n d^2)</span></td>
+<td style="text-align:center"><span class="math inline">O(n)</span></td>
+<td style="text-align:center"><span class="math inline">O(n)</span></td>
+<td style="text-align:center"><span class="math inline">n - 1</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Convolutional</strong></td>
+<td style="text-align:center"><span class="math inline">O(k \cdot n \cdot d^2)</span></td>
+<td style="text-align:center"><span class="math inline">O(k n d^2)</span>（可分離卷積為 <span class="math inline">O(knd + nd^2)</span>）</td>
+<td style="text-align:center"><span class="math inline">O(1)</span></td>
+<td style="text-align:center"><span class="math inline">O(\log_k(n))</span> 或 <span class="math inline">O(n/k)</span></td>
+<td style="text-align:center">連續核 <span class="math inline">\lceil \frac{n-1}{k-1} \rceil</span>；膨脹核 <span class="math inline">\lceil \log_k n \rceil</span></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Self-Attention (restricted)</strong></td>
+<td style="text-align:center"><span class="math inline">O(r \cdot n \cdot d)</span></td>
+<td style="text-align:center"><span class="math inline">O(r n d + n d^2)</span></td>
+<td style="text-align:center"><span class="math inline">O(1)</span></td>
+<td style="text-align:center"><span class="math inline">O(n/r)</span></td>
+<td style="text-align:center"><span class="math inline">\lceil \frac{n-1}{\lfloor r/2 \rfloor} \rceil</span>（對稱視窗）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="完整推導-4">完整推導</h3>
+<ol>
+<li><strong>跨位置核心算力交叉點（<code>STEP-11</code>）</strong>：<code>[AI 推導]</code> 比較自注意力跨位置矩陣乘法項 <span class="math inline">2 n^2 d</span> 與標準循環層狀態轉移矩陣乘法項 <span class="math inline">c \cdot n d^2</span>（例如單純 Elman RNN <span class="math inline">c=2</span>，標準 LSTM 四道門 <span class="math inline">c=8</span>）：
+<div class="math inline">n^2 d &lt; n d^2 \iff n &lt; d.</div>
+在 WMT 2014 機器翻譯中，子詞序列長度通常為 <span class="math inline">n \approx 20 \sim 60</span>，遠小於 <span class="math inline">d = 512</span>（<code>VER-3</code> 實測 <span class="math inline">n=35, d=512</span> 時，<span class="math inline">n^2 d / (n d^2) = 35/512 \approx 0.0684</span>，僅為後者的 <span class="math inline">6.84\%</span>。）；當 <span class="math inline">n = 512</span> 時兩者交叉相等；當 <span class="math inline">n = 2048</span> 時 <span class="math inline">n^2 d</span> 為 <span class="math inline">n d^2</span> 的 <span class="math inline">4.0</span> 倍。</li>
+<li><strong>信號傳播圖直徑推導</strong>：<code>[AI 推導]</code> 將序列位置 <span class="math inline">\{1, \dots, n\}</span> 視為有向計算圖頂點：
+<ul>
+<li><strong>Self-Attention</strong>：全連接二分圖，任意位置 <span class="math inline">u, v</span> 在單層內直接以權重 <span class="math inline">A_{uv}</span> 相連，直徑恆為 <span class="math inline">1 = O(1)</span>。</li>
+<li><strong>Recurrent</strong>：單向鏈圖 <span class="math inline">1 \to 2 \to \cdots \to n</span>，從位置 <span class="math inline">1</span> 傳遞至位置 <span class="math inline">n</span> 必經 <span class="math inline">n-1 = O(n)</span> 次狀態更新。</li>
+<li><strong>Convolutional</strong>：核寬 <span class="math inline">k</span> 之標準一維卷積每層感受野半徑擴展 <span class="math inline">(k-1)</span> 個跨距，覆蓋跨度 <span class="math inline">n-1</span> 需堆疊 <span class="math inline">\lceil (n-1)/(k-1) \rceil = O(n/k)</span> 層（如 ConvS2S）；若採用膨脹因子 <span class="math inline">k^0, k^1, \dots, k^{L-1}</span> 之膨脹卷積（如 ByteNet），<span class="math inline">L</span> 層感受野寬度為 <span class="math inline">1 + (k-1)\sum_{l=0}^{L-1} k^l = k^L \ge n \iff L = \lceil \log_k n \rceil = O(\log_k n)</span>。</li>
+<li><strong>Restricted Self-Attention</strong>：每個查詢僅關注周圍寬度 <span class="math inline">r</span> 的鄰域（半徑 <span class="math inline">\approx r/2</span>），跨距 <span class="math inline">n-1</span> 需 <span class="math inline">\Theta(n/r)</span> 層轉發。</li>
+</ul>
+</li>
+</ol>
+<h3 id="局限分析-4">局限分析</h3>
+<ul>
+<li><strong>重要審核修正（<code>IMP-2</code> / <code>TENS-1</code>）</strong>：<code>[AI 推導]</code> 原文 Table 1 將 Self-Attention 複雜度寫為 <span class="math inline">O(n^2 \cdot d)</span>，隱去了 <span class="math inline">Q, K, V, O</span> 線性投影所需的 <span class="math inline">4 n d^2</span> 項（有趣的是，在作者保留於 LaTeX 註解區的早期草稿表格 <code>[background.tex:L45-L53]</code> 中，作者曾將 Pointwise Feed-Forward <span class="math inline">O(n \cdot d^2)</span> 與 Attention <span class="math inline">O(r \cdot n \cdot d)</span> 分開列出，定稿合併時未將 MHA 內部的投影項 <span class="math inline">4nd^2</span> 寫入 Table 1）。因此，單就一層完整 MHA 子層而言，其總算力為 <span class="math inline">4 n d^2 + 2 n^2 d \ge 4 n d^2</span>，並不會比單純循環矩陣 <span class="math inline">2 n d^2</span> 少算乘法，真正帶來十倍以上訓練加速的是 <span class="math inline">O(1)</span> 序列深度讓所有 <span class="math inline">n</span> 個位置的 <span class="math inline">4 n d^2</span> 合併成單次大型 GEMM 矩陣乘法，完全釋放了 P100 GPU 的硬體吞吐率。</li>
+</ul>
+<h3 id="研究拓展-4">研究拓展</h3>
+<p><code>[外部知識]</code> 當現代應用將序列長度 <span class="math inline">n</span> 推向百萬詞元（<span class="math inline">n = 10^6 \gg d = 4096</span>）時，<span class="math inline">O(n^2 d)</span> 算力與 <span class="math inline">O(n^2)</span> 記憶體成為首要瓶頸，催生了兩條突破路線：(1) 演算法等價硬體感知重排：Dao et al. (2022) FlashAttention 利用 SRAM 分塊在線 Softmax 將 HBM 讀寫複雜度從 <span class="math inline">O(n^2)</span> 降至 <span class="math inline">O(n^2 d^2 / M_{\text{SRAM}})</span> 而不做任何近似；(2) 次二次複雜度架構：如原文預見的局部滑動視窗注意力（Longformer / Mistral Sliding Window，對應 Table 1 最後一列 <span class="math inline">O(r n d)</span>）、線性核注意力與狀態空間模型（Mamba / Linear Attention）。</p>
+<h2 id="h5-批判性學術評論與研究延伸">H5 批判性學術評論與研究延伸</h2>
+<h2 id="51-實證設計與消融實驗tables-24-appendix-visualizations深度審視">5.1 實證設計與消融實驗（Tables 2–4 &amp; Appendix Visualizations）深度審視</h2>
+<ol>
+<li><strong>翻譯基準與訓練算力效率（Table 2，<code>[Sec 6.1, P8]</code>）</strong>：
+<ul>
+<li><code>Transformer (base)</code>（<span class="math inline">N=6, d_{\text{model}}=512, d_{\text{ff}}=2048, h=8</span>，約 <span class="math inline">65\text{M}</span> 參數）在 8 張 P100 訓練僅 12 小時（<span class="math inline">3.3 \times 10^{18}</span> FLOPs）即於 WMT14 英德達 27.3 BLEU，超越此前所有單模型（GNMT+RL 為 24.6 BLEU @ <span class="math inline">2.3 \times 10^{19}</span> FLOPs；ConvS2S 為 25.16 BLEU @ <span class="math inline">9.6 \times 10^{18}</span> FLOPs）。</li>
+<li><code>Transformer (big)</code>（<span class="math inline">d_{\text{model}}=1024, d_{\text{ff}}=4096, h=16</span>，約 <span class="math inline">213\text{M}</span> 參數）訓練 3.5 天（<span class="math inline">2.3 \times 10^{19}</span> FLOPs）於英德達 28.4 BLEU（超越 ConvS2S Ensemble 的 26.36 BLEU 達 +2.04 BLEU），英法達 41.8 BLEU。</li>
+<li><strong>批判性細節審視</strong>：評估細節採用了最後 5 個（base）或 20 個（big）檢查點權重平均（Checkpoint Averaging）、束搜尋寬度 <span class="math inline">4</span> 與長度懲罰 <span class="math inline">\alpha = 0.6</span> <code>[Sec 6.1, P8]</code>；此外需注意後期 NLP 社群（Post, 2018 SacreBLEU）指出早期 WMT14 英德文獻間存在 compound-splitting 分詞腳本差異，但在相同 <code>tensor2tensor</code> 管道內的消融比較完全嚴謹。</li>
+</ul>
+</li>
+<li><strong>架構消融實驗（Table 3，<code>[Sec 6.2, P9]</code>）的四項核心洞見</strong>：
+<ul>
+<li><strong>Row (A) 多頭數量甜區</strong>：固定總算力下，<span class="math inline">h=1</span>（24.9 BLEU, PPL 5.29）顯著劣於 <span class="math inline">h=8</span>（25.8 BLEU, PPL 4.92）與 <span class="math inline">h=16</span>（25.8 BLEU, PPL 4.91），而 <span class="math inline">h=32</span>（25.4 BLEU, PPL 5.01）回落，完美印證了「多子空間解析度增益」與「單頭低秩瓶頸（<code>CEX-3</code>）」之間的雙向權衡。</li>
+<li><strong>Row (B) 鍵空間維度敏感度</strong>：僅將 <span class="math inline">d_k</span> 降至 16 或 32（保留 <span class="math inline">d_v=64</span>）使 BLEU 降至 25.1 / 25.4，促使作者提出深刻洞見：「決定相容性並不容易，可能比單純點積更複雜的相容性函數會有幫助」 <code>[Sec 6.2, P9]</code>。</li>
+<li><strong>Row (D) 標籤平滑的困惑度，BLEU 悖論（<code>ATOM-10</code>）</strong>：<span class="math inline">\epsilon_{ls} = 0.1</span> 將目標分佈軟化，故意懲罰過度自信的極端機率，因此必然使交叉熵困惑度（PPL）變差，卻提升了束搜尋下的校正性與最終 BLEU <code>[Sec 5.4, P8]</code>。</li>
+<li><strong>Row (E) 位置編碼同分佈等價性</strong>：正弦編碼（25.8 BLEU, PPL 4.92）與可學習位置嵌入（25.7 BLEU, PPL 4.92）幾乎無分軒輊。</li>
+</ul>
+</li>
+<li><strong>跨任務句法泛化（Table 4，<code>[Sec 6.3, P10]</code>）</strong>：在缺乏大量任務專屬調優的情況下，4 層編碼器（<span class="math inline">d_{\text{model}}=1024</span>）於 Penn Treebank WSJ Section 23 取得 91.3 F1（純 WSJ 40K 句監督訓練，超越 Petrov et al. 2006 BerkeleyParser 的 90.4 與無預訓練之 Vinyals &amp; Kaiser 2015 的 88.3），並在半監督設定下達 92.7 F1，證明純自注意力天然適合捕捉層級樹狀句法約束。</li>
+<li><strong>附錄注意力視覺化（Figures 3–5，<code>[ms.tex:L410; P13-P15]</code>）之批判審視</strong>：
+<ul>
+<li>附錄展示了第 5 層（共 6 層）不同注意力頭無監督湧現出長距離動補搭配（<code>&quot;making ... more difficult&quot;</code>）與精準代詞指代消解（<code>&quot;its&quot;</code> 聚焦於 <code>&quot;The Law&quot;</code>）。</li>
+<li><code>[外部知識]</code> 審慎而言，這些視覺化構成了多頭分工的強有力定性例證，但後續可解釋性研究（Jain &amp; Wallace, 2019; Brunner et al., 2020）指出：經過多層殘差連接混合後，第 5 層某位置的向量已融合全句資訊，單一注意力權重高並不等同於因果歸因（Causal Attribution）的充要證明。</li>
+</ul>
+</li>
+</ol>
+<h2 id="52-後續十年歷史影響與核心架構修正路線">5.2 後續十年歷史影響與核心架構修正路線</h2>
+<ol>
+<li><strong>正規化拓撲修正（Post-LN <span class="math inline">\to</span> Pre-LN + RMSNorm）</strong>：Xiong et al. (2020) 嚴格證明了原文 <code>[Sec 3.1]</code> 的 Post-LN 結構 <span class="math inline">\mathrm{LayerNorm}(x + \mathrm{Sublayer}(x))</span> 在初始化時輸出層梯度與層數無關但淺層梯度衰減，必須依賴 <code>[Sec 5.3]</code> 的 4000 步 Warmup；將 LayerNorm 移入殘差支路內形成 Pre-LN <span class="math inline">x + \mathrm{Sublayer}(\mathrm{LayerNorm}(x))</span> 後，恆等殘差主幹暢通無阻，成為百層級大模型的基石。</li>
+<li><strong>前饋網路非線性升級（ReLU FFN <span class="math inline">\to</span> SwiGLU）</strong>：Shazeer（本文第二作者，2020）將 <code>[Sec 3.3, Eq.(2)]</code> 的單純 ReLU FFN 改進為門控雙線性單元 SwiGLU，顯著提升參數效率。</li>
+<li><strong>範式分化（Encoder-Decoder <span class="math inline">\to</span> Encoder-Only / Decoder-Only）</strong>：本文的編碼器支路催生了 BERT / ViT（雙向表徵學習），解碼器因果遮罩支路（<code>PRP-6</code>）則直接催生了 GPT 系列自回歸基礎模型，將「Attention Is All You Need」從機器翻譯擴展為文字、視覺、音訊、蛋白質摺疊（AlphaFold 2 Evoformer）的通用計算原語。</li>
+</ol>
+<h1 id="跨層研究分析全局依賴網絡脆弱節點與數理哲學跨域橋接">跨層研究分析：全局依賴網絡、脆弱節點與數理哲學跨域橋接</h1>
+<h2 id="61-全局張力與脆弱推理節點診斷">6.1 全局張力與脆弱推理節點診斷</h2>
+<pre class="mermaid">flowchart LR
+    subgraph Fragile[&quot;關鍵脆弱節點與隱含張力&quot;]
+        F1[&quot;ASM-2 (缺口標記) 學習投影 W^Q, W^K 破壞 零均值單位方差獨立假設&quot;]
+        F2[&quot;TENS-1 (複雜度張力) Table 1 省略 4nd^2 投影項 短序列算力實由線性層主導&quot;]
+        F3[&quot;TENS-2 (最佳化張力) Post-LN 破壞恆等殘差流 強迫耦合 4000 步 Warmup&quot;]
+        F4[&quot;ASM-3 (未驗假說) 正弦編碼具備 SO(2) 性質 但加性混疊阻礙真實長度外推&quot;]
+    end
+
+    subgraph Remedies[&quot;現代數理與工程演進解方&quot;]
+        R1[&quot;QK-Norm / Cosine Attention 強制約束點積前範數與溫度&quot;]
+        R2[&quot;FlashAttention / Tensor Cores 壓榨 O(1) 深度之記憶體讀寫極限&quot;]
+        R3[&quot;Pre-LN / DeepNorm 恢復恆等梯度直通車&quot;]
+        R4[&quot;RoPE / ALiBi 乘性相對旋轉與線性距離偏置&quot;]
+    end
+
+    F1 --&gt; R1
+    F2 --&gt; R2
+    F3 --&gt; R3
+    F4 --&gt; R4
+</pre>
+<h2 id="62-跨學科數理統計物理與形式語義學橋接interdisciplinary-bridges">6.2 跨學科數理、統計物理與形式語義學橋接（Interdisciplinary Bridges）</h2>
+<p>以下建立三項嚴格的跨學科結構同構與理論橋接，每一項均明確界定其 成立條件、推導依據 與 不確定性等級。</p>
+<h3 id="橋接一bridge-1非參數統計學-nadaraya-watson-核回歸與指數傾斜平滑器">橋接一（<code>BRIDGE-1</code>）：非參數統計學 ， Nadaraya-Watson 核回歸與指數傾斜平滑器</h3>
+<p><code>[外部知識]</code> / <code>[AI 推導]</code></p>
+<ul>
+<li><strong>核心映射</strong>：縮放點積注意力算子在數學結構上精確同構於非參數統計中的 Nadaraya-Watson 核回歸估計量（1964）：給定查詢自變數 <span class="math inline">q</span> 與樣本觀測對 <span class="math inline">\{(k_s, v_s)\}_{s=1}^{n}</span>，條件期望 <span class="math inline">\mathbb{E}[V \mid K = q]</span> 的核平滑估計為：
+<div class="math inline">\hat{m}_h(q) = \frac{\sum_{s=1}^{n} \mathcal{K}_h(q, k_s)   v_s}{\sum_{u=1}^{n} \mathcal{K}_h(q, k_u)}, \quad \text{其中未歸一化核函數 } \mathcal{K}_h(q, k) = \exp\left(\frac{\langle q, k \rangle}{\sqrt{d_k}}\right).</div>
+因此，單層注意力即是在學習到的流形投影上對上下文特徵執行自適應核密度回歸，而 <span class="math inline">h_{\text{bw}} = d_k^{1/4}</span> 扮演核頻寬（Kernel Bandwidth）角色。</li>
+<li><strong>成立條件</strong>：當查詢與鍵位於球面流形 <span class="math inline">\|q\|_2 = \|k_s\|_2 = R</span>（例如施加 QK-Norm 後），由 <span class="math inline">\|q - k_s\|_2^2 = 2R^2 - 2\langle q, k_s \rangle</span>，常數因子 <span class="math inline">e^{-R^2/\sqrt{d_k}}</span> 在分子分母精確約消，縮放點積注意力與各向同性高斯徑向基（RBF）Nadaraya-Watson 核回歸在代數上 100% 恆等；若未限制鍵範數 <span class="math inline">\|k_s\|_2</span>，則構成帶有範數先驗權重 <span class="math inline">\pi_s \propto \exp(\|k_s\|_2^2 / (2\sqrt{d_k}))</span> 的指數族傾斜（Exponentially Tilted）核平滑器。</li>
+<li><strong>推導依據</strong>：平方歐氏距離展開式與分數分母不變性（Tsai et al., 2019 <em>Transformer Dissection: An Unified Understanding for Transformer's Attention via the Lens of Kernel</em>）。</li>
+<li><strong>不確定性</strong>：低（Low），球面約束下為精確代數恆等式；無約束範數下則需注意 <span class="math inline">\mathcal{K}_h(q, k) = e^{\langle q,k\rangle/\sqrt{d_k}}</span> 雖為再生核希爾伯特空間（RKHS）正定核（冪級數展開係數皆正），但非平移不變核。</li>
+</ul>
+<h3 id="橋接二bridge-2統計物理學-連續現代-hopfield-網路自由能最小化與熱力學相變">橋接二（<code>BRIDGE-2</code>）：統計物理學 ， 連續現代 Hopfield 網路自由能最小化與熱力學相變</h3>
+<p><code>[外部知識]</code> / <code>[AI 推導]</code></p>
+<ul>
+<li><strong>核心映射</strong>：考慮具有記憶模式矩陣 <span class="math inline">K = [k_1, \dots, k_n]^\top \in \mathbb{R}^{n \times d_k}</span> 與逆溫度（Inverse Temperature）<span class="math inline">\beta = 1/\sqrt{d_k}</span> 的連續狀態現代 Hopfield 關聯記憶系統，定義其 Helmholtz 型自由能泛函（Free-Energy Functional）：
+<div class="math inline">E_\beta(q) = -\frac{1}{\beta} \ln \left( \sum_{s=1}^{n} \exp(\beta \langle k_s, q \rangle) \right) + \frac{1}{2} \|q\|_2^2.</div>
+對此非凸能量景觀（第 1 項凹函數 <span class="math inline">+</span> 第 2 項強凸二次正則項）施加單步凹凸程序（Concave-Convex Procedure, CCCP）求極小點，即令 <span class="math inline">\nabla_q E_\beta(q) = 0</span>，立刻導出不動點檢索更新律：
+<div class="math inline">q^{\text{new}} = \sum_{s=1}^{n} \frac{\exp(\beta \langle k_s, q \rangle)}{\sum_{u=1}^{n} \exp(\beta \langle k_u, q \rangle)} k_s = K^\top \mathrm{softmax}(\beta K q)!</div>
+再經線性讀出映射 <span class="math inline">V^\top</span>（自關聯轉為異關聯記憶），這正是單步縮放點積注意力。在此物理圖像下，原文第 3.2.1 節的縮放因子 <span class="math inline">\beta = 1/\sqrt{d_k}</span> 具有精確的統計力學意義：控制關聯記憶檢索的熱力學相變溫度，若 <span class="math inline">\beta \gg d_k^{-1/2}</span>（未縮放高維極限，溫度過低 <span class="math inline">T \to 0</span>），系統瞬間凍結於單一亞穩態自旋玻璃極小谷（One-Hot 飽和，梯度消失）；若 <span class="math inline">\beta \to 0</span>（高溫極限 <span class="math inline">T \to \infty</span>），系統退化為順磁相均勻平均 <span class="math inline">\frac{1}{n}\sum_s v_s</span>（失去解析度）；唯有 <span class="math inline">\beta \sim d_k^{-1/2}</span> 使系統處於可兼顧多記憶混合與尖銳檢索的臨界工作區。</li>
+<li><strong>成立條件</strong>：嚴格能量遞減單調性 <span class="math inline">E_\beta(q^{(t+1)}) \le E_\beta(q^{(t)})</span> 要求對稱關聯記憶（<span class="math inline">V = K</span> 且跨步共享權重）；在標準深度 Transformer 中，各層具有獨立非對稱投影 <span class="math inline">(W_i^Q, W_i^K, W_i^V)</span>，故每一層對應於在層專屬異質能量場上執行單步梯度檢索而非迭代收斂至同一能量函數之不動點。</li>
+<li><strong>推導依據</strong>：Log-Sum-Exp 共軛凸對偶（Legendre-Fenchel 對偶 <span class="math inline">\sup_{p \in \Delta^{n-1}} \{\langle p, \beta K q \rangle - \frac{1}{\beta} \sum_s p_s \ln p_s\}</span>）與 CCCP 收斂定理（Ramsauer et al., 2020 <em>Hopfield Networks is All You Need</em>）。</li>
+<li><strong>不確定性</strong>：低至中（Low–Medium），單層檢索算子與自由能梯度之代數對應為嚴格數學定理（不確定性低）；將整個非對稱多層含殘差與 FFN 之 Transformer 解釋為全局能量下降動力學則需額外對稱性約束（不確定性中）。</li>
+</ul>
+<h3 id="橋接三bridge-3語言哲學與形式語義學-動態圖關係綁定與非樹狀-frege-組合性">橋接三（<code>BRIDGE-3</code>）：語言哲學與形式語義學 ， 動態圖關係綁定與非樹狀 Frege 組合性</h3>
+<p><code>[AI 推導]</code> / <code>[外部知識]</code></p>
+<ul>
+<li><strong>核心映射</strong>：古典形式語義學（Frege 組合性原則、Montague 語法）假設句義必須沿著預先給定的離散句法剖析樹（Constituency Tree）自底向上遞迴合成，這也是早期 Tree-LSTM 與 RNNG（Dyer et al., 2016，見本文 Table 4 對照組）的設計哲學。Transformer 則提供了一種全新的連續張量場組合哲學：詞彙不再只是靜態符號類型（Static Lexical Types），而是透過 <span class="math inline">h</span> 個雙線性頭動態生成潛在有向加權關係圖 <span class="math inline">\{A^{(1)}, \dots, A^{(h)}\}</span> 執行即時角色，填充項變量綁定（Dynamic Variable-Role Binding）。例如在附錄 Figure 4 中，代詞 <code>&quot;its&quot;</code> 作為未飽和索引詞（Indexical / Unbound Variable），藉由第 5、6 頭的查詢，鍵匹配直接綁定先行詞 <code>&quot;The Law&quot;</code>，並在 <span class="math inline">O(1)</span> 路徑步數內將先行詞語義特徵透過值投影搬運至代詞槽位，無需顯式建構離散樹卻在 WSJ 句法剖析（Table 4: 92.7 F1）上超越傳統顯式語法模型。</li>
+<li><strong>成立條件</strong>：依賴多頭子空間維度 <span class="math inline">d_k</span> 足夠支撐稀疏且可區分的關係對齊（當 <span class="math inline">h</span> 過大、<span class="math inline">d_k</span> 過小時受限於 <code>CEX-3</code> 低秩瓶頸而失效），並依賴足夠層數 <span class="math inline">N</span> 完成多跳關係組合（Multi-Hop Relational Composition）。</li>
+<li><strong>推導依據</strong>：將多頭自注意力重寫為多關係動態圖卷積算子 <span class="math inline">\sum_{i=1}^h A^{(i)}(X) X W_i^V W_i^O</span>，結合本文 Section 6.3 句法剖析泛化實驗與 Appendix Figures 3–5 之指代/句法頭實證觀察。</li>
+<li><strong>不確定性</strong>：中（Medium），作為計算語言學與心靈哲學層面的表徵結構對應極具啟發性，但需警惕將單頭注意力權重直接等同於人類可解釋語法規則的過度簡化風險（權重高不等於唯一因果路徑）。</li>
+</ul>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_26｜Overcoming catastrophic forgetting in neural networks · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-fd7784c2">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-fd7784c2">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-overcoming-catastrophic-forgetting-in-neural-networks2016">🏆 Overcoming catastrophic forgetting in neural networks（2016）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a>
+細分子方向：<span class="wl-missing">07A_持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</span>
+跨領域橋接：<span class="wl-missing">橋接11_互補記憶系統、主動推論、生物電形態發生與人工意識判準</span>
+作者與出處：James Kirkpatrick, Razvan Pascanu, Neil Rabinowitz, Joel Veness, Guillaume Desjardins, Andrei A. Rusu et al.（2016，<em>Proceedings of the National Academy of Sciences</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/MNNEUJ6S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1612.00796" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：Overcoming catastrophic forgetting in neural networks<br />
+<strong>作者</strong>：James Kirkpatrick et al. (DeepMind)<br />
+<strong>發表期刊</strong>：PNAS 114 (13) 3521–3526 (2017)<br />
+<strong>arXiv 編號</strong>：<code>1612.00796</code><br />
+<strong>學術定位</strong>：連續學習（Continual Learning / Lifelong Learning）領域的代表作之作。為神經網路長久以來的致命缺陷「災難性遺忘（Catastrophic Forgetting）」提供了優雅的貝氏正則化解決方案，彈性權重整合（Elastic Weight Consolidation, EWC），啟發了大量基於參數重要性保護的連續適應演算法。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;新任務數據流入 D_B&quot;] --&gt; B[&quot;標準梯度下降 (SGD)&quot;]
+    B --&gt; C[&quot;覆蓋舊參數: 災難性遺忘 (Loss_A 暴增)&quot;]
+    A --&gt; D[&quot;EWC 演算法: 計算任務 A 費雪資訊 F_i&quot;]
+    D --&gt; E[&quot;高重要性參數: 施加強二次彈性約束&quot;]
+    D --&gt; F[&quot;低重要性參數: 自由更新適應新任務 B&quot;]
+    E --&gt; G[&quot;沿任務 A 零空間更新: 雙任務性能同時維持&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">\theta</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^P</span></td>
+<td style="text-align:left">Parameters</td>
+<td style="text-align:left">神經網路全域參數向量</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\theta_A^*</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^P</span></td>
+<td style="text-align:left">Task A Optimum</td>
+<td style="text-align:left">任務 A 收斂之最優權重</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">F_i</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^+</span></td>
+<td style="text-align:left">Curvature Metric</td>
+<td style="text-align:left">參數 <span class="math inline">\theta_i</span> 之經驗費雪訊息值</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\lambda</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^+</span></td>
+<td style="text-align:left">Hyperparameter</td>
+<td style="text-align:left">記憶保留正則化超參數</td>
+<td style="text-align:left">Section 3</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（EWC 損失函數）</strong>：
+設任務 A 最優參數為 <span class="math inline">\theta_A^*</span>，其對應的費雪訊息對角權重為 <span class="math inline">F_i</span>。在學習任務 B 時，最佳化目標定義為：
+<div class="math inline">\mathcal{L}_{EWC}(\theta) = \mathcal{L}_B(\theta) + \sum_{i=1}^P \frac{\lambda}{2} F_i (\theta_i - \theta_{A, i}^*)^2</div></p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析貝氏拉普拉斯近似與費雪黑森等價性">5-層核心定理專題解析：貝氏拉普拉斯近似與費雪黑森等價性</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>連續學習面臨的核心問題是：哪些參數動不得，哪些參數可以隨便改？貝氏視角給予了答案：任務 A 的後驗概率分佈刻畫了參數的不確定性。在極小點附近展開，損失函數曲率越陡峭的方向（二階導數越大），說明稍微變動就會導致性能劇烈惡化；而在平坦的峽谷方向，參數有很大自由度。費雪訊息矩陣正是局部曲率的最佳估計。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>設神經網路在任務 A 上收斂至局部最優解 <span class="math inline">\theta^*</span>。當數據由真實分佈生成且模型匹配時，負對數似然的期望黑森矩陣（Hessian）等於一階得分函數的協方差矩陣（費雪訊息矩陣）：
+<div class="math inline">\mathbb{E}_{x, y}[-\nabla^2 \log p(y|x, \theta^*)] = \mathbb{E}_{x, y}[\nabla \log p(y|x, \theta^*) \nabla \log p(y|x, \theta^*)^T]</div></p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>考慮概率密度函數歸一化條件：
+<div class="math inline">\int p(y|x, \theta) dy = 1</div>
+對兩側關於參數向量 <span class="math inline">\theta</span> 求一階梯度：
+<div class="math inline">\nabla_\theta \int p(y|x, \theta) dy = \int \nabla_\theta p(y|x, \theta) dy = 0</div>
+進一步對其求二階導數：
+<div class="math inline">\int \nabla_\theta^2 p(y|x, \theta) dy = 0</div>
+利用對數導數公式 <span class="math inline">\nabla_\theta \log p = \frac{\nabla_\theta p}{p}</span>，求其二階導：
+<div class="math inline">\nabla_\theta^2 \log p = \frac{\nabla_\theta^2 p}{p} - \frac{(\nabla_\theta p)(\nabla_\theta p)^T}{p^2} = \frac{\nabla_\theta^2 p}{p} - (\nabla_\theta \log p)(\nabla_\theta \log p)^T</div>
+在兩側乘以 <span class="math inline">p(y|x, \theta)</span> 並對 <span class="math inline">y</span> 進行全空間積分：
+<div class="math inline">\int (\nabla_\theta^2 \log p) p dy = \int (\nabla_\theta^2 p) dy - \int (\nabla_\theta \log p)(\nabla_\theta \log p)^T p dy</div>
+代入 <span class="math inline">\int (\nabla_\theta^2 p) dy = 0</span>：
+<div class="math inline">\mathbb{E}[\nabla_\theta^2 \log p] = - \mathbb{E}[(\nabla_\theta \log p)(\nabla_\theta \log p)^T]</div>
+兩側取負號即證得黑森矩陣期望等於費雪訊息矩陣：
+<div class="math inline">\mathbb{E}[-\nabla_\theta^2 \log p] = \mathbb{E}[(\nabla_\theta \log p)(\nabla_\theta \log p)^T] = F</div>
+證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>該等價性依賴於「期望值在最優解處評估」且「樣本標籤來自模型分佈」。在實踐中使用的「經驗費雪（Empirical Fisher）」採用了真實訓練集標籤而非模型採樣，且強行捨棄了非對角協方差項，在參數高度相關時會低估某些方向的脆弱性。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>後續發展出線上在線版 EWC（Online EWC），將歷史任務的費雪矩陣以滑動平均維護，避免正則化項數目隨任務數線性膨脹；同時催生了基於子空間投射的正交權重更新方法（OWM/GPM）。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心計算驗證：</p>
+<ol>
+<li><strong>SymPy 費雪-黑森積分等價性符號驗證</strong>：
+在一維高斯模型下，符號積分計算負對數似然之期望二階導與一階導平方期望，確認二者完全恆等且均精確等於 <span class="math inline">1/\sigma^2</span>。</li>
+<li><strong>NumPy 二維連續學習玩具模型模擬</strong>：
+建構任務 A 具有極度非均勻曲率之二維盆地（方差比 100:1），對比標準 SGD 與 EWC：普通 SGD 漂移至 (2, 2) 導致任務 A 損失暴增至 202.0；EWC 在保留任務 A 損失 <span class="math inline">&lt; 1.0</span> 的前提下成功收斂於折衷解，數值驗證通過。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。拉普拉斯展開、貝氏先驗轉化與損失形式嚴格忠實。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。無環依賴驗證通過，符號與數值計算均通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（經驗費雪矩陣近似漂移）</strong>：以經驗樣本梯度外積代替真實費雪，在擬合不良或過擬合噪聲時可能產生失真權重。建議人工複核時關注長程任務下的權重漂移效應。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="計算神經科學對偶突觸元可塑性機制">計算神經科學對偶：突觸元可塑性機制</h3>
+<p>EWC 在人工神經網路中的運作機制，直接對偶於生物大腦中突觸的元可塑性（Metaplasticity）：生物突觸並非單純的純量權重，而是具備多重生化狀態的複雜動力系統。經常參與重要記憶形成的突觸被生化分子「加固」，表現出極高的抗修改阻力。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

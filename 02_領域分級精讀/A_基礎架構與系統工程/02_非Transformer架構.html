@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-f8b21081">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-f8b21081">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
@@ -215,6 +217,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Spatiotemporal Prediction of Lake Water Quality Using Kriging, Geographically Weighted Regression, and Spatial Gating</strong>，Mustafa Kamal et al.
+<ul>
+<li>重點：在缺失率逾 85% 的 LakeBeD-US 湖泊水質基準上，對克里金插值、GWR、空間門控模組、KAN 與混合 PINN 共 144 組受控配置進行防洩漏評估。雖然排序聚合顯示 Temporal + Kriging 與 Temporal + GWR 平均 RMSE 排名最低，但經多重校正的 Wilcoxon 檢定證實空間特徵並未顯著超越純時間基線，克里金特徵僅作為營養狀態脈絡先驗。</li>
+<li>連結：<a href="zotero://select/library/items/99GWRCAT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.22266/ijies2026.1130.27" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜GRU-KAN: A Hybrid Recurrent–Kolmogorov–Arnold Network for Low-latency 3D Hand Gesture Classification Using Direct Kinematic Features from Skeletal Data</strong>，Israa F. Fatih, Wisam S. Hacham, Muhannad K. Sabir
+<ul>
+<li>重點：直接從三維骨架串流擷取 14 項運動學描述子，結合 GRU 時序編碼器與採可學習 B-spline 活化函數及跳躍連接的 KAN 分類器（GRU-KAN），省去濾波與穿戴感測器。在 7 類手勢留出集達到 90.0% 準確率與 57.06 毫秒 CPU 推論延遲，較同條件 GRU-MLP 基線高出 4.29 個百分點，在 45 類 FPHA 上亦達 66.81%（對比 64.68%）。</li>
+<li>連結：<a href="zotero://select/library/items/AXWGRGNR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.22266/ijies2026.1130.62" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜State and boundary condition estimation in pipeline networks using a two-stage sliding-mode framework</strong>，Morteza Imani et al.：處理觀測器匹配條件不成立的高壓輸水管網。方法結合高階滑動模態（HOSM）四階微分器與一階滑動模態觀測器（SMO），可同步重構內部水力狀態與未知的邊界需水量。驗證涵蓋最高 164 管段／277 狀態的網路、±10% 的波速與摩擦失配，以及實體分岔銅管實驗。（<a href="zotero://select/library/items/54GIZE6C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ymssp.2026.115257" rel="noopener">官方連結</a>）</li>
@@ -261,6 +278,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

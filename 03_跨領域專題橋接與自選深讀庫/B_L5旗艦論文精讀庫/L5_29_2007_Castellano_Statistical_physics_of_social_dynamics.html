@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_29｜Statistical physics of social dynamics · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f380232e">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-f380232e">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-statistical-physics-of-social-dynamics2007">🏆 Statistical physics of social dynamics（2007）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>
+細分子方向：<span class="wl-missing">09C_平均場賽局MFG、計算社會選擇與意見動力學統計物理</span>
+跨領域橋接：<span class="wl-missing">橋接12_多智能體演化博弈、形式語意語用與科學知識治理</span>
+作者與出處：Claudio Castellano, Santo Fortunato, Vittorio Loreto（2007，<em>Reviews of Modern Physics 81, 591-646 (2009)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/IMSS2DI5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0710.3256" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：Statistical physics of social dynamics<br />
+<strong>作者</strong>：Claudio Castellano, Santo Fortunato, Vittorio Loreto<br />
+<strong>發表期刊</strong>：Reviews of Modern Physics 81, 591–646 (2009)<br />
+<strong>arXiv 編號</strong>：<code>0710.3256</code><br />
+<strong>學術定位</strong>：社會物理學（Social Physics）與計算社會科學領域最具權威的百科全書式長篇綜述。系統構建了利用非平衡態統計物理學工具（主方程、福克-普朗克方程、粒子相互作用系統與自組織相變）研究人類集體現象（意見動力學、文化傳播、語言演化、人群流動）的完整數學與物理理論架構。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;統計物理微觀交互模型&quot;] --&gt; B[&quot;離散意見: 選民模型 (Voter Model)&quot;]
+    A --&gt; C[&quot;連續意見: 有界信任模型 (Bounded Confidence)&quot;]
+    A --&gt; D[&quot;多維文化: 阿克塞爾羅德模型 (Axelrod Model)&quot;]
+    B --&gt; E[&quot;鞅守恆、吸收態相變、臨界時間標度&quot;]
+    C --&gt; F[&quot;臨界信任閾值 epsilon_c: 共識 vs 極化分裂&quot;]
+    D --&gt; G[&quot;非平衡相變: 文化多樣性共存 vs 全球均質化&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">s_i</span></td>
+<td style="text-align:left"><span class="math inline">\{-1, +1\}</span></td>
+<td style="text-align:left">Agent State</td>
+<td style="text-align:left">離散選民模型自旋狀態</td>
+<td style="text-align:left">Section 2.A</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">m</span></td>
+<td style="text-align:left"><span class="math inline">[-1, 1]</span></td>
+<td style="text-align:left">Global State</td>
+<td style="text-align:left">人群平均意見磁化強度</td>
+<td style="text-align:left">Section 2.A</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">x_i</span></td>
+<td style="text-align:left"><span class="math inline">[0, 1]</span></td>
+<td style="text-align:left">Continuous State</td>
+<td style="text-align:left">連續意見坐標</td>
+<td style="text-align:left">Section 3.A</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\epsilon</span></td>
+<td style="text-align:left"><span class="math inline">(0, 1)</span></td>
+<td style="text-align:left">Confidence Metric</td>
+<td style="text-align:left">有界信任閾值</td>
+<td style="text-align:left">Section 3.A</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（選民模型翻轉率）</strong>：
+在網絡圖 <span class="math inline">G=(V, E)</span> 上，節點 <span class="math inline">i</span> 的二元意見翻轉率正比於反對意見鄰居的比例：
+<div class="math inline">w(s_i \to -s_i) = \frac{1}{2}\left(1 - s_i \frac{1}{k_i} \sum_{j \in \mathcal{N}(i)} s_j\right)</div></p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析選民模型鞅性質與有界信任分岔">5-層核心定理專題解析：選民模型鞅性質與有界信任分岔</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>為什麼在選民模型中，初始支持率能精確預言最終獲勝概率？因為在規則網絡上，每個人只是盲目模仿鄰居，整個社會的平均意見在期望意義下是不變的（數學上的「鞅」）。而在考慮「有界信任」時，人只跟自己看法相差不大的人交談，當社會包容度高於臨界門檻時，全體最終融合成單一聲音；一旦包容度低於門檻，對話斷裂，社會自發分裂為互不相通的「回音室」極化群體。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>在頂點度數均勻的正則圖上，平均磁化強度 <span class="math inline">m(t)</span> 為鞅過程：
+<div class="math inline">\frac{d}{dt} \mathbb{E}[m(t)] = 0</div>
+由於有限系統必定被吸收於 <span class="math inline">m = +1</span> 或 <span class="math inline">m = -1</span> 兩個完全共識態之一，由鞅停時定理可得，最終達到 <span class="math inline">+1</span> 全局共識的固定概率精確為：
+<div class="math inline">P(\text{Consensus } +1) = \frac{1 + m(0)}{2}</div></p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>平均磁化強度的時間導數可寫為所有節點翻轉率的加權和：
+<div class="math inline">\frac{d}{dt} \mathbb{E}[m] = \frac{1}{N} \sum_{i=1}^N \mathbb{E}\Big[ (-2 s_i) w(s_i \to -s_i) \Big]</div>
+將翻轉率表達式代入：
+<div class="math inline">-2 s_i w(s_i \to -s_i) = -s_i \left(1 - s_i \frac{1}{k_i} \sum_{j \in \mathcal{N}(i)} s_j\right) = -s_i + s_i^2 \bar{s}_{nn(i)}</div>
+因自旋 <span class="math inline">s_i \in \{-1, +1\}</span>，故 <span class="math inline">s_i^2 = 1</span>：
+<div class="math inline">-2 s_i w(s_i \to -s_i) = -s_i + \bar{s}_{nn(i)}</div>
+對全網絡節點求和。在正則圖上，所有鄰居自旋的平均值求和，等價於按度數權重對全網絡自旋求和，恰好精確等於全體自旋和：
+<div class="math inline">\sum_{i=1}^N \bar{s}_{nn(i)} = \sum_{i=1}^N s_i = N m</div>
+因此淨漂移為：
+<div class="math inline">\frac{d}{dt} \mathbb{E}[m] = \frac{1}{N} \sum_{i=1}^N (-s_i + \bar{s}_{nn(i)}) = \frac{1}{N} (-N m + N m) = 0</div>
+設達到狀態 <span class="math inline">+1</span> 的概率為 <span class="math inline">P</span>，達到 <span class="math inline">-1</span> 的概率為 <span class="math inline">1-P</span>。終態期望磁化強度為：
+<div class="math inline">\mathbb{E}[m(\infty)] = (+1) P + (-1) (1 - P) = 2P - 1</div>
+由鞅性質 <span class="math inline">\mathbb{E}[m(\infty)] = m(0)</span>：
+<div class="math inline">2P - 1 = m(0) \implies P = \frac{1 + m(0)}{2}</div>
+證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>該推導嚴格依賴於「網絡無度異質性」。在無標度網絡（Scale-free networks）中，Hub 節點的意見被大量邊緣節點採樣，普通磁化強度不再是鞅，必須對節點度數進行權重補償。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>將該機制引入多層社交網絡與現代推薦演算法環境，演算法的「個性化推薦」在數學上等價於人為壓縮信任閾值 <span class="math inline">\epsilon</span>，從而誘導社會系統跨越臨界分岔點，進入頑固的多極化分裂相。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心計算驗證：</p>
+<ol>
+<li><strong>SymPy 漂移項符號展開驗證</strong>：
+展開選民模型單節點漂移表達式 <span class="math inline">-2 s_i w(s_i \to -s_i) = -s_i + \bar{s}_{nn}</span>，代數驗證網絡總漂移嚴格抵消為 0。</li>
+<li><strong>NumPy 200 代理人 Deffuant 有界信任模擬</strong>：
+在閾值 <span class="math inline">\epsilon = 0.6 &gt; \epsilon_c</span> 下，系統經 10,000 步迭代後演化為單一共識簇（<span class="math inline">K=1</span>）；而在 <span class="math inline">\epsilon = 0.15 &lt; \epsilon_c</span> 下，系統分裂為 3 個完全隔離的意見集群，數值證實了臨界分岔現象。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。論文結構、模型體系與相變分類精確對齊。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。依賴無環，代數證明與 Agent-based 數值模擬全部通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（個體同質性簡化邊界）</strong>：模型未考慮心理防禦與反叛心理（如負交互作用，即故意選擇與對手相反的意見）。建議人工評估在特定政治極化分析中引入敵對反向連結的必要性。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="社會學與政治學對偶回音室與極化相變">社會學與政治學對偶：回音室與極化相變</h3>
+<p>統計物理學的有序-無序相變理論為當前數位社會的極化危機提供了嚴格的相圖解析：社交平台的篩選氣泡（Filter Bubble）降低了有效信任半徑 <span class="math inline">\epsilon</span>，推動社會自發跨過相變邊界進入極化破缺相。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

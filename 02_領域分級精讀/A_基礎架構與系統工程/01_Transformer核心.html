@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-e1050175">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-e1050175">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
@@ -203,6 +205,21 @@ RoPE（Su et al., 2021）對第 <span class="math inline">m</span> 位置的子�
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2027｜A Hybrid Deep Learning Framework Based on ResNet and Vision Transformer for Pneumonia Detection from Chest X-ray Images</strong>，Samira Mavaddati
+<ul>
+<li>重點：將客製化 ResNet 的局部空間編碼與 Vision Transformer（ViT）的全局自注意力透過互補特徵融合策略結合，用於胸腔 X 光肺炎偵測。在基準 CXR 資料集上達到 97.03% 準確率，靈敏度與特異度皆高於單一 CNN 或 Transformer 模型，並以注意力視覺化標示臨床判讀區域。</li>
+<li>連結：<a href="zotero://select/library/items/G5MPKWSK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5829/ije.2027.40.02b.06" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Causal Localization of Process Anomalies in Biopharmaceutical Fermentation</strong>，Lukas Schneider, Anna Meier
+<ul>
+<li>重點：結合領域約束因果發現、時間注意力與干預殘差評分，對生物製藥發酵 54 項耦合變數進行細粒度異常定位。在 1,120 批次、7,200 萬筆紀錄資料集上，中位異常定位時間從純重建 Transformer 基線的 16.9 分鐘縮短至 5.4 分鐘，誤報率降至每批次 1.8 件，事件邊界偏差減少 12.7 分鐘。</li>
+<li>連結：<a href="zotero://select/library/items/5WKUTIWM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.64744/tjhsmt.2026.266" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜A Sharp Turn Is Not a Phase Transition: What Training-Time Transitions in Small Language Models Establish, Why Threshold Readouts, Fast Crossovers, Developmental Stages and Critical Behaviour Are Reported Under One Name, and the Controls That Would Tell Them Apart</strong>，Pranay M. Mahendrakar：訓練動力學文獻把四類現象都叫「相變」：閾值讀出、快速過渡、可因果干預的發展階段、隨規模尖銳化的嚴格相變。本文逐一拆解，並嚴格推導證明小型字符級 Transformer 四項同步指標的轉折，其實是固定視窗計數跨過 1/2 的算術恆等與有界卜瓦松擬合效應。文中還彙整 30 項既有研究，給出標準判別測試。（<a href="zotero://select/library/items/XRUPXZH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.24355740" rel="noopener">官方連結</a>）</li>
@@ -249,6 +266,9 @@ RoPE（Su et al., 2021）對第 <span class="math inline">m</span> 位置的子�
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

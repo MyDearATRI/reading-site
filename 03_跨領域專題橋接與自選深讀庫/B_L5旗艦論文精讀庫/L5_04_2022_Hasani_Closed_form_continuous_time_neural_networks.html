@@ -1,0 +1,583 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_04｜Closed-form continuous-time neural networks · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-13da2720">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-13da2720">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-closed-form-continuous-time-neural-networks2022">🏆 Closed-form continuous-time neural networks（2022）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a>
+細分子方向：<span class="wl-missing">02C_神經常微分方程、連續深度模型與流控制</span> · <span class="wl-missing">42A_液態時間常數網路LTC與閉式連續動力學CfC</span>
+跨領域橋接：<span class="wl-missing">橋接02_連續時間動力學、狀態空間與液態神經網路</span> · <span class="wl-missing">橋接04_神經符號實值邏輯、自動形式化與信念修正</span>
+作者與出處：Ramin Hasani, Mathias Lechner, Alexander Amini, Lucas Liebenwein, Aaron Ray, Max Tschaikowski et al.（2022，<em>Nature Machine Intelligence</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/R5CEHES9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.13898" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="1-一句話核心命題">1. 一句話核心命題</h2>
+<p><code>[原文內容]</code> 本研究針對液態時間常數網路（Liquid Time-Constant Networks, LTCs）中長期無已知解析解的非線性突觸電導積分，推導出具備嚴格指數衰減誤差界 <span class="math inline">|x(t)-\tilde{x}(t)| \le |x_0 - A|e^{-w_\tau t}</span> 的閉式近似解，並據此設計出無需數值常微分方程（ODE）求解器的閉式連續深度神經網路（Closed-form Continuous-depth Networks, CfC），在保持連續時間動態表達力與抗噪因果注意力的同時，實現較微分方程模型快 1 至 5 個數量級的訓練與推論速度 <code>[P1:L11-P2:L15; arxiv.tex:L185-L191]</code>。</p>
+<h2 id="2-執行摘要executive-summary">2. 執行摘要（Executive Summary）</h2>
+<p><code>[原文內容]</code> 以常微分方程建構的連續時間神經網路（如 Neural ODE、ODE-RNN 與 LTC）能自然處理非均勻採樣序列與連續物理動態，但其訓練與推論嚴重受制於高階自適應數值求解器（如 Dormand–Prince <code>DOPRI5</code>）的高昂函數評估次數（NFEs），在多時間尺度剛性（stiff）系統中尤為致命 <code>[P2:L25-P3:L6]</code>。Hasani、Lechner、Tschaikowski 與 Teschl 等人回到生物神經元透過非線性電導突觸互動的純量基礎模型，透過線性非自治 ODE 參數變易法與代換積分消去雙重積分，將唯一無法一般積分的突觸釋放累積項 <span class="math inline">\int_0^t f(I(s)) ds</span> 以端點閉式項近似，證明其在指數衰減包絡下的最壞情況誤差不僅以 <span class="math inline">e^{-w_\tau t}</span> 指數收斂，且上下確界在全體連續輸入函數空間上達到數學緊緻（sharp） <code>[P7:L14-P10:L12]</code>。隨後，作者針對直接向量化閉式解（<code>Cf-S</code>）在深度學習最佳化中面臨的指數梯度消失與靜態平衡點僵化問題，引入平滑反轉 Sigmoid 時間閘門 <span class="math inline">\sigma(-f(\mathbf{x},\mathbf{I};\theta_f)\mathbf{t})</span>、共享主幹（backbone）三分支網路 <span class="math inline">(f,g,h)</span> 與互補凸組合閘控 <span class="math inline">(1-\sigma)</span>，構成完整的 <code>CfC</code> 與混合記憶變體 <code>CfC-mmRNN</code> <code>[P13:L28-P16:L23]</code>。實驗橫跨全尺寸自動駕駛實車測試（Lexus RX450H）、事件驅動 Bit-Stream XOR、PhysioNet ICU 醫療時序（訓練快 <span class="math inline">160\times</span>–<span class="math inline">220\times</span>）、IMDB 文本分類與 MuJoCo Walker2D 物理動力學預測（較 Transformer 降低 <span class="math inline">18\%</span> 均方誤差且快 <span class="math inline">10\times</span>） <code>[P17:L1-P24:L65]</code>。</p>
+<h2 id="3-技術全景深讀摘要technical-panorama-audit-highlights">3. 技術全景深讀摘要（Technical Panorama &amp; Audit Highlights）</h2>
+<ul>
+<li><strong>純量閉式化鏈條與隱含對稱化前提</strong>：<code>[原文內容]</code> 原文從向量 LTC 初值問題 <span class="math inline">\dot{\mathbf{x}} = -(w_\tau + f(\mathbf{x},\mathbf{I},\theta))\mathbf{x} + A f(\mathbf{x},\mathbf{I},\theta)</span> <code>[Eq. 1, P7:L8]</code> 出發，退化至無自連接單神經元線性非自治方程 <span class="math inline">\dot{x} = -[w_\tau + f(I(t))]x + A f(I(t))</span> <code>[Eq. 3, P7:L20]</code>。<code>[AI 推導]</code> 深度審核揭示：為使變易常數雙重積分透過代換 <span class="math inline">u(s)=\int_s^t[w_\tau+f(I(v))] dv</span> 完全相消為單積分真解 <span class="math inline">x_{\text{sym}}(t) = (x_0 - A)e^{-w_\tau t - \int_0^t f(I(s)) ds} + A</span> <code>[Eq. 5, P8:L43]</code>，原文在第 8 頁插入了一個未編號的「對稱化假設（Assumption）」<code>[P8:L6-L17]</code>，將右端驅動項由 <span class="math inline">A f(I(t))</span> 改寫為 <span class="math inline">A[w_\tau + f(I(t))]</span>。我們在 <code>VER-1</code> 與 <code>PRP-3</code> 中精確證明：此修改等價於將被動漏電反轉電位由 <span class="math inline">0</span> 平移至突觸反轉電位 <span class="math inline">A</span>，兩者之差滿足精確微分方程 <span class="math inline">\dot{e}_{\text{sym}} = -(w_\tau+f)e_{\text{sym}} + A w_\tau</span>，在 <span class="math inline">A w_\tau \neq 0</span> 時產生有界穩態偏移 <span class="math inline">|e_{\text{sym}}(t)| \in \big[|A|\frac{w_\tau}{w_\tau+1}(1-e^{-(w_\tau+1)t}),  |A|(1-e^{-w_\tau t})\big]</span>。</li>
+<li><strong>極值函數構造與緊緻性證明</strong>：<code>[原文內容]</code> Lemma 1 提出近似式 <span class="math inline">\tilde{x}(t) = (x_0 - A)e^{-[w_\tau + f(I(t))]t} f(-I(t)) + A</span> <code>[Eq. 8, P9:L31]</code>，並在補充材料 <code>[P37:L5-P38:L10]</code> 證明對任意連續輸入信號 <span class="math inline">I \in C([0,t])</span>，正規化誤差 <span class="math inline">\frac{1}{c}(x_{\text{sym}}(t)-\tilde{x}(t))</span> 的上確界為 <span class="math inline">e^{-w_\tau t}</span>、下確界為 <span class="math inline">e^{-w_\tau t}(e^{-t}-1)</span>。<code>[AI 推導]</code> 審核發現兩項關鍵細節：(1) Lemma 1 敘述僅寫「<span class="math inline">f</span> 正值、單調遞增且有界」，但證明實質依賴正規化值域 <span class="math inline">0 \le f(z) \le 1</span> 且 <span class="math inline">\lim_{z\to-\infty}f(z)=0,\lim_{z\to+\infty}f(z)=1</span>（<code>ASM-2</code>）；(2) 乘子 <span class="math inline">f(-I(t))</span> 雖為後續神經架構引入乘性狀態分支埋下伏筆，卻導致 <span class="math inline">t=0</span> 時出現初值跳躍 <span class="math inline">\tilde{x}(0) - x_0 = -(x_0-A)f(I(0))</span>（<code>ATOM-5</code>）。若採用純端點求積 <span class="math inline">\hat{x}_{\text{quad}}(t) = (x_0-A)e^{-[w_\tau+f(I(t))]t}+A</span>，誤差界將進一步收緊為兩端皆歸零的 <span class="math inline">O(t e^{-w_\tau t})</span> 包絡：<span class="math inline">|x_{\text{sym}}(t)-\hat{x}_{\text{quad}}(t)| \le |x_0-A|e^{-w_\tau t}(1-e^{-t}) \le |x_0-A| t e^{-w_\tau t}</span>（<code>PRP-4</code>，經 <code>VER-2</code> 驗證）。</li>
+<li><strong>從理論公式到可訓練架構的關鍵躍遷</strong>：<code>[AI 推導]</code> 消融實驗顯示，直接套用閉式公式的 <code>Cf-S</code>（Eq. 9）在 PhysioNet 上僅得 <code>0.643</code> AUC（與原始 ODE 版 <code>LTC</code> 的 <code>0.6477</code> 一樣受困於梯度衰減），而完整版 <code>CfC</code>（Eq. 10）同時躍升至 <code>0.839</code> AUC 且每輪僅需 <code>0.1</code> 分鐘 <code>[Table 5, P22]</code>。審核透過交叉比對正文第 14 頁與補充表 S1、S4 發現：印刷版 Eq. (10) 省略了閘門內的關鍵正偏置超參數 <code>forget_bias</code> <span class="math inline">b_{\text{forget}} \in [0.6, 5.0]</span>（否則 <span class="math inline">t=0</span> 時 <span class="math inline">\sigma(-f\cdot 0) = 0.5 \neq 1</span>），且雙頭凸組合 <span class="math inline">\sigma g + (1-\sigma)h</span> 自動吸收了 <code>ASM-1</code> 的穩態偏移與 <code>Algorithm 1</code> 多突觸累加超調，這正是 <code>CfC</code> 兼具理論啟發性與工程可擴展性的真正機制（<code>CONC-6</code>）。</li>
+</ul>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<h2 id="1-研究脈絡與核心問題">1. 研究脈絡與核心問題</h2>
+<p><code>[外部知識]</code> 自 Chen et al. (2018) 提出 Neural ODEs 以來，將殘差網路的離散層索引或循環神經網路（RNN）的時間步提升為連續向量場 <span class="math inline">\dot{\mathbf{x}}(t) = F_\theta(\mathbf{x}(t), \mathbf{I}(t), t)</span>，為非均勻採樣醫療紀錄、事件相機視覺與物理動力學提供了自然的數學語言。Hasani et al. (2021) 進一步受線蟲（<em>C. elegans</em>）非脈衝分級電位神經系統啟發，提出液態時間常數網路（LTC） <code>[Ref. 1, P3:L21-P4:L48]</code>：突觸輸入不僅作為加性電流注入，更直接調變神經元的等效鬆弛時間常數 <span class="math inline">\tau_{\text{sys}}(\mathbf{x},\mathbf{I}) = [w_\tau + f(\mathbf{x},\mathbf{I},\theta)]^{-1}</span>。</p>
+<p><code>[原文內容]</code> 然而，這種輸入相依的多時間尺度耦合在數值計算上造成了嚴重的剛性瓶頸（Stiffness Bottleneck）：當系統同時包含快變突觸（大電導）與慢變記憶通道（小漏電）時，顯式自適應 Runge–Kutta 求解器（如 <code>DOPRI5</code> <code>[Ref. 10]</code>）被迫將步長壓縮至最快特徵值尺度 <span class="math inline">\Delta t \lesssim O(1/\lambda_{\max})</span>，導致每個序列步需要數十至數千次神經網路前向評估與伴隨反向傳播 <code>[P3:L1-L11]</code>。既有改良路線（如狀態擴增 Augmented Neural ODEs、根尋找 Deep Equilibrium Models、或神經殘差逼近求解器 Hypersolvers <code>[Refs. 4, 13, 17]</code>）皆未能擺脫離散步長截斷誤差與求解器迴圈；本研究則選擇直接對 LTC 電導微分方程進行解析閉式逼近 <code>[P3:L12-L20]</code>。</p>
+<h2 id="2-先修知識與全文論證依賴圖譜">2. 先修知識與全文論證依賴圖譜</h2>
+<pre class="mermaid">flowchart TD
+    subgraph PREREQ[&quot;外部先修數學與神經計算基礎&quot;]
+        P_ODE[&quot;線性非自治 ODE 變易常數法 (Perko 1991, Sec 1.10)&quot;]
+        P_ANA[&quot;Lipschitz 連續性與控制收斂定理 (Rudin 1976)&quot;]
+        P_BIO[&quot;電導基突觸膜電位動力學 (Hodgkin-Huxley / C. elegans)&quot;]
+        P_GRAD[&quot;RNN 梯度消失與混合記憶 ODE-LSTM (Hochreiter 1997， Lechner 2020)&quot;]
+    end
+
+    subgraph THEORY[&quot;L2-L3 核心解析推導層 (Sec 3 &amp; Supp)&quot;]
+        DEF1[&quot;DEF-1: 向量 LTC 初值問題 (Eq. 1)&quot;]
+        EQ3[&quot;EQN-3: 單細胞前饋線性 ODE (Eq. 3)&quot;]
+        ASM1[&quot;ASM-1: +A*w_tau 對稱化假設 (Page 8)&quot;]
+        EQ5[&quot;EQN-6: 單積分精確解 x_sym(t) (Eq. 5)&quot;]
+        PRP1[&quot;PRP-1: 分段常數輸入精確閉式解 (Eqs. 6-7)&quot;]
+        ASM2[&quot;ASM-2: 隱含正規化 Sigmoid 值域 f in [0,1]&quot;]
+        LEM1[&quot;LEM-1: 緊緻指數誤差界與上下確界 (Eq. 8)&quot;]
+        THM1[&quot;THM-1: 單細胞閉式近似定理 (Eq. 2)&quot;]
+    end
+
+    subgraph AUDIT[&quot;L5 深度審核補全層 (AI 推導 + SymPy/NumPy 驗證)&quot;]
+        PRP3[&quot;PRP-3: 非對稱 LTC 與對稱解穩態偏差精確界 (VER-1)&quot;]
+        PRP4[&quot;PRP-4: 純求積 O(t e^{-w_tau t}) 緊界與自連接 Gronwall 界 (VER-2/5)&quot;]
+        COR1[&quot;COR-1: 凸包不變區間有界性與 Jacobian 梯度譜 (VER-3)&quot;]
+    end
+
+    subgraph ARCH[&quot;架構工程與實證驗證層 (Sec 4-7)&quot;]
+        ALG1[&quot;ALG-1: 已訓練 LTC 零樣本閉式編譯 (MSE=0.006)&quot;]
+        CFS[&quot;EQN-11: 直接閉式網路 Cf-S (Eq. 9)&quot;]
+        CFC[&quot;DEF-2: 反轉 Sigmoid 凸閘控網路 CfC / CfC-mmRNN (Eq. 10)&quot;]
+        PRP2[&quot;PRP-2: O(nk) 複雜度與剛性求解器加速 10x-9505x (VER-4)&quot;]
+        BENCH[&quot;CONC-3/4: 自駕車 RX450H + XOR/PhysioNet/IMDB/Walker2D&quot;]
+    end
+
+    P_BIO --&gt; DEF1
+    DEF1 --&gt; EQ3
+    EQ3 --&gt; ASM1
+    P_ODE --&gt; ASM1
+    ASM1 --&gt; EQ5
+    EQ5 --&gt; PRP1
+    EQ5 --&gt; LEM1
+    P_ANA --&gt; ASM2
+    ASM2 --&gt; LEM1
+    PRP1 --&gt; THM1
+    LEM1 --&gt; THM1
+    EQ3 --&gt; PRP3
+    LEM1 --&gt; PRP3
+    PRP1 --&gt; PRP4
+    LEM1 --&gt; PRP4
+    THM1 --&gt; ALG1
+    THM1 --&gt; CFS
+    CFS --&gt; CFC
+    P_GRAD --&gt; CFC
+    THM1 --&gt; COR1
+    CFC --&gt; COR1
+    CFC --&gt; PRP2
+    PRP2 --&gt; BENCH
+    COR1 --&gt; BENCH
+</pre>
+<h2 id="3-分層閱讀路線建議">3. 分層閱讀路線建議</h2>
+<ol>
+<li><strong>應用與架構速讀線（約 30 分鐘）</strong>：閱讀 <code>H0</code> <span class="math inline">\to</span> <code>H2</code>（聚焦 <code>Eq. 10</code> 架構圖景與 <code>forget_bias</code> 實作關鍵）<span class="math inline">\to</span> <code>H5.1</code>（五大實驗基準性能－速度權衡與模型選型準則）。</li>
+<li><strong>嚴格數理審核線（約 90 分鐘）</strong>：精讀 <code>H2.2</code>（符號重載與型別字典）<span class="math inline">\to</span> <code>H4</code>（<code>Theorem 1</code>、<code>Lemma 1</code>、<code>PRP-3</code>、<code>PRP-4</code>、<code>COR-1</code> 五層完整推導與隐含前提拆解）<span class="math inline">\to</span> <code>H3</code>（高頻混疊反例 <code>CEX-1</code>、對稱化偏移反例 <code>CEX-2</code> 與多突觸超調反例 <code>CEX-3</code>）。</li>
+<li><strong>前沿跨域研究線（約 60 分鐘）</strong>：在完成 <code>H4</code> 後深入 <code># 跨層研究分析</code>，掌握 <code>CfC</code> 與李群 Magnus 展開、選擇性狀態空間模型（<code>Liquid-S4</code> / <code>Mamba</code>）零階保持離散化，以及神經符號邏輯神經網路（<code>LNN</code>）時序邏輯閘的嚴格結構映射。</li>
+</ol>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<h2 id="1-三大生物神經突觸機制與數學映射">1. 三大生物神經突觸機制與數學映射</h2>
+<p><code>[原文內容]</code> 原文於主文開篇 <code>[Sec 2, P3:L21-P4:L48; Fig. 1]</code> 指出傳統人工神經網路將突觸簡化為靜態純量權重，抹除了自然神經迴路的三項核心資訊傳遞機制，而 LTC 與 CfC 正是建立於這三者的數學抽象之上：</p>
+<ol>
+<li><strong>連續膜電位演化</strong>：突觸後神經元電位 <span class="math inline">x(t)</span> 隨連續時間依微分方程演化，具備固有被動漏電時間常數 <span class="math inline">\tau = 1/w_\tau &gt; 0</span> <code>[P4:L8-L12, P4:L29]</code>。</li>
+<li><strong>非線性突觸傳遞機率</strong>：突觸前刺激 <span class="math inline">I(t)</span> 並非線性疊加，而是透過受體激活機率與神經遞質釋放非線性函數 <span class="math inline">f(I(t)) \in (0,1)</span> 控制突觸電導開放程度 <code>[P4:L5, P4:L37-L40]</code>。</li>
+<li><strong>反轉電位負回饋記憶機制（Conductance-based Negative Feedback）</strong>：突觸電流為乘性電導形式 <span class="math inline">S(t) = f(I(t))(A - x(t))</span> <code>[P4:L5-L6]</code>。當膜電位 <span class="math inline">x(t)</span> 逼近突觸反轉電位（synaptic reversal potential）<span class="math inline">A</span> 時，驅動力 <span class="math inline">(A - x(t)) \to 0</span> 自動關閉淨電流，從而在物理上內建狀態有界性與自適應有效時間常數 <span class="math inline">\tau_{\text{eff}}(t) = [w_\tau + f(I(t))]^{-1}</span> <code>[P4:L40-L46]</code>。</li>
+</ol>
+<h2 id="2-全局符號型別字典與重載警示symbol-type-dictionary">2. 全局符號型別字典與重載警示（Symbol &amp; Type Dictionary）</h2>
+<table>
+<thead>
+<tr>
+<th>符號 ID</th>
+<th>LaTeX 符號</th>
+<th>嚴格數學型別（Type）</th>
+<th>作用域與物理／代數語義</th>
+<th>原文定位</th>
+<th>審核重載與陷阱警示（Overload &amp; Audit Warnings）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SYM-1</code></td>
+<td><span class="math inline">\mathbf{x}(t),  x(t)</span></td>
+<td><span class="math inline">C^1([0,\infty),\mathbb{R}^D)</span> 或 <span class="math inline">\mathbb{R}^D</span></td>
+<td>突觸後神經元膜電位／隱藏狀態向量（初值 <span class="math inline">\mathbf{x}_0 = \mathbf{x}(0)</span>）</td>
+<td><code>[P7:L8-L11]</code></td>
+<td><strong>符號混用</strong>：<code>Eq. (2)</code> <code>[P7:L17]</code> 左端直接寫 <span class="math inline">x(t)</span> 代表近似解，至 <code>Lemma 1</code> <code>Eq. (8)</code> <code>[P9:L31]</code> 才改寫為 <span class="math inline">\tilde{x}(t)</span>，而 <code>Alg. 1</code> <code>[P11:L12]</code> 寫為 <span class="math inline">\hat{\mathbf{x}}(t)</span>。</td>
+</tr>
+<tr>
+<td><code>SYM-2</code></td>
+<td><span class="math inline">\mathbf{I}(t),  I(t)</span></td>
+<td><span class="math inline">C^0([0,\infty),\mathbb{R}^m)</span> 或分段常數函數</td>
+<td>外部突觸前輸入時序信號</td>
+<td><code>[P7:L8-L11]</code></td>
+<td><code>Lemma 1</code> 要求連續函數 <span class="math inline">C([0,t])</span>，<code>Eqs. (6)-(7)</code> 則為右連續左極限分段常數函數。</td>
+</tr>
+<tr>
+<td><code>SYM-3</code></td>
+<td><span class="math inline">w_\tau</span>（或 <span class="math inline">1/\tau</span>）</td>
+<td><span class="math inline">\mathbb{R}_{&gt;0}^D</span>（量綱：<span class="math inline">\text{time}^{-1}</span>）</td>
+<td>被動漏電電導（時間常數之倒數）</td>
+<td><code>[P4:L11, P7:L12]</code></td>
+<td><strong>名稱誤導</strong>：正文 <code>[P7:L12]</code> 稱 <span class="math inline">w_\tau</span> 為「time-constant parameter vector」，但由 <code>Fig. 1</code> <span class="math inline">(-x/\tau)</span> 與 <code>Alg. 1</code> <span class="math inline">(1/\tau_i)</span> <code>[P11:L22]</code> 可證其物理量綱實為<strong>逆時間常數（衰減率）</strong>，且必須滿足 <span class="math inline">w_\tau &gt; 0</span> <code>[P10:L10]</code>。</td>
+</tr>
+<tr>
+<td><code>SYM-4</code></td>
+<td><span class="math inline">A,  A_{ij}</span></td>
+<td><span class="math inline">\mathbb{R}^D</span> 或 <span class="math inline">\mathbb{R}^{(N+H)\times H}</span></td>
+<td>突觸反轉電位／漸近偏置目標</td>
+<td><code>[P4:L23, P7:L12]</code></td>
+<td>在單突觸推導與 <code>Cf-S</code> 中為神經元向量 <span class="math inline">A^{(D)}</span>；在 <code>Fig. 2</code> 與 <code>Alg. 1</code> 中為逐突觸矩陣 <span class="math inline">A_{ij}</span>。</td>
+</tr>
+<tr>
+<td><code>SYM-5</code></td>
+<td><span class="math inline">f(\cdot;\theta)</span></td>
+<td><code>Eqs. 2-8</code>: Lipschitz 單調遞增 <span class="math inline">\mathbb{R}\to[0,1]</span>；<code>Eq. 10</code>: <span class="math inline">\mathbb{R}^{D+m}\to\mathbb{R}^D</span></td>
+<td>突觸釋放非線性函數／液態時間閘門頭網路</td>
+<td><code>[P9:L29, P15:L17]</code></td>
+<td><strong>嚴重型別重載</strong>：<code>Lemma 1</code> 證明嚴格要求 <span class="math inline">0 \le f \le 1</span>；但在 <code>CfC</code> <code>Eq. (10)</code> 中 <span class="math inline">f(\mathbf{x},\mathbf{I};\theta_f)</span> 為一般神經網路頭（吸收了 <span class="math inline">w_\tau</span>），若無正值約束當 <span class="math inline">f&lt;0</span> 時 <span class="math inline">t\to\infty</span> 會使 <span class="math inline">\sigma(-ft)\to 1</span> 而非 <span class="math inline">0</span>。</td>
+</tr>
+<tr>
+<td><code>SYM-8</code></td>
+<td><span class="math inline">u(s)</span></td>
+<td><span class="math inline">C^1([0,t], \mathbb{R}_{\ge 0})</span></td>
+<td>反向累積耗散指數 <span class="math inline">\int_s^t [w_\tau + f(I(v))] dv</span></td>
+<td><code>[P8:L26-L30]</code></td>
+<td>僅用於 <code>Theorem 1</code> 證明中消去內層積分的代換變數，滿足 <span class="math inline">u(t)=0</span> 與 <span class="math inline">du/ds = -(w_\tau+f(I(s)))</span>。</td>
+</tr>
+<tr>
+<td><code>SYM-9</code></td>
+<td><span class="math inline">\tau_i,  \gamma_i</span></td>
+<td><span class="math inline">0=\tau_0&lt;\dots&lt;\tau_n=\infty;  \gamma_i\in\mathbb{R}</span></td>
+<td>分段常數輸入之切換時間點與區間常數值</td>
+<td><code>[P9:L8-L10]</code></td>
+<td><strong>切勿混淆</strong>切換時刻 <span class="math inline">\tau_i</span> <code>[P9:L8]</code> 與第 <span class="math inline">i</span> 顆神經元的膜時間常數 <span class="math inline">\tau_i</span> <code>[P11:L10, P12:L66]</code>。</td>
+</tr>
+<tr>
+<td><code>SYM-11</code></td>
+<td><span class="math inline">\sigma(\cdot)</span></td>
+<td><span class="math inline">C^\infty(\mathbb{R},(0,1))</span></td>
+<td>標準 Logistic Sigmoid 函數 <span class="math inline">(1+e^{-z})^{-1}</span></td>
+<td><code>[P14:L39, P15:L17]</code></td>
+<td><strong>三重重載</strong>：(1) <code>Eq. (10)</code> 時間閘門 <span class="math inline">\sigma(\cdot)</span>；(2) <code>Alg. 1</code> <code>[P11:L11]</code> 突觸斜率參數矩陣 <span class="math inline">\sigma^{(N\times H)}</span>；(3) <code>Fig. 5c</code> <code>[P19:L33]</code> 高斯感測器雜訊變異數 <span class="math inline">\sigma^2=0.35</span>。</td>
+</tr>
+<tr>
+<td><code>SYM-12</code></td>
+<td><span class="math inline">g(\cdot;\theta_g),  h(\cdot;\theta_h)</span></td>
+<td><span class="math inline">\mathbb{R}^{D+m} \to \mathbb{R}^D</span></td>
+<td>共享主幹分出之雙狀態非線性頭網路</td>
+<td><code>[P14:L45-P15:L31]</code></td>
+<td><span class="math inline">g</span> 推廣短時初值項 <span class="math inline">B\odot f(-\mathbf{x},-\mathbf{I})</span>；<span class="math inline">h</span> 推廣長時漸近反轉電位 <span class="math inline">A</span>。</td>
+</tr>
+<tr>
+<td><code>SYM-16</code></td>
+<td><span class="math inline">b_{\text{forget}}</span></td>
+<td><span class="math inline">\mathbb{R}</span>（實作取 <span class="math inline">[0.6, 5.0]</span>）</td>
+<td>時間閘門遺忘偏置（<code>forget_bias</code>）</td>
+<td><code>[P39:L53, P40:L130]</code></td>
+<td><code>[AI 推導]</code> <strong>印刷公式遺漏符號</strong>：<code>Eq. (10)</code> 未寫出 <span class="math inline">+b_{\text{forget}}</span>，導致字面上 <span class="math inline">t=0</span> 時 <span class="math inline">\sigma(0)=0.5</span>，與正文 <code>[P14:L39]</code>「<span class="math inline">t=0</span> 時約為 <span class="math inline">1</span>」矛盾；須由補充表 <code>Table S1/S4</code> 還原為 <span class="math inline">\sigma(-f\mathbf{t}+b_{\text{forget}})</span>。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="3-四種-cfc-架構變體演進關係">3. 四種 CfC 架構變體演進關係</h2>
+<p><code>[原文內容]</code> 為驗證從純量閉式近似 <code>Eq. (2)</code> 到工程深度架構 <code>Eq. (10)</code> 各項設計修改的必要性，原文於 <code>[Sec 5-6, P13:L28-P16:L23]</code> 定義了四個嚴格遞進的模型變體：</p>
+<pre class="mermaid">flowchart LR
+    EQ2[&quot;純量閉式近似 (Eq. 2) (x0-A) exp(-[w_tau+f(I)]t) f(-I) + A&quot;] --&gt; CFS[&quot;1. Cf-S (Eq. 9) B * exp(-[w_tau+f(x,I)]t) * f(-x,-I) + A 直接參數化，具指數梯度消失&quot;]
+    CFS --&gt; NOGATE[&quot;2. CfC-noGate sigma(-f*t + b_f) * g(x,I) + h(x,I) 平滑閘門 + 三分支主幹，無互補閘&quot;]
+    NOGATE --&gt; CFC[&quot;3. CfC (Eq. 10) sigma(-f*t + b_f)*g + [1-sigma(-f*t + b_f)]*h 嚴格凸組合插值閘控&quot;]
+    CFC --&gt; MMRNN[&quot;4. CfC-mmRNN 將 CfC 嵌入 LSTM 混合記憶胞 克服超長離散序列梯度衰減&quot;]
+</pre>
+<ul>
+<li><strong>時間戳記 <span class="math inline">\mathbf{t}</span> 的雙模態處理協議</strong> <code>[原文內容]</code> <code>[P16:L1-L6; arxiv.tex:L448-L449]</code>：
+<ol>
+<li><strong>不規則採樣／事件驅動時序</strong>（如 PhysioNet 醫療紀錄、事件型 Bit-Stream XOR、Walker2D）：直接以每個樣本到達的真實時間間隔 <span class="math inline">\Delta t</span> 或時間戳記設定 <span class="math inline">\mathbf{t}</span>；</li>
+<li><strong>無顯式時間戳記之一般離散序列</strong>（如 IMDB 單詞序列）：在兩個超參數端點 <span class="math inline">[a, b]</span> 區間內按批次序列長度進行等距均勻採樣，使連續深度閘門仍能提供多尺度記憶衰減。</li>
+</ol>
+</li>
+</ul>
+<h2 id="h3-具體正例演算與邊界反例構造">H3 具體正例演算與邊界反例構造</h2>
+<h2 id="1-正例演算一分段常數zero-order-hold輸入下的精確閉式遞推">1. 正例演算一：分段常數（Zero-Order Hold）輸入下的精確閉式遞推</h2>
+<p><code>[AI 推導]</code> 考慮單一對稱化 LTC 神經元 <code>[EQN-4, P8:L6]</code>，設參數為 <span class="math inline">x(0) = 1.0</span>、反轉電位 <span class="math inline">A = -1.0</span>（故初始偏移 <span class="math inline">c = x(0)-A = 2.0</span>）、漏電率 <span class="math inline">w_\tau = 0.5\text{ s}^{-1}</span>，突觸非線性為標準 Sigmoid <span class="math inline">f(z)=\sigma(z)=(1+e^{-z})^{-1}</span>。設分段常數輸入信號在 <span class="math inline">\tau_0 = 0, \tau_1 = 1, \tau_2 = 2</span> 上取值為：</p>
+<ul>
+<li>區間 <span class="math inline">[0, 1)</span>：<span class="math inline">\gamma_0 = 0 \implies f(\gamma_0) = \sigma(0) = 0.5</span>，有效總衰減率 <span class="math inline">r_0 = w_\tau + f(\gamma_0) = 1.0\text{ s}^{-1}</span>；</li>
+<li>區間 <span class="math inline">[1, 2]</span>：<span class="math inline">\gamma_1 = \ln 3 \approx 1.0986 \implies f(\gamma_1) = \sigma(\ln 3) = 0.75</span>，有效總衰減率 <span class="math inline">r_1 = w_\tau + f(\gamma_1) = 1.25\text{ s}^{-1}</span>。</li>
+</ul>
+<p>依原文分段常數精確公式 <code>Eq. (6)</code>–<code>Eq. (7)</code> <code>[P9:L11-L23]</code>：</p>
+<ol>
+<li>在 <span class="math inline">t = 1.0</span> 時：<span class="math inline">\int_0^1 f(I(s)) ds = 0.5 \times 1 = 0.5</span>，精確膜電位為
+<div class="math inline">x_{\text{sym}}(1) = 2.0 \cdot e^{-0.5(1) - 0.5} - 1.0 = 2 e^{-1} - 1 \approx -0.264241.</div></li>
+<li>在 <span class="math inline">t = 2.0</span> 時：累積積分 <span class="math inline">\int_0^2 f(I(s)) ds = 0.5(1 - 0) + 0.75(2 - 1) = 1.25</span>，精確膜電位為
+<div class="math inline">x_{\text{sym}}(2) = 2.0 \cdot e^{-0.5(2) - 1.25} - 1.0 = 2 e^{-2.25} - 1 \approx -0.789202.</div></li>
+<li><strong>關鍵半群遞推性質驗證</strong>：若在每個採樣步將上一時刻狀態 <span class="math inline">x_{\text{sym}}(1)</span> 作為新初值，執行單步指數更新：
+<div class="math inline">(x_{\text{sym}}(1) - A) e^{-[w_\tau + f(\gamma_1)](2 - 1)} + A = (2e^{-1}) e^{-1.25} - 1 = 2 e^{-2.25} - 1 = x_{\text{sym}}(2).</div>
+這證明了在任意離散採樣網格上，只要輸入在步間近似常數（零階保持），逐步套用純指數閉式更新是完全無截斷誤差的精確積分器。而原文單發閉式近似 <code>Eq. (8)</code> 在 <span class="math inline">t=2.0</span> 處給出 <span class="math inline">\tilde{x}(2) = 2.0 \cdot e^{-(0.5+0.75)\times 2} \sigma(-\ln 3) - 1 = 2 e^{-2.5}(0.25) - 1 \approx -0.958958</span>，其與真解差距 <span class="math inline">|x_{\text{sym}}(2)-\tilde{x}(2)| = 0.169756</span>，嚴格小於 <code>Lemma 1</code> 誤差上界 <span class="math inline">|c|e^{-w_\tau \cdot 2} = 2 e^{-1} \approx 0.735759</span>。</li>
+</ol>
+<h2 id="2-正例演算二剛性多時間尺度神經元組上-dopri5-vs-cfc-實測對決ver-4">2. 正例演算二：剛性多時間尺度神經元組上 <code>DOPRI5</code> vs <code>CfC</code> 實測對決（<code>VER-4</code>）</h2>
+<p><code>[AI 推導]</code> 為定量驗證原文「快 1 至 5 個數量級」<code>[P2:L6]</code> 的機制，我們在 <code>verify_math.py</code>（<code>VER-4</code>）中建構了 <span class="math inline">D=16</span> 顆隱藏神經元的 LTC 層，其逆時間常數 <span class="math inline">w_{\tau,i}</span> 在 <span class="math inline">[0.1, w_{\max}]</span> 上呈對數均勻分佈，於正弦刺激 <span class="math inline">I(t)=\sin(2t)</span> 下積分至 <span class="math inline">T=5.0</span>，比較論文引用之標準自適應五階 Runge–Kutta 求解器 <code>DOPRI5</code> <code>[Ref. 10, rtol=1e-5, atol=1e-7]</code> 與閉式公式的函數評估次數（NFEs）：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:right">最大逆時間常數 <span class="math inline">w_{\max}</span></th>
+<th style="text-align:right">系統剛性比 <span class="math inline">\kappa = w_{\max}/w_{\min}</span></th>
+<th style="text-align:right"><code>DOPRI5</code> 接受步數 / 拒絕步數</th>
+<th style="text-align:right"><code>DOPRI5</code> 總評估次數（NFE）</th>
+<th style="text-align:right"><code>CfC</code> 閉式評估次數（NFE）</th>
+<th style="text-align:right">NFE 加速倍率</th>
+<th style="text-align:right">實測純計算加速比</th>
+<th style="text-align:right"><span class="math inline">T=5</span> 最大狀態差</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:right"><span class="math inline">1</span></td>
+<td style="text-align:right"><span class="math inline">10</span></td>
+<td style="text-align:right"><span class="math inline">14</span> / <span class="math inline">2</span></td>
+<td style="text-align:right"><code>97</code></td>
+<td style="text-align:right"><code>1</code></td>
+<td style="text-align:right"><code>97x</code></td>
+<td style="text-align:right"><code>147.8x</code></td>
+<td style="text-align:right"><span class="math inline">0.015144</span></td>
+</tr>
+<tr>
+<td style="text-align:right"><span class="math inline">10</span></td>
+<td style="text-align:right"><span class="math inline">100</span></td>
+<td style="text-align:right"><span class="math inline">26</span> / <span class="math inline">2</span></td>
+<td style="text-align:right"><code>169</code></td>
+<td style="text-align:right"><code>1</code></td>
+<td style="text-align:right"><code>169x</code></td>
+<td style="text-align:right"><code>266.8x</code></td>
+<td style="text-align:right"><span class="math inline">0.011862</span></td>
+</tr>
+<tr>
+<td style="text-align:right"><span class="math inline">100</span></td>
+<td style="text-align:right"><span class="math inline">1,000</span></td>
+<td style="text-align:right"><span class="math inline">160</span> / <span class="math inline">7</span></td>
+<td style="text-align:right"><code>1,003</code></td>
+<td style="text-align:right"><code>1</code></td>
+<td style="text-align:right"><code>1,003x</code></td>
+<td style="text-align:right"><code>1,184.2x</code></td>
+<td style="text-align:right"><span class="math inline">0.009839</span></td>
+</tr>
+<tr>
+<td style="text-align:right"><span class="math inline">1,000</span></td>
+<td style="text-align:right"><span class="math inline">10,000</span></td>
+<td style="text-align:right"><span class="math inline">1,520</span> / <span class="math inline">64</span></td>
+<td style="text-align:right"><strong><code>9,505</code></strong></td>
+<td style="text-align:right"><strong><code>1</code></strong></td>
+<td style="text-align:right"><strong><code>9,505x</code></strong></td>
+<td style="text-align:right"><strong><code>8,749.8x</code></strong></td>
+<td style="text-align:right"><span class="math inline">0.008627</span></td>
+</tr>
+</tbody>
+</table>
+<p>當最快神經元時間常數縮小至 <span class="math inline">10^{-3}\text{ s}</span>（<span class="math inline">w_{\max}=1000</span>）時，即便該快變分量在 <span class="math inline">t &gt; 0.01\text{ s}</span> 後早已指數收斂至平衡態，顯式 <code>DOPRI5</code> 仍為維持數值穩定域而被迫走 <code>1,520</code> 步（含 <code>64</code> 次步長拒絕重算，共 <code>9,505</code> 次網路前向傳播），而閉式解在任意時間跨度 <span class="math inline">T</span> 下恆為嚴格 <code>NFE = 1</code>。</p>
+<h2 id="3-邊界反例構造破壞假設與極端輸入測試">3. 邊界反例構造（破壞假設與極端輸入測試）</h2>
+<h3 id="反例一cex-1高頻振盪相位混疊與末段突跳記憶抹除ver-2">反例一（<code>CEX-1</code>）：高頻振盪相位混疊與末段突跳記憶抹除（<code>VER-2</code>）</h3>
+<ul>
+<li><strong>構造目的</strong>：檢驗當輸入信號 <span class="math inline">I(s)</span> 高頻快速變化或在末端突跳時，以瞬時端點值 <span class="math inline">t f(I(t))</span> 取代歷史積分 <span class="math inline">\int_0^t f(I(s)) ds</span> 所引發的記憶失真。</li>
+<li><strong>嚴格構造</strong> <code>[AI 推導]</code>：取 <span class="math inline">x_0 = 1.0, A = 0.0, w_\tau = 0.25</span>（取 <span class="math inline">A=0</span> 使 <code>Eq. 3</code> 與 <code>Eq. 5</code> 完全重合，純粹隔離積分近似誤差），時間區間 <span class="math inline">t \in [0, 2]</span>，輸入為 <span class="math inline">10\text{ Hz}</span> 高頻餘弦波 <span class="math inline">I(s) = 8 \cos(2\pi \cdot 10 s)</span>。</li>
+<li><strong>解析與數值結果</strong>：
+<ol>
+<li>由於 <span class="math inline">\sigma(8\cos\theta) + \sigma(-8\cos\theta) = 1</span> 對稱，根據 Riemann–Lebesgue 平均效應，真實積分相當平滑：<span class="math inline">\int_0^t \sigma(8\cos(20\pi s)) ds \approx 0.5 t</span>，故真實膜電位平滑衰減為 <span class="math inline">x(t) \approx e^{-(0.25 + 0.5)t} = e^{-0.75 t}</span>。</li>
+<li>然而，單發閉式解 <span class="math inline">\tilde{x}(t) = e^{-[0.25 + \sigma(I(t))]t}\sigma(-I(t))</span> 完全遺忘歷史平均，隨瞬時相位劇烈震盪：每當 <span class="math inline">t = m/10</span>（餘弦波峰 <span class="math inline">I(t)=+8</span>），<span class="math inline">\sigma(-8) = 0.000335</span>，導致 <span class="math inline">\tilde{x}(0^+) = 0.000335</span>（相較真值 <span class="math inline">1.0</span> 產生 <code>0.999665</code> 的瞬時絕對誤差，全軌跡 <code>RMSE = 0.421896</code>）；每當 <span class="math inline">t = (m+0.5)/10</span>（波谷 <span class="math inline">I(t)=-8</span>），<span class="math inline">\tilde{x}(t) \approx e^{-0.25 t}</span> 又嚴重高估真值 <span class="math inline">e^{-0.75 t}</span>。</li>
+<li><strong>修復機制驗證</strong>：若改採 <code>PRP-1</code> / <code>CfC</code> 實際序列處理中的逐步遞推展開（Step-wise Recurrent Unrolling）（步長 <span class="math inline">\Delta t = 0.005\text{ s}</span>），全軌跡 <code>RMSE</code> 由 <code>0.421896</code> 驟降至 <code>0.000951</code>（誤差降低 <code>443.76</code> 倍）。這揭示了 <code>CfC</code> 在高頻時序上必須以事件／採樣步 <span class="math inline">\Delta t_k</span> 逐步遞推，而不可從 <span class="math inline">t=0</span> 單發跳躍跨越數十個輸入週期。</li>
+</ol>
+</li>
+</ul>
+<h3 id="反例二cex-2靜默突觸下-asm-1-對稱化假設導致的非零穩態偏移ver-1">反例二（<code>CEX-2</code>）：靜默突觸下 <code>ASM-1</code> 對稱化假設導致的非零穩態偏移（<code>VER-1</code>）</h3>
+<ul>
+<li><strong>嚴格構造</strong> <code>[AI 推導]</code>：取原始 LTC 方程 <code>Eq. (3)</code> <span class="math inline">\dot{x}_{\text{LTC}} = -[w_\tau + \sigma(I)]x_{\text{LTC}} + A\sigma(I)</span>，設 <span class="math inline">x_0 = 1.2, A = -0.5, w_\tau = 0.4</span>，輸入恆為強烈抑制信號 <span class="math inline">I(t) \equiv -10</span>（突觸關閉，<span class="math inline">\sigma(-10) \approx 4.54\times 10^{-5} \approx 0</span>）。</li>
+<li><strong>結果</strong>：原始生物物理神經元在突觸完全靜默時，僅受被動漏電 <span class="math inline">-\frac{x}{\tau}</span> 作用，穩態必回到靜息電位 <span class="math inline">x_{\text{LTC}}(\infty) = \frac{A\sigma(-10)}{w_\tau + \sigma(-10)} \approx 0</span>；但經過第 8 頁對稱化假設 <code>ASM-1</code> 後的 <code>Eq. (5)</code> 與閉式解 <code>Eq. (2)</code> 卻收斂至突觸反轉電位 <span class="math inline">\tilde{x}(\infty) = A = -0.5</span>。即便在活躍輸入 <span class="math inline">I(t)\equiv +1.0</span> 下，<code>VER-1</code> 實測顯示 <code>Eq. (3)</code> 與 <code>Eq. (5)</code> 之間仍存在 <code>0.176207</code> 的永久穩態偏差（不隨 <span class="math inline">t\to\infty</span> 消失）。這證明 <code>Theorem 1</code> 的指數衰減誤差界嚴格針對對稱化 LTC（<code>Eq. 5</code>），若應用於原始 <code>Eq. (3)</code> 則需加上 <code>PRP-3</code> 的穩態修正項，或在 <code>CfC</code> 中由網路頭 <span class="math inline">h(\mathbf{x},\mathbf{I};\theta_h)</span> 學習真實穩態分壓比。</li>
+</ul>
+<h3 id="反例三cex-3algorithm-1-與-fig-2c-多突觸未正規化累加之凸包超調ver-5">反例三（<code>CEX-3</code>）：<code>Algorithm 1</code> 與 <code>Fig. 2c</code> 多突觸未正規化累加（<code>+=</code>）之凸包超調（<code>VER-5</code>）</h3>
+<ul>
+<li><strong>嚴格構造</strong> <code>[AI 推導]</code>：考慮單一神經元（<span class="math inline">w_\tau = 0.5, x_1(0)=0.2</span>）同時接收兩條常數活躍突觸輸入：突觸 1（<span class="math inline">A_{01}=1.0, I=1.5 \implies f_{01}=0.8176</span>）與突觸 2（<span class="math inline">A_{21}=0.8, x_2=1.0 \implies f_{21}=0.7311</span>）。</li>
+<li><strong>結果</strong>：真實雙突觸電導 ODE <span class="math inline">\dot{x}_1 = -w_\tau x_1 + f_{01}(A_{01}-x_1) + f_{21}(A_{21}-x_1)</span> 的精確平衡點為電導加權平均 <span class="math inline">x_1^* = \frac{f_{01}A_{01}+f_{21}A_{21}}{w_\tau + f_{01} + f_{21}} = \mathbf{0.684564} \in [0, 1]</span>；但 <code>Algorithm 1</code> <code>[P11:L18]</code> 與 <code>Fig. 2c</code> <code>[P12:L11-L19]</code> 對每條突觸獨立套用單突觸閉式解再直接相加（<code>+=</code>），在 <span class="math inline">t=20</span> 時給出 <span class="math inline">\hat{x}_1(20) \approx A_{01} + A_{21} = \mathbf{1.800000}</span>，超調量高達 <code>+1.115436</code>，直接衝出反轉電位物理上界 <span class="math inline">\max_j A_{ij} = 1.0</span>。</li>
+</ul>
+<h2 id="h4-核心定理五層註釋逐步補全證明與推理缺口分析">H4 核心定理五層註釋、逐步補全證明與推理缺口分析</h2>
+<h2 id="核心結果一theorem-1-單細胞前饋液態網路之閉式近似解-p7l14-p10l12">核心結果一：<code>Theorem 1</code> ， 單細胞前饋液態網路之閉式近似解 <code>[P7:L14-P10:L12]</code></h2>
+<h4 id="直觀理解">直觀理解</h4>
+<p><code>[原文內容]</code> 單一無自連接的 LTC 神經元就像一個「漏水速率與進水閥門同步受外部信號 <span class="math inline">I(t)</span> 調控的水箱」。由於水箱自身水位 <span class="math inline">x(t)</span> 只以一次方線性出現，我們可以先用積分因子算出精確含積分形式的解；唯一算不出初等函數的部分是外部信號經過非線性閥門後的歷史總開度 <span class="math inline">\int_0^t f(I(s)) ds</span>。<code>Theorem 1</code> 的核心洞見是：因為這個積分被放在負指數衰減項 <span class="math inline">e^{-w_\tau t - \int_0^t f(I(s)) ds}</span> 裡面，只要基礎漏水率 <span class="math inline">w_\tau &gt; 0</span>，過去累積積分的任何近似誤差都會被外層的被動漏電因子 <span class="math inline">e^{-w_\tau t}</span> 隨時間指數壓制。</p>
+<h4 id="嚴格表述">嚴格表述</h4>
+<p><code>[原文內容]</code> 定理 1（<code>THM-1</code>, <code>[P7:L14-L18; arxiv.tex:L270-L276]</code>）：給定由單一神經元構成、接收一維連續時序輸入 <span class="math inline">I: [0,\infty) \to \mathbb{R}</span> 且無自連接（no self-connections）的 LTC 初值問題 <code>Eq. (1)</code>。<code>[AI 推導]</code> 在滿足對稱化漏電反轉假設（<code>ASM-1</code>） <span class="math inline">\dot{x}_{\text{sym}}(t) = -[w_\tau + f(I(t),\theta)](x_{\text{sym}}(t) - A)</span>、逆時間常數 <span class="math inline">w_\tau &gt; 0</span>，以及正規化 Sigmoid 型非線性假設（<code>ASM-2</code>）（<span class="math inline">f(\cdot,\theta): \mathbb{R}\to[0,1]</span> 為單調遞增 Lipschitz 連續函數且兩端極限為 <span class="math inline">0</span> 與 <span class="math inline">1</span>）之下，閉式表達式
+<div class="math inline">\tilde{x}(t) = (x_0 - A) e^{-[w_\tau + f(I(t),\theta)]t} f(-I(t),\theta) + A \qquad \text{(Eq. 2)}</div>
+為精確軌跡 <span class="math inline">x_{\text{sym}}(t)</span> 的一致指數收斂近似解，對所有 <span class="math inline">t \ge 0</span> 滿足 <span class="math inline">|x_{\text{sym}}(t) - \tilde{x}(t)| \le |x_0 - A| e^{-w_\tau t}</span>。</p>
+<h4 id="完整推導">完整推導</h4>
+<ol>
+<li><strong>一維無自連接線性化（<code>STEP-1</code>, <code>[原文內容]</code> <code>[P7:L19-L25]</code>）</strong>：在 <span class="math inline">D=1, m=1</span> 且神經元無自回饋連接（<span class="math inline">f</span> 不依賴 <span class="math inline">x</span>）時，<code>Eq. (1)</code> 化簡為關於 <span class="math inline">x(t)</span> 的一階線性非自治常微分方程：
+<div class="math inline">\frac{d}{dt}x(t) = -\big[w_\tau + f(I(t))\big]x(t) + A f(I(t)). \qquad \text{(Eq. 3)}</div></li>
+<li><strong>引入對稱化假設與變易常數積分（<code>STEP-2</code>, <code>[原文內容]</code> <code>[P8:L6-L24]</code> + <code>[AI 推導]</code> 補全積分因子細節）</strong>：原文於第 8 頁引入對稱化方程（<code>ASM-1</code>）：
+<div class="math inline">\frac{d}{dt}x_{\text{sym}}(t) = -\big[w_\tau + f(I(t))\big]x_{\text{sym}}(t) + A\big[w_\tau + f(I(t))\big].</div>
+<code>[AI 推導]</code> 定義正值積分因子 <span class="math inline">\mu(t) := \exp\big(\int_0^t [w_\tau + f(I(v))] dv\big)</span>。將上式移項乘以 <span class="math inline">\mu(t)</span> 得全導數：
+<div class="math inline">\frac{d}{ds}\big[\mu(s) x_{\text{sym}}(s)\big] = \mu(s) A\big[w_\tau + f(I(s))\big].</div>
+對 <span class="math inline">s \in [0, t]</span> 積分並兩邊同乘 <span class="math inline">\mu(t)^{-1}</span>，且注意到 <span class="math inline">\mu(t)^{-1}\mu(s) = \exp\big(-\int_s^t [w_\tau + f(I(v))] dv\big)</span>，即得原文雙重積分式 <code>Eq. (4)</code> <code>[P8:L19-L24]</code>：
+<div class="math inline">x_{\text{sym}}(t) = e^{-\int_0^t [w_\tau + f(I(s))] ds} x(0) + \int_0^t e^{-\int_s^t [w_\tau + f(I(v))] dv} A\big(w_\tau + f(I(s))\big) ds.</div></li>
+<li><strong>代換積分消去內層積分（<code>STEP-3</code>, <code>[原文內容]</code> <code>[P8:L25-L45]</code>）</strong>：令輔助函數
+<div class="math inline">u(s) := \int_s^t [w_\tau + f(I(v))] dv.</div>
+<code>[AI 推導]</code> 因 <span class="math inline">I</span> 與 <span class="math inline">f</span> 連續，被積函數連續，由微積分基本定理對下限 <span class="math inline">s</span> 求導得 <span class="math inline">\frac{du}{ds} = -\big(w_\tau + f(I(s))\big)</span>，即 <span class="math inline">A(w_\tau + f(I(s))) ds = -A du</span>，且上下限對應 <span class="math inline">u(0) = \int_0^t [w_\tau + f(I(v))] dv</span>、<span class="math inline">u(t) = 0</span>。代入 <code>Eq. (4)</code> 第二項：
+<div class="math inline">-A \int_{u(0)}^{0} e^{-u} du = A \big[e^{-u}\big]_{u(0)}^{0} = A\Big(1 - e^{-\int_0^t [w_\tau + f(I(s))] ds}\Big).</div>
+與第一項合併並提出公因式 <span class="math inline">e^{-\int_0^t w_\tau ds} = e^{-w_\tau t}</span>，即得精確單積分閉式真解 <code>Eq. (5)</code> <code>[P8:L43-L45]</code>：
+<div class="math inline">x_{\text{sym}}(t) = (x(0) - A) e^{-w_\tau t} e^{-\int_0^t f(I(s)) ds} + A.</div></li>
+<li><strong>分段常數精確解與一般連續輸入近似（<code>STEP-4</code> &amp; <code>LEM-1</code>, <code>[原文內容]</code> <code>[P9:L1-P10:L12]</code>）</strong>：對分段常數輸入 <span class="math inline">I(s)=\gamma_i</span>（<span class="math inline">s\in[\tau_i,\tau_{i+1})</span>），積分拆解為有限和 <code>Eq. (6)</code>–<code>Eq. (7)</code>；對一般連續輸入，以 <code>Eq. (8)</code> <span class="math inline">\tilde{x}(t)</span> 近似並援引 <code>Lemma 1</code> 證得 <span class="math inline">|x_{\text{sym}}(t)-\tilde{x}(t)| \le |x(0)-A|e^{-w_\tau t}</span>，完成定理證明。</li>
+</ol>
+<h4 id="局限分析">局限分析</h4>
+<ol>
+<li><strong><code>ASM-1</code> 對稱化造成的模型偏移</strong> <code>[AI 推導]</code>：如 <code>CEX-2</code> 與下文 <code>PRP-3</code> 所示，<code>Eq. (5)</code> 並非 <code>Eq. (3)</code> 的精確解，除非 <span class="math inline">A=0</span> 或將漏電靜息電位重新定義為 <span class="math inline">A</span>。</li>
+<li><strong><span class="math inline">t=0</span> 處的初值不連續性</strong> <code>[AI 推導]</code>：在 <span class="math inline">t=0</span> 時，<code>Eq. (5)</code> 滿足 <span class="math inline">x_{\text{sym}}(0) = x_0</span>，但 <code>Eq. (2)</code> 給出 <span class="math inline">\tilde{x}(0) = (x_0 - A)f(-I(0)) + A</span>，產生初值誤差 <span class="math inline">(x_0 - A)(1 - f(-I(0)))</span>（<code>ATOM-5</code>）。</li>
+<li><strong>無自連接限制</strong>：<code>Theorem 1</code> 假設神經元無自連接；一旦 <span class="math inline">f = f(x(t), I(t))</span>，方程回歸非線性 ODE，積分因子法不再直接給出顯式解，必須依賴小步長 <span class="math inline">\Delta t</span> 下的凍結係數展開（見 <code>PRP-4</code>）。</li>
+</ol>
+<h4 id="研究拓展">研究拓展</h4>
+<p><code>[AI 推導]</code> 若保留真實生物物理中不同的漏電靜息電位 <span class="math inline">E_L</span> 與突觸反轉電位 <span class="math inline">A</span>，可透過時間相依瞬時平衡點 <span class="math inline">E_{\text{eff}}(t) := \frac{w_\tau E_L + f(I(t))A}{w_\tau + f(I(t))}</span> 執行分部積分展開，得到高一階漸近精確且無穩態偏移的閉式近似：
+<div class="math inline">\tilde{x}_{\text{exact-eq}}(t) = \big(x_0 - E_{\text{eff}}(0)\big) e^{-[w_\tau + f(I(t))]t} + E_{\text{eff}}(t),</div>
+其在任意常數輸入下對原始 <code>Eq. (3)</code> 達到零誤差。</p>
+<h2 id="核心結果二lemma-1-閉式近似之全局誤差上界與極值緊緻性定理-p9l29-p10l7-p37l5-p38l10">核心結果二：<code>Lemma 1</code> ， 閉式近似之全局誤差上界與極值緊緻性定理 <code>[P9:L29-P10:L7, P37:L5-P38:L10]</code></h2>
+<h4 id="直觀理解-1">直觀理解</h4>
+<p><code>[原文內容]</code> 將整段歷史積分 <span class="math inline">e^{-\int_0^t f(I(s)) ds}</span> 換成只看當下輸入的 <span class="math inline">e^{-f(I(t))t} f(-I(t))</span>，最壞能錯多少？<code>Lemma 1</code> 證明：因為兩個量都被限制在 <span class="math inline">[0,1]</span> 區間內，括號內最大落差絕不會超過 <span class="math inline">1</span>，所以總誤差永遠被 <span class="math inline">|x_0 - A|e^{-w_\tau t}</span> 鎖死。更漂亮的是，作者構造出兩種「最後一瞬間急轉彎」的對抗信號，先一直保持極負（完全不衰減，<span class="math inline">e^{-\int f}\approx 1</span>）直到最後 <span class="math inline">\delta</span> 秒突然拉到極正（使當下近似項歸零），證明上確界 <span class="math inline">1\cdot e^{-w_\tau t}</span> 無法再被任何常數改進（sharp）；反之先一直保持極正（最大衰減至 <span class="math inline">e^{-t}</span>）再在最後一瞬間拉到極負（使當下近似項變為 <span class="math inline">1</span>），精確達到下確界 <span class="math inline">(e^{-t}-1)e^{-w_\tau t}</span>。</p>
+<h4 id="嚴格表述-1">嚴格表述</h4>
+<p><code>[原文內容]</code> 引理 1（<code>LEM-1</code>, <code>[P9:L29-P10:L7; arxiv.tex:L337-L349]</code>）：設 <span class="math inline">f: \mathbb{R} \to [0,1]</span> 為 Lipschitz 連續（常數 <span class="math inline">L&gt;0</span>）、單調遞增函數，且滿足 <code>[AI 推導：補全隱含前提 ASM-2]</code> <span class="math inline">\lim_{z\to-\infty}f(z)=0</span> 與 <span class="math inline">\lim_{z\to+\infty}f(z)=1</span>。對任意連續輸入信號 <span class="math inline">I \in C([0,t], \mathbb{R})</span>，令 <span class="math inline">x(t)</span> 為 <code>Eq. (5)</code> 之積分真解，<span class="math inline">\tilde{x}(t)</span> 為 <code>Eq. (8)</code> 之閉式近似解，記 <span class="math inline">c = x(0) - A \neq 0</span>。則對所有 <span class="math inline">t \ge 0</span>：
+<div class="math inline">|x(t) - \tilde{x}(t)| \le |x(0) - A| e^{-w_\tau t},</div>
+且在全體連續輸入函數空間 <span class="math inline">C([0,t],\mathbb{R})</span> 上具備精確極值：</p>
+<ol>
+<li><span class="math inline">\sup\big\{\frac{1}{c}(x(t) - \tilde{x}(t))  \big|  I \in C([0,t],\mathbb{R})\big\} = e^{-w_\tau t}</span>；</li>
+<li><span class="math inline">\inf\big\{\frac{1}{c}(x(t) - \tilde{x}(t))  \big|  I \in C([0,t],\mathbb{R})\big\} = e^{-w_\tau t}(e^{-t} - 1)</span>。</li>
+</ol>
+<h4 id="完整推導-1">完整推導</h4>
+<ol>
+<li><strong>公因式分解與區間包絡界（<code>STEP-5</code> &amp; <code>STEP-6</code>, <code>[原文內容]</code> <code>[P37:L7-L13]</code>）</strong>：將 <code>Eq. (5)</code> 與 <code>Eq. (8)</code> 相減：
+<div class="math inline">x(t) - \tilde{x}(t) = c e^{-w_\tau t} \underbrace{\Big[ e^{-\int_0^t f(I(s)) ds} - e^{-f(I(t))t} f(-I(t)) \Big]}_{=: \Delta(I; t)}.</div>
+由 <code>ASM-2</code> 知對一切實數 <span class="math inline">z</span> 有 <span class="math inline">0 \le f(z) \le 1</span> 且 <span class="math inline">t \ge 0</span>，故 <span class="math inline">\int_0^t f(I(s)) ds \ge 0 \implies u_1 := e^{-\int_0^t f(I(s)) ds} \in (0, 1]</span>；同理 <span class="math inline">e^{-f(I(t))t} \in (0,1]</span> 且 <span class="math inline">f(-I(t)) \in [0,1] \implies u_2 := e^{-f(I(t))t}f(-I(t)) \in [0,1]</span>。由於 <span class="math inline">u_1, u_2 \in [0,1]</span>，必有 <span class="math inline">-1 \le u_1 - u_2 \le 1</span>，故 <span class="math inline">|x(t)-\tilde{x}(t)| = |c|e^{-w_\tau t}|\Delta(I;t)| \le |c|e^{-w_\tau t}</span>。</li>
+<li><strong>上確界對抗階躍信號構造（<code>STEP-7</code>, <code>[原文內容]</code> <code>[P37:L13-L20]</code>）</strong>：當 <span class="math inline">t=0</span> 時，對任意常數信號 <span class="math inline">I(0)=C\to+\infty</span> 有 <span class="math inline">\Delta(I;0) = 1 - f(-C) \to 1</span>。設 <span class="math inline">t &gt; 0</span>，任取極小 <span class="math inline">\varepsilon \in (0,1)</span>，由 <code>ASM-2</code> 取充分大 <span class="math inline">C &gt; 0</span> 使 <span class="math inline">f(-C) \le \varepsilon</span> 且 <span class="math inline">f(C) \ge 1 - \varepsilon</span>。對任意 <span class="math inline">0 &lt; \delta &lt; t</span>，定義分段常數信號：
+<div class="math inline">I(s) = \begin{cases} -C, &amp; s \in [0, t-\delta], \\ +C, &amp; s \in (t-\delta, t]. \end{cases}</div>
+則歷史積分滿足 <span class="math inline">\int_0^t f(I(s)) ds = f(-C)(t-\delta) + f(C)\delta \le \varepsilon t + \delta</span>，且端點處 <span class="math inline">I(t)=C \implies f(I(t)) \ge 1-\varepsilon,  f(-I(t)) = f(-C) \le \varepsilon</span>。因此：
+<div class="math inline">\Delta(I; t) \ge e^{-\varepsilon t - \delta} - e^{-(1-\varepsilon)t}\varepsilon \xrightarrow{\varepsilon \to 0^+,  \delta \to 0^+} 1 - 0 = 1.</div></li>
+<li><strong>連續函數空間稠密逼近與右端點釘紮補全（<code>STEP-8</code>, <code>[原文內容]</code> <code>[P37:L21-P38:L2]</code> + <code>[AI 推導]</code> 補全端點不變性）</strong>：由於 <span class="math inline">I(s)</span> 在 <span class="math inline">s = t-\delta</span> 不連續，須構造連續函數序列 <span class="math inline">\{I_n\}_{n=1}^\infty \subset C([0,t])</span> 逼近之。<code>[AI 推導]</code> 原文僅寫「存在 <span class="math inline">|I_n|\le C</span> 且逐點收斂 <span class="math inline">I_n \to I</span>」，但若 <span class="math inline">I_n(t)</span> 在右端點 <span class="math inline">s=t</span> 發生改變，第二項 <span class="math inline">e^{-f(I_n(t))t}f(-I_n(t))</span> 可能偏離。我們顯式構造分段線性連續斜坡（設 <span class="math inline">n</span> 充分大使得 <span class="math inline">\frac{\delta}{n+1} &lt; \delta</span>）：
+<div class="math inline">I_n(s) := \begin{cases} -C, &amp; s \in [0, t-\delta], \\ -C + \frac{2C(n+1)}{\delta}(s - (t-\delta)), &amp; s \in \big(t-\delta,  t-\delta + \frac{\delta}{n+1}\big), \\ +C, &amp; s \in \big[t-\delta + \frac{\delta}{n+1},  t\big]. \end{cases}</div>
+如此一來，每個 <span class="math inline">I_n</span> 皆嚴格連續、一致有界 <span class="math inline">|I_n(s)| \le C</span>、在 <span class="math inline">[0,t]</span> 上逐點收斂至 <span class="math inline">I(s)</span>，且在右端點恆滿足 <span class="math inline">I_n(t) = +C = I(t)</span>。對積分項應用 <span class="math inline">f</span> 的 Lipschitz 性質：
+<div class="math inline">\left|\int_0^t f(I(s)) ds - \int_0^t f(I_n(s)) ds\right| \le L \int_0^t |I(s) - I_n(s)| ds = L \cdot \frac{1}{2}(2C)\frac{\delta}{n+1} \xrightarrow{n\to\infty} 0</div>
+（亦即原文引用之 Lebesgue 控制收斂定理，控制函數為常數 <span class="math inline">2LC</span>）。因指數函數連續且 <span class="math inline">I_n(t)=I(t)</span>，有 <span class="math inline">\lim_{n\to\infty}\Delta(I_n;t) = \Delta(I;t)</span>，結合上界 <span class="math inline">\Delta \le 1</span> 證得 <span class="math inline">\sup_{I\in C([0,t])} \frac{1}{c}(x(t)-\tilde{x}(t)) = e^{-w_\tau t}</span>。</li>
+<li><strong>下確界構造與普適下界證明（<code>STEP-9</code>, <code>[原文內容]</code> <code>[P38:L2-L10]</code>）</strong>：
+<ul>
+<li><strong>普適下界</strong>：對任意 <span class="math inline">I' \in C([0,t])</span>，由 <span class="math inline">f \le 1</span> 知 <span class="math inline">\int_0^t f(I'(s)) ds \le t \implies e^{-\int_0^t f(I'(s)) ds} \ge e^{-t}</span>；同時 <span class="math inline">e^{-f(I'(t))t}f(-I'(t)) \le 1</span>，故必有 <span class="math inline">\Delta(I';t) \ge e^{-t} - 1</span>。</li>
+<li><strong>可達性</strong>：將上述連續斜坡序列取負號得 <span class="math inline">-I_n \in C([0,t])</span>。其極限階躍信號 <span class="math inline">-I</span> 在 <span class="math inline">[0, t-\delta]</span> 取 <span class="math inline">+C</span>、在 <span class="math inline">(t-\delta, t]</span> 取 <span class="math inline">-C</span>，故 <span class="math inline">\int_0^t f(-I(s)) ds \ge (1-\varepsilon)(t-\delta) + 0 = (1-\varepsilon)(t-\delta)</span>，且右端點 <span class="math inline">-I(t) = -C</span> 使 <span class="math inline">f(-I(t)) \le \varepsilon</span> 而 <span class="math inline">f(-(-I(t))) = f(C) \ge 1-\varepsilon</span>。因此：
+<div class="math inline">\lim_{n\to\infty} \Delta(-I_n; t) = \Delta(-I; t) \le e^{-(1-\varepsilon)(t-\delta)} - e^{-\varepsilon t}(1-\varepsilon) \xrightarrow{\varepsilon,\delta \to 0^+} e^{-t} - 1.</div>
+上下夾擠即證得 <span class="math inline">\inf_{I\in C([0,t])} \frac{1}{c}(x(t)-\tilde{x}(t)) = e^{-w_\tau t}(e^{-t} - 1)</span>。<code>VER-2</code> 數值實驗以平滑 <span class="math inline">C^\infty</span> 雙曲正切脈衝在 <span class="math inline">t=1</span> 實測得上確界比值 <code>0.999499</code>（理論值 <code>1.0</code>）與下確界比值 <code>-0.631935</code>（理論值 <span class="math inline">e^{-1}-1 = -0.632121</span>），完全吻合。</li>
+</ul>
+</li>
+</ol>
+<h4 id="局限分析-1">局限分析</h4>
+<ul>
+<li><strong>最壞情況界與局部小時間階數的張力</strong> <code>[AI 推導]</code>：<code>Lemma 1</code> 的上確界 <span class="math inline">|c|e^{-w_\tau t}</span> 在 <span class="math inline">t \to 0^+</span> 時趨近 <span class="math inline">|c|</span> 而非 <span class="math inline">0</span>。這並非證明不夠緊，而是因為公式本身乘上了 <span class="math inline">f(-I(t))</span>，導致在 <span class="math inline">t=0</span> 處就有真實誤差。這意味著 <code>Eq. (8)</code> 不能作為小步長 <span class="math inline">\Delta t \to 0</span> 的局部高階數值格式直接遞推（否則每步都會乘一次 <span class="math inline">f(-I_k)</span> 造成額外收縮。）。</li>
+</ul>
+<h4 id="研究拓展-1">研究拓展</h4>
+<p><code>[AI 推導]</code> 若對一般有界區間 <span class="math inline">f: \mathbb{R} \to [m, M]</span>（<span class="math inline">0 \le m &lt; M</span>）推廣 <code>Lemma 1</code>，透過完全相同的極值脈衝構造可得精確推廣上下確界：
+<div class="math inline">\sup_{I \in C([0,t])} \Delta(I; t) = e^{-m t} - m e^{-M t}, \qquad \inf_{I \in C([0,t])} \Delta(I; t) = e^{-M t} - M e^{-m t}.</div>
+特別地，若 <span class="math inline">M &gt; 1 + e^{-m t}/m</span>（例如 <span class="math inline">t=0</span> 時 <span class="math inline">M &gt; 2</span>），則 <span class="math inline">|\inf \Delta| = M - 1 &gt; 1</span>，原文 <span class="math inline">|c|e^{-w_\tau t}</span> 上界將直接失效，再次印證隱含前提 <code>ASM-2</code>（<span class="math inline">m=0, M=1</span>）不可或缺。</p>
+<h2 id="核心結果三審核補全命題-prp-3-與-prp-4-對稱化誤差精確分解-緊界與自連接-grönwall-分析-ai-推導">核心結果三：審核補全命題 <code>PRP-3</code> 與 <code>PRP-4</code> ， 對稱化誤差精確分解、<span class="math inline">O(t e^{-w_\tau t})</span> 緊界與自連接 Grönwall 分析 <code>[AI 推導]</code></h2>
+<h4 id="直觀理解-2">直觀理解</h4>
+<p>為完全釐清原文跳過的兩個核心理論問題，(1) 第 8 頁加入 <span class="math inline">+A w_\tau</span> 對原始 LTC 方程究竟造成多大偏差？(2) 為何去掉 <span class="math inline">f(-I(t))</span> 後的純求積閉式解及含自連接神經元在步進展開時具有 <span class="math inline">O(t e^{-w_\tau t})</span> 與 <span class="math inline">O(\Delta t^2)</span> 收斂性？，我們給出嚴格解析補全。</p>
+<h4 id="嚴格表述-2">嚴格表述</h4>
+<p><code>[AI 推導]</code> 審核命題 1 &amp; 2（<code>PRP-3</code> &amp; <code>PRP-4</code>，經 <code>VER-1, VER-2, VER-5</code> 驗證）：</p>
+<ol>
+<li><strong>（對稱化偏差雙邊精確界 <code>PRP-3</code>）</strong> 設 <span class="math inline">x_{\text{LTC}}(t)</span> 為原始 <code>Eq. (3)</code> 之解，<span class="math inline">x_{\text{sym}}(t)</span> 為對稱化 <code>Eq. (5)</code> 之解，初值同為 <span class="math inline">x_0</span>，且 <span class="math inline">0 \le f(I(t)) \le 1, w_\tau &gt; 0</span>。則對所有 <span class="math inline">t \ge 0</span>：
+<div class="math inline">|A|\frac{w_\tau}{w_\tau + 1}\big(1 - e^{-(w_\tau + 1)t}\big) \le |x_{\text{sym}}(t) - x_{\text{LTC}}(t)| \le |A|\big(1 - e^{-w_\tau t}\big).</div></li>
+<li><strong>（純求積 <span class="math inline">O(t e^{-w_\tau t})</span> 全局緊界與自連接 Grönwall 步進界 <code>PRP-4</code>）</strong> 定義純端點求積閉式近似 <span class="math inline">\hat{x}_{\text{quad}}(t) := (x_0 - A)e^{-[w_\tau + f(I(t))]t} + A</span>，則對一切連續信號 <span class="math inline">I \in C([0,t])</span>：
+<div class="math inline">|x_{\text{sym}}(t) - \hat{x}_{\text{quad}}(t)| \le |x_0 - A| e^{-w_\tau t}(1 - e^{-t}) \le |x_0 - A| t e^{-w_\tau t}.</div>
+進而，對含自連接之非線性對稱化 LTC <span class="math inline">\dot{x} = -[w_\tau + f(x, I(t))](x - A)</span>（其中 <span class="math inline">f</span> 對 <span class="math inline">(x,I)</span> 為 <span class="math inline">L_f</span>-Lipschitz，<span class="math inline">I</span> 為 <span class="math inline">L_I</span>-Lipschitz），在單步區間 <span class="math inline">[0, \Delta t]</span> 上以凍結初態閉式步 <span class="math inline">\hat{x}_{\text{step}}(\Delta t) := (x_0 - A)e^{-[w_\tau + f(x_0, I(0))]\Delta t} + A</span> 近似，其局部截斷誤差滿足 Grönwall 界：
+<div class="math inline">|x(\Delta t) - \hat{x}_{\text{step}}(\Delta t)| \le \frac{1}{2}|x_0 - A| L_{\text{eff}} \Delta t^2 e^{-w_\tau \Delta t} = \mathcal{O}(\Delta t^2 e^{-w_\tau \Delta t}).</div></li>
+</ol>
+<h4 id="完整推導-2">完整推導</h4>
+<ol>
+<li><strong><code>PRP-3</code> 證明</strong>：令 <span class="math inline">e_{\text{sym}}(t) := x_{\text{sym}}(t) - x_{\text{LTC}}(t)</span>，則 <span class="math inline">e_{\text{sym}}(0) = 0</span>。將 <code>EQN-4</code> 減去 <code>EQN-3</code> 得線性非齊次 ODE：
+<div class="math inline">\dot{e}_{\text{sym}}(t) = -\big[w_\tau + f(I(t))\big]e_{\text{sym}}(t) + A w_\tau \implies e_{\text{sym}}(t) = A w_\tau \int_0^t e^{-\int_s^t [w_\tau + f(I(v))] dv} ds.</div>
+因 <span class="math inline">0 \le f(I(v)) \le 1</span>，指數內部滿足 <span class="math inline">w_\tau(t-s) \le \int_s^t [w_\tau + f(I(v))] dv \le (w_\tau + 1)(t-s)</span>。取負指數並對 <span class="math inline">s \in [0,t]</span> 積分：
+<div class="math inline">\int_0^t e^{-(w_\tau+1)(t-s)} ds = \frac{1 - e^{-(w_\tau+1)t}}{w_\tau + 1} \le \frac{|e_{\text{sym}}(t)|}{|A|w_\tau} \le \int_0^t e^{-w_\tau(t-s)} ds = \frac{1 - e^{-w_\tau t}}{w_\tau},</div>
+同乘 <span class="math inline">|A|w_\tau</span> 即得雙邊不等式。</li>
+<li><strong><code>PRP-4</code> 第一部分證明</strong>：因 <span class="math inline">0 \le \int_0^t f(I(s)) ds \le t</span> 且 <span class="math inline">0 \le f(I(t))t \le t</span>，兩個指數項 <span class="math inline">e^{-\int_0^t f(I(s)) ds}</span> 與 <span class="math inline">e^{-f(I(t))t}</span> 同時落在緊區間 <span class="math inline">[e^{-t}, 1]</span> 內。該區間直徑為 <span class="math inline">1 - e^{-t}</span>，且由基本凸性不等式 <span class="math inline">1 - e^{-t} \le t</span>（<span class="math inline">\forall t \ge 0</span>），立即得到
+<div class="math inline">|x_{\text{sym}}(t) - \hat{x}_{\text{quad}}(t)| = |x_0 - A| e^{-w_\tau t} \big|e^{-\int_0^t f(I(s)) ds} - e^{-f(I(t))t}\big| \le |x_0 - A| e^{-w_\tau t}(1 - e^{-t}) \le |x_0 - A| t e^{-w_\tau t}.</div>
+注意此界在 <span class="math inline">t=0</span> 與 <span class="math inline">t\to\infty</span> 兩端同時歸零，峰值位於 <span class="math inline">t = 1/w_\tau</span>（或 <span class="math inline">\ln(1 + 1/w_\tau)</span>）。</li>
+<li><strong><code>PRP-4</code> 第二部分（自連接 Grönwall 步進界）證明</strong>：對 <span class="math inline">\dot{x} = -[w_\tau + f(x(s), I(s))](x(s) - A)</span>，由不變區間性質知 <span class="math inline">|x(s) - A| \le |x_0 - A|e^{-w_\tau s} \le |x_0 - A|</span>，故 <span class="math inline">|\dot{x}(s)| \le (w_\tau + 1)|x_0 - A|</span>。因此在 <span class="math inline">s \in [0, \Delta t]</span> 上，狀態與輸入偏移滿足 <span class="math inline">|x(s) - x_0| \le (w_\tau + 1)|x_0 - A| s</span> 與 <span class="math inline">|I(s) - I(0)| \le L_I s</span>。由 <span class="math inline">f</span> 的 Lipschitz 性質：
+<div class="math inline">\big|f(x(s), I(s)) - f(x_0, I(0))\big| \le L_f\big((w_\tau + 1)|x_0 - A| + L_I\big) s =: L_{\text{eff}} s.</div>
+將精確隱式表達 <span class="math inline">x(\Delta t) - A = (x_0 - A)e^{-w_\tau \Delta t - \int_0^{\Delta t} f(x(s),I(s)) ds}</span> 與 <span class="math inline">\hat{x}_{\text{step}}(\Delta t) - A = (x_0 - A)e^{-w_\tau \Delta t - f(x_0,I(0))\Delta t}</span> 相減，利用 <span class="math inline">|e^{-a} - e^{-b}| \le |a - b|</span>（<span class="math inline">\forall a,b \ge 0</span>）：
+<div class="math inline">|x(\Delta t) - \hat{x}_{\text{step}}(\Delta t)| \le |x_0 - A| e^{-w_\tau \Delta t} \int_0^{\Delta t} |f(x(s),I(s)) - f(x_0,I(0))| ds \le \frac{1}{2}|x_0 - A| L_{\text{eff}} \Delta t^2 e^{-w_\tau \Delta t}.</div>
+再由離散 Grönwall 引理，在有限時域 <span class="math inline">[0, T]</span> 分為 <span class="math inline">N = T/\Delta t</span> 步時，全局累積誤差為 <span class="math inline">N \cdot \mathcal{O}(\Delta t^2) = \mathcal{O}(\Delta t)</span> 一階收斂。<code>VER-5</code> 實測將 <span class="math inline">\Delta t</span> 由 <span class="math inline">0.1</span> 減半至 <span class="math inline">0.05</span> 時，局部誤差由 <span class="math inline">1.3068\times 10^{-3}</span> 降至 <span class="math inline">3.2402\times 10^{-4}</span>，比值為 <code>4.033</code>，精確驗證了 <span class="math inline">\mathcal{O}(\Delta t^2)</span> 局部收斂階。</li>
+</ol>
+<h4 id="局限分析-2">局限分析</h4>
+<p><code>PRP-4</code> 的 <span class="math inline">\mathcal{O}(\Delta t^2)</span> 局部收斂要求輸入信號 <span class="math inline">I(t)</span> 在步間具備 Lipschitz 連續性；若輸入為理想 Dirac 脈衝或步間多次翻轉的高頻方波且步長 <span class="math inline">\Delta t</span> 未滿足 Nyquist 採樣尺度，則局部誤差退化為 <span class="math inline">\mathcal{O}(\Delta t)</span>。</p>
+<h4 id="研究拓展-2">研究拓展</h4>
+<p>若在步間採用中點／梯形指數積分器（Magnus 二階格式，以 <span class="math inline">\frac{1}{2}[f(x_k,I_k)+f(\hat{x}_{k+1},I_{k+1})]\Delta t</span> 近似積分），局部截斷誤差可進一步提升至 <span class="math inline">\mathcal{O}(\Delta t^3 e^{-w_\tau \Delta t})</span>（全局二階精確），且每步僅需 <span class="math inline">2</span> 次前向評估。</p>
+<h2 id="核心結果四狀態凸包有界性jacobian-梯度譜與-cfc-計算複雜度分析cor-1-prp-2">核心結果四：狀態凸包有界性、Jacobian 梯度譜與 <code>CfC</code> 計算複雜度分析（<code>COR-1</code> &amp; <code>PRP-2</code>）</h2>
+<h4 id="直觀理解-3">直觀理解</h4>
+<p>連續時間 RNN 在長序列或不規則大時間跨度 <span class="math inline">\Delta t \gg 1</span> 下最怕兩件事：(1) 前向狀態爆炸（如顯式 Euler 步長過大發散）；(2) 反向傳播梯度因指數衰減 <span class="math inline">e^{-r \Delta t}</span> 瞬間下溢為零。<code>COR-1</code> 證明閉式解與 <code>CfC</code> 將輸出嚴格鎖定在兩個狀態端點的凸組合（Convex Combination）內，因此在任意大的時間跨度 <span class="math inline">\Delta t \to \infty</span> 下絕對不會數值爆炸；同時以反轉 Sigmoid 閘門取代指數閘門，大幅放寬了對時間常數參數的梯度學習視窗。</p>
+<h4 id="嚴格表述-3">嚴格表述</h4>
+<p><code>[AI 推導]</code> 審核推論 1 與複雜度命題（<code>COR-1</code> &amp; <code>PRP-2</code>，對應 <code>[P5-P6, P14-P15]</code>，經 <code>VER-3, VER-4</code> 驗證）：</p>
+<ol>
+<li><strong>（嚴格不變區間與凸包穩定性）</strong> 對任意 <span class="math inline">t \ge 0, w_\tau &gt; 0</span> 與 <span class="math inline">f(I(t)), f(-I(t)) \in [0,1]</span>，純量閉式解滿足 <span class="math inline">\tilde{x}(t) \in [\min(x_0, A), \max(x_0, A)]</span>；在 <code>CfC</code> 架構 <code>Eq. (10)</code> 中，令閘門向量 <span class="math inline">\mathbf{p}(t) = \sigma(-f(\mathbf{x},\mathbf{I};\theta_f)\mathbf{t} + b_{\text{forget}}) \in (0,1)^D</span>，則每個隱藏維度嚴格滿足凸包界：
+<div class="math inline">\min\big(g_i(\mathbf{x},\mathbf{I}),  h_i(\mathbf{x},\mathbf{I})\big) &lt; x_{\text{CfC},i}(t) &lt; \max\big(g_i(\mathbf{x},\mathbf{I}),  h_i(\mathbf{x},\mathbf{I})\big).</div></li>
+<li><strong>（精確敏感度 Jacobian 譜）</strong> 純量閉式解對初態與逆時間常數之偏導數為：
+<div class="math inline">\frac{\partial \tilde{x}(t)}{\partial x_0} = e^{-[w_\tau + f(I(t))]t} f(-I(t)) \in [0,1], \qquad \frac{\partial \tilde{x}(t)}{\partial w_\tau} = -t(x_0 - A) e^{-[w_\tau + f(I(t))]t} f(-I(t)),</div>
+其中 <span class="math inline">\big|\frac{\partial \tilde{x}(t)}{\partial w_\tau}\big|</span> 在特徵時間 <span class="math inline">t^* = \frac{1}{w_\tau + f(I(t))}</span> 達到唯一全局峰值 <span class="math inline">\frac{|x_0 - A|f(-I(t))}{e\cdot [w_\tau + f(I(t))]}</span>。</li>
+<li><strong>（序列與單步時間複雜度 <code>PRP-2</code> <code>[原文內容]</code> <code>[Tables 1-2, P5-P6]</code>）</strong> 設序列長度為 <span class="math inline">n</span>、隱藏維度為 <span class="math inline">k</span>、ODE 求解器階數為 <span class="math inline">p</span>，則 <code>CfC</code> 單步預測複雜度為 <span class="math inline">\mathcal{O}(k)</span>（稀疏／逐元素閘控下；稠密全連接頭為 <span class="math inline">\mathcal{O}(k^2)</span>）、全序列複雜度為 <span class="math inline">\mathcal{O}(nk)</span>，嚴格優於 <code>ODE-RNN</code> 之 <span class="math inline">\mathcal{O}(nkp)</span>（剛性自適應求解下為 <span class="math inline">\mathcal{O}(\text{NFE}\cdot k)</span>）與標準自注意力 <code>Transformer</code> 之 <span class="math inline">\mathcal{O}(n^2 k)</span>。</li>
+</ol>
+<h4 id="完整推導-3">完整推導</h4>
+<ol>
+<li><strong>凸組合代數重排</strong>：令 <span class="math inline">\alpha(t) := e^{-[w_\tau + f(I(t))]t}f(-I(t))</span>，由 <span class="math inline">w_\tau &gt; 0, f \in [0,1], t \ge 0</span> 知 <span class="math inline">0 \le \alpha(t) \le 1</span>，故 <span class="math inline">\tilde{x}(t) = \alpha(t)x_0 + (1-\alpha(t))A</span> 為 <span class="math inline">x_0</span> 與 <span class="math inline">A</span> 之凸組合，必落在 <span class="math inline">[\min(x_0,A),\max(x_0,A)]</span> 內（<code>VER-3</code> 1000 次隨機測試 100% 成立）。對 <code>CfC</code> <code>Eq. (10)</code>，第 <span class="math inline">i</span> 分量為 <span class="math inline">p_i g_i + (1-p_i)h_i</span>，因 <span class="math inline">\sigma(\cdot) \in (0,1)</span>，嚴格雙邊有界（反之消融變體 <code>CfC-noGate</code> 寫為 <span class="math inline">p_i g_i + h_i</span>，上界擴大為 <span class="math inline">g_i + h_i</span>，失去漸近凸包歸一性）。</li>
+<li><strong>Jacobian 極值點求導</strong>：對 <span class="math inline">\phi(t) := t e^{-r t}</span>（其中 <span class="math inline">r = w_\tau + f(I(t)) &gt; 0</span>）求導得 <span class="math inline">\phi'(t) = (1 - rt)e^{-rt}</span>，令 <span class="math inline">\phi'(t^*) = 0</span> 得唯一駐點 <span class="math inline">t^* = 1/r</span>，且 <span class="math inline">\phi''(t^*) = -r e^{-1} &lt; 0</span>，代入得最大敏感度幅值 <span class="math inline">|x_0 - A|f(-I(t))/(e r)</span>。</li>
+<li><strong>反轉 Sigmoid 閘門對指數梯度消失的緩解機制與 <code>forget_bias</code> 校正</strong>：
+<ul>
+<li>指數閘門 <span class="math inline">G_{\text{exp}}(t) = e^{-r t}</span> 對速率 <span class="math inline">r</span> 的導數為 <span class="math inline">\big|\frac{\partial G_{\text{exp}}}{\partial r}\big| = t e^{-rt}</span>；</li>
+<li>帶偏置反轉 Sigmoid 閘門 <span class="math inline">G_{\text{sig}}(t) = \sigma(-rt + b_{\text{forget}})</span> 對速率 <span class="math inline">r</span> 的導數為 <span class="math inline">\big|\frac{\partial G_{\text{sig}}}{\partial r}\big| = t \sigma(-rt + b_{\text{forget}})\big(1 - \sigma(-rt + b_{\text{forget}})\big)</span>。
+<code>[AI 推導]</code> 當 <span class="math inline">b_{\text{forget}} &gt; 0</span>（如 <code>Table S1</code> 取 <span class="math inline">b_{\text{forget}} = 4.7</span>）時：在 <span class="math inline">t=0</span> 處 <span class="math inline">G_{\text{sig}}(0) = \sigma(4.7) = \mathbf{0.990987} \approx 1</span>（完美還原正文 <code>[P14:L39-L40]</code> 之描述。）；而在長跨度 <span class="math inline">T=10, r=1</span> 時，<span class="math inline">e^{-10} = 4.54\times 10^{-5}</span>，而 <span class="math inline">\sigma(-10+4.7) = \sigma(-5.3) = 4.97\times 10^{-3}</span>，速率梯度比值達 <code>108.86</code> 倍（<code>VER-3</code>）。</li>
+</ul>
+</li>
+</ol>
+<h4 id="局限分析-3">局限分析</h4>
+<ol>
+<li><strong>長序列離散步連乘梯度消失仍存在</strong> <code>[原文內容]</code> <code>[P26:L7-L9]</code>：雖然單步大時間跨度 <span class="math inline">\Delta t</span> 的閘門梯度獲得改善，但在步數極多（如 IMDB 數百個單詞 token，<span class="math inline">n \gg 100</span>）時，狀態轉移 Jacobian <span class="math inline">\prod_{s=1}^n \frac{\partial \mathbf{x}_s}{\partial \mathbf{x}_{s-1}}</span> 的譜半徑若小於 <span class="math inline">1</span>，仍會發生經典 RNN 長程梯度衰減。這解釋了為何純 <code>CfC</code> 在 IMDB 上僅得 <code>85.9%</code>，必須結合恆等記憶通道（<code>CfC-mmRNN</code>）才能達到最高分 <code>88.3%</code> <code>[Table 6, P23]</code>。</li>
+<li><strong>喪失流同胚可逆性（Non-Bijectivity）</strong> <code>[原文內容]</code> <code>[P26:L1-L6]</code>：Lipschitz ODE 的時間演化算子 <span class="math inline">\Phi_{0,t}</span> 由解的唯一性保證必為雙射（bijection），其對數行列式由瞬時跡公式 <span class="math inline">\frac{d}{dt}\ln|\det \partial \Phi/\partial x_0| = \operatorname{tr}(\partial F/\partial x)</span> 給出；而 <code>CfC</code> 的顯式映射 <span class="math inline">\mathbf{x} \mapsto \sigma(-f(\mathbf{x},\mathbf{I})t)\odot g(\mathbf{x},\mathbf{I}) + [1-\sigma]\odot h(\mathbf{x},\mathbf{I})</span> 當 <span class="math inline">g(\mathbf{x},\mathbf{I}) = h(\mathbf{x},\mathbf{I})</span> 或在特定駐點處 Jacobian 可奇異，不構成微分同胚，故不可直接替代連續正規化流（Continuous Normalizing Flows, FFJORD）進行精確機率密度估計。</li>
+</ol>
+<h4 id="研究拓展-3">研究拓展</h4>
+<p><code>[AI 推導]</code> 若欲讓 <code>CfC</code> 同時支援精確密度估計（可逆流），可將狀態 <span class="math inline">\mathbf{x} = (\mathbf{x}_A, \mathbf{x}_B)</span> 改為仿射耦合層（Affine Coupling）形式：令 <span class="math inline">f, g, h</span> 僅依賴前半狀態 <span class="math inline">\mathbf{x}_A</span> 去閘控後半狀態 <span class="math inline">\mathbf{x}_B</span> 的線性收縮：<span class="math inline">\mathbf{y}_B = \sigma(-f(\mathbf{x}_A)t)\odot \mathbf{x}_B + [1-\sigma(-f(\mathbf{x}_A)t)]\odot h(\mathbf{x}_A)</span>，即可兼具顯式時間連續性、三角 Jacobian <span class="math inline">O(D)</span> 對數行列式與嚴格全域解析逆映射。</p>
+<h2 id="h5-批判性學術評論與研究延伸">H5 批判性學術評論與研究延伸</h2>
+<h2 id="1-五大實證基準與消融實驗之深度批判解讀">1. 五大實證基準與消融實驗之深度批判解讀</h2>
+<p><code>[原文內容]</code> 綜合全文 Tables 3–7 <code>[P18-P24]</code> 的數據，我們可以提煉出三個極具洞察力的實證規律：</p>
+<ol>
+<li><strong>為何 <code>Cf-S</code> 在醫療與物理任務上遠遜於 <code>CfC</code>？</strong>
+<ul>
+<li>在 PhysioNet ICU 死亡率預測 <code>[Table 5, P22]</code> 中，<code>Cf-S</code> 僅得 <code>0.643 ± 0.018</code> AUC（幾乎等同原始 <code>LTC</code> 的 <code>0.6477</code>），而 <code>CfC</code> 與 <code>CfC-noGate</code> 飆升至 <code>0.839</code> 與 <code>0.840</code>（且訓練每輪僅 <code>0.1</code> 分鐘，比 <code>ODE-RNN</code> 的 <code>16.5</code> 分鐘快 <code>165</code> 倍、比 <code>Latent-ODE-ODE</code> 的 <code>22.0</code> 分鐘快 <code>220</code> 倍）。</li>
+<li><code>[AI 推導]</code> 根本原因正是我們在 <code>H4</code> 揭示的三重數學束縛：<code>Cf-S</code>（<code>Eq. 9</code>）保留了指數衰減 <span class="math inline">e^{-[w_\tau+f]t}</span>（對稀疏醫療觀測的大時間間隔 <span class="math inline">\Delta t</span> 瞬間將第一項抹零）、固定常數向量 <span class="math inline">A</span>（當第一項歸零後隱藏狀態直接退化為與輸入無關的常數 <span class="math inline">A</span>。），以及 <span class="math inline">t=0</span> 處的 <span class="math inline">f(-\mathbf{x},-\mathbf{I})</span> 突跳。一旦 <code>CfC</code> 將常數 <span class="math inline">A</span> 升級為輸入相依網路 <span class="math inline">h(\mathbf{x},\mathbf{I};\theta_h)</span> 並改用帶 <code>forget_bias</code> 的 Sigmoid 閘門，大時間間隔不再導致資訊歸零為死常數，而是平滑過渡至由當前觀測特徵決定的語義目標態 <span class="math inline">h(\mathbf{x},\mathbf{I})</span>。</li>
+</ul>
+</li>
+<li><strong>事件驅動不規則採樣（Bit-Stream XOR, <code>Table 4</code>）對純 ODE 模型的毀滅性打擊</strong>：
+<ul>
+<li>在等距編碼下幾乎所有模型皆達 <code>100%</code>；但在只傳輸位元跳變時刻的事件驅動不規則編碼下，所有純微分方程模型（<code>ODE-RNN</code> <code>51.21%</code>、<code>CT-RNN</code> <code>50.79%</code>、<code>GRU-ODE</code> <code>52.52%</code>、甚至原始 <code>LTC</code> <code>49.11%</code>）全部退化為隨機猜測。唯獨 <code>CfC</code>（<code>99.42%</code>）與 <code>CfC-mmRNN</code>（<code>99.72%</code>）在無需求解器的情況下擊敗了 <code>ODE-LSTM</code>（<code>98.89%</code>）。這證明連續時間偏置若透過多步 ODE 求解器反向傳播，會在變動步長區間遭受嚴重的伴隨梯度退化 <code>[Ref. 9]</code>，而閉式單步時間閘門完全繞開了求解器展開鏈。</li>
+</ul>
+</li>
+<li><strong>連續物理運動學（Walker2D, <code>Table 7</code>）與真實自駕車抗噪注意力（<code>Table 3</code>, <code>Fig. 5</code>）</strong>：
+<ul>
+<li>在非均勻採樣且含缺失相位的 MuJoCo Walker2D 任務上，<code>CfC</code>（<code>0.643</code> MSE，<code>0.08</code> min/epoch）與 <code>CfC-mmRNN</code>（<code>0.617</code> MSE）不僅大幅超越 <code>ODE-RNN</code>（<code>1.904</code>），更超越 <code>Transformer</code>（<code>0.761</code> MSE，<code>0.80</code> min/epoch）達 <span class="math inline">18\%</span>，展現了顯式連續時間閘門對物理慣性外推的天然歸納偏置。</li>
+<li>在 Lexus RX450H 全尺寸實車車道保持測試中，僅 <code>4,184</code> 個循環參數的 <code>CfC</code> 在冬季雪景與方差 <span class="math inline">\sigma^2=0.35</span> 強高斯雜訊下仍維持聚焦於道路邊界與遠方地平線的 VisualBackprop 顯著性圖，而標準 CNN 與 LSTM 的注意力則散亂至車頭與天空背景 <code>[Fig. 5, P19]</code>。</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-原文公式與圖表精確勘誤表audit-errata">2. 原文公式與圖表精確勘誤表（Audit Errata）</h2>
+<p><code>[AI 推導]</code> 經逐行比對 <code>arxiv.tex</code> 與 40 頁 PDF，整理供研究者參考之精確勘誤如下：</p>
+<table>
+<thead>
+<tr>
+<th>定位</th>
+<th>原文寫法</th>
+<th>審核指正與原因</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Table 1</code> 標題 <code>[P5:L2; arxiv.tex:L218]</code></td>
+<td><code>$\delta &lt;&lt; 0$</code></td>
+<td>應為 <strong><code>$0 &lt; \delta \ll 1$</code></strong>。該表引自 Poli et al. (2020) <em>Hypersolvers</em>，<span class="math inline">\delta</span> 為殘差擬合網路的局部逼近相對誤差幅值（正極小量），非負無窮大。</td>
+</tr>
+<tr>
+<td><code>Algorithm 1</code> <code>[P11:L11-L12, L27; arxiv.tex:L369-L370, L375]</code></td>
+<td>突觸參數維度 <code>$(N \times H)$</code>、輸出 <code>$\hat{\mathbf{x}}^{(N \times T)}(t)$</code>、指數內多一個右括號 <code>\Big))</code></td>
+<td>隱藏層神經元數為 <span class="math inline">H</span>，故輸出維度應為 <strong><code>$(H \times T)$</code></strong>；因鄰接矩陣 <span class="math inline">W_{\text{Adj}}</span> 包含輸入與循環節點 <span class="math inline">(N+H)</span>，突觸參數矩陣維度應為 <strong><code>$((N+H) \times H)$</code></strong>；且 <code>+=</code> 累加未對多突觸反轉電位做電導正規化（見 <code>CEX-3</code>）。</td>
+</tr>
+<tr>
+<td><code>Fig. 2c</code> 第二神經元公式 <code>[P12:L37]</code></td>
+<td><code>$f_{12}(-x_2(t))$</code></td>
+<td>該突觸來自神經元 1 指向神經元 2（指數項內為 <span class="math inline">f_{12}(x_1)</span>），故乘性因子自變數應為突觸前電位 <strong><code>$f_{12}(-x_1(t))$</code></strong>。</td>
+</tr>
+<tr>
+<td><code>Eq. (10)</code> 與正文對照 <code>[P14:L39-L40, P15:L4-L5 vs P15:L17]</code></td>
+<td><code>[P14:L39]</code> 稱 <span class="math inline">t=0</span> 時 <span class="math inline">\sigma(\cdot) \approx 1</span>，<code>[P15:L4]</code> 又稱插值於 <span class="math inline">t\to-\infty</span> 與 <span class="math inline">t\to\infty</span> 之間，而 <code>Eq. (10)</code> 寫 <span class="math inline">\sigma(-f(\mathbf{x},\mathbf{I};\theta_f)\mathbf{t})</span></td>
+<td>無偏置時 <span class="math inline">\sigma(-ft)</span> 對稱中心在 <span class="math inline">t=0</span>（<span class="math inline">\sigma(0)=0.5 \neq 1</span>，僅在 <span class="math inline">t\to-\infty</span> 趨於 <span class="math inline">1</span>）；完整實作公式須依 <code>Table S1/S4</code> 補入正遺忘偏置 <strong><span class="math inline">\sigma\big(-f(\mathbf{x},\mathbf{I};\theta_f)\mathbf{t} + b_{\text{forget}}\big)</span></strong>（將反曲點右移至 <span class="math inline">t_{\text{mid}} = b_{\text{forget}}/f &gt; 0</span>，使 <span class="math inline">t=0</span> 處即逼近 <span class="math inline">1</span>），且 <span class="math inline">f</span> 需保持正值以確保 <span class="math inline">t\to\infty</span> 時收斂至 <span class="math inline">0</span>。</td>
+</tr>
+<tr>
+<td><code>Table 5</code> 欄位標題 <code>[P22:L6; arxiv.tex:L564]</code></td>
+<td><code>AUC Score (%)</code>（數值列為 <code>0.839 ± 0.002</code>）</td>
+<td>表內數值為 <span class="math inline">[0,1]</span> 小數比例而非百分比（<code>0.839</code> 即 <span class="math inline">83.9\%</span>），標題 <code>(% )</code> 屬單位標註不一致；且 <code>CfC-mmRNN</code> 行寫為純文字 <code>+-</code> 而非 <code>$\pm$</code> <code>[arxiv.tex:L581]</code>。</td>
+</tr>
+</tbody>
+</table>
+<h1 id="跨層研究分析全局依賴網絡脆弱節點與數理哲學跨域橋接">跨層研究分析：全局依賴網絡、脆弱節點與數理哲學跨域橋接</h1>
+<h2 id="1-全局依賴診斷與核心張力剖析">1. 全局依賴診斷與核心張力剖析</h2>
+<p><code>[AI 推導]</code> 縱覽 <code>L0</code>–<code>L5</code> 知識圖譜，本論文的論證結構呈現出一個極為獨特的「雙層解耦結構」：</p>
+<ul>
+<li><strong>數學層（<code>SEC-3</code> &amp; <code>SEC-8</code>）</strong> 建立在嚴謹但高度受限的純量線性非自治分析之上，其核心支點為對稱化假設 <code>ASM-1</code> 與單位區間有界性 <code>ASM-2</code>；</li>
+<li><strong>工程層（<code>SEC-5</code> &amp; <code>SEC-6</code>）</strong> 則大膽地打破了字面閉式解 <code>Cf-S</code> 的限制，保留其「顯式時間乘積調變（<span class="math inline">f \cdot t</span>）＋雙極限凸組合插值」的拓撲骨架，而將指數函數鬆弛為帶偏置 Sigmoid、將靜態參數鬆弛為共享主幹神經網路頭。
+這種「理論推導提供結構歸納偏置（Inductive Bias），工程鬆弛修復最佳化病態」的範式，解釋了為何單看 <code>ASM-1</code> 或 <code>Algorithm 1</code> 存在局部代數瑕疵，最終 <code>CfC</code> 模型卻能在真實世界自駕車與不規則時序任務上取得壓倒性成功。</li>
+</ul>
+<h2 id="2-四大跨學科理論橋接interdisciplinary-theoretical-bridges">2. 四大跨學科理論橋接（Interdisciplinary Theoretical Bridges）</h2>
+<h3 id="bridge-1非自治演化半群與李群-magnus-展開lie-group-magnus-expansion"><code>BRIDGE-1</code>：非自治演化半群與李群 Magnus 展開（Lie-Group Magnus Expansion）</h3>
+<ul>
+<li><strong>結構映射</strong> <code>[AI 推導 + 外部知識]</code>：考慮一般 <span class="math inline">D</span> 維線性非自治系統 <span class="math inline">\dot{\mathbf{x}}(t) = -G(t)\mathbf{x}(t) + \mathbf{b}(t)</span>。在純量情形（<span class="math inline">D=1</span>）或對角解耦情形下，不同時刻的生成元彼此對易：<span class="math inline">[G(t_1), G(t_2)] = G(t_1)G(t_2) - G(t_2)G(t_1) = 0</span>，因此李群 Magnus 展開（Magnus, 1954）在第一項精確截斷：<span class="math inline">\Omega(t) = -\int_0^t G(s) ds</span>，直接給出原文 <code>Eq. (5)</code> 的單指數積分因子結構。當考慮多神經元循環連接 <span class="math inline">G(t) = \operatorname{diag}(w_\tau) + J_f(t)</span> 且不同時刻突觸耦合矩陣不對易（<span class="math inline">[G(t_1), G(t_2)] \neq 0</span>）時，<code>CfC</code> 採用 Hadamard 逐元素乘積 <span class="math inline">\odot</span> 閘控，在算子理論上嚴格對應於對角化一階無對易子指數積分器（Diagonal First-Order Commutator-Free Exponential Integrator），而將高階非對易李括號項 <span class="math inline">\frac{1}{2}\int_0^{\Delta t}\int_0^{s_1}[G(s_1),G(s_2)] ds_2 ds_1</span> 交由共享主幹的非線性空間混合層 <span class="math inline">(g, h)</span> 隱式補償。</li>
+<li><strong>成立條件</strong>：當循環權重矩陣為正規對角佔優（如具強漏電阻尼 <span class="math inline">w_\tau</span> 或稀疏有向無環／弱反饋 NCP 拓撲）或步長 <span class="math inline">\Delta t</span> 適中時，忽略二階對易子誤差僅為 <span class="math inline">\mathcal{O}(\|[G_1,G_2]\|\Delta t^3)</span>；若系統存在強非正規旋轉振盪（如強反對稱矩陣 <span class="math inline">G^\top = -G</span> 且無對角阻尼）且跨越大時間步 <span class="math inline">\Delta t \gg 1</span>，實數 Sigmoid 閘門無法單步表徵複特徵值相位旋轉 <span class="math inline">e^{i\omega \Delta t}</span>。</li>
+<li><strong>推導依據</strong>：非自治線性微分方程 Peano–Baker 級數與 Magnus 定理（Iserles &amp; Nørsett, <em>Acta Numerica</em> 1999）作用於 <code>EQN-1</code> 與 <code>EQN-6</code>。</li>
+<li><strong>不確定性</strong>：低（Low），純量對易截斷與對角算子近似階數為嚴格數學定理；非線性頭網路補償非對易旋轉之能力上限則依賴網路寬度，屬經驗有效。</li>
+</ul>
+<h3 id="bridge-2選擇性狀態空間模型selective-ssmshippo-liquid-s4-mamba之代數同構"><code>BRIDGE-2</code>：選擇性狀態空間模型（Selective SSMs：<code>HiPPO</code> <span class="math inline">\to</span> <code>Liquid-S4</code> <span class="math inline">\to</span> <code>Mamba</code>）之代數同構</h3>
+<ul>
+<li><strong>結構映射</strong> <code>[AI 推導 + 外部知識]</code>：觀察原文分段常數精確遞推式 <code>PRP-1</code>（<code>Eq. 7</code> 在區間 <span class="math inline">[t_k, t_{k+1})</span> 上記 <span class="math inline">\Delta t_k = t_{k+1}-t_k</span>）：
+<div class="math inline">x(t_{k+1}) = \underbrace{e^{-[w_\tau + f(I_k)]\Delta t_k}}_{\bar{A}_k(I_k)} x(t_k) + \underbrace{\big(1 - e^{-[w_\tau + f(I_k)]\Delta t_k}\big) A}_{\bar{B}_k(I_k)}.</div>
+將此式與 2023 年引發序列建模革命的 Mamba（Selective State Space Models, Gu &amp; Dao 2023） 及同作者團隊後續提出的 Liquid-S4（Hasani et al., ICLR 2023） 的零階保持（Zero-Order Hold, ZOH）離散化公式 <span class="math inline">\mathbf{h}_{k+1} = \exp(\Delta_k \mathbf{A})\mathbf{h}_k + (\Delta_k \mathbf{A})^{-1}(\exp(\Delta_k \mathbf{A}) - \mathbf{I})\Delta_k \mathbf{B} u_k</span> 對比，兩者在代數上完全同構。具體而言，LTC/CfC 中的輸入相依電導 <span class="math inline">w_\tau + f(I_k)</span> 正好扮演了 Mamba 中輸入相依選擇性步長 <span class="math inline">\Delta_k(I_k)</span> 的角色：當輸入不重要時 <span class="math inline">f(I_k)\to 0</span>，有效步長縮小，狀態保持長程記憶；當關鍵事件發生時 <span class="math inline">f(I_k)\to 1</span>，有效步長放大，迅速抹除舊狀態並寫入新目標態 <span class="math inline">A</span>（或 <span class="math inline">h(I_k)</span>）。</li>
+<li><strong>成立條件</strong>：若閘門與狀態投影僅依賴外部輸入 <span class="math inline">I_k</span> 而不依賴隱藏狀態 <span class="math inline">x_k</span>（前饋對角線性遞推），該二元仿射算子 <span class="math inline">(a_2, b_2) \circ (a_1, b_1) = (a_2 a_1,  a_2 b_1 + b_2)</span> 滿足嚴格結合律，可透過並行前綴掃描（Parallel Associative Scan）在 GPU 上以 <span class="math inline">\mathcal{O}(\log n)</span> 並行深度訓練（即 Mamba 路線）；而本文完整版 <code>CfC</code>（<code>Eq. 10</code>）在 <span class="math inline">f(\mathbf{x}_k, \mathbf{I}_k)</span> 內部保留了對上一狀態 <span class="math inline">\mathbf{x}_k</span> 的非線性依賴，因此犧牲了結合律並行掃描，換取了更強的單層非線性自動機狀態轉移能力（如可單層追蹤非交換有限狀態機與物理耦合運動學）。</li>
+<li><strong>推導依據</strong>：<code>PRP-1</code>（<code>EQN-8</code>）ZOH 精確離散化與仿射半群結合律代數檢驗。</li>
+<li><strong>不確定性</strong>：低（Low），代數同構關係完全精確，且精準解釋了 <code>CfC</code> 與 <code>Mamba</code> 在文本規模擴展（並行掃描優勢）vs 低延遲閉環機器人控制（非線性狀態回饋優勢）上的生態位分工。</li>
+</ul>
+<h3 id="bridge-3神經符號邏輯神經網路logical-neural-networks-lnn與可審計時序邏輯閘"><code>BRIDGE-3</code>：神經符號邏輯神經網路（Logical Neural Networks, LNN）與可審計時序邏輯閘</h3>
+<ul>
+<li><strong>結構映射</strong> <code>[AI 推導 + 外部知識]</code>：在本論文所屬之「液態與邏輯神經網路」雙重脈絡下，<code>CfC</code> 的互補凸組合更新 <code>Eq. (10)</code>：
+<div class="math inline">\mathbf{x}(t) = p(\mathbf{x},\mathbf{I},t) \odot g(\mathbf{x},\mathbf{I}) + \big(1 - p(\mathbf{x},\mathbf{I},t)\big) \odot h(\mathbf{x},\mathbf{I}), \qquad p = \sigma(-f(\mathbf{x},\mathbf{I})t + b_{\text{forget}}) \in (0,1)^D</div>
+可視為一個連續時間實值度量時序邏輯（Metric Temporal Logic, MTL）多工推論閘（對接 Riegel et al. 2020 <em>Logical Neural Networks</em> 的可微實值邏輯算子）：將正規化特徵映射至真值區間 <span class="math inline">[0,1]</span> 時，<span class="math inline">p(t)</span> 表徵「保持先驗命題 <span class="math inline">g</span>」的連續時間持續度（Persistence / Until 算子），而 <span class="math inline">1 - p(t)</span> 表徵「在特徵時間尺度 <span class="math inline">\tau_{\text{eff}} = 1/f(\mathbf{x},\mathbf{I})</span> 內最終轉移至後繼命題 <span class="math inline">h</span>」（Eventually <span class="math inline">\Diamond_{[0,\tau_{\text{eff}}]}</span> 算子）。當搭配 <code>Table 3</code> / <code>Fig. 5</code> 中僅 <code>19</code> 顆神經元、分層為「感測層 <span class="math inline">\to</span> 中間層 <span class="math inline">\to</span> 命令層 <span class="math inline">\to</span> 運動控制層」的稀疏神經迴路策略（NCP）拓撲時，每條突觸閘門都對應一條可人類追蹤的條件控制規則。</li>
+<li><strong>成立條件</strong>：要求狀態分支 <span class="math inline">g, h</span> 經有界激活（如 <code>[0,1]</code> 或 <code>[-1,1]</code> LeCun Tanh，見 <code>Table S2-S4</code>）規範化、網路連接保持高度稀疏（如 NCP 圖結構），且時間閘門率 <span class="math inline">f(\mathbf{x},\mathbf{I}) &gt; 0</span> 維持單調語義。</li>
+<li><strong>推導依據</strong>：<code>COR-1</code> 凸包閉封性與實值模糊／Lukasiewicz–Product 邏輯凸插值算子性質。</li>
+<li><strong>不確定性</strong>：中（Medium），凸組合真值閉封性為數學嚴格，但標準梯度下降訓練並未像形式化 LNN 那樣施加一階邏輯公理上下界投影約束，故語義可解釋性仰賴稀疏拓撲先驗與事後顯著性審核（如 VisualBackprop）。</li>
+</ul>
+<h3 id="bridge-4計算生物物理學與非平衡細胞膜熱力學conductance-reversal-thermodynamics"><code>BRIDGE-4</code>：計算生物物理學與非平衡細胞膜熱力學（Conductance Reversal Thermodynamics）</h3>
+<ul>
+<li><strong>結構映射</strong> <code>[原文內容 + AI 推導]</code>：在 Hodgkin–Huxley 與 Morris–Lecar 細胞膜電生理學中，無動作電位再生鈉通道的分級電位中間神經元遵循電容充放電守恆律 <span class="math inline">C_m \frac{dV}{dt} = -g_L(V - E_L) - \sum_j g_{\text{syn},j}(t)(V - E_{\text{syn},j})</span>。原始 LTC <code>Eq. (3)</code> 對應於無量綱化下靜息漏電位 <span class="math inline">E_L = 0</span>、突觸反轉電位 <span class="math inline">E_{\text{syn}} = A</span> 的雙熱庫（two-reservoir）非平衡穩態系統（只要 <span class="math inline">g_{\text{syn}}&gt;0</span> 且 <span class="math inline">E_L \neq E_{\text{syn}}</span>，穩態必有持續跨膜離子耗散流）；而第 8 頁的對稱化假設 <code>ASM-1</code>（<span class="math inline">+A w_\tau</span>）在熱力學上等價於令 <span class="math inline">E_L = E_{\text{syn}} = A</span>，將雙電位競爭系統簡化為向單一有效平衡態 <span class="math inline">A</span> 進行變電導指數弛豫（Variable-Conductance Relaxation）的單熱庫耗散過程。</li>
+<li><strong>成立條件</strong>：適用於無全或無（all-or-none）尖峰放電分岔的連續分級電位神經元（如線蟲 302 顆神經元組成的神經網路 <code>[Ref. 63]</code>）；不直接涵蓋具負微分電導與極限環振盪（Hopf / SNIC 分岔）的脈衝神經網路（Spiking Neural Networks）。</li>
+<li><strong>推導依據</strong>：<code>Fig. 1</code> <code>[P4:L1-L36]</code> 電導突觸定義與 <code>EQN-3</code> / <code>EQN-4</code> 守恆律比對。</li>
+<li><strong>不確定性</strong>：低（Low），此即 LTC 與 CfC 原始設計之精確生物物理本體。</li>
+</ul>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

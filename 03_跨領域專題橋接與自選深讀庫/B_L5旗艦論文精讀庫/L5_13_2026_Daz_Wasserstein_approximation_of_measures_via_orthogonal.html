@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_13｜Wasserstein approximation of measures via orthogonal frames: statistical and computational complexities · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-182c95bd">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-182c95bd">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-wasserstein-approximation-of-measures-via-orthogonal-frames-statistical-and-computational-complexities2026">🏆 Wasserstein approximation of measures via orthogonal frames: statistical and computational complexities（2026）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a>
+細分子方向：<span class="wl-missing">41H_自旋玻璃相變、重疊間隙性質OGP與平均情況統計計算鴻溝</span>
+跨領域橋接：<span class="wl-missing">橋接01_最優傳輸相變與計算複雜度邊界</span> · <span class="wl-missing">橋接03_隨機熱力學、Wasserstein梯度流與生成擴散</span> · <span class="wl-missing">橋接05_演算法資訊論、壓縮預測與元複雜度</span> · <span class="wl-missing">橋接06_代數幾何、李群算子縮放與幾何複雜度理論GCT</span> · <span class="wl-missing">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</span>
+作者與出處：Mateo Díaz, Nicolás García Trillos, Daniel López-Castaño, Congwei Yang（2026，<em>arXiv (Cornell University)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/2PJWVPD7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.36581" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[原文內容]</code> 本論文攻克了非光滑幾何統計學習領域的重大難題：證明了使用正交標架（Orthogonal Frames）在 Wasserstein-2 距離下逼近高維機率測度時，儘管經驗風險目標在 Voronoi 切換邊界上處處非光滑，經驗極小點仍能以參數化最優收斂階 <span class="math inline">O(\sqrt{d/n})</span> 逼近真實標架，且線上黎曼隨機梯度下降（Riemannian SGD）能在對數步數內高機率收斂 <code>[Current_version/sections/intro.tex:L71-L95 | PDF P2]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>問題核心</strong>：在最優傳輸量化與表示學習中，正交標架 <span class="math inline">U \in O(d)</span> 提供了結構最簡潔的離散支撐點逼近。然而其損失函數 <span class="math inline">\min_{j} \|X - u_j\|^2</span> 因指標競爭切換而具有內在非光滑性，傳統經驗過程理論（如 Rademacher 複雜度或光滑黎曼最佳化）無法直接給出銳利的統計與最佳化收斂階。</li>
+<li><strong>幾何突破（通用條帶覆蓋）</strong>：作者證明了樣本點在相鄰標架間發生「活動指標切換」的幾何區域被限制在球面上一組厚度為 <span class="math inline">\delta</span> 的超平面條帶內。透過極大分離集與球面堆積定理，證明了條帶的測度可被統一控制。</li>
+<li><strong>統計保證（Theorem 10）</strong>：在次指數範數集中性條件下，經驗風險極小值 <span class="math inline">U^*_n</span> 滿足 <span class="math inline">d_{\mathrm{frame}}(U^*_n, U^*) \lesssim \sqrt{d/n}</span>。</li>
+<li><strong>計算複雜度（Theorem 15）</strong>：在 <span class="math inline">O(d)</span> 上的在線黎曼 SGD，選取微批次大小 <span class="math inline">B \asymp \log n</span>，迭代次數 <span class="math inline">T \asymp \frac{L}{m} \log n</span> 即可高機率收斂至統計誤差下界。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    P1[&quot;最優傳輸: Wasserstein 量化問題&quot;] --&gt; D1[&quot;DEF-DIAZ-ENERGY: 正交標架能量 E(U)&quot;]
+    P2[&quot;微分幾何: 正交群 O(d) 黎曼流形&quot;] --&gt; D2[&quot;DEF-DIAZ-SGD: 黎曼隨機梯度下降&quot;]
+    D1 --&gt; A1[&quot;AP-DIAZ-1: 奇異切換區域之通用條帶覆蓋&quot;]
+    A1 --&gt; T1[&quot;THM-DIAZ-STAT: 統計收斂階 O(sqrt(d/n))&quot;]
+    D2 --&gt; T2[&quot;THM-DIAZ-SGD: 對數複雜度線上收斂性&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>意義</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">U</span></td>
+<td><span class="math inline">O(d)</span></td>
+<td><span class="math inline">\mathbb{R}^d</span> 的正交標架 <span class="math inline">[u_1, \dots, u_d]</span></td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">d_{\mathrm{frame}}(U_1, U_2)</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td>超八面體群 <span class="math inline">B_d</span> 商空間上的標架距離</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\mathcal{E}(U)</span></td>
+<td><span class="math inline">\mathbb{R}_+</span></td>
+<td>標架之期望 Wasserstein-2 量化能量</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理非光滑經驗極小點之最優統計收斂性theorem-10">核心定理：非光滑經驗極小點之最優統計收斂性（Theorem 10）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>雖然每個樣本 <span class="math inline">x_i</span> 投影到標架向量 <span class="math inline">u_j</span> 上的最近鄰會隨 <span class="math inline">U</span> 的微小轉動而突變（造成非光滑階躍），但發生突變的條件是 <span class="math inline">x_i</span> 恰好落在兩向量垂直平分面的薄層鄰域內。只要測度 <span class="math inline">\mu</span> 沒有集聚在這些平分面上，發生切換的樣本比例便嚴格受限，使得總體經驗子梯度的波動表現出「粗糙 Lipschitz（Coarsely Lipschitz）」性質。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設測度 <span class="math inline">\mu</span> 滿足強凸曲率與次指數範數假設。當樣本數 <span class="math inline">n</span> 充分大時，以至少 <span class="math inline">1 - \delta</span> 的機率滿足：
+<div class="math inline">d_{\mathrm{frame}}(U^*_n, U^*) \leq C \sqrt{\frac{d \log(1/\delta)}{n}}</div></p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：切換點條帶覆蓋</strong>。對於距離滿足 <span class="math inline">\|U_1 - U_2\|_F \leq \delta</span> 的兩個標架，定義切換點集合。利用引理證明切換點必落於至多 <span class="math inline">d(d-1)</span> 個通用條帶內。</li>
+<li><strong>第二步：均勻經驗子梯度控制</strong>。透過確定性網格覆蓋論證（Deterministic Covering Argument），證明經驗次梯度與總體梯度的差在標架鄰域上均勻滿足 <span class="math inline">\sup_{U} \|G_n(U) - \nabla \mathcal{E}(U)\|_F \lesssim \sqrt{d/n}</span>。</li>
+<li><strong>第三步：局部二次增長求逆</strong>。由總體目標在 <span class="math inline">U^*</span> 處的強凸性 <span class="math inline">\mathcal{E}(U) - \mathcal{E}(U^*) \geq m d_{\mathrm{frame}}(U, U^*)^2</span>，結合第一步與第二步得出 <span class="math inline">d_{\mathrm{frame}}(U^*_n, U^*) \lesssim \frac{1}{m}\sqrt{d/n}</span>。證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>定理要求真實極小點 <span class="math inline">U^*</span> 處的 Hessian 矩陣具有嚴格正特徵值下界 <span class="math inline">m &gt; 0</span>。如果分佈 <span class="math inline">\mu</span> 是球對稱的高斯分佈，則標架旋轉能量恆定，<span class="math inline">m = 0</span>，此時標架無法被唯一識別。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>為高維流形上的神經網路隱空間主軸正交對齊提供了嚴格的有限樣本統計與計算保證。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有定理依賴 DAG 嚴格無環。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

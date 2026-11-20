@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-2ab70637">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a><a class="find" href="../../index.html#n=n-2ab70637">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · F_腦認知、生命形態、哲學與社會演化</span>
@@ -198,6 +200,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Infrastructure-Based Multi-Agent Reinforcement Learning with Attention for Highway Ramp Merging</strong>，Chenhao Tong, Steffen Müller
+<ul>
+<li>重點：提出結合路側基礎設施 V2I 通訊與注意力觀測編碼器的 Transformer-MARL 架構，讓連網自駕車在高速公路匝道匯入時能從全局車流中過濾出相關車輛資訊。在 SUMO 四小時動態車流測試中，該模型在車流順暢度與安全性上優於鄰近觀測、全局編碼與規則基線，且在含有人類駕駛車輛與 V2I 通訊誤差時仍維持無碰撞與吞吐量。</li>
+<li>連結：<a href="zotero://select/library/items/KC9SZ3SB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20078" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Well-Log Reconstruction with Pre-trained Geological Knowledge: A Knowledge-Conditioned Large-Language-Model Generative Agent</strong>，Yongan Zhang et al.
+<ul>
+<li>重點：提出 GeoLog-Agent，以預訓練 LLM 作為地質先驗來源，經由 Geo-Harness 將地層推理解碼為岩石物理軌跡、FiLM 調變與條件對抗約束，並結合多尺度擴張生成補全缺失測井區段。在挪威北海基準上平均 R^2 達 0.9307（峰值 0.9713），平均 RMSE 較九種基線平均降低 30.97%，將該機制遷移至六種傳統深度模型亦使其 R^2 提升 0.0162 至 0.0789。</li>
+<li>連結：<a href="zotero://select/library/items/ZAQMBI7F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19624" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -240,6 +257,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

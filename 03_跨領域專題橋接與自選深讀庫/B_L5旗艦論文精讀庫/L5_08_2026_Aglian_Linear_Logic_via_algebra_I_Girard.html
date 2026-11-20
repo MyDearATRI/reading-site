@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_08｜Linear Logic via algebra I: Girard algebras · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-79b1ba43">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-79b1ba43">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-linear-logic-via-algebra-i-girard-algebras2026">🏆 Linear Logic via algebra I: Girard algebras（2026）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>
+細分子方向：<span class="wl-missing">39A_Girard線性邏輯、證明網Proof Nets與相空間代數語意</span>
+跨領域橋接：<span class="wl-missing">橋接04_神經符號實值邏輯、自動形式化與信念修正</span>
+作者與出處：Paolo Aglianò, Mitar Nedeljković（2026，<em>arXiv (Cornell University)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.16804" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[原文內容]</code> 本論文在數理邏輯與通用代數交匯處建立了嚴格框架：將 Girard 提出的線性邏輯（Linear Logic）完全代數化為「Girard 代數」，證明了 Girard 相空間（Phase Spaces）本質上就是完備剩餘格上的核心閉包算子（Nuclear Closure Operators），並建立了原子 Girard 代數與關係結構之間的範疇對偶性 <code>[furtheralgebraiclinear_source.tex:L277-L372 | PDF P6-P8]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>問題背景</strong>：線性邏輯自 1987 年由 Jean-Yves Girard 提出以來，其語義學主要依賴於相空間（Phase Spaces）或範疇論中的 <span class="math inline">*</span>-自治範疇（<span class="math inline">*</span>-autonomous categories）。然而缺乏像布爾代數對應於經典邏輯、Heyting 代數對應於直覺主義邏輯那樣純粹的通用代數（Universal Algebra）簇理論。</li>
+<li><strong>Girard 代數定義</strong>：定義為具有循環對偶元素 <span class="math inline">0</span> 的交換有界剩餘格，滿足雙重否定對合律 <span class="math inline">(x \to 0) \to 0 = x</span>。</li>
+<li><strong>核心定理 1（核閉包表示定理）</strong>：證明了任何核算子 <span class="math inline">\gamma</span> 的像空間 <span class="math inline">A_\gamma</span> 均為 Girard 代數，且所有 Girard 量子代數（Girard Quantales）均可表示為冪集代數上的核閉包映射。</li>
+<li><strong>核心定理 2（原子表示定理）</strong>：證明了每一個完備原子 Girard 代數都完全由其在原子集 <span class="math inline">\mathrm{At}(\mathbf{A})</span> 上的三元關係唯一確定。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    P1[&quot;通用代數: 剩餘格 (Residuated Lattices)&quot;] --&gt; D1[&quot;DEF-AGL-GIRARD: Girard 代數與雙重對合律&quot;]
+    P2[&quot;證明論: 線性邏輯 (Linear Logic) 相空間&quot;] --&gt; D2[&quot;SYM-AGL-NUCLEUS: 核算子 (Nuclear Operator)&quot;]
+    D1 --&gt; T1[&quot;THM-AGL-NUCLEAR: 核閉包量子代數表示定理&quot;]
+    D1 --&gt; T2[&quot;THM-AGL-ATOM: 原子結構唯一確定性定理&quot;]
+    T1 --&gt; C1[&quot;CONC-AGL-1: 乘法加法線性邏輯之完全代數語義&quot;]
+    T2 --&gt; C2[&quot;CONC-AGL-2: 證明網與關係相空間之範疇對偶&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>意義</th>
+<th>來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">\mathbf{A}</span></td>
+<td>Algebraic Structure</td>
+<td>Girard 代數 <span class="math inline">(A, \wedge, \vee, \cdot, \to, 0, 1)</span></td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">x^\bot</span></td>
+<td><span class="math inline">A \to A</span></td>
+<td>線性否定 <span class="math inline">x \to 0</span></td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\gamma</span></td>
+<td><span class="math inline">A \to A</span></td>
+<td>滿足剩餘封閉性的核閉包算子</td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理核閉包表示定理theorem-34">核心定理：核閉包表示定理（Theorem 3.4）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>在經典邏輯中，子代數與同餘關係由理想或濾子刻畫。在非緊縮結構的線性邏輯中，核算子 <span class="math inline">\gamma</span> 扮演了「保證剩餘結構在投影後依然自洽」的核心工具。本定理證明，只要一個閉包算子滿足 <span class="math inline">\gamma(x)\gamma(y) \leq \gamma(xy)</span>，其固定點集合就能自動繼承全部線性邏輯連接詞（乘法張量、線性蘊涵、否定對合），從而將 Girard 的拓撲式相空間轉化為格論中的商構造。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設 <span class="math inline">\mathbf{A}</span> 為 Girard 代數，<span class="math inline">\gamma</span> 為 <span class="math inline">\mathbf{A}</span> 上的核算子。則固定點集合 <span class="math inline">A_\gamma = \{x \in A : \gamma(x) = x\}</span> 在修改運算 <span class="math inline">x \cdot_\gamma y = \gamma(x \cdot y)</span> 下構成一個 Girard 代數。進一步地，每一個 Girard 量子代數都同構於某個冪集量子代數的核閉包像。</p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：剩餘相容性</strong>。由核算子公理 <span class="math inline">\gamma(x) \cdot y \leq \gamma(x \cdot y)</span>，兩邊取剩餘導出 <span class="math inline">\gamma(x \to y) = x \to \gamma(y)</span>。因此若 <span class="math inline">y \in A_\gamma</span>，則 <span class="math inline">x \to y \in A_\gamma</span>。</li>
+<li><strong>第二步：雙重否定對合性</strong>。對任意 <span class="math inline">x \in A_\gamma</span>，考慮 <span class="math inline">(x \to 0) \to 0</span>。由第一步，線性蘊涵在 <span class="math inline">A_\gamma</span> 內封閉，故母代數的對合律 <span class="math inline">(x \to 0) \to 0 = x</span> 在 <span class="math inline">A_\gamma</span> 上自動保持。</li>
+<li><strong>第三步：量子代數表示</strong>。取相空間 <span class="math inline">(M, \bot)</span>，令 <span class="math inline">\mathbf{A} = \mathcal{P}(M)</span>。構造雙正交閉包 <span class="math inline">\gamma(X) = (X^\bot)^\bot</span>。證明 <span class="math inline">\gamma</span> 滿足核算子條件，其像空間恰好是 Girard 相代數。證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>純 Girard 代數對應於乘法加法線性邏輯（MALL）。若要納入線性邏輯中的指數模態（Exponentials <span class="math inline">!</span> 和 <span class="math inline">?</span>），需要在代數上額外引入上單子（Comonad）結構，這構成本系列第二篇的課題。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>為量子計算中的量子邏輯門、線性型別系統（Linear Types）與資源敏感程式語言的靜態分析提供了嚴格代數模型。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有定理依賴 DAG 嚴格無環。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

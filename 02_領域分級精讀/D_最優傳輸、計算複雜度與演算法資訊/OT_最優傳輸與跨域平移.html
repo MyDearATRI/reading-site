@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-a2deec48">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a><a class="find" href="../../index.html#n=n-a2deec48">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · D_最優傳輸、計算複雜度與演算法資訊</span>
@@ -207,6 +209,23 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li>
+<p><strong>2026｜Infinity-Wasserstein Distributionally Robust Principal Component Analysis: Exact Reformulation, Finite-Sample Guarantee, and Efficient Algorithm</strong>，Zhouxing Luo, Lei Wang, Xin Liu</p>
+<ul>
+<li>重點：採用無窮 Wasserstein 距離建構分佈穩健 PCA，推導精確有限維重構並識別最壞情況分佈，藉保留逐樣本殘差資訊調整主子空間；在有限四階矩假設下建立一致有限樣本保證，並設計具收斂保證的迭代重加權 Majorization–Minimization 演算法。</li>
+<li>連結：<a href="zotero://select/library/items/CNZU3A63" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.23877" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>2026｜Quadratically Regularized Medians in Metric and Wasserstein Spaces</strong>，Benoît Bonnet-Weill, Matteo Tacchi-Bénard, Nicola Zaupa</p>
+<ul>
+<li>重點：證明常見 Wasserstein 重心皆可被單一受污染輸入操縱，並將 Lipschitz 韌性推廣至度量空間與分數指數情形。利用廣義測地線與平坦插值的凸性估計，證明 <span class="math inline">W_1</span> 與線性化 <span class="math inline">W_2</span> 的二次正則化 Wasserstein 中位數具該韌性，且迭代求解後者等價於 <span class="math inline">W_2</span> 中位數的 Majorization–Minimization 近似。</li>
+<li>連結：<a href="zotero://select/library/items/K5IEN8Z5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.23545" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -252,6 +271,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

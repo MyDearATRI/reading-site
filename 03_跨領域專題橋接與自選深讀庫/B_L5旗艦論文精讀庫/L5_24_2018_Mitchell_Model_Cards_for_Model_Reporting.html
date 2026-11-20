@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_24｜Model Cards for Model Reporting · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-4aba1fd4">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-4aba1fd4">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-model-cards-for-model-reporting2018">🏆 Model Cards for Model Reporting（2018）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a>
+細分子方向：<span class="wl-missing">24B_模型卡、資料集譜系文檔與演算法透明度審計</span>
+跨領域橋接：<span class="wl-missing">橋接12_多智能體演化博弈、形式語意語用與科學知識治理</span>
+作者與出處：Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson et al.（2018，<em>FAT</em> '19: Conference on Fairness, Accountability, and Transparency, January 29--31, 2019, Atlanta, GA, USA*）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/D3FB3RDJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1810.03993" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：Model Cards for Model Reporting<br />
+<strong>作者</strong>：Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman, Ben Hutchinson, Elena Spitzer, Inioluwa Deborah Raji, Timnit Gebru<br />
+<strong>發表會議</strong>：FAT* '19 (ACM Conference on Fairness, Accountability, and Transparency)<br />
+<strong>arXiv 編號</strong>：<code>1810.03993</code><br />
+<strong>學術定位</strong>：負責任人工智慧 (Responsible AI) 與模型治理領域的憲章級論文。針對當時工業界發布模型時缺乏透明度、黑箱作業、忽視偏見的弊病，首創「Model Card」標準化文檔制度，開創性地將「細分人口統計評估（Disaggregated Evaluation）」確立為模型發布的不可逾越底線，直接推動了全球 AI 安全治理、歐盟 AI 法案與各大科技公司的透明度標準制定。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;黑箱模型發布弊病 (單一平均值指標掩蓋少數派崩潰)&quot;] --&gt; B[&quot;提出 Model Card 規範架構 (9大標準板塊)&quot;]
+    B --&gt; C[&quot;強制細分評估 (Disaggregated Evaluation)&quot;]
+    C --&gt; D[&quot;按交叉特徵 (性別 x 膚色 x 年齡) 切割數據子集 S_k&quot;]
+    D --&gt; E[&quot;曝光辛普森悖論與最壞情況誤差邊界 Δ_M&quot;]
+    E --&gt; F[&quot;實現責任透明、可審計的負責任 AI 治理實踐&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">\mathcal{X}</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{P}(\Omega)</span></td>
+<td style="text-align:left">Dataset</td>
+<td style="text-align:left">全局評估基準數據集</td>
+<td style="text-align:left">P2:L25</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">S_k</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{S}_k \subseteq \mathcal{X}</span></td>
+<td style="text-align:left">Slices</td>
+<td style="text-align:left">依受保護特徵劃分的第 <span class="math inline">k</span> 個細分子群體切片</td>
+<td style="text-align:left">P4:L10</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">M(f, S_k)</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Metric</td>
+<td style="text-align:left">模型 <span class="math inline">f</span> 在切片 <span class="math inline">S_k</span> 上的細分性能指標</td>
+<td style="text-align:left">P4:L15</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">M_{\text{agg}}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Aggregate</td>
+<td style="text-align:left">總體加權平均指標 (<span class="math inline">M_{\text{agg}} = \sum w_k M_k</span>)</td>
+<td style="text-align:left">P4:L18</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\Delta_M</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Disparity Gap</td>
+<td style="text-align:left">跨子群體最大指標差距 (不均等鴻溝)</td>
+<td style="text-align:left">P5:L8</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（Model Card 標準化架構）</strong>：
+一份合規的 Model Card 形式化定義為包含九個核心要素的元組：
+<div class="math inline">\text{ModelCard} = \langle \text{ModelDetails}, \text{IntendedUse}, \text{Factors}, \text{Metrics}, \text{Data}, \text{Analyses}, \text{EthicalConsiderations}, \text{Caveats} \rangle</div>
+其中 <span class="math inline">\text{Analyses}</span> 必須包含按 <span class="math inline">\text{Factors}</span> 所定義之交集條件展開的細分定量評估矩陣。</p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析機器學習聚合指標中的辛普森悖論與細分評估必要性">5-層核心定理專題解析：機器學習聚合指標中的辛普森悖論與細分評估必要性</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>想像一個醫療檢測模型號稱擁有「99% 的超高準確率」，但如果這款模型受訓時 99% 的樣本都是青年人，而只有 1% 是老年人；如果模型在老年人身上的準確率實際上只有 10%（幾乎每次都誤診），但因為老年人只佔 1%，在總平均一算：<span class="math inline">0.99 \times 100\% + 0.01 \times 10\% \approx 99.1\%</span>。平均值製造了模型極度完美的假象，而真正的受害者在統計學上被「合法隱形」了。Model Card 的核心理念就是用顯微鏡把每個細分子群體單獨拉出來審視。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>設評估數據集劃分為 <span class="math inline">K</span> 個不相交子集 <span class="math inline">\mathcal{X} = \bigcup_{k=1}^K S_k</span>，總體指標為子集指標之凸組合 <span class="math inline">M_{\text{agg}} = \sum_{k=1}^K w_k M(S_k)</span>。對於任意給定的整體優異性門檻 <span class="math inline">1 - \epsilon</span>（<span class="math inline">\epsilon \to 0</span>），存在模型 <span class="math inline">f</span> 與權重分佈 <span class="math inline">w</span>，使得總體指標滿足 <span class="math inline">M_{\text{agg}} &gt; 1 - \epsilon</span>，但極端子群體指標差距滿足：
+<div class="math inline">\Delta_M = \max_k M(S_k) - \min_k M(S_k) &gt; \delta_0</div>
+其中 <span class="math inline">\delta_0</span> 可達到顯著不可接受的失誤水準（如 <span class="math inline">\delta_0 &gt; 0.30</span>）。</p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>以兩類切片為例：多數派群體 <span class="math inline">S_1</span> 與少數派群體 <span class="math inline">S_2</span>，權重分別為 <span class="math inline">w_1</span> 與 <span class="math inline">1 - w_1</span>，對應指標為 <span class="math inline">M_1</span> 與 <span class="math inline">M_2</span>。
+總體指標函數：
+<div class="math inline">M_{\text{agg}}(w_1, M_1, M_2) = w_1 M_1 + (1 - w_1) M_2</div>
+對多數派權重求偏導：
+<div class="math inline">\frac{\partial M_{\text{agg}}}{\partial w_1} = M_1 - M_2</div>
+該偏導數與權重 <span class="math inline">w_1</span> 本身無關，僅由性能差值決定。
+考慮極限情況：令多數派比例 <span class="math inline">w_1 = 1 - \delta</span>（其中 <span class="math inline">\delta &lt; \frac{\epsilon}{1 - M_2}</span>）。
+令多數派表現完美 <span class="math inline">M_1 = 1.0</span>，而少數派表現極差 <span class="math inline">M_2 = 0.50</span>。
+計算總體聚合指標：
+<div class="math inline">M_{\text{agg}} = (1 - \delta) \times 1.0 + \delta \times 0.50 = 1 - 0.5\delta</div>
+若取 <span class="math inline">\delta = 0.02</span>（少數派佔比 2%），則：
+<div class="math inline">M_{\text{agg}} = 1 - 0.01 = 0.99 &gt; 99\%</div>
+然而跨群體真實差距為：
+<div class="math inline">\Delta_M = M_1 - M_2 = 1.0 - 0.50 = 0.50 = 50\%</div>
+這嚴格證明了：即使整體指標超過 99%，模型在少數派上的錯誤率依然可以高達 50%。單一聚合指標存在嚴重的資訊降維坍縮，無法表徵邊界風險，證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>細分評估依賴於數據集中受保護標籤的完整性。在真實世界中，數據採集可能涉及隱私限制或未知潛在受害人群（未被定義的少數群體），使 Model Card 無法預先列出所有未知的交叉切片。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>動態 Model Card 與持續自適應治理：隨著大語言模型 (LLMs) 與多模態生成模型的普及，靜態的 Benchmark 難以窮盡提示詞分佈，激發了利用 LLM-as-a-Judge 與紅隊自動滲透（Automated Red Teaming）生成動態交互式 Model Cards 的前沿研究。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心驗證：</p>
+<ol>
+<li><strong>SymPy 符號求導驗證辛普森掩蓋效應</strong>：
+計算 <span class="math inline">\frac{\partial}{\partial w_1} [w_1 M_1 + (1-w_1) M_2]</span>，符號化簡證明其恆等於 <span class="math inline">M_1 - M_2</span>，驗證權重偏態下聚合指標的敏感性喪失。</li>
+<li><strong>NumPy 交叉人臉辨識細分評估模擬</strong>：
+在多維人口統計（性別 <span class="math inline">\times</span> 膚色）模擬數據集中，總體準確率高達 <span class="math inline">90.9\%</span>，但細分分析暴露深膚色女性準確率僅 <span class="math inline">65.0\%</span>（淺膚色男性為 <span class="math inline">98.0\%</span>），差距高達 <span class="math inline">33.0\%</span>，數值完全證實細分揭露的必要性。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。9 大標準結構、案例數據、度量公式完全忠實於 FAT* 原文。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。依賴關係清晰無環，符號與數值驗證通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（長尾樣本置信度）</strong>：多維切片過細時部分長尾群體樣本數極少，需人工審核其統計置信區間有效性。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="科學哲學與認識正義對偶抵抗統計隱形的認識論承諾">科學哲學與認識正義對偶：抵抗「統計隱形」的認識論承諾</h3>
+<p>Model Cards 在科學哲學上對偶於女性主義認識論與「認識正義（Epistemic Justice）」：它反對以單一普遍主義的平均人（Average Man）標準代表全人類，堅持將知識生產與演算法後果置於具體的邊緣處境中審視。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

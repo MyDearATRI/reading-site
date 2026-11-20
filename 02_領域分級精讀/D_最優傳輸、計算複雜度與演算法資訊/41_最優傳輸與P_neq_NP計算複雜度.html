@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-b3bdf481">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a><a class="find" href="../../index.html#n=n-b3bdf481">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · D_最優傳輸、計算複雜度與演算法資訊</span>
@@ -272,6 +274,23 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li>
+<p><strong>2026｜The computational complexity of bosonic Lindbladian fixed points</strong>，En-Jui Kuo et al.</p>
+<ul>
+<li>重點：刻畫具有限次多項式交互作用的玻色子 Lindbladian 固定點在可觀測量估計與採樣上的複雜度圖譜：包含最高十二次哈密頓量與線性損耗下嵌入通用量子計算、具非相干幫浦高斯態的有效率古典採樣及弱 Kerr 穩定性、無幫浦高斯態的採樣困難度，以及至多四模態五次跳躍算符純耗散系統穩態存在性判定的 <span class="math inline">\mathsf{RE}</span>-hardness。</li>
+<li>連結：<a href="zotero://select/library/items/HDF2FMIC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25519" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>2026｜Planning Width Is Hard to Approximate Even Given the Unique Optimal Plan</strong>，Viet Bac Nguyen</p>
+<ul>
+<li>重點：構造具唯一最優規劃與單一可達目標態的正前提條件 STRIPS 任務，證明即使給定最優規劃，區分寬度 <span class="math inline">1</span> 與 <span class="math inline">\Theta(N)</span> 對集合、鏈與目標容許寬度仍為 <span class="math inline">\mathrm{NP}</span>-hard（不可達 <span class="math inline">o(N)</span> 單邊或 <span class="math inline">o(\sqrt{N})</span> 對稱近似），判定閾值 <span class="math inline">k</span> 則分別為 <span class="math inline">\mathrm{coNP}</span>-complete（固定 <span class="math inline">k</span>）與 <span class="math inline">\Sigma_2^{\mathrm{P}}</span>-complete（輸入 <span class="math inline">k</span>）。</li>
+<li>連結：<a href="zotero://select/library/items/ER7JT4BI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25484" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ol>
 <li>
@@ -317,6 +336,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-46dee7c3">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a><a class="find" href="../../index.html#n=n-46dee7c3">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · B_學習理論、推理與表示幾何</span>
@@ -184,6 +186,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Extremal relations and Betti numbers of four-generated numerical semigroups</strong>，Keisuke Sato
+<ul>
+<li>重點：證明四元極小生成數值半群在重數 <span class="math inline">m \ge 4</span> 時，極小表示基數上界為 <span class="math inline">T(m) = 2 + \lfloor 2\sqrt{m} \rfloor</span>（解決 Elmacioglu 等人猜想 7.1），並給出最大型與第二總 Betti 數的區間界與 Macaulay 等號刻畫。研究附帶 Lean 4 形式化證明（涵蓋範疇論 <code>Tor</code> 與 Betti 恆等式），並明確揭露 AI 輔助推導範圍與同機快取重播的驗證邊界。</li>
+<li>連結：<a href="zotero://select/library/items/DNGQVZ5P" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.24346040" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Typed Knowledge over Constructive Institutions</strong>，Hans-Martin Will
+<ul>
+<li>重點：針對現有證明輔助器內建定義層級證明無關性導致科學知識庫無法比較獨立推導或執行反事實撤回的問題，為 Eigenius 系統建構類型論與三層制度論基礎。方案結合無類型可會合轉換、見證公理化的證明無關性、無強制轉換子類型檢查器、Why-溯源證成邏輯與 <code>TTR</code> 開放世界知識圖譜，並在 Lean 4 中以零 <code>sorry</code> 完成元理論形式化。</li>
+<li>連結：<a href="zotero://select/library/items/TRE7QB7Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.07432" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Isabelle Pool Server: a pooled verification service for prover training and multi-agent proving</strong>，Xuanwei Ren, Wenda Li：推出 Isabelle Pool Server（IPS），一個支援 HTTP 與雙 MCP 介面的預熱無頭會話池驗證服務。它提供會話租賃、用檢查點做低成本的分支回溯，以及記憶體感知的准入控制。單機可擴展到 32 個併發工作執行緒，證明檢查吞吐率達單執行緒的 24 倍。（<a href="zotero://select/library/items/EIQ2ZU9C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24788" rel="noopener">官方連結</a>）</li>
@@ -224,6 +241,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

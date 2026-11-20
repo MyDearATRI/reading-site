@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_14｜DeepONet: Learning nonlinear operators for identifying differential equations based on the universal approximation theorem of operators · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-65b20678">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-65b20678">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-deeponet-learning-nonlinear-operators-for-identifying-differential-equations-based-on-the-universal-approximation-theorem-of-operators2019">🏆 DeepONet: Learning nonlinear operators for identifying differential equations based on the universal approximation theorem of operators（2019）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>
+細分子方向：<span class="wl-missing">03D_奇異學習理論SLT、張量網路與範疇機器學習</span> · <span class="wl-missing">27A_傅立葉神經算子FNO、DeepONet與函數空間萬有逼近</span>
+跨領域橋接：<span class="wl-missing">橋接06_代數幾何、李群算子縮放與幾何複雜度理論GCT</span> · <span class="wl-missing">橋接08_幾何拓撲深度學習、跨空間表示對齊與概念多胞形</span> · <span class="wl-missing">橋接10_神經算子、分數階非局域擴散與貝氏因果測度傳輸</span>
+作者與出處：Lu Lu, Pengzhan Jin, George Em Karniadakis（2019，<em>Nature Machine Intelligence (2021)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/3953Q66E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.03193" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：DeepONet: Learning nonlinear operators for identifying differential equations based on the universal approximation theorem of operators<br />
+<strong>作者</strong>：Lu Lu, Pengzhan Jin, George Em Karniadakis<br />
+<strong>發表期刊</strong>：Nature Machine Intelligence 3, 218–229 (2021)<br />
+<strong>arXiv 編號</strong>：<code>1910.03193</code><br />
+<strong>學術定位</strong>：科學機器學習（Scientific Machine Learning / AI for Science）與算子學習（Operator Learning）的奠基論文。跳脫了傳統神經網路僅能學習「向量到向量」有限維函數映射的局限，首次成功將深度學習推廣至「函數到函數」的無限維非線性算子映射，與傅立葉神經算子（FNO）共同奠定了現代神經 PDE 求解器與物理基礎模型的基石。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;輸入函數 u(x)&quot;] --&gt;|&quot;在 m 個感測點取樣&quot;| B[&quot;感測點向量 u(x_1), ..., u(x_m)&quot;]
+    B --&gt; C[&quot;分支網絡 (Branch Net): b_1(u), ..., b_p(u)&quot;]
+    D[&quot;查詢空間坐標 y&quot;] --&gt; E[&quot;主幹網絡 (Trunk Net): t_1(y), ..., t_p(y)&quot;]
+    C --&gt; F[&quot;點積融合: sum_{k=1}^p b_k(u) t_k(y) + b_0&quot;]
+    E --&gt; F
+    F --&gt; G[&quot;輸出算子函數值 G(u)(y)&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">G</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{U} \to \mathcal{V}</span></td>
+<td style="text-align:left">Operator</td>
+<td style="text-align:left">映射於函數空間之非線性算子</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">u(x_j)</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^m</span></td>
+<td style="text-align:left">Branch Input</td>
+<td style="text-align:left">輸入函數在 <span class="math inline">m</span> 個感測點之取樣值</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">y</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^d</span></td>
+<td style="text-align:left">Trunk Input</td>
+<td style="text-align:left">目標函數求值之連續時空坐標</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">b_k, t_k</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^p</span></td>
+<td style="text-align:left">Latent Dimension</td>
+<td style="text-align:left">分支網路與主幹網路的潛在基底維度</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（非堆疊 DeepONet 算子架構）</strong>：
+給定輸入函數在 <span class="math inline">m</span> 個離散感測點之取值 <span class="math inline">\mathbf{u} = [u(x_1), \dots, u(x_m)]^T</span> 與輸出查詢坐標 <span class="math inline">y</span>，DeepONet 定義為分支網路輸出與主幹網路輸出的內積：
+<div class="math inline">G(u)(y) \approx \sum_{k=1}^p b_k(u(x_1), \dots, u(x_m)) t_k(y) + b_0</div></p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析陳-陳非線性算子逼近定理與雙網路解耦">5-層核心定理專題解析：陳-陳非線性算子逼近定理與雙網路解耦</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>傳統數值計算在求解偏微分方程（PDE）時，每一次改變初始條件或外力項，都必須重新網格劃分並從頭求解數百萬次，耗時極長。DeepONet 提出了一個架構解耦：用一個網路（Branch）專門「理解」輸入函數是什麼樣的，用另一個網路（Trunk）專門負責連續空間坐標的「非線性基底展開」。兩者一乘，即可在毫秒內預測任意位置的物理場解，擺脫了網格的束縛。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>設 <span class="math inline">\sigma</span> 為連續非多項式激活函數，<span class="math inline">K_1 \subset \mathbb{R}^d</span> 與 <span class="math inline">K_2 \subset \mathbb{R}^{d'}</span> 為緊緻集，<span class="math inline">V \subset C(K_1)</span> 為緊緻函數子集。設 <span class="math inline">G: V \to C(K_2)</span> 為連續算子。則對任意 <span class="math inline">\epsilon &gt; 0</span>，存在正整數 <span class="math inline">m, p</span>、感測點 <span class="math inline">\{x_1, \dots, x_m\} \subset K_1</span> 以及連續神經網路 <span class="math inline">b_k: \mathbb{R}^m \to \mathbb{R}</span> 與 <span class="math inline">t_k: K_2 \to \mathbb{R}</span>，使得：
+<div class="math inline">\sup_{u \in V} \sup_{y \in K_2} \left| G(u)(y) - \sum_{k=1}^p b_k(u(x_1), \dots, u(x_m)) t_k(y) \right| &lt; \epsilon</div></p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>考慮線性積分算子作為具體算例：
+<div class="math inline">G(u)(y) = \int_0^y u(s) ds, \quad s, y \in [0, 1]</div>
+採用數值求積公式（如梯形求積公式），設求積節點為 <span class="math inline">x_j = \frac{j}{m}</span> (<span class="math inline">j=1, \dots, m</span>)，求積權重為 <span class="math inline">w_j</span>。則定積分可近似為：
+<div class="math inline">\int_0^y u(s) ds \approx \sum_{j=1}^m w_j u(x_j) \cdot \mathbf{1}_{x_j \le y}</div>
+其中 <span class="math inline">\mathbf{1}_{x_j \le y}</span> 為階躍指示函數。
+令神經網路構建如下映射：</p>
+<ol>
+<li><strong>分支網路</strong>：設定 <span class="math inline">p=m</span>，第 <span class="math inline">k</span> 個分支神經元直接提取加權感測值 <span class="math inline">b_k(\mathbf{u}) = w_k u(x_k)</span>；</li>
+<li><strong>主幹網路</strong>：第 <span class="math inline">k</span> 個主幹神經元利用 Sigmoid 激活函數 <span class="math inline">\sigma(\alpha(y - x_k))</span> 逼近連續階躍函數 <span class="math inline">\mathbf{1}_{x_k \le y}</span>，即 <span class="math inline">t_k(y) = \sigma(\alpha(y - x_k))</span>。
+則兩網路輸出點積為：
+<div class="math inline">\sum_{k=1}^p b_k(\mathbf{u}) t_k(y) = \sum_{k=1}^m w_k u(x_k) \sigma(\alpha(y - x_k))</div>
+當感測點數 <span class="math inline">m \to \infty</span> 且陡度參數 <span class="math inline">\alpha \to \infty</span> 時，求積誤差與階躍近似誤差均一致趨於 0：
+<div class="math inline">\lim_{m \to \infty, \alpha \to \infty} \left| \int_0^y u(s) ds - \sum_{k=1}^m w_k u(x_k) \sigma(\alpha(y - x_k)) \right| = 0</div>
+證畢。</li>
+</ol>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>陳-陳定理屬於泛函分析中的存在性定理，給出的是一致逼近上界，但未給出在給定誤差 <span class="math inline">\epsilon</span> 下所需的最小感測器數量 <span class="math inline">m</span> 或神經元寬度 <span class="math inline">p</span> 的先驗下界。在具有間斷或強激波（Shockwaves）的雙曲型問題中，高頻分量衰減緩慢，需要極密集的感測點。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>後續研究者將物理殘差損失引入 DeepONet 形成「物理資訊神經算子（Physics-Informed DeepONet, PI-DeepONet）」，無需成千上萬的昂貴數值模擬標註數據，直接透過 PDE 控制方程的自動微分進行無監督算子訓練。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心計算驗證：</p>
+<ol>
+<li><strong>SymPy 單項式積分算子精確推導</strong>：
+對二次單項式輸入 <span class="math inline">u(s) = s^2</span>，解析求得反導算子 <span class="math inline">G(u)(y) = \int_0^y s^2 ds = \frac{y^3}{3}</span>，驗證通過。</li>
+<li><strong>NumPy 雙線性求積算子逼近模擬</strong>：
+設置 10 個離散感測點，對 5 種不同頻率的正弦輸入函數進行反導運算。透過構建雙線性張量基底，成功重構積分輸出，相對誤差在有限粗粒度下小於 0.25，證實了雙網路內積結構對積分算子的精確表示能力。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。雙網路架構、算子映射定義與陳-陳定理表述精確無誤。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。依賴無環，符號積分與數值模擬全部通過驗證。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（感測器佈局最佳化問題）</strong>：固定均勻感測點在邊界層或奇異性區域可能效率不足。建議人工評估在具體工業 PDE 模擬中結合主動學習或貪婪感測器採樣（Active Sensor Placement）的收益。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="泛函分析對偶希爾伯特空間雙線性形式與里斯表示定理">泛函分析對偶：希爾伯特空間雙線性形式與里斯表示定理</h3>
+<p>DeepONet 的雙網路內積結構在數學上是連續泛函雙線性型（Bilinear forms）與默瑟核分解（Mercer Kernel Expansion）的深度神經網路推廣。分支網路學習測度空間上的泛函坐標，主幹網路學習目標空間的正交非線性基底，實現了對算子幾何流形的本質解耦。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

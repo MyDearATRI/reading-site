@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-beef8afd">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a><a class="find" href="../../index.html#n=n-beef8afd">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · C_純數學、範疇論與邏輯基礎</span>
@@ -176,6 +178,21 @@ LLM 知識編輯（Model Editing / 機器遺忘 <a class="wl" href="../A_%E5%9F%
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2025｜Compositional Verification of Concurrency Using Past-Time Temporal Epistemic Logic</strong>，Hamed Nemati, Mads Dam
+<ul>
+<li>重點：引入在局部歷史完全記憶交錯執行上詮釋的過去時態認識邏輯與健全證明系統，於具讀寫觀測的共享記憶體語言上驗證 Peterson 互斥演算法，並將依賴與保證（Rely-guarantee）推理嵌入為認識穩定性提升原則以導出平行組合元定理。</li>
+<li>連結：<a href="zotero://select/library/items/PEHUP2V6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.18885" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2024｜Solving Epistemic Logic Programs using Generate-and-Test with Propagation</strong>，Jorge Fandinno, Lute Lillo
+<ul>
+<li>重點：建立認識邏輯程式生成與測試求解器的通用正確性框架，並引入整合認識後果傳播的新生成器，以線性開銷實現待測候選數量的指數級縮減；實作求解器在基準測試上達到約 3.3 倍加速並多解出 91% 的算例。</li>
+<li>連結：<a href="zotero://select/library/items/S2GW4WXX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.22130" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Going Deep Inside Public Announcement Logic</strong>，Clara Lerouvillois, Lutz Straßburger：採用沒有多餘語法官僚的開放演繹（Open Deduction）形式體系，為公開宣告邏輯（PAL）建構第一個深度推論（Deep Inference）證明系統，可以深入公式內部拆解宣告的複合。文中完整證明了可靠性、完備性與切規則可容許性。（<a href="zotero://select/library/items/SWPVXQ4V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21157" rel="noopener">官方連結</a>）</li>
@@ -212,6 +229,9 @@ LLM 知識編輯（Model Editing / 機器遺忘 <a class="wl" href="../A_%E5%9F%
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

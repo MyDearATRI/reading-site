@@ -1,0 +1,349 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_10｜Gromov-Wasserstein Alignment of Word Embedding Spaces · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-fce5ae55">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-fce5ae55">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-gromov-wasserstein-alignment-of-word-embedding-spaces2018">🏆 Gromov-Wasserstein Alignment of Word Embedding Spaces（2018）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>
+細分子方向：<span class="wl-missing">03C_資訊幾何、自然梯度與統計流形結構</span> · <span class="wl-missing">04B_模型縫合、相對表示與無監督跨空間嵌入對齊</span> · <span class="wl-missing">OTD_Gromov-Wasserstein與異構概念及圖譜無監督對齊</span>
+跨領域橋接：<span class="wl-missing">橋接01_最優傳輸相變與計算複雜度邊界</span> · <span class="wl-missing">橋接03_隨機熱力學、Wasserstein梯度流與生成擴散</span> · <span class="wl-missing">橋接06_代數幾何、李群算子縮放與幾何複雜度理論GCT</span> · <span class="wl-missing">橋接08_幾何拓撲深度學習、跨空間表示對齊與概念多胞形</span>
+作者與出處：David Alvarez-Melis, Tommi S. Jaakkola（2018，<em>EMNLP 2018</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/8WSG2DTR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1809.00013" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[原文內容]</code> 本論文證明：無需任何平行語料、共享座標系或對抗訓練（GAN）與啟發式後處理（CSLS／Inverted Softmax），僅憑兩個單語詞嵌入空間各自的內部成對關係矩陣 <span class="math inline">(\mathbf{C}_s, \mathbf{C}_t)</span>，即可透過熵正則化 Gromov–Wasserstein（GW）最優傳輸在單一最佳化階段內同時求得跨空間概念對應耦合 <span class="math inline">\Gamma^*</span>（怎麼平移）與內在語義結構差異度量 <span class="math inline">\operatorname{GW}^{1/2}</span>（平移代價多少）<code>[intro.tex:L3-L7, approach.tex:L77-L97 | PDF P1:L21-L33, P4:L108-L189]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>問題診斷 <code>[原文內容]</code></strong>：單語詞向量（如 Word2Vec、fastText）本質上是從共現統計恢復語義度量的演算法（Metric Recovery, Hashimoto et al., 2016），其座標系存在任意正交旋轉與鏡射規範自由度（Gauge Freedom）<span class="math inline">\mathbf{Q} \in O(d)</span>。因此傳統點對點最優傳輸（Optimal Transport, OT）所需的跨域代價 <span class="math inline">\|\mathbf{x}^{(i)} - \mathbf{y}^{(j)}\|</span> 在未對齊空間上無定義或隨意改變 <code>[P1:L77-L92, P3:L46-L54]</code>。</li>
+<li><strong>核心方法 <code>[原文內容]</code></strong>：引入 Mémoli (2011) 的 Gromov–Wasserstein 距離，將「點與點的距離」提升為「距離與距離之間的距離」<span class="math inline">L(C_{ik}, C'_{jl})</span>，在雙隨機傳輸多胞形 <span class="math inline">\Pi(\mathbf{p}, \mathbf{q})</span> 上最小化四階二次型目標 <span class="math inline">\sum_{i,j,k,l} L(C_{ik}, C'_{jl})\Gamma_{ij}\Gamma_{kl} - \lambda H(\Gamma)</span> <code>[P3:L94-P4:L113]</code>。</li>
+<li><strong>演算法效率突破 <code>[外部知識 + 原文內容]</code></strong>：利用 Peyré et al. (2016) 的可分離損失張量分解，將每次外部迭代的偽代價矩陣 <span class="math inline">\hat{\mathbf{C}}_\Gamma = \mathbf{C}_{st} - 2\mathbf{C}_s \Gamma \mathbf{C}_t^\top</span> 計算複雜度由 <span class="math inline">O(N_1^2 N_2^2)</span> 降至 <span class="math inline">O(N_1^2 N_2 + N_1 N_2^2)</span>，內部嵌套 Sinkhorn–Knopp 矩陣縮放；對超大規模詞表（<span class="math inline">\sim 2\times 10^5</span> 詞），先對前 <span class="math inline">K=20,000</span> 詞求 <span class="math inline">\Gamma^*</span>，再由重心正交 Procrustes 投影 <span class="math inline">\mathbf{P}^* = \mathbf{U}\mathbf{V}^\top</span>（其中 <span class="math inline">\mathbf{X}\Gamma^*\mathbf{Y}^\top = \mathbf{U}\Sigma\mathbf{V}^\top</span>）外推至全詞表 <code>[P4:L120-L145, P5:L18-L81]</code>。</li>
+<li><strong>實證與宏觀理論貢獻 <code>[原文內容]</code></strong>：在 Conneau et al. (2018) 與 Dinu et al. (2014) 兩大基準上達到與 SOTA 對抗／自學習方法相當的準確率（如 EN→ES <code>81.7%</code>、Dinu EN→IT <code>49.21%</code>），而單機四核 CPU 耗時僅 <code>37</code> 分鐘（較 Conneau et al. 的 <code>957</code> 分鐘快 25.9 倍），且由邊際歸一化自動抑制樞紐詞（Hubness）效應；同時給出 7 種語言概念空間之間的內在 GW 語義距離矩陣 <code>[P7:L1-L85, P8:L1-L173]</code>。</li>
+</ol>
+<h2 id="技術全景深讀摘要technical-deep-dive-summary">技術全景深讀摘要（Technical Deep-Dive Summary）</h2>
+<p><code>[AI 推導]</code> 從數學結構審視，本文實際上在三個層次之間建立了嚴格橋樑：</p>
+<ul>
+<li><strong>微觀層（局部概念配對）</strong>：最優傳輸計畫 <span class="math inline">\Gamma^* \in \Pi(\mathbf{p}, \mathbf{q})</span> 給出源概念 <span class="math inline">w_i^x</span> 平移至目標概念 <span class="math inline">w_j^y</span> 的軟性條件機率 <span class="math inline">P(w_j^y \mid w_i^x) = \Gamma^*_{ij} / p_i</span>。</li>
+<li><strong>中觀層（演算法凹凸結構）</strong>：當採用單位化詞向量之餘弦相似度 <span class="math inline">\mathbf{C}_s = \cos(\mathbf{X}, \mathbf{X}) \succeq 0</span> 與 <span class="math inline">\mathbf{C}_t = \cos(\mathbf{Y}, \mathbf{Y}) \succeq 0</span> 時，二次交叉項 <span class="math inline">-\operatorname{tr}(\mathbf{C}_s \Gamma \mathbf{C}_t^\top \Gamma^\top) = -\operatorname{vec}(\Gamma)^\top (\mathbf{C}_t \otimes \mathbf{C}_s)\operatorname{vec}(\Gamma)</span> 因半正定矩陣之 Kronecker 積仍半正定而在整個 <span class="math inline">\mathbb{R}^{n\times m}</span> 上恆為凹函數（Concave）。因此 Algorithm 1 本質上是無需步長線搜尋即嚴格單調下降的 凹凸程序（CCCP / Majorization–Minimization）（見 <code>LEM-1</code> 與 <code>VER-3</code>）。</li>
+<li><strong>宏觀層（賦距測度空間幾何）</strong>：在單位球面 <span class="math inline">S^{d-1}</span> 上，歐氏弦距離平方滿足 <span class="math inline">\|\hat{\mathbf{x}}^{(i)} - \hat{\mathbf{x}}^{(k)}\|_2^2 = 2 - 2\cos(\mathbf{x}^{(i)}, \mathbf{x}^{(k)})</span>，故 <span class="math inline">(\cos_{ik}^s - \cos_{jl}^t)^2 = \frac{1}{4}(d_s^2 - d_t^2)^2</span>。這證明餘弦相似度之 <span class="math inline">L_2</span>-GW 恰等於單位球面賦距測度空間上 Sturm <span class="math inline">(2,2)</span>-GW 度量平方的 <span class="math inline">\frac{1}{4}</span>，從根本上消解了原文混稱「餘弦距離（cosine distance）」與 <code>cos(X,X)</code> 的表面矛盾。</li>
+</ul>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<h2 id="研究背景定位">研究背景定位</h2>
+<p>2013 年 Mikolov et al. 發現不同語言獨立訓練的單語詞嵌入空間呈現顯著的局部幾何同構性（Isomorphism），開啟了雙語詞典歸納（Bilingual Lexicon Induction, BLI）研究。早期方法依賴數千組種子詞典求解線性或正交 Procrustes 問題（Schönemann, 1966；Smith et al., 2017）。2017–2018 年無監督方法崛起，主要分為兩派：</p>
+<ol>
+<li><strong>對抗生成派</strong>（Zhang et al., 2017a；Conneau et al., 2018）：以 GAN 判別器逼近分佈對齊，但存在極小極大博弈不穩定、過度訓練退化（Overtraining Degradation）及嚴重依賴 CSLS 修補高維「樞紐詞（Hubness）」現象。</li>
+<li><strong>聯合正交－OT 交替最佳化派</strong>（Zhang et al., 2017b；Grave et al., 2019 Wasserstein Procrustes）：交替求 <span class="math inline">\Gamma \in \Pi(\mathbf{p},\mathbf{q})</span> 與 <span class="math inline">\mathbf{P} \in O(d)</span>，極度敏感於初始值且預設兩空間維度相同並服從單一全局正交變換。</li>
+</ol>
+<p>Alvarez-Melis 與 Jaakkola 則回到更本質的公理：既然詞嵌入本身只是語義關係度量的座標表示，對齊演算法就不應依賴座標，而應直接在賦距測度空間（Metric Measure Spaces, mm-spaces）的商空間上進行最優傳輸。</p>
+<h2 id="先修知識與全文論證依賴圖mermaid-圖譜">先修知識與全文論證依賴圖（Mermaid 圖譜）</h2>
+<pre class="mermaid">flowchart TD
+    subgraph Prereq[&quot;先修數學基石 (External Foundations)&quot;]
+      P1[&quot;Kantorovich 離散最優傳輸 LP Π(p,q) 雙隨機多胞形&quot;]
+      P2[&quot;Cuturi (2013) 熵正則化 OT Sinkhorn-Knopp 矩陣縮放&quot;]
+      P3[&quot;Mémoli (2011) Gromov-Wasserstein 距離 賦距測度空間同構類度量 (THM-1)&quot;]
+      P4[&quot;Peyré et al. (2016) 可分離張量縮併 O(N^3) 偽代價分解 (PRP-1)&quot;]
+      P5[&quot;Schönemann (1966) 正交 Procrustes SVD 閉式解 P* = UV^T (EQN-2)&quot;]
+    end
+
+    subgraph CorePaper[&quot;本文核心推導與演算法架構&quot;]
+      A1[&quot;ATOM-1: 單語嵌入具 O(d) 座標規範自由度 跨域點距離 ||x - y|| 失效&quot;]
+      D3[&quot;DEF-3: 離散 GW 二次規劃 (Eq. 8) min_Γ Σ L(C_ik, C&#x27;_jl) Γ_ij Γ_kl&quot;]
+      L1[&quot;LEM-1 [AI 審核補全]: 餘弦 Gram 半正定性 ⟹ CCCP 單調下降 &amp; 弦距離等價性&quot;]
+      A3[&quot;ATOM-3: 雙邊際歸一化天然抑制 Hubness&quot;]
+      PR2[&quot;PRP-2: 重心正交 Procrustes 外推 (Eq. 10) 擴展至 20 萬詞級大詞表&quot;]
+    end
+
+    subgraph Outcomes[&quot;實證與跨學科結論&quot;]
+      C1[&quot;CONC-1: 單階段無監督詞彙對齊 25.9x CPU 加速 &amp; 免後處理軟詞典&quot;]
+      C2[&quot;CONC-2: 語言／概念空間之 GW 內在距離 量化跨域平移最小結構扭曲代價&quot;]
+    end
+
+    P1 --&gt; P2
+    P1 --&gt; P3
+    P3 --&gt; D3
+    A1 --&gt; D3
+    P4 --&gt; L1
+    P2 --&gt; L1
+    D3 --&gt; L1
+    D3 --&gt; A3
+    D3 --&gt; PR2
+    P5 --&gt; PR2
+    L1 --&gt; C1
+    A3 --&gt; C1
+    PR2 --&gt; C1
+    P3 --&gt; C2
+    L1 --&gt; C2
+</pre>
+<h2 id="分層閱讀路線建議">分層閱讀路線建議</h2>
+<ul>
+<li><strong>快速掌握核心思想（30 分鐘）</strong>：閱讀 <code>Abstract</code> → <code>Section 1</code> → <code>Figure 1</code> → <code>Section 3.1</code>（Eq. 8–9 與 Theorem 3.1）→ <code>Section 4.4</code>（Figure 4 語言距離熱力圖）。</li>
+<li><strong>實作與數值重現路線（60 分鐘）</strong>：精讀 <code>Section 2.2</code>（Eq. 6–7）→ <code>Section 3.1–3.2</code>（<code>Algorithm 1</code> 虛擬碼與本指南訂正的 6 處排版細節）→ 本指南 <code>H3 正反例演算</code> 與 <code>Section 4.3</code>（<code>Figure 3</code> 矩陣尺度歸一化技巧）。</li>
+<li><strong>跨學科理論遷移路線（概念空間平移／範疇論／量化社會學）</strong>：精讀本指南 <code>H4 五層定理註釋</code> → <code>跨層研究分析</code>（<code>BRIDGE-1</code> 至 <code>BRIDGE-3</code>）→ 核查 <code>audit_verification.json</code> 中的 <code>ISS-GW-1</code> 至 <code>ISS-GW-4</code>。</li>
+</ul>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<h2 id="核心符號與型別作用域對照表含原文排版勘誤標記">核心符號與型別作用域對照表（含原文排版勘誤標記）</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">編號</th>
+<th style="text-align:left">符號</th>
+<th style="text-align:left">嚴格數學型別（已審核校準）</th>
+<th style="text-align:left">原文定位</th>
+<th style="text-align:left">語義與原文排版勘誤說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>SYM-1</code></td>
+<td style="text-align:left"><span class="math inline">\mathbf{X}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^{d_x \times n}</span></td>
+<td style="text-align:left"><code>[Sec 2, P2:L29-L57]</code></td>
+<td style="text-align:left">源概念空間嵌入矩陣，第 <span class="math inline">i</span> 列 <span class="math inline">\mathbf{x}^{(i)} \in \mathbb{R}^{d_x}</span> 對應詞彙 <span class="math inline">w_i^x \in V_x</span> <code>[原文內容]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-2</code></td>
+<td style="text-align:left"><span class="math inline">\mathbf{Y}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^{d_y \times m}</span></td>
+<td style="text-align:left"><code>[Sec 2, P2:L30-L57]</code></td>
+<td style="text-align:left">目標概念空間嵌入矩陣，第 <span class="math inline">j</span> 列 <span class="math inline">\mathbf{y}^{(j)} \in \mathbb{R}^{d_y}</span> 對應詞彙 <span class="math inline">w_j^y \in V_y</span>。<strong>勘誤</strong>：Eq. (3) 誤印為 <span class="math inline">\delta_{\mathbf{y}^{(i)}}</span>，應為 <span class="math inline">\delta_{\mathbf{y}^{(j)}}</span> <code>[AI 推導]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-3</code></td>
+<td style="text-align:left"><span class="math inline">\mathbf{P} \in O(d)</span></td>
+<td style="text-align:left"><span class="math inline">\{\mathbf{P} \in \mathbb{R}^{d\times d} : \mathbf{P}^\top\mathbf{P}=\mathbf{I}_d\}</span></td>
+<td style="text-align:left"><code>[Sec 2.1, P2:L73; Sec 3.2, P5:L35]</code></td>
+<td style="text-align:left">跨空間正交線性映射（要求 <span class="math inline">d_x = d_y = d</span>）。<strong>重大勘誤</strong>：原文 Eq. (2) 與 Eq. (10) 均誤寫為 <span class="math inline">O(n) \subset \mathbb{R}^{n\times n}</span>；因 <span class="math inline">\mathbf{P}</span> 左乘 <span class="math inline">\mathbf{Y} \in \mathbb{R}^{d\times m}</span>，維度必須是 <span class="math inline">O(d)</span> <code>[AI 推導]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-4</code></td>
+<td style="text-align:left"><span class="math inline">\mathbf{p}, \mathbf{q}</span></td>
+<td style="text-align:left"><span class="math inline">\mathbf{p} \in \Delta_n,  \mathbf{q} \in \Delta_m</span></td>
+<td style="text-align:left"><code>[Sec 2.2, P2:L112-L130]</code></td>
+<td style="text-align:left">源與目標詞彙的機率權重向量（實驗採均勻分佈 <span class="math inline">1/n, 1/m</span>；亦可代入詞頻或 Zipf 冪律分佈）<code>[原文內容]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-5</code></td>
+<td style="text-align:left"><span class="math inline">\Gamma \in \Pi(\mathbf{p},\mathbf{q})</span></td>
+<td style="text-align:left"><span class="math inline">\{\Gamma \in \mathbb{R}_+^{n\times m} : \Gamma\mathbf{1}_m = \mathbf{p},  \Gamma^\top\mathbf{1}_n = \mathbf{q}\}</span></td>
+<td style="text-align:left"><code>[Sec 2.2, P3:L7-L9]</code></td>
+<td style="text-align:left">傳輸耦合矩陣（軟性翻譯詞典）。<strong>勘誤</strong>：原文 P3:L9 誤印為 <span class="math inline">\Gamma\mathbf{1}_n = \mathbf{p}</span>，當 <span class="math inline">m \neq n</span> 時應為 <span class="math inline">\Gamma\mathbf{1}_m = \mathbf{p}</span> <code>[AI 推導]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-6</code></td>
+<td style="text-align:left"><span class="math inline">\mathbf{C}_s, \mathbf{C}_t</span></td>
+<td style="text-align:left"><span class="math inline">\mathbf{C}_s \in \mathbb{R}^{n\times n},  \mathbf{C}_t \in \mathbb{R}^{m\times m}</span></td>
+<td style="text-align:left"><code>[Sec 3.1-3.2, P3:L107, P5:L60]</code></td>
+<td style="text-align:left">空間內部成對關係矩陣。注意符號重載：Sec 2.2 的 <span class="math inline">\mathbf{C} \in \mathbb{R}^{n\times m}</span> 是跨域代價，Sec 3 起改指空間內部相似度 <code>cos(X,X)</code> <code>[原文內容]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-7</code></td>
+<td style="text-align:left"><span class="math inline">\mathcal{L}_{ijkl}</span></td>
+<td style="text-align:left"><span class="math inline">L(C_{ik}, C'_{jl}) \in \mathbb{R}_+</span></td>
+<td style="text-align:left"><code>[Sec 3.1, P3:L119-L121]</code></td>
+<td style="text-align:left">四階關係失真張量：將 <span class="math inline">i \mapsto j</span> 與 <span class="math inline">k \mapsto l</span> 同時配對時，兩空間內部關係 <span class="math inline">C_{ik}</span> 與 <span class="math inline">C'_{jl}</span> 的不匹配懲罰 <code>[原文內容]</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>SYM-8</code></td>
+<td style="text-align:left"><span class="math inline">\hat{\mathbf{C}}_\Gamma</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}^{n\times m}</span></td>
+<td style="text-align:left"><code>[Sec 3.1, P4:L138; Alg. 1, P5:L68]</code></td>
+<td style="text-align:left">在當前耦合 <span class="math inline">\Gamma</span> 下線性化所得的偽代價矩陣（Pseudo-cost matrix），將四階 GW 轉化為標準二階熵 OT 子問題 <code>[原文內容]</code>。</td>
+</tr>
+</tbody>
+</table>
+<h2 id="直觀幾何模型星座拓樸拼圖對比絕對經緯度疊合">直觀幾何模型：「星座拓樸拼圖」對比「絕對經緯度疊合」</h2>
+<p>想像兩位身處不同星球（或不同學科典範）的天文學家各自繪製星圖：</p>
+<ul>
+<li><strong>傳統點對點 OT / Procrustes 的困境</strong>：要求兩張星圖必須畫在同一張透明膠片座標系上；若其中一張被旋轉了 <span class="math inline">73^\circ</span> 或左右翻轉（鏡像），甚至一張是二維投影、另一張是三維球面座標（<span class="math inline">d_x \neq d_y</span>），直接比較座標差 <span class="math inline">\|\mathbf{x}^{(i)} - \mathbf{y}^{(j)}\|</span> 完全無意義。</li>
+<li><strong>Gromov–Wasserstein 的直觀模型</strong>：完全拋棄外部座標軸，只保留每顆星與同星圖內其他星之間的距離／夾角關係網（例如：「獵戶座腰帶三顆星近乎等距共線，且與參宿四構成特定夾角」，正對應 <code>Figure 1</code> <code>[P4:L70-L99]</code> 中英語 <code>one, two, three, january, february</code> 與義大利語 <code>uno, due, tre, gennaio, febbraio</code> 幾乎同構的內部塊狀相似度矩陣。）。GW 尋找的耦合 <span class="math inline">\Gamma^*</span> 就是讓「配對後所有星對距離差之加權平方和」最小的軟性雙射；而最小殘差 <span class="math inline">\operatorname{GW}^{1/2}</span> 就是這兩套概念系統在結構上無法完美重合的固有幾何扭曲量（平移代價）。</li>
+</ul>
+<h2 id="h3-具體正例演算與邊界反例構造">H3 具體正例演算與邊界反例構造</h2>
+<h2 id="正例演算旋轉置換鏡像翻轉下的精確概念對齊對應-ver-2-ver-3">正例演算：旋轉＋置換＋鏡像翻轉下的精確概念對齊（對應 <code>VER-2</code> &amp; <code>VER-3</code>）</h2>
+<p><code>[AI 推導]</code> 考慮二維單位圓 <span class="math inline">S^1 \subset \mathbb{R}^2</span> 上的 4 個源概念向量 <span class="math inline">\mathbf{x}^{(i)} = (\cos\theta_i, \sin\theta_i)^\top</span>，角度為 <span class="math inline">\theta = (0, 0.5, 1.3, 2.4)</span> 弧度；目標空間經過未知旋轉 <span class="math inline">0.9</span> 弧度並打亂詞序 <span class="math inline">\pi = (2, 0, 3, 1)</span>（即 <span class="math inline">\mathbf{y}^{(0)}=\mathbf{R}_{0.9}\mathbf{x}^{(2)}, \mathbf{y}^{(1)}=\mathbf{R}_{0.9}\mathbf{x}^{(0)}, \mathbf{y}^{(2)}=\mathbf{R}_{0.9}\mathbf{x}^{(3)}, \mathbf{y}^{(3)}=\mathbf{R}_{0.9}\mathbf{x}^{(1)}</span>），取均勻權重 <span class="math inline">p_i = q_j = \frac{1}{4}</span>。</p>
+<ol>
+<li><strong>內部關係矩陣完全不依賴旋轉角 <span class="math inline">0.9</span></strong>：
+<div class="math inline">(\mathbf{C}_s)_{ik} = \cos(\theta_i - \theta_k),\qquad (\mathbf{C}_t)_{jl} = \cos(\theta_{\pi(j)} - \theta_{\pi(l)}).</div></li>
+<li><strong>執行熵正則化 CCCP–Sinkhorn 迭代（<span class="math inline">\lambda = 0.02</span>，共 15 步，<code>VER-3</code>）</strong>：
+<ul>
+<li>初始耦合接近均勻模糊匹配，目標函數值為 <code>0.646606</code>；</li>
+<li>隨迭代推進，目標函數每一步嚴格單調下降（最大單步增量 <code>4.86e-17</code>，達雙精度機器零誤差），最終收斂至 <code>-0.047727</code>；</li>
+<li>對耦合矩陣每列取最大值索引 <span class="math inline">\arg\max_j \Gamma^*_{ij}</span>，精確恢復逆置換 <code>[1, 3, 0, 2]</code>（即 <span class="math inline">\mathbf{x}^{(0)}\leftrightarrow\mathbf{y}^{(1)}, \mathbf{x}^{(1)}\leftrightarrow\mathbf{y}^{(3)}, \mathbf{x}^{(2)}\leftrightarrow\mathbf{y}^{(0)}, \mathbf{x}^{(3)}\leftrightarrow\mathbf{y}^{(2)}</span>），準確率 100%。</li>
+</ul>
+</li>
+<li><strong>手性鏡像不變性（<code>VER-2</code>）</strong>：若將源空間的不對稱三角形經鏡射 <span class="math inline">\mathbf{R}_{\text{refl}} = \operatorname{diag}(1, -1)</span>（<span class="math inline">\det = -1</span>）變為目標空間，純旋轉群 <span class="math inline">SO(2)</span> 的最小平方誤差高達 <code>2.928755</code>，但 <span class="math inline">\operatorname{GW}(\mathbf{C}_X, \mathbf{C}_Y) = 0</span> 精確成立。</li>
+</ol>
+<h2 id="三個關鍵邊界反例構造對應-cex-1cex-2cex-3">三個關鍵邊界反例構造（對應 <code>CEX-1</code>、<code>CEX-2</code>、<code>CEX-3</code>）</h2>
+<h3 id="反例一cex-1自同構對稱導致反義詞對偶概念無法唯一辨識">反例一（<code>CEX-1</code>）：自同構對稱導致「反義詞／對偶概念」無法唯一辨識</h3>
+<p><code>[AI 推導]</code> 設源空間與目標空間各有 4 個概念，構成邊長 <span class="math inline">a \neq b</span> 的矩形頂點：<span class="math inline">(0,0)=\text{「冷」}, (a,0)=\text{「涼」}, (a,b)=\text{「熱」}, (0,b)=\text{「暖」}</span>。此度量空間的自同構群為 Klein 四元群 <span class="math inline">V_4</span>（含恆等、水平翻轉、垂直翻轉、<span class="math inline">180^\circ</span> 中心對稱互換）。</p>
+<ul>
+<li><strong>結果</strong>：將「冷↔熱、涼↔暖」完全顛倒的耦合矩陣 <span class="math inline">\Gamma_{\text{flip}}</span> 與正確恆等耦合 <span class="math inline">\Gamma_{\text{id}}</span> 給出完全相同的全局最小值 <span class="math inline">\operatorname{GW} = 0</span>。</li>
+<li><strong>深刻啟示</strong>：純關係幾何只能識別「結構角色等價類」；若兩個學科或語言內部存在對稱二元對立（如正／負電荷、左派／右派、生／死），純無監督 GW 必然存在自同構簡併（Degeneracy），需極少量錨點（Fused GW）破缺對稱性。</li>
+</ul>
+<h3 id="反例二cex-2非半正定關係矩陣下-algorithm-1-無阻尼迭代發生永久震盪對應-ver-4">反例二（<code>CEX-2</code>）：非半正定關係矩陣下 Algorithm 1 無阻尼迭代發生永久震盪（對應 <code>VER-4</code>）</h3>
+<p><code>[AI 推導]</code> 原文 Section 4.2 <code>[P7:L102]</code> 宣稱目標函數單調下降。但取 <span class="math inline">n=m=2,  \mathbf{p}=\mathbf{q}=(0.5, 0.5)</span>，設內部矩陣為反號不定矩陣：
+<div class="math inline">\mathbf{C}_s = \begin{pmatrix} 0 &amp; 1 \\ 1 &amp; 0 \end{pmatrix}, \qquad \mathbf{C}_t = \begin{pmatrix} 1 &amp; 0 \\ 0 &amp; 1 \end{pmatrix}.</div>
+將可行耦合參數化為 <span class="math inline">\Gamma(\alpha) = \begin{pmatrix} \alpha &amp; 0.5-\alpha \\ 0.5-\alpha &amp; \alpha \end{pmatrix}</span>（<span class="math inline">\alpha \in [0, 0.5]</span>），代入得二次目標：
+<div class="math inline">\mathcal{E}(\Gamma(\alpha)) = 0.5 - 4\alpha(0.5 - \alpha) = 4\alpha^2 - 2\alpha + 0.5,</div>
+這是關於 <span class="math inline">\alpha</span> 的嚴格凸函數（二次導數 <span class="math inline">+8 &gt; 0</span>，唯一最小值在內部混合點 <span class="math inline">\alpha^* = 0.25</span>），而非凹函數。對凸函數做切線線性化極小化會跳向邊界端點：<code>VER-4</code> 實測 <span class="math inline">\lambda=0.01</span> 時，<span class="math inline">\Gamma_{00}^{(t)}</span> 呈現 <code>[0.0, 0.5, 0.0, 0.5, 0.0, 0.5]</code> 永久震盪不收斂。這嚴格證明：Algorithm 1 之所以無需步長線搜尋仍單調收斂，依賴於 <span class="math inline">\mathbf{C}_s = \cos(\mathbf{X},\mathbf{X}) \succeq 0, \mathbf{C}_t = \cos(\mathbf{Y},\mathbf{Y}) \succeq 0</span> 的 Gram 半正定凹性（<code>LEM-1</code>）。</p>
+<h3 id="反例三cex-3未開根號之-違反三角不等式">反例三（<code>CEX-3</code>）：未開根號之 <span class="math inline">\operatorname{GW}</span> 違反三角不等式</h3>
+<p><code>[AI 推導]</code> 取三個雙點賦距測度空間 <span class="math inline">X_1=\{a_1,a_2\}</span>（距離 <span class="math inline">0</span>）、<span class="math inline">X_2=\{b_1,b_2\}</span>（距離 <span class="math inline">1</span>）、<span class="math inline">X_3=\{c_1,c_2\}</span>（距離 <span class="math inline">2</span>），均勻權重 <span class="math inline">(0.5,0.5)</span>，損失 <span class="math inline">L(u,v)=(u-v)^2</span>：
+<div class="math inline">\operatorname{GW}(X_1, X_2) = 2\cdot \frac{1}{4}(0-1)^2 = 0.5,\quad \operatorname{GW}(X_2, X_3) = 2\cdot \frac{1}{4}(1-2)^2 = 0.5,</div>
+<div class="math inline">\operatorname{GW}(X_1, X_3) = 2\cdot \frac{1}{4}(0-2)^2 = 2.0 &gt; 0.5 + 0.5 = 1.0!</div>
+未開平方的 <span class="math inline">\operatorname{GW}</span> 違反三角不等式；取平方根後 <span class="math inline">\sqrt{2.0} \le \sqrt{0.5} + \sqrt{0.5} = \sqrt{2.0}</span> 方才滿足 Theorem 3.1。</p>
+<h2 id="h4-核心定理五層註釋逐步補全證明與推理缺口分析">H4 核心定理五層註釋、逐步補全證明與推理缺口分析</h2>
+<h2 id="核心結果一mémoli-度量定理與餘弦球面橋接thm-1-lem-1">核心結果一：Mémoli 度量定理與餘弦球面橋接（<code>THM-1</code> + <code>LEM-1</code>）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>兩個概念空間即使維度不同（例如 300 維詞嵌入 vs 768 維概念向量，甚至純粹的學科共引網絡圖距離），只要把每個空間看作「帶有質量權重的內部距離網」，<span class="math inline">\operatorname{GW}^{1/2}</span> 就能給出它們之間的真實幾何距離：距離為 <span class="math inline">0</span> 當且僅當兩空間存在保距保測度的一一對應；且從空間 <span class="math inline">A</span> 經中介空間 <span class="math inline">B</span> 平移到空間 <span class="math inline">C</span> 的總結構失真，永遠不少於 <span class="math inline">A \to C</span> 的直接平移失真（三角不等式）。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<ul>
+<li><strong><code>[外部知識]</code> 定理 3.1（Mémoli, 2011, Theorem 5.1, <code>[P4:L178-L182]</code>）</strong>：設 <span class="math inline">(\mathcal{X}, d_{\mathcal{X}}, \mu)</span> 與 <span class="math inline">(\mathcal{Y}, d_{\mathcal{Y}}, \nu)</span> 為緊緻賦距測度空間（Compact Metric Measure Spaces），定義 <span class="math inline">L_2</span>-Gromov–Wasserstein 距離為
+<div class="math inline">d_{\operatorname{GW}}(\mathcal{X}, \mathcal{Y}) := \frac{1}{2}\left(\inf_{\gamma \in \Pi(\mu, \nu)} \iint_{\mathcal{X}^2 \times \mathcal{Y}^2} \big|d_{\mathcal{X}}(x, x') - d_{\mathcal{Y}}(y, y')\big|^2   d\gamma(x,y)  d\gamma(x',y')\right)^{1/2}.</div>
+則 <span class="math inline">d_{\operatorname{GW}}</span> 在賦距測度空間的保測度等距同構類（mm-isomorphism classes）上構成嚴格度量（非負性、對稱性、正定性、三角不等式）。</li>
+<li><strong><code>[AI 推導]</code> 審核橋接引理（<code>LEM-1</code>）</strong>：對單位化詞向量 <span class="math inline">\hat{\mathbf{x}}^{(i)} \in S^{d_x - 1}</span> 與 <span class="math inline">\hat{\mathbf{y}}^{(j)} \in S^{d_y - 1}</span>，令歐氏弦度量為 <span class="math inline">d_s(i,k) = \|\hat{\mathbf{x}}^{(i)} - \hat{\mathbf{x}}^{(k)}\|_2</span>、<span class="math inline">d_t(j,l) = \|\hat{\mathbf{y}}^{(j)} - \hat{\mathbf{y}}^{(l)}\|_2</span>。則 Algorithm 1 所用之餘弦相似度平方損失恆等於 Sturm <span class="math inline">(2,2)</span>-扭曲度量平方的四分之一：
+<div class="math inline">\big(\cos(\hat{\mathbf{x}}^{(i)}, \hat{\mathbf{x}}^{(k)}) - \cos(\hat{\mathbf{y}}^{(j)}, \hat{\mathbf{y}}^{(l)})\big)^2 = \frac{1}{4}\big(d_s(i,k)^2 - d_t(j,l)^2\big)^2.</div></li>
+</ul>
+<h3 id="3-完整推導補全原文省略之黏合引理與弦距離代數">3. 完整推導（補全原文省略之黏合引理與弦距離代數）</h3>
+<ol>
+<li><strong><code>[外部知識]</code> 三角不等式證明核心（Gluing Lemma）</strong>：任取三個賦距測度空間 <span class="math inline">\mathcal{X}, \mathcal{Y}, \mathcal{Z}</span>，設 <span class="math inline">\gamma_{XY} \in \Pi(\mu, \nu)</span> 與 <span class="math inline">\gamma_{YZ} \in \Pi(\nu, \sigma)</span> 分別達到（或 <span class="math inline">\varepsilon</span>-逼近）<span class="math inline">d_{\operatorname{GW}}(\mathcal{X},\mathcal{Y})</span> 與 <span class="math inline">d_{\operatorname{GW}}(\mathcal{Y},\mathcal{Z})</span>。由最優傳輸黏合引理（Dudley / Villani Gluing Lemma），存在乘積空間 <span class="math inline">\mathcal{X}\times\mathcal{Y}\times\mathcal{Z}</span> 上的聯合機率測度 <span class="math inline">\pi</span>，其 <span class="math inline">(X,Y)</span> 邊際為 <span class="math inline">\gamma_{XY}</span>、<span class="math inline">(Y,Z)</span> 邊際為 <span class="math inline">\gamma_{YZ}</span>；令 <span class="math inline">\gamma_{XZ} \in \Pi(\mu, \sigma)</span> 為其 <span class="math inline">(X,Z)</span> 邊際，則由函數空間 <span class="math inline">L^2(\pi \otimes \pi)</span> 的 Minkowski 三角不等式：
+<div class="math inline">\begin{aligned}
+2 d_{\operatorname{GW}}(\mathcal{X}, \mathcal{Z}) &amp;\le \| d_{\mathcal{X}}(X, X') - d_{\mathcal{Z}}(Z, Z') \|_{L^2(\gamma_{XZ}\otimes\gamma_{XZ})} = \| d_{\mathcal{X}}(X, X') - d_{\mathcal{Z}}(Z, Z') \|_{L^2(\pi\otimes\pi)} \\
+&amp;\le \| d_{\mathcal{X}}(X, X') - d_{\mathcal{Y}}(Y, Y') \|_{L^2(\pi\otimes\pi)} + \| d_{\mathcal{Y}}(Y, Y') - d_{\mathcal{Z}}(Z, Z') \|_{L^2(\pi\otimes\pi)} \\
+&amp;= 2 d_{\operatorname{GW}}(\mathcal{X}, \mathcal{Y}) + 2 d_{\operatorname{GW}}(\mathcal{Y}, \mathcal{Z}).
+\end{aligned}</div></li>
+<li><strong><code>[AI 推導]</code> 餘弦相似度與單位球面弦距離等價推導</strong>：在單位球面上 <span class="math inline">\|\hat{\mathbf{x}}^{(i)}\|_2 = \|\hat{\mathbf{y}}^{(j)}\|_2 = 1</span>，故 <span class="math inline">d_s(i,k)^2 = \|\hat{\mathbf{x}}^{(i)} - \hat{\mathbf{x}}^{(k)}\|_2^2 = 2 - 2\cos_{ik}^s</span>，同理 <span class="math inline">d_t(j,l)^2 = 2 - 2\cos_{jl}^t</span>。兩式相減時常數項 <span class="math inline">2</span> 精確抵消：
+<div class="math inline">d_s(i,k)^2 - d_t(j,l)^2 = -2(\cos_{ik}^s - \cos_{jl}^t) \implies (\cos_{ik}^s - \cos_{jl}^t)^2 = \frac{1}{4}\big(d_s(i,k)^2 - d_t(j,l)^2\big)^2.</div>
+再由 <span class="math inline">L^2(\pi\otimes\pi)</span> 對函數 <span class="math inline">f_X = d_s^2</span> 的範數三角不等式，開平方根後的 <span class="math inline">\operatorname{GW}_{\cos}^{1/2}</span> 在單位球面支撐集同構類上同樣嚴格滿足三角不等式。</li>
+</ol>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<ol>
+<li><strong>熵正則化偏差（Entropic Bias, <code>ISS-GW-1</code>）</strong>：當 <span class="math inline">\lambda &gt; 0</span> 時，即使兩空間完全相同 <span class="math inline">\mathcal{X} = \mathcal{Y}</span>，<span class="math inline">\operatorname{GW}_\lambda(\mathbf{C}, \mathbf{C}, \mathbf{p}, \mathbf{p}) \neq 0</span>（如 <code>VER-3</code> 中帶熵目標可為負值或具正偏差），破壞正定性 <span class="math inline">d(X,X)=0</span>。</li>
+<li><strong>局部極小值陷阱</strong>：<span class="math inline">\Pi(\mathbf{p}, \mathbf{q})</span> 上的非凸二次規劃只能保證 CCCP 收斂至駐點（Stationary Point），無法保證全局最優，故實測得到的 <span class="math inline">\widehat{\operatorname{GW}}</span> 是真實度量平方的上界估計。</li>
+<li><strong>Figure 4 未開根號問題</strong>：原文 Figure 4 <code>[P8:L170-L173]</code> 繪製的是未開平方根的 Eq. (8) 值乘以 <span class="math inline">10^2</span>；雖然經 <code>VER-5</code> 檢驗該 <span class="math inline">7\times 7</span> 矩陣的全部 <span class="math inline">343</span> 個有序三元組在經驗數值上恰好未違反三角不等式，但理論上必須取平方根並做 Sinkhorn 去偏差（Debiasing）才具嚴格度量資格。</li>
+</ol>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<ul>
+<li><strong>去偏差 Gromov–Wasserstein 散度</strong>：定義 <span class="math inline">\widetilde{\operatorname{GW}}_\lambda(X,Y) = \operatorname{GW}_\lambda(X,Y) - \frac{1}{2}\operatorname{GW}_\lambda(X,X) - \frac{1}{2}\operatorname{GW}_\lambda(Y,Y)</span> 以恢復對稱歸零性。</li>
+<li><strong>超度量與層次分類樹 GW（Ultrametric GW）</strong>：當概念空間是學科分類樹（Taxonomy / Ontology）時，將歐氏弦度量替換為樹上最近共同祖先超度量（Tree Metric），可直接度量兩套學科知識分類法的結構演化距離。</li>
+</ul>
+<h2 id="核心結果二-張量縮併分解cccp-單調性與重心-procrustes-外推prp-1-lem-1-prp-2">核心結果二：<span class="math inline">O(N^3)</span> 張量縮併分解、CCCP 單調性與重心 Procrustes 外推（<code>PRP-1</code> + <code>LEM-1</code> + <code>PRP-2</code>）</h2>
+<h3 id="1-直觀理解-1">1. 直觀理解</h3>
+<p>直接計算所有四元組 <span class="math inline">(i,j,k,l)</span> 的關係誤差需要 <span class="math inline">N^4</span> 次運算：詞表取 <span class="math inline">N=20,000</span> 時，<span class="math inline">N^4 = 1.6 \times 10^{17}</span> 次浮點運算在超級電腦上亦不可行。但平方展開 <span class="math inline">(a - b)^2 = a^2 + b^2 - 2ab</span> 把四階耦合拆成三個低階項：<span class="math inline">a^2</span> 項與 <span class="math inline">b^2</span> 項直接被邊際機率 <span class="math inline">\mathbf{p}, \mathbf{q}</span> 吸收成固定常數矩陣，交叉項 <span class="math inline">-2ab</span> 則變成三次普通 <span class="math inline">N\times N</span> 矩陣乘法 <span class="math inline">-2\mathbf{C}_s \Gamma \mathbf{C}_t^\top</span>（僅 <span class="math inline">O(N^3)</span>，約 <span class="math inline">8\times 10^{12}</span> FLOPs，加速 2 萬倍。）。</p>
+<h3 id="2-嚴格表述-1">2. 嚴格表述</h3>
+<ul>
+<li><strong><code>[外部知識 + 原文內容]</code> 命題（<code>PRP-1</code>, Eq. 9, <code>[P4:L138-L145]</code>）</strong>：設損失函數可分解為 <span class="math inline">L(a,b) = f_1(a) + f_2(b) - h_1(a)h_2(b)</span>，且 <span class="math inline">\Gamma \in \Pi(\mathbf{p}, \mathbf{q})</span> 滿足 <span class="math inline">\Gamma\mathbf{1}_m = \mathbf{p}</span>、<span class="math inline">\Gamma^\top\mathbf{1}_n = \mathbf{q}</span>。則四階張量縮併矩陣 <span class="math inline">\hat{\mathbf{C}}_\Gamma := \mathcal{L} \otimes \Gamma \in \mathbb{R}^{n\times m}</span> 恆等於：
+<div class="math inline">\hat{\mathbf{C}}_\Gamma(\mathbf{C}_s, \mathbf{C}_t, \Gamma) = f_1(\mathbf{C}_s)\mathbf{p}\mathbf{1}_m^\top + \mathbf{1}_n \mathbf{q}^\top f_2(\mathbf{C}_t)^\top - h_1(\mathbf{C}_s)\Gamma h_2(\mathbf{C}_t)^\top.</div>
+特別對 <span class="math inline">L(a,b) = (a-b)^2</span>，有 <span class="math inline">f_1(a)=a^2, f_2(b)=b^2, h_1(a)=2a, h_2(b)=b</span>，即 Algorithm 1 第 4、7 行之公式。</li>
+<li><strong><code>[原文內容 + AI 推導]</code> 命題（<code>PRP-2</code>, Eq. 10, <code>[P5:L34-L45]</code>）</strong>：設 <span class="math inline">d_x = d_y = d</span>，已求得前 <span class="math inline">k</span> 個核心詞之最優耦合 <span class="math inline">\Gamma^* \in \Pi(\mathbf{p}, \mathbf{q})</span>。則 Frobenius 範數下的重心正交 Procrustes 問題
+<div class="math inline">\min_{\mathbf{P} \in O(d)} \|\mathbf{X}_{1:k}\Gamma^* - \mathbf{P}\mathbf{Y}_{1:k}\|_F^2</div>
+具有全局閉式最優解 <span class="math inline">\mathbf{P}^* = \mathbf{U}\mathbf{V}^\top</span>，其中 <span class="math inline">\mathbf{X}_{1:k}\Gamma^*\mathbf{Y}_{1:k}^\top = \mathbf{U}\Sigma\mathbf{V}^\top</span> 為奇異值分解。</li>
+</ul>
+<h3 id="3-完整推導逐步補全-step-1step-2step-3">3. 完整推導（逐步補全 <code>STEP-1</code>、<code>STEP-2</code>、<code>STEP-3</code>）</h3>
+<ol>
+<li><strong><code>STEP-1</code>（張量降階恆等式證明）<code>[AI 推導]</code></strong>：逐元素展開 <span class="math inline">(\mathcal{L}\otimes\Gamma)_{ij}</span>：
+<div class="math inline">\begin{aligned}
+(\mathcal{L}\otimes\Gamma)_{ij} &amp;= \sum_{k=1}^n \sum_{l=1}^m \big(f_1(C_{s,ik}) + f_2(C_{t,jl}) - h_1(C_{s,ik})h_2(C_{t,jl})\big)\Gamma_{kl} \\
+&amp;= \sum_{k=1}^n f_1(C_{s,ik}) \underbrace{\left(\sum_{l=1}^m \Gamma_{kl}\right)}_{= p_k} + \sum_{l=1}^m f_2(C_{t,jl}) \underbrace{\left(\sum_{k=1}^n \Gamma_{kl}\right)}_{= q_l} - \sum_{k=1}^n h_1(C_{s,ik}) \left(\sum_{l=1}^m \Gamma_{kl} h_2(C_{t,jl})\right) \\
+&amp;= \big(f_1(\mathbf{C}_s)\mathbf{p}\big)_i + \big(f_2(\mathbf{C}_t)\mathbf{q}\big)_j - \big(h_1(\mathbf{C}_s)\Gamma h_2(\mathbf{C}_t)^\top\big)_{ij}.
+\end{aligned}</div>
+寫成矩陣外積形式即得 <span class="math inline">\hat{\mathbf{C}}_\Gamma = f_1(\mathbf{C}_s)\mathbf{p}\mathbf{1}_m^\top + \mathbf{1}_n\mathbf{q}^\top f_2(\mathbf{C}_t)^\top - h_1(\mathbf{C}_s)\Gamma h_2(\mathbf{C}_t)^\top</span>（<code>VER-1</code> 數值檢驗最大元素誤差 <code>2.22e-16</code>）。</li>
+<li><strong><code>STEP-2</code>（CCCP 單調下降性證明）<code>[AI 推導]</code></strong>：當 <span class="math inline">\mathbf{C}_s, \mathbf{C}_t</span> 對稱且 <span class="math inline">L(a,b) = \frac{1}{2}(a-b)^2</span> 時，二次目標為
+<div class="math inline">\mathcal{E}_{1/2}(\Gamma) = \frac{1}{2}\langle \mathbf{C}_{st}, \Gamma \rangle - \langle \mathbf{C}_s \Gamma \mathbf{C}_t^\top, \Gamma \rangle.</div>
+注意第一項在 <span class="math inline">\Pi(\mathbf{p},\mathbf{q})</span> 上恆為常數 <span class="math inline">\frac{1}{2}(\mathbf{p}^\top \mathbf{C}_s^{\odot 2}\mathbf{p} + \mathbf{q}^\top \mathbf{C}_t^{\odot 2}\mathbf{q})</span>。對 <span class="math inline">\Gamma</span> 求梯度得 <span class="math inline">\nabla_\Gamma \mathcal{E}_{1/2}(\Gamma) = \frac{1}{2}\mathbf{C}_{st} - 2\mathbf{C}_s \Gamma \mathbf{C}_t^\top</span>（與 <span class="math inline">\hat{\mathbf{C}}_\Gamma = \mathbf{C}_{st} - 2\mathbf{C}_s \Gamma \mathbf{C}_t^\top</span> 在 <span class="math inline">\Pi(\mathbf{p},\mathbf{q})</span> 上僅差與 <span class="math inline">\Gamma</span> 無關的常數項 <span class="math inline">\frac{1}{2}\langle\mathbf{C}_{st}, \Gamma\rangle</span>。這完美解釋了原文 <code>P3:L113</code> 寫 <span class="math inline">\frac{1}{2}(a-b)^2</span> 而 <code>Algorithm 1</code> 第 7 行出現係數 <span class="math inline">-2</span> 的精確代數來源。）。
+進一步，因 <span class="math inline">\mathbf{C}_s = \hat{\mathbf{X}}^\top\hat{\mathbf{X}} \succeq 0</span> 且 <span class="math inline">\mathbf{C}_t = \hat{\mathbf{Y}}^\top\hat{\mathbf{Y}} \succeq 0</span>，Kronecker 積 <span class="math inline">\mathbf{C}_t \otimes \mathbf{C}_s \succeq 0</span>，故海森二次型 <span class="math inline">\nabla^2 \mathcal{E}_{1/2}[\Delta, \Delta] = -2\operatorname{vec}(\Delta)^\top (\mathbf{C}_t \otimes \mathbf{C}_s)\operatorname{vec}(\Delta) \le 0</span>。由凹函數一階上界性質：
+<div class="math inline">\mathcal{E}_{1/2}(\Gamma) \le \mathcal{E}_{1/2}(\Gamma^{(t)}) + \langle \hat{\mathbf{C}}_{\Gamma^{(t)}}, \Gamma - \Gamma^{(t)} \rangle, \quad \forall \Gamma \in \Pi(\mathbf{p}, \mathbf{q}).</div>
+兩邊同時加上嚴格凸熵懲罰 <span class="math inline">-\lambda H(\Gamma)</span> 並對 <span class="math inline">\Gamma \in \Pi(\mathbf{p},\mathbf{q})</span> 執行精確 Sinkhorn 最小化得到 <span class="math inline">\Gamma^{(t+1)}</span>，立即推得：
+<div class="math inline">\mathcal{E}_{1/2}(\Gamma^{(t+1)}) - \lambda H(\Gamma^{(t+1)}) \le \mathcal{E}_{1/2}(\Gamma^{(t)}) - \lambda H(\Gamma^{(t)}),</div>
+且嚴格小於號成立直到抵達駐點。</li>
+<li><strong><code>STEP-3</code>（重心 Procrustes SVD 證明與非均勻邊際審核）<code>[AI 推導]</code></strong>：利用 <span class="math inline">\mathbf{P} \in O(d) \implies \|\mathbf{P}\mathbf{Y}\|_F^2 = \|\mathbf{Y}\|_F^2</span>：
+<div class="math inline">\|\mathbf{X}\Gamma^* - \mathbf{P}\mathbf{Y}\|_F^2 = \|\mathbf{X}\Gamma^*\|_F^2 + \|\mathbf{Y}\|_F^2 - 2\operatorname{tr}\big(\mathbf{P}\mathbf{Y}(\Gamma^*)^\top\mathbf{X}^\top\big).</div>
+將 <span class="math inline">\mathbf{X}\Gamma^*\mathbf{Y}^\top = \mathbf{U}\Sigma\mathbf{V}^\top</span> 代入得 <span class="math inline">\operatorname{tr}(\mathbf{P}\mathbf{V}\Sigma\mathbf{U}^\top) = \operatorname{tr}((\mathbf{U}^\top\mathbf{P}\mathbf{V})\Sigma) \le \operatorname{tr}(\Sigma)</span>，當 <span class="math inline">\mathbf{U}^\top\mathbf{P}\mathbf{V} = \mathbf{I}_d</span> 即 <span class="math inline">\mathbf{P}^* = \mathbf{U}\mathbf{V}^\top</span> 時取最大值。</li>
+</ol>
+<h3 id="4-局限分析推理缺口與隱藏陷阱">4. 局限分析（推理缺口與隱藏陷阱）</h3>
+<ul>
+<li><strong>原文範數下標誤植</strong>：原文 Eq. (10) <code>[P5:L35]</code> 寫為 <span class="math inline">\|\mathbf{X}\Gamma^* - \mathbf{P}\mathbf{Y}\|_2^2</span>（譜範數平方），但譜範數正交逼近問題並無此 SVD 閉式解，必須修正為 Frobenius 範數 <span class="math inline">\|\cdot\|_F^2</span>。</li>
+<li><strong>非均勻詞頻權重陷阱（<code>ISS-GW-2</code>）</strong>：目標詞 <span class="math inline">\mathbf{y}^{(j)}</span> 在源空間的真實條件重心是 <span class="math inline">\bar{\mathbf{x}}^{(j)} = \frac{1}{q_j}\sum_i \Gamma^*_{ij}\mathbf{x}^{(i)} = (\mathbf{X}\Gamma^*\operatorname{diag}(\mathbf{q})^{-1})_{:,j}</span>。在本文實驗採用的均勻分佈 <span class="math inline">q_j = 1/k</span> 下，<span class="math inline">\operatorname{diag}(\mathbf{q})^{-1} = k\mathbf{I}_k</span> 只對矩陣乘上正常數 <span class="math inline">k</span>，不影響 <span class="math inline">\mathbf{U}\mathbf{V}^\top</span>；但若如作者在 <code>P5:L5-L12</code> 建議改用 Zipf 冪律詞頻 <span class="math inline">\mathbf{q}</span>，直接套用 <span class="math inline">\operatorname{SVD}(\mathbf{X}\Gamma^*\mathbf{Y}^\top)</span> 會令高頻虛詞權重放大 <span class="math inline">q_j</span> 倍，壓制低頻專業概念詞。</li>
+</ul>
+<h3 id="5-研究拓展-1">5. 研究拓展</h3>
+<ul>
+<li><strong>低秩 Gromov–Wasserstein（Low-Rank GW, Scetbon et al., 2022）</strong>：令耦合矩陣本身具有非負低秩分解 <span class="math inline">\Gamma = \mathbf{Q}\operatorname{diag}(1/\mathbf{g})\mathbf{R}^\top</span>，可將複雜度從 <span class="math inline">O(N^3)</span> 降至線性 <span class="math inline">O(N r^2)</span>，完全免除退回全局線性映射 <span class="math inline">\mathbf{P}^*</span> 的第二步妥協。</li>
+</ul>
+<h2 id="h5-批判性學術評論與研究延伸">H5 批判性學術評論與研究延伸</h2>
+<h2 id="批判性優劣勢審核">批判性優劣勢審核</h2>
+<ol>
+<li><strong>典範級貢獻</strong>：本文是自然語言處理與機器學習領域首次將 Mémoli 的 Gromov–Wasserstein 幾何工具轉化為可擴展無監督表示對齊演算法的代表作工作。它用一個乾淨、單調收斂、僅單一超參數 <span class="math inline">\lambda</span> 的變分最佳化問題，取代了脆弱的對抗訓練流水線，並深刻揭示了詞嵌入對齊的本質是賦距測度空間配準而非歐氏向量迴歸。</li>
+<li><strong>三個方法論張力（Tensions）</strong>：
+<ul>
+<li><strong>「免後處理」宣稱的適用邊界</strong>：在 <code>K ≤ 20,000</code> 的核心詞集內，直接用 <span class="math inline">\Gamma^*</span> 檢索確實因雙隨機歸一化天然消除了 Hubness；但為擴展至 <code>200,000</code> 全詞表（Section 4.1 <code>[P6:L133-L136]</code>），作者仍退回正交映射 <span class="math inline">\mathbf{P}^*</span> 並重新引入了 CSLS 檢索。</li>
+<li><strong>非等距形態學瓶頸（<code>ISS-GW-3</code>）</strong>：在語法形態高度屈折的語言對（如 Table 1 EN→RU <code>45.1%</code> 對比 Conneau <code>52.4%</code>；Table 2 Dinu EN→FI <code>18.3%</code> 對比 Artetxe <code>33.50%</code>），一個英語詞根對應數十個俄語／芬蘭語格變體，破壞了 <span class="math inline">1</span>-對-<span class="math inline">1</span> 均勻邊際 <span class="math inline">\Pi(\frac{1}{n}\mathbf{1}, \frac{1}{m}\mathbf{1})</span> 的等距假設。</li>
+<li><strong>對語料尺度不對稱的敏感性</strong>：如 <code>Figure 3</code> 與 <code>Table 2</code> 所示，未對 <span class="math inline">\mathbf{C}_s, \mathbf{C}_t</span> 做歸一化前，Dinu EN–ES 僅得 <code>12.5%</code>，歸一化後躍升至 <code>37.60%</code>。這說明 <span class="math inline">L_2</span> 損失對內部距離的絕對數值尺度敏感，並非尺度不變（Scale-invariant）。</li>
+</ul>
+</li>
+</ol>
+<h1 id="跨層研究分析全局依賴網絡脆弱節點與數理哲學跨域橋接">跨層研究分析：全局依賴網絡、脆弱節點與數理哲學跨域橋接</h1>
+<h2 id="專題核心解答兩個概念空間怎麼平移平移代價多少">專題核心解答：「兩個概念空間怎麼平移？平移代價多少？」</h2>
+<p>將兩個學科、歷史時期或語言的概念系統建模為賦距測度空間 <span class="math inline">\mathfrak{C}_A = (V_A, \mathbf{C}_A, \mathbf{p}_A)</span> 與 <span class="math inline">\mathfrak{C}_B = (V_B, \mathbf{C}_B, \mathbf{p}_B)</span>：</p>
+<ol>
+<li><strong>怎麼平移（Translation Operator）</strong>：由最優耦合 <span class="math inline">\Gamma^* \in \Pi(\mathbf{p}_A, \mathbf{p}_B)</span> 誘導馬可夫轉移核 <span class="math inline">K_{A\to B}(j \mid i) = \Gamma^*_{ij} / p_{A,i}</span>。
+<ul>
+<li>若某概念 <span class="math inline">i</span> 的條件熵 <span class="math inline">H(K_{A\to B}(\cdot \mid i)) \approx 0</span>，表示該概念在目標學科存在精確結構同源詞（Structural Homologue）；</li>
+<li>若條件熵極高，表示該概念在平移時發生概念裂變（Conceptual Fission），必須拆解為目標學科的多個子概念組合才能維持關係網一致。</li>
+</ul>
+</li>
+<li><strong>平移代價多少（Translation Cost）</strong>：
+<ul>
+<li><strong>全局平移代價</strong>：去偏差開根號距離 <span class="math inline">d_{\operatorname{GW}}(\mathfrak{C}_A, \mathfrak{C}_B) = \frac{1}{2}\widetilde{\operatorname{GW}}(\mathbf{C}_A, \mathbf{C}_B, \mathbf{p}_A, \mathbf{p}_B)^{1/2}</span>，量化兩套概念體系在全局拓樸上的不可通約度（Structural Incommensurability）；</li>
+<li><strong>單一概念局部平移代價</strong>：第 <span class="math inline">i</span> 個源概念的局部結構扭曲能 <span class="math inline">e_i := \frac{1}{p_{A,i}}\sum_j (\hat{\mathbf{C}}_{\Gamma^*})_{ij} \Gamma^*_{ij}</span>，精確定位哪些核心概念在跨學科遷移時承受最大的語義撕裂。</li>
+</ul>
+</li>
+</ol>
+<h2 id="跨學科數理與哲學橋接嚴格標明成立條件推導依據與不確定性">跨學科數理與哲學橋接（嚴格標明成立條件、推導依據與不確定性）</h2>
+<h3 id="橋接一bridge-1範疇論與-lawvere-賦距範疇enriched-category-theory">橋接一（<code>BRIDGE-1</code>）：範疇論與 Lawvere 賦距範疇（Enriched Category Theory）</h3>
+<ul>
+<li><strong>結構映射</strong>：依 Lawvere (1973)，每個度量空間 <span class="math inline">(\mathcal{X}, d_{\mathcal{X}})</span> 是一個在廣義真值閉單群範疇 <span class="math inline">([0,\infty], \ge, +, 0)</span> 上豐化（Enriched）的小範疇。等距同構對應豐化範疇等價；而當嚴格豐化函子不存在時，GW 最優耦合 <span class="math inline">\Gamma^*</span> 構成帶有測度權重的隨機伴隨對應／鬆弛雙模（Stochastic Profunctor / Lax Correspondence），其 <span class="math inline">\operatorname{GW}^{1/2}</span> 度量了偏離嚴格豐化函子性的最小 <span class="math inline">L^2</span> 餘極限扭曲。</li>
+<li><strong>成立條件</strong>：<span class="math inline">\mathbf{C}_A, \mathbf{C}_B</span> 必須滿足真實度量公理（或透過 <code>LEM-1</code> 轉換為單位球面弦度量），且 <span class="math inline">\lambda \to 0^+</span>。</li>
+<li><strong>推導依據</strong>：結合 Lawvere (1973) 賦距範疇定義、Mémoli (2011) <code>THM-1</code> 商空間度量以及 Fritz &amp; Perrone 的馬可夫／Kantorovich 單子（Monad）耦合結構。</li>
+<li><strong>不確定性等級</strong>：低至中（集合與度量層面嚴格成立；但因最優耦合 <span class="math inline">\Gamma^*</span> 未必唯一，態射複合僅滿足次可加性三角不等式而非嚴格函子結合律）。</li>
+</ul>
+<h3 id="橋接二bridge-2量化社會學科學學與孔恩不可通約性kuhns-incommensurability-field-homology">橋接二（<code>BRIDGE-2</code>）：量化社會學、科學學與孔恩「不可通約性」（Kuhn's Incommensurability &amp; Field Homology）</h3>
+<ul>
+<li><strong>結構映射</strong>：將孔恩（Thomas Kuhn）科學哲學中定性的「典範不可通約性」以及布迪厄（Pierre Bourdieu）場域理論中的「場域結構同構（Homology of Fields）」完全算子化。給定兩個學科（如統計物理學 vs 量化社會學）的概念共現／引用相似度矩陣 <span class="math inline">(\mathbf{C}_A, \mathbf{p}_A)</span> 與 <span class="math inline">(\mathbf{C}_B, \mathbf{p}_B)</span>，<span class="math inline">\Gamma^*</span> 自動發現跨學科結構同源概念對（如「自由能泛函 ↔ 社會效用隨機選擇模型」），而 <span class="math inline">\operatorname{GW}^{1/2}</span> 給出跨學科翻譯的精確幾何阻力。</li>
+<li><strong>成立條件</strong>：兩學科文獻語料需經尺度歸一化（如 <code>Figure 3</code>），且當某一學科包含全新本體論實體（無對應物）時，必須將硬邊際 <span class="math inline">\Pi(\mathbf{p}_A, \mathbf{p}_B)</span> 推廣為 Partial / Unbalanced GW。</li>
+<li><strong>推導依據</strong>：本文 Section 3.1 與 Section 4.4（Figure 4 跨語言距離矩陣）由自然語言詞庫向學科概念詞庫的直接數學推廣。</li>
+<li><strong>不確定性等級</strong>：中（經驗假設層面：如 <code>CEX-1</code> 所示，關係同構是語義等價的必要條件而非充分條件，對稱二元對立概念仍可能發生鏡像錯配）。</li>
+</ul>
+<h3 id="橋接三bridge-3統計力學平均場自旋玻璃自由能mean-field-spin-glass-variational-free-energy">橋接三（<code>BRIDGE-3</code>）：統計力學平均場自旋玻璃自由能（Mean-Field Spin-Glass Variational Free Energy）</h3>
+<ul>
+<li><strong>結構映射</strong>：熵正則化 GW 目標 <span class="math inline">\mathcal{F}_\lambda(\Gamma) = \sum_{i,j,k,l} L(C_{ik}, C'_{jl})\Gamma_{ij}\Gamma_{kl} - \lambda H(\Gamma)</span> 在代數上嚴格同構於溫度 <span class="math inline">T = \lambda</span> 下的雙隨機 Potts 自旋玻璃 Bragg–Williams 平均場變分自由能 <span class="math inline">\mathcal{F} = U_{\text{int}}(\Gamma) - T S(\Gamma)</span>。Algorithm 1 的外層偽代價更新 <span class="math inline">\hat{\mathbf{C}}_\Gamma</span> 即為自洽平均場有效哈密頓量（Effective Cavity Field），內層 Sinkhorn 迭代即為雙邊際配分函數歸一化；當 <span class="math inline">\lambda</span> 由大變小時，系統經歷從高溫順磁相（均勻模糊耦合 <span class="math inline">\Gamma = \mathbf{p}\mathbf{q}^\top</span>）向低溫鐵磁／自旋玻璃凍結相（稀疏置換矩陣）的對稱性破缺相變。</li>
+<li><strong>成立條件</strong>：對任意 <span class="math inline">\lambda &gt; 0</span> 與任意有限矩陣恆等成立。</li>
+<li><strong>推導依據</strong>：Birkhoff 多胞形上的 Gibbs 變分原理與 Rangarajan et al. (1997) 確定性退火（Deterministic Annealing）映射。</li>
+<li><strong>不確定性等級</strong>：極低（變分泛函與不動點方程完全同構；同時解釋了為何極小 <span class="math inline">\lambda</span> 在高非對稱空間如 EN–RU 上易陷入亞穩態局部極小值，需退火策略輔助）。</li>
+</ul>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

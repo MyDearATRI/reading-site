@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-2205d16f">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-2205d16f">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
@@ -193,6 +195,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜What Survives the Shift from Text to Pixels? Conditional Protection against Prompt Injection in Image-Rendered Documents</strong>，Haoyang Liu et al.
+<ul>
+<li>重點：配對 191 筆問答來源的純文字與頁面影像版本跨六模型測試間接提示注入。頁面渲染雖壓低附加與格式竄改執行率，但 Qwen3-VL-8B 影像答案替換率仍達 77.96%，且八組候選搜尋可彌平 Qwen 與 Gemini 的防護缺口（GPT-5-nano 除外）；注意力阻斷顯示模型常能轉錄影像指令卻不執行，因視覺編碼分散了指令與目標的注意力位置，故渲染僅具條件式保護。</li>
+<li>連結：<a href="zotero://select/library/items/EH7XQZT7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24231" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Dressed in Authority: Practical Black-Box Jailbreaking of MLLMs via Visual Trust Bias</strong>，Weihang Liu et al.
+<ul>
+<li>重點：利用多模態模型對權威視覺版面線索的內在信任偏誤，提出黑盒越獄框架 VTBA：從權威版型庫匹配最適版式並將有害意圖自然嵌入，進而在無對抗雜訊下繞過安全拒答。作者建立 2,500 筆自然圖文配對評測集，證實 VTBA 在多個強多模態模型上具高攻擊成功率。</li>
+<li>連結：<a href="zotero://select/library/items/5U9WZ4ZM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.22292" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Jailbreak Detection on Large Language Models via Contrastive Prototype Structures</strong>，Yan Qiu, Yuanyuan Li：提出不需額外下游分類器的對比原型越獄偵測框架 JDPI，只用二元安全標籤微調編碼器，再依良性／有害原型的相對距離判別。在四個基準上準確率提升 9.1–18.0 個百分點，經適配後超越 Llama Guard 3-8B 達 0.173–0.310 ROC-AUC，多輪累積與跨集遷移的穩健性也更強。（<a href="zotero://select/library/items/5MJW5PDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24936" rel="noopener">官方連結</a>）</li>
@@ -224,6 +241,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-a7a688b9">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a><a class="find" href="../../index.html#n=n-a7a688b9">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · B_學習理論、推理與表示幾何</span>
@@ -193,6 +195,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Bayesian <span class="math inline">κ</span>-Explorer for Minimax Model Estimation in MDPs</strong>，Xihe Gu, Urbashi Mitra, Tara Javidi
+<ul>
+<li>重點：為未知馬可夫決策過程的極小極大轉移估計提出 Bayesian <span class="math inline">\kappa</span>-Explorer，在轉移分佈施加 Dirichlet 先驗使後驗期望平方 <span class="math inline">\ell_2</span> 誤差等於總後驗變異數，進而免除頻繁學派做法中昂貴的信賴集聯合最佳化。方法保留 <span class="math inline">\widetilde{O}(T^{-1/3})</span> 代理收斂率與漸近極小極大配置基準上界，並在 Pendulum、Mountain Car 與 Taxi 上降低最壞情況轉移估計誤差。</li>
+<li>連結：<a href="zotero://select/library/items/F58MFG3S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25160" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜Functional Principal Component Analysis: Minimax Optimality from Sparse to Dense Designs and Beyond</strong>，Shunxing Yan, Fang Yao
+<ul>
+<li>重點：在帶有雜訊的離散隨機觀測下，建立篩估計函數型主成分分析（FPCA）針對發散譜指標與遞增維度主子空間的極小極大最優收斂率。分析將譜逼近與隨機擾動分離，揭示譜辨識與非參數重建交互產生的稀疏至稠密四種或兩種採樣體制，並證明下游 FPCA 函數型線性迴歸同樣達成極小極大最優。</li>
+<li>連結：<a href="zotero://select/library/items/4S54MT6Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24228" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Simple Private Noisy SGD is Minimax-Optimal under Population Strong Convexity</strong>，Valentin Roth, Marco Avella Medina：嚴格證明最簡單的單次遍歷差分隱私雜訊 SGD（固定步長排程＋常數批次），在母體強凸光滑損失與 Rényi DP 下，同時具備期望與高機率兩種意義的極小極大最優性。本文也首次為隱私邏輯斯迴歸建立消去多項式對數冗餘因子的精確最優收斂率。（<a href="zotero://select/library/items/CWGK4ICU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26515" rel="noopener">官方連結</a>）</li>
@@ -231,6 +248,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

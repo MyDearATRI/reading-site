@@ -10,8 +10,10 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
 <link rel="stylesheet" href="../../assets/style.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc">
+<body class="doc" data-note="n-2a2f903e">
 <header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a><a class="find" href="../../index.html#n=n-2a2f903e">Find on board</a></header>
 <main>
 <span class="kicker">領域分級精讀 · B_學習理論、推理與表示幾何</span>
@@ -179,6 +181,21 @@
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
 <!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-200800-增量每日新增">2026-11-20（08:00 增量）每日新增</h4>
+<ul>
+<li><strong>2026｜Dynamic flow promotes airway MPS maturation and host response to viral infection</strong>，Claire H Caygill et al.
+<ul>
+<li>重點：比較靜態培養與連續基底側動態灌流下原代人類呼吸道微生理系統（MPS）對三種 SARS-CoV-2 變異株的宿主反應。動態流能在不大幅改變基線基因表現下加速上皮分化動力學、降低重複變異，並放大轉錄組效應量以提升受感染組織判別力與干擾素通路的機制可解釋性。</li>
+<li>連結：<a href="zotero://select/library/items/Q6TCU8M3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fimmu.2026.1993146" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li><strong>2026｜AlphaInterp: Revealing how AlphaFold 3 processes structure, confidence, and evolutionary information</strong>，Jonathan Feldman, Jeffrey Skolnick
+<ul>
+<li>重點：結合表徵幾何分析、線性探針、激活修補與系統發生擾動，解剖 AlphaFold 3 如何把多序列比對（MSA）轉換為三維結構與置信度。結果顯示少數具演化分歧度的同源序列即可在 pairformer 中形成緊緻潛在空間並逐層解碼距離、接觸與置信度，而演化過度相近或無關序列均無法恢復預測表現。</li>
+<li>連結：<a href="zotero://select/library/items/5MC9RURR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1371/journal.pcbi.1014981" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ul>
 <h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
 <ul>
 <li><strong>2026｜Separating Interpretability and Reconstruction in Sparse Autoencoders</strong>，Anh Tien Nguyen, Dimitris Samaras, Mahdi S. Hosseini：提出模組化的雙分支稀疏自編碼器 DualSAE，用去相關損失與兩階段訓練，把主導語意的稀疏分支和非語意的重建殘差分支解耦。跨視覺與語言模型，重建保真度與單義可解釋性同時取得約 29% 與 34% 的相對提升。（<a href="zotero://select/library/items/IE8XG7KZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25165" rel="noopener">官方連結</a>）</li>
@@ -212,6 +229,9 @@
 </article>
 </main>
 <footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

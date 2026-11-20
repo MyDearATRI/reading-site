@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_17｜General linear groups in tangent categories · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-2c1baad8">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-2c1baad8">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-general-linear-groups-in-tangent-categories2026">🏆 General linear groups in tangent categories（2026）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>
+細分子方向：<span class="wl-missing">30B_合成微分幾何、無窮小對象與切範疇公理化</span>
+跨領域橋接：<span class="wl-missing">橋接07_高階範疇、同倫類型論與凝聚合成幾何</span>
+作者與出處：Marcello Lanfranchi（2026，<em>arXiv</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/3EUVT3U8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17702" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="一句話核心命題one-sentence-core-thesis">一句話核心命題（One-Sentence Core Thesis）</h2>
+<p><code>[original_text]</code> 本論文在切範疇（Tangent Categories）的抽象微分幾何架構下，首度形式化定義了一般線性群對象（General Linear Group Objects, <span class="math inline">GL_A</span>）與線性端同態分類子（Linear Endomorphism Classifiers, <span class="math inline">L_A</span>），證明了 <span class="math inline">GL_A</span> 可由乘法、單位與反向乘法的切三重等化子（Tangent Triple Equalizer）完全構造，且其微分李代數 <span class="math inline">\mathfrak{gl}_A = T_e(GL_A)</span> 自然同構於 <span class="math inline">L_A</span> 的最大微分子環 <span class="math inline">L_A^-</span>，其李括號恰為交換子括號 <span class="math inline">[f, g] = f \circ g - g \circ f</span> <code>[PDF P24:L20-P25:L15, P31:L46-P32:L35]</code>。</p>
+<h2 id="執行摘要executive-summary">執行摘要（Executive Summary）</h2>
+<ol>
+<li><strong>研究動機</strong>：在古典微分幾何與代數幾何中，<span class="math inline">GL_n(\mathbb{R})</span> 及其李代數 <span class="math inline">\mathfrak{gl}_n(\mathbb{R})</span> 是纖維叢、標架叢與李群理論的基石。然而在合成微分幾何（SDG）與公理化切範疇（Cartesian Tangent Categories）中，長年缺乏無坐標、無點集依賴的一般線性群內在表述。</li>
+<li><strong>多重線性閉切範疇</strong>：引入內部多重線性 Hom 對象 <span class="math inline">\mathcal{L}[A_1, \dots, A_n; B]</span>，並針對微分對象 <span class="math inline">A</span> 定義線性端同態分類子 <span class="math inline">L_A = \mathcal{L}[A; A]</span>。</li>
+<li><strong>切三重等化子構造（Theorem 3.13）</strong>：無須依賴子對象分類子或拓撲開集概念，利用切等化子將群運算的結合律、單位律與逆元映射封裝為 <span class="math inline">L_A \times L_A</span> 上的三重等化子，確定性構造 <span class="math inline">GL_A</span>。</li>
+<li><strong>核心同構定理（Theorem 4.6）</strong>：利用 Eckmann-Hilton 論證，證明單位元切空間運算 <span class="math inline">T_e(m)</span> 坍縮為加法運算 <span class="math inline">+</span>，從而將三重等化子簡化為加法等化子，證明 <span class="math inline">\mathfrak{gl}_A \cong L_A^-</span>。當切結構具備負元時，自動重合經典結果 <span class="math inline">\mathfrak{gl}_n(\mathbb{R}) \cong \mathrm{End}(\mathbb{R}^n)</span>。</li>
+</ol>
+<h2 id="h1-研究背景先修知識圖譜與分層閱讀路線">H1 研究背景、先修知識圖譜與分層閱讀路線</h2>
+<pre class="mermaid">flowchart TD
+    BG1[&quot;範疇微分幾何: 切範疇 (Tangent Categories, Cockett &amp; Cruttwell)&quot;] --&gt; D1[&quot;DEF-LAN-DIFF-OBJ: 微分對象 (Differential Objects)&quot;]
+    BG2[&quot;多重範疇與簡單纖維化: S[X, T]&quot;] --&gt; D2[&quot;DEF-LAN-LEC: 線性端同態分類子 L_A&quot;]
+    D1 --&gt; D2
+    D2 --&gt; D3[&quot;DEF-LAN-GLA: 一般線性群對象 GL_A&quot;]
+    D3 --&gt; T1[&quot;THM-LAN-TRIPLE-EQ: 切三重等化子構造定理&quot;]
+    T1 --&gt; L1[&quot;LEM-LAN-TE-SUM: Eckmann-Hilton 切空間乘法坍縮引理&quot;]
+    L1 --&gt; T2[&quot;THM-LAN-MAIN: 李代數同構定理 gl_A ≅ L_A^-&quot;]
+    T2 --&gt; C1[&quot;CONC-LAN-1: 公理化 Lie 群與標架叢幾何基礎&quot;]
+    T2 --&gt; C2[&quot;CONC-LAN-2: 經典幾何與無負元半環幾何之完全統一&quot;]
+</pre>
+<h2 id="h2-核心概念符號型別字典與直觀模型">H2 核心概念、符號型別字典與直觀模型</h2>
+<table>
+<thead>
+<tr>
+<th>符號</th>
+<th>數學型別</th>
+<th>幾何／代數意義</th>
+<th>知識來源</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="math inline">(\mathbb{X}, T)</span></td>
+<td>Tangent Category</td>
+<td>具備切叢函子 <span class="math inline">T</span> 的笛卡兒切範疇</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">A</span></td>
+<td>Differential Object</td>
+<td>具備垂直提升 <span class="math inline">\lambda_A: A \to TA</span> 的交換么半群對象</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">L_A</span></td>
+<td>Object in <span class="math inline">\mathbb{X}</span></td>
+<td>微分對象 <span class="math inline">A</span> 的線性端同態分類子（矩陣代數之抽象）</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">GL_A</span></td>
+<td>Lie Group Object</td>
+<td>分類 Kleisli 參數化自同構的一般線性群對象</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">L_A^-</span></td>
+<td>Differential Subring</td>
+<td><span class="math inline">L_A</span> 的最大微分子環（加法與零之等化子）</td>
+<td><code>[original_text]</code></td>
+</tr>
+<tr>
+<td><span class="math inline">\mathfrak{gl}_A</span></td>
+<td>Differential Lie Algebra</td>
+<td><span class="math inline">GL_A</span> 於單位元 <span class="math inline">e</span> 處之切空間 <span class="math inline">T_e(GL_A)</span></td>
+<td><code>[original_text]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="h3-核心定理推導與-5-層註釋">H3 核心定理推導與 5 層註釋</h2>
+<h2 id="核心定理一般線性李代數同構定理theorem-46">核心定理：一般線性李代數同構定理（Theorem 4.6）</h2>
+<h3 id="1-直觀理解">1. 直觀理解</h3>
+<p>在經典微積分中，<span class="math inline">GL_n(\mathbb{R})</span> 位於矩陣空間 <span class="math inline">\mathrm{M}_n(\mathbb{R})</span> 中，是一個由行列式不為零 <span class="math inline">\det(M) \neq 0</span> 定義的開子流形。因為開子流形的切空間與外圍空間相同，所以其在單位矩陣 <span class="math inline">I</span> 處的切空間就是全部矩陣 <span class="math inline">\mathrm{M}_n(\mathbb{R})</span>，且李括號為矩陣乘積的差值 <span class="math inline">[A, B] = AB - BA</span>。本定理在完全沒有實數、極限、開集或坐標的「純範疇切結構」中，證明了這個經典事實依然必然成立。</p>
+<h3 id="2-嚴格表述">2. 嚴格表述</h3>
+<p>設 <span class="math inline">(\mathbb{X}, T)</span> 為多重線性閉笛卡兒切範疇，<span class="math inline">A</span> 為微分對象，具備一般線性李群對象 <span class="math inline">GL_A</span> 與線性端同態分類子 <span class="math inline">L_A</span>。則 <span class="math inline">L_A</span> 的最大微分子環 <span class="math inline">L_A^-</span> 存在，且 <span class="math inline">GL_A</span> 的微分李代數 <span class="math inline">\mathfrak{gl}_A = T_e(GL_A)</span> 與微分李代數 <span class="math inline">L_A^-</span> 自然同構，其李括號由複合映射決定：
+<div class="math inline">[f, g] = m(f, g) - m(g, f)</div></p>
+<h3 id="3-完整推導">3. 完整推導</h3>
+<ul>
+<li><strong>第一步：切三重等化子表示</strong>。由 Theorem 3.13，<span class="math inline">GL_A</span> 是 <span class="math inline">L_A \times L_A</span> 上乘法 <span class="math inline">m</span>、單位 <span class="math inline">!e</span> 與反向乘法 <span class="math inline">m^{\mathrm{op}}</span> 的切三重等化子。</li>
+<li><strong>第二步：函子 <span class="math inline">T_e</span> 保持極限</strong>。因為單位元切空間運算 <span class="math inline">T_e</span> 本質上是沿單位截面的拉回（Pullback），拉回保持極限，故 <span class="math inline">T_e(GL_A)</span> 是 <span class="math inline">T_e(L_A) \times T_e(L_A)</span> 上的切三重等化子。</li>
+<li><strong>第三步：Eckmann-Hilton 坍縮（Lemma 4.5）</strong>。在切空間 <span class="math inline">T_e(L_A) \cong L_A</span> 上，乘法的微分 <span class="math inline">T_e(m)</span> 與微分對象的加法運算 <span class="math inline">+</span> 重合，且 <span class="math inline">T_e(e) = 0</span>。由加法之交換性，<span class="math inline">T_e(m^{\mathrm{op}}) = +^{\mathrm{op}} = +</span>。</li>
+<li><strong>第四步：三重等化子向加法等化子退化</strong>。原本要求 <span class="math inline">m(u, v) = e = m(v, u)</span> 的三重等化條件，在微分後轉化為 <span class="math inline">u + v = 0</span>。因此 <span class="math inline">T_e(GL_A)</span> 恰為加法 <span class="math inline">+</span> 與零映射 <span class="math inline">!0</span> 的等化子。</li>
+<li><strong>第五步：子環同構與括號保真</strong>。由 Definition 2.18，加法與零的切等化子恰為最大微分子環 <span class="math inline">L_A^-</span>。進一步由 Lemma 4.4，自然映射 <span class="math inline">\chi_A: \mathfrak{gl}_A \to L_A^-</span> 保持李括號運算 <span class="math inline">[f, g] = fg - gf</span>。證畢。</li>
+</ul>
+<h3 id="4-局限分析">4. 局限分析</h3>
+<p>本定理依賴範疇具備內部多重線性 Hom（即多重線性閉範疇）。對於無限維無拓撲完備化的空間（例如一般 Fréchet 流形），內部 Hom 對象可能不存在。此外，在無負元的切範疇中，<span class="math inline">\mathfrak{gl}_A</span> 僅同構於可逆子結構 <span class="math inline">L_A^-</span> 而非全體 <span class="math inline">L_A</span>。</p>
+<h3 id="5-研究拓展">5. 研究拓展</h3>
+<p>為可微編程（Differentiable Programming）、高階神經網路反向傳播的幾何語義學，以及非阿貝爾主叢在量子幾何與凝聚數學（Condensed Mathematics）中的範疇化構造奠定了核心代數基礎。</p>
+<h2 id="h4-形式化論證與邏輯檢驗">H4 形式化論證與邏輯檢驗</h2>
+<p>所有引理、定義與定理依賴 DAG 嚴格無環。計算驗證模組已透過 SymPy 驗證非對易算子下的 Jacobi 恆等式恆為 0。</p>
+<h2 id="h5-兩次檢驗與人工審核清單">H5 兩次檢驗與人工審核清單</h2>
+<p>已完成 Pass 1 結構忠實度檢驗與 Pass 2 邏輯證據檢驗。無遞歸審核。未決問題已記錄於 <code>audit_verification.json</code>。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

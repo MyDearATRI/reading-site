@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_27｜Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-27216d0d">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-27216d0d">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-multi-agent-actor-critic-for-mixed-cooperative-competitive-environments2017">🏆 Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments（2017）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>
+細分子方向：<span class="wl-missing">09A_多智能體強化學習MARL、集中訓練分散執行與協作博弈</span>
+跨領域橋接：<span class="wl-missing">橋接12_多智能體演化博弈、形式語意語用與科學知識治理</span>
+作者與出處：Ryan Lowe, Yi Wu, Aviv Tamar, Jean Harb, Pieter Abbeel, Igor Mordatch（2017，<em>arXiv (Cornell University)</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/F7UKR4IW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.02275" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments<br />
+<strong>作者</strong>：Ryan Lowe, Yi Wu, Aviv Tamar, Jean Harb, Pieter Abbeel, Igor Mordatch<br />
+<strong>發表會議</strong>：NeurIPS 2017<br />
+<strong>arXiv 編號</strong>：<code>1706.02275</code><br />
+<strong>學術定位</strong>：多智能體強化學習 (MARL) 領域的代表作經典。提出了「集中式訓練、分散式執行 (CTDE)」範式下的 MADDPG 演算法，完全打破了傳統單智能體強化學習直接應用於多智能體系統時面臨的「環境非平穩性（Non-stationarity）」難題，成為後續無數多智能體決策、無人機集群協同及自對弈博弈系統的基石架構。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;多智能體系統環境非平穩難題 (其他智能體策略持續漂移)&quot;] --&gt; B[&quot;集中式訓練 (Centralized Training)&quot;]
+    B --&gt; C[&quot;集中式 Critic: 輸入全局狀態 x 與聯合動作 a = (a_1, ..., a_N)&quot;]
+    C --&gt; D[&quot;恢復環境馬可夫性質，經驗回放池 (Replay Buffer) 重新生效&quot;]
+    D --&gt; E[&quot;多智能體確定性策略梯度 (MADDPG Theorem)&quot;]
+    E --&gt; F[&quot;分散式執行 (Decentralized Execution): Actor 僅依賴局部觀測 o_i&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">N</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{N}</span></td>
+<td style="text-align:left">Multi-Agent System</td>
+<td style="text-align:left">智能體總數</td>
+<td style="text-align:left">P3:L5</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\mathbf{x}</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{S} \subseteq \mathbb{R}^d</span></td>
+<td style="text-align:left">Global State</td>
+<td style="text-align:left">全局狀態向量 (<span class="math inline">x = (o_1, \dots, o_N)</span>)</td>
+<td style="text-align:left">P3:L10</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\mu_i</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{O}_i \to \mathcal{A}_i</span></td>
+<td style="text-align:left">Policy Network</td>
+<td style="text-align:left">第 <span class="math inline">i</span> 個智能體之確定性策略網絡</td>
+<td style="text-align:left">P4:L12</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">Q_i^\mu</span></td>
+<td style="text-align:left"><span class="math inline">\mathcal{S} \times \mathcal{A} \to \mathbb{R}</span></td>
+<td style="text-align:left">Action-Value Function</td>
+<td style="text-align:left">第 <span class="math inline">i</span> 個智能體依賴聯合動作之集中式 Critic</td>
+<td style="text-align:left">P4:L15</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">\gamma</span></td>
+<td style="text-align:left"><span class="math inline">[0, 1)</span></td>
+<td style="text-align:left">Discount Factor</td>
+<td style="text-align:left">貼現因子</td>
+<td style="text-align:left">P3:L15</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（馬可夫博弈 Markov Game）</strong>：
+一個包含 <span class="math inline">N</span> 個智能體的隨機博弈形式化定義為元組：
+<div class="math inline">\mathcal{M} = \langle N, \mathcal{S}, \{\mathcal{A}_i\}_{i=1}^N, \mathcal{P}, \{r_i\}_{i=1}^N, \{\mathcal{O}_i\}_{i=1}^N, \gamma \rangle</div>
+每個智能體 <span class="math inline">i</span> 依據局部觀測 <span class="math inline">o_i = O_i(s)</span> 做出動作 <span class="math inline">a_i = \mu_i(o_i)</span>，環境依據轉移機率 <span class="math inline">\mathcal{P}(s' | s, a_1, \dots, a_N)</span> 轉移並賦予各自獎勵 <span class="math inline">r_i</span>。</p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析集中式訓練分散式執行與多智能體確定性策略梯度">5-層核心定理專題解析：集中式訓練分散式執行與多智能體確定性策略梯度</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>在足球比賽或無人機編隊中，如果每個人都只根據自己看到的局部視野各自猜測隊友與對手的心思，環境看起來就會雜亂無章且隨時劇烈漂移（你以為隊友會傳球，但他策略剛改了）。MADDPG 的策略是：在「訓練階段（像教練覆盤觀看上帝視角全景錄影）」讓評論家（Critic）知道全場所有人的位置與所有人的動作，從而精準評估局勢；而在「正式比賽（執行階段）」每位球員（Actor）只憑自己的眼睛即時反應。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>設有 <span class="math inline">N</span> 個連續動作智能體，策略參數分別為 <span class="math inline">\theta_i</span>。在集中式價值函數 <span class="math inline">Q_i^\mu(\mathbf{x}, a_1, \dots, a_N)</span> 下，第 <span class="math inline">i</span> 個智能體期望回報 <span class="math inline">J(\theta_i) = \mathbb{E}[R_i]</span> 關於策略參數的確定性策略梯度嚴格滿足：
+<div class="math inline">\nabla_{\theta_i} J(\theta_i) = \mathbb{E}_{\mathbf{x}, a \sim \mathcal{D}}\left[ \nabla_{\theta_i} \mu_i(a_i | o_i) \left. \nabla_{a_i} Q_i^\mu(\mathbf{x}, a_1, \dots, a_N) \right|_{a_i = \mu_i(o_i)} \right]</div></p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>考慮累積目標函數在回放池分佈 <span class="math inline">\rho^\mu</span> 下的展開：
+<div class="math inline">J(\theta_i) = \int_{\mathcal{S}} \rho^\mu(\mathbf{x}) Q_i^\mu(\mathbf{x}, \mu_1(o_1), \dots, \mu_i(o_i; \theta_i), \dots, \mu_N(o_N)) d\mathbf{x}</div>
+對參數 <span class="math inline">\theta_i</span> 求偏導：
+<div class="math inline">\nabla_{\theta_i} J(\theta_i) = \int_{\mathcal{S}} \left[ \nabla_{\theta_i} \rho^\mu(\mathbf{x}) Q_i^\mu(\mathbf{x}, a) + \rho^\mu(\mathbf{x}) \nabla_{\theta_i} Q_i^\mu(\mathbf{x}, a_1, \dots, \mu_i(o_i; \theta_i), \dots, a_N) \right] d\mathbf{x}</div>
+依據 Silver 等人 (2014) 的確定性策略梯度定理，狀態分佈對策略梯度的依賴項 <span class="math inline">\nabla_{\theta_i} \rho^\mu(\mathbf{x})</span> 可以忽略或等價轉化。聚焦於被積函數第二項：
+<div class="math inline">\nabla_{\theta_i} Q_i^\mu(\mathbf{x}, a_1, \dots, \mu_i(o_i; \theta_i), \dots, a_N)</div>
+應用多元向量微積分鏈式法則：由於僅第 <span class="math inline">i</span> 個智能體的動作 <span class="math inline">a_i = \mu_i(o_i; \theta_i)</span> 依賴參數 <span class="math inline">\theta_i</span>，而其餘智能體動作 <span class="math inline">a_j</span> (<span class="math inline">j \ne i</span>) 在求偏導時視為固定輸入：
+<div class="math inline">\nabla_{\theta_i} Q_i^\mu(\mathbf{x}, a_1, \dots, a_N) = \left( \frac{\partial a_i}{\partial \theta_i} \right)^\top \left. \frac{\partial Q_i^\mu}{\partial a_i} \right|_{a_i = \mu_i(o_i)} = \nabla_{\theta_i} \mu_i(o_i) \left. \nabla_{a_i} Q_i^\mu(\mathbf{x}, a_1, \dots, a_N) \right|_{a_i = \mu_i(o_i)}</div>
+代入回放池經驗分佈期望，即得：
+<div class="math inline">\nabla_{\theta_i} J(\theta_i) = \mathbb{E}_{\mathbf{x}, a \sim \mathcal{D}}\left[ \nabla_{\theta_i} \mu_i(a_i | o_i) \left. \nabla_{a_i} Q_i^\mu(\mathbf{x}, a_1, \dots, a_N) \right|_{a_i = \mu_i(o_i)} \right]</div>
+證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>該架構的核心假設是訓練階段集中式 Critic 能夠完整無延遲採樣所有智能體的動作與環境全景狀態。在去中心化通訊受限（例如水下機器人、跨機構聯邦決策）的訓練場景下，全局資訊無法集中採集，此定理的訓練閉環將無法建立。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>多智能體信用分配（Credit Assignment）與價值分解：當群體獲得共享獎勵時，MADDPG 的單一純量 Critic 難以定量分離某個個體智能體對團隊成功所做的邊際貢獻，激勵了後續反事實多智能體（COMA）與 QMIX 等價值函數因式分解結構的長足發展。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心驗證：</p>
+<ol>
+<li><strong>SymPy 符號鏈式法則化簡</strong>：
+對集中式動作價值函數求多元策略梯度偏導，驗證符號化簡差值嚴格為 0，證明多元鏈式法則在聯合動作空間成立。</li>
+<li><strong>NumPy 貝爾曼備份與 TD 誤差穩定性</strong>：
+在 2 智能體連續博弈環境中計算集中式貝爾曼目標值 <span class="math inline">y = r_i + \gamma Q'_i</span> 與當前 Critic 的均方誤差，證實狀態平穩性保證下數值計算無溢位且穩定收斂。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。博弈論定義、CTDE 框架與策略梯度完全忠實於 NeurIPS 原文。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。DAG 無環路，符號驗證與數值測試皆通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（超大規模擴展性與信用分配）</strong>：當智能體規模 <span class="math inline">N &gt; 100</span> 時，集中式 Critic 維度災難與稀疏共享獎勵下的信用分配未在原文中完全根除，建議比對 MAAC 與 QMIX 架構。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="賽局論與經濟學對偶機制設計中的全知拍賣師">賽局論與經濟學對偶：機制設計中的全知拍賣師</h3>
+<p>集中式訓練分散式執行架構在微觀經濟學上完美映射為「機制設計（Mechanism Design）」：集中式 Critic 對偶於全知中介者/拍賣師（計算社會福利與邊際激勵），而各智能體 Actor 對偶於擁有私人資訊與自主效用目標的市場參與者。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

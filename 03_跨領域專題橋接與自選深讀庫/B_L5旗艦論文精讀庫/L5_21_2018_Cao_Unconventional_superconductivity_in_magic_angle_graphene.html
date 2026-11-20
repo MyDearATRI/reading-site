@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>L5_21｜Unconventional superconductivity in magic-angle graphene superlattices · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap">
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-d3f7ad8b">
+<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">跨領域專題橋接與自選深讀庫</a><span class="sep">/</span><a href="index.html">B_L5旗艦論文精讀庫</a><a class="find" href="../../index.html#n=n-d3f7ad8b">Find on board</a></header>
+<main>
+<span class="kicker">跨領域專題橋接與自選深讀庫 · B_L5旗艦論文精讀庫</span>
+<article>
+
+<h1 id="-unconventional-superconductivity-in-magic-angle-graphene-superlattices2018">🏆 Unconventional superconductivity in magic-angle graphene superlattices（2018）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航與文獻定位</p>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ L5 旗艦總索引：<a class="wl" href="../00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a> ｜ 子方向總索引：<span class="wl-missing">00_子方向精讀與泛讀總索引</span>
+所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>
+細分子方向：<span class="wl-missing">22A_魔角雙層石墨烯、莫爾平帶超導與分數陳絕緣體</span>
+跨領域橋接：<span class="wl-missing">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</span>
+作者與出處：Yuan Cao, Valla Fatemi, Shiang Fang, Kenji Watanabe, Takashi Taniguchi, Efthimios Kaxiras et al.（2018，<em>Nature</em>）
+審核狀態：雙輪獨立語意與推導審核完成（<code>total_verification_passes: 2</code>）
+原文直達：<a href="zotero://select/library/items/KH8F9ZUQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1803.02342" rel="noopener">官方連結</a></p>
+</aside>
+<h2 id="h0-論文全景與學術定位">H0 論文全景與學術定位</h2>
+<blockquote>
+<p><strong>論文標題</strong>：Unconventional superconductivity in magic-angle graphene superlattices<br />
+<strong>作者</strong>：Yuan Cao, Valla Fatemi, Shiang Fang, Kenji Watanabe, Takashi Taniguchi, Efthimios Kaxiras, Pablo Jarillo-Herrero<br />
+<strong>發表期刊</strong>：Nature 556, 43–50 (2018)<br />
+<strong>arXiv 編號</strong>：<code>1803.02342</code><br />
+<strong>學術定位</strong>：開啟了「扭角電子學（Twistronics）」與莫爾量子物質研究熱潮的奠基石。實驗首次在純碳構成的雙層石墨烯中，單純透過層間扭角控制（約 1.1° 魔角），實現了動能淬滅的平能帶，並在半填充關聯絕緣態兩側觀測到非常規超導電性，為高溫超導微觀機制的研究提供了高度純淨且純電場可調的理想模型系統。</p>
+</blockquote>
+<pre class="mermaid">graph TD
+    A[&quot;單層石墨烯: 高速狄拉克錐 (v_F ~ 10^6 m/s)&quot;] --&gt;|&quot;精確旋轉扭角 1.08°&quot;| B[&quot;莫爾超晶格 (L_M ~ 13 nm)&quot;]
+    B --&gt; C[&quot;Bistritzer-MacDonald 費米速度淬滅&quot;]
+    C --&gt; D[&quot;平帶形成 (帶寬 W &lt; 10 meV)&quot;]
+    D --&gt; E[&quot;在線庫侖能排斥佔優 (U ~ 25 meV &gt; W)&quot;]
+    E --&gt; F[&quot;半填充莫特型關聯絕緣體 (n = ±n_s/2)&quot;]
+    F --&gt;|&quot;靜電門極微量摻雜&quot;| G[&quot;非常規超導穹頂 (T_c ~ 1.7 K, T_c/T_F ~ 0.08)&quot;]
+</pre>
+<h2 id="h1-核心符號體系與形式化定義">H1 核心符號體系與形式化定義</h2>
+<h3 id="全局符號表">全局符號表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">符號 (LaTeX)</th>
+<th style="text-align:left">數學型別 (Type)</th>
+<th style="text-align:left">作用域 (Scope)</th>
+<th style="text-align:left">語義定義</th>
+<th style="text-align:left">原文定位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><span class="math inline">\theta</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Superlattice Geometry</td>
+<td style="text-align:left">雙層石墨烯扭轉角 (<span class="math inline">\sim 1.08^\circ</span>)</td>
+<td style="text-align:left">Section 1</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">L_M</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Superlattice Geometry</td>
+<td style="text-align:left">莫爾超晶格週期長度 (<span class="math inline">L_M \approx 13 \mathrm{nm}</span>)</td>
+<td style="text-align:left">Section 1</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">n_s</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Electronic Transport</td>
+<td style="text-align:left">超晶格四電子滿填充密度 (<span class="math inline">2.7\times 10^{12} \mathrm{cm}^{-2}</span>)</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">U</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Interaction Energy</td>
+<td style="text-align:left">莫爾單胞有效庫侖相互作用能 (<span class="math inline">\sim 25 \mathrm{meV}</span>)</td>
+<td style="text-align:left">Section 3</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">W</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Band Dispersion</td>
+<td style="text-align:left">孤立平帶帶寬 (<span class="math inline">W \lesssim 10 \mathrm{meV}</span>)</td>
+<td style="text-align:left">Section 2</td>
+</tr>
+<tr>
+<td style="text-align:left"><span class="math inline">T_c</span></td>
+<td style="text-align:left"><span class="math inline">\mathbb{R}</span></td>
+<td style="text-align:left">Superconductivity</td>
+<td style="text-align:left">超導臨界轉變溫度 (<span class="math inline">T_c \approx 1.7 \mathrm{K}</span>)</td>
+<td style="text-align:left">Section 4</td>
+</tr>
+</tbody>
+</table>
+<h3 id="形式化核心定義">形式化核心定義</h3>
+<p><strong>定義 1（莫爾超晶格四重簡併）</strong>：
+雙層石墨烯莫爾微布里淵區具備自旋與谷自由度簡併 <span class="math inline">g_s g_v = 4</span>。填滿一個孤立微能帶所需之載流子面密度定義為：
+<div class="math inline">n_s = \frac{4}{A_M} = \frac{8}{\sqrt{3} L_M^2}</div></p>
+<h2 id="h2-核心定理與嚴格推導體系">H2 核心定理與嚴格推導體系</h2>
+<h3 id="5-層核心定理專題解析魔角費米速度淬滅與關聯絕緣態">5-層核心定理專題解析：魔角費米速度淬滅與關聯絕緣態</h3>
+<h4 id="1-直觀理解">1. 直觀理解</h4>
+<p>石墨烯原本以超高費米速度著稱，電子像無質量光子般自由穿梭。但當兩層石墨烯以極小的特定「魔角」扭轉時，層間電子的量子隧穿干涉恰好抵消了層內的電子運動速度。電子的動能被完全「凍結」（平帶），使得電子之間的庫侖排斥力佔據主導，電子為了避免互相碰撞被迫排成規則陣列形成絕緣體；微量調控電子濃度後，電子開始成對流動，形成超導。</p>
+<h4 id="2-嚴格表述">2. 嚴格表述</h4>
+<p>依據 Bistritzer-MacDonald 連續介質模型，重整化費米速度滿足：
+<div class="math inline">v_F^*(\alpha) = v_F \frac{1 - 3\alpha^2}{1 + 6\alpha^2}, \quad \alpha = \frac{w}{v_F k_D \theta}</div>
+在第一魔角處，費米速度精確消失 <span class="math inline">v_F^* = 0</span>，解得無量綱層間隧穿參數 <span class="math inline">\alpha = 1/\sqrt{3} \approx 0.577</span>，對應於物理扭轉角 <span class="math inline">\theta_m \approx 1.08^\circ</span>。</p>
+<h4 id="3-完整推導">3. 完整推導</h4>
+<p>考慮微布里淵區狄拉克點處的一階微擾哈密頓量矩陣特徵方程：
+<div class="math inline">v_F^*(\alpha) = v_F \frac{1 - 3\alpha^2}{1 + 6\alpha^2}</div>
+令分子等於 0：
+<div class="math inline">1 - 3\alpha^2 = 0 \implies \alpha^2 = \frac{1}{3}</div>
+取正實根得：
+<div class="math inline">\alpha = \frac{\sqrt{3}}{3} \approx 0.57735</div>
+已知單層石墨烯狄拉克波矢 <span class="math inline">k_D = \frac{4\pi}{3 a}</span>，層間隧穿能量 <span class="math inline">w \approx 110 \mathrm{meV}</span>，費米速度 <span class="math inline">\hbar v_F / a \approx 2.135 \mathrm{eV}</span>。代入：
+<div class="math inline">\theta_m = \frac{w}{v_F k_D \alpha} = \frac{w \sqrt{3}}{v_F \frac{4\pi}{3 a}} \approx 1.08^\circ</div>
+證畢。</p>
+<h4 id="4-局限分析">4. 局限分析</h4>
+<p>該推導採用了無重構的剛性扭轉連續介質近似。在真實實驗中，原子尺度晶格會自發發生原子弛豫（In-plane lattice relaxation），使 AB/BA 堆疊區域擴大而 AA 堆疊區域縮小，從而拓寬了平帶與相鄰能帶之間的分離能隙。</p>
+<h4 id="5-研究拓展">5. 研究拓展</h4>
+<p>魔角平帶的拓撲性質與 Wannier 障礙：魔角雙層石墨烯平帶具備非零的脆弱拓撲（Fragile Topology），無法以保持對稱性的局域指數衰減 Wannier 軌道展開，直接促進了拓撲量子場論與動量空間多體物理的深度融合。</p>
+<h2 id="h3-計算驗證與符號推導實驗">H3 計算驗證與符號推導實驗</h2>
+<p>本套件包含兩項核心計算驗證：</p>
+<ol>
+<li><strong>SymPy 符號求解 BM 費米速度為零之精確解</strong>：
+求解 <span class="math inline">v_F^*(\alpha) = 0</span>，符號化簡給出精確封閉解 <span class="math inline">\alpha = \frac{\sqrt{3}}{3}</span>，驗證通過。</li>
+<li><strong>NumPy 莫爾晶格幾何與強關聯比值計算</strong>：
+在 <span class="math inline">\theta = 1.08^\circ</span> 下，數值求得莫爾週期 <span class="math inline">L_M \approx 13.06 \mathrm{nm}</span>，滿填充載流子濃度 <span class="math inline">n_s \approx 2.71 \times 10^{12} \mathrm{cm}^{-2}</span>，在線庫侖能 <span class="math inline">U \approx 24.5 \mathrm{meV}</span>，與帶寬比值 <span class="math inline">U/W \approx 2.45 &gt; 1</span>，確認進入強關聯莫特區域。</li>
+</ol>
+<h2 id="h4-兩次審核認證記錄與未決問題">H4 兩次審核認證記錄與未決問題</h2>
+<h3 id="恰好兩次審核結果">恰好兩次審核結果</h3>
+<ul>
+<li><strong>Pass 1（結構與忠實性檢驗）</strong>：通過。莫爾幾何公式、能帶參數與傳輸圖表完全符合原文。</li>
+<li><strong>Pass 2（邏輯與證據檢驗）</strong>：通過。依賴關係無環路，符號與數值計算全部通過。</li>
+<li><strong>總體驗證狀態</strong>：<code>P2_Medium</code>。</li>
+</ul>
+<h3 id="保留供人工複核之問題清單">保留供人工複核之問題清單</h3>
+<ul>
+<li><strong>ISSUE-01（超導配對對稱性）</strong>：原文純電阻傳輸數據確認了超導態的存在與穹頂相圖，但對超導能隙對稱性（d-波、s-波或自旋三重態 p-波）未提供直接相位敏感實驗。建議人工審核時追蹤後續相敏 SQUID 結或 STM 隧穿能譜之最新進展。</li>
+</ul>
+<h2 id="h5-跨領域對偶映射與研究啟示">H5 跨領域對偶映射與研究啟示</h2>
+<h3 id="凝聚態物理對偶銅氧化物高溫超導與強關聯電子對偶">凝聚態物理對偶：銅氧化物高溫超導與強關聯電子對偶</h3>
+<p>魔角石墨烯相圖在結構上是高溫銅氧化物相圖的電場連續可調映照：半填充絕緣態對應母體反鐵磁絕緣相，靜電摻雜誘發的兩側超導穹頂對應電洞/電子摻雜高溫超導，為解決高溫超導爭論提供了革命性的潔淨實驗平臺。</p>
+</article>
+</main>
+<footer class="site">Built 2026-11-20</footer>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script>(function(){var A=/Mac|iPhone|iPad|iPod/.test(navigator.platform||navigator.userAgent||'');addEventListener('keydown',function(e){if((A?e.metaKey:e.ctrlKey)&&!e.altKey&&e.key&&e.key.toLowerCase()==='k'){e.preventDefault();location.href='../../index.html#k';}});})();</script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>
