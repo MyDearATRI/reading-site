@@ -1,0 +1,241 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>37｜因果推論與反事實最優傳輸（Causal Inference &amp; Counterfactual Optimal Transport） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a></nav></header>
+<main>
+<article>
+
+<h1 id="37因果推論與反事實最優傳輸causal-inference-counterfactual-optimal-transport">37｜因果推論與反事實最優傳輸（Causal Inference &amp; Counterfactual Optimal Transport）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 D：最優傳輸、計算複雜度與演算法資訊</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>經典 Wasserstein 距離的耦合可以偷看未來，也不管因果箭頭的方向。因果與反事實最優傳輸在耦合多胞形中加入時間濾波的非預知約束與有向無環圖（DAG）結構，讓隨機控制估值、多維反事實世界的建構與公平性決策，都建立在遵守因果律的最小變形幾何上。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+經典最優傳輸有一個不容易察覺、後果卻很嚴重的缺陷：它是靜態全知（Anticipative）的。假設有兩棵描述股價或病情演化的兩期機率樹。第一棵樹在今天中午就提前揭曉明天會漲還是會跌；第二棵樹要等到明天早上才揭曉，只是在今天中午加上 <span class="math inline">0.0001</span> 的微弱雜訊來區分上下分支。經典 Wasserstein 距離 <span class="math inline">W_p</span> 算出這兩棵樹的距離趨近於 0，因為全知的搬土工可以直接偷看明天的結果來安排今天的配對。但對真實的決策者來說，在第一棵樹裡今天就能無風險套利，在第二棵樹裡今天什麼都不知道，兩者的最優報酬相差很大。Judea Pearl 因果階梯最高層的反事實推論也有同樣的問題，例如問「如果這位當初沒吃藥的病人改吃了藥，他的多維生理指標會變成什麼？」。若不管變數間的有向無環圖（DAG），直接做全局歐氏配對，就會造出違反生理因果律的反事實個體。因果最優傳輸（Causal OT）與圖因果最優傳輸（Graph Causal OT）針對的就是這個矛盾：只讓不偷看未來、不破壞因果父子條件結構的傳輸計畫參與比較。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li><strong>禁止內線交易的搬運工（適配 Wasserstein 距離 <span class="math inline">\mathcal{AW}_p</span>）</strong>：把一個隨機過程 <span class="math inline">X_{1:T}</span> 搬到另一個隨機過程 <span class="math inline">Y_{1:T}</span> 時，規定搬運工在決定第 <span class="math inline">t</span> 天怎麼搬 <span class="math inline">Y_t</span> 的當下，只能看截至第 <span class="math inline">t</span> 天已經發生的歷史 <span class="math inline">X_{1:t}</span>，不能偷看第 <span class="math inline">t+1</span> 天以後才會擲出的骰子（非預知濾波條件）。雙向都禁止偷看的距離，就是金融數學與動態控制中穩健可靠的雙因果／適配 Wasserstein 距離。</li>
+<li><strong>順著骨牌順序推演平行宇宙（DAG 圖因果傳輸與反事實映射）</strong>：在醫療或社會政策中，年齡影響血壓，血壓與用藥共同影響康復率。建構「假如改用另一種療法」的反事實世界時，不能直接拿終點結果去拉，必須順著 DAG 拓撲排序一層一層做條件單調傳輸。先對齊背景外生分位數（保持同一個人在平行宇宙裡的內在體質排名不變），再讓處置效應順著因果箭頭向下傳導。</li>
+<li><strong>介入（Interventional）與回溯（Backtracking）反事實</strong>：「假如我當初按下煞車，就不會撞車」是切斷因果箭頭的介入反事實。看到車禍現場問「既然沒撞車，那他一秒前最可能做過什麼動作？」則是回溯反事實（Liu–Fatemi–Sra 2026）：不切斷因果機制，直接把觀測後驗以最小傳輸代價投影回外生歷史空間。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li><strong>序列決策、量化金融與強化學習（<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a>）</strong>：Bartl &amp; Wiesel (2023) 證明，多期隨機最佳化與最優停時問題對模型誤差的敏感度，只有在適配 Wasserstein 距離 <span class="math inline">\mathcal{AW}_p</span> 下才連續可控。用普通 <span class="math inline">W_p</span> 做分佈穩健最佳化 DRO，會漏算資訊結構風險。</li>
+<li><strong>因果表示學習、演算法公平性與可解釋 AI（<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>、<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a>）</strong>：反事實公平迴歸（Generali Lince et al. 2026）與群體反事實解釋（Valero-Leal et al. 2026）都證明，最優的公平／解釋映射恰好由 Wasserstein 重心與顯式最優傳輸映射以閉式給出。</li>
+<li><strong>信念修正與應用範疇論（<a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a>、<a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a>）</strong>：David Lewis 的「最近可能世界語意學」在連續機率因果模型中有了嚴格的度量實現：離現實最近且滿足假設條件的可能世界，就是因果約束下的 Wasserstein 投影。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    W0[&quot;經典靜態 Wasserstein 距離 W_p：全知耦合偷看未來，導致動態控制估值不連續&quot;] --&gt;|&quot;加入時間濾波非預知約束&quot;| COT[&quot;因果 / 雙因果最優傳輸與適配 Wasserstein 距離 AW_p (Lassalle / Backhoff / Bartl–Wiesel)&quot;]
+    COT --&gt;|&quot;推廣至連續時間隨機微分方程與熵正則&quot;| SDE[&quot;SDE 適配距離、高斯熵閉式解與非線性拋物主方程 (2025–2026)&quot;]
+    COT --&gt;|&quot;從線性時間鏈推廣至一般有向無環圖&quot;| GCOT[&quot;圖因果最優傳輸 Graph Causal OT (Cheridito–Eckstein 2025; Obłój–Tuchilus 2026)&quot;]
+    GCOT --&gt;|&quot;嵌入 Pearl 結構因果模型 (SCM)&quot;| CF[&quot;反事實最優傳輸：介入推前、回溯反事實 (Backtracking OT) 與群體反事實解釋 (2026)&quot;]
+    GCOT --&gt;|&quot;對抗分佈偏移與消除混雜偏差&quot;| APP[&quot;結構因果分佈穩健最佳化 (Causal DRO)、反事實公平重心與多重處置 Fused-GW 平衡&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>因果／雙因果最優傳輸與適配 Wasserstein 距離 <span class="math inline">\mathcal{AW}_p</span></strong></p>
+<ul>
+<li>直覺理解：對兩個長度為 <span class="math inline">T</span> 的離散時間隨機過程分佈 <span class="math inline">\mu, \nu</span>，不偷看未來的耦合 <span class="math inline">\pi</span> 是指：在已知過去路徑 <span class="math inline">X_{1:t}</span> 的條件下，目標過程當前的演化 <span class="math inline">Y_{1:t}</span> 與來源過程未來的走向 <span class="math inline">X_{t+1:T}</span> 條件獨立。換句話說，<span class="math inline">\pi</span> 的條件核在每一期 <span class="math inline">t</span> 只能依賴 <span class="math inline">X_{1:t}</span>。若雙向同時滿足因果性（Bicausal Coupling <span class="math inline">\Pi_{\mathrm{bc}}(\mu,\nu)</span>），誘導出的距離就是適配 Wasserstein 距離 <span class="math inline">\mathcal{AW}_p</span>。用動態規劃向後歸納，它等價於從最後一期往前逐層計算條件分佈的嵌套 Wasserstein 距離。</li>
+<li>機制或核心表達式：
+<div class="math inline">\mathcal{AW}_p^p(\mu, \nu) = \inf_{\pi \in \Pi_{\mathrm{bc}}(\mu, \nu)} \mathbb{E}_\pi\!\left[ \sum_{t=1}^T d(X_t, Y_t)^p \right], \qquad \pi(Y_{1:t} \in A \mid X_{1:T}) = \pi(Y_{1:t} \in A \mid X_{1:t})</div>
+Bartl &amp; Wiesel (2023) 給出多期隨機最佳化與最優停時對 <span class="math inline">\mathcal{AW}_p</span> 微擾的一階敏感度精確展開。Backhoff-Veraguas, Källblad &amp; Robinson (2025) 刻畫了連續時間隨機微分方程（SDE）法則間的 <span class="math inline">\mathcal{AW}_p</span>。Acciaio, Hou &amp; Pammer (2025) 導出高斯過程上熵正則化 <span class="math inline">\mathcal{AW}</span> 的顯式結構。Backhoff et al. (2026) 則用全非線性拋物主方程（Master Equation）與 Kushner–Stratonovich 濾波隨機控制，統一刻畫連續時間因果 OT。</li>
+<li>能做到什麼，代價是什麼：它是唯一能讓動態規劃、濾波、最優停時與美式選擇權定價同時保持連續穩定的資訊拓撲（Adapted Topology）。代價是直接從獨立樣本估計嵌套條件分佈很容易遇到維度災難，需要借助核平滑分群（Adapted Empirical Measure）或熵正則化對偶求解。</li>
+</ul>
+</li>
+<li>
+<p><strong>圖因果最優傳輸（Graph Causal OT）與有向無環圖度量理論</strong></p>
+<ul>
+<li>直覺理解：時間只是一條單向直線 <span class="math inline">1 \to 2 \to \dots \to T</span>，現實中的因果機制卻是一張複雜的有向無環圖（DAG <span class="math inline">G=(V,E)</span>）。Cheridito &amp; Eckstein (2025) 與 Obłój &amp; Tuchilus (2026) 把時間濾波的概念推廣到任意有向圖：規定每個節點 <span class="math inline">v \in V</span> 的耦合只能依賴它在圖上的父節點／祖先資訊。<span class="math inline">G</span> 是全連接圖時，退化為經典標準 OT；<span class="math inline">G</span> 是線性鏈時，還原時間序列因果 OT；<span class="math inline">G</span> 為空圖時，對應獨立邊際耦合。</li>
+<li>機制或核心表達式：
+<div class="math inline">\mathcal{W}_{G,p}^p(\mu, \nu) = \inf_{\pi \in \Pi_G(\mu, \nu)} \int c(x, y)\, d\pi(x, y)</div>
+其中 <span class="math inline">\Pi_G(\mu,\nu)</span> 為滿足 DAG <span class="math inline">G</span> 馬可夫分解與局部因果條件獨立約束的耦合集。Obłój &amp; Tuchilus (2026) 給出完整刻畫：精確判定對哪些有向無環圖 <span class="math inline">G</span>，其誘導的雙圖因果差異構成真正的度量（滿足三角不等式與膠合性質 Gluing Lemma），並證明圖因果 Monge 映射的稠密性與拓撲等價性。</li>
+<li>能做到什麼，代價是什麼：把結構因果模型（SCM）與最優傳輸合成同一個數學對象，研究者可以針對局部因果模組做分佈比較與穩健控制（如 Ehyaei et al. 2025 的結構因果 DRO 模糊集）。代價是並非任意有向圖都自動滿足膠合引理，存在傳遞性阻礙結構時需要特別處理。</li>
+</ul>
+</li>
+<li>
+<p><strong>反事實最優傳輸：介入推前、回溯反事實與重心公平性</strong></p>
+<ul>
+<li>直覺理解：在 Pearl 結構因果模型 <span class="math inline">X_i = f_i(\mathrm{PA}_i, U_i)</span> 中，計算個體反事實需要三步（Abduction 反推外生潛變數 <span class="math inline">U \to</span> Action 執行介入 <span class="math inline">\mathrm{do}(T=t') \to</span> Prediction 前向預測）。但實務上往往不知道確切的結構方程 <span class="math inline">f_i</span> 與外生噪音分佈。在一維單調模型下，保持外生噪音 <span class="math inline">U</span> 不變等價於保持分位數排名（Quantile Preservation），也就是一維最優傳輸映射。推到多維空間時，沿因果拓撲順序構造的單調最優傳輸映射不需要顯式估計隱藏噪音，就能把事實群體推前為幾何失真最小的反事實群體。Liu, Fatemi &amp; Sra (2026) 把這個做法延伸到回溯反事實（Backtracking Counterfactuals）：不切斷因果定律，改把事實觀測誘導的外生後驗分佈 <span class="math inline">\mathbb{P}(U \mid X=x)</span>，用最優傳輸投影到滿足目標反事實查詢的外生配置流形上。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>回溯反事實傳輸</strong>：給定事實觀測 <span class="math inline">x</span> 誘導的外生後驗 <span class="math inline">\mu_{U|x}</span>，在滿足反事實結果約束集 <span class="math inline">\mathcal{U}_{x^*}</span> 的測度上最小化 <span class="math inline">W_p(\mu_{U|x}, \nu)</span>，同時涵蓋逐點自然投影與分佈級流形調整。</li>
+<li><strong>反事實公平迴歸（Generali Lince et al. 2026）</strong>：在重抽樣因果不確定性的視角下，最優反事實公平預測器精確等價於敏感屬性條件分佈在潛變數條件下的 Wasserstein 重心分位數映射（Barycentric Quantile Projection）。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：可以替機器學習黑盒提供群體反事實解釋（Valero-Leal et al. 2026），這種解釋保持群體內部的幾何結構，也能泛化到新樣本。也可以給出有嚴格理論保證的反事實公平後處理器。代價是真實生成機制若嚴重違反單調性（如秩反轉 Rank Reversal 效應：不吃藥身體好的人吃藥反而過敏惡化），純單調 OT 假設會產生不可識別偏差。</li>
+</ul>
+</li>
+<li>
+<p><strong>觀測資料混雜消除與多重處置因果效應估計</strong></p>
+<ul>
+<li>直覺理解：在非隨機對照試驗（醫療電子病歷、推薦系統點擊後轉換率 Sang et al. 2025）中，接受處置組（如使用新藥或點擊廣告）與對照組的協變數分佈有嚴重的選擇與混雜偏差（Confounding Bias）。因果最優傳輸（Li et al. 2023）結合傾向分數／因果圖權重來修正傳輸邊際，做精細的個體處理效應（ITE）配對。同時面對 <span class="math inline">K</span> 種組合處置時（Multiple Simultaneous Treatments），傳統成對平衡需要 <span class="math inline">O(K^2)</span> 計算，還會破壞局部鄰近結構。Murakami, Hattori &amp; Kubota (2026) 引入重心融合 Gromov–Wasserstein（Barycentric Fused GW），把所有處置組同步對齊到統一的潛在重心空間，同時保住協變數特徵與局部圖拓撲。</li>
+<li>機制或核心表達式：
+<div class="math inline">\min_{\mu_{\mathrm{bar}},\, \{\pi_k\}_{k=1}^K} \sum_{k=1}^K w_k \, \mathrm{FGW}_{\alpha}\big( (\mu_k, C_k),\, (\mu_{\mathrm{bar}}, C_{\mathrm{bar}}) \big)</div>
+複雜度從成對比較的二次增長降到相對於處置模式數的線性擴展，並維持跨組局部近鄰一致性。</li>
+<li>能做到什麼，代價是什麼：大幅降低異質處理效應（CATE / ITE）估計的方差，也能應付多重處置的組合爆炸。代價是仍要依賴「無未觀測強混雜因子（Unconfoundedness）」假設，或已知的因果工具變數結構，才能保證因果無偏性。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>因果圖未知或部分可識別下的最優傳輸（Causal Discovery + OT 的雞生蛋問題）</strong>：現有的圖因果最優傳輸（Cheridito &amp; Eckstein 2025; Obłój &amp; Tuchilus 2026）與結構因果 DRO（Ehyaei et al. 2025）大多假設底層 DAG <span class="math inline">G</span> 已由領域專家給定。但真實的科學探索中，連因果箭頭的方向都常常只在馬可夫等價類（MEC）內部分已知（參見 Barberia et al. 2010 對人類選擇最優低基率／高基率背景做因果發現的認知研究）。DAG 本身有結構不確定性時，怎麼定義穩健的因果 Wasserstein 距離，是亟待補上的缺口。</li>
+<li><strong>適配與圖因果 Wasserstein 距離的高維統計與計算瓶頸</strong>：和標準 <span class="math inline">W_p</span> 相比，適配距離 <span class="math inline">\mathcal{AW}_p</span> 需要對整條歷史條件核做嵌套匹配。直接代入經驗樣本時，每個歷史路徑只出現一次，結果會退化成平凡的恆等配對（零泛化力）。高斯閉式解（Acciaio et al. 2025）與連續時間 PDE 主方程（Backhoff et al. 2026）增進了解析上的理解，但在高維非高斯時間序列與大型 DAG 上怎麼做出近線性的神經求解器，仍是工程與理論上的重大開放問題。</li>
+<li><strong>介入反事實（Interventional）、回溯反事實（Backtracking）與單調性假設的邊界</strong>：單調三角／Brenier 最優傳輸隱含一個強假設：潛在排名不因介入而翻轉（Rank Invariance）。生物或社會系統存在非單調交互作用時，OT 反事實映射給出的是真實的個體反事實，還是只是分佈上最經濟的合理下界？怎麼用部分識別區間（Partial Identification Bounds）如實量化這個因果張力，正成為因果統計學的核心議題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a>、世界模型與離線強化學習</strong>：評估生成式世界模型（World Model）或金融模擬器的好壞，不能只算邊際畫面 FID 或普通軌跡 Wasserstein 距離。一個洩漏未來資訊或搞錯分岔時間點的模擬器，普通 <span class="math inline">W_2</span> 誤差可以很低，在裡面訓練的 RL 智能體卻會學出依賴這些虛假內線資訊的災難性策略。應該改用適配 Wasserstein 距離 <span class="math inline">\mathcal{AW}_p</span> 檢驗資訊流結構是否對齊。</li>
+<li><strong>遷移至 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a></strong>：自然語言中的條件句與反事實語氣（「要是昨天沒下雨，比賽早就打完了」對比「既然草地是乾的，昨天一定沒下雨」）長期困擾形式語意學。介入式 OT 與回溯式 OT（Liu et al. 2026）為 Lewis 可能世界語意學提供了一套可以直接計算機率測度的連續幾何工具。</li>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 與演算法審計</strong>：做分佈穩健防禦（DRO）時，若允許攻擊者在整個歐氏 Wasserstein 球內任意改動特徵，防禦模型會過度保守，例如出現「年齡不變但工作年資倒退十年」這種不可能的樣本。改用結構因果最優傳輸模糊集（Causal DRO），紅隊擾動就會嚴格遵守真實世界的物理與社會因果約束。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。本領域是很新的交叉方向，目前收錄 36 篇文獻（其中 21 篇具備開放取用 OA PDF）。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2023</td>
+<td><em>Sensitivity of Multiperiod Optimization Problems with Respect to the Adapted Wasserstein Distance</em>，Daniel Bartl, Johannes Wiesel</td>
+<td>動態隨機最佳化的必讀論文：嚴格證明多期決策與最優停時對模型微擾的敏感度，只有在適配 Wasserstein 距離 <span class="math inline">\mathcal{AW}_p</span> 下才有顯式一階展開。</td>
+<td>時間序列因果 OT 首選</td>
+<td><a href="zotero://select/library/items/F9IVESA4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1137/22m1537746" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><em>Causal Optimal Transport for Treatment Effect Estimation</em>，Qian Li, Zhichao Wang, Shaowu Liu, Gang Li</td>
+<td>把因果推論的混雜調整直接做進最優傳輸配對框架，顯著提高觀測資料下個體與平均處理效應的估計精度。</td>
+<td>因果機器學習入門</td>
+<td><a href="zotero://select/library/items/NIE7QWGP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tnnls.2021.3118542" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2025</td>
+<td><em>Optimal transport and Wasserstein distances for causal models</em>，Patrick Cheridito, Stephan Eckstein</td>
+<td>從時間鏈走向一般因果圖的轉折點（<em>Bernoulli</em>）：把全連接圖（標準 OT）、線性鏈（時間因果 OT）與任意有向圖納入同一個圖適配最優傳輸框架。</td>
+<td>圖因果理論基石</td>
+<td><a href="zotero://select/library/items/5KCDRZZZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3150/24-bej1773" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2025</td>
+<td><em>Designing Ambiguity Sets for Distributionally Robust Optimization Using Structural Causal Optimal Transport</em>，Ahmad Reza Ehyaei, Golnoosh Farnadi, Samira Samadi</td>
+<td>結合結構因果模型（SCM）與最優傳輸，構造真實可達的分佈穩健最佳化（DRO）模糊集，緩解傳統 Wasserstein 球過度保守的問題。</td>
+<td>穩健決策與安全必讀</td>
+<td><a href="zotero://select/library/items/XMGBJZ5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1609/aaai.v39i16.33808" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>Graph Causal Optimal Transport and Wasserstein Distances</em>，Jan Obłój, Vlad Tuchilus</td>
+<td>圖因果度量理論的重要結果：完整刻畫哪些有向無環圖（DAG）誘導的圖因果 Wasserstein 差異構成嚴格度量、滿足膠合引理，並具有 Monge 映射稠密性。</td>
+<td>🏆 <strong>L5 已深讀</strong>／數學核心</td>
+<td><a href="zotero://select/library/items/38Q8VDPN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.13716" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>Analytical Approach to Continuous-Time Causal Optimal Transport</em>，Julio Backhoff, Erhan Bayraktar, Ibrahim Ekren, Antonios Zitridis</td>
+<td>處理連續時間馬可夫源與擴散目標之間的因果最優傳輸，證明它等價於擴大狀態空間上的全非線性拋物主方程與濾波隨機控制。</td>
+<td>連續時間隨機分析高階</td>
+<td><a href="zotero://select/library/items/WJRHQT8G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.19978" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>Transporting the Past: An Optimal Transport View of Backtracking Counterfactuals</em>，Zhangyi Liu, Pouria Fatemi, Suvrit Sra</td>
+<td>率先用最優傳輸重新表述結構因果模型中的回溯反事實推論，把事實觀測誘導的外生後驗平滑傳輸到反事實查詢流形。</td>
+<td>反事實幾何必讀新作</td>
+<td><a href="zotero://select/library/items/F2XEJ6ZQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.08682" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>Julio Backhoff-Veraguas, Sigrid Källblad, Benjamin A. Robinson (2025)</strong>，<em>Adapted Wasserstein distance between the laws of SDEs</em> (<em>Stochastic Processes and their Applications</em>, Citations: 5) ｜ 嚴格分析連續時間隨機微分方程（SDE）分佈之間的適配 Wasserstein 距離，以及漂移／擴散係數的穩定性。 <a href="zotero://select/library/items/FF3VT2D6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.spa.2025.104689" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Beatrice Acciaio, Songyan Hou, Gudmund Pammer (2025)</strong>，<em>Entropic adapted Wasserstein distance on Gaussians</em> (<em>Electronic Communications in Probability</em>) ｜ 針對高斯時間序列推導熵正則化適配 Wasserstein 距離的顯式結構，給高維動態模型一個計算效率高的閉式基準。 <a href="zotero://select/library/items/E9AJBHDJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1214/25-ecp728" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Yizhou Sang, Congcong Liu, Yuying Chen, Zhiwei Fang (2025)</strong>，<em>Post-event Modeling via Causal Optimal Transport for CTR Prediction</em> (<em>ACM SIGIR</em>, Citations: 2) ｜ 把因果最優傳輸用在大規模資訊檢索與推薦系統的點擊率預測，消除事後觀測特徵的選擇偏差。 <a href="zotero://select/library/items/A27UAA3F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3726302.3731942" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Itxaso Barberia, Irina Baetu, Joan Sansa, Andy G. Baker (2010)</strong>，<em>Choosing Optimal Causal Backgrounds for Causal Discovery</em> (<em>Quarterly Journal of Experimental Psychology</em>) ｜ 實驗心理學視角：說明人類在探測生成性原因與預防性原因時，會主動挑選低基率或高基率的最優因果背景環境，以最大化因果辨識力。 <a href="zotero://select/library/items/MGTWW6V4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1080/17470211003770904" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Xihao He, Fengyi Yuan (2026)</strong>，<em>Approximating Itô Processes in Adapted Wasserstein Distance with Finite Support Laws</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：提出「適應泛函量化」遞迴條件抽樣演算法，用有限條路徑逼近 Itô 擴散過程。一維情況的收斂率是 <span class="math inline">(\log M)^{-1/2}</span>，多維在定量 Osgood 穩定條件下是 <span class="math inline">(\log M)^{-\eta_p}</span>。文中還構造光滑有界的反例，證明沒有 Osgood 條件時，收斂可以慢於任意對數冪次。</li>
+<li>連結：<a href="zotero://select/library/items/GR78K5SB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.22282" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Erhan Bayraktar, Fang Rui Lim (2026)</strong>，<em>Adapted transport inequalities in continuous time</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：對連續時間 SDE 的路徑分佈，建立半鞅適應 Wasserstein 距離下的適應二次傳輸成本不等式（AQTCI），以及它的馬可夫無維度張量化性質。由此推出最優停時與投資組合對漂移擾動的穩定性、動態風險集中界，並推廣到非 Lipschitz 路徑泛函與分數階 SDE。</li>
+<li>連結：<a href="zotero://select/library/items/5ZDH94P5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21815" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-首期雙篇">2026-11-19 首期雙篇</h4>
+<ol>
+<li>
+<p><strong>Zhangyi Liu, Pouria Fatemi, Suvrit Sra (2026)</strong>，<em>Transporting the Past: An Optimal Transport View of Backtracking Counterfactuals</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：傳統 Pearl 反事實靠切斷因果邊（介入）來回答「如果改做 X 會怎樣」，卻不容易處理「既然看到了結果 Y，過去的外生條件最可能是什麼」這種回溯推理。本文提出逐點投影與分佈級最優傳輸兩個框架，為回溯反事實建立嚴格的幾何測度基礎。</li>
+<li>連結：<a href="zotero://select/library/items/F2XEJ6ZQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.08682" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Jan Obłój, Vlad Tuchilus (2026)</strong>，<em>Graph Causal Optimal Transport and Wasserstein Distances</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：🏆 <strong>L5 已深讀</strong> ｜ 解決一個基礎數學問題：任意 DAG 約束下的最優傳輸，何時能形成滿足三角不等式的 Wasserstein 度量。文中並證明誘導拓撲與自然適配拓撲一致。</li>
+<li>連結：<a href="zotero://select/library/items/38Q8VDPN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.13716" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-年度其他追蹤清單">2026 年度其他追蹤清單</h4>
+<ul>
+<li><strong>M. Generali Lince, S. Gaucher, J-J. Vie, P. Loiseau (2026)</strong>，<em>Counterfactually Fair Regression via Optimal Transport</em> (<em>arXiv</em>) ｜ 證明在重抽樣噪音因果不確定性下，反事實公平等價於潛變數條件下的人口統計均等，並用重心分位數映射給出最優公平迴歸器的閉式解。 <a href="zotero://select/library/items/UAMJHEI7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.28251" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Yuki Murakami, Takumi Hattori, Kohsuke Kubota (2026)</strong>，<em>Barycentric Fused Gromov-Wasserstein Balancing for Causal Inference under Multiple Treatments</em> (<em>arXiv</em>) ｜ 用重心融合 Gromov–Wasserstein 取代傳統 <span class="math inline">O(K^2)</span> 的成對分佈平衡，在多重同時處置下保住局部近鄰幾何，並降低反事實估計方差。 <a href="zotero://select/library/items/7CWEMFMA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.22024" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Enrique Valero-Leal, Bernd Bischl, Pedro Larrañaga, Concha Bielza (2026)</strong>，<em>Optimal Transport Group Counterfactual Explanations</em> (<em>arXiv</em>) ｜ 學習顯式最優傳輸映射來生成群體反事實解釋，既能泛化到新的群體成員，又嚴格控制群體內部的幾何扭曲。 <a href="zotero://select/library/items/QIG6JCAK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.20692" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Julio Backhoff, Erhan Bayraktar, Ibrahim Ekren, Antonios Zitridis (2026)</strong>，<em>Analytical Approach to Continuous-Time Causal Optimal Transport</em> (<em>arXiv</em>) ｜ 建立連續時間因果最優傳輸的非線性拋物主方程與單純形隨機控制對偶理論。 <a href="zotero://select/library/items/WJRHQT8G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.19978" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

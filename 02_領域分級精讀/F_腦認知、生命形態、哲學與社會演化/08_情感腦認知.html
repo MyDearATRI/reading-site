@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>08｜情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="08情感腦認知互補學習系統評價理論貝氏認知與-neuroai">08｜情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> ｜ <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>情感腦認知（Affective &amp; Cognitive Neuroscience / NeuroAI）研究人類大腦怎麼在樣本極少、風險又高的社交情境中做到系統性泛化與價值權衡。它靠的是海馬迴快速記下個例、新皮質慢慢萃取結構的雙記憶系統，加上因果心智模型，以及認知評價（Appraisal）的情緒機制。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+當代大型語言模型的隱式統計流暢度很高，卻在三個類人智慧的核心面向上常出錯。第一，單次經驗的快速綁定和跨領域的抽象泛化互相衝突：神經網路不是學太快而破壞舊結構，就是學太慢，沒辦法立刻記住剛發生的一件事。第二，組合系統性（Systematicity）有缺口：學會「跳」與「跑兩次」之後，能不能零樣本推知「跳兩次」。第三，表面的情緒詞彙匹配和真實情境的因果評價有落差：同一場突發事件，為什麼讓同車的孩童興奮，卻讓前座乘客憤怒。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+大腦不像一塊均質的硬碟，比較像三方合作的工作室：現場速記本（海馬迴）、圖書館分類總編（新皮質）和緊急警報調度台（杏仁核／評價系統）。白天遇到罕見的意外，速記本用稀疏獨立的頁面一秒鐘原樣記下，不干擾圖書館既有的書架。到了夜晚睡眠，速記本反覆把新故事搭配舊案例重播給總編聽，總編才一點一點提煉出跨場景通用的結構地圖（如 Tolman–Eichenbaum 關係基底）。情緒也不是非理性的雜訊。它是調度台針對「當前事件是否危及我的核心目標、我有沒有控制力」算出來的高維優先級中斷訊號。</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>對接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a>：RAG、情景緩衝區與注意力耦合潛記憶（如 Miniature Brain Transformer），都是人工系統對海馬迴與新皮質互補學習系統（CLS）的工程重建。</li>
+<li>對接 <a class="wl" href="21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>：Fodor &amp; Pylyshyn 的系統性泛化挑戰困擾連接主義三十餘年，Lake 與 Baroni 的元學習組合泛化（MLC）直接回應了它。</li>
+<li>對接 <a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 與人機對齊：不理解認知評價理論（Appraisal Theory）與個體人格差異，AI 智能體就只能輸出扁平的客服式同理心，沒辦法預測真實人類在利益與信念衝突下的情緒分化。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Core[&quot;類人智慧三大核心支柱 (NeuroAI &amp; Cognitive Science)&quot;] --&gt; M1[&quot;雙系統記憶架構：互補學習系統 (CLS)&quot;]
+    Core --&gt; M2[&quot;因果世界模型與系統性組合泛化&quot;]
+    Core --&gt; M3[&quot;情感計算與認知評價理論 (Appraisal Theory)&quot;]
+
+    M1 --&gt;CLS95[&quot;海馬迴稀疏快學 + 新皮質睡眠重播慢學 (McClelland 1995 / Kumaran 2016)&quot;]
+    CLS95 --&gt; TEM[&quot;Tolman-Eichenbaum 機器 (Whittington 2020)：內嗅皮質結構基底 × 海馬迴感官綁定&quot;]
+    TEM --&gt; BrainTF[&quot;腦啟發神經架構 (2026)：視丘門控、海馬迴顯式記憶與群體幾何相變&quot;]
+
+    M2 --&gt; BBS16[&quot;像人一樣學習與思考 (Lake et al. 2016)：直覺物理 + 直覺心理 + 因果生成程式&quot;]
+    BBS16 --&gt; MLC[&quot;元學習組合泛化 (MLC, Nature 2023) 與兒童第一視角詞彙接地&quot;]
+
+    M3 --&gt; EI[&quot;大模型情緒智慧基準評測 (EI)&quot;]
+    EI --&gt; Appraisal[&quot;評價理論對比情緒推理 (CHIARO) 與人格特質整合框架 (PTEI)&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>互補學習系統與關係結構分解（Complementary Learning Systems &amp; Tolman–Eichenbaum Machine）</strong></p>
+<ul>
+<li>直覺理解：演化同時保留海馬迴與新皮質兩套記憶系統，是因為一次就學會單一個案需要高學習率和高度分離的稀疏表徵，而抽取跨經驗的統計規律需要極低的學習率和重疊的分佈式表徵。兩者還有進一步的分工：內嗅皮質（MEC）負責抽出像棋盤格一樣的抽象關係圖結構，海馬迴則像魔鬼氈，把當下的具體感官內容貼到結構節點上。</li>
+<li>機制或核心表達式：在 Tolman–Eichenbaum Machine（TEM）中，內嗅皮質學習可以跨環境重用的抽象結構轉移基底 <span class="math inline">g_t</span>。海馬迴則用快速 Hebbian 聯想矩陣 <span class="math inline">M_t</span>，把結構位置 <span class="math inline">g_t</span> 和具體感官編碼 <span class="math inline">x_t</span> 做外積綁定與檢索：
+<div class="math inline">g_t = f_{\mathrm{transition}}(g_{t-1}, a_t), \qquad M_t = \lambda M_{t-1} + \eta\, p_t g_t^\top, \qquad \hat{x}_t = \mathrm{Retrieve}(M_t, g_t)</div></li>
+<li>能做到什麼，代價是什麼：它用同一套機制解釋了空間網格細胞（Grid Cells）、位置細胞（Place Cells），以及非空間的社會／邏輯關係推理為什麼能快速零樣本遷移，也直接啟發了當代 AGI 的顯式記憶模組。代價是需要額外的離線重播鞏固週期（Replay Consolidation）和精細的門控機制，以免新舊情景在檢索時互相碰撞。</li>
+</ul>
+</li>
+<li>
+<p><strong>因果生成心智模型與元學習組合泛化（Causal Mental Models &amp; Meta-Learning for Compositionality）</strong></p>
+<ul>
+<li>直覺理解：人類小孩看一兩張獨輪滑板車的照片，就能認出變體、畫出草圖，甚至想像把它拆開重組。因為人學到的不是像素相關性，而是這東西怎麼一筆一筆生成出來的因果程式，再加上把舊規則即時拼成新指令的元技能。</li>
+<li>機制或核心表達式：貝氏程式學習（BPL）把概念表徵成部件與關係的機率生成程式 <span class="math inline">P(\theta, \text{parts}, \text{relations})</span>。神經網路這邊，Lake &amp; Baroni 的元學習組合泛化（MLC）動態構造成千上萬個序列，每個序列由支援集（Support Set, <span class="math inline">\mathcal{S}</span>）接查詢組合集（Query Set, <span class="math inline">\mathcal{Q}</span>）組成，再在這些序列上優化參數 <span class="math inline">\Theta</span>，讓標準 Transformer 在上下文中湧現出類符號的組合規則：
+<div class="math inline">\max_{\Theta} \; \mathbb{E}_{(\mathcal{S}, \mathcal{Q}) \sim p_{\mathrm{comp}}} \!\left[ \sum_{(x, y) \in \mathcal{Q}} \log P_{\Theta}(y \mid x, \mathcal{S}) \right]</div></li>
+<li>能做到什麼，代價是什麼：不必硬編碼符號語法樹，神經網路在系統性泛化測試中就能達到、甚至重現人類的反應模式與系統性偏誤。代價是高度依賴元訓練任務分佈 <span class="math inline">p_{\mathrm{comp}}</span> 的多樣性設計。如果元經驗本身缺少組合變化，網路還是會退化成表面的捷徑記憶。</li>
+</ul>
+</li>
+<li>
+<p><strong>認知評價理論與個體化情感計算（Appraisal Theory &amp; Personalized Affective Computing）</strong></p>
+<ul>
+<li>直覺理解：情緒不是寫在句子字面上的固定標籤（「踢椅子＝生氣」），而是特定主體對同一客觀事件的主觀認知評價函數。同一個事件，對主體 A 是「目標一致＋高掌控感 <span class="math inline">\to</span> 喜悅」，對主體 B 卻是「目標受阻＋他人歸因 <span class="math inline">\to</span> 憤怒」。</li>
+<li>機制或核心表達式：依據認知評價理論（Lazarus / Scherer），主體 <span class="math inline">i</span>（具人格特質向量 <span class="math inline">\tau_i \in \text{OCEAN}</span> 與當前目標 <span class="math inline">G_i</span>）面對共享事件 <span class="math inline">E</span> 時，先算出多維評價向量 <span class="math inline">\mathbf{a}_i</span>（目標相關性、一致性、因果歸因、應對潛能），再映射成情緒狀態 <span class="math inline">e_i</span>：
+<div class="math inline">\mathbf{a}_i = \mathrm{Appraise}(E;\, G_i, \mathcal{B}_i, \tau_i), \qquad P(e_i \mid E, i) = \mathrm{Softmax}\big(W \mathbf{a}_i\big)</div></li>
+<li>能做到什麼，代價是什麼：它超出了傳統單句單標籤情感分類的上限，能處理同一場景下多個主體情緒相反的推理（如 CHIARO 對比基準），也能納入人格差異（如 PTEI）。代價是主觀目標、文化規範與隱性人格狀態往往無法直接觀測，所以這是高度欠定（Underdetermined）的逆向心智推論問題。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>LLM 只是純隱式的皮質統計機，還是已經湧現心智模型</strong>：以 Park (ICML 2026) 等為代表的一方指出，自迴歸大模型的權重學習高度對應人類的隱式程序／語義記憶，缺少可隨機讀寫、可溯源修正的海馬迴顯式情景記憶（Explicit Memory），這是長程策略規劃與元認知的根本瓶頸。另一派（如 Binz &amp; Schulz）則證明，經心理學實驗微調後的 LLM（如 Centaur 路線），預測人類決策行為的表現已經超過傳統手寫的認知模型。</li>
+<li><strong>模擬情緒（Simulated EI）與內在功能性情感（Artificial Emotion）的界線</strong>：大模型在標準情商測驗上能拿高分，但遇到對比性的因果場景或隱含的人格衝突時常常失準。更深一層的爭論（跨接 <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a>）是：AI 只需要外在的情緒識別與表達就夠了，還是必須具備類似杏仁核與視丘門控的內在價值中斷與穩態調節態，才能在開放的風險環境中做出穩健的權衡。</li>
+<li><strong>兒童感官接地（Grounded Egocentric Learning）的魯棒性極限</strong>：Vong &amp; Lake 等人用嬰幼兒頭戴攝影機拍下的真實第一視角影片訓練多模態模型，做到了少樣本詞彙接地。但最新的實證也顯示，這類模型遇到視角干擾、詞頻長尾與抽象動詞時仍然相當脆弱。純被動觀察與主動社交互動之間的差距還沒有補上。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把海馬迴群體幾何相變（Crystalline Coding）用到 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的長上下文記憶設計</strong>：Raju (2026) 發現，高記憶容量鳥類（儲食山雀）的海馬迴不靠擴大腦體積，而是讓群體表徵從鬆散態轉變成拓撲剛性的晶體幾何態（Crystalline Geometry），藉此達到極限容量。設計高密度、抗干擾的向量資料庫，或對 KV Cache 做幾何正則化時，可以拿這個物理機制當藍圖。</li>
+<li><strong>把腦區分工門控（視丘＋杏仁核＋雙側海馬迴）用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a></strong>：把「什麼資訊值得寫入長期記憶」（杏仁核顯著性門控）和「當前工作記憶怎麼路由」（視丘到前額葉的緩衝）顯式解耦，可以同時解決關聯召回（Episodic Recall）與規則算術外推（Rule Extrapolation）在單一注意力層內互搶資源的問題。</li>
+<li><strong>把認知評價對比框架（CHIARO）用到 <a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的衝突調解與社會模擬</strong>：模擬公共政策或輿論演化時，不直接替智能體寫死情緒立場，改成給它們不同的目標與歸因偏置，讓群體的對立情緒從同一事件的不同評價路徑中自然湧現。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1995</td>
+<td><em>Why there are complementary learning systems in the hippocampus and neocortex</em>（James L. McClelland）</td>
+<td>認知神經科學的經典論文：從連接主義災難性干擾在數學上不可避免這一點，推導出大腦為什麼必須分化出快慢互補的雙記憶系統。</td>
+<td>G1–G2 必讀基石</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/R4CVDRF9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1037/0033-295x.102.3.419" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Building Machines That Learn and Think Like People</em>（Brenden M. Lake）</td>
+<td>🏆 <strong>L5 已審核</strong>｜認知科學界針對深度學習提出的綱領性論文，影響很大：確立直覺物理、直覺心理、因果組合模型與學會學習四項核心判準。</td>
+<td>G1 全景必讀</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/BR443K2Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1604.00289" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>What Learning Systems do Intelligent Agents Need? Complementary Learning Systems Theory Updated</em>（Dharshan Kumaran）</td>
+<td>DeepMind 與 McClelland 合作更新 CLS 理論：把海馬迴重播直接連到深度強化學習的 Experience Replay 與情景推理。</td>
+<td>G2 架構橋接</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/GBTBEKVE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.tics.2016.05.004" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><em>The Tolman-Eichenbaum Machine: Unifying Space and Relational Memory through Generalization in the Hippocampal Formation</em>（James C. R. Whittington）</td>
+<td>NeuroAI 的代表作：用結構轉移基底加感官內容綁定，統一解釋空間導航的網格細胞與抽象關係推理的泛化。</td>
+<td>G2–G3 深度機制</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/VVIVEFA3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.cell.2020.10.024" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><em>Human-like systematic generalization through a meta-learning neural network</em>（Brenden M. Lake）</td>
+<td>發表於 <em>Nature</em>：證明標準神經網路經過元學習組合訓練（MLC），可以解決困擾學界 35 年的系統性泛化難題。</td>
+<td>G2 核心結果</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/DQIWQTK8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s41586-023-06668-3" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><em>Emotional Intelligence of Large Language Models</em>（Xuena Wang）</td>
+<td>首度以標準化心理學量表，系統評測大模型的情緒識別、理解與調節能力，LLM 情商的量化研究由此開始。</td>
+<td>G2 情感計算入門</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/NEJ26DS6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2307.09042" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2019｜Michael Levin</strong>，<em>The Computational Boundary of a 'Self': Developmental Bioelectricity Drives Multicellularity and Scale-Free Cognition</em>（<em>Frontiers in Psychology</em>，314 引）：說明無尺度認知光錐怎麼從細胞生理延伸到高階心智的目標導航。書目索引 ｜ <a href="zotero://select/library/items/723J7XQ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fpsyg.2019.02688" rel="noopener">原文</a></li>
+<li><strong>2022｜Michael Levin</strong>，<em>Technological Approach to Mind Everywhere (TAME)</em>（<em>Frontiers in Systems Neuroscience</em>，195 引）：一套工程化框架，把智慧定義為在任意問題空間（代謝、解剖、概念與情感空間）中維持目標穩態。書目索引 ｜ <a href="zotero://select/library/items/IBJBXBIP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnsys.2022.768201" rel="noopener">原文</a></li>
+<li><strong>2022｜Mengchi Liu &amp; Dongmei Yu</strong>，<em>Towards intelligent E-learning systems</em>（<em>Education and Information Technologies</em>，203 引）：探討怎麼設計結合學習者認知狀態建模與知識追蹤的智慧化教育系統。書目索引 ｜ <a href="zotero://select/library/items/NJBDJANF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10639-022-11479-6" rel="noopener">原文</a></li>
+<li><strong>2019｜Brenden M. Lake</strong>，<em>Compositional generalization through meta sequence-to-sequence learning</em>（<em>arXiv</em>，117 引）：MLC 的先驅工作，展示記憶增強神經網路怎麼靠元序列學習，學會「blicket twice」這類即時概念組合。OA PDF ｜ <a href="zotero://select/library/items/G9CC7URZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1906.05381" rel="noopener">原文</a></li>
+<li><strong>2023｜Marcel Binz &amp; Eric Schulz</strong>，<em>Turning large language models into cognitive models</em>（<em>arXiv</em>，114 引）：用人類心理學決策實驗的資料微調大型語言模型，證明它的行為擬合與泛化能力超過傳統認知模型。OA PDF ｜ <a href="zotero://select/library/items/7RMM9MZ2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.03917" rel="noopener">原文</a></li>
+<li><strong>2024｜Arsham Gholamzadeh Khoee et al.</strong>，<em>Domain generalization through meta-learning: a survey</em>（<em>Artificial Intelligence Review</em>，109 引）：完整綜述元學習怎麼幫助深度神經網路克服真實世界的分佈偏移（OOD），並提升跨領域泛化。OA PDF ｜ <a href="zotero://select/library/items/5BGXMZBE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.02785" rel="noopener">原文</a></li>
+<li><strong>2026｜Wai Keen Vong &amp; Brenden M. Lake</strong>，<em>On the Robustness of Modeling Grounded Word Learning Through a Child’s Egocentric Input</em>（<em>Open Mind</em>）：嚴格檢驗「用幼兒真實頭戴視角影音學習具身詞彙接地」這個做法的穩健性與極限條件。OA PDF ｜ <a href="zotero://select/library/items/DQRZ9IIF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.14749" rel="noopener">原文</a></li>
+<li><strong>2026｜Hong Jeong</strong>，<em>A Miniature Brain Transformer: Thalamic Gating, Hippocampal Lateralization, Amygdaloid Salience, and Prefrontal Working Memory in Attention-Coupled Latent Memory</em>（<em>arXiv</em>）：把視丘中繼、杏仁核顯著性、前額葉緩衝與雙側海馬迴抑制耦合進 Transformer 的潛記憶架構，兼顧情景召回與規則推演。OA PDF ｜ <a href="zotero://select/library/items/FWP9MXIA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.07217" rel="noopener">原文</a></li>
+<li><strong>2026｜Sangjun Park</strong>，<em>Position: Hippocampal Explicit Memory Is the Cornerstone for AGI</em>（<em>ICML 2026</em>）：主張現有 LLM 只相當於人類的隱式記憶，要整合海馬迴式的顯式記憶，才撐得起長程規劃與元認知。OA PDF ｜ <a href="zotero://select/library/items/2EZMMJIN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.11245" rel="noopener">原文</a></li>
+<li><strong>2026｜Prashant C. Raju</strong>，<em>Geometric Phase Transition Enables Extreme Hippocampal Memory Capacity</em>（<em>arXiv</em>）：比較儲食鳥類與非儲食鳥類的神經表徵，發現極限的空間記憶容量來自海馬迴群體編碼的離散相變：從無序態轉為拓撲剛性的晶體幾何態。OA PDF ｜ <a href="zotero://select/library/items/QH77K5PQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.17199" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Megha Manoj, Sue Ann Campbell (2026)</strong>，<em>Phase model analysis of the effect of M-current on neural synchrony in hippocampal networks</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：對含鉀離子 M-電流的海馬迴錐體神經元網路做一維相位約化，並用解析方式證明：低乙醯膽鹼（強 M-電流）驅動全局同步，支援慢波記憶鞏固。高乙醯膽鹼（抑制 M-電流）則讓全局同步分裂成多個穩定的對稱分群解，對應各自獨立的記憶群集。</li>
+<li>連結：<a href="zotero://select/library/items/VFSX499E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.12684" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Reza Ahmadvand, Sara Safura Sharif, Yaser Mike Banad (2026)</strong>，<em>A Unified Phase-native Computational Principle Governs Hippocampal Spike Timing and Neural Coding</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：提出統一複數神經元（UCN）與強迫相位積分原理，把海馬迴神經編碼正交拆成振幅（what）與相位累積（when），重現 <span class="math inline">\theta</span> 相位鎖定。文中也證明，過去報導的非週期頻譜斜率鎖定關聯，其實來自週期振盪的污染，不是因果調控。</li>
+<li>連結：<a href="zotero://select/library/items/83WEGBHJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.19690" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Chiaroscuro for Emotions: A Contrastive Emotion Benchmark Grounded in Appraisal Theory</strong>（Divyesh Bommana, Mohammad Saim, Tianyu Jiang，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：傳統情緒識別基準假設一段文本對應單一情緒。但在真實世界裡，同一個共享的因果事件（如孩童興奮地踢前座椅子）會在兩個當事人心中同時引發正負相反的情緒，這一點被完全忽略了。</li>
+<li>關鍵做法：依據心理學的認知評價理論（Appraisal Theory），建立 1,000 組由人類精細標註的對比情緒推論基準 <code>CHIARO</code>。模型必須拆解不同主體的目標受阻與歸因視角，不能只靠情緒的字面關鍵詞。</li>
+<li>跨領域啟發：多智能體社會模擬（<a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>）與高情商對話對齊，可以用它來檢驗視角採擇（Perspective-Taking）能力。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/95DIKBJQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.03394" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>PTEI: Integrating Personality Traits to Enhance Emotional Intelligence in Large Language Models</strong>（Amir Reza Jafari et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：大型語言模型在複雜的人際情緒推理上仍明顯落後人類。主要盲點是把所有人當成均質的平均人，忽略了個體性格差異對情緒反應的調節。</li>
+<li>關鍵做法：提出 <code>PTEI</code> 框架，把 OCEAN 大五人格等個體特質維度顯式注入情緒推論鏈，讓模型能針對不同性格輪廓的主體，做出有區別的情緒解讀。</li>
+<li>跨領域啟發：說明心智理論（Theory of Mind）與情感對齊不能只建模通用的人類先驗，還必須引入結構化的個體差異潛變數。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/GX7ZJNZ8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.10245" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

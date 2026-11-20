@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>M-S31｜幾何與代數複雜度 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">數學</a></nav></header>
+<main>
+<article>
+
+<h1 id="m-s31幾何與代數複雜度">M-S31｜幾何與代數複雜度</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+上一章：<a class="wl" href="M65_%E7%B5%B1%E8%A8%88%E5%8E%9F%E5%85%B8%EF%BC%9ABootstrap%E3%80%81Lasso%E3%80%81%E5%9B%A0%E6%9E%9C%E5%9C%96.html">M65 統計原典：Bootstrap、Lasso、因果圖</a> ｜ 下一章：<a class="wl" href="M-S32_%E7%AF%84%E7%96%87%E9%82%8F%E8%BC%AF%E3%80%81%E5%9E%8B%E5%88%A5%E8%AB%96%E8%88%87%E7%B5%84%E5%90%88%E6%80%A7.html">M-S32 範疇邏輯、型別論與組合性</a>
+本線先備：<a class="wl" href="M57_%E6%9C%89%E9%99%90%E7%BE%A4%E8%A1%A8%E7%A4%BA%E8%88%87%E6%9D%8E%E4%BB%A3%E6%95%B8%E5%85%A5%E9%96%80.html">M57 有限群表示與李代數入門</a> · <a class="wl" href="M59_%E6%A6%82%E5%BD%A2%E8%AB%96%EF%BC%88Vakil%EF%BC%89.html">M59 概形論（Vakil）</a>
+別線先備：<a class="wl" href="../02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a>（細節見下方「路線上的計劃」）
+研究主脊：<a class="wl" href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A1_%E8%A8%88%E7%AE%97%E7%9A%84%E6%A5%B5%E9%99%90.html">主脊1_計算的極限</a>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a></p>
+</aside>
+<aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/01-math.md:228</code>；這一格是計劃，不代表已學到）</p>
+<p></p>
+<ul>
+<li>內容：S3 候選方向，題目到時由學習者選。路線檔註記：主脊 1</li>
+<li>先備：M57、M59；TCS 的代數計算與 VP、VNP 節點</li>
+<li>過關證據：L5：一份可以投稿或公開的原創結果草稿，交猜想主管紅隊</li>
+<li>依序要讀的核心文獻：
+<ol>
+<li>Valiant，1979，&quot;The Complexity of Computing the Permanent&quot;，Theoretical Computer Science 8。未核對。</li>
+<li>Mulmuley &amp; Sohoni，2001，&quot;Geometric Complexity Theory I: An Approach to the P vs. NP and Related Problems&quot;，SIAM J. Comput. 31(2):496–526。已核對 2026-11-18。 <a href="zotero://select/library/items/4S5CUWSB" class="zotero">📚 Zotero 開啟</a></li>
+<li>Landsberg，<em>Geometry and Complexity Theory</em>（Cambridge University Press，2017）。未核對。</li>
+<li>Bürgisser, Ikenmeyer, Panova，2019，&quot;No Occurrence Obstructions in Geometric Complexity Theory&quot;，J. Amer. Math. Soc. 32:163–193（arXiv 1604.06431）。已核對 2026-11-18。 <a href="zotero://select/library/items/XFPSPN4S" class="zotero">📚 Zotero 開啟</a></li>
+<li>Limaye, Srinivasan, Tavenas，2021，&quot;Superpolynomial Lower Bounds Against Low-Depth Algebraic Circuits&quot;，FOCS 2021（ECCC TR21-081）。已核對 2026-11-18。</li>
+</ol>
+</li>
+</ul>
+</aside>
+<h2 id="正文">正文</h2>
+<!-- BODY_START：教師回報本章完成後，筆記主管才寫這一區。只記學習者實際學到、做到的。 -->
+<aside class="callout" data-kind="note"><p class="callout-title">尚未學到</p>
+<p>這一章還在路線上。t-math 回報完成後，這裡會依 ledger 與教師通知補寫。</p>
+</aside>
+<h3 id="選定的題目與理由">選定的題目與理由</h3>
+<h3 id="核心文獻閱讀紀錄">核心文獻閱讀紀錄</h3>
+<h3 id="自己的問題與結果">自己的問題與結果</h3>
+<h3 id="與其他節點的連結">與其他節點的連結</h3>
+<!-- BODY_END -->
+<h2 id="待完成與延伸">待完成與延伸</h2>
+<!-- EXTENSION_START：這一節與正文分開。寫正文時不動它，之後只在各小節末尾追加。 -->
+<h3 id="待完成">待完成</h3>
+<ul class="contains-task-list">
+<li class="task-list-item"><input class="task-list-item-checkbox" disabled="disabled" type="checkbox"> 過關證據：L5：一份可以投稿或公開的原創結果草稿，交猜想主管紅隊</li>
+</ul>
+<h3 id="學習者專門要求">學習者專門要求</h3>
+<h3 id="教師-subnote">教師 subnote</h3>
+<h3 id="未來探索提示">未來探索提示</h3>
+<!-- EXTENSION_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+</body>
+</html>

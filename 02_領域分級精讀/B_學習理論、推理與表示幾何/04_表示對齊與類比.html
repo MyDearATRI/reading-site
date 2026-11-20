@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04｜表示對齊與類比推理（柏拉圖表示假說、跨空間最優配對與關係映射） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a></nav></header>
+<main>
+<article>
+
+<h1 id="04表示對齊與類比推理柏拉圖表示假說跨空間最優配對與關係映射">04｜表示對齊與類比推理（柏拉圖表示假說、跨空間最優配對與關係映射）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 B：學習理論、推理與表示幾何</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> ｜ <a class="wl" href="03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域研究兩件事：一是兩個智能系統的座標軸完全不同，甚至來自不同感官模態或不同學科體系，為什麼仍會收斂出同構的內部關係幾何；二是怎麼不靠人工平行標註，就完成跨空間無監督對齊、模型縫合與高階結構類比。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+兩個獨立訓練的神經網路，隱藏神經元的排列順序、向量維度與座標基底都不能直接比較。一個只讀過文字的語言模型和一個只看過影像的視覺模型是這樣，兩門不同的語言、兩個不同的科學領域之間也是這樣。把模型 A 的向量直接減去模型 B 的向量，在數學上沒有意義。這個領域要回答兩個問題。第一，沒有字典逐一告訴你誰對應誰的時候，怎麼只靠各自內部關係網路的形狀，判定兩個表徵空間是否共享同一套世界結構。第二，怎麼把在 A 領域學到的關係法則零樣本遷移（類比）到 B 領域。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像地球人與外星人各畫了一張銀河系星圖。地球人用英里，上下顛倒，以太陽為中心。外星人用光年，鏡像翻轉，以仙女座為中心，還漏畫了幾顆暗星。
+<ul>
+<li>逐點比對座標數值的話，兩張圖的相似度是零。</li>
+<li>但如果計算每張圖內部星星彼此距離構成的三角形比例，就會發現兩張星圖可以像拼圖一樣，透過旋轉縮放（Procrustes 對齊）或非平衡結構配對（Unbalanced Gromov–Wasserstein）密合地疊在一起。柏拉圖表示假說（Platonic Representation Hypothesis）更進一步：所有夠強的智能體都在預測同一個真實物理世界，所以它們內部的星圖幾何最後會趨於一致。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+它為跨學科的知識遷移提供數學工具。在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 中，它決定視覺、語言與世界模型如何共享統一思維層（如 Vision-of-Thought）。在 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 與 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> 中，它把跨語言詞表和跨知識圖譜的本體對齊轉成嚴格的度量測度空間距離。在 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> 中，它用資訊距離給出任意兩個物件互轉的最小熱力學與演算法代價。在 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 中，它解釋人類如何靠類比驅動語法化與零樣本概念泛化。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    INFO[&quot;Bennett et al. (1998) 資訊距離：最短互轉程式長度與可逆熱力學最小功&quot;] --&gt; COGA[&quot;Larkey &amp; Love (2003) CAB 聯結主義類比 &amp; Fischer (2008) 類比驅動語法化&quot;]
+    COGA --&gt; LLM_ANA[&quot;Finn &amp; Levine (2017) 元學習普適性 → Webb, Holyoak &amp; Lu (2024) 大語言模型反事實零樣本類比湧現&quot;]
+    OT_BASE[&quot;Alvarez-Melis &amp; Jaakkola (2018) GW 詞嵌入對齊 &amp; Grave et al. (2019) Wasserstein Procrustes&quot;] --&gt; GWL[&quot;Xu et al. (2019) GWL 圖匹配嵌入 → Séjourné et al. (2021) 非平衡 UGW → Wu &amp; Tang (2023) 跨語言知識圖譜對齊&quot;]
+    GWL --&gt; PRH[&quot;柏拉圖表示假說前沿 (2026)：世界模型狀態轉移收斂 vs 天文學『共享幾何不等於共享物理』層級檢驗&quot;]
+    LLM_ANA --&gt; VOT[&quot;多模態與科學基礎模型遷移 (2026)：Vision-of-Thought 視覺思維層、粒子物理與高光譜跨域遷移&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>無監督跨空間幾何對齊（Wasserstein Procrustes, GW &amp; Unbalanced GW）</strong></p>
+<ul>
+<li>直覺理解：對齊兩團高維點雲有兩種難度。第一種是兩個空間維度相同，只差一個旋轉和未知的點對點配對。這時一邊轉動星座圖（正交矩陣 <span class="math inline">Q</span>），一邊找配對（置換／傳輸矩陣 <span class="math inline">P</span>），這就是 Wasserstein Procrustes。第二種比較難：兩個空間維度不同，甚至一邊有十萬個細分概念，另一邊只有三千個粗概念（局部概念膨脹或消亡）。這時 Gromov–Wasserstein（GW）直接比對兩邊的內部距離矩陣。非平衡 UGW 再放寬「總質量必須 100% 一對一搬完」的限制，讓邊緣的冷門概念由質量增減項吸收，避免硬性錯配破壞全局幾何。</li>
+<li>機制或核心表達式：Grave et al.（2019）同時在正交群 <span class="math inline">O_d</span> 與雙隨機置換流形 <span class="math inline">\mathcal{P}_n</span> 上極小化對齊誤差：
+<div class="math inline">\min_{Q \in O_d,\, P \in \mathcal{P}_n} \| X Q - P Y \|_F^2</div>
+兩個空間不能直接作差時，Séjourné, Vialard &amp; Peyré（2021）引入錐鬆弛，並用 Csiszár <span class="math inline">\varphi</span>-散度懲罰邊際偏差，定義非平衡 Gromov–Wasserstein 距離：
+<div class="math inline">\mathrm{UGW}(\mu_X, \mu_Y) = \inf_{\pi \ge 0} \iint |d_X(x,x') - d_Y(y,y')|^2 \,\mathrm{d}\pi(x,y)\mathrm{d}\pi(x',y') + \rho D_\varphi(\pi_1 \otimes \pi_1 \| \mu_X \otimes \mu_X) + \rho D_\varphi(\pi_2 \otimes \pi_2 \| \mu_Y \otimes \mu_Y)</div></li>
+<li>能做到什麼，代價是什麼：完全沒有平行語料，也能對齊跨語系詞彙、異構知識圖譜（Wu &amp; Tang, 2023）與單細胞多組學流形。代價是二次指派問題（QAP）是非凸 NP-Hard（參見 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a>），而且對局部等距的鏡像翻轉（如「左／右」或「冷／熱」對稱軸反轉）有固有的模糊性，常需要少量錨點或高階結構約束來打破對稱。</li>
+</ul>
+</li>
+<li>
+<p><strong>基底無關相似性與柏拉圖表示假說（CKA, Stitching &amp; Platonic Representation Hypothesis）</strong></p>
+<ul>
+<li>直覺理解：要檢驗兩個深度網路的某兩層是否學到同一個概念空間，不能直接看第 <span class="math inline">i</span> 個神經元。要看的是這 1000 張圖片在模型 A 眼中的兩兩相似度矩陣，和在模型 B 眼中的兩兩相似度矩陣是否一致（如中心化核對齊 CKA 與互近鄰指標）。柏拉圖表示假說主張，真實物理世界是產生所有影像、文字與感測訊號的共同投影源。模型規模越大、要同時應付的預測任務越多，能兼容所有約束的表徵解空間就被壓得越窄，異質架構因此收斂到同一個內在幾何結構。</li>
+<li>機制或核心表達式：設兩模型在相同 <span class="math inline">n</span> 個樣本上的激活矩陣分別為 <span class="math inline">X \in \mathbb{R}^{n \times d_1}</span> 與 <span class="math inline">Y \in \mathbb{R}^{n \times d_2}</span>。線性 CKA 用中心化 Gram 矩陣 <span class="math inline">K = X X^\top</span>、<span class="math inline">L = Y Y^\top</span> 的 Hilbert–Schmidt 獨立性準則（HSIC），給出對正交旋轉與等比縮放完全不變的對齊度：
+<div class="math inline">\mathrm{CKA}(K, L) = \frac{\mathrm{HSIC}(K, L)}{\sqrt{\mathrm{HSIC}(K, K)\,\mathrm{HSIC}(L, L)}}</div>
+在世界模型方面，Li et al.（2026）提出預測一致性假設（Predictive Consistency Assumption），指出共享的狀態轉移目標（State Transition Objective）構成演化選擇壓力，驅動異質世界模型收斂出同構的動態潛空間。</li>
+<li>能做到什麼，代價是什麼：解釋了為什麼凍結的視覺編碼器只要加一層很薄的線性投影（Model Stitching），就能接上大語言模型成為 VLM。代價是局部鄰域幾何相似，不保證科學因果變數可以互換（見下方 G3 最新的天文學反例）。</li>
+</ul>
+</li>
+<li>
+<p><strong>結構映射、關係類比推理與湧現機制（Analogical Alignment &amp; Counterfactual Analogies）</strong></p>
+<ul>
+<li>直覺理解：人類說「原子核之於電子，猶如太陽之於行星」時，意思不是太陽和原子核長得像（表面屬性相似性幾乎為零），而是「中心引力吸引外圍軌道運轉」這組高階關係結構在兩個系統中同構。早期認知科學用聯結主義迭代匹配（如 CAB 模型），模擬人類如何在局部元素與全局關係角色之間雙向傳遞支持度。在歷史語言學中（Fischer, 2008），驅動實詞不斷演化為語法結構（語法化）的，正是這種類比對齊。</li>
+<li>機制或核心表達式：類比推理可以形式化為尋找部分結構同態 <span class="math inline">\Phi: \mathcal{S}_{\text{source}} \to \mathcal{S}_{\text{target}}</span>，要最大化的是關係謂詞保真度 <span class="math inline">R(a,b) \iff R'(\Phi(a), \Phi(b))</span>，不是單點特徵相似度。有人質疑大語言模型做類比題只是背誦訓練語料。對此，Webb, Holyoak &amp; Lu（2024）設計了字母表隨機打亂的反事實類比任務（Counterfactual Tasks），證實在控制符號切分（Tokenization）與工作記憶瓶頸之後，大模型在訓練集不可能出現過的扭曲規則空間中，仍然表現出零樣本的關係結構對齊。</li>
+<li>能做到什麼，代價是什麼：讓智能體在全新領域做單樣本或零樣本的結構遷移（如從高能噴流物理遷移到微中子散射實驗，Krzmanc et al., 2026）。代價是表面語意誘餌（Surface Distractors）很強，或關係階層超過三階嵌套時，純自回歸注意力仍容易退回表面共現的捷徑。</li>
+</ul>
+</li>
+<li>
+<p><strong>演算法資訊距離與元學習普適變換（Information Distance &amp; Meta-Learning Universality）</strong></p>
+<ul>
+<li>直覺理解：把問題推到極端，可以問兩個類型完全不同的物件 <span class="math inline">x</span> 與 <span class="math inline">y</span>（例如一段交響樂譜和一張星雲照片）之間，最根本的認知與翻譯距離是什麼。Bennett、Gács、李明與 Vitányi（1998）的答案是：把 <span class="math inline">x</span> 無損翻譯成 <span class="math inline">y</span>、同時也能把 <span class="math inline">y</span> 無損翻譯回 <span class="math inline">x</span> 所需的最短電腦程式長度。這個長度在物理上恰好等於可逆熱力學轉換所需的最小能量耗散。在連續梯度這一邊，Finn &amp; Levine（2017）證明深度表徵加上幾步梯度下降，在數學上足以逼近任何學習演算法。所以好的對齊表徵，就是把新任務放在走一步梯度就能到達的鄰域裡。</li>
+<li>機制或核心表達式：用條件 Kolmogorov 複雜度 <span class="math inline">K(x|y)</span> 定義普適資訊距離（Bennett et al., 1998）：
+<div class="math inline">E(x, y) = \max\{ K(x \mid y),\, K(y \mid x) \}</div>
+忽略對數誤差時，<span class="math inline">E(x,y)</span> 是所有可計算認知距離的下確界（Universal Cognitive Distance）。也就是說，只要兩個物件之間有任何規律性的類比或對稱關係，<span class="math inline">E(x,y)</span> 就會精確捕捉到並加以壓縮。</li>
+<li>能做到什麼，代價是什麼：為所有跨模態翻譯、壓縮相似度（NCD）與表示遷移提供不依賴特定神經架構的絕對資訊論基準（直接連到 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a>）。代價是精確的 Kolmogorov 複雜度不可計算，實務上要用壓縮器、對比互資訊下界或元學習梯度步數來近似。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>共享幾何是否等於共享物理與因果機制（柏拉圖假說的嚴格邊界）</strong>：2026 的天文學大規模實證研究 <em>Shared Geometry Is Not Shared Physics</em>（Duraphe et al., 2026）逐層檢驗了 36 個預訓練模型，橫跨光學影像、紅外線與光譜。結果是，所有模型對都能在某幾層找到顯著的局部鄰域幾何對齊，但對齊度不隨網路深度單調遞增，而且幾何上高度對齊的表徵，在下游物理參數反演上未必可以互換。這是目前學界分歧最大的地方：統計共現壓出來的流形鄰域同構，可能只對齊了觀測表象，還沒有對齊背後的生成物理定律。</li>
+<li><strong>跨模態對齊該用連續潛空間的黑盒調變，還是顯式的離散中間思維層</strong>：現有的文生圖與多模態系統多半讓文字向量直接調製連續擴散雜訊，中間沒有可解釋的橋樑，複雜空間關係與數量類比因此常常出錯。<em>Vision-of-Thought (VoT)</em>（Sun et al., 2026）等新工作開始在 VLM 與擴散解碼器之間插入顯式的離散視覺思維層。爭論的焦點是：跨模態對齊應該發生在高維連續向量流形上，還是必須經過離散符號／結構瓶頸。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>用非平衡 Gromov–Wasserstein（UGW）做科學史與學科演化對齊</strong>：在 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 中，兩個不同年代或不同學門（如「統計物理」與「深度學習理論」）的概念共現網路規模相差很大，而且常有舊概念消亡、新分支暴增。直接套用 Séjourné et al.（2021）的 UGW，能自動找出「自旋玻璃 ↔ 非凸損失地景」、「重整化群 ↔ 深度特徵抽象」這類跨學科結構類比。它的局部傳輸失真值還能精確標出哪個概念在對面學科還沒有對應物，那往往就是突破性創新的空白點。</li>
+<li><strong>演化樹與連續嵌入空間的雙向錨定</strong>：<em>Micro16S</em>（Bishop et al., 2026）把微生物 16S rRNA 基因序列按系統發育樹（Phylogenetic Tree）嵌入連續空間。它證明離散詞表處理不了新物種時，用外部的演化／本體距離約束潛空間幾何，可以讓模型對從未見過的分類單元做零樣本泛化。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1998</td>
+<td><strong>Information Distance</strong>，Charles H. Bennett et al.</td>
+<td>用最短互轉程式長度定義普適認知距離，並證明它恰好等於可逆熱力學轉換的最小物理功。</td>
+<td><code>G2/G3 思想地基</code></td>
+<td><a href="zotero://select/library/items/XUDXH6I8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/9804010" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2003</td>
+<td><strong>CAB: Connectionist Analogy Builder</strong>，Levi B. Larkey, Bradley C. Love</td>
+<td>認知科學類比建模的經典論文：展示簡單的迭代神經計算如何根據元素在關係結構中扮演的對等角色，建立跨域對應。</td>
+<td><code>G2 認知基石</code></td>
+<td><a href="zotero://select/library/items/ANABGJTF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0364-0213(03)00066-1" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><strong>Gromov-Wasserstein Alignment of Word Embedding Spaces</strong>，David Alvarez-Melis, Tommi S. Jaakkola</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：把沒有雙語詞典的跨語言詞嵌入對齊直接寫成單步 GW 最優傳輸，量化結構關係平移的扭曲代價。</td>
+<td><code>G1/G2 入門首選</code></td>
+<td><a href="zotero://select/library/items/8WSG2DTR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1809.00013" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>Unsupervised Alignment of Embeddings with Wasserstein Procrustes</strong>，Edouard Grave et al.</td>
+<td>聯合求解正交剛體旋轉（Procrustes）與置換配對（Wasserstein），不用不穩定的對抗訓練，就完成高維點雲的無監督對齊。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/VCIJNCSH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1805.11222" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><strong>Unbalanced Gromov-Wasserstein Distance: Conic Formulation and Relaxation</strong>，Thibault Séjourné et al.</td>
+<td>引入 Csiszár 散度，允許局部質量增減，解決兩個分類體系規模懸殊或局部概念膨脹時的非平衡結構平移。</td>
+<td><code>G3 理論深潛</code></td>
+<td><a href="zotero://select/library/items/E2BPCKF6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2009.04266" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>Evidence from counterfactual tasks supports emergent analogical reasoning in large language models</strong>，Taylor Webb, Keith J. Holyoak, Hongjing Lu</td>
+<td>用字母序列隨機置換的反事實推理實驗回應學界質疑，嚴謹地證實大語言模型有超出語料記憶的湧現類比能力。</td>
+<td><code>G1/G2 核心爭鳴</code></td>
+<td><a href="zotero://select/library/items/WFIGCXHR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.13070" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（5 篇跨學科樞紐文獻）</summary>
+<p></p>
+<ul>
+<li><strong>2008｜On analogy as the motivation for grammaticalization</strong>，Olga C. M. Fischer（語言學經典：論證驅動詞彙演化為語法結構的主要認知動力是人類的結構類比，不是單純的語音磨損，179 引）｜<a href="zotero://select/library/items/DP7BTXGU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1075/sl.32.2.04fis" rel="noopener">原文</a></li>
+<li><strong>2017｜Meta-Learning and Universality: Deep Representations and Gradient Descent can Approximate any Learning Algorithm</strong>，Chelsea Finn, Sergey Levine（證明深度表徵加上標準梯度下降，在學習演算法的層級上有萬能逼近性，為表徵遷移提供理論基礎，156 引）｜<a href="zotero://select/library/items/G7C38QMD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1710.11622" rel="noopener">原文</a></li>
+<li><strong>2019｜Gromov-Wasserstein Learning for Graph Matching and Node Embedding</strong>，Hongteng Xu et al.（提出 GWL 框架，對齊兩張異構圖的同時學習共享的節點嵌入，127 引）｜<a href="zotero://select/library/items/SZQ57Q8Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1901.06003" rel="noopener">原文</a></li>
+<li><strong>2023｜Cross-Lingual Knowledge Graph Alignment via Graph Optimal Transport</strong>，Shuang Wu, Jie Tang（結合 Wasserstein 與 GW，用於跨語言知識圖譜的實體與全局拓撲對齊，能有效過濾局部偽匹配，56 引）｜<a href="zotero://select/library/items/QZU25N9W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.00916" rel="noopener">原文</a></li>
+<li><strong>2026｜VoT: Vision-of-Thought for Unified Multimodal Representation Alignment</strong>，Jingxiang Sun et al.（在 VLM 與擴散解碼器之間加入可解釋的離散視覺思維層，把高層語言邏輯和底層視覺訊號接到同一個對齊框架裡）｜<a href="zotero://select/library/items/BJ9ACK59" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.07815" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜RAIL: Representation-Aligned Imitation Learning for Student-Compatible Teacher Policies</strong>，Meraj Mammadov, Pedro Zuidberg Dos Martires, Johannes Andreas Stork：特權教師與感測學生之間有不可約的模仿鴻溝。本文提出表徵對齊模仿學習 RAIL 來消除它：在教師訓練階段就用對比學習建立師生共享的潛在空間，並限制教師只能依這個空間決策。不需要獎勵塑形和事後的學生 RL 微調，就超越基線，並支援零樣本任務遷移。（<a href="zotero://select/library/items/ZDUKFFBS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.12251" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜A Spiking Neural Model of the Mental Lexicon: Representations, Similarity Structure, and Associative Retrieval in Perception and Production</strong>，Bernd J. Kröger：在神經工程框架（NEF）與語意指標架構（SPA）下，用 199,400 顆 LIF 脈衝神經元實作含 613 個詞條的心智詞庫模型。模型透過關係圖遞迴表徵、中介詞元（Lemma）與贏者全拿／閾值聯想記憶，讓語音感知與言語產生兩個方向都能精確檢索。（<a href="zotero://select/library/items/PK5572WU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.09402" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦柏拉圖表示假說在天文物理與世界模型中的正反雙向檢驗">2026-11-19 最新入庫（聚焦：柏拉圖表示假說在天文物理與世界模型中的正反雙向檢驗）</h4>
+<ul>
+<li><strong>2026｜Shared Geometry Is Not Shared Physics: A Layerwise Test of the Platonic Representation Hypothesis in Astronomy</strong>，Kshitij Duraphe, Aravind Kannappan, Dun Li Chan, Okiki Famutimi
+<ul>
+<li>重點：橫跨光學影像、紅外線與光譜，對 36 個預訓練模型做逐層分析。局部鄰域幾何對齊普遍存在，但不隨深度單調上升，而且幾何對齊的表徵未必有物理可互換性。這為柏拉圖表示假說劃出一條重要的科學邊界。</li>
+<li>連結：<a href="zotero://select/library/items/VRH4C6I4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.04130" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜Platonic Representation Hypothesis on World Models</strong>，Wenhow Li, Chengwei MA, Hui Xiong, Ying-Cong Chen
+<ul>
+<li>重點：把柏拉圖表示假說從靜態感知推進到動態世界模型，提出預測一致性假設（Predictive Consistency Assumption），證明共享的環境狀態轉移預測目標會使異構世界模型收斂出同構的動態潛表徵。</li>
+<li>連結：<a href="zotero://select/library/items/UFR9V7N9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.23720" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-科學基礎模型跨域表徵遷移">同批延伸選讀（2026 科學基礎模型跨域表徵遷移）</h4>
+<ul>
+<li><strong>2026｜Cross-Domain Transfer of Hyperspectral Foundation Models</strong>，Nick Theisen, Peer Neubert（不丟棄高維光譜資訊，也不增加跨模態橋接的複雜度，直接驗證高光譜基礎模型的表徵能否跨領域複用）｜<a href="zotero://select/library/items/SDSDEKZE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.26478" rel="noopener">原文</a></li>
+<li><strong>2026｜Cross-Domain Transfer with Particle Physics Foundation Models: From Jets to Neutrino Interactions</strong>，Gregor Krzmanc et al.（檢驗在高能質子／電子對撞噴流上預訓練的粒子物理基礎模型，能否把物理表徵跨能標遷移到數 GeV 的微中子與原子核散射實驗）｜<a href="zotero://select/library/items/HP82B2NK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.12364" rel="noopener">原文</a></li>
+<li><strong>2026｜Micro16S: Universal Phylogenetic 16S rRNA Gene Representations for Deep Learning of the Microbiome</strong>，Haig V. Bishop et al.（用演化分類樹的關係引導連續空間的三元組對齊，讓微生物組模型不再受限於固定的離散物種詞表）｜<a href="zotero://select/library/items/FEIIUNGR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.64898/2026.03.21.713432" rel="noopener">DOI</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

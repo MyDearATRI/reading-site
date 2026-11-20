@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05｜形式化與推理（Lean 4 定理證明、強化學習長思維鏈、神經符號邏輯與複雜度邊界） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a></nav></header>
+<main>
+<article>
+
+<h1 id="05形式化與推理lean-4-定理證明強化學習長思維鏈神經符號邏輯與複雜度邊界">05｜形式化與推理（Lean 4 定理證明、強化學習長思維鏈、神經符號邏輯與複雜度邊界）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 B：學習理論、推理與表示幾何</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a> ｜ <a class="wl" href="16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域用神經網路的直覺啟發式搜尋和強化學習自我博弈，去處理指數爆炸的推理搜尋空間，再用形式化證明助手（Lean 4）與可微實值邏輯（LNN / LTN）保證演繹的每一步都嚴格、沒有幻覺。這些都得在 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span> 劃下的計算極限之內進行。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+人類與 AI 的推理都有系統一（快直覺）和系統二（慢邏輯）接不起來的問題。純深度網路擅長模糊聯想和猜測下一步的方向，但在十幾步以上的嚴格數學推導或安全關鍵決策中，只要有一步出現小幻覺，整個推導就錯了。傳統符號邏輯與自動定理證明器則相反：每一步都 100% 保真，可是面對真實數學（例如該在哪裡添一條幾何輔助線）時，很快就淹沒在無窮大的組合搜尋樹裡（受制於 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span> 與不可近似性硬界）。這個領域的做法是把三樣東西接成閉環：神經模型負責猜測與創造，強化學習負責測試時的反思搜尋，形式化驗證器／實值邏輯閘負責防錯。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像攀登一座垂直冰壁：
+<ol>
+<li>純神經生成（裸 LLM）像不繫安全繩的徒手獨攀高手。動作流暢，但爬到第 50 公尺時只要抓錯一塊碎冰就會墜谷（邏輯幻覺）。</li>
+<li>純符號搜尋像一個機器人，規定每移動一公分都要把整座山的石頭敲一遍。它絕對安全，但一輩子爬不上山頂（組合爆炸）。</li>
+<li>現代形式化與神經符號推理（如 AlphaGeometry、Lean 4 + RL、DeepSeek-R1）是讓直覺敏銳的攀登者每往上探幾步，就打入一根由編譯器／邏輯核 100% 認證的岩釘（形式化驗證器 / 可驗證獎勵 RLVR）。發現死路可以退回上一根岩釘重試，所以既敢大膽添輔助線跳躍，登頂路線的每一步又都經過驗證。</li>
+</ol>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+它是本知識庫最大的樞紐之一，收了逾 314 篇文獻。向上，它接 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>（依賴類型論證明核心）和 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a>（PCP 定理與證明複雜度）。橫向上，它和 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 共用實值邏輯神經元架構，也把神經符號因果推理接到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a> 的訊號賽局語意通訊。向下，用強化學習激發推理能力的做法改變了 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 的後訓練方式。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    COMP[&quot;Håstad (2001) PCP 緊不可近似定理 → Aaronson (2016) &amp; Wigderson (2019)：計算與證明複雜度硬邊界&quot;] --&gt; FORM[&quot;The mathlib Community (2019)：Lean 依賴類型統一數學庫與零幻覺驗證核心&quot;]
+    PROG[&quot;Lake, Salakhutdinov &amp; Tenenbaum (2015) 貝氏程式歸納 → Evans &amp; Grefenstette (2018) 抗噪可微歸納邏輯&quot;] --&gt; NESY[&quot;Riegel et al. (2020) 邏輯神經網路 LNN &amp; Hitzler (2022) / Nawaz (2025) 神經符號融合體系&quot;]
+    FORM --&gt; OLYM[&quot;Trinh et al. (2024) AlphaGeometry：神經直覺添輔助點 × 符號演繹閉環攻克奧賽幾何&quot;]
+    OLYM --&gt; R1[&quot;DeepSeek-R1 (2025)：純強化學習與可驗證獎勵自發湧現反思、回溯與測試時擴展&quot;]
+    NESY --&gt; FRONT[&quot;2026 神經符號安全落地：模態 LNN、反事實公平性、重症敗血症預警、低軌衛星聯邦防禦與 LTN-GAN&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>形式化證明核心與神經符號演繹閉環（Lean <code>mathlib</code> &amp; AlphaGeometry）</strong></p>
+<ul>
+<li>直覺理解：自然語言寫的數學證明裡有很多「顯然可得」的跳步和隱含假設。Lean 證明助手與 <code>mathlib</code> 則把現代數學（代數、拓撲、分析、範疇）用依賴類型論（Dependent Type Theory）寫成一套程式碼，像大型軟體庫一樣彼此嚴密相連。根據 Curry–Howard 同構，證明一個定理等價於構造出一個能通過類型檢查器編譯的程式。AlphaGeometry 在這個基礎上示範了一種分工。絕大多數幾何證明卡住，是因為缺少某個原圖上沒有的輔助點，而符號系統自己找不出這種點。於是由神經語言模型猜出輔助構造，再交給高速符號引擎推導出全部等角與相似關係。整個流程不需要任何人類奧賽題示範，就能合成上億道訓練題。</li>
+<li>機制或核心表達式：在依賴類型論中，命題 <span class="math inline">P</span> 表示為類型，證明項 <span class="math inline">p : P</span> 由很精簡的可信核心（Trusted Kernel）做確定性驗證 <span class="math inline">\Gamma \vdash p : P \implies \text{Valid}</span>。神經證明搜尋把狀態空間建模為馬可夫決策過程：給定當前證明目標狀態 <span class="math inline">s_t</span>（未證子目標集合），策略網路 <span class="math inline">\pi_\theta(a_t \mid s_t)</span> 生成證明策略（Tactic）或輔助構造項 <span class="math inline">a_t</span>，環境（Lean / 符號幾何引擎 DD+AR）確定性轉移到新目標集合 <span class="math inline">s_{t+1}</span>，直到未證目標為空集 <span class="math inline">\varnothing</span>。</li>
+<li>能做到什麼，代價是什麼：它能消除數學與程式驗證中的邏輯幻覺，並在沒有人類標註的情況下，靠合成定理自舉（Self-Play / Synthetic Data）超越人類奧賽金牌水準。代價是把前沿的非形式化自然語言想法翻譯成形式化敘述（Autoformalization）時，語意對齊仍有落差；跨分支的巨型引理庫檢索成本也高。</li>
+</ul>
+</li>
+<li>
+<p><strong>可驗證獎勵強化學習與測試時計算擴展（RLVR, PRM &amp; Test-Time Scaling）</strong></p>
+<ul>
+<li>直覺理解：過去大家以為，要教語言模型學會複雜推理，必須請大批博士一步步寫出標準解題過程（監督微調 SFT）。DeepSeek-R1（2025）顯示不必如此。只要問題本身有客觀可驗證的對錯標準（例如數學答案對不對、程式碼能不能跑過測試、Lean 編譯過不過），直接用純強化學習（GRPO）獎勵答對的最終結果就夠了。模型為了拿到獎勵，會在訓練中自己發展出拉長思考鏈、自我懷疑（「等等，這步好像算錯了，讓我重新檢查…」）、回溯與多路徑驗證等高階元認知行為。</li>
+<li>機制或核心表達式：群組相對策略最佳化（GRPO）不需要昂貴的價值網路（Critic）。它對同一問題 <span class="math inline">q</span> 抽樣一組推理軌跡 <span class="math inline">\{o_1, \dots, o_G\}</span>，由確定性規則驗證器給出獎勵 <span class="math inline">\{r_1, \dots, r_G\}</span>，再用組內標準化優勢直接更新策略：
+<div class="math inline">\hat{A}_i = \frac{r_i - \mathrm{mean}(\{r_1,\dots,r_G\})}{\mathrm{std}(\{r_1,\dots,r_G\})}</div>
+搭配過程獎勵模型（PRM）或樹搜尋，模型可以在測試階段把額外算力換成推理深度（Test-Time Compute Scaling）。</li>
+<li>能做到什麼，代價是什麼：模型不再受人類標註數據的上限限制，還會出現人類沒有硬編碼進去的推理策略。代價有兩個。在缺乏明確真值驗證器的開放領域（如哲學論證、模糊的現實決策），容易出現獎勵駭客（Reward Hacking）。超長思維鏈也帶來明顯的推論延遲，這連到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 與神經形態低功耗晶片（如 TrueNorth）的能效議題。</li>
+</ul>
+</li>
+<li>
+<p><strong>神經符號邏輯神經元與貝氏程式歸納（LNN, LTN &amp; Probabilistic Program Induction）</strong></p>
+<ul>
+<li>直覺理解：與其讓神經網路和符號系統分開運作、只偶爾交換訊息，IBM 提出的邏輯神經網路（Logical Neural Networks, LNN）讓每一個神經元本身就是嚴格的邏輯閘（AND / OR / IMPLIES），同時仍能用梯度下降學權重。它不強迫未知命題猜一個單一機率值，而是維護一個真值上下界區間 <span class="math inline">[L, U]</span>。這樣既能區分確定為假 <span class="math inline">[0,0]</span>、完全未知 <span class="math inline">[0,1]</span>（開放世界假設）和自相矛盾 <span class="math inline">L &gt; U</span>，又能雙向推理（已知前件推後件，或已知後件為假反推前件為假）。邏輯張量網路（LTN）的思路相近，把一階邏輯公式轉成連續可微的滿足度損失。Lake、Salakhutdinov &amp; Tenenbaum（2015）的貝氏程式歸納（BPL）則把概念表示為生成該物件的組合子程式，用來解釋人類為什麼看一眼陌生文字就能舉一反三。</li>
+<li>機制或核心表達式：在 LNN（Riegel et al., 2020）中，每個邏輯連接詞對應一個受約束的加權實值 Łukasiewicz <span class="math inline">t</span>-模算子，神經元輸出真值區間 <span class="math inline">[L_i, U_i] \subseteq [0,1]</span>。反向傳播時最小化經驗損失與全局邏輯矛盾懲罰項之和：
+<div class="math inline">\min_{W \in \mathcal{C}_{\text{logic}}} \mathcal{L}_{\text{task}}(W) + \gamma \sum_{v \in V} \max(0,\, L_v(W) - U_v(W))</div>
+2026 年的工作把它擴展到模態邏輯（<em>Modal Logical Neural Networks</em>，支援必然 <span class="math inline">\Box</span> 與可能 <span class="math inline">\Diamond</span> 算子），以及聯邦邊緣安全與生成約束（LTN-GAN）。</li>
+<li>能做到什麼，代價是什麼：它同時有神經學習的抗噪性（如 Evans &amp; Grefenstette 的 <span class="math inline">\partial\text{ILP}</span> 從含噪資料歸納規則）和白盒邏輯保證，特別適合醫療重症預警、工業故障診斷與演算法反事實公平性等攸關生命安全的場景。代價是實體數量龐大時，一階邏輯全稱量詞的實例化（Grounding）會讓記憶體膨脹。</li>
+</ul>
+</li>
+<li>
+<p><strong>計算複雜度、證明複雜度與緊不可近似硬界（<span class="math inline">\mathrm{P} \neq \mathrm{NP}</span> &amp; PCP Theorem）</strong></p>
+<ul>
+<li>直覺理解：不管神經網路多大、架構多精巧，都不可能有一個萬能神諭，總能在多項式時間內一步猜中任意邏輯公式的可滿足性或最優解。Wigderson（2019）與 Aaronson（2016）提醒 AI 研究者：計算複雜度相當於資訊世界的熱力學第二定律。Håstad（2001，哥德爾獎得主）更進一步，用機率可檢驗證明（PCP 定理）與有限交換群傅立葉分析證明了緊不可近似定理。對三元線性方程組（MAX-E3-LIN-2），隨機亂猜就能對一半（<span class="math inline">1/2</span>）；但只要 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span>，任何多項式時間演算法都做不到 <span class="math inline">1/2 + \varepsilon</span> 的近似保證。對 MAX-E3-SAT，隨便亂猜能滿足 <span class="math inline">7/8</span> 的子句，但要保證達到 <span class="math inline">7/8 + \varepsilon</span> 同樣是 NP-Hard。</li>
+<li>機制或核心表達式：PCP 定理 <span class="math inline">\mathrm{NP} = \mathrm{PCP}[O(\log n), O(1)]</span> 說的是，任何 NP 證明都能重新編碼成一種形式，檢驗者只要隨機讀取常數個（甚至 3 個）位元，就能檢驗全局真偽。Håstad 結合長碼（Long Code）與離散傅立葉反演，導出緊閾值：
+<div class="math inline">\text{MAX-E3-SAT 近似比上界} = \frac{7}{8} + \varepsilon, \qquad \text{MAX-E3-LIN-}q\text{ 近似比上界} = \frac{1}{q} + \varepsilon \quad (\text{若 } \mathrm{P} \neq \mathrm{NP})</div></li>
+<li>能做到什麼，代價是什麼：它為所有自動推理、約束求解與測試時搜尋劃出理論上限。面對困難的組合推理時，測試時花更多搜尋步數不是工程缺陷，而是數學上的必然。它也給了一個啟發：人類數學家之所以能證明定理，是因為人類挑的問題有高度的代數與幾何對稱結構，避開了隨機最壞情況下那種密碼學式的難題。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>純強化學習隱式長思維鏈與顯式神經符號／形式化約束的路線之爭</strong>：以 DeepSeek-R1 為代表的擴展派認為，只要有終端驗證器和足夠的測試時算力，自然語言或潛在空間裡的自由搜尋會自己學出最佳推理策略，不需要手工設計邏輯閘。神經符號與高安全工程派不這麼看，他們 2026 年的最新落地包括 ICU 敗血症即時死亡率預測、低軌立方衛星星座入侵偵測與旋轉機械跨工況診斷。這一派指出，在分布外（OOD）極端環境與不可重試的生命關鍵場景中，黑盒思維鏈如果沒有內建一階邏輯／模態邏輯硬約束（LTN / LNN），仍可能產生看似有理、實際上會致命的推理幻覺。</li>
+<li><strong>自動形式化（Autoformalization）的語意保真瓶頸</strong>：證明搜尋引擎再強，如果第一步把人類提出的問題或安全規範翻成 Lean 4 敘述時就翻錯了題意（例如漏掉邊界非退化條件，把難題翻成平凡恆真命題），編譯器照樣會判定通過。怎麼在不靠人工逐行審閱的情況下，驗證形式化命題確實忠於原始自然語言的意圖，是目前連接 <a class="wl" href="05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 最難的開放問題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>PCP 用局部隨機抽檢換取全局可驗證性的思想</strong>：PCP 定理除了用來證明不可近似下界，反過來也有正面的用法。只要要求推理者按特定糾錯碼格式交出帶有冗餘結構的證明軌跡，審查者就不必重算整個十萬步推導，隨機抽檢極少數幾個局部一致性節點，就能以很高的信心抓出造假或邏輯漏洞。這對 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 中的可擴展監督（Scalable Oversight）與大型智能體審計有參考價值。</li>
+<li><strong>神經符號因果推理與訊號賽局（Signaling Games）</strong>：Thomas &amp; Saad（2023）把神經符號因果模型嵌入演化訊號賽局。兩個智能體不必傳送原始高維感測資料，就自發形成精簡、具因果可解釋性的語意通訊協定。這項工作把 <a class="wl" href="05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>、<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a> 三個領域接在一起。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2001</td>
+<td><strong>Some Optimal Inapproximability Results</strong>，Johan Håstad</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：獲哥德爾獎的論文，用 3-query PCP 與有限群傅立葉分析證出 MAX-E3-SAT（<span class="math inline">7/8+\varepsilon</span>）等緊不可近似硬界。</td>
+<td><code>G3 理論深潛</code></td>
+<td><a href="zotero://select/library/items/N689ZC5T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://people.kth.se/~johanh/optimalinap.pdf" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2015</td>
+<td><strong>Human-level concept learning through probabilistic program induction</strong>，Brenden M. Lake, Ruslan Salakhutdinov, Joshua B. Tenenbaum</td>
+<td><em>Science</em> 論文：用組合式貝氏程式歸納（BPL）重現人類只憑單一樣本就能學會新概念、想像與解釋的能力。</td>
+<td><code>G1/G2 認知必讀</code></td>
+<td><a href="zotero://select/library/items/CFNX27WG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1126/science.aab3050" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>Mathematics and Computation: A Theory Revolutionizing Technology and Science</strong>，Avi Wigderson</td>
+<td>阿貝爾獎得主親自寫的計算複雜度全景專書，連結 <span class="math inline">\mathrm{P}</span> 對 <span class="math inline">\mathrm{NP}</span>、代數複雜度、對稱空間測地最佳化與證明複雜度。</td>
+<td><code>G1/G2 宏觀全景</code></td>
+<td><a href="zotero://select/library/items/K6ITU7UF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.math.ias.edu/~avi/BOOK/book.pdf" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>The Lean mathematical library</strong>，The mathlib Community</td>
+<td>說明 Lean <code>mathlib</code> 如何用依賴類型論與分散式協作，把現代古典數學寫成統一的形式化軟體庫。</td>
+<td><code>G2 形式化必讀</code></td>
+<td><a href="zotero://select/library/items/8QI3N8F3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.09336" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Logical Neural Networks</strong>，Ryan Riegel et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：建立神經元與實值加權邏輯連接詞的嚴格一對一對應，支援 <span class="math inline">[L,U]</span> 全向真值區間推理與矛盾偵測。</td>
+<td><code>G2 神經符號核心</code></td>
+<td><a href="zotero://select/library/items/MSX7CB5B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.13155" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>Solving olympiad geometry without human demonstrations</strong>，Trieu H. Trinh et al.</td>
+<td><em>Nature</em> 的 AlphaGeometry 論文：完全不靠人類證明示範，用合成定理自舉，結合神經添輔助點與符號演繹解出 IMO 幾何題。</td>
+<td><code>G1/G2 典範</code></td>
+<td><a href="zotero://select/library/items/VI8XQXF4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s41586-023-06747-5" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2025</td>
+<td><strong>DeepSeek-R1: Incentivizing Reasoning Capability in LLMs via Reinforcement Learning</strong>，DeepSeek-AI, Daya Guo et al.</td>
+<td><em>Nature</em> 論文：證明不需要大量人工思維鏈標註，純強化學習在可驗證獎勵下就能自發出現反思、回溯與推理擴展。</td>
+<td><code>G1/G2 必讀焦點</code></td>
+<td><a href="zotero://select/library/items/ZNP9MW7R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2501.12948" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇複雜度、神經形態與神經符號經典）</summary>
+<p></p>
+<ul>
+<li><strong>2015｜TrueNorth: Design and Tool Flow of a 65 mW 1 Million Neuron Programmable Neurosynaptic Chip</strong>，Filipp Akopyan et al.（IBM 的脈衝神經突觸晶片架構，百萬神經元只耗 65 毫瓦，啟發了高能效邊緣認知推理硬體的設計，2068 引）｜<a href="zotero://select/library/items/HSMAR8V5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tcad.2015.2474396" rel="noopener">DOI</a></li>
+<li><strong>2016｜P =? NP</strong>，Scott Aaronson（長篇綜述，涵蓋相對化、代數化、自然證明障礙、幾何複雜度理論 GCT 與物理熱力學計算極限）｜<a href="zotero://select/library/items/JI5MQ5UI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.scottaaronson.com/papers/pnp.pdf" rel="noopener">原文</a></li>
+<li><strong>2018｜Learning Explanatory Rules from Noisy Data</strong>，Richard Evans, Edward Grefenstette（提出可微歸納邏輯程式設計 <span class="math inline">\partial\text{ILP}</span>，讓神經梯度搜尋能直接從含雜訊的原始資料歸納出人類可讀的一階解釋規則，635 引）｜<a href="zotero://select/library/items/QPNXXS2F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1711.04574" rel="noopener">原文</a></li>
+<li><strong>2022｜Neuro-symbolic approaches in artificial intelligence</strong>，Pascal Hitzler et al.（系統梳理知識表徵推理與深度學習融合的歷史譜系與主要分類法，267 引）｜<a href="zotero://select/library/items/S67JFVAF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/nsr/nwac035" rel="noopener">DOI</a></li>
+<li><strong>2023｜Neuro-Symbolic Causal Reasoning Meets Signaling Game for Emergent Semantic Communications</strong>，Christo Kurisummoottil Thomas, Walid Saad（結合神經符號因果推理與博弈訊號賽局，用很小的頻寬形成高可靠的語意通訊，74 引）｜<a href="zotero://select/library/items/HEBAFI22" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.12040" rel="noopener">原文</a></li>
+<li><strong>2025｜A review of neuro-symbolic AI integrating reasoning and learning for advanced cognitive systems</strong>，Uzma Nawaz, Mufti Anees-ur-Rahaman, Zubair Saeed（近期高引用的神經符號認知系統綜述，聚焦學習適應性與形式化可解釋推理的工程整合，138 引）｜<a href="zotero://select/library/items/F3NAXRZS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.iswa.2025.200541" rel="noopener">DOI</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Isabelle Pool Server: a pooled verification service for prover training and multi-agent proving</strong>，Xuanwei Ren, Wenda Li：推出 Isabelle Pool Server（IPS），一個支援 HTTP 與雙 MCP 介面的預熱無頭會話池驗證服務。它提供會話租賃、用檢查點做低成本的分支回溯，以及記憶體感知的准入控制。單機可擴展到 32 個併發工作執行緒，證明檢查吞吐率達單執行緒的 24 倍。（<a href="zotero://select/library/items/EIQ2ZU9C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24788" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Python Code Generation for Isabelle/HOL</strong>，Nikolaus Huber, Roly Perera, Dominic Orchard：為 Isabelle/HOL 程式碼生成器補上長期缺少的 Python 後端。經形式化驗證的高階邏輯演算法因此可以直接用於 Python 科學計算，也可以當作零錯誤的參考神諭，對主流手寫 Python 函式庫做自動化差分測試。（<a href="zotero://select/library/items/MDMKMUQP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.22613" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦全局視角過程獎勵模型-gprm">2026-11-19（08:00 增量）最新入庫（聚焦：全局視角過程獎勵模型 GPRM）</h4>
+<ul>
+<li><strong>2026｜GPRM: Global Perspective Process Reward Model</strong>，Zifan Zhang et al.
+<ul>
+<li>重點：現有過程獎勵模型（PRM）的評估和先前的評估不連貫，也看不到後續脈絡。本文聯合建模問題、先前步驟與其評估、當前步驟和未來步驟，並用回看、前瞻、自檢、目標對齊四個維度的結構化框架訓練 SFT 與 <code>GRPO</code> 獎勵模型。模型規模較小、資料較少，就在 PRMBench（+7.8）與 ProcessBench（+5.4）超越強基線，測試時擴展（TTS）提升約 4 分，在 Agent Error Bench 也超越 GPT-4.1。</li>
+<li>連結：<a href="zotero://select/library/items/IQEC2D9E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20755" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦模態邏輯神經網路擴展與生成式邏輯硬約束">2026-11-19 最新入庫（聚焦：模態邏輯神經網路擴展與生成式邏輯硬約束）</h4>
+<ul>
+<li><strong>2026｜Logic Tensor Network-Enhanced Generative Adversarial Network</strong>，Nijesh Upreti, Vaishak Belle
+<ul>
+<li>重點：傳統生成模型的畫面逼真，卻常違反領域的邏輯常識。本文提出 LTN-GAN 框架，把領域先驗知識編碼成可微邏輯張量網路（LTNs）的滿足度約束，在樣本生成過程中直接強制維持邏輯一致性。</li>
+<li>連結：<a href="zotero://select/library/items/APDD3A9J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.03839" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜Modal Logical Neural Networks</strong>，Antonin Sulc
+<ul>
+<li>重點：把經典的命題／一階邏輯神經網路（LNN）推進到可能世界語意（Kripke Semantics）的模態邏輯層次。神經符號網路因此可以直接表達並訓練必然性、可能性、時態與多主體知識狀態（連到 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a>）。</li>
+<li>連結：<a href="zotero://select/library/items/4H5NPXZA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.6102573" rel="noopener">DOI</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-高可信神經符號安全與關鍵工程落地">同批延伸選讀（2026 高可信神經符號安全與關鍵工程落地）</h4>
+<ul>
+<li><strong>2026｜FedLTN-CubeSat: Neuro-Symbolic Federated Learning for Intrusion Detection in LEO CubeSat Constellations</strong>，Gang Yang et al.（在功耗與重量限制極嚴的低軌衛星星座上，用聯邦邏輯張量網路兼顧入侵偵測的精度、效率與規則可解釋性）｜<a href="zotero://select/library/items/353ESJB5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/math14061047" rel="noopener">DOI</a></li>
+<li><strong>2026｜Rule guided transformers for dynamic knowledge adaptation in rotating machinery fault diagnosis</strong>，Eduard Hogea et al.（把 Transformer 與 LTN 一階邏輯滿足度結合，處理工業旋轉機械跨轉速與跨負載工況漂移時黑盒模型不可信的問題）｜<a href="zotero://select/library/items/MMHRQTGM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.aei.2026.104444" rel="noopener">DOI</a></li>
+<li><strong>2026｜Neuro-symbolic artificial intelligence for real-time sepsis mortality prediction</strong>，Fabrizio De Santis, Gyunam Park, Francesco Zanichelli（面向 ICU 重症臨床決策支援，用神經符號邏輯規則處理黑盒預警在生命關鍵場景中不可解釋的風險）｜<a href="zotero://select/library/items/Q39NNEEQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.engappai.2026.114920" rel="noopener">DOI</a></li>
+<li><strong>2026｜A Neurosymbolic Approach to Counterfactual Fairness</strong>，Xenia Heilmann et al.（把反事實公平性（Counterfactual Fairness）形式化為邏輯張量網路內部的符號約束，從架構層面保證決策公平）｜<a href="zotero://select/library/items/X43PSHU5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/29498732261443184" rel="noopener">DOI</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

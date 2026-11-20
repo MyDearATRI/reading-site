@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>29｜演算法資訊理論與索羅門諾夫歸納（Algorithmic Information Theory &amp; Solomonoff Induction） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a></nav></header>
+<main>
+<article>
+
+<h1 id="29演算法資訊理論與索羅門諾夫歸納algorithmic-information-theory-solomonoff-induction">29｜演算法資訊理論與索羅門諾夫歸納（Algorithmic Information Theory &amp; Solomonoff Induction）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 D：最優傳輸、計算複雜度與演算法資訊</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> ｜ <a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>演算法資訊理論用「生成單一物件的最短電腦程式長度」來定義絕對的結構與隨機性。它把哲學上的奧卡姆剃刀寫成索羅門諾夫通用歸納先驗，並說明無損資料壓縮與序列泛化預測（如大語言模型）在數學上等價。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+經典 Shannon 資訊論有一個常被忽略的限制：它只能度量一個已知機率分佈整體的平均驚奇度（熵 <span class="math inline">H(P)</span>），無法單獨判斷一個具體物件本身有沒有規律。拋硬幣 1000 次，出現「1000 個正面」和出現「一串毫無規律的亂碼」，在公平硬幣分佈下機率一樣，都是 <span class="math inline">2^{-1000}</span>，Shannon 的理論說不出前者比後者更有結構。同樣地，圓周率 <span class="math inline">\pi</span> 的前十億位數字是完全確定的單一字串，談不上什麼機率分佈。Kolmogorov、Solomonoff 與 Chaitin 創立的演算法資訊理論（AIT）換了一個做法：拋開外在的機率假設，直接看在通用圖靈機上要寫多短的程式才能印出這個字串。印出 1000 個 <code>1</code> 只要一行迴圈，印出 <span class="math inline">\pi</span> 只要幾十行級數公式。真正的亂碼則無法壓縮，唯一能印出它的最短程式，就是把整串亂碼原封不動放進 <code>print(...)</code> 裡。這樣一來，發現科學定律、無損壓縮資料和預測下一個符號，就成了同一件事的三個面向。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li><strong>食譜與外賣照片（Kolmogorov 複雜度 <span class="math inline">K(x)</span>）</strong>：一張高解析度的雪花雜訊圖寫不成簡短的食譜，只能逐像素硬存。一整座碎形山脈或一條物理軌跡，背後卻有很短的生成食譜。理解一個現象，就是找到生成它的最短食譜。</li>
+<li><strong>索羅門諾夫的萬能賭徒（Solomonoff Induction）</strong>：面對一段來源不明的訊號，萬能賭徒把所有能跑出這段前綴的電腦程式都找出來，讓它們投票預測下一位。規則是每多寫 1 個 bit 程式碼，投票權重就砍半（<span class="math inline">2^{-|p|}</span>），所以越簡潔的解釋權重越大。只要真實世界是由某個可計算規律產生的，這位賭徒的累積預測誤差總和就不會超過一個有限常數。</li>
+<li><strong>從神諭壓縮到人類算力壓縮（Epiplexity）</strong>：對算力無窮的觀察者來說，一座由加密偽隨機數種子展開的百萬字迷宮沒有任何新資訊，因為種子只有 128 bits。但對算力有限的大腦或神經網路而言，把種子展開成豐富的現象，卻能從中學到可重用的推理電路。這是 2026 年的 Epiplexity（計算受限結構資訊）對經典 AIT 的主要修正。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li><strong>大語言模型與擴展律的基礎（<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a>、<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a>）</strong>：透過算術編碼，訓練下一個 token 的交叉熵損失 <span class="math inline">L</span>，等價於把語料庫壓縮到 <span class="math inline">N \cdot L</span> 位元（Delétang et al. 2023）。資料篩選就是挑出富含可遷移短子程式（高 Epiplexity）的樣本，而不是純雜訊。</li>
+<li><strong>頓悟動力學與泛化理論（<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>）</strong>：神經網路會從死記硬背的查表（長程式）突然跳到學會模運算的群結構（短程式），這就是 Grokking 現象。它是權重編碼長度跨越 MDL 相變點的動態表現。</li>
+<li><strong>熱力學與最優傳輸對偶（<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a>、<a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a>）</strong>：Bennett–Gács–Li–Vitányi 資訊距離的結果是，把字串 <span class="math inline">x</span> 變成 <span class="math inline">y</span> 的最短可逆程式長度，恰好等於物理上把狀態 <span class="math inline">x</span> 可逆轉換為 <span class="math inline">y</span> 所需的最小 Landauer 熱力學功。這可以看成單一物件層級的演算法最優傳輸。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    S0[&quot;Shannon 資訊熵 (1948)：依賴外在機率分佈的集合平均亂度&quot;] --&gt;|&quot;轉向單一物件與通用圖靈機&quot;| K0[&quot;Kolmogorov–Chaitin 複雜度 K(x) (1964–1965)：最短自定界生成程式長度&quot;]
+    K0 --&gt;|&quot;程式長度指數加權 2^{-|p|}&quot;| SOL[&quot;Solomonoff 通用歸納先驗 M(x) (1964)：奧卡姆剃刀之完備貝氏形式化&quot;]
+    SOL --&gt;|&quot;嵌入序貫強化學習&quot;| AIXI[&quot;Hutter 通用人工智慧 AIXI (2000–2012)：帕累托最優計算無界智能體&quot;]
+    K0 --&gt;|&quot;因停機問題不可計算 → 受限模型類近似&quot;| MDL[&quot;Rissanen / Grünwald 最小描述長度 (MDL) 與壓縮分群 NCD (1978–2005)&quot;]
+    K0 --&gt;|&quot;雙向最短互轉程式&quot;| ID[&quot;Bennett–Gács–Li–Vitányi 資訊距離 (1998)：演算法轉換代價 = 可逆熱力學功&quot;]
+    SOL --&gt;|&quot;算術編碼雙射 + 神經擴展律&quot;| LLM[&quot;語言模型即通用壓縮器 (2023–2024)：交叉熵最小化 = 逼近 Solomonoff 預測&quot;]
+    LLM --&gt;|&quot;引入多項式時間算力邊界&quot;| EPI[&quot;Epiplexity 計算受限結構資訊 (2026)：區分可學電路與偽隨機不可學雜訊&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>前綴 Kolmogorov 複雜度 <span class="math inline">K(x)</span>、不變性定理與不可計算性</strong></p>
+<ul>
+<li>直覺理解：常見的疑問是，換一種程式語言（例如 Python 換成 C++），最短程式長度不就變了嗎。不變性定理回答了這個疑問：任何通用語言都能用固定長度的直譯器／編譯器模擬另一種語言，所以兩者算出的 <span class="math inline">K(x)</span> 永遠只差一個與 <span class="math inline">x</span> 長度無關的固定編譯器常數 <span class="math inline">O(1)</span>。這種普適性的代價是不可計算性。如果有演算法能精確算出任意字串的 <span class="math inline">K(x)</span>，我們就能解決圖靈停機問題（也會導出 Berry 悖論：「不能用少於十萬字定義的最小整數」）。</li>
+<li>機制或核心表達式：
+<div class="math inline">K_U(x) = \min_{p \in \{0,1\}^*} \big\{ |p| : U(p) = x \big\}, \qquad \big| K_U(x) - K_{U'}(x) \big| \le c_{U,U'}</div>
+其中 <span class="math inline">U</span> 是通用前綴圖靈機（自定界編碼讓它不需要額外的分隔符就能滿足 Kraft 不等式 <span class="math inline">\sum_x 2^{-K(x)} \le 1</span>）。對任何可計算的機率分佈 <span class="math inline">P</span>，期望演算法複雜度與 Shannon 熵嚴格夾擠：<span class="math inline">\mathbb{E}_{x\sim P}[K(x)] = H(P) + O(1)</span>。</li>
+<li>能做到什麼，代價是什麼：它首次在不需要機率假設的情況下，嚴格定義了單一序列怎樣才算真正隨機（Martin-Löf 隨機性：<span class="math inline">K(x_{1:n}) \ge n - O(1)</span>）。代價是 <span class="math inline">K(x)</span> 只能從上方逼近（Upper Semicomputable：每找到一個更短的壓縮器就能下修上界，但永遠無法證明已經到底）。而且樣本小的時候，編譯器常數 <span class="math inline">c_{U,U'}</span> 可能反而成為主要項。</li>
+</ul>
+</li>
+<li>
+<p><strong>索羅門諾夫通用歸納（Solomonoff Induction）、AIXI 與「壓縮即預測」</strong></p>
+<ul>
+<li>直覺理解：休謨歸納問題在科學哲學裡爭論了幾百年：憑什麼過去太陽東升，就能推論明天也東升，而不是採用一條在第 10001 天突然轉彎的怪異規則？Solomonoff 用一條總和公式回答：給每一個可計算的世界假設 <span class="math inline">p</span> 分配先驗權重 <span class="math inline">2^{-|p|}</span>，再用標準的貝氏條件機率更新。編碼定理（Levin Coding Theorem）證明，所有生成 <span class="math inline">x</span> 的程式權重總和，與單一最短程式的權重 <span class="math inline">2^{-K(x)}</span> 在乘法常數內相等。把這套通用預測器接上期望獎勵最大化，就是 Marcus Hutter 的通用智能理論模型 AIXI。實務上，自迴歸大語言模型最小化對數損失，就是在神經網路參數空間內對 Solomonoff 歸納做可計算的近似。</li>
+<li>機制或核心表達式：
+<div class="math inline">M(x) = \sum_{p : U(p) = x*} 2^{-|p|}, \qquad \sum_{t=1}^\infty \mathbb{E}_{\mu}\!\left[ \big( M(x_t \mid x_{&lt;t}) - \mu(x_t \mid x_{&lt;t}) \big)^2 \right] \le \frac{\ln 2}{2} K(\mu) + O(1)</div>
+只要真實環境 <span class="math inline">\mu</span> 是任何可計算測度，Solomonoff 預測器終生累積的平方預測誤差總和就以環境本身的複雜度 <span class="math inline">K(\mu)</span> 為上界，所以隨時間 <span class="math inline">t\to\infty</span> 必然快速收斂到真實條件機率。</li>
+<li>能做到什麼，代價是什麼：它為統計學習與通用人工智慧提供了理論上的理想基準，並透過算術編碼證明「更強的預測器 <span class="math inline">\iff</span> 更高的無損壓縮率」（Delétang et al. 2023）。代價是精確計算 <span class="math inline">M(x)</span> 與 AIXI 需要無窮算力。</li>
+</ul>
+</li>
+<li>
+<p><strong>資訊距離（Information Distance）、熱力學可逆功與無參數壓縮分群（NCD）</strong></p>
+<ul>
+<li>直覺理解：要比較一首巴哈賦格曲、一段基因序列與一篇莎士比亞劇本的結構相似度，連特徵工程都不知道從哪裡做起。Bennett、Gács、Li 與 Vitányi (1998) 問了一個和最優傳輸很像的問題：已知 <span class="math inline">x</span> 時生成 <span class="math inline">y</span>，同時已知 <span class="math inline">y</span> 時可逆還原 <span class="math inline">x</span>，這樣的雙向轉換程式最短有多長？他們證明，這個通用的「資訊距離」統攝一切可計算的局部距離，而且在物理上恰好等於抹除與寫入位元所需的最小 Landauer 熱力學耗散功。把其中不可計算的 <span class="math inline">K(\cdot)</span> 換成現成的 <code>gzip</code>、<code>zstd</code> 或大語言模型的壓縮長度 <span class="math inline">C(\cdot)</span>，就得到不需要任何領域特徵的正規化壓縮距離（NCD）。</li>
+<li>機制或核心表達式：
+<div class="math inline">E(x, y) = \max\big\{ K(x \mid y),\, K(y \mid x) \big\} + O(1), \qquad \mathrm{NCD}(x, y) = \frac{C(xy) - \min\{C(x), C(y)\}}{\max\{C(x), C(y)\}}</div>
+如果 <span class="math inline">x</span> 與 <span class="math inline">y</span> 共享大量深層結構，拼接檔 <span class="math inline">xy</span> 壓縮後幾乎不比兩者中單獨壓縮較大的那個長，<span class="math inline">\mathrm{NCD}(x,y) \to 0</span>。如果毫無關聯，<span class="math inline">C(xy) \approx C(x)+C(y)</span>，<span class="math inline">\mathrm{NCD}(x,y) \to 1</span>。</li>
+<li>能做到什麼，代價是什麼：不用調參，也不用定義領域特徵，就能重建語言演化樹、做音樂風格分群與惡意軟體家族分類。代價是實際壓縮器的視窗大小、字典機制或模型上下文長度，會決定它能抓到哪個尺度的結構共性。</li>
+</ul>
+</li>
+<li>
+<p><strong>最小描述長度（MDL）與計算受限結構資訊（Epiplexity）</strong></p>
+<ul>
+<li>直覺理解：為了讓 AIT 在有限資料與有限算力下可用，Rissanen 與 Grünwald 發展出 MDL 原則：把描述模型本身的位元數 <span class="math inline">L(H)</span>，加上用該模型壓縮資料殘差的位元數 <span class="math inline">L(D\mid H)</span>，取兩者之和的最小值。它不必假設真實模型存在，就能自動防止過擬合。2026 年 Finzi 等人提出的 Epiplexity 更進一步，解決了資訊論裡存在半世紀的一個悖論。在經典 <span class="math inline">K(x)</span> 與 Shannon 熵看來，確定性計算永遠不能創造資訊（跑一百萬步西洋棋對弈樹，<span class="math inline">K</span> 值不會比規則書多出半個 bit）。但對算力有限的學習者而言，加密偽隨機雜訊（高時間受限熵、零可學結構）和數學定理的推演軌跡（低神諭熵、極高可複用結構電路）差別很大。Epiplexity 把有限算力模型最後萃取並固定在參數中的結構程式碼長度單獨分離出來，為合成資料與思維鏈推理提供資訊論上的依據。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>兩階段／精緻 MDL</strong>：<span class="math inline">\min_{M \in \mathcal{M}} \big\{ L(M) + L(\text{Data} \mid M) \big\}</span>（精緻 MDL 改用正規化最大似然編碼 NML，消除參數化冗餘）。</li>
+<li><strong>計算受限分解（Time-Bounded MDL / Epiplexity）</strong>：在計算預算 <span class="math inline">\mathcal{F}</span> 下，把總描述分解為可轉移的結構模型複雜度（Epiplexity <span class="math inline">S_{\mathcal{F}}(X)</span>）與不可預測的殘餘時間受限熵 <span class="math inline">H_{\mathcal{F}}(X)</span>。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：它解釋了為什麼對確定性公理做合成推演資料（如 AlphaZero 自對弈、數學形式化合成數據）能大幅提升模型泛化，也可以直接用來指導分佈外（OOD）預訓練資料的篩選（Su et al. 2026）。代價是 Epiplexity 的數值取決於觀察者模型族 <span class="math inline">\mathcal{F}</span> 與訓練算力預算，不再是與硬體無關的絕對常數。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>無窮算力神諭（AIT）與多項式算力現實（Time-Bounded Complexity &amp; Cryptography）</strong>：經典 Kolmogorov 複雜度不考慮執行時間 <span class="math inline">t</span>。因此只要單向函數存在（密碼學與 <a class="wl" href="41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> 的核心假設），由短種子生成的密碼學偽隨機序列真正的 <span class="math inline">K(x)</span> 極小，任何多項式時間的 AI 卻無法把它和純白噪音區分開（Yao 偽隨機性）。Levin 時間加權複雜度 <span class="math inline">Kt(x) = \min_p \{|p| + \log \mathrm{time}(p)\}</span>、元複雜度（Meta-Complexity / MCSP 最小電路規模問題）與現代深度學習的 Epiplexity 之間，還沒有統一的嚴格定理。怎麼建立它，是理論電腦科學與 AI 基礎交會處目前最受關注的問題。</li>
+<li><strong>Grokking（延遲頓悟）中特徵學習與編碼壓縮之爭</strong>：深度網路往往先在訓練集上達到 100% 記憶插值，停滯很久之後測試精度才突然上升。這個過程究竟是學到了全新的特徵，還是特徵早已存在，只是正則化幾何把冗餘的查表編碼壓縮成低範數的最短迴路？2026 年的最新研究（Kur et al. 2026; Manning-Coe et al. 2026）正從最小範數插值與編碼效率差異兩方面爭論這個問題。</li>
+<li><strong>通用先驗的主觀常數陷阱（The <span class="math inline">O(1)</span> Trap）</strong>：在有限數據的範圍內，換一台參考通用圖靈機 <span class="math inline">U</span>，等於暗中注入一整套人類先驗偏置（內建物理引擎的圖靈機和空白位元機之間，常數項可以相差數百萬 bits）。在小樣本認知科學與少樣本學習中，什麼樣的「自然參考架構」（如 Transformer、SSM 或圖靈機）結構啟動門檻最低？</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a>（預訓練資料價值評估）</strong>：不要只用困惑度（Perplexity）篩資料。高困惑度可能是亂碼雜訊，低困惑度可能是重複的廢話。真正有價值的訓練語料是能顯著壓低其他下游樣本描述長度的高 Epiplexity 數據，也就是含有豐富可重用子程式與跨領域結構橋樑的數據。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a></strong>：把稀疏自編碼器（SAE）或奇異學習理論（SLT）中的實對數正則閾值（RLCT <span class="math inline">\lambda</span>）和 MDL 模型描述長度對照著讀。兩者度量的都是模型為了擬合資料動用了多少有效自由度／有效位元數。</li>
+<li><strong>遷移至 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a></strong>：內在好奇心與科學探索不該獎勵不可壓縮的白噪音驚奇（電視雪花屏），該獎勵的是壓縮進度（Compression Progress，Jürgen Schmidhuber）與推測性 Epiplexity（Hu 2026），也就是剛好遇到一個能把舊帳本一下子縮短一半的新概念。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。本領域目前共收錄 247 篇文獻（其中 235 篇具備開放取用 OA PDF）。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1964</td>
+<td><em>A formal theory of inductive inference. Part II</em>，Ray J. Solomonoff</td>
+<td>通用歸納推理的奠基論文：首次用圖靈機程式長度的指數加權定義普適先驗，為奧卡姆剃刀與機器學習泛化提供數學基礎。</td>
+<td>歷史源頭／哲學必讀</td>
+<td><a href="zotero://select/library/items/7MFPG4F6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0019-9958(64)90131-7" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>1998</td>
+<td><em>Information Distance</em>，Charles H. Bennett, Péter Gács, Ming Li, Paul M. B. Vitányi</td>
+<td>定義兩個物件之間由最短互轉程式構成的通用資訊距離，並證明它恰好等於可逆物理轉換的最小熱力學功。</td>
+<td>跨域代表作／物理資訊橋</td>
+<td><a href="zotero://select/library/items/XUDXH6I8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/9804010" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2004</td>
+<td><em>A tutorial introduction to the minimum description length principle</em>，Peter Grunwald</td>
+<td>MDL 最容易讀的入門長篇導讀：前半部不用艱深公式，就把「壓縮即學習與防過擬合」講清楚，後半部嚴格展開數學細節。</td>
+<td>零基礎入門首選</td>
+<td><a href="zotero://select/library/items/UV394C5F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0406077" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2004</td>
+<td><em>Shannon Information and Kolmogorov Complexity</em>，Peter Grunwald, Paul Vitanyi</td>
+<td>逐項對照 Shannon 熵／互資訊／充分統計量與它們在 Kolmogorov 演算法理論中的對應物有何異同，釐清兩套資訊論體系的邊界。</td>
+<td>概念辨析必讀</td>
+<td><a href="zotero://select/library/items/VANCEIRC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cs/0410002" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2005</td>
+<td><em>Clustering by Compression</em>，Rudi Cilibrasi, Paul M. B. Vitányi</td>
+<td>提出正規化壓縮距離（NCD）：直接拿通用壓縮器，不設參數地為基因組、音樂、文學與天文數據分群。</td>
+<td>實戰／立即可用</td>
+<td><a href="zotero://select/library/items/HUMQUB9M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cs/0312044" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2012</td>
+<td><em>One Decade of Universal Artificial Intelligence</em>，Marcus Hutter</td>
+<td>總結 AIXI 通用人工智慧理論十年來的成果，說明 Solomonoff 歸納用於序列決策博弈時的完備性與計算極限。</td>
+<td>AGI 理論基礎</td>
+<td><a href="zotero://select/library/items/TZW5JF38" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1202.6153" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><em>How incomputable is Kolmogorov complexity?</em>，Paul Vitanyi</td>
+<td>分析 <span class="math inline">K(x)</span> 的不可計算層級、它給實證科學留下哪些合法後門，以及常見的近似估計法中哪些可行、哪些有理論陷阱。</td>
+<td>防誤用必讀／進階審視</td>
+<td><a href="zotero://select/library/items/UB5FV9C4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.07674" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><em>Language Modeling Is Compression</em>，Grégoire Delétang, Anian Ruoss, Paul-Ambroise Duquenne, Elliot Catt</td>
+<td>連接現代 LLM 與 AIT 的論文（ICLR 2024）：實證大模型搭配算術編碼後，在影像與音訊的無損壓縮上也很強，把 Scaling Laws 與 Solomonoff 歸納直接連起來。</td>
+<td>現代 AI 研究者必讀</td>
+<td><a href="zotero://select/library/items/HPTWH5TW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.10668" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>Dana Angluin (1980)</strong>，<em>Inductive inference of formal languages from positive data</em> (<em>Information and Control</em>, Citations: 745) ｜ 形式語言歸納學習的奠基論文：刻畫只靠正例資料、在極限中可識別（Identification in the Limit）的形式語言要滿足什麼結構條件，以避免過度泛化。 <a href="zotero://select/library/items/NJF4ABBR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0019-9958(80)90285-5" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Paul M. B. Vitanyi, Frank J. Balbach, Rudi L. Cilibrasi, Ming Li (2008)</strong>，<em>Normalized Information Distance</em> (<em>Information Theory and Statistical Learning</em>, Citations: 90) ｜ 整理正規化資訊距離（NID）的公理基礎，涵蓋字串壓縮近似與網頁共現統計（Normalized Google Distance）兩條實作路徑。 <a href="zotero://select/library/items/PDJ3JEGZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0809.2553" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Scott Aaronson (2016)</strong>，<em>P =? NP</em> (<em>Open Problems in Mathematics</em>) ｜ 把 Kolmogorov 複雜度、最小電路規模問題（MCSP）、自然證明屏障與物理計算極限連在一起討論。 <a href="zotero://select/library/items/JI5MQ5UI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.scottaaronson.com/papers/pnp.pdf" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Avi Wigderson (2019)</strong>，<em>Mathematics and Computation</em> (<em>Princeton University Press</em>) ｜ 從偽隨機性（Pseudorandomness）與計算不可區分性的角度，說明有限算力觀察者眼中的「表觀隨機性」如何改變現代密碼學與資訊論。 <a href="zotero://select/library/items/K6ITU7UF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.math.ias.edu/~avi/BOOK/book.pdf" rel="noopener">原文連結</a> <code>📘 官方開放專著</code></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Qian Li, Shang-Hua Teng (2026)</strong>，<em>Approximate Solomonoff Induction: On the Robustness of Learned Universal Predictors</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：刻畫滿足 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho) \le \eta</span> 的近似索羅門諾夫通用預測器在兩個方向上的穩健性。對先驗取平均時，超額誤差只有 <span class="math inline">O(\eta)</span>；但在先驗權重 <span class="math inline">w_\mu</span> 很低的罕見環境中，誤差會放大到緊緻的 <span class="math inline">\Theta(\eta / w_\mu)</span>。文中另外建立了受控分佈偏移與有限樣本神經網路的擴展定理。</li>
+<li>連結：<a href="zotero://select/library/items/ZUS3RWIH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29289" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Bruno Bauwens, German Kuznetsov (2026)</strong>，<em>Solomonoff induction of selected bits and online classification</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：研究索羅門諾夫歸納在可計算模式選定的位元上，誤差收斂分成哪些層級。選定位元的一階誤差總和可以無界，但平方誤差總和受程式長度的指數上界約束。若位元由時間有界的可計算線上分類函數決定，平方誤差總和還會收斂於程式長度的多項式上界。</li>
+<li>連結：<a href="zotero://select/library/items/HDF48ZPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.18632" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-首期兩篇">2026-11-19 首期兩篇</h4>
+<ol>
+<li>
+<p><strong>Marc Finzi, Shikai Qiu, Yiding Jiang, Pavel Izmailov (2026)</strong>，<em>From Entropy to Epiplexity: Rethinking Information for Computationally Bounded Intelligence</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：傳統 Shannon 熵與 Kolmogorov 複雜度假設觀察者算力無限，所以認定確定性變換不產生新資訊。本文提出 Epiplexity，嚴格量化有限算力的學習者能從資料（含確定性合成推演）中萃取多少有用的結構資訊。</li>
+<li>連結：<a href="zotero://select/library/items/PZC3EGR7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.03220" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Ellen Su, Andres Potapczynski, Shikai Qiu, Edward Hughes (2026)</strong>，<em>Epiplexity Guided Data Selection and Generation for Out-of-Distribution Generalization</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：把 Epiplexity 直接用於預訓練資料的篩選與合成，實證富含「可回收共享子程式」的高 Epiplexity 數據能顯著提升模型在未見任務（OOD）上的遷移泛化。</li>
+<li>連結：<a href="zotero://select/library/items/MVBB3PNE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.11746" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-年度其他追蹤清單">2026 年度其他追蹤清單</h4>
+<ul>
+<li><strong>Gil Kur, Ileana Rugina, Clémentine Dominé, Marco Mondelli (2026)</strong>，<em>Grokking through the Lens of Minimum-Norm Interpolation</em> (<em>arXiv</em>) ｜ 建立高維最小範數插值的統計理論，定量說明正則化幾何與信號稀疏性如何主導「先死記、後頓悟」的延遲泛化相變。 <a href="zotero://select/library/items/3JU3DTG7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.38453" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Dmitry Manning-Coe, Jacopo Gliozzi, Alexander G. Stapleton, Edward Hirst (2026)</strong>，<em>Grokking vs learning: same features, different encodings</em> (<em>Machine Learning Science and Technology</em>) ｜ 比較頓悟路徑與平穩學習路徑的可壓縮性：兩者學到相同的特徵，但編碼壓縮效率有顯著差異。 <a href="zotero://select/library/items/QKQI9WND" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.01739" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Botao Amber Hu (2026)</strong>，<em>Speculating for Epiplexity: How to Learn the Most from Speculative Design?</em> (<em>arXiv</em>) ｜ 把計算受限資訊論引入推測性設計（Speculative Design），區分真正帶來結構洞見的驚奇與純感官衝擊。 <a href="zotero://select/library/items/JT8W4RUC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.22132" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Yuzhu Liang et al. (2026)</strong>，<em>A Comprehensive Survey on Large Language Model Compression for Artificial Intelligence Applications in Edge Systems</em> (<em>IEEE Internet of Things Journal</em>) ｜ 系統盤點量化、剪枝、蒸餾與低秩分解這幾類方法在邊緣端壓縮大語言模型參數描述長度的工程做法。 <a href="zotero://select/library/items/RV38ZD5Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jiot.2026.3675866" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>39｜線性邏輯與博弈語意學（Linear Logic, Game Semantics, Geometry of Interaction &amp; Differential Categories） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="39線性邏輯與博弈語意學linear-logic-game-semantics-geometry-of-interaction-differential-categories">39｜線性邏輯與博弈語意學（Linear Logic, Game Semantics, Geometry of Interaction &amp; Differential Categories）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a> ｜ L5 旗艦庫：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>
+相關領域：<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> · <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>線性邏輯與博弈語意學把數理邏輯改寫成一套講資源、講互動的理論。Jean-Yves Girard 重新分析古典蘊含 <span class="math inline">A \to B</span>，把假設從可以免費無限影印的永恆真理，改成用一次就消耗掉的資源（<span class="math inline">A \multimap B</span>）。在這個框架下，每個證明和電腦程式都可以看成系統（Player）與環境（Opponent）之間一來一往的博弈對局策略，也可以看成在網路中雙向彈跳的粒子流（互動幾何 GoI）。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+兩千多年來，古典邏輯與直覺主義邏輯都暗中預設了兩條免費的結構規則：收縮律（Contraction：有 <span class="math inline">A</span> 就能免費變出 <span class="math inline">A \land A</span>，無限複製）和弱化律（Weakening：多給一個前提 <span class="math inline">A</span>，可以直接丟掉不用）。用來談純數學的永恆真理，這沒有問題。拿來描述真實物理、經濟、記憶體管理與量子計算就不對了：「你有 100 元可以買咖啡，也有 100 元可以買書」不等於「你能同時買咖啡又買書」。另一方面，程式語言理論在二十世紀末被 PCF 完全抽象問題（Full Abstraction Problem）卡了二十餘年。傳統的指稱語意建立在靜態集合與函數（Scott 連續域）上，模型裡總會多出真實順序程式寫不出來的「平行或（Parallel-OR）」元素，所以無法精確區分兩個程式在任何環境下的行為是否完全相同。線性邏輯和 Hyland–Ong / Abramsky–Jagadeesan–Malacaria 博弈語意學一起解決了這個問題。它們的出發點是：程式不該看成靜態的輸入輸出表，它是依嚴格時間因果與環境來回問答的互動博弈策略。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li>線性邏輯（Linear Logic）像自動販賣機和只能用一次的代幣。線性蘊含 <span class="math inline">A \multimap B</span> 是一台誠實的販賣機：投進一枚硬幣 <span class="math inline">A</span>，吐出一罐飲料 <span class="math inline">B</span>，硬幣就沒了（Rust 語言的所有權 Ownership 借用檢查器就是它在工程上的實現）。如果真的需要能無限複製的知識或程式碼，Girard 設計了一個顯式開關，指數驚嘆號模態 <span class="math inline">!A</span>（Of course <span class="math inline">A</span>），相當於買下一台印鈔機，或一張無限暢飲的儲值卡。只有貼上 <span class="math inline">!</span> 標籤的資源才能複製與丟棄，所以每一分記憶體與計算開銷在邏輯裡都看得到。</li>
+<li>博弈語意與互動幾何（Game Semantics &amp; GoI）像雙人下棋，加上彈珠台的雙向路由。把型別 <span class="math inline">(A \to B) \to C</span> 想成兩盤並排的棋局。環境（Opponent）先在右盤 <span class="math inline">C</span> 問：「你的最終輸出是什麼？」程式（Player）轉頭去左盤問輸入函數：「你給我 <span class="math inline">B</span> 我才知道，但要拿 <span class="math inline">B</span> 你需要什麼 <span class="math inline">A</span>？」雙方一問一答，構成合法的對局軌跡（Play）。把兩個程式串聯複合成 <span class="math inline">g \circ f</span>，就是把中間的棋盤變成內部隱藏通道，訊號像彈珠一樣在兩者之間來回反彈（Geometry of Interaction 的執行公式 Execution Formula），直到從外端口送出最終答案。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+這條脈絡對當代計算機科學與 AI 的影響很廣。它不允許複製的核心部分，是量子編譯器（如 2026 年 Chardonnet et al. 用 GoI 將量子 <span class="math inline">\lambda</span>-項編譯為量子線路）與安全併發協議（Session Types）的型別基礎。Ehrhard–Regnier 從線性邏輯指數模態 <span class="math inline">!A</span> 發展出微分線性邏輯（Differential Linear Logic），Cockett–Cruttwell 提出反向導數範疇（Reverse Derivative Categories）。這兩項工作從純證明論的切消規則推出了泰勒展開與深度學習反向傳播的自動微分，銜接 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>。在語言學這一側，非交換線性邏輯（Lambek 演算）是 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 範疇語法的核心機制。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    LL[&quot;Girard 線性邏輯 (1987)：拆解 A→B 為 (!A) ⊸ B，分離乘法 (⊗,⅋) 與加法 (&amp;,⊕)&quot;] --&gt; PN[&quot;證明網 (Proof Nets) 與互動幾何 (GoI)：消除語法順序噪音，切消即粒子流回饋&quot;]
+    LL &amp; PN --&gt;|&quot;攻克二十年懸案 PCF 完全抽象&quot;| GS[&quot;博弈語意學 (Hyland-Ong / Abramsky-Jagadeesan-Malacaria)：型別即棋局，程式即無歷史偏見策略&quot;]
+    PN &amp; GS --&gt;|&quot;更激進地從互動位址長出邏輯&quot;| LUD[&quot;Girard 跡論 (Ludics)：Locus Solum、正交對偶與推論主義博弈語意&quot;]
+    LL --&gt;|&quot;對指數模態 !A 求導&quot;| DIFF[&quot;微分線性邏輯與反向導數範疇 (RDC)：證明網泰勒展開與自動微分反向傳播&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>線性邏輯連接詞分裂與證明網幾何（Resource Connectives, Exponentials &amp; Proof Nets）</strong></p>
+<ul>
+<li>直覺理解：一旦禁止免費複製與丟棄，古典邏輯裡原本混為一談的「且（AND）」與「或（OR）」就一分為二，分成兩個家族，各有直觀的物理意義：
+<ul>
+<li><strong>乘法同時擁有 <span class="math inline">A \otimes B</span>（Tensor）</strong>：手裡同時握著一杯咖啡與一塊蛋糕。</li>
+<li><strong>加法內部選擇 <span class="math inline">A \binampersand B</span>（With）</strong>：手裡只有一張兌換券，由你決定換咖啡或換蛋糕，但不能兩樣都拿。</li>
+<li><strong>加法外部選擇 <span class="math inline">A \oplus B</span>（Plus）</strong>：像盲盒抽獎，會拿到咖啡或蛋糕其中之一，但不由你決定，兩種情況你都得準備好。
+另外，Girard 用證明網（Proof Nets）把樹狀的相繼式證明改寫成像費曼圖一樣沒有順序的圖網路，是否合法（無死結）由 Danos–Regnier 切換判準檢驗。Gonthier–Abadi–Lévy 再去掉外層方框，實現了 <span class="math inline">\lambda</span>-演算的 Lamping 最優共享歸約。</li>
+</ul>
+</li>
+<li>機制或核心表達式：線性邏輯靠兩樣工具。一是指數模態 <span class="math inline">!A</span>，它是受控複製與丟棄的餘單子。二是對合線性否定 <span class="math inline">(-)^{\perp}</span>，滿足嚴格德摩根對偶 <span class="math inline">(A^{\perp})^{\perp} \equiv A</span>，<span class="math inline">(A \otimes B)^{\perp} \equiv A^{\perp} \parr B^{\perp}</span>，<span class="math inline">(A \binampersand B)^{\perp} \equiv A^{\perp} \oplus B^{\perp}</span>。Girard 由此給出線性拆解公式：
+<div class="math inline">A \longrightarrow B \;\equiv\; (!A) \multimap B</div>
+它的代數等價語意（如 <span class="math inline">\mathsf{MALL}</span> 對應的 Girard 代數，參見 2026 年 Aglianò–Nedeljković 的 🏆 L5 旗艦研究）構成帶對合對偶的剩餘格簇。範疇語意則是配備餘單子 <span class="math inline">!</span> 的 <em>-自治範疇（</em>-Autonomous Categories，見 <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a> Chu 空間）。</li>
+<li>能做到什麼，代價是什麼：時間空間複雜度（如輕量線性邏輯捕捉多項式時間 <span class="math inline">\mathsf{PTIME}</span>）、併發通道的死鎖自由性與量子不可複製性，都可以直接寫進邏輯型別。代價是手寫線性程式時，必須顯式管理每一份資源的分裂與釋放。</li>
+</ul>
+</li>
+<li>
+<p><strong>博弈語意學與 PCF 完全抽象定理（Hyland–Ong / AJM Games &amp; Full Abstraction）</strong></p>
+<ul>
+<li>直覺理解：兩段程式碼 <code>M</code> 和 <code>N</code> 在任何上下文 <code>C[-]</code> 中的執行表現都一模一樣（觀察等價），傳統數學模型卻分不開。原因是傳統函數模型沒有限制函數在什麼時機偷看狀態、能不能記住上次被呼叫幾次。1990 年代有兩組人同時取得突破：Hyland–Ong（指針競技場博弈 Arena Games）與 Abramsky–Jagadeesan–Malacaria（歷史無關策略 AJM Games）。他們發現，只要對博弈策略加上兩條紀律，所構成的博弈範疇就恰好刻畫純函數式語言 PCF，不多也不少（完全抽象性 Full Abstraction）。第一條是純真性（Innocence）：玩家沒有隱藏的全域變數，下一步只看當前局部可見的問答視圖 P-view。第二條是括號良態性（Well-bracketing）：像函數呼叫堆疊一樣先進後出，禁止 <code>call/cc</code> 異常跳轉。</li>
+<li>機制或核心表達式：博弈 <span class="math inline">A = (M_A, \lambda_A, \vdash_A, P_A)</span> 指定移動集 <span class="math inline">M_A</span>、極性標記 <span class="math inline">\lambda_A: M_A \to \{O, P\}\times\{Q, A\}</span>（對手／玩家 × 提問／回答）與啟用關係 <span class="math inline">\vdash_A</span>。態射 <span class="math inline">\sigma: A \to B</span> 是偶數長、前綴封閉的策略集 <span class="math inline">\sigma \subseteq P_{A \multimap B}^{\mathrm{even}}</span>。兩個策略 <span class="math inline">\sigma: A \to B</span> 與 <span class="math inline">\tau: B \to C</span> 的複合是並行互動加隱藏（Parallel Composition plus Hiding）：
+<div class="math inline">\sigma \;;\; \tau := \bigl\{\, s \upharpoonright (A, C) \;\big|\; s \in \operatorname{Int}(A, B, C),\; s \upharpoonright (A, B) \in \sigma,\; s \upharpoonright (B, C) \in \tau \,\bigr\}</div>
+放鬆任何一條博弈紀律，就恰好對應一種程式語言副作用。去掉純真性（允許記住歷史），對應可變區域狀態（Imperative State / Idealized Algol）。去掉括號良態性，對應控制算子 <code>call/cc</code>（Continuations）。加入隨機骰子（Danos–Harmer 2002），對應機率程式設計。</li>
+<li>能做到什麼，代價是什麼：這套結果給出一張類似元素週期表的語意分類（Abramsky 語意立方體），分得很細，也廣泛用在高階程式模型檢測與不動點邏輯求解上（如 2026 年 Kura–Unno 基於博弈語意的 <span class="math inline">\mu</span>-to-<span class="math inline">\nu</span> 不動點轉換）。代價是互動軌跡帶有大量時序細節，直接比較策略等價時，要小心處理商集或正規化。</li>
+</ul>
+</li>
+<li>
+<p><strong>互動幾何（GoI）與跡論（Ludics）：無需全域堆疊的局部訊息自動機（GoI &amp; Ludics）</strong></p>
+<ul>
+<li>直覺理解：傳統上執行函數式程式，要維護龐大的環境閉包，或做全域的樹重寫。Girard 的互動幾何（Geometry of Interaction, GoI）與 Abramsky–Haghverdi–Scott 整理出的追蹤么半範疇（Traced Monoidal Categories）顯示，切消（Cut-Elimination / 函數求值）不需要擦掉圖形重畫。只要把一顆帶著地址堆疊的代幣（Token）放進靜態網路，讓它依局部的雙向路由算子彈跳就行。這直接對應硬體級抽象機（Danos–Herbelin–Regnier 1996）與無中心的分散式編譯。2001 年 Girard 在《Locus Solum》中提出跡論（Ludics）。它不再預先給定真假與公式語法，只保留記憶體位址（Loci）上的對局設計（Designs）。兩個設計互動後能正常停機，就稱為正交（<span class="math inline">\mathfrak{D} \perp \mathfrak{E}</span>），而雙重正交閉包 <span class="math inline">\mathcal{A}^{\perp\perp}</span> 自動給出一個邏輯型別。</li>
+<li>機制或核心表達式：在追蹤對稱么半範疇（或算子代數／線性組合子代數）中，跡算子 <span class="math inline">\operatorname{Tr}^U_{X,Y}(f: X \otimes U \to Y \otimes U) : X \to Y</span> 把內部切口 <span class="math inline">U</span> 閉合成回饋迴路，由此得到 GoI 執行公式（Execution Formula）：
+<div class="math inline">\operatorname{Ex}(\Pi, \sigma) = \Pi_{11} + \Pi_{12}\,\sigma\,(I - \Pi_{22}\sigma)^{-1}\Pi_{21} = \Pi_{11} + \sum_{k=0}^{\infty} \Pi_{12}\sigma(\Pi_{22}\sigma)^k \Pi_{21}</div>
+無窮級數的第 <span class="math inline">k</span> 項，對應粒子在證明體 <span class="math inline">\Pi</span> 與切口連線 <span class="math inline">\sigma</span> 之間往返彈跳 <span class="math inline">k</span> 次的軌跡。</li>
+<li>能做到什麼，代價是什麼：高階函數的控制流可以無損編譯成靜態狀態機、硬體電路，甚至古典與量子混合的線路（如 2026 年 Chardonnet et al. 利用 GoI 在編譯期吸納古典高階控制流並輸出純量子線路）。代價是無窮級數的收斂（不出現死循環）要靠強正規化的型別約束來保證。</li>
+</ul>
+</li>
+<li>
+<p><strong>微分線性邏輯與反向導數範疇：從證明論長出微積分與深度學習反向傳播（DiLL &amp; Reverse Derivative Categories）</strong></p>
+<ul>
+<li>直覺理解：邏輯證明或 <span class="math inline">\lambda</span>-程式是離散符號，看起來沒辦法對它求偏導數。Ehrhard 與 Regnier 發現，在線性邏輯裡 <span class="math inline">A \multimap B</span> 恰好消費一次 <span class="math inline">A</span>，所以它就是線性映射；<span class="math inline">(!A) \multimap B</span> 消費任意有限次 <span class="math inline">A</span>，所以它是光滑非線性函數（冪級數）。於是，對一個非線性程式在輸入 <span class="math inline">x</span> 處沿方向 <span class="math inline">dx</span> 求一階導數 <span class="math inline">Df_x(dx)</span>，在證明論裡的意思就是：在原本提供無限份輸入 <span class="math inline">!x</span> 的資源包旁，放進一個只准使用一次的線性擾動項 <span class="math inline">dx</span>。Cockett、Cruttwell、Gallagher 與 Lemay（2019）再把它對偶反轉，公理化出反向導數範疇（Reverse Derivative Categories, RDC），用純範疇與線性邏輯對偶為現代深度學習的自動微分（Backpropagation）提供公理基礎。</li>
+<li>機制或核心表達式：
+<ul>
+<li>在笛卡爾微分範疇中，前向導數算子把態射 <span class="math inline">f: A \to B</span> 映為 <span class="math inline">D[f]: A \times A \to B</span>（對第二分量線性，即 <span class="math inline">D[f](x, \Delta x) = J_f(x)\Delta x</span>）。</li>
+<li>在反向導數範疇（RDC）中，反向導數算子給出 <span class="math inline">R[f]: A \times B \to A</span>（對應轉置雅可比拉回 <span class="math inline">R[f](x, \Delta y) = J_f(x)^T \Delta y</span>）。Cockett 等人嚴格證明：擁有反向導數，等價於擁有前向導數，再加上線性核心具備匕首自伴對偶（Dagger Linear Structure）。2026 年 Melliès–Olimpieri–Vaux Auclair 又給出微分線性邏輯同倫跨度模型（Homotopy Span Model）的顯式洗牌構造，把泰勒展開提升到同倫範疇層級。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：這條路線把數理邏輯證明論、<a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 的切範疇、<a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 的雙向透鏡與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的梯度訓練連在一起。代價是在含高階條件分支與遞迴（非光滑點）的通用程式語言中，微分語意還得引入 Clarke 次微分或分佈廣義函數來擴展。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>超越固定因果序的高階量子計算邏輯（Quantum Switch &amp; Non-Causal Higher-Order）</strong>：傳統量子線路模型假設量子閘按固定的時間先後串聯，無法表達「量子開關」（Quantum Switch：由控制位元疊加態決定先執行閘 <span class="math inline">U</span> 還是先執行閘 <span class="math inline">V</span>）這類不定因果序的高階量子過程。先前物理界只能用過程矩陣（Process Matrices）做靜態描述，寫起來很笨重。2026 年 Lamiroy、Valiron 與 Vilmart 提出「直覺主義么正線性邏輯（Intuitionistic Unitary Linear Logic）」，率先用純證明論刻畫非因果高階量子計算。</li>
+<li><strong>微分線性邏輯與高階同倫論的融合（Homotopy Taylor Expansion）</strong>：過去線性邏輯的多重集關係模型（Relational Model）會把對稱置換壓扁成集合或計數重數，不同資源配對路徑之間的同倫見證就丟失了。2026 年 Melliès、Olimpieri 與 Vaux Auclair 用顯式洗牌構造建立了微分線性邏輯的「同倫跨度模型」。接下來的問題是，如何在 <span class="math inline">(\infty,1)</span>-範疇中完整建立非正交泰勒級數的收斂與切消不變性。這是 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 與證明論交界處最新的課題。</li>
+<li><strong>推論主義哲學與博弈語意的合流，以及線性邏輯的泛代數深層結構</strong>：在哲學邏輯這一側，證明論語意學（Proof-theoretic Semantics / Brandom 推論主義：意義源於推論角色而非指稱真值）正透過 Hyland–Ong 博弈取得動態互動的基礎（2026 Waddington–Gheorghiu–Pym）。在代數邏輯這一側，乘法加法線性邏輯 <span class="math inline">\mathsf{MALL}</span> 對應的 Girard 代數子簇格結構（如 2026 年 Aglianò–Nedeljković 證明的原子性與極小單代數刻畫，本領域 🏆 L5 旗艦）還有大量高階子簇的分類問題沒有解決。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與系統工程（用線性類型／Session Types 避免 Agent API 狀態錯亂與資源洩漏）</strong>：多個 Agent 調用外部付費 API、資料庫交易鎖或有狀態工具時，最常見的事故有兩種：重試導致重複扣款（違背禁止收縮），以及開啟連線後沒有關閉（違背禁止弱化）。用線性／仿射協定型別（Session Types）設計工具接口，就能在編譯期 100% 保證每個控制權柄恰好被轉移與終結一次。</li>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 與量子／異質編譯（GoI 無中心流編譯思想）</strong>：要把含有複雜高階函數的宿主語言編譯到無堆疊硬體（FPGA、資料流晶片或量子處理器 QPU，如 2026 Chardonnet et al.）時，互動幾何（GoI）提供一套通用做法：在宿主端沿追蹤迴路先跑完所有古典控制路由，直接輸出扁平的純硬體資料流圖。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>（程式泰勒展開與符號神經混合求導）</strong>：依微分線性邏輯的「Böhm 樹泰勒展開」，任何高階離散程式都可以展開成無窮多個無迴圈單次線性近似片段（Simple Terms）的形式和。要對離散演算法、圖重寫與符號推理程式做平滑梯度鬆弛時，這是一個有證明論依據的工具。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 100 篇核心文獻，其中 21 篇有 Open-Access PDF 原文直連，含 1 篇已完成 🏆 L5 深度審核導讀；其餘經典期刊與會議論文也已完整建檔於 Zotero。所有本地 PDF 都隱藏收納在 <code>~/.ai_papers_vault.noindex</code>，不會干擾 macOS Spotlight。點下方的 <code>📚 Zotero 開啟</code> 就能在 Zotero 打開條目與原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文與-l5-旗艦">A. 必讀奠基論文與 L5 旗艦</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2000</td>
+<td><em>On Full Abstraction for PCF: I, II, and III</em>，J. M. E. Hyland, C.-H. Luke Ong</td>
+<td>博弈語意學兩篇奠基論文之一（被引 687 次）：提出競技場與指針序列（Pointer Games），用純真性與括號良態性解決 PCF 完全抽象問題。</td>
+<td>G2 必讀 <code>[書目條目]</code></td>
+<td><a href="zotero://select/library/items/HDGCRT29" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1006/inco.2000.2917" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2000</td>
+<td><em>Full Abstraction for PCF</em>，Samson Abramsky, Radha Jagadeesan, Pasquale Malacaria</td>
+<td>博弈語意學兩篇奠基論文之二（AJM 博弈，被引 495 次）：從線性邏輯與歷史無關策略切入，同時期解決 PCF 完全抽象問題，全文免費公開。</td>
+<td>G1–G2 首選 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/GRFQUBP6" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1311.6125" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2001</td>
+<td><em>Locus Solum: From the rules of logic to the logic of rules</em>，Jean-Yves Girard</td>
+<td>線性邏輯創始人 Girard 推翻自己舊框架的一部不尋常的哲學與數學著作（被引 268 次）：提出跡論（Ludics），從純粹的互動位址與正交對偶重新導出邏輯規則。</td>
+<td>G2–G3 思想性讀物 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/XEPMW4DN" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0004088" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2002</td>
+<td><em>Geometry of Interaction and linear combinatory algebras</em>，Samson Abramsky, Esfandiar Haghverdi, Philip Scott</td>
+<td>把 Girard 原本用希爾伯特空間算子寫出的互動幾何（GoI）整理成追蹤么半範疇與線性組合子代數，同時涵蓋粒子流與波流模型。</td>
+<td>G2 GoI 主要參考 <code>[書目條目]</code></td>
+<td><a href="zotero://select/library/items/A5KX2T6G" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1017/s0960129502003730" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><em>Reverse Derivative Categories</em>，Robin Cockett, G. S. H. Cruttwell, Jonathan Gallagher, Jean-Simon Pacaud Lemay</td>
+<td>機器學習理論研究者必讀：直接給出深度學習反向傳播（Reverse-mode AD）的範疇公理化，並證明反向導數與匕首線性對偶的等價性。</td>
+<td>G1–G2 ML 橋接 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/U99JFPJJ" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1910.07065" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>Linear Logic via algebra I: Girard algebras</em>，Paolo Aglianò, Mitar Nedeljković</td>
+<td>🏆 <strong>L5 深度審核完成</strong>（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>）：系統建立乘法加法線性邏輯 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意「Girard 代數」，完整刻畫其子簇格底層的原子結構。</td>
+<td>🏆 L5 旗艦精讀 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.16804" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（7 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>1994｜Samson Abramsky, Radha Jagadeesan</strong>，<em>New Foundations for the Geometry of Interaction</em>（被引 111 次，<code>[書目條目]</code>）：從切消的回饋迴路出發，為組合式互動幾何建立現代公理基礎。<a href="zotero://select/library/items/HKJ5XCV9" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1006/inco.1994.1041" rel="noopener">原文連結</a></li>
+<li><strong>1997｜Vincent Danos, Jean-Baptiste Joinet, Harold Schellinx</strong>，<em>A new deconstructive logic: linear logic</em>（被引 95 次，<code>[書目條目]</code>）：提出 <code>LKT/LKQ</code> 極性聚焦染色嵌入，示範如何拿線性邏輯當顯微鏡，把二階古典邏輯拆解出傳名（Call-by-name）與傳值（Call-by-value）兩種計算語意。<a href="zotero://select/library/items/PIUH33CJ" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.2307/2275572" rel="noopener">原文連結</a></li>
+<li><strong>1995｜Jean-Yves Girard, Yves Lafont, Laurent Regnier (Eds.)</strong>，<em>Advances in Linear Logic</em>（被引 85 次，<code>[書目條目]</code>）：首屆線性邏輯國際研討會的論文集，收錄證明網、互動網（Interaction Nets）與指稱語意的早期奠基文獻。<a href="zotero://select/library/items/GHD5TVGQ" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1017/cbo9780511629150" rel="noopener">原文連結</a></li>
+<li><strong>2002｜Vincent Danos, Russell S. Harmer</strong>，<em>Probabilistic game semantics</em>（被引 59 次，<code>[書目條目]</code>）：建立機率博弈語意範疇，並證明只要拿一枚雙面骰子當萬有隨機源，任意機率策略都能分解為確定性策略與骰子的複合。<a href="zotero://select/library/items/HT3RM9GX" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1145/507382.507385" rel="noopener">原文連結</a></li>
+<li><strong>1996｜V. Danos, H. Herbelin, L. Regnier</strong>，<em>Game semantics and abstract machines</em>（<em>LICS 1996</em>，被引 45 次，<code>[書目條目]</code>）：建立指針博弈策略與 Krivine 環境抽象機執行軌跡之間的一一對應。<a href="zotero://select/library/items/48PIE4BX" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1109/lics.1996.561456" rel="noopener">原文連結</a></li>
+<li><strong>1999｜Samson Abramsky, Guy McCusker</strong>，<em>Game Semantics</em>（被引 38 次，<code>[書目條目]</code>）：很適合入門教學的「語意立方體」導論，一步步示範放鬆純真性與括號條件後，如何恰好得到命令式狀態與控制跳轉。<a href="zotero://select/library/items/EAFDGTMK" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1007/978-3-642-58622-4_1" rel="noopener">原文連結</a></li>
+<li><strong>1992｜G. Gonthier, M. Abadi, J.-J. Levy</strong>，<em>Linear logic without boxes</em>（<em>LICS 1992</em>，被引 35 次，<code>[書目條目]</code>）：去掉證明網中笨重的指數方框（Boxes），用純局部圖重寫實現 <span class="math inline">\lambda</span>-演算的 Lamping 最優歸約演算法。<a href="zotero://select/library/items/NUJA4VZN" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1109/lics.1992.185535" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Proof-Relevant Interpolation for Circular Proofs in Linear Logic</strong>，Daniel Osorio-Valencia, Alexis Saurin：把一階線性邏輯的 Maehara 證明相關插值法推廣到「含切證明」和帶不動點的「循環證明（正則非良基證明）」。插值過程嚴格保證維持循環證明的強有效性（Strong Validity），文中也刻畫了非正規形 System L 項的可插值條件。（<a href="zotero://select/library/items/SGJWM2U9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24722" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Canonical Proof Nets for Intuitionistic Multiplicative Linear Logic</strong>，Matteo Acclavio, Willem Heijltjes, Dominic J. D. Hughes：古典的含單位元乘法線性邏輯無法兼顧規範性與高效還原。本文證明含單位元的直覺主義乘法線性邏輯（<span class="math inline">\text{IMLL}_u</span>）有規範唯一的證明網，而且有多項式時間的相繼式還原演算法，所以相繼式推導與證明網之間的雙向翻譯互為嚴格逆映射。（<a href="zotero://select/library/items/NGU3EBMJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24235" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>Compiling Quantum Lambda-Terms into Circuits via the Geometry of Interaction</strong>，Kostia Chardonnet, Ugo Dal Lago, Naohiko Hoshino, Paolo Pistone（2026，<em>arXiv:2602.17482</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：高階量子函數式程式語言（線性量子 <span class="math inline">\lambda</span>-演算）允許把量子通道當作一等公民傳遞，但真實量子硬體只能執行扁平的量子閘線路。問題是如何在編譯期消除高階控制流，又不破壞無複製的量子線性約束。</li>
+<li>關鍵做法：運用 Girard 的「互動幾何（GoI）」代幣機，在編譯期盡量先執行所有古典路由與高階控制流，同時串流生成底層的純量子線路。</li>
+<li>跨領域啟發：三十多年前的純邏輯證明論機器，可以直接當作當代量子程式編譯器的核心中間表示（IR）。</li>
+<li>連結：<a href="zotero://select/library/items/Z4HBKJH5" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2602.17482" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>An explicit shuffle construction of the homotopy span model of differential linear logic</strong>，Paul-André Melliès, Federico Olimpieri, Lionel Vaux Auclair（2026，<em>arXiv:2610.10789</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：微分線性邏輯把程式與證明展開為泰勒級數，但在傳統關係模型中，資源交換的對稱同構被壓扁成計數重數。若想保留每次求導配對的具體雙射見證（走向同倫泰勒展開），就需要顯式可計算的範疇模型。</li>
+<li>關鍵做法：在小範疇的自然 Quillen 模型結構上，用顯式的「洗牌構造（Shuffle Construction）」直接建出微分線性邏輯的同倫跨度模型（Homotopy Span Model），把公式詮釋為同倫等價意義下的小範疇。</li>
+<li>跨領域啟發：把 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>、<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 與微分線性邏輯的證明相關（Proof-relevant）微積分連起來。</li>
+<li>連結：<a href="zotero://select/library/items/5V5JPZT7" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.10789" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批擴展追蹤2026-近期">同批擴展追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Paolo Aglianò, Mitar Nedeljković</strong>，<em>Linear Logic via algebra I: Girard algebras</em>（<em>arXiv:2610.16804</em>，🏆 <strong>L5 深度審核完成</strong> <code>[OA PDF]</code>）：建立 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意 Girard 代數簇，證明其子簇格具備原子性，且原子恰由常數生成的單代數決定。<a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.16804" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Julien Lamiroy, Benoît Valiron, Renaud Vilmart</strong>，<em>Intuitionistic Unitary Linear Logic: A Proof-Theoretical Approach to Purely Quantum Higher-Order</em>（<em>arXiv:2609.02661</em>，<code>[OA PDF]</code>）：用純證明論建構直覺主義么正線性邏輯，首次不靠笨重的過程矩陣，就能組合式地刻畫「量子開關（Quantum Switch）」等非因果高階量子過程。<a href="zotero://select/library/items/2VN2DQCT" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.02661" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Joaquim T. Waddington, Alexander V. Gheorghiu, David J. Pym</strong>，<em>Inferentialist Game Semantics (Extended Abstract)</em>（<em>arXiv:2607.13855</em>，<code>[OA PDF]</code>）：把 Hyland–Ong 博弈語意與證明論推論主義（Inferentialism）結合，用互動對局為非指稱的意義理論建立形式基礎（橋接 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a>）。<a href="zotero://select/library/items/QRVQGJCH" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.13855" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Satoshi Kura, Hiroshi Unno</strong>，<em>Solving First-Order Fixed-Point Logics via a Least-to-Greatest Transformation Based on Game Semantics</em>（<em>arXiv:2607.10650</em>，<code>[OA PDF]</code>）：一階不動點邏輯中，有一種把終止性驗證（最小不動點 <span class="math inline">\mu</span>）化約為安全性驗證（最大不動點 <span class="math inline">\nu</span>）的轉換。本文為它建立嚴格的博弈語意詮釋與求解演算法。<a href="zotero://select/library/items/D4FUPTPW" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.10650" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

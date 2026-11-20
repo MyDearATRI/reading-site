@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>10｜現代 AI 工具鏈（RAG／GraphRAG、擴散與流匹配生成、偏好對齊強化與自主工程智能體） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="10現代-ai-工具鏈raggraphrag擴散與流匹配生成偏好對齊強化與自主工程智能體">10｜現代 AI 工具鏈（RAG／GraphRAG、擴散與流匹配生成、偏好對齊強化與自主工程智能體）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> ｜ <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> ｜ <a class="wl" href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。結構化記憶靠 GraphRAG 與圖最優傳輸對齊外掛，連續幾何生成靠薛丁格橋與直線流匹配（Flow Matching / Rectified Flow），真實世界的執行迴路則靠拉格朗日解耦偏好強化（Constrained GRPO）與防時間洩漏的自主智能體來閉合。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+剛完成預訓練的基座大模型，像一位博聞強記、卻被關在暗室裡、沒有紙筆也沒有煞車的天才。直接拿去做真實任務，會遇到四個問題：
+<ol>
+<li><strong>知識凍結與黑盒幻覺</strong>：參數記憶無法即時更新。一般的向量檢索（Naive RAG）把長文切碎後，會丟掉跨段落的關係。就算升級成 GraphRAG，如果沒有嚴格的推導出處記錄（Provenance），高風險領域還是不敢採信。</li>
+<li><strong>連續模態生成的彎曲耗散</strong>：在影像、4K 視覺與三維點雲等非歐氏／高維連續空間中，早期的隨機擴散要走上千步曲折的去噪路徑。所以需要找到連接兩個任意分佈的最短測地線，讓生成走直達路徑。</li>
+<li><strong>後訓練對齊的刷分越界陷阱</strong>：免價值網路的群組相對策略最佳化（GRPO）讓推理強化學習的成本降了很多。但如果直接把任務獎勵與安全懲罰加減之後再做群組標準化，安全約束在數學上會被抵消掉。</li>
+<li><strong>自主智能體評測的時空作弊假象</strong>：軟體工程智能體（SWE Agents）常宣稱修復率很高，其實分數往往嚴重虛高。原因是模型預訓練時看過專案後來的演進，或基準快照混入了後續提交（Temporal Leakage）。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+如果 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 是造一顆大馬力渦輪引擎，<code>10_工具鏈</code> 就是把引擎組裝成全地形特種工程車所需的四個總成：
+<ol>
+<li><strong>帶代數收據的結構化衛星導航（RAG / GraphRAG + GW 圖對齊 + How-Provenance）</strong>：先用最小拓撲扭曲（Gromov–Wasserstein）把不同語言或資料庫的地圖疊合起來，再讓每次回答都附一張收據，寫明是由哪幾條原始事實、怎麼相加相乘推出來的。</li>
+<li><strong>拉直彎道的超導磁浮軌（Schrödinger Bridge &amp; Rectified Flow）</strong>：原本的隨機擴散像醉漢在濃霧裡走路。現在順著動態最優傳輸的速度場，把路徑拉直成不交叉的測地線，幾步之內就到高解析度的目標流形。</li>
+<li><strong>車隊相對競速與獨立緊急煞車（Constrained GRPO）</strong>：不請昂貴的隨車裁判（Critic），讓同一題跑出的多組軌跡互相比高低。但安全紅線的煞車獨立於分數排名之外，不能為了衝分數闖紅燈。</li>
+<li><strong>配備歷史隔離沙盒的機械手臂（Autonomous SWE Agents）</strong>：能自主讀寫大型程式碼樹、跑測試、修補臭蟲，並在嚴格鎖定歷史時間戳的零洩漏考場中接受檢驗。</li>
+</ol>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+純數學理論在這個領域變成可用的工程。它把 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 中的 Christian Léonard 薛丁格橋、Gromov–Wasserstein 圖匹配與黎曼流形測地線，做成跨語言知識圖譜融合與 3D／4K 生成引擎。它也為 <a class="wl" href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a>、<a class="wl" href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 與 <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 提供可驗證的後訓練方法和抗污染的智能體基準。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    SB0[&quot;Léonard (2014) 薛丁格問題與動態最優傳輸相對熵理論&quot;] --&gt; DSB[&quot;De Bortoli et al. (2021) Diffusion Schrödinger Bridge：IPF 有限時間任意分佈擴散橋&quot;]
+    DSB --&gt; RFM[&quot;Chen &amp; Lipman (2024) 黎曼流形流匹配 → Diffusion-4K (2025) / Rectified Flow 直線性界與 3D TokenFlow (2026)&quot;]
+    GW0[&quot;Xu et al. (2019) GWL 圖最優傳輸學習 ＆ Wu &amp; Tang (2023) 跨語言知識圖譜對齊&quot;] --&gt; KGRAG[&quot;Pan et al. (2023) LLM × 知識圖譜統一藍圖 ＆ Verma (2024) RAG 脈絡壓縮&quot;]
+    KGRAG --&gt; PROV[&quot;2026 可驗證 GraphRAG：GraphRAGProv 半環溯源多項式 ＆ GBOR-RAG 多庫基因富集圖譜&quot;]
+    AGENT0[&quot;Wang et al. (2023) LLM 自主智能體四模組架構（角色・記憶・規劃・工具行動）&quot;] --&gt; CGRPO[&quot;Girgis et al. (2026) Constrained GRPO：拉格朗日對偶與群組正規化解耦&quot;]
+    AGENT0 --&gt; SWEEVAL[&quot;Sun et al. (2026) 時間一致性零洩漏程式碼圖譜評測 ＆ Duan et al. (2026) PTA-IRT 軌跡感知基準壓縮&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>結構化圖譜檢索、最優傳輸本體對齊與代數溯源（GraphRAG, GW Alignment &amp; How-Provenance）</strong></p>
+<ul>
+<li>直覺理解：把文件切成五百字一塊做餘弦相似度檢索，遇到要跨三個檔案拼湊線索、或要統合多個資料庫的基因通路時就不管用。上下文塞太滿，又會出現「迷失在中間（Lost in the Middle）」的問題。所以一方面需要脈絡壓縮（Contextual Compression）來提純資訊，另一方面要升級成知識圖譜增強（GraphRAG）。企業或科學界要合併兩張異質／跨語言圖譜時，常常沒有對齊錨點。這時可以用 Gromov–Wasserstein（GW）圖最優傳輸，比對兩張圖內部的拓撲距離關係來自動對齊。再往下一步，為了不讓大模型拿到子圖後還是編造結論，2026 的 <code>GraphRAGProv</code> 直接在底層跑 SPARQL，並算出溯源多項式（How-Provenance Polynomials），把每一句結論是怎麼組合出來的都列清楚。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>圖匹配與嵌入共同學習（Xu et al., 2019 <code>GWL</code>; Wu &amp; Tang, 2023）</strong>：同時最小化兩項：跨圖節點特徵的 Wasserstein 成本，以及圖內結構距離矩陣 <span class="math inline">(D_X, D_Y)</span> 的 Gromov–Wasserstein 失真：
+<div class="math inline">\min_{T \in \Pi(\mu, \nu)} \;\langle C_{\mathrm{feat}}(X, Y),\, T \rangle + \alpha \sum_{i,j,k,l} \bigl| D_X(i,k) - D_Y(j,l) \bigr|^2 T_{ij} T_{kl}</div></li>
+<li><strong>半環溯源多項式（El Amrani &amp; Galárraga, 2026 <code>GraphRAGProv</code>）</strong>：替來源圖譜中的每筆事實標上變數 <span class="math inline">x_k \in X</span>，查詢推導就在交換半環 <span class="math inline">\mathbb{N}[X]</span> 上生成多項式 <span class="math inline">\sum_{m} c_m \prod_{k} x_k^{e_{mk}}</span>。其中乘法 <span class="math inline">\cdot</span> 代表多筆前提聯合推導（Join/AND），加法 <span class="math inline">+</span> 代表多條獨立證據路徑並列支撐（Union/OR）。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：同時有神經語言模型的流暢綜合能力，和符號資料庫逐字可追責的特性（如 <code>GBOR-RAG</code> 統一多基因庫的富集詮釋）。代價是高品質 RDF／階層式圖譜的抽取成本高，大規模 GW 耦合也要靠熵正則化近似來控制計算複雜度。</li>
+</ul>
+</li>
+<li>
+<p><strong>薛丁格擴散橋、黎曼流匹配與拉直生成流（Schrödinger Bridge, Riemannian Flow Matching &amp; Rectified Flow）</strong></p>
+<ul>
+<li>直覺理解：傳統擴散模型要先把資料一路加噪，直到變成純高斯白噪音（理論上需要無窮長時間），再一步步倒回來。但有時我們想直接在草圖分佈與高清圖分佈這樣兩個任意分佈之間架橋，或是在彎曲球面／旋轉群流形上生成分子與 3D 點雲。1931 年薛丁格提出的薛丁格橋問題（Schrödinger Problem）給了一個統計物理的答案：在兩端邊際分佈固定的條件下，找一條與參考布朗運動相對熵最小的隨機演化路徑。雜訊趨近於零時，它精確退化為動態最優傳輸。Flow Matching（流匹配）與 Rectified Flow（拉直流）再往前一步，省掉訓練期昂貴的隨機微分方程模擬，直接回歸直線／測地線插值的瞬時速度場。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>薛丁格橋與迭代比例擬合（Léonard, 2014; De Bortoli et al., 2021 <code>DSB</code>）</strong>：在路徑測度空間最小化相對熵 <span class="math inline">\min_{P \in \mathcal{P}(\Omega)} \mathrm{KL}(P \,\|\, R)</span>（受限於端點邊際 <span class="math inline">P_0 = \mu_0,\, P_1 = \mu_1</span>）。做法是在正向與逆向時間擴散之間交替投影（連續版 Sinkhorn / IPF），在有限時間內精確橋接任意分佈。</li>
+<li><strong>黎曼流形無模擬流匹配（Chen &amp; Lipman, 2024 <code>RFM</code>）</strong>：在帶度量張量 <span class="math inline">g</span> 的光滑流形 <span class="math inline">\mathcal{M}</span> 上，沿條件測地線（或預度量指數映射）<span class="math inline">x_t = \psi_t(x_0 \mid x_1)</span> 直接擬合切空間速度場：
+<div class="math inline">\mathcal{L}_{\mathrm{RFM}}(\theta) = \mathbb{E}_{t,\, x_0,\, x_1} \Bigl\| v_\theta(x_t, t) - \dot{\psi}_t(x_0 \mid x_1) \Bigr\|_{g(x_t)}^2</div></li>
+<li><strong>兩步拉直流的直線性理論與階層詞元流（2026 <code>Rectified Flow</code> / <code>TokenFlow</code>）</strong>：Rectified Flow 透過重耦合（Reflow）最小化路徑彎曲度 <span class="math inline">S(X) = \int_0^1 \mathbb{E}\bigl\| \dot{X}_t - (X_1 - X_0) \bigr\|^2 \mathrm{d}t</span>。Pham et al.（2026）嚴格刻畫了兩步重流要滿足什麼耦合條件，才能真正得到直線軌跡。<code>TokenFlow</code> 則在 <span class="math inline">M \ll N</span> 個潛詞元與點級細節上耦合雙層拉直流，以維持 3D 點雲的排列等變性與部件結構。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：把高維連續生成從上千步隨機採樣壓到數步、甚至單步 ODE 積分，也支援 4K 超高解析度的小波潛空間合成（<code>Diffusion-4K</code>, 2025）與一般彎曲幾何。代價是源分佈與目標分佈的幾何錯位很大時，有限步重流仍會殘留非直線彎曲（Non-straightness），硬要單步跨過去會讓細節模糊。</li>
+</ul>
+</li>
+<li>
+<p><strong>免價值網路偏好對齊與拉格朗日安全約束解耦（GRPO &amp; Constrained GRPO）</strong></p>
+<ul>
+<li>直覺理解：在強化學習後訓練（RLHF / RLVR）中，傳統 PPO 要額外養一個和語言模型一樣大的價值評估網路（Critic），顯存直接翻倍。群組相對策略最佳化（GRPO）省掉了 Critic：對同一個提示一次抽樣 <span class="math inline">G</span> 個回答，拿這組回答的平均分當基準，再除以組內標準差，算出相對優勢。但 Girgis 等人（2026）發現其中有個數學上的陷阱。在安全關鍵領域，傳統做法是先把獎勵 <span class="math inline">r_i</span> 減去拉格朗日安全懲罰 <span class="math inline">\lambda c_i</span> 合成單一分數，再除以組內標準差。安全違規嚴重、拉格朗日乘子 <span class="math inline">\lambda</span> 變大時，分母的標準差也跟著等比例放大，<span class="math inline">\lambda</span> 在分子分母直接對消。模型從此對安全懲罰的大小沒有反應。</li>
+<li>機制或核心表達式：<code>Constrained GRPO</code>（Girgis et al., 2026）指出，標準化前純量化（Pre-normalization Scalarization）會造成尺度抵消：
+<div class="math inline">\frac{(r_i - \lambda c_i) - \mu_{r - \lambda c}}{\sigma_{r - \lambda c}} \xrightarrow{\lambda \to \infty} -\frac{c_i - \mu_c}{\sigma_c} \quad \text{（對 }\lambda\text{ 失去幅度敏感性！）}</div>
+解法是把獎勵正規化與約束懲罰解耦：任務獎勵單獨計算組內標準化優勢 <span class="math inline">\hat{A}_i^{(r)} = \frac{r_i - \mu_r}{\sigma_r}</span>，安全約束則維持不受獎勵方差扭曲的拉格朗日梯度更新。這樣既保有零 Critic 的記憶體優勢，又能嚴格保證安全收斂。</li>
+<li>能做到什麼，代價是什麼：大型推理語言模型與多模態模型可以在低顯存開銷下，一邊最大化推理得分，一邊守住合規／工具安全紅線。代價是每個提示仍要並行生成 <span class="math inline">G</span> 條長思維鏈軌跡，拉格朗日對偶步長也要配合約束滿足率動態調整。</li>
+</ul>
+</li>
+<li>
+<p><strong>自主軟體工程智能體、時間一致性隔離與軌跡感知評測（Autonomous Agents, Time-Consistent SWE &amp; PTA-IRT）</strong></p>
+<ul>
+<li>直覺理解：現代自主智能體（Wang et al., 2023）結合了角色設定、長短期記憶、子任務規劃與外部工具執行。在倉庫級軟體工程（SWE）中，給智能體一張包含類別繼承、函數調用與檔案樹的階層式程式碼圖譜（Hierarchical Code Graph），很能幫它在數十萬行的專案裡定位臭蟲。但評估時如果不小心用了含有未來重構提交的圖譜，或模型早就背過該 Issue 的修復 PR，分數就會失真。另外，跑完一輪數百題的真實容器編譯測試常要花數千美元，所以也需要只用很少題目就能估準模型實力的方法。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>時間一致性零洩漏隔離協議（Sun et al., 2026，🏆 L5）</strong>：針對真實演進的專案（如 C++ DragonFly 與 JS/TS React），強制鎖定歷史截止點 <span class="math inline">t_{\mathrm{cutoff}}</span>，確保程式碼倉庫快照 <span class="math inline">\mathcal{R}_{\le t_{\mathrm{cutoff}}}</span>、階層式程式碼知識圖譜 <span class="math inline">\mathcal{G}_{\le t_{\mathrm{cutoff}}}</span> 與提示脈絡都嚴格滿足零未來資訊洩漏（Zero-Leakage Isolation）。</li>
+<li><strong>特權軌跡感知試題反應理論（Duan et al., 2026 <code>PTA-IRT</code>）</strong>：傳統精簡基準只擬合二元的「過關／失敗」矩陣 <span class="math inline">Y_{ij} \in \{0,1\}</span>。本方法在校準試題難度 <span class="math inline">b_j</span> 與鑑別度 <span class="math inline">a_j</span> 時，另外納入智能體解題過程的搜尋步數、檔案編輯與測試回饋等特權執行軌跡特徵 <span class="math inline">\tau_{ij}</span>，大幅降低小樣本評測的排名估計誤差。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：去掉資料污染造成的虛高，量出外部圖譜工具對複雜倉庫推理的淨貢獻，並把昂貴的容器化智能體評測成本壓低數倍。代價是要建置跨語言、嚴格時間切片的快照與重播環境，基準工程的投入很高。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>稠密神經檢索的隱式綜合力，與符號圖譜溯源的透明性和可問責性</strong>：傳統 GraphRAG 把知識圖譜子圖轉成文字塞進 LLM 提示詞。跨跳問答的表現提升了，但最終答案變成圖譜加上黑盒語言模型幻覺的混合體，醫療、基因組學與法律領域很難核查。2026 年的 <code>GraphRAGProv</code>（用 SPARQL 與半環溯源多項式精確記錄推導組合）與 <code>GBOR-RAG</code>（建立可追蹤的跨庫基因集與詞條知識圖譜）代表一種反省：把精確的組合推理交還給圖查詢與代數溯源，LLM 只負責自然語言對齊與可讀的詮釋。</li>
+<li><strong>拉直生成流（Rectified Flow）的幾何交叉障礙與強化工具鏈的多目標獎勵劫持</strong>：工程界普遍期待靠反覆重流（Reflow）把任意擴散模型壓成一步到位的直線生成器。但 Pham et al.（2026）從理論上證明，在特定分佈幾何下，兩步拉直流仍有消不掉的非直線度（Non-straightness）。另一方面，自主智能體開始在長程任務中自己調用終端機與外部 API。怎麼防止模型像傳統 GRPO 那樣因標準化偏差而繞過安全約束（<code>Constrained GRPO</code>），或在受污染的基準上虛假過關，仍是工具鏈落地時最棘手的系統問題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>交換半環 How-Provenance 多項式 → 自動化科學發現與形式化審計</strong>：資料庫理論中的半環溯源多項式除了追蹤 GraphRAG 答案的來源，還可以移植到 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 的自動引理依賴追蹤、<a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 的最小矛盾前提定位，以及 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> 的科學綜述證據鏈稽核。</li>
+<li><strong>時間一致性零洩漏協議（Time-Consistent Isolation）→ 科學預測學與量化策略回測</strong>：Sun et al.（2026）把程式碼樹和外部知識圖譜同步鎖定在歷史時間截面 <span class="math inline">t_{\mathrm{cutoff}}</span>。這套協議可以直接搬到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a>（預測未來的跨領域連結時不混入事後的引用圖）與金融時序因果推論。</li>
+<li><strong>特權過程軌跡校準（Privileged Trajectory-Aware IRT）→ 人機教學評測與自動定理證明基準</strong>：訓練／校準期用豐富的過程訊號（解題中間步驟、錯誤回溯次數）來標定題目鑑別度，推論評測期就只需要很少的題目也能測準能力。這種結合心理計量與過程監督的框架，可以直接用在 <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 與教育診斷評量。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2014</td>
+<td><strong>A survey of the Schrödinger problem and some of its connections with optimal transport</strong>，Christian Léonard</td>
+<td>薛丁格橋的數學導讀：把路徑空間的相對熵最小化和動態最優傳輸的零雜訊極限連起來，是現代擴散橋的理論基礎。</td>
+<td><code>G2/G3 數學基石</code></td>
+<td><a href="zotero://select/library/items/FD5VM8C6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1308.0215" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>Gromov-Wasserstein Learning for Graph Matching and Node Embedding</strong>，Hongteng Xu et al.</td>
+<td>提出 GWL 框架，在沒有跨圖錨點的情況下，靠最小化拓撲錯位代價，同時完成知識圖譜匹配與共享概念嵌入學習。</td>
+<td><code>G2 跨域必讀</code></td>
+<td><a href="zotero://select/library/items/SZQ57Q8Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1901.06003" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><strong>Diffusion Schrödinger Bridge with Applications to Score-Based Generative Modeling</strong>，Valentin De Bortoli et al.</td>
+<td>用迭代比例擬合（IPF / Sinkhorn），在有限時間內直接在兩個任意分佈之間架起熵耗散最小的擴散生成橋。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/HCI566QA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.01357" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>Unifying Large Language Models and Knowledge Graphs: A Roadmap</strong>，Shirui Pan et al.</td>
+<td>超過千引的綱領性藍圖，整理出三種工具鏈融合方式：KG 增強 LLM、LLM 建構 KG、雙向協同推理。</td>
+<td><code>G1/G2 全景首選</code></td>
+<td><a href="zotero://select/library/items/X9IFSBNE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.08302" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>A Survey on Large Language Model based Autonomous Agents</strong>，Lei Wang et al.</td>
+<td>自主智能體架構引用數最高的綜述，確立角色剖析、記憶機制、任務規劃與外部工具行動這四個模組的標準劃分。</td>
+<td><code>G1/G2 全景首選</code></td>
+<td><a href="zotero://select/library/items/MEXHAA49" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2308.11432" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>Flow Matching on General Geometries</strong>，Ricky T. Q. Chen, Yaron Lipman</td>
+<td>提出黎曼流匹配（RFM），不需要昂貴的模擬，就能在一般彎曲流形上沿測地線學連續正規化流的速度場。</td>
+<td><code>G2/G3 生成核心</code></td>
+<td><a href="zotero://select/library/items/AWNUAS34" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2302.03660" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><strong>Time-Consistent Evaluation of Hierarchical Code Graphs for SWE Agents</strong>，Xianpeng, Sun, Tian Yu, Haonan Sun</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：在真實大型 C++ 與 JS/TS 專案的演化史上強制執行零時間洩漏隔離，量出階層式程式碼圖譜對 SWE 智能體的實際增益。</td>
+<td><code>G2 評測必讀</code></td>
+<td><a href="zotero://select/library/items/QUCJ6HBA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17388" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（3 篇跨語言圖最優傳輸、RAG 壓縮與 4K 潛擴散代表作）</summary>
+<p></p>
+<ul>
+<li><strong>2023｜Cross-Lingual Knowledge Graph Alignment via Graph Optimal Transport</strong>，Shuang Wu, Jie Tang（結合實體級 Wasserstein 與結構級 Gromov-Wasserstein 最優傳輸來對齊跨語言知識圖譜，能過濾偽對齊並量化本體遷移代價，56 引）｜<a href="zotero://select/library/items/QZU25N9W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.00916" rel="noopener">原文</a></li>
+<li><strong>2024｜Contextual Compression in Retrieval-Augmented Generation for Large Language Models: A Survey</strong>，Sourav Verma（系統整理 RAG 檢索脈絡壓縮、冗餘過濾與關鍵資訊蒸餾技術，處理長視窗的雜訊干擾與推論延遲問題）｜<a href="zotero://select/library/items/3K3QTMCZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.13385" rel="noopener">原文</a></li>
+<li><strong>2025｜Diffusion-4K: Ultra-High-Resolution Image Synthesis with Latent Diffusion Models</strong>，Jinjin Zhang et al.（建立 Aesthetic-4K 基準與小波潛空間微調框架，讓文生圖擴散模型可以直接合成 4K 超高解析度細節，22 引）｜<a href="zotero://select/library/items/VF8WZE2T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.18352" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜LSP-RAG: Latent Scoring Perspectives for Knowledge Graph Retrieval-Augmented Generation</strong>，Haochen Liu et al.：提出知識圖譜檢索增強生成框架 LSP-RAG。它把視角專屬軟提示，和隨推理跳數演化的脈絡軟提示耦合起來，自適應地聚合多視角的三元組評分。輕量級語言模型因此在多跳 KGQA 基準上，勝過靠大型商用 LLM 引導的高成本檢索系統。（<a href="zotero://select/library/items/B4I2D8KI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25229" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜CURATOR: Scalable Fine-grained Evidence Selection for Retrieval-Augmented Generation using Decision Models</strong>，Shib Dasgupta, Bandish Parikh, Rashmi Gangadharaiah：指出現成的決策模型同時評估大量 RAG 候選片段時，辨別力會隨並行規模退化。本文在大規模候選池上微調決策模型 CURATOR，讓它聯合選出數量可變的支撐片段，兼顧跨片段的互補視野與單次評估的效率，在上下文預算有限時顯著提升 RAG 表現。（<a href="zotero://select/library/items/5WUEB8KK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.16366" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦物理約束拉直流降尺度與採樣後守恆投影認證">2026-11-19（08:00 增量）最新入庫（聚焦：物理約束拉直流降尺度與採樣後守恆投影認證）</h4>
+<ul>
+<li><strong>2026｜Towards Physics-Constrained Rectified Flow for Climate Downscaling: What Projections Can Certify?</strong>，Arun Sharma
+<ul>
+<li>重點：系統檢驗條件流匹配氣候降尺度模型 <code>PC-RF</code> 的訓練懲罰與採樣後投影。結果證實，後投影不需要高解析參考場，就能把負降水違規率（NVR）與質量守恆誤差（MCE）精確歸零。作者建議把 NVR/MCE 當成優先於視覺分數的通過／失敗檢查。</li>
+<li>連結：<a href="zotero://select/library/items/BMR942XR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.22283" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦帶安全約束之群組相對策略最佳化與軌跡感知-swe-智能體評測">2026-11-19 最新入庫（聚焦：帶安全約束之群組相對策略最佳化與軌跡感知 SWE 智能體評測）</h4>
+<ul>
+<li><strong>2026｜Constrained Group Relative Policy Optimization</strong>，Roger Girgis et al.
+<ul>
+<li>重點：標準 GRPO 在標準化之前就把獎勵與安全懲罰線性合併，會讓拉格朗日乘子失效。本文指出這個缺陷，並提出把獎勵優勢正規化與約束懲罰解耦的 <code>Constrained GRPO</code>，讓免 Critic 的強化微調仍守得住安全紅線。</li>
+<li>連結：<a href="zotero://select/library/items/7D56F29T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.05863" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜Efficient SWE Agent Benchmarking via Trajectory-Aware Evaluation</strong>，Kefeng Duan et al.
+<ul>
+<li>重點：提出特權軌跡感知試題反應理論（<code>PTA-IRT</code>），在校準期納入智能體多步搜尋、修改與測試執行的過程軌跡訊號，只要跑很小的代表性題集，就能高精度還原全基準排名。</li>
+<li>連結：<a href="zotero://select/library/items/668583BG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01603" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-可溯源-graphrag生物富集圖譜與拉直生成流理論">同批延伸選讀（2026 可溯源 GraphRAG、生物富集圖譜與拉直生成流理論）</h4>
+<ul>
+<li><strong>2026｜GraphRAGProv: GraphRAG Meets How-Provenance</strong>，Wadie El Amrani, Luis Galárraga（在來源接地的 RDF 圖譜上執行 SPARQL，並結合 <code>how-provenance</code> 半環多項式，為要求高透明度的領域提供可精確稽核的 GraphRAG 答案推導鏈）｜<a href="zotero://select/library/items/8SEQKZX2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.37237" rel="noopener">原文</a></li>
+<li><strong>2026｜Automated Enrichment Analysis with GraphRAG: Efficient Multi-Database ORA Extraction and Biological Interpretation</strong>，Guangcan Li et al.（提出 <code>GBOR-RAG</code>，把零散的多個基因集資料庫統一成詞條與基因的知識圖譜，讓基因表現的過度代表性富集分析可以追溯）｜<a href="zotero://select/library/items/XAPZIZTR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.30710" rel="noopener">原文</a></li>
+<li><strong>2026｜Setting Things Straight: On the Straightness and Non-Straightness of Two-Step Rectified Flow</strong>，Tuan Pham et al.（首次給出嚴格的數學判準，說明兩步拉直流 Rectified Flow 什麼時候能真正拉直 ODE 生成軌跡，什麼時候會殘留結構性彎曲）｜<a href="zotero://select/library/items/6VUDZSX4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.36090" rel="noopener">原文</a></li>
+<li><strong>2026｜TokenFlow: Latent Token Rectified Flow Matching for 3D Point Cloud Generation</strong>，Linhao Wang, Dongjin Huang（用 <span class="math inline">M \ll N</span> 個潛詞元的拉直流耦合點級條件流，同時保留 3D 點雲的部件級拓撲佈局、表面細節與排列等變性）｜<a href="zotero://select/library/items/8XJM5BZ2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.27418" rel="noopener">原文</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

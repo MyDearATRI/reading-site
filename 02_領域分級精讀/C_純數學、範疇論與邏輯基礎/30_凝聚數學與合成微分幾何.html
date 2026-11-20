@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>30｜凝聚數學與合成微分幾何（Condensed Mathematics, Synthetic Differential Geometry &amp; Tangent Categories） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="30凝聚數學與合成微分幾何condensed-mathematics-synthetic-differential-geometry-tangent-categories">30｜凝聚數學與合成微分幾何（Condensed Mathematics, Synthetic Differential Geometry &amp; Tangent Categories）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a> ｜ L5 旗艦庫：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>
+相關領域：<a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> · <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> · <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> · <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域用兩條互補的路線重寫分析學與微積分的基礎。凝聚數學（Condensed Mathematics）用收斂序列這類探針上的層取代傳統的點集拓撲空間，讓無限維泛函分析與巴拿赫空間可以放進同調代數。合成微分幾何（SDG）與切範疇（Tangent Categories）則重新啟用萊布尼茲那種平方嚴格等於零的真實無窮小量 <span class="math inline">d^2=0</span>，讓微分、聯絡與曲率不必再靠 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 極限，變成線性與範疇代數的運算。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+古典點集拓撲（開集公理）與 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 分析學看起來穩固，但和現代代數結合時出了兩個大問題：
+<ol>
+<li><strong>拓撲阿貝爾群不是阿貝爾範疇（代數與分析接不起來）</strong>：考慮實數 <span class="math inline">\mathbb{R}</span> 上的恆等映射 <span class="math inline">\mathrm{id}: \mathbb{R}_{\mathrm{disc}} \to \mathbb{R}</span>，定義域是帶離散拓撲的 <span class="math inline">\mathbb{R}_{\mathrm{disc}}</span>，值域是帶標準歐氏拓撲的 <span class="math inline">\mathbb{R}</span>。它是連續雙射，核（Kernel）是 <span class="math inline">0</span>，餘核（Cokernel）也是 <span class="math inline">0</span>，卻不是同胚，因為逆映射不連續。於是整個泛函分析（Banach / Fréchet 空間）都無法直接套用同調代數、導出範疇與六函子機器。Clausen 與 Scholze 創立的凝聚數學從定義下手：用極端不連通緊空間（如收斂序列 <span class="math inline">\mathbb{N} \cup \{\infty\}</span>）上的層（Condensed Sets）取代拓撲空間，凝聚阿貝爾群就構成 Grothendieck 阿貝爾範疇。</li>
+<li><strong>光滑流形缺乏冪零無窮小與函數空間的笛卡爾閉性（微積分的組合操作很笨重）</strong>：在古典流形範疇裡，兩個流形之間的映射空間不再是有限維流形，切向量也得繞道等價類或導子來定義。Lawvere–Kock 的合成微分幾何（SDG）、Cockett–Cruttwell 的切範疇與 Schreiber–Shulman 的內聚 <span class="math inline">\infty</span>-Topos，都直接在光滑宇宙裡內建無窮小試探棒 <span class="math inline">D = \{d \in R \mid d^2 = 0\}</span>。這樣一來，取切叢 <span class="math inline">TM</span> 就 literally 是求指數函數空間 <span class="math inline">M^D</span>。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li>**凝聚集合（Condensed Set）**像一張動態探測網：不看靜態的像素點，只看所有高速攝影機拍到的軌跡。傳統拓撲問的是哪些點集算開集，容易卡在病態反例上。凝聚數學不管空間自己有哪些開集，只拿所有標準的緊緻測試探針去探測它，最典型的探針是帶極限點的收斂序列 <span class="math inline">S = \{1, 1/2, 1/3, \dots, 0\}</span> 與 Cantor 集。它記錄的是哪些點列收斂到哪裡，而且多個探針的結果可以黏合起來。這時 <span class="math inline">\mathbb{R}_{\mathrm{disc}} \to \mathbb{R}</span> 的餘核不再是 <span class="math inline">0</span>，它記下了所有在歐氏拓撲收斂、在離散拓撲卻跳躍的序列差值，同調上的漏洞就補起來了。</li>
+<li>**合成微分幾何（Kock–Lawvere 公理）**是一個內建自動微分雙偶數（Dual Numbers）的幾何宇宙。寫過機器學習自動微分（Forward-mode AD）的人都用過雙偶數 <span class="math inline">a + b\varepsilon</span>（<span class="math inline">\varepsilon^2 = 0</span>）：代入 <span class="math inline">f(x+\varepsilon) = f(x) + f'(x)\varepsilon</span>，一次就算出導數。SDG 把整個幾何宇宙搬進一個 Topos，在裡面所有光滑曲線在無窮小尺度 <span class="math inline">D</span> 上嚴格就是直線段。代價是放棄排中律，不能問 <span class="math inline">d = 0</span> 還是 <span class="math inline">d \neq 0</span>。在這個宇宙裡，微分形式、李括號 <span class="math inline">[X,Y]</span> 與無限階噴流叢（Jet Bundles）都是純代數的組合操作。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+凝聚數學與液態向量空間（Liquid Vector Spaces）改寫了 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 的複解析／非阿基米德幾何。它的 Liquid Tensor Experiment 是 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 裡用 Lean 定理證明器驗證當代前沿純數學的里程碑。切範疇、噴流叢餘單子與內聚 <span class="math inline">\infty</span>-Topos 這一邊，一方面連到 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> 的微分線性邏輯與反向導數範疇（自動微分的基礎），另一方面為 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的非線性偏微分方程幾何（Diffieties）和量子規範場論提供嚴格的無窮維微積分基礎。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    B1[&quot;古典分析兩大痛點：(1) 拓撲向量空間非阿貝爾範疇  (2) 流形無函數空間與真實無窮小&quot;] --&gt; R1[&quot;路線 A｜Clausen-Scholze 凝聚數學：Pro-finite 探針上的層論&quot;]
+    B1 --&gt; R2[&quot;路線 B｜Lawvere-Kock 合成微分幾何 (SDG)：光滑 Topos 與 d^2=0 公理&quot;]
+    R1 --&gt; LIQ[&quot;固態模 (Solid) 與液態向量空間 (Liquid)：非阿基米德與複分析同調大一統&quot;]
+    R2 --&gt; TC[&quot;切範疇 (Tangent Categories) 與內聚 ∞-Topos：純範疇微積分、李群與規範場&quot;]
+    LIQ &amp; TC --&gt; CONV[&quot;現代合流：複解析疊六函子形式主義、無限噴流叢 PDE 幾何與 Lean 形式化驗證&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>凝聚集合與凝聚阿貝爾群：把拓撲翻譯成緊緻探針上的層（Condensed Sets &amp; Abelian Groups）</strong></p>
+<ul>
+<li>直覺理解：同調上性質最好的空間，是極端不連通緊 Hausdorff 空間（Extrinsically Disconnected Profinite Sets，即 Stone 空間中的投射物件）。任何打到它上面的滿射都能連續分裂，沒有拓撲扭曲造成的障礙。Clausen 與 Scholze（以及獨立提出 Pyknotic Objects 的 Barwick–Haine）把任意拓撲空間 <span class="math inline">T</span> 嵌入為這類探針範疇上的層 <span class="math inline">\underline{T}(S) := C^0(S, T)</span>。只要 <span class="math inline">T</span> 是緊生成弱 Hausdorff 空間（涵蓋所有度量空間、流形、CW 複形與 Banach/Fréchet 空間），這個嵌入就是完全忠實（Fully Faithful）的，不丟任何資訊。嵌入之後所在的範疇是一個 Topos，有任意極限、餘極限與閉張量積。</li>
+<li>機制或核心表達式：凝聚集合（Condensed Set）定義為 profinite 集合（或極端不連通集 <span class="math inline">\mathsf{ExtrDisc}</span>）上、對有限不交併覆蓋成立的層 <span class="math inline">\mathcal{X}: \mathsf{ProFin}^{\mathrm{op}} \to \mathsf{Set}</span>（這裡忽略集合論上細微的基數截斷）。凝聚阿貝爾群範疇 <span class="math inline">\mathsf{Cond}(\mathsf{Ab})</span> 滿足全套 Grothendieck 阿貝爾範疇公理（AB3–AB6，包含濾過餘極限與可數乘積的正合性），所以可以直接構造導出 <span class="math inline">\infty</span>-範疇 <span class="math inline">D(\mathsf{Cond}(\mathsf{Ab}))</span>，並計算連續上同調 <span class="math inline">\operatorname{Ext}^i_{\mathsf{Cond}}(\underline{A}, \underline{B})</span>。</li>
+<li>能做到什麼，代價是什麼：拓撲群裡雙射連續但逆不連續、核與餘核因此失效的老問題解決了，代數拓撲、泛函分析與上同調可以在同一個框架裡做。代價是點不再足以決定整個凝聚物件：存在底層點集為 <span class="math inline">0</span>、卻帶著非平凡無窮小收斂殘影的非零凝聚群，就像概形中的冪零元。</li>
+</ul>
+</li>
+<li>
+<p><strong>固態與液態張量積：處理無窮維函數空間的完備化（Solid &amp; Liquid Modules）</strong></p>
+<ul>
+<li>直覺理解：在代數裡，兩個多項式環做張量積很容易：<span class="math inline">\mathbb{C}[x] \otimes \mathbb{C}[y] = \mathbb{C}[x,y]</span>。分析學裡就不行。圓盤上的全純函數空間或 Banach 空間如果只做普通的代數張量積，得到的只有殘缺的有限秩和，必須再做拓撲完備化張量積 <span class="math inline">\widehat{\otimes}</span>（Grothendieck 核空間理論）。但傳統的完備化往往不正合，一進導出範疇就不能用。Scholze 發現，在非阿基米德（<span class="math inline">p</span>-進／形式冪級數）的情形，有性質很好的固態模（Solid Modules，<span class="math inline">\mathbb{Z}_\blacksquare</span>）。在實數與複數的情形，三角不等式 <span class="math inline">|x+y| \le |x|+|y|</span> 允許誤差線性累加，所以要改用 <span class="math inline">0 &lt; p &lt; 1</span> 的凹次可加範數 <span class="math inline">\| \sum c_n e_n \|_p = \sum |c_n|^p</span> 來控制尾端收斂，液態向量空間（Liquid Vector Spaces，<span class="math inline">\mathcal{M}_{&lt;p}(\mathbb{R})</span>）就是這樣來的。</li>
+<li>機制或核心表達式：給定液態參數 <span class="math inline">0 &lt; p \le 1</span>，主定理（已由 Lean 4 的 Liquid Tensor Experiment 完成機器形式化驗證）說，極端不連通集 <span class="math inline">S</span> 的 <span class="math inline">p</span>-測度空間有高階擴張消沒：
+<div class="math inline">\forall\, i \ge 1,\quad \operatorname{Ext}^i_{\mathsf{Cond}(\mathbb{R})}\bigl(\mathcal{M}_{&lt;p}(S),\, V\bigr) = 0 \qquad (\forall\, p\text{-liquid } V)</div>
+由此可知 <span class="math inline">p</span>-液態向量空間構成 <span class="math inline">\mathsf{Cond}(\mathbb{R})</span> 的正合局部化穩定子範疇。它的液態導出張量積 <span class="math inline">\otimes^{\mathbb{L}}_{\mathbb{R}_{&lt;p}}</span> 在 Fréchet 核空間（如光滑函數 <span class="math inline">C^\infty(M)</span> 與全純函數 <span class="math inline">\mathcal{O}(X)</span>）上，精確重現經典的拓撲完備張量積。</li>
+<li>能做到什麼，代價是什麼：複解析幾何因此有了和純代數幾何同樣強的六函子與同調工具，例如 2026 年 Clausen–Scholze《Condensed Mathematics and Complex Geometry》重證凝聚對偶與 GAGA。代價是核心消沒定理的直接估計很精細也很複雜，這也是 Scholze 發起形式化挑戰的原因。</li>
+</ul>
+</li>
+<li>
+<p><strong>合成微分幾何與內聚 <span class="math inline">\infty</span>-Topos：無極限的直覺主義微積分（SDG &amp; Cohesive <span class="math inline">\infty</span>-Topos）</strong></p>
+<ul>
+<li>直覺理解：切向量為什麼不能直接說成一段無窮短的曲線 <span class="math inline">D \to M</span>？在古典邏輯裡，如果實數 <span class="math inline">d</span> 滿足 <span class="math inline">d^2 = 0</span>，用排中律假設 <span class="math inline">d \neq 0</span>，兩邊同除以 <span class="math inline">d</span> 就會推出 <span class="math inline">d = 0</span>，產生矛盾。Anders Kock 與 Lawvere 注意到，在光滑層構成的直覺主義 Topos（例如 Cahiers Topos 或 Dubuc 光滑 Topos）裡，排中律本來就不成立。於是 <span class="math inline">D = \{d \in R \mid d^2 = 0\}</span> 是一段真實存在的無窮小線段：它比單點 <span class="math inline">\{0\}</span> 大，卻沒辦法再拆開來看。Urs Schreiber 與 Michael Shulman 進一步把這套想法提升到高階範疇與類型論，建立內聚 <span class="math inline">(\infty,1)</span>-Topos（Cohesive <span class="math inline">\infty</span>-Topos），用一串四元伴隨函子同時涵蓋離散點集、光滑流形、無窮小形式鄰域與高階規範場。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>Kock–Lawvere 公理（SDG）</strong>：光滑線對象 <span class="math inline">R</span> 上的任意映射 <span class="math inline">f: D \to R</span> 都有唯一的一次仿射形式：
+<div class="math inline">\forall\, f \in R^D,\; \exists!\, (a, b) \in R \times R \quad\text{s.t.}\quad \forall\, d \in D,\; f(d) = a + b\cdot d</div>
+因此流形 <span class="math inline">M</span> 的切叢可以直接定義為指數物件 <span class="math inline">TM := M^D</span>，向量場就是滿足 <span class="math inline">\pi \circ X = \mathrm{id}_M</span> 的截面。它的轉換伴隨就是微小的平移流 <span class="math inline">D \times M \to M</span>。</li>
+<li><strong>公理化內聚性（Cohesion）</strong>：用四重伴隨函子鏈 <span class="math inline">\Pi \dashv \mathrm{Disc} \dashv \Gamma \dashv \mathrm{coDisc}</span>（基本 <span class="math inline">\infty</span>-群胚形狀 <span class="math inline">\dashv</span> 離散嵌入 <span class="math inline">\dashv</span> 底層點集 <span class="math inline">\dashv</span> 餘離散嵌入），加上無窮小形狀伴隨 <span class="math inline">\Im \dashv \flat</span>，來刻畫微分幾何與微分上同調。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：無窮維流形（如場空間與映射空間 <span class="math inline">N^M</span>）和無限階噴流叢都變成笛卡爾閉對象，操作起來和有限維集合一樣方便。2026 年 Giotopoulos–Khavkine–Sati–Schreiber 嚴格證明合成無限噴流叢保持約化性，支撐了 PDE 餘單子理論。代價是推理全程必須遵守構造性／直覺主義邏輯，不能對任意實數隨意做 <code>if x == 0 else</code> 這種分支。</li>
+</ul>
+</li>
+<li>
+<p><strong>切範疇：把取切叢提煉成精簡的泛代數算子（Tangent Categories）</strong></p>
+<ul>
+<li>直覺理解：如果不想改動底層邏輯（不放棄排中律，也不建構龐大的光滑 Topos），可以學 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> 裡笛卡爾微分範疇的做法：把切叢函子 <span class="math inline">T: \mathcal{C} \to \mathcal{C}</span> 滿足的幾條代數性質直接抽出來當公理。Rosický 與 Cockett–Cruttwell 的切範疇（Tangent Category）就是這樣做的。光滑流形、代數幾何的仿射概形（對偶於交換環）、微分範疇的餘代數、機器學習裡的可微參數空間，都是切範疇的實例。</li>
+<li>機制或核心表達式：切範疇 <span class="math inline">(\mathcal{C}, T, p, 0, +, \ell, c)</span> 配備自函子 <span class="math inline">T: \mathcal{C} \to \mathcal{C}</span>、自然投射 <span class="math inline">p_M: TM \to M</span>（使每個纖維在拉回下成為交換么半群／阿貝爾群叢）、垂直提升 <span class="math inline">\ell_M: TM \to T^2 M</span> 與典範翻轉對合 <span class="math inline">c_M: T^2 M \xrightarrow{\sim} T^2 M</span>（對應二階偏導數交換律 <span class="math inline">\partial_x\partial_y = \partial_y\partial_x</span>）。只靠這組純代數公理，不用座標就能推導聯絡（Connections）、曲率、Bianchi 恆等式和 Cartan 立方微分形式演算（2026 Blohmann），也能做出一般線性群 <span class="math inline">\mathrm{GL}</span>，以及李群與李代數的對應（2026 Lanfranchi，本領域 🏆 L5 旗艦精讀）。</li>
+<li>能做到什麼，代價是什麼：這是最輕量、也最容易移植到工程上的公理化微分幾何介面，同時涵蓋光滑幾何、概形與自動微分。代價是它沒有假設空間局部同構於 <span class="math inline">\mathbb{R}^n</span>，所以像指數映射收斂性（把李代數積分回李群）這類全域分析的存在定理，需要另外加上微分方程完備性假設。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>複解析疊（Complex Analytic Stacks）上母題同倫與六函子的統一</strong>：代數幾何裡的 Morel–Voevodsky 母題同倫論與六函子形式主義，要怎麼完整搬到液態複解析幾何與高階解析疊上，並確保解析化函子（Analytification）與六種運算嚴格相容？2026 年 Clausen–Scholze 的波恩與哥本哈根講義正式版，以及 Roy Magen 關於複解析疊局部化定理的結果，正在把這個計畫推向完成。</li>
+<li><strong>切範疇中的全域李理論與非線性 PDE 基礎</strong>：在抽象切範疇裡，從內部群物件（李群）取切空間得到李代數，完全是代數函子，例如 2026 年 Lanfranchi 建立的一般線性群與李對應。但什麼時候能反過來從抽象李代數積分出群物件，還不清楚。怎麼在切範疇上統一建立非交換微分形式與 Cartan 演算也還沒解決，2026 年 Blohmann 就發現存在多套不等價的立方微分形式 CDGA。</li>
+<li><strong>無窮維場論與非線性 PDE 解空間的形式嚴格化</strong>：物理學家在拉格朗日場論裡，長期憑直覺對無窮維場流形的無限噴流叢（Infinite Jet Bundles）做變分計算。這裡面藏著兩個漏洞：Fréchet 流形嵌入光滑 Topos 時投射極限是否保持，以及無窮小冪零造成的模糊（Reducedness）。2026 年 Giotopoulos–Khavkine–Sati–Schreiber 剛補上合成噴流叢約化性的嚴格證明。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>（為 AI 驗證而重構公理的思路）</strong>：Liquid Tensor Experiment 能在一年半內用 Lean 完成當代菲爾茲獎級數學的完整形式化，原因是凝聚數學本來就是為了去掉分析裡零碎的特例、改用乾淨的同調泛性質重寫分析學而設計的。這對 AI 輔助數學形式化有參考價值：與其讓 AI 直接處理充滿 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 補丁的傳統證明，不如先把底層定義重構成凝聚／切範疇式的良態代數介面。</li>
+<li><strong>遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>（噴流叢餘單子與物理守恆算子架構）</strong>：非線性 PDE 可以看成噴流叢 <span class="math inline">J^\infty E \to E</span> 上的子簇（Diffiety），延拓操作（Prolongation）自然構成一個範疇餘單子（Comonad）。要設計嚴格滿足高階微分相容性與局部對稱性的神經 PDE 算子，可以拿它當幾何不變的架構。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與高階自動微分（切範疇翻轉算子 <span class="math inline">c: T^2 M \to T^2 M</span>）</strong>：在流形上做二階最佳化（Hessian / 自然梯度 / 黎曼動量）時，常見的 bug 是搞混切叢的切叢 <span class="math inline">TTM</span> 裡兩個方向的水平與垂直分量。照切範疇的典範翻轉對合與聯絡公理來寫型別簽名，可以從源頭避免高階幾何自動微分的座標混淆。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 167 篇核心文獻，其中 166 篇有 Open-Access PDF 原文連結，1 篇已完成 🏆 L5 深度審核導讀。原始 PDF 都收在隱藏庫 <code>~/.ai_papers_vault.noindex</code> 並綁定到 Zotero，不會出現在 macOS Spotlight。點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文與-l5-旗艦">A. 必讀奠基論文與 L5 旗艦</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2019</td>
+<td><em>Lectures on Condensed Mathematics</em>，Peter Scholze</td>
+<td>凝聚數學的奠基講義。第一講就用很直白的語言說明傳統拓撲阿貝爾群為什麼失敗，以及緊探針上的層怎麼補救。</td>
+<td>G1–G2 必讀首選 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/AWXPXFI7" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2605.03658" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><em>Lectures on Analytic Spaces</em>，Peter Scholze</td>
+<td>凝聚數學的第二部講義，正式引入實／複數上的液態向量空間（Liquid Vector Spaces）與核性，並發起 Lean 形式化挑戰。</td>
+<td>G2–G3 液態核心 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/EV6EE487" class="zotero">📚 Zotero 開啟</a> · <a href="https://www.math.uni-bonn.de/people/scholze/Analytic.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2006</td>
+<td><em>Synthetic Differential Geometry</em>，Anders Kock</td>
+<td>合成微分幾何的標準教材，可公開取得。書中只用 <span class="math inline">d^2=0</span> 無窮小公理，像做國中代數一樣推導切叢、微分形式與聯絡曲率。</td>
+<td>G1–G2 建立直覺 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/854E8GTD" class="zotero">📚 Zotero 開啟</a> · <a href="https://users-math.au.dk/kock/sdg99.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Differential cohomology in a cohesive infinity-topos</em>，Urs Schreiber</td>
+<td>結合合成微分幾何與高階 Topos 的長篇專著，在內聚 <span class="math inline">(\infty,1)</span>-Topos 中統一處理高階規範場、聯絡與微分上同調。</td>
+<td>G3 物理場論地基 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1310.7930" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Connections in Tangent Categories</em>，J. R. B. Cockett, G. S. H. Cruttwell</td>
+<td>切範疇的代表作。不用局部座標與極限，在純抽象範疇中推導仿射聯絡、曲率、撓率、Bianchi 恆等式與平行移動。</td>
+<td>G2 範疇微積分 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/RWGFWRRF" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1610.08774" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>General linear groups in tangent categories</em>，Marcello Lanfranchi</td>
+<td>🏆 <strong>L5 深度審核完成</strong>（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>）：在抽象切範疇中內蘊構造一般線性群物件及其李代數交換子同構，為流形李群與仿射概形群提供統一的對稱框架。</td>
+<td>🏆 L5 旗艦精讀 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/3EUVT3U8" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.17702" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（5 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>2015｜Michael Shulman</strong>，<em>Brouwer's fixed-point theorem in real-cohesive homotopy type theory</em>（被引 71 次，<code>[OA PDF]</code>）：把公理化內聚性轉成模態同倫類型論，區分拓撲連續性與同倫路徑，並構造性地證明 Brouwer 不動點定理（連到 <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>）。<a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1509.07584" rel="noopener">原文連結</a></li>
+<li><strong>2014｜Mauro Porta, Tony Yue Yu</strong>，<em>Higher analytic stacks and GAGA theorems</em>（被引 49 次，<code>[OA PDF]</code>）：用 <span class="math inline">\infty</span>-範疇建立複解析與非阿基米德高階幾何疊的基礎，證明導出直像的 Grauert 定理與高階疊的 GAGA 定理。<a href="zotero://select/library/items/4JUAU7CT" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1412.5166" rel="noopener">原文連結</a></li>
+<li><strong>2014｜Urs Schreiber, Michael Shulman</strong>，<em>Quantum Gauge Field Theory in Cohesive Homotopy Type Theory</em>（被引 18 次，<code>[OA PDF]</code>）：一篇簡短的綜述，說明如何在內聚同倫類型論中形式化量子規範場論的核心結構，適合當作長篇專著的導讀。<a href="zotero://select/library/items/QQHDUPBC" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1408.0054" rel="noopener">原文連結</a></li>
+<li><strong>2019｜Clark Barwick, Peter Haine</strong>，<em>Pyknotic objects, I. Basic notions</em>（被引 12 次，<code>[OA PDF]</code>）：與 Clausen–Scholze 同期、獨立提出緊空間站點上的超層（Pyknotic Objects，希臘語意為「濃密／凝聚」），並用清楚的範例說明帶拓撲資訊的同倫代數。<a href="zotero://select/library/items/B3F6FHCW" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1904.09966" rel="noopener">原文連結</a></li>
+<li><strong>2019｜Robin Cockett, Jean-Simon Pacaud Lemay, Rory B. B. Lucyshyn-Wright</strong>，<em>Tangent Categories from the Coalgebras of Differential Categories</em>（<code>[OA PDF]</code>）：指出微分範疇（源自微分線性邏輯，見 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>）的 coEilenberg–Moore 餘代數範疇本身就是切範疇，並由此導出仿射概形（交換環的對偶範疇）上的切結構。<a href="zotero://select/library/items/HKXXS8NE" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1910.05617" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>Condensed Mathematics and Complex Geometry</strong>，Dustin Clausen, Peter Scholze（2026，<em>arXiv:2605.11731</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：許多幾何學家覺得凝聚數學與液態張量積很抽象，需要看到它用在最經典的複解析流形與複空間上時，能怎麼簡化傳統的多複變難題。</li>
+<li>關鍵做法：公開波恩與哥本哈根聯合課程的定稿講義。講義聚焦複解析幾何，用凝聚數學與液態上同調，從新的概念角度重建經典複幾何的核心定理（如凝聚層有限性、對偶與 GAGA）。</li>
+<li>跨領域啟發：從 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 進入凝聚數學時，這是最容易讀、幾何內容也最具體的入口。</li>
+<li>連結：<a href="zotero://select/library/items/JASK9WGZ" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2605.11731" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Synthetic Differential Jet Bundles are Reduced</strong>，Grigorios Giotopoulos, Igor Khavkine, Hisham Sati, Urs Schreiber（2026，<em>arXiv:2601.15862</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：把偏微分方程解空間（Diffieties）從古典 Fréchet 光滑流形嵌入合成微分幾何的 Cahiers 光滑 Topos，就能用上餘單子形式主義。但這個嵌入是否保持無限噴流叢的投射極限、會不會混進多餘的無窮小冪零成分，一直是沒有證明的隱含假設。</li>
+<li>關鍵做法：給出嚴格證明：光滑嵌入保持無限噴流叢的極限，而且合成噴流叢是約化的（Infinitesimally Reduced）。合成 PDE 與拉格朗日場論的泛函基礎因此有了依據。</li>
+<li>跨領域啟發：為高階物理場論與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的無窮維噴流幾何補上原本缺少的嚴格性。</li>
+<li>連結：<a href="zotero://select/library/items/PNMF46EU" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2601.15862" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批延伸追蹤2026-近期">同批延伸追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Marcello Lanfranchi</strong>，<em>General linear groups in tangent categories</em>（<em>arXiv:2611.17702</em>，🏆 <strong>L5 深度審核完成</strong> <code>[OA PDF]</code>）：在切範疇中定義抽象一般線性群，並證明它的李代數同構於方陣交換子李代數。<a href="zotero://select/library/items/3EUVT3U8" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.17702" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Marcello Lanfranchi</strong>，<em>The Lie group-Lie algebra correspondence in tangent categories</em>（<em>arXiv:2609.03449</em>，<code>[OA PDF]</code>）：把經典流形與仿射概形上的李群與李代數對應，統一寫成純切範疇內群物件上的函子構造。<a href="zotero://select/library/items/BWX2J5TE" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.03449" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Christian Blohmann</strong>，<em>Cartan calculus of cubical forms in tangent categories</em>（<em>arXiv:2609.05963</em>，<code>[OA PDF]</code>）：在帶交換環純量乘法的笛卡爾切範疇中，構造微分立方形式的交換微分分次代數（CDGA）與完整的 Cartan 演算（外微分、內積與李導數）。<a href="zotero://select/library/items/RNTAD2NQ" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.05963" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Cedric Brendel</strong>，<em>A Proof of Coherent Duality via Techniques from Condensed Mathematics</em>（<em>arXiv:2607.14120</em>，<code>[OA PDF]</code>）：循序漸進介紹凝聚數學與固態模的基礎，並用凝聚方法清楚講解概形的凝聚對偶（Serre–Grothendieck Coherent Duality）。<a href="zotero://select/library/items/98ZB79VK" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.14120" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Roy Magen</strong>，<em>The Localization Theorem for the Motivic Homotopy Theory of Complex Analytic Stacks and other Geometric Settings</em>（<em>arXiv:2605.14470</em>，<code>[OA PDF]</code>）：證明複解析疊上的 Morel–Voevodsky 局部化定理，支撐複解析母題同倫論的六函子與相容的解析化映射。<a href="zotero://select/library/items/T4IQJHCW" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2605.14470" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

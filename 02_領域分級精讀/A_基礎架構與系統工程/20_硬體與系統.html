@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>20｜硬體與系統（Roofline 與記憶體牆、3D 自動並行訓練、PagedAttention 與推論引擎） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="20硬體與系統roofline-與記憶體牆3d-自動並行訓練pagedattention-與推論引擎">20｜硬體與系統（Roofline 與記憶體牆、3D 自動並行訓練、PagedAttention 與推論引擎）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> ｜ <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。峰值算力每兩年成長 <span class="math inline">3.0\times</span>，DRAM 與跨卡互連頻寬卻只成長 <span class="math inline">1.6\times</span>／<span class="math inline">1.4\times</span>。為了應付這道 AI 記憶體牆（Memory Wall），本領域用的工具有 Roofline 算術強度法則、算子內／算子間雙層自動並行編譯、作業系統虛擬分頁式的 KV 管理（PagedAttention），以及基數樹前綴共享（RadixAttention）。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+外行人以為大模型的瓶頸是晶片算得不夠快。系統架構師知道實際情況是，現代 GPU 絕大部分時間都在等資料從記憶體或網路線搬過來。這道 AI 記憶體牆（Gholami et al., 2024）在訓練與推論兩端各有一組矛盾：
+<ol>
+<li><strong>訓練端的顯存爆炸與通訊塞車矛盾</strong>：百億至兆級的參數，連同梯度與 Adam 優化器動量，遠超過單張 GPU 的容量。切得太碎（張量並行跨出單機 NVLink），會被跨機網路延遲拖垮。切得太粗（純管線並行），又會產生大量設備空轉等待的管線氣泡（Pipeline Bubbles）。</li>
+<li><strong>推論端的頻寬飢餓與動態顯存碎片矛盾</strong>：自迴歸解碼每輸出 1 個 Token，就得把數百 GB 的權重和隨長度動態膨脹的 KV Cache 從高頻寬記憶體（HBM）重新搬進計算核心一次，算術強度低到趨近 1 FLOP/Byte。更糟的是，傳統系統無法預知模型會回答多長，只能為每個請求預先圈出最大長度的連續顯存。結果 60% 到 80% 的昂貴顯存變成無法利用的碎片，批次並行的吞吐量因此上不去。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+把大型 AI 系統想像成米其林中央廚房的走廊，加上智慧連鎖餐廳的座位調度：
+<ul>
+<li>Roofline 模型與記憶體牆（Williams et al., 2009; Gholami et al., 2024）：主廚揮刀的速度已經超過音速（Tensor Core 峰值 FLOPS），但從冷凍庫通往料理台的走廊窄得只能單人通過（記憶體頻寬牆）。如果每跑一趟冷凍庫只拿一顆蒜頭回來切一刀（單批次逐 Token 解碼），主廚 98% 的時間都在乾等。要讓他的刀不閒著，得把幾十張訂單湊成一籃一次搬進來切（大 Batch 推論），或讓小助手先猜好接下來五道菜一併端上來，讓主廚一次驗收（推測解碼 Speculative Decoding）。</li>
+<li>PagedAttention（vLLM）與 RadixAttention（SGLang）：傳統的顯存管理像老派宴會廳。客人一進門，不知道他會帶幾個朋友，就先封鎖一整張 20 人長桌，最後只坐 3 人，門外卻大排長龍。PagedAttention 引入作業系統的虛擬記憶體分頁，把全場拆成 4 人小方桌，隨到隨拼，不浪費空位。SGLang 的 RadixAttention 更進一步，把所有客人都會點的固定高湯鍋底（系統提示詞、Few-shot 範例、多輪對話與樹搜尋的共享前綴）存在基數樹（Radix Tree）快取裡，跨請求直接共用，不必重熬。</li>
+<li>Megatron-LM 與 Alpa 自動並行：要造一艘單一船塢塞不下的巨輪時，Megatron-LM 把矩陣直切配橫切，讓工人做完兩道工序才對一次帳（每層只需一次 <code>All-Reduce</code>）。Alpa 則像全自動的總工程師，用雙層最佳化（整數線性規劃＋動態規劃）自動算出哪裡該多人合焊一塊鋼板（算子內並行）、哪裡該分段做流水線組裝（算子間並行）。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+本領域收錄 97 篇文獻，決定各種理論架構能不能變成實際可用的系統。它解釋了 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 為什麼從標準 MHA 全面轉向 GQA / MLA（都是為了壓縮 KV Cache 的頻寬需求），也解釋了 <a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a>（Mamba / 線性注意力 / CfC）在超長上下文推論上的硬體優勢。<code>SGLang</code> 的結構化有限狀態機解碼與樹狀快取，直接提升 <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 自主代理與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 測試時樹搜尋的執行效率。2026 年最新的 <code>vLLM Hook</code> 則在高吞吐引擎內部開放可程式化掛鉤，讓 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的激活引導與 <a class="wl" href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 的線上護欄可以直接部署上線。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    ROOF_ORIG[&quot;Williams, Waterman &amp; Patterson (2009) Roofline 視覺效能模型 → Gholami et al. (2024) AI 與記憶體牆 20 年硬體剪刀差&quot;] --&gt; TRAIN_PAR[&quot;Shoeybi et al. (2019) Megatron-LM 層內張量並行 → Zheng et al. (2022) Alpa 算子內／算子間雙層自動並行編譯&quot;]
+    TRAIN_PAR --&gt; COMM_CLOUD[&quot;Li et al. (2024) 分散式訓練通訊特徵剖析 &amp; Miao et al. (2024) SpotServe 搶佔式雲端實例彈性容錯服務&quot;]
+    ROOF_ORIG --&gt; INF_GEN1[&quot;Aminabadi et al. (2022) DeepSpeed Inference 多卡核融合 &amp; Sheng et al. (2023) FlexGen 單卡三級儲存高吞吐卸載&quot;]
+    INF_GEN1 --&gt; KV_OS[&quot;Kwon et al. (2023) vLLM PagedAttention 虛擬記憶體分頁 → Zheng et al. (2023) SGLang RadixAttention 結構化程式執行&quot;]
+    KV_OS --&gt; FRONT26[&quot;2026 長上下文與異質硬體突破：CompactAttention / TideKV 分塊預填充壓縮、Arm/CIM Roofline 協同與 vLLM Hook 內部可程式化&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>Roofline 效能物理上界與 AI 記憶體牆（Arithmetic Intensity, Memory Wall &amp; CIM Roofline）</strong></p>
+<ul>
+<li>直覺理解：這裡的問題是，任何程式跑在任何晶片（GPU、Arm CPU 或存算一體晶片）上，最快能跑多快。柏克萊團隊（Williams, Waterman &amp; Patterson, 2009）用一張雙對數折線圖回答，就是 Roofline 模型。橫軸是每從記憶體搬 1 Byte 資料能做幾次浮點運算（算術強度 Arithmetic Intensity <span class="math inline">I</span>），縱軸是實測的每秒浮點運算數（FLOPS）。斜坡屋簷由記憶體頻寬決定，平頂屋頂由晶片峰值算力決定。Gholami et al.（2024）在 <em>AI and Memory Wall</em> 中算過：過去 20 年，伺服器峰值算力每兩年成長 <span class="math inline">3.0\times</span>，DRAM 頻寬每兩年只成長 <span class="math inline">1.6\times</span>，互連頻寬只有 <span class="math inline">1.4\times</span>。結果屋頂越來越高，斜坡卻越來越緩。LLM 預填充（Prefill，矩陣乘矩陣，<span class="math inline">I</span> 高）還碰得到平頂的算力上限，自迴歸解碼（Decode，矩陣乘向量，<span class="math inline">I \approx 1\sim 2</span>）則卡在左側斜坡的底端，買再貴的算力也快不起來。</li>
+<li>機制或核心表達式：給定硬體峰值算力 <span class="math inline">P_{\text{peak}}</span>（FLOP/s）與峰值記憶體頻寬 <span class="math inline">B_{\text{peak}}</span>（Byte/s），算子的算術強度 <span class="math inline">I = W_{\text{FLOPs}} / Q_{\text{Bytes}}</span> 決定可達效能的硬上界：
+<div class="math inline">P_{\text{attainable}}(I) = \min\!\Big( P_{\text{peak}}, \; I \times B_{\text{peak}} \Big), \qquad \text{脊點（Ridge Point） } I^* = \frac{P_{\text{peak}}}{B_{\text{peak}}}</div>
+當 <span class="math inline">I &lt; I^*</span> 時，系統處於記憶體受限區（Memory-Bound）。這時要提速只有兩條路：壓縮資料搬運量 <span class="math inline">Q_{\text{Bytes}}</span>（權重／KV 量化、算子融合以減少中間寫回），或拉高 <span class="math inline">I</span>（增大 Batch、推測解碼）。2026 年的工作把這套分析框架延伸到邊緣 Arm CPU 的混合量化與核心協同最佳化（Zhou, 2026），以及存算一體架構的適配評估（<em>CIM-Aware Roofline</em>, Ma et al., 2026）。</li>
+<li>能做到什麼，代價是什麼：在動手寫任何一行 CUDA / Neon 組合語言之前，就能很快判定瓶頸在算力還是頻寬，並算出理論加速比的上限。代價是經典的一階 Roofline 假設資料預取與計算完全重疊。要處理細粒度的快取階層（SRAM、HBM、PCIe）與跨卡網路的尾延遲，得擴展成多階層、通訊感知的 Roofline。</li>
+</ul>
+</li>
+<li>
+<p><strong>多維分散式並行與雙層自動編譯最佳化（Megatron-LM, Alpa, DeepSpeed &amp; SpotServe）</strong></p>
+<ul>
+<li>直覺理解：一個單卡放不下的巨型神經網路，要拆給上千張 GPU 協同訓練與推論。Megatron-LM（Shoeybi et al., 2019）提出層內張量並行（Tensor Parallelism）：把雙層 MLP 的第一個權重矩陣直著切（Column Parallel），直接過非線性激活，第二個權重矩陣橫著切（Row Parallel），中間完全不需要跨卡通訊，整層算完才做唯一一次 <code>All-Reduce</code>。但遇到異質模型（如 MoE、長序列或圖卷積網路 Scardapane et al., 2021）與複雜的叢集拓撲，手工排並行計畫非常困難。Alpa（Zheng et al., 2022）把這件事自動化。它的觀察是：資料並行與張量並行屬於算子內（Intra-operator，需要高頻寬 NVLink），管線並行屬於算子間（Inter-operator，只傳邊界激活，適合慢速的跨機網路）。於是它用兩層階層式最佳化，自動產生接近、甚至超越人類專家調優的執行計畫。</li>
+<li>機制或核心表達式：<em>Megatron-LM</em> 的層內切分利用分塊矩陣恆等式消除中間同步：
+<div class="math inline">Y = \mathrm{GeLU}(X [A_1, A_2]) \begin{bmatrix} B_1 \\ B_2 \end{bmatrix} = \mathrm{GeLU}(X A_1) B_1 + \mathrm{GeLU}(X A_2) B_2 \xrightarrow{\text{All-Reduce}} Y</div>
+<em>Alpa</em> 則把裝置叢集切成子網格（Device Mesh）。內層針對單一管線階段，用整數線性規劃（ILP）極小化算子內計算與集合通訊的成本。外層用動態規劃（DP）切分計算圖的階段，並最小化最慢階段的耗時與管線氣泡延遲。推論與雲端彈性方面，DeepSpeed Inference（Aminabadi et al., 2022）結合深度核融合與多 GPU 張量切分，降低百億參數模型與 MoE 的延遲。SpotServe（Miao et al., 2024, ASPLOS）則利用動態重並行與低開銷的狀態遷移，讓大模型能穩定跑在搶佔式實例（Spot Instances）上。這類實例隨時可能被雲端回收，但價格便宜數倍。</li>
+<li>能做到什麼，代價是什麼：支撐兆級參數的穩定擴展（可參照 Li et al., 2024 對分散式集合通訊流量的細緻特徵化，與 Zeng et al., 2023 的分散式 LLM 訓練體系），並大幅降低雲端推理的費用。代價是張量並行非常依賴機內的超高速互連（NVLink）。一旦跨節點硬開張量並行，每次前向反向都有數百次 <code>All-Reduce</code> 同步屏障，吞吐效率會被吃光。</li>
+</ul>
+</li>
+<li>
+<p><strong>作業系統級 KV 記憶體虛擬化、結構化前綴快取與三級卸載（PagedAttention, SGLang &amp; FlexGen）</strong></p>
+<ul>
+<li>直覺理解：2023 年之前，LLM 推論系統為每個請求預留一大塊連續顯存來放 KV Cache，就像早期沒有分頁機制的電腦，既浪費空間，又無法跨請求共享。vLLM / PagedAttention（Kwon et al., 2023, SOSP）把作業系統教科書裡的虛擬記憶體分頁（Virtual Memory Paging）搬進自注意力核心：邏輯上連續的 Token KV 向量，在實體 HBM 中被打散，存進固定大小的非連續區塊（Blocks），再透過一張輕量的區塊映射表（Block Table）即時查找。顯存浪費因此壓到 4% 以下，吞吐量提高 2–4 倍。接著 SGLang（Zheng et al., 2023, NeurIPS）發現，現代 Agent、思維樹（Tree-of-Thought）與結構化 JSON 輸出有大量跨呼叫的重複前綴，於是提出 RadixAttention：請求結束後不急著丟棄 KV 分頁，而是掛在以 LRU 淘汰管理的基數樹（Radix Tree）上，後續任何共享前綴的請求都可以直接複用，不必重算。它還搭配壓縮有限狀態機（Compressed FSM），一次跳過確定性的語法符號。手邊只有一張顯存不足的單卡時，FlexGen（Sheng et al., 2023）用線性規劃調度 GPU–CPU–NVMe 固態硬碟三級儲存的 Z 字形區塊遍歷（Zig-zag Schedule），做到離線批次的高吞吐推論。</li>
+<li>機制或核心表達式：在 <em>PagedAttention</em> 中，設實體 KV 區塊大小為 <span class="math inline">B</span> 個 Token，第 <span class="math inline">j</span> 個邏輯區塊映射到實體位址 <span class="math inline">p(j)</span>。自注意力的分塊計算改寫成對非連續實體分頁的聚合讀取，不再需要重新分配連續記憶體：
+<div class="math inline">\mathrm{Attention}(q_i, K_{\le i}, V_{\le i}) = \sum_{j=1}^{\lceil i/B \rceil} \mathrm{SoftmaxBlock}\!\left(\frac{q_i K_{\text{phys}[p(j)]}^\top}{\sqrt{d}}\right) V_{\text{phys}[p(j)]}</div>
+這個設計也直接支援平行採樣與 Beam Search 的寫入時複製（Copy-on-Write）：多個候選分支共享同一個實體前綴區塊，只在分叉寫入新 Token 時才複製單一尾端頁。</li>
+<li>能做到什麼，代價是什麼：線上高並發服務的批次上限與多輪 Agent 複雜控制流的執行效率因此大幅提高，這套設計也成為當代開源推論引擎的工業標準。代價是非連續區塊的間接尋址需要專門改寫底層的 GPU Attention Kernel，才能維持記憶體合併存取（Coalesced Access）的效率。</li>
+</ul>
+</li>
+<li>
+<p><strong>長上下文分塊預填充壓縮、省顯存推測解碼與引擎內部可程式化（CompactAttention, TideKV, Speculative Decoding &amp; vLLM Hook）</strong></p>
+<ul>
+<li>直覺理解：到了 2026 年，長達數十萬字的超長上下文與測試時安全干預，給推論系統帶來三個新問題。(1) 為了不讓一個十萬字的長提示詞卡住其他所有短請求，現代引擎普遍採用分塊預填充（Chunked Prefill），把長提示切成小塊分批算。但現有的稀疏注意力在短查詢塊下效率大跌，CompactAttention（Song et al., 2026）因此提出區塊聯集 KV 選擇（Block-Union KV Selection），重新取得硬體加速。(2) 全量預填充後再壓縮 KV，仍會撞上預填充期間的顯存峰值。太早按塊淘汰，又會因為還沒看完後文而誤刪關鍵資訊。TideKV（Wang et al., 2026）用逐層延遲 KV 淘汰（Layer-Wise Delayed Eviction）同時顧到低顯存峰值與全局語意保真。(3) 在消費級單卡上跑推測解碼，同時載入草稿模型與目標模型容易爆顯存，Patel（2026）設計了記憶體高效的推測解碼來解決容量限制。另外，最能連接其他領域的是 vLLM Hook v0（Ko &amp; Chen, 2026）：生產級 vLLM 原本高度封裝、像個黑盒，它用輕量外掛開放了已部署模型內部各層激活狀態的可程式化讀寫介面。</li>
+<li>機制或核心表達式：在分塊預填充序列 <span class="math inline">X = [C_1, C_2, \dots, C_M]</span> 中，<em>TideKV</em> 錯開層間與塊間的生命週期，壓平峰值顯存 <span class="math inline">\max_{t, \ell} M_{\text{KV}}(t, \ell)</span>，避免在還沒看完完整上下文之前就永久丟棄底層鍵值。<em>vLLM Hook</em> 則在編譯排程迴圈的第 <span class="math inline">\ell</span> 層插入可組合的算子掛鉤 <span class="math inline">\tilde{\mathbf{h}}^{(\ell)} = \mathcal{G}_\phi\!\left(\mathbf{h}^{(\ell)};\, \text{context}\right)</span>，讓測試時激活引導（Activation Steering）、探針監測與動態對齊可以在 PagedAttention 的批次執行中原生運行。</li>
+<li>能做到什麼，代價是什麼：百萬級長文本推論、消費級單卡加速與線上白盒安全干預，因此能從實驗室裡跑得很慢的 PyTorch 腳本，進到高吞吐的生產叢集。代價是動態淘汰與運行時掛鉤如果設計不當，可能破壞 CUDA Graph 的靜態捕獲優化，需要在可程式化的靈活度與微秒級排程開銷之間仔細權衡。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>靜態圖封裝加速，與測試時動態稀疏及內部白盒干預之間的架構拉鋸</strong>：為了餵飽高速 Tensor Core 並掩蓋 Python 排程延遲，生產引擎傾向把計算圖、記憶體池與固定分頁格式全部靜態化（CUDA Graphs / Mega-Kernels）。但演算法這邊的新做法，不論是依內容動態剪除 KV 的長文本壓縮（<em>CompactAttention</em> / <em>TideKV</em>）、動態專家路由（MoE），還是安全與可解釋性需要的逐 Token 內部激活讀寫（<em>vLLM Hook</em>），都是高度動態、條件分支密集的操作。怎麼設計新一代的 AI 虛擬機抽象，既支援細粒度的運行時自省與稀疏跳躍，又不打斷硬體流水線的滿載運作，是系統與演算法協同設計的主要課題。</li>
+<li><strong>逼近馮・紐曼搬運瓶頸的極限，與存算一體（CIM）及邊緣異質硬體在精度與彈性之間的取捨</strong>：<em>AI and Memory Wall</em>（Gholami et al., 2024）顯示，只要權重與 KV 還得在獨立的記憶體與運算核心之間往返搬運，能耗與頻寬牆終究會限制擴展上限。存算一體（Compute-in-Memory, Ma et al., 2026）直接在記憶體陣列內完成乘加運算，能效有望有數量級的提升（呼應 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> 的計算熱力學能耗下界）。但自迴歸推論每秒都在動態生成並寫入新的 KV Cache，硬體又有混合精度與非理想雜訊，CIM 要怎麼從靜態權重加速走到全動態注意力加速，還沒有答案。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把古典作業系統五十年的設計模式對應到大模型系統</strong>：近三年影響最大的幾項 AI 系統進展都找得到對應。<code>PagedAttention</code> 對應虛擬記憶體分頁與 <code>fork()</code> 寫入時複製。<code>SGLang RadixAttention</code> 對應檔案系統的樹狀緩衝快取（Buffer Cache）。<code>FlexGen</code> 對應外部排序與虛擬交換區的 I/O 排程。<code>vLLM Hook</code> 則像 Linux 核心的 eBPF 動態追蹤掛鉤，不重編譯核心、不停機，就能安全注入自訂的監測與過濾邏輯。在古典 OS、資料庫（MVCC 交易隔離）與網路路由器中成熟運作的機制，幾乎都可能是下一個 SOSP / OSDI 等級的 AI 系統題目。</li>
+<li><strong>用算術強度脊點 <span class="math inline">I^*</span> 重新檢視科學計算與機器學習演算法</strong>：跨領域研究者常只數算術乘法次數（FLOPs），不數記憶體讀寫的位元組（Bytes）。設計 <a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 的新型遞迴算子、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的圖與層論捲積，或 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的多尺度網格求解器時，應該先用 Roofline 檢驗算術強度。用區塊化重排（Tiling）與算子融合，把中間狀態留在片上的高速 SRAM 內算完再寫回，實際加速往往比在數學上砍掉一半乘法次數還大。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2009</td>
+<td><strong>Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures</strong>，Samuel Williams, Andrew S. Waterman, David A. Patterson</td>
+<td>計算機體系結構的經典論文：用一張圖，以算術強度、記憶體頻寬屋簷與峰值算力屋頂說明硬體效能瓶頸在哪裡。</td>
+<td><code>G1/G2 必讀</code></td>
+<td><a href="zotero://select/library/items/WMN3PKZ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2172/1407078" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism</strong>，Mohammad Shoeybi et al.</td>
+<td>大模型分散式訓練的基礎：提出簡單高效的 Transformer 層內張量並行切分法，不用修改編譯器，就能把模型規模推到百億與千億級。</td>
+<td><code>G2 訓練並行核心</code></td>
+<td><a href="zotero://select/library/items/F5ATPK9H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1909.08053" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning</strong>，Lianmin Zheng et al.</td>
+<td>自動並行編譯的重要論文：把資料、張量與管線並行統一放進算子內 ILP 加算子間 DP 的雙層最佳化空間，全自動生成分散式執行計畫。</td>
+<td><code>G2/G3 系統美學</code></td>
+<td><a href="zotero://select/library/items/RK4JVS4M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2201.12023" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>Efficient Memory Management for Large Language Model Serving with PagedAttention</strong>，Woosuk Kwon et al.</td>
+<td>SOSP 論文（<code>vLLM</code>，逾 1,770 引）：借用作業系統的虛擬記憶體分頁消除 KV Cache 的顯存碎片，改變了大模型推論服務的架構。</td>
+<td><code>G1/G2 入門首選</code></td>
+<td><a href="zotero://select/library/items/PNX6AE5Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.06180" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>SGLang: Efficient Execution of Structured Language Model Programs</strong>，Lianmin Zheng et al.</td>
+<td>NeurIPS 論文：用 <code>RadixAttention</code> 基數樹自動跨請求共享前綴 KV 快取，搭配壓縮有限狀態機，大幅加速多輪 Agent 與結構化生成。</td>
+<td><code>G1/G2 智能體引擎</code></td>
+<td><a href="zotero://select/library/items/3C5FI6QA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.07104" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>AI and Memory Wall</strong>，Amir Gholami et al.</td>
+<td><em>IEEE Micro</em> 的宏觀分析：用 20 年的硬體演進數據，指出算力（<span class="math inline">3.0\times</span>）與頻寬（<span class="math inline">1.6\times/1.4\times</span>）之間結構性的剪刀差，並說明後摩爾時代 AI 硬體與系統協同的方向。</td>
+<td><code>G1 全局視野</code></td>
+<td><a href="zotero://select/library/items/BBVRMNHP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.14123" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇超大規模推論、單卡卸載、搶佔式雲端與分散式通訊經典）</summary>
+<p></p>
+<ul>
+<li><strong>2021｜Distributed Training of Graph Convolutional Networks</strong>，Simone Scardapane, Indro Spinelli, Paolo Di Lorenzo（探討不規則圖結構卷積網路在跨節點分散式訓練中的鄰域同步，以及無中心化的通訊削減策略，26 引）｜<a href="zotero://select/library/items/JABH2AQD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tsipn.2020.3046237" rel="noopener">DOI</a></li>
+<li><strong>2022｜DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale</strong>，Reza Yazdani Aminabadi et al.（SC 論文：針對稠密百億模型與稀疏 MoE，系統化整合深度算子核融合、多 GPU 張量並行與異質記憶體卸載，296 引）｜<a href="zotero://select/library/items/ANQ42NVM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2207.00032" rel="noopener">原文</a></li>
+<li><strong>2023｜FlexGen: High-Throughput Generative Inference of Large Language Models with a Single GPU</strong>，Ying Sheng et al.（面向對延遲不敏感的批次生成任務，用線性規劃協同調度 GPU、CPU 記憶體與磁碟三級儲存，並搭配 4-bit 壓縮，在單張消費級卡上達到很高的吞吐量，86 引）｜<a href="zotero://select/library/items/VXQGK7C7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.06865" rel="noopener">原文</a></li>
+<li><strong>2023｜Distributed Training of Large Language Models</strong>，Fanlong Zeng et al.（IEEE ICPADS：整理大模型分散式訓練中資料並行、張量並行、管線並行與混合記憶體最佳化的各類技術，26 引）｜<a href="zotero://select/library/items/CC5NE9MB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/icpads60453.2023.00126" rel="noopener">DOI</a></li>
+<li><strong>2024｜SpotServe: Serving Generative Large Language Models on Preemptible Instances</strong>，Xupeng Miao et al.（ASPLOS 論文：雲端廉價的搶佔式 GPU 隨時會被中斷回收，本文用動態重並行與有狀態上下文的無縫遷移，大幅壓低推論服務成本，76 引）｜<a href="zotero://select/library/items/USFQWPXF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2311.15566" rel="noopener">原文</a></li>
+<li><strong>2024｜Understanding Communication Characteristics of Distributed Training</strong>，Wenxue Li et al.（實測分析大規模分散式訓練叢集中集合通訊算子的流量突發性、拓撲競爭與網路瓶頸特徵，49 引）｜<a href="zotero://select/library/items/MVSPDCFA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3663408.3663409" rel="noopener">DOI</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜TideCache: Efficient Hybrid LLM Serving with Transparent Cache Management and Layer-Wise Streaming</strong>，Jinbin Luo et al.：針對全域注意力層與有界狀態層交錯的混合架構大模型，在 GB300／GH200 超級晶片上建構 TideCache。它結合固定虛擬位址的透明快取池，以及趁有界狀態層運算時預取注意力前綴的逐層串流器。相較 SGLang+HiCache，智能體輪次最高提升 2.04 倍，TTFT 加速 1.40–3.05 倍。（<a href="zotero://select/library/items/XHJ54E2E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26619" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation</strong>，Zhixiong Hu et al.：發表 autodesk.com 的生產級內容推薦召回系統 LSER。它把預訓練 LLM 提煉出的工作階段與歷史語意嵌入注入雙塔模型的使用者塔，並用近線（Nearline）非同步刷新管線，把即時行為更新和線上低延遲召回解耦。（<a href="zotero://select/library/items/WEX6D2J7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26096" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦arm-cpu-roofline-混合量化協同最佳化與-vllm-內部狀態可程式化掛鉤">2026-11-19 最新入庫（聚焦：Arm CPU Roofline 混合量化協同最佳化與 vLLM 內部狀態可程式化掛鉤）</h4>
+<ul>
+<li><strong>2026｜Roofline-Guided Mixed Quantization and Kernel Co-Optimization for Efficient Large Language Model Inference on Arm CPUs</strong>，Quan Zhou
+<ul>
+<li>重點：面向沒有昂貴 GPU 的邊緣與通用伺服器場景，以硬體 Roofline 模型為依據，聯合最佳化混合精度量化策略與底層 Arm CPU 核心算子排程，緩解記憶體頻寬瓶頸（4 引）。</li>
+<li>連結：<a href="zotero://select/library/items/M64GSMDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/dipca70202.2026.11565905" rel="noopener">DOI</a></li>
+</ul>
+</li>
+<li><strong>2026｜vLLM Hook v0: A Plug-in for Programming Model Internals on vLLM</strong>，Ching-Yun Ko, Pin-Yu Chen
+<ul>
+<li>重點：讓可解釋性與測試時對齊能進到生產級部署。它用非侵入式外掛解除 vLLM 對模型內部隱藏態的黑盒封裝，線上高吞吐服務因此可以直接讀取並動態干預各層激活向量。</li>
+<li>連結：<a href="zotero://select/library/items/IKTEBHQ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.06588" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-分塊預填充稀疏加速逐層延遲-kv-淘汰省顯存推測解碼與存算一體-roofline">同批延伸選讀（2026 分塊預填充稀疏加速、逐層延遲 KV 淘汰、省顯存推測解碼與存算一體 Roofline）</h4>
+<ul>
+<li><strong>2026｜CompactAttention: Accelerating Chunked Prefill with Block-Union KV Selection</strong>，Jiwon Song et al.（傳統稀疏注意力在長文本分塊預填充 Chunked Prefill 的短查詢下硬體效率大跌，本文用區塊聯集 KV 選擇兼顧分塊排程與注意力加速）｜<a href="zotero://select/library/items/DEEJE8CJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.16839" rel="noopener">原文</a></li>
+<li><strong>2026｜Memory-Efficient Speculative Decoding for Large Language Model Inference on Commodity GPUs</strong>，Tejas Patel（推測解碼必須同時載入草稿模型與目標模型，容易撐爆消費級單卡的顯存。本文在有限的顯存預算下做到多 Token 平行驗證加速）｜<a href="zotero://select/library/items/S78FQUR3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/csnt69054.2026.11502509" rel="noopener">DOI</a></li>
+<li><strong>2026｜A CIM-Aware Roofline Framework for Evaluating Compute-in-Memory Adaptation in Large Language Model Inference</strong>，Liqiu Ma, Jingdi Liu, Xiaotao Li（把經典 Roofline 框架擴展到存算一體 Compute-in-Memory 新型硬體，定量評估大模型各階段算子映射到 CIM 陣列的實際收益與瓶頸）｜<a href="zotero://select/library/items/UC7244C6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/ccai69603.2026.11642022" rel="noopener">DOI</a></li>
+<li><strong>2026｜TideKV: Delayed KV Eviction via Layer-Wise Chunked Prefill for Memory-Efficient Long-Context LLM Inference</strong>，Yu Wang et al.（長文本推論有個兩難：全量預填充會撐高顯存峰值，線上逐塊提早淘汰又傷精度。本文提出逐層分塊延遲 KV 淘汰機制，同時壓低預填充與解碼的峰值顯存）｜<a href="zotero://select/library/items/ZWDKKHH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.24499" rel="noopener">原文</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

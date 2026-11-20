@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>17｜評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="17評估與資料資料去重與配比最佳化合成教科書污染解剖與動態基準評測">17｜評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。這個領域做兩件事：用精確去重、教科書級高密度合成與線性域歸因配比提高擴展律的效率，並用動態抗污染基準、裁判元評估與黑盒污染／配比逆向解剖，確保量到的是真實能力。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+主流架構在 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 上趨於同質之後，模型的高下改由兩件事決定：餵進去什麼資料，以及怎麼量出真實能力。這兩件事各有一個結構性矛盾：
+<ol>
+<li><strong>規模飢渴與冗餘毒化的矛盾</strong>：網際網路的原始爬蟲語料看似無窮，其實有大量重複的垃圾內容。例如 Lee et al. 發現，在標準語料庫 C4 中，同一句 61 字的英文重複出現超過 60,000 次。這浪費數十萬 GPU 小時的算力，還會直接讓模型逐字背誦訓練集、洩漏隱私。</li>
+<li><strong>排行榜繁榮與觀測等價性危機（Observational Equivalence）</strong>：全網公開文本都被收進數兆 Token 的預訓練集之後，考前看過題庫（Benchmark Contamination）和真正學會泛化推理，在靜態排行榜的分數上分不出來。改用大模型當裁判（LLM-as-a-Judge）解決了人工評分難以擴展的問題，但遇到高難度推理題時，又帶來表面風格偏見與集體誤判。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像同時經營一座米其林研發廚房和一間奧運反興奮劑藥檢中心：
+<ul>
+<li>**資料工程（Data Deduplication, Mixing &amp; Synthetic Textbooks）**像備料與配湯。與其把批發市場十卡車混著爛葉子的食材原封不動倒進鍋裡熬（原始 CommonCrawl），不如先用篩網挑掉重複的爛葉（後綴陣列／MinHash 去重），再按合適的營養比例調配 22 種學術、程式碼與專業高湯（<em>The Pile</em> 與 <em>LinMix</em> 正交域歸因）。還可以請主廚專門編寫步驟清楚、由淺入深的教材（<em>Textbooks Are All You Need</em>，讓只有 1.3B 參數的 <code>phi-1</code> 跨數量級勝過百億級的大模型）。</li>
+<li>**動態評測與黑盒解剖（LiveBench, JudgeBench &amp; Data Mixture Surgery）**是藥檢官的兩種工具。第一種是每月從最新的數學競賽、論文與新聞動態生成新考卷，題目不可能出現在舊題庫裡，又有客觀的標準答案（<em>LiveBench</em>），另外還專門設計陷阱題，考裁判本人會不會判錯（<em>JudgeBench</em>）。第二種是就算受測選手拒絕交出飲食清單（閉源黑盒模型），藥檢官也能只憑他呼出的一口氣（純黑盒生成文本與成員推論 <em>LLMSurgeon</em> / <em>MIA</em>），反推他賽前偷吃了哪幾道題庫配方。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+這個領域收了 100 篇核心文獻，負責整個 AI 科學方法論裡「怎麼量」的部分。它為 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 的計算最優擴展律提供實證：高品質資料可以突破冪律瓶頸。資訊壓縮與去重這一塊，連到 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a>（消除演算法冗餘以逼近真實最小描述長度）。殘差流污染線性探針和 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 關係緊密。黑盒成員推論攻擊（MIA）、版權溯源與排行榜治理，則連到 <a class="wl" href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a>。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    METRO[&quot;Conte &amp; Hwu (1991) 系統基準特徵化 &amp; Gay et al. (2015) 測試神諭資料選擇&quot;] --&gt; PILE[&quot;Gao et al. (2020) The Pile (825 GiB 22 子集) &amp; Lee et al. (2021) 預訓練語料精確／近似去重&quot;]
+    PILE --&gt; PHI[&quot;Gunasekar et al. (2023) Textbooks Are All You Need (phi-1)：教科書級合成資料打破規模迷思&quot;]
+    PILE --&gt; LIVE[&quot;White et al. (2024) LiveBench 動態抗污染基準 &amp; Tan et al. (2024) JudgeBench 裁判模型元基準&quot;]
+    PHI --&gt; MIX26[&quot;2026 資料配比科學化：LinMix 線性域歸因實驗設計、LLMSurgeon 黑盒數位 DNA 解剖與多語內生推理配比&quot;]
+    LIVE --&gt; CONTAM26[&quot;2026 污染攻防深水區：黑盒 MIA 統一檢驗、殘差流干擾控制探針 (Excess Separability) 與失效防禦分類學&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>語料多樣性、近似去重與教科書級資訊密度（The Pile, Deduplication &amp; Synthetic Textbooks）</strong></p>
+<ul>
+<li>直覺理解：早期做預訓練的人相信，只要字數夠多，模型自己會沙裡淘金。The Pile（Gao et al., 2020）最早證明，刻意把 ArXiv、PubMed、GitHub、法律與數學討論等 22 個差異很大的專業領域混編在一起，比單一網頁爬蟲更能帶出跨領域泛化。接著 Lee et al.（2021）指出重複文本的害處：大量近似重複的段落會在訓練損失中形成陡峭的吸引子，讓模型把參數容量浪費在死記硬背（Verbatim Memorization）上，還會直接污染驗證集。phi-1（<em>Textbooks Are All You Need</em>, Gunasekar et al., 2023）沿這個方向走得更遠。網頁語料多半跳躍零碎，缺少推理的中間步驟。如果篩出教學邏輯像教科書一樣清楚的文本，再配上合成練習題，只要 7B Tokens 與 1.3B 參數，就能在程式碼生成上超越十倍規模的模型。</li>
+<li>機制或核心表達式：大規模語料去重結合兩套演算法。(1) ExactSubstr 用後綴陣列（Suffix Array），在線性時間 <span class="math inline">O(N)</span> 內找出並剪掉長度 <span class="math inline">\ge L</span> 的完全重複子字串。(2) NearDup 把文檔轉成 <span class="math inline">n</span>-gram 集合，用 MinHash 與局部敏感雜湊（LSH）估計 Jaccard 相似度，剔除高重疊的文檔對：
+<div class="math inline">\mathrm{Jaccard}(D_i, D_j) = \frac{|S_n(D_i) \cap S_n(D_j)|}{|S_n(D_i) \cup S_n(D_j)|} \ge \tau</div>
+從泛化的角度看，高密度教科書語料等於把訓練分佈 <span class="math inline">p_{\text{raw}}(x)</span> 重加權，映射到富含因果推導鏈條的子流形 <span class="math inline">p_{\text{pedagogical}}(x)</span>，學會複合演算法所需的樣本複雜度因此低很多。</li>
+<li>能做到什麼，代價是什麼：去重可以把模型無提示的逐字背誦率降低 10 倍以上，同時減少訓練步數並提升驗證困惑度（Perplexity）。合成教科書則讓邊緣端的小模型也有很高的推理密度。代價是如果過度依賴單一教師模型來合成資料，容易繼承教師的偏見、壓窄長尾世界知識，並引發分佈坍縮。</li>
+</ul>
+</li>
+<li>
+<p><strong>預訓練資料配比最佳化與黑盒數位 DNA 逆向解剖（LinMix, Multilingual Bridges &amp; LLMSurgeon）</strong></p>
+<ul>
+<li>直覺理解：假設手上有程式碼、數學、多國語言、百科與小說共 <span class="math inline">K</span> 個領域的語料池，問題是該按什麼百分比混合，目標能力才最強。主流做法是隨機取幾十組配比（標準 Dirichlet 抽樣）訓練小代理模型（Proxy Models），再擬合回歸曲線來預測最佳配比。2026 年的 LinMix（Baniecki et al., 2026）指出，這其實是一個線性領域歸因（Linear Domain Attribution）問題，而隨機 Dirichlet 抽樣在單純形（Simplex）上會產生嚴重的共線性，估計變異也高。反過來的問題是，面對不公開配方的閉源或開源權重模型時，能不能推回它的配比。LLMSurgeon（Luo et al., 2026）開創了「資料配比外科解剖（Data Mixture Surgery）」這個做法：只靠對目標模型抽樣生成的文本，就能像驗 DNA 一樣反推它預訓練時各領域的佔比。</li>
+<li>機制或核心表達式：設領域權重向量 <span class="math inline">\mathbf{w} = (w_1, \dots, w_K)^\top \in \Delta^{K-1}</span>（滿足 <span class="math inline">\sum_{k=1}^K w_k = 1, w_k \ge 0</span>）。從代理歸因的角度看，下游指標 <span class="math inline">M(\mathbf{w})</span> 在局部或變換空間可以近似為各域貢獻的線性組合 <span class="math inline">M(\mathbf{w}) \approx \boldsymbol{\beta}^\top \mathbf{w}</span>。<em>LinMix</em> 不用低效的隨機配比，改用最優實驗設計，最小化歸因參數協方差 <span class="math inline">\mathrm{Cov}(\hat{\boldsymbol{\beta}}) \propto (\mathbf{W}^\top \mathbf{W})^{-1}</span> 的跡或行列式。逆問題 <em>LLMSurgeon</em> 則是給定領域分類樹 <span class="math inline">\mathcal{T}</span>，只用無條件／弱條件生成的樣本集 <span class="math inline">\{y_m\}_{m=1}^M \sim \pi_\theta</span> 來解分佈反演：
+<div class="math inline">\hat{\mathbf{w}} = \arg\min_{\mathbf{w} \in \Delta^{K-1}} \mathcal{D}\!\left(\hat{p}_{\text{gen}}(\cdot \mid \pi_\theta) \,\Big\|\, \sum_{k=1}^K w_k \, \Phi_k(\mathcal{T})\right)</div>
+此外，大模型不管用什麼語言提問，內部都會切回英語思考。Mofakhami et al.（2026）證明，要打破這一點、做到真正的母語內生推理（L2 In-Language Reasoning），策略性的跨語系資料混編（Multilingual Data Mixing）是不可少的支柱。</li>
+<li>能做到什麼，代價是什麼：只要很少次的代理訓練，就能找到全局最優的領域權重，外部審計者也能看出黑盒模型的語料結構。代價是領域之間如果有很強的非線性高階協同效應（例如程式碼與自然語言數學的交叉增益），或後訓練強化學習大幅改寫了輸出風格，純線性歸因與黑盒生成反演的誤差界就會放寬。</li>
+</ul>
+</li>
+<li>
+<p><strong>抗污染動態基準、觀測等價拆解與裁判元評估（LiveBench, Mitigation Taxonomy &amp; JudgeBench）</strong></p>
+<ul>
+<li>直覺理解：一張靜態考卷在網路上公開超過三個月，幾乎一定會以原題、翻譯題或合成變體的形式流回下一代模型的訓練集。LiveBench（White et al., 2024）用兩條規則來處理。(1) 題目持續取材自最新發布的數學競賽、arXiv 論文、新聞與資料集，確保時間戳晚於模型的知識截斷日。(2) 所有題目（含數學、編程、資料分析、指令遵循）都設計成有客觀、確定性的真值驗證程式，不受人工眾包或 LLM 裁判的主觀偏見影響。學界現在大量依賴用大模型評大模型。針對這一點，JudgeBench（Tan et al., 2024）專門挑出含有隱蔽邏輯錯誤、微妙程式 Bug 的高難度客觀對照組，檢驗裁判模型在超出人類眾包直覺的難題上到底有多少判別力。</li>
+<li>機制或核心表達式：Angulo et al.（2026）給了一個形式化的刻畫：排行榜發布的任何單一分數 <span class="math inline">S</span>，都是五個耦合變數的聯合函數：
+<div class="math inline">S = \mathcal{F}\!\left(\theta_{\text{model}},\, \mathcal{H}_{\text{harness}},\, B_{\text{elicitation}},\, \mathcal{P}_{\text{sample}},\, C_{\text{contamination}}\right)</div>
+排行榜只公布 <span class="math inline">(\theta_{\text{model}}, S)</span> 時，<span class="math inline">\theta_{\text{model}}</span> 的真實能力提升和 <span class="math inline">C_{\text{contamination}}</span> 的洩漏程度在統計上是觀測等價（Observationally Equivalent）的。所以必須同時固定評測腳手架 <span class="math inline">\mathcal{H}</span>、控制推論誘導預算 <span class="math inline">B</span>，並依「哪些防禦緩解措施已被擊穿（Defeated Mitigation）」來分類剩下的效度威脅。</li>
+<li>能做到什麼，代價是什麼：可以識別出過擬合的刷榜模型：它們在靜態的 MMLU / GSM8K 上分數虛高，換成全新的動態題目就大幅下滑。代價是持續維護高品質動態基準需要長期投入專家命題的成本，而且很難涵蓋沒有唯一標準答案的開放式美學與哲學寫作。</li>
+</ul>
+</li>
+<li>
+<p><strong>黑盒成員推論與內部殘差流干擾控制探針（Black-Box MIA &amp; Excess Separability）</strong></p>
+<ul>
+<li>直覺理解：假設拿不到訓練語料庫，模型釋出前也沒有埋金絲雀字串（Canary Strings），還是有兩條路可以查某份版權書籍或基準測試集有沒有被餵進模型。第一條是黑盒成員推論攻擊（Membership Inference Attacks, MIA）（Janicki et al., 2026）：觀察模型對原句與鄰近改寫句的對數機率比，或異常低的困惑度。第二條比較新，是白盒／灰盒的內部激活探針：直接訓練一個線性分類器去讀模型中間層的殘差流（Residual Stream），看它遇到看過的考題時會不會出現特殊的記憶訊號。不過 Braun（2026）在 <em>Excess Separability</em> 中嚴謹證明，樸素線性探針看起來很準，幾乎都是因為它學到了題目的領域詞彙與句法等無關干擾特徵（Nuisance Features）。一旦嚴格控制干擾變數，修正項本身帶來的變異數甚至會大於待檢驗的虛無假設訊號。</li>
+<li>機制或核心表達式：黑盒 MIA 通常用目標模型與參考分佈（或鄰域擾動 <span class="math inline">\tilde{x}</span>）的對數似然統計量來判定成員身分：
+<div class="math inline">\mathcal{T}_{\mathrm{MIA}}(x; \theta) = \log p_\theta(x) - \mathbb{E}_{\tilde{x} \sim \mathcal{N}(x)}\big[\log p_\theta(\tilde{x})\big] \gtrless \gamma</div>
+在內部殘差流層 <span class="math inline">\mathbf{h}_\ell(x) \in \mathbb{R}^d</span> 上，Braun（2026）定義了扣除無關語意協變數 <span class="math inline">\mathbf{z}(x)</span> 之後的超額可分性（Excess Separability）統計量 <span class="math inline">\Delta_{\mathrm{sep}} = \mathrm{AUC}(\mathbf{h}_\ell \to c) - \mathrm{AUC}(\mathbf{z} \to c)</span>。他並證明，消除干擾所需的正交化／配對校正方差 <span class="math inline">\mathrm{Var}(\hat{\Delta}_{\mathrm{sep}})</span>，為單一基準測試集的樣本數設了一個嚴苛的可檢測下界。</li>
+<li>能做到什麼，代價是什麼：為版權訴訟取證與污染稽核提供統一的實驗基準，並標出統計檢定力的邊界。它也說明，事後只憑小樣本激活值就想準確抓出微幅污染，在資訊論與統計變異上有根本的限制。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>語意級改寫／合成蒸餾污染，與事後檢測的統計變異限制</strong>：傳統的 <span class="math inline">n</span>-gram 重疊過濾，已經擋不住同義改寫、跨語言翻譯與強模型合成的變體（Angulo et al., 2026）。統一黑盒 MIA 評測（Janicki et al., 2026）和殘差流超額可分性探針（Braun, 2026）則得到同一個結論：訓練規模達數兆 Token、單一文檔只經過 1 個 Epoch 的輕微更新時，單題層級的記憶痕跡非常微弱。事後取證因此要在降低偽陽性和維持統計檢定力之間取捨。</li>
+<li><strong>高純度合成資料的效率，與認知窄化和英語霸權</strong>：<em>phi-1</em> 開創的教科書合成路線，大幅提高了中小模型在程式與競賽數學上的得分效率。但過度人工雕琢的語料，容易抹平真實人類語言的歧義性、文化多樣性與非英語的思維脈絡。下一代基礎語料工程的核心問題，是怎麼在提高推理密度的同時，像 <em>Building Multilingual Bridges</em>（Mofakhami et al., 2026）那樣靠精細配比保住各母語的內生推理（In-Language Reasoning），不讓全球知識都坍縮到英語表徵上。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>從隨機盲試轉向最優實驗設計（Optimal Experimental Design）的配比科學</strong>：<em>LinMix</em>（Baniecki et al., 2026）把昂貴的預訓練配比搜尋化歸為線性域歸因，並證明常見的 Dirichlet 隨機取點是很差的實驗設計。這套方法在單純形約束下，用正交／D-最優設計把歸因變異壓到最小。它可以直接搬到 <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的多源檢索權重調優、材料科學的多組分合金配方篩選，以及多任務強化學習的獎勵權重校準。</li>
+<li><strong>借鑑自然科學的基準校準星（Calibration Benchmark Stars）計量哲學</strong>：本領域知識庫收錄了天文學的 <em>Benchmark stars, benchmark spectrographs</em>（Adibekyan et al., 2020）、毒理學的 <em>Benchmark Dose</em>（Rezvanfar, 2014），以及軟體工程的神諭選擇（Gay et al., 2015）。天文學家為了讓全球不同解析度（<span class="math inline">R \sim 115,000</span> 至 <span class="math inline">220,000</span>）的光譜儀量出可以互相比對的恆星物理參數，建立了 34 顆蓋亞基準星（Gaia Benchmark Stars）當作絕對校準錨點。這對 AI 評測與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> 的啟發是：除了把題目越出越難，還要維護一組有嚴格理論不變量、真值分解已知的計量校準集，專門用來校準不同評測框架（Harness）與裁判模型本身的系統性偏差。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1991</td>
+<td><strong>Benchmark characterization</strong>，T.M. Conte, W.-M.W. Hwu</td>
+<td>計算機架構與系統評測的奠基論文，確立了如何定量刻畫基準測試程式的工作負載特徵與代表性偏差。</td>
+<td><code>G2 計量源頭</code></td>
+<td><a href="zotero://select/library/items/6DHGXUFQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/2.67193" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>The Pile: An 800GB Dataset of Diverse Text for Language Modeling</strong>，Leo Gao et al.</td>
+<td>開源大模型語料工程的重要工作：用 22 個經過策展的學術、程式碼與專業子集組成 825 GiB 語料，證實跨領域的資料多樣性直接決定泛化上限。</td>
+<td><code>G1/G2 入門首選</code></td>
+<td><a href="zotero://select/library/items/A7TDDFK8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.00027" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><strong>Deduplicating Training Data Makes Language Models Better</strong>，Katherine Lee et al.</td>
+<td>ACL 的經典論文：指出主流語料庫中有大量重複片段（單句重複逾 6 萬次），並用精確與近似去重把模型的逐字背誦率降低 10 倍，同時加速收斂。</td>
+<td><code>G1/G2 必讀核心</code></td>
+<td><a href="zotero://select/library/items/R2MZFMGG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.06499" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>Textbooks Are All You Need</strong>，Suriya Gunasekar et al.</td>
+<td><code>phi-1</code> 的論文：證明按教科書品質篩選資料、再加上合成練習題，能讓 1.3B 的小模型只用 8 張 A100 訓練 4 天，就在 HumanEval 上突破 50.6%。</td>
+<td><code>G1/G2 觀念翻轉</code></td>
+<td><a href="zotero://select/library/items/5E5A2AH9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.11644" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>LiveBench: A Challenging, Contamination-Limited LLM Benchmark</strong>，Colin White et al.</td>
+<td>針對測試集污染與裁判偏見這兩個問題，用持續更新的時效性題源，搭配 100% 客觀可驗證的真值計分，做出高鑑別度的動態基準。</td>
+<td><code>G1/G2 評測必讀</code></td>
+<td><a href="zotero://select/library/items/86JM9AS2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.19314" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>JudgeBench: A Benchmark for Evaluating LLM-based Judges</strong>，Sijun Tan et al.</td>
+<td>大家都用 LLM 當裁判之後，裁判本身也需要考核。本文聚焦推理、知識與編程的高難度客觀題對，全面檢驗自動裁判模型的判準極限。</td>
+<td><code>G2 裁判審計</code></td>
+<td><a href="zotero://select/library/items/NQPCR4MK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.12784" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇跨學科基準校準與資料選擇經典）</summary>
+<p></p>
+<ul>
+<li><strong>2014｜Benchmark Dose</strong>，M.A. Rezvanfar（毒理學與風險評估中的基準劑量建模方法論，展示如何用劑量反應曲線的信賴下限取代粗糙的單點閾值，對安全基準的統計定界有啟發）｜<a href="zotero://select/library/items/2EI7TN46" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-12-386454-3.00588-1" rel="noopener">DOI</a></li>
+<li><strong>2015｜Automated Oracle Data Selection Support</strong>，Gregory Gay et al.（<em>IEEE TSE</em> 經典論文，研究軟體測試中如何自動選出最能暴露系統缺陷的測試神諭觀察子集，24 引）｜<a href="zotero://select/library/items/ZDIV6UJ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tse.2015.2436920" rel="noopener">DOI</a></li>
+<li><strong>2015｜Efficient data selection for ASR</strong>，Neil Taylor Kleynhans, Etienne Barnard（語音辨識領域訓練資料子集篩選的早期實證，探討用資訊量過濾壓縮訓練集規模時，如何維持甚至提升辨識率）｜<a href="zotero://select/library/items/65NEHB32" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10579-014-9285-0" rel="noopener">DOI</a></li>
+<li><strong>2017｜Data Selection for Neural Networks</strong>，Mirosław Kordos（系統比較實例選擇、原型壓縮與雜訊濾除這幾類演算法，對神經網路訓練效率與決策邊界平滑度的影響）｜<a href="zotero://select/library/items/CW6J3NEJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4467/20838476si.16.012.6193" rel="noopener">DOI</a></li>
+<li><strong>2017｜Training Data Augmentation and Data Selection</strong>，Martin Karafiát et al.（結合資料增強與依目標域相似度做的資料選擇，提升聲學模型在真實高雜訊環境下的穩健泛化能力）｜<a href="zotero://select/library/items/ZIHARGPN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-64680-0_10" rel="noopener">DOI</a></li>
+<li><strong>2020｜Benchmark stars, benchmark spectrographs</strong>，V. Adibekyan et al.（<em>Astronomy &amp; Astrophysics</em>：用超高解析度的 ESPRESSO 光譜嚴格檢驗 30 顆蓋亞基準校準恆星的跨儀器一致性，是科學界校準基準本身的範例，18 引）｜<a href="zotero://select/library/items/U3W87B27" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1051/0004-6361/202038793" rel="noopener">DOI</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Learning to Think with Images Faithfully via Adaptive Data Selection</strong>，Yu Zhao et al.：指出用影像思考（TwI）的視覺語言模型有「表演式工具使用」的毛病：呼叫了放大工具，卻忽略回傳的局部影像。做法是隨模型能力動態篩選要放大才能答對的訓練樣本，並搭配免工具的自適應獎勵。在 V*（+11.6%）與 HR-Bench 4K/8K 上刷新 SOTA，幻覺也減少。（<a href="zotero://select/library/items/2IW72TWQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26199" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Safety-Preserving Medical LLM Fine-Tuning via Bilevel Data Selection</strong>，Ruoxuan Shi et al.：病患端醫療大模型微調時，容易削弱安全護欄。本文提出可擴展的雙層資料選擇（S-BDS），控制選擇權重的集中度。在 Llama 與 Qwen 上，它在 HealthBench 維持臨床專業能力，同時在 PatientSafetyBench 上超過最強安全基線 4.64 與 3.00 個百分點。（<a href="zotero://select/library/items/AMQCQ274" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20643" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦預訓練基座模型基準洩漏加速與-anti-hack-量化審計">2026-11-19（08:00 增量）最新入庫（聚焦：預訓練基座模型基準洩漏加速與 Anti-Hack 量化審計）</h4>
+<ul>
+<li><strong>2026｜Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month -- from post-training down to pre-training base models</strong>，Yiwei Qin et al.
+<ul>
+<li>重點：區分 <code>benchleaking</code> 與 <code>benchmaxxing</code>。文中指出基準洩漏已從後訓練智能體的顯性洩題，蔓延到公開的預訓練基座（部分模型在 HumanEval 與 OpenBookQA 的洩漏率達 96% 與 85%），並提出 <code>Anti-Hack</code> 污染校正分數來量化虛高的程度。</li>
+<li>連結：<a href="zotero://select/library/items/GM7PMTV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21315" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦黑盒污染成員推論統一基準與預訓練數位-dna-逆向解剖">2026-11-19 最新入庫（聚焦：黑盒污染成員推論統一基準與預訓練數位 DNA 逆向解剖）</h4>
+<ul>
+<li><strong>2026｜Detecting Data Contamination in Large Language Models</strong>，Juliusz Janicki, Savvas Chamezopoulos, Evangelos Kanoulas, Georgios Tsatsaronis
+<ul>
+<li>重點：黑盒成員推論攻擊（MIA）高度依賴複雜的資料擾動，各方法很難公平地橫向比較。本文在嚴格的黑盒假設下建立統一評測協議，系統量化當代最先進的污染檢測方法在版權稽核與測試集洩漏查證上實際能做到哪裡。</li>
+<li>連結：<a href="zotero://select/library/items/G5NDSKME" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.19561" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜LLMSurgeon: Diagnosing Data Mixture of Large Language Models</strong>，Yaxin Luo, Jiacheng Cui, Xiaohan Zhao, Xinyi Shang
+<ul>
+<li>重點：正式定義「資料配比外科解剖（Data Mixture Surgery）」任務：只憑目標模型生成的純黑盒文本，就能在預先定義的分類樹下，以高準確度反推底層預訓練語料的領域分佈比例（數位 DNA）。</li>
+<li>連結：<a href="zotero://select/library/items/D7SXFN8T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.30348" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-污染效度分類學殘差流探針極限與線性域歸因配比">同批延伸選讀（2026 污染效度分類學、殘差流探針極限與線性域歸因配比）</h4>
+<ul>
+<li><strong>2026｜Benchmark Contamination: A Taxonomy Organized by Defeated Mitigation</strong>，Johanna Angulo, Víctor Yeste, Hector Espinos-Morato（傳統分類法只服務自動檢測。本文改依「已部署的防禦緩解措施被哪種機制擊穿」來重建污染分類學，處理排行榜分數中能力與洩漏觀測等價這個核心難題）｜<a href="zotero://select/library/items/UNWFG3ZN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.29463" rel="noopener">原文</a></li>
+<li><strong>2026｜Excess Separability: Nuisance-Controlled Residual-Stream Probing for Benchmark Contamination Detection</strong>，Florian Braun（嚴格證明直接對內部激活做樸素線性探針會失效，並推導出控制無關干擾後的超額可分性檢測法，也指出校正項變異數對單一基準污染檢出率造成的統計極限）｜<a href="zotero://select/library/items/SBRH9CCK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.12652" rel="noopener">原文</a></li>
+<li><strong>2026｜LinMix: Data Mixing as Linear Domain Attribution</strong>，Hubert Baniecki, Przemyslaw Biecek, Martin Pawelczyk（把代理模型的資料配比搜尋重新表述為線性領域歸因問題，指出標準 Dirichlet 隨機抽樣效率低，並用科學的實驗設計大幅提高配比預測精度）｜<a href="zotero://select/library/items/MSKPC36B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.37390" rel="noopener">原文</a></li>
+<li><strong>2026｜Building Multilingual Bridges: Data Mixing as the Pillar of Generalization for In-Language Reasoning</strong>，Mehrnaz Mofakhami et al.（處理推理大模型一律被迫用英語思考的瓶頸，證實精細的跨語言資料配比是帶出非英語母語內生推理泛化的關鍵）｜<a href="zotero://select/library/items/WT8R3NRS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.10445" rel="noopener">原文</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>21｜形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="21形式語意與語言學範疇語法形式分佈語意組合性與理性言語行為">21｜形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> ｜ <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> ｜ <a class="wl" href="32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>形式語意與語言學研究兩件事：有限的詞彙怎麼靠嚴格的代數結構拼出無限多的精確意義（組合性），以及統計向量空間怎麼和邏輯真值、社會博弈語用（言外之意）結合起來。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+自然語言研究長期分成兩個互不相通的傳統。一邊是 Montague 與 Lambek 的形式邏輯傳統，能精確處理「並非所有學生都沒有交作業」這類句子的量詞轄域、否定與邏輯蘊涵，卻不知道「貓」與「狗」在語意上比「貓」與「微積分」更接近，詞彙內容是空的。另一邊是 Firth 與現代神經嵌入的分佈語意傳統（「觀其伴而知其義」），能捕捉詞彙相似度與感知接地，卻在邏輯功能詞、多層遞迴結構和新的屬性組合（如視覺／聽覺多模態中的零樣本能力組合）上經常失敗。此外，人說話總是話留三分（語用學），字面真值不等於溝通意圖。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+理解一句話要三層一起運作：樂高積木的卡榫、顏料調色盤，還有兩個人互相讀心。
+<ol>
+<li>範疇語法（Categorial Grammar / Lambek 演算）是積木上的凹凸卡榫類型。名詞是實體積木 <span class="math inline">e</span>，不及物動詞是「右邊缺一塊 <span class="math inline">e</span> 就能拼成句子真值 <span class="math inline">t</span>」的帶槽組件 <span class="math inline">e \backslash t</span>。一句話合不合語法，就看這些資源能不能剛好消完，整個過程是一個消去證明。</li>
+<li>組合分佈語意（Frege in Space）把積木換成向量與張量算子。名詞是高維空間裡的一個點（或 Gärdenfors 概念空間中的凸區域），形容詞與動詞是對這個點做旋轉、縮放或雙線性映射的矩陣／高階張量。</li>
+<li>理性言語行為（RSA）是聽話者與說話者之間遞迴的貝氏讀心術。朋友說「有些甜點還不錯」，你會想：如果全部都好吃，他大可直接說「全都超讚」；他刻意不這麼說，其餘的甜點八成很雷。</li>
+</ol>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>和 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>、<a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 相接：Lambek 範疇語法本身就是非交換直覺主義線性邏輯。它的句法推導直接對應 Girard 證明網（Proof Nets）與么半範疇弦圖，後者是 DisCoCat 量子自然語言處理的基礎。</li>
+<li>和 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a>、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> 相接：現在視覺語言模型（VLM）與音訊語言模型（LALM）最棘手的兩個問題是屬性錯綁（Attribute Binding Failure）和能力無法組合，這就是形式語意學研究了半世紀的組合性缺口（Compositionality Gap）。</li>
+<li>和 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與對話對齊相接：大模型要理解模糊指令、反諷、禮貌委婉語，或要設計資訊密度高的協作 Agent 通訊時，RSA 機率語用學提供了精確的貝氏公式。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Root[&quot;自然語言意義的三大維度：結構 × 內容 × 語境意圖&quot;] --&gt; S1[&quot;形式句法與邏輯語意：Montague 與 Lambek 傳統&quot;]
+    Root --&gt; S2[&quot;幾何與統計內容：分佈語意與概念空間&quot;]
+    Root --&gt; S3[&quot;語用推理：機率語用學與理性言語行為 (RSA)&quot;]
+
+    S1 --&gt; LMG[&quot;Lambek-Montague 範疇語法：句法類型推演同構於 λ-演算組合&quot;]
+    LMG --&gt; ProofNet[&quot;前沿匯流：Girard 線性邏輯證明網與 Peirce 存在圖 (Existential Graphs)&quot;]
+
+    S2 --&gt; Dist[&quot;分佈記憶 (Baroni &amp; Lenci) 與多模態感知分佈語意 (Bruni 2014)&quot;]
+    Dist --&gt; CompDist[&quot;Frege in Space：向量/張量語意組合、CCG 邏輯結合與概念空間凸區域&quot;]
+    CompDist --&gt; NeuralComp[&quot;大模型時代診斷：雙曲/切空間原語分解 (GDE) 與音訊/語法組合缺口&quot;]
+
+    S3 --&gt; Grice[&quot;Grice 合作原則與會話含意&quot;]
+    Grice --&gt; RSA[&quot;理性言語行為框架 (Degen 2022)：字面聽者 L0 → 語用說者 S1 → 語用聽者 L1&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>弗雷格組合性原理與 Lambek–Montague 範疇語法（Categorial Grammar &amp; Curry–Howard–Lambek）</strong></p>
+<ul>
+<li>直覺理解：「穿太空衣的粉紅水豚在證明黎曼猜想」這句話，你這輩子第一次看到，卻馬上就懂。原因是複合表達式的意義完全由組成部件的意義和結合方式唯一決定（Frege 組合性原理）。範疇語法把詞性寫成帶方向的分數，造句就像分數約分，約分的同時會自動生成 <span class="math inline">\lambda</span>-演算的邏輯公式。</li>
+<li>機制或核心表達式：設基本類型為實體 <span class="math inline">e</span> 與真值 <span class="math inline">t</span>（句法上是名詞組 <span class="math inline">NP</span> 與句子 <span class="math inline">S</span>）。帶方向的 Lambek 斜線類型滿足消去律，並透過同態映射 <span class="math inline">\llbracket \cdot \rrbracket</span> 嚴格對應到函數作用（Function Application）：
+<div class="math inline">A \cdot (A \backslash B) \vdash B, \qquad (B / A) \cdot A \vdash B, \qquad \llbracket \alpha \, \beta \rrbracket = \llbracket \alpha \rrbracket\big(\llbracket \beta \rrbracket\big)</div></li>
+<li>能做到什麼，代價是什麼：它用沒有歧義的代數推演處理長距離依賴、配位結構（CCG 多模態組合範疇語法）與量詞蘊涵，也可以轉譯成線性邏輯證明網。代價是純布林真值語意把詞根當成沒有內部結構的原子符號，無法度量詞義漸變、原型效應和多模態感官相似性。</li>
+</ul>
+</li>
+<li>
+<p><strong>組合分佈語意與流形原語分解（Compositional Distributional Semantics &amp; Geometric Primitives）</strong></p>
+<ul>
+<li>直覺理解：要把 Frege 放進向量空間（「Frege in Space」），不能把所有詞都當成同一維度、地位相同的向量直接相加，因為加法滿足交換律，分不清「狗咬人」與「人咬狗」。比較貼切的幾何圖像是：名詞是空間中的向量（或概念空間裡的凸集），修飾語與謂詞是作用在空間上的線性矩陣、雙線性張量，或是黎曼／雙曲流形切空間中的正交原語方向。</li>
+<li>機制或核心表達式：起點是 Mitchell &amp; Lapata 的乘性互動模型 <span class="math inline">\mathbf{p} = \mathbf{u} \odot \mathbf{v}</span>。接著 Baroni–Zamparelli 把形容詞建模為矩陣 <span class="math inline">\mathbf{A} \in \mathbb{R}^{d \times d}</span>，作用在名詞向量 <span class="math inline">\mathbf{n} \in \mathbb{R}^d</span> 上（<span class="math inline">\llbracket \text{Adj N} \rrbracket = \mathbf{A}\mathbf{n}</span>）。當代的做法是多模態流形上的測地線可分解嵌入（Geodesically Decomposable Embeddings, GDE）：在嵌入分佈 Fréchet 均值 <span class="math inline">\boldsymbol{\mu}</span> 的切空間 <span class="math inline">T_{\boldsymbol{\mu}}\mathcal{M}</span> 中，把沒見過的新組合分解為屬性原語與物體原語之和，再用指數映射投回歐氏或雙曲流形 <span class="math inline">\mathcal{M}</span>：
+<div class="math inline">\mathbf{z}_{\text{attr}, \text{obj}} = \exp_{\boldsymbol{\mu}}\!\Big( \mathbf{v}_{\text{attr}} + \mathbf{v}_{\text{obj}} \Big), \qquad \mathbf{v}_{\text{attr}}, \mathbf{v}_{\text{obj}} \in T_{\boldsymbol{\mu}}\mathcal{M}</div></li>
+<li>能做到什麼，代價是什麼：它把連續表示幾何（歐氏與雙曲階層空間）和離散概念的零樣本重組（Compositional Zero-Shot Learning）連了起來。代價有兩個。高階謂詞（如及物動詞需要三階張量 <span class="math inline">\mathbb{R}^{d \times d \times d}</span>）在經典框架下會遇到參數維度災難。在端到端大模型中，不同模態的子能力各自單獨測試都滿分，一組合就失靈，這種組合鴻溝仍然常見。</li>
+</ul>
+</li>
+<li>
+<p><strong>理性言語行為框架與機率語用學（Rational Speech Act, RSA）</strong></p>
+<ul>
+<li>直覺理解：語言溝通是一場合作博弈（可接到 <a class="wl" href="32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a>）。聽者不會只看字面真假。他假設說者是理性主體，想用最省力的話傳遞最多資訊，再一層層用貝氏反推還原弦外之音（數量含意、隱喻、反諷與指代消解）。</li>
+<li>機制或核心表達式：從字面聽者 <span class="math inline">L_0(w \mid u) \propto \delta_{\llbracket u \rrbracket(w)=1} P(w)</span> 出發。語用說者 <span class="math inline">S_1</span> 依資訊效用與話語成本 <span class="math inline">C(u)</span>，以理性參數 <span class="math inline">\alpha</span> 選擇話語 <span class="math inline">u</span>。語用聽者 <span class="math inline">L_1</span> 再依貝氏定理反推世界狀態 <span class="math inline">w</span>：
+<div class="math inline">P_{S_1}(u \mid w) \propto \exp\!\Big(\alpha \big(\ln P_{L_0}(w \mid u) - C(u)\big)\Big), \qquad P_{L_1}(w \mid u) \propto P_{S_1}(u \mid w)\, P(w)</div></li>
+<li>能做到什麼，代價是什麼：只用很少的參數，就能定量擬合大量心理語言學的人類實驗數據（如「some <span class="math inline">\leadsto</span> not all」隨語境變強變弱）。代價是標準 RSA 要預先枚舉替代話語集合（Alternative Utterances）與候選世界狀態。在開放域的無限語句空間裡怎麼有效率地近似替代集，仍是活躍的研究問題。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>大模型形式語言能力落差很大，原因是架構缺陷還是語料長尾不足</strong>：用數萬億詞訓練的大模型，在某些複雜語法現象上幾乎不出錯，在另一些形式結構（如深層中心嵌入、特定主謂一致干擾或結構化語言矩陣推理 BLM）上卻低於隨機猜測。最新的受控預訓練研究（Renduchintala &amp; Bhatia 2026）在爭論兩種解釋：這些失敗是因為自注意力架構缺乏顯式的層級歸納偏置，還是只因為自然網路語料中某些高階語法構式非常稀疏。</li>
+<li><strong>多模態大模型的能力組合斷裂（Compositionality Gap）</strong>：視覺語言模型和最新的大型音訊語言模型（LALMs）都有這個現象。模型已經各自學會情緒／環境音識別、條件片段定位與語音轉寫問答，可是一旦要在單一的兩句話輸入裡把這三項能力串起來，表現就大幅下跌。這表示端到端表徵還沒有形成模組化、可組合的介面。</li>
+<li><strong>圖論邏輯與範疇語法的統一</strong>：學界正從 Lambek–Montague 語法轉向 Girard 線性邏輯證明網與 Peirce 存在圖（Existential Graphs），想把一維字串順序帶來的偶然性拿掉，找出二維／高維的語意圖演算。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把切空間測地線原語分解（GDE）用到 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a></strong>：嵌入空間有非歐階層結構（如雙曲空間）時，不要直接在座標上做向量加減（類比推理 <span class="math inline">\mathbf{a} - \mathbf{b} + \mathbf{c}</span>）。先用對數映射（Log Map）投到 Fréchet 均值的切空間做線性分解，再用指數映射回到流形，可以明顯提升跨模態零樣本泛化。</li>
+<li><strong>把 RSA 遞迴語用推論用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與人機協作提示對齊</strong>：AI 助手如果只按字面執行使用者不完整的 Prompt，就是停在 <span class="math inline">L_0</span>。讓它顯式建模「使用者既然挑了這幾個詞而沒挑別的詞，背後的真實目標分佈是什麼」（<span class="math inline">L_1</span>），可以明顯減少過度字面的解讀和無效追問。</li>
+<li><strong>把 Blackbird 語言矩陣（BLM）的想法用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a></strong>：仿照瑞文氏智力矩陣，在句內、跨句與選項多個層級放入結構不變量，設計出靠表面詞彙共現捷徑解不了的語言能力基準。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2000</td>
+<td><em>Conceptual Spaces: The Geometry of Thought</em>（Peter Gärdenfors）</td>
+<td>在符號邏輯與神經網路之間提出第三層，即幾何概念空間，用性質維度上的凸區域與 Voronoi 分割解釋詞義習得與概念組合。</td>
+<td>G1–G2 必讀名著</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/W4VEHHRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7551/mitpress/2076.001.0001" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2008</td>
+<td><em>Vector-based Models of Semantic Composition</em>（Jeff Mitchell）</td>
+<td>向量語意組合的早期實證研究：系統地形式化加性與乘性向量組合算子，首次證明乘性互動在短語語意判斷上顯著優於簡單相加。</td>
+<td>G2 經典起點</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/A3U3W9JU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://hdl.handle.net/20.500.11820/505eae7b-87c0-4a71-99ed-eb38eb077979" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2010</td>
+<td><em>Distributional Memory: A General Framework for Corpus-Based Semantics</em>（Marco Baroni）</td>
+<td>把語料庫共現資訊統一整理成三階的「詞、關係、詞」加權張量，建立通用的分佈語意框架，不必再為每個任務各做一套特徵工程。</td>
+<td>G2 架構理解</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/NAPDUN5B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1162/coli_a_00016" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Combined Distributional and Logical Semantics</em>（Mike Lewis）</td>
+<td>結合邏輯語意與分佈語意的經典論文：用 CCG 範疇語法生成精確的邏輯骨架，再用分佈聚類填入謂詞關係常數，支援開放域推理。</td>
+<td>G2–G3 核心橋樑</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/WRDUNQKV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1162/tacl_a_00219" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2014</td>
+<td><em>Frege in Space: A Program for Compositional Distributional Semantics</em>（Marco Baroni）</td>
+<td>組合分佈語意的綱領性論文：把 Frege 函數作用映射為向量、矩陣與高階張量代數，讓形式語意的類型和線性代數對應起來。</td>
+<td>G1–G2 核心讀物</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/9PI36PSJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.33011/lilt.v9i.1321" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><em>The Rational Speech Act Framework</em>（Judith Degen）</td>
+<td>機率語用學的年度綜述：逐步講解 RSA 遞迴貝氏推理公式、實驗驗證，以及擴展到開放域的限制。</td>
+<td>G2 語用學首選</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/59859TGS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1146/annurev-linguistics-031220-010811" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2014｜Elia Bruni, N. K. Tran &amp; Marco Baroni</strong>，<em>Multimodal Distributional Semantics</em>（<em>JAIR</em>，915 引）：純文本的分佈語意缺乏感官接地。本文融合視覺影像特徵與語料分佈，讓語意表徵更接近人類。書目索引 ｜ <a href="zotero://select/library/items/7QFS9MQM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1613/jair.4135" rel="noopener">原文</a></li>
+<li><strong>2015｜Samuel R. Bowman, Christopher Potts &amp; Christopher D. Manning</strong>，<em>Recursive Neural Networks Can Learn Logical Semantics</em>（<em>arXiv</em>，117 引）：嚴格檢驗樹狀遞迴神經網路與張量網路能不能在固定維度的連續向量裡，學出自然語言的邏輯蘊涵、等價與矛盾關係。OA PDF ｜ <a href="zotero://select/library/items/CFS9J7WE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1406.1827" rel="noopener">原文</a></li>
+<li><strong>2004｜Wiley 編著</strong>，<em>Compositionality in Formal Semantics</em>（76 引）：論文集，系統收錄形式語意學傳統中關於組合性公設、量詞與語法語意介面的經典論文。書目索引 ｜ <a href="zotero://select/library/items/RJXMEM6Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/9780470751305" rel="noopener">原文</a></li>
+<li><strong>2016｜Gemma Boleda &amp; Aurélie Herbelot</strong>，<em>Formal Distributional Semantics: Introduction to the Special Issue</em>（<em>Computational Linguistics</em>，55 引）：梳理符號推理的形式語意與統計分佈語意如何互補融合，並給出主要路線圖。書目索引 ｜ <a href="zotero://select/library/items/AN87EKXD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1162/coli_a_00261" rel="noopener">原文</a></li>
+<li><strong>2003｜Jason Baldridge &amp; Geert-Jan M. Kruijff</strong>，<em>Multi-modal combinatory categorial grammar</em>（<em>EACL '03</em>，51 引）：把資源敏感的模態控制引入組合範疇語法（CCG），用來精確約束跨語言的詞序自由度與組合規則的適用性。書目索引 ｜ <a href="zotero://select/library/items/R87QPFW3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3115/1067807.1067836" rel="noopener">原文</a></li>
+<li><strong>2015｜Tamara Polajnar, Laura Rimell &amp; Stephen Charles Clark</strong>，<em>An Exploration of Discourse-Based Sentence Spaces for Compositional Distributional Semantics</em>（30 引）：探索用句子外部的篇章語境來建構句子級分佈向量空間，並比較句內詞彙特徵與篇章分佈假說。OA PDF ｜ <a href="zotero://select/library/items/UGXEQF33" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.18653/v1/w15-2701" rel="noopener">原文</a></li>
+<li><strong>2025｜Glyn V. Morrill</strong>，<em>A Formal Synopsis of Lambek-Montague Grammar</em>（<em>Philosophies</em>）：簡要總結 Lambek 句法演算與 Montague 邏輯語意如何整合，並指向 Girard 線性邏輯證明網這種更精煉的表示。書目索引 ｜ <a href="zotero://select/library/items/5EDT3Z3U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/philosophies11010001" rel="noopener">原文</a></li>
+<li><strong>2026｜H S V N S Kowndinya Renduchintala &amp; Sumit Bhatia</strong>，<em>Heterogeneity in Formal Linguistic Competence of Language Models: Is Data the Real Bottleneck?</em>（<em>arXiv</em>）：用受控的一億詞預訓練實驗，分析大模型形式語法能力兩極分化的原因是語料構式稀疏度還是架構瓶頸。OA PDF ｜ <a href="zotero://select/library/items/SVFNDH8D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.17930" rel="noopener">原文</a></li>
+<li><strong>2026｜Paola Merlo et al.</strong>，<em>Blackbird Language Matrices: A Framework to Investigate the Linguistic Competence of Language Models</em>（<em>arXiv</em>）：借鑑智力測驗矩陣，設計多層級的結構化自然語言基準 <code>BLM</code>，專門測試大模型的組塊化（Chunking）與系統性。OA PDF ｜ <a href="zotero://select/library/items/E6BRJSXN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.20966" rel="noopener">原文</a></li>
+<li><strong>2027｜Nathan Haydon</strong>，<em>Categorial Grammar and Existential Graphs</em>（<em>LNCS</em>）：連結範疇語法與 Peirce 存在圖（Existential Graphs），探索句法與邏輯推演之間的圖形化對偶。書目索引 ｜ <a href="zotero://select/library/items/22A3H28R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-032-34178-5_11" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Stergios Chatzikyriakidis, Aarne Talman (2026)</strong>，<em>Formalizing Formal Semantics: The Formal Atlas</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：建構自然語言形式語意平台 <code>Formal Atlas</code>，結合互動介面與 Rocq 證明輔助器。平台把 Montague《PTQ》、動態與類型論語意、RSA 語用和分佈式語意串在一起，做形式化驗證與跨理論的預測比較。</li>
+<li>連結：<a href="zotero://select/library/items/ANHWPC2J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19509" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Richard Moot (2026)</strong>，<em>Type-logical grammars and formal languages</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：嚴格證明兩件事。含乘積、結合律、抽離與中綴規則的型態邏輯語法，固定語言識別問題是 NP-完備的。一階線性邏輯語法可以精確模擬非確定性線性時間（<code>NLIN</code>）準線性語法，由此確立它是 <code>NLIN</code> 語言與自動機的內在邏輯。</li>
+<li>連結：<a href="zotero://select/library/items/KBW9GNEP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.12618" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Compositionality with Primitives: A Unified View from Euclidean to Hyperbolic Vision-Language Models</strong>（Puru Vaish et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：組合零樣本學習（CZSL）要求視覺語言模型認出從未一起出現過的「屬性加物體」新組合。既有的原語分解方法多半只適用於平坦的歐氏空間，無法一併處理有階層語意結構的雙曲嵌入空間。</li>
+<li>關鍵做法：以測地線可分解嵌入（GDE）框架為基礎，在嵌入分佈 Fréchet 均值的切空間中找出視覺原語方向，為歐氏與雙曲流形上的 VLM 提供統一的原語組合觀點。</li>
+<li>跨領域啟發：把形式語意的原語組合，和 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a>／<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> 的流形幾何操作直接連起來。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/QHQPH8S6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29811" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>When Capabilities Fail to Compose: Diagnosing the Compositionality Gap in Large Audio-Language Models</strong>（Chien-Feng Liu et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：大型音訊語言模型（LALMs）在單項聲學任務（性別／情緒／環境音識別、語音轉寫）上表現很好，但能不能像形式語意的函數複合那樣可靠地串聯多項子能力，還不清楚。</li>
+<li>關鍵做法：建構帶有雙段聲學線索的受控診斷基準，要求模型同時整合音訊屬性識別、線索條件片段選擇與下游問答，藉此找出多模態能力組合是在哪個環節斷掉的。</li>
+<li>跨領域啟發：證明單點能力達標 <span class="math inline">\neq</span> 系統性可組合，為多模態評估（<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a>）提供嚴謹的組合診斷方法。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/5ER8JHJH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.36921" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

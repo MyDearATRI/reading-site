@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>40｜形態發生與多尺度生物計算：生物電認知光錐、自創生、神經元胞自動機與形態計算 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="40形態發生與多尺度生物計算生物電認知光錐自創生神經元胞自動機與形態計算">40｜形態發生與多尺度生物計算：生物電認知光錐、自創生、神經元胞自動機與形態計算</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> ｜ <a class="wl" href="08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> ｜ <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>一般認為只有大腦神經元會思考、DNA 是身體唯一的藍圖，形態發生與多尺度生物計算質疑這兩個看法。這個領域研究沒有中央指揮的細胞、化學反應網與軟機器人，怎麼靠非神經生物電網路、局部自組織規則（NCA）和身體的物理形狀本身，做出強韌的目標導向計算與自我修復。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+現代電腦工程與主流 AI 很脆弱。硬體與軟體嚴格分離，拔掉幾顆電晶體或切掉機器人半條腿，系統就當機。生物不是這樣：蠑螈被切掉四肢、渦蟲被切成兩百段、蝌蚪的眼睛被移植到尾巴上，數百萬個沒有全局座標地圖的細胞仍能自發溝通、改道生長，精準重建出功能完整的器官，達到目標解剖形態後還會自動停止生長。中心化控制論和純基因決定論都解釋不了這件事。這個領域要回答兩個問題：局部組件不靠中央控制器，怎麼湧現出跨尺度的目的性穩態（Teleonomy）；物理身體本身又怎麼替大腦分擔計算。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li><strong>DNA 與生物電網路（Michael Levin）</strong>：基因組（DNA）不是身體的幾何建築藍圖，比較像一本五金材料行的目錄，列的是怎麼生產離子通道與蛋白質零件。儲存器官目標形狀、指揮細胞往哪裡長和何時停工的軟體記憶體，是間隙連接（Gap Junctions）把全體細胞的膜電位 <span class="math inline">V_{\mathrm{mem}}</span> 耦合起來形成的非神經生物電網路。可以這樣想：大腦還沒演化出來之前，全身組織就已經是一個在解剖形態空間（Morphospace）裡導航的集體大腦。</li>
+<li><strong>神經元胞自動機（NCA）</strong>：把這套生物發育的想法搬進深度學習。每個像素／體素都是一個活細胞，裝著同一份微型神經網路權重，只看鄰居的化學濃度訊號來更新自己。從單一顆種子像素出發，就能長出複雜的 3D 結構或超材料，切掉一半還會像蠑螈一樣自己長回來。</li>
+<li><strong>形態計算（Morphological Computation）</strong>：可以說是不帶大腦的聰明身體。替微型機器人穿上特定幾何形狀的外骨骼，或設計軟機器人的材料彈性，碰撞與形變本身就完成了控制計算，不需要神經網路介入。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>對接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>：神經元胞自動機（NCA）與通用連續元胞自動機（Universal NCA）展示了一種去中心化的計算範式：只做局部通訊、全網共享權重、內建自修復。它很適合當作抗毀損邊緣智能與群體機器人（Swarm Robotics）的基礎架構。</li>
+<li>對接 <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 與 <a class="wl" href="08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>：Levin 的無尺度認知光錐（Cognitive Light Cone）與 TAME 框架不把智慧限定在人類語言，而是看成一條連續光譜（代謝空間 <span class="math inline">\to</span> 生理空間 <span class="math inline">\to</span> 解剖形態空間 <span class="math inline">\to</span> 三維運動空間 <span class="math inline">\to</span> 語言概念空間）。這也直接啟發了對大模型智能體的時間跨度與真實身份同一性的檢視（Perrier &amp; Bennett 2026）。</li>
+<li>對接生醫工程與超材料設計（<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>）：調控非興奮性細胞的生物電介面，正在發展成合成形態學（Synthetic Morphology），目標是不改基因就能逆轉癌變、誘導器官再生。自組織 NCA 則已經做到無序超材料（Disordered Metamaterials）的單樣本生成設計。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Root[&quot;無中央控制器的生命自組織與具身計算&quot;] --&gt; M1[&quot;化學與反應擴散基底：圖靈斑圖、自創生與化學組織論&quot;]
+    Root --&gt; M2[&quot;多尺度基礎認知：非神經生物電、認知光錐與合成形態學&quot;]
+    Root --&gt; M3[&quot;人工生長與具身計算：神經元胞自動機 (NCA) 與形態計算&quot;]
+
+    M1 --&gt; Turing[&quot;圖靈反應—擴散形態發生 (1952 / Wardlaw 1953) 與表面自修復物理化學&quot;]
+    Turing --&gt; Autopoiesis[&quot;自創生理論 (Maturana-Varela / Luisi 2003) 與化學組織論閉包 (Dittrich 2005)&quot;]
+
+    M2 --&gt; Bioelec[&quot;體細胞非神經生物電計算 (Manicka &amp; Levin 2019) 與癌症/老化基因調控介面 (Cadinu 2025)&quot;]
+    Bioelec --&gt; LightCone[&quot;無尺度認知光錐 (Levin 2019) → TAME 萬物心智框架 (2022) → 能動材料合成形態學 (Davies &amp; Levin 2023)&quot;]
+
+    M3 --&gt; MorphComp[&quot;形態計算與無腦軟機器人/碰撞機器人群 (Ben Zion 2021 / Mertan &amp; Cheney 2024)&quot;]
+    MorphComp --&gt; NCA[&quot;3D 神經元胞自動機 (Sudhakaran 2021) → 通用計算 NCA (Béna 2025) → 機器人群組裝與無序超材料設計 (2026)&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>圖靈反應擴散、自創生與化學組織論（Reaction–Diffusion, Autopoiesis &amp; Chemical Organizations）</strong></p>
+<ul>
+<li>直覺理解：一鍋原本均勻的化學物質，為什麼能自發長出斑馬條紋與植物葉序？Alan Turing 發現，只要局部自我催化的激活劑擴散得慢，長程抑制劑擴散得快（擴散驅動不穩定性），對稱性就會自發破缺，長出空間結構。生命要讓這個結構不被熱力學耗散沖垮，就得形成 Maturana–Varela 所說的自創生（Autopoiesis）：反應網路自己生產出包圍並維持該反應網路的邊界。Dittrich 進一步把它代數化，寫成封閉且質量自維持的化學組織格（見 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a>）。</li>
+<li>機制或核心表達式：雙組分圖靈形態發生素 <span class="math inline">(u, v)</span> 滿足反應擴散偏微分方程（當 <span class="math inline">D_v \gg D_u</span> 時發生空間波數失穩）。化學反應網路 <span class="math inline">(M, R)</span> 中的子集 <span class="math inline">O \subseteq M</span> 構成一個化學組織（Chemical Organization），若且唯若它滿足代數封閉性（Closure）與化學計量自維持性（Self-Maintenance，存在反應速率向量 <span class="math inline">\mathbf{v} &gt; \mathbf{0}</span> 使淨消耗為非負）：
+<div class="math inline">\begin{cases} \partial_t u = D_u \nabla^2 u + f(u,v) \\ \partial_t v = D_v \nabla^2 v + g(u,v) \end{cases}, \qquad O \text{ is an Organization } \iff \mathrm{Cl}(O)=O \;\land\; \exists \mathbf{v}&gt;\mathbf{0}:\, S_O \mathbf{v} \ge \mathbf{0}</div></li>
+<li>能做到什麼，代價是什麼：不需要預設任何遺傳程式，就能解釋周期性斑圖、裂紋自癒合材料（Nosonovsky &amp; Bhushan）與建設性動力系統的不動點吸引子。代價是純開環的圖靈斑圖沒有抗切割的再生目標：切掉一半斑紋，系統不會自動重算全局比例來精確還原複雜器官。</li>
+</ul>
+</li>
+<li>
+<p><strong>非神經生物電網路與無尺度認知光錐（Developmental Bioelectricity &amp; Cognitive Light Cone）</strong></p>
+<ul>
+<li>直覺理解：胚胎與渦蟲不論從哪裡被切斷，都能導航回正確的解剖終點，這種目標導向穩態（Teleonomy）需要解釋。Michael Levin 指出，體細胞靠離子通道維持靜息膜電位 <span class="math inline">V_{\mathrm{mem}}</span>，並用電壓敏感的間隙連接（電突觸 <span class="math inline">G_{ij}</span>）組成全身的生物電計算網。單一細胞原本只關心微米與秒級的局部代謝穩態，認知光錐極小。一旦經由電耦合連成網路，局部誤差就被整合成公分與月級的器官形態設定點（Morphogenetic Setpoint）。如果某個細胞斷開電耦合、退回單細胞光錐，它會把身體其餘部分當成外部環境，不受控地增殖。這就是把癌症詮釋為計算邊界塌縮的說法。</li>
+<li>機制或核心表達式：非神經組織中，細胞 <span class="math inline">i</span> 的膜電位演化由離子通道電流與電壓依賴型間隙連接電導 <span class="math inline">G_{ij}(V_i - V_j)</span> 的耦合驅動，形成儲存解剖目標態的多穩態吸引子景觀：
+<div class="math inline">C_m \frac{dV_i}{dt} = - \sum_{c} I_{\mathrm{ion}, c}(V_i) + \sum_{j \in \mathcal{N}(i)} G_{ij}(V_i, V_j)\,(V_j - V_i)</div></li>
+<li>能做到什麼，代價是什麼：它建立了 TAME（Technological Approach to Mind Everywhere）這條跨基質的智慧連續譜。工程師可以把組織當成能動材料（Agential Materials），用電生理訊號重寫組織的目標，不必逐一微調底層基因。代價是非神經生物電訊號與下游染色質／轉錄調控之間跨時間尺度的精確定量解碼還沒有做到，各方仍在加緊研究（Cadinu et al. 2025）。</li>
+</ul>
+</li>
+<li>
+<p><strong>神經元胞自動機（NCA）與物理形態計算（Morphological Computation）</strong></p>
+<ul>
+<li>直覺理解：這裡的問題是，怎麼讓人工系統有生物組織那樣的自組裝、自修復與通用計算能力。神經元胞自動機（NCA）用一個很小的共享卷積／MLP 網路 <span class="math inline">f_\theta</span> 來參數化局部的細胞更新規則，再用跨多步展開的反向傳播，訓練細胞群從單一點長成目標 3D 結構、功能機器或無序超材料微結構。形態計算更進一步：在軟機器人或擁擠碰撞的機器人群（Morphobots）中，只要外骨骼的非對稱形狀與材料順應性設計得當，複雜的物理碰撞就會直接變成定向的群集行為（「No-brainer」無腦自適應控制）。</li>
+<li>機制或核心表達式：在連續狀態網格或分散式機器人的局部鄰域 <span class="math inline">\mathcal{N}(i)</span> 上，所有單元共享同一個可微的局部更新算子 <span class="math inline">f_\theta</span>（含感知濾波器 <span class="math inline">K</span>，以及用來強制去中心化魯棒性的隨機非同步遮罩 <span class="math inline">\xi_i^t</span>）：
+<div class="math inline">\mathbf{s}_i^{t+1} = \mathbf{s}_i^t + \xi_i^t \cdot f_\theta\!\Big(\mathbf{s}_i^t,\, \big\{\mathbf{s}_j^t\big\}_{j \in \mathcal{N}(i)}\Big), \qquad \mathcal{L}(\theta) = \big\| \mathrm{Proj}(\mathbf{S}^T) - \mathbf{Y}_{\mathrm{target}} \big\|_2^2</div></li>
+<li>能做到什麼，代價是什麼：模型參數量只有數千到數萬，比傳統生成模型小幾個數量級。它本來就能外推到任意網格尺度、做單樣本訓練（One-Shot Design），受損後也會自動再生。最新研究（Béna et al. 2025）正在探索連續 NCA 的圖靈通用計算能力（Universal Computation）。代價是多步時間展開的訓練容易遇到梯度爆炸／消失與長期吸引子漂移，需要仔細設計池化訓練（Pool Sampling）與穩定性約束。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>基礎認知與目的性語言（Teleonomy）的科學邊界之爭</strong>：Levin 的 TAME 框架主張用目標導向、記憶、認知光錐這些能動性詞彙來描述細胞群、基因調控網，乃至合成生物機器人（Xenobots / Anthrobots），理由是這樣能直接導出可檢驗的高層再生實驗干預。傳統分子生物學和心靈哲學的懷疑論者則質疑：把穩態吸引子動力學稱為「認知（Cognition）」，是真的統一了範式，還是一種容易和高階有意識心智混淆的隱喻延伸？</li>
+<li><strong>語言模型智能體的表象身份與真實具身身份之間的斷裂</strong>：Perrier &amp; Bennett (2026) 從跨時間尺度約束（Stack Theory）出發指出，生物體的自我同一性，是由物理代謝與形態穩態在每一刻共同強制約束出來的。當代語言模型智能體雖然能在上下文視窗裡說出完全正確的自我描述，那些約束在實際選擇動作的瞬間卻往往沒有聯合生效。怎麼區分視窗共現的表象身份和有因果約束力的真實主體身份，是與 <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 交界處尚未解決的難題。</li>
+<li><strong>從虛擬網格 NCA 走向真實物理群體形態發生（Sim-to-Real Swarm Morphogenesis）</strong>：在電腦的像素網格裡，每個細胞的位置整齊固定，通訊沒有延遲。搬到真實碰撞環境中的移動機器人群之後（Verma et al. 2026），物理體積排斥、非同步通訊丟包與局部死鎖會嚴重干擾目標形狀的收斂。怎麼把局部 NCA 狀態共享和碰撞感知控制整合起來，目前還在研究中。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把單樣本自組織 NCA（One-Shot Self-Organizing NCA）用到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 與逆向工程設計</strong>：用傳統擴散或生成模型設計超材料，需要成千上萬筆訓練樣本，又很難泛化到無序微結構。Xiang &amp; Wang (2026) 證明，把無序超材料看成局部規則自組織生長的產物，只靠單一目標樣本（One-Shot）就能學會生成一整個超材料家族，既有隨機性，力學覆蓋度也很好。</li>
+<li><strong>把能動材料（Agential Materials）的階層控制觀用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與複雜系統架構</strong>：把底層組件設計成自己會做局部誤差修正與自我修復的子模組，上層控制器就不必微調每一個底層參數，只要像生物電訊號那樣下達低維度的目標穩態設定點（Setpoint Modulation）。</li>
+<li><strong>把形態計算（Morphological Computation）用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 與儲池計算（Reservoir Computing）</strong>：有些特徵轉換本來可以交給物理非線性動力學（光學衍射、機械彈性、液態電路 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a>）免費完成，就不要讓數位神經網路用高功耗的矩陣乘法去硬擬合。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1953</td>
+<td><em>A COMMENTARY ON TURING'S DIFFUSION‐REACTION THEORY OF MORPHOGENESIS</em>（Claude W. Wardlaw）</td>
+<td>緊接在圖靈 1952 年形態發生論文之後發表的植物發育學評註：記錄了數學的反應擴散模型最初衝擊實驗生物學界時的情形。</td>
+<td>G1 歷史源頭</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/JXHNNFEQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1111/j.1469-8137.1953.tb05203.x" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2003</td>
+<td><em>Autopoiesis: a review and a reappraisal</em>（Pier Luigi Luisi）</td>
+<td>從化學與生命科學角度重審自創生理論，寫得很清楚：分析生命系統如何透過自我邊界生產與反應閉環，定義最小生命與基礎認知。</td>
+<td>G1–G2 概念基石</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/6BGWNN88" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s00114-002-0389-9" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2005</td>
+<td><em>Chemical organization theory: towards a theory of constructive dynamical systems</em>（Peter Dittrich）</td>
+<td>建設性動力系統的數學理論：把複雜的開放反應網路精確映射成封閉且質量自維持的代數化學組織階層。</td>
+<td>G2 數學結構</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/IAHKDWPV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/q-bio/0501016" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><em>The Computational Boundary of a 'Self': Developmental Bioelectricity Drives Multicellularity and Scale-Free Cognition</em>（Michael Levin）</td>
+<td>重新界定「自我」的邊界：提出無尺度的認知光錐，說明細胞的生物電耦合如何擴大目標的時空半徑，耦合斷裂時又如何退化為癌症。</td>
+<td>G1 全員必讀</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/723J7XQ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fpsyg.2019.02688" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><em>Growing 3D Artefacts and Functional Machines with Neural Cellular Automata</em>（Shyam Sudhakaran）</td>
+<td>把 2D 神經元胞自動機推進到三維功能結構（Minecraft 複雜建築與可運作機器），並展示被切割後的自我再生能力。</td>
+<td>G2 演算法實作</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/ZBJI5VB9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.08737" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><em>Technological Approach to Mind Everywhere (TAME)</em>（Michael Levin）</td>
+<td>萬物心智的實驗工程學綱領：把智慧統一重新定義為一種能力，即在代謝、生理、解剖與語言等任意問題空間中抵抗干擾、達成目標。</td>
+<td>G1–G3 核心綱領</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/IBJBXBIP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnsys.2022.768201" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><em>Synthetic morphology with agential materials</em>（Jamie A. Davies）</td>
+<td>發表於 <em>Nature Reviews Bioengineering</em> 的合成形態學綱領文章：說明工程學如何從操作被動的死物質，轉向引導有局部自主性的能動活材料。</td>
+<td>G1–G3 工程視野</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/3TBN7JNC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s44222-022-00001-9" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2021｜Matan Yah Ben Zion et al.</strong>，<em>Morphological computation and decentralized learning in a swarm of sterically interacting robots</em>（<em>Science Robotics</em>，67 引）：用 3D 列印的幾何外骨骼做出 Morphobots，讓機器人群在高密度的物理碰撞環境中，靠身體形態直接完成具身計算與分散式學習。OA PDF ｜ <a href="zotero://select/library/items/82JI4MZ9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.06953" rel="noopener">原文</a></li>
+<li><strong>2010｜Michael Nosonovsky &amp; Bharat Bhushan</strong>，<em>Surface self-organization: From wear to self-healing in biological and technical surfaces</em>（<em>Applied Surface Science</em>，56 引）：從非平衡態熱力學與多尺度自組織的角度，連結生物組織再生與人工自修復表面工程。書目索引 ｜ <a href="zotero://select/library/items/B6KM7RBI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.apsusc.2010.01.061" rel="noopener">原文</a></li>
+<li><strong>2009｜Michael Nosonovsky et al.</strong>，<em>Physical chemistry of self-organization and self-healing in metals</em>（<em>PCCP</em>，53 引）：分析微膠囊破裂癒合與金屬材料階層式自組織自修復的物理化學機制。書目索引 ｜ <a href="zotero://select/library/items/QDXRQ759" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1039/b912433k" rel="noopener">原文</a></li>
+<li><strong>2019｜Santosh Manicka &amp; Michael Levin</strong>，<em>Modeling somatic computation with non-neural bioelectric networks</em>（<em>Scientific Reports</em>，41 引）：用計算模型定量證明，非神經體細胞生物電網路能執行邏輯閘、模式記憶與抗干擾的資訊處理。OA PDF ｜ <a href="zotero://select/library/items/9C8ZF4FP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.04246" rel="noopener">原文</a></li>
+<li><strong>2023｜Michael G. Levin</strong>，<em>Collective Intelligence of Morphogenesis as a Teleonomic Process</em>（<em>MIT Press</em>，38 引）：從科學哲學與實驗發育生物學兩方面，說明形態發生為什麼可以嚴格而可操作地看成多尺度集體智慧與目的性過程（Teleonomy）。書目索引 ｜ <a href="zotero://select/library/items/PPANPJ6H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7551/mitpress/14642.003.0013" rel="noopener">原文</a></li>
+<li><strong>2024｜Alican Mertan &amp; Nick Cheney</strong>，<em>No-brainer: Morphological Computation driven Adaptive Behavior in Soft Robots</em>（<em>arXiv</em>）：質疑機器人一定要外掛神經網路大腦的預設，展示只靠軟機器人物理身體的計算，就能產生適應環境的行為。OA PDF ｜ <a href="zotero://select/library/items/ENT4VC27" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.16613" rel="noopener">原文</a></li>
+<li><strong>2025｜Paolo Cadinu et al.</strong>，<em>Bioelectrical interfaces beyond excitable cells: cancer, aging, and gene expression modulation</em>（<em>Advanced Materials Interfaces</em>）：綜述神經與心肌細胞以外的新一代生物電材料介面，重點是非興奮性細胞在癌症、老化與基因表達調控上的最新應用。OA PDF ｜ <a href="zotero://select/library/items/NERVXANF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.00872" rel="noopener">原文</a></li>
+<li><strong>2025｜Gabriel Béna, Dan F. M. Goodman, Antoine Cully et al.</strong>，<em>A Path to Universal Neural Cellular Automata</em>（<em>arXiv</em>）：探索用梯度下降學出來的連續神經元胞自動機，如何繼承康威生命遊戲的圖靈通用計算（Universal Computation）能力。OA PDF ｜ <a href="zotero://select/library/items/ZHNJIHN7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.13058" rel="noopener">原文</a></li>
+<li><strong>2026｜Elija Perrier &amp; Michael Timothy Bennett</strong>，<em>Time, Identity and Consciousness in Language Model Agents</em>（<em>AAAI Symposium Series</em>）：用 Stack Theory 區分視窗層級共現的表象身份，和對跨時間行動有約束力的真實智能體身份，並檢討機器意識評測的盲點。OA PDF ｜ <a href="zotero://select/library/items/W4R5XGCK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.09043" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Fei Zuo, Jiaqi Shi, Yujing Liu (2026)</strong>，<em>Where Does Randomness Matter in Neural Cellular Automata?</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：把神經元胞自動機（NCA）訓練時與推論時的隨機更新模式分開來看。實驗顯示，異步隨機訓練 10/10 成功的模型，改用完全確定性的同步執行，仍全部守住目標 4,096 步。文中還推導出純量晶格的精確均方穩定判據，用來區分訓練最佳化、執行模式與再生行為。</li>
+<li>連結：<a href="zotero://select/library/items/UMU6RBKU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.36797" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Sujay Uday Rittikar, Sheela Ramanna (2026)</strong>，<em>LexLattice: Multilingual Extractive Summarization via Neural Cellular Automata on Document Hierarchies</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：把法律法案的階層表示成二維語意晶格，再用只有 1.8M 可訓練參數的遮罩二維神經元胞自動機（2D NCA）彙整跨章節的證據。在 <code>EUR-Lex-Sum</code> 全部 24 種語言的抽取式摘要上勝過十億參數的大模型，對未見語言的保留率達 0.99。</li>
+<li>連結：<a href="zotero://select/library/items/Z69947R7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.27032" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-190800-增量最新入庫聚焦極性主動物質多尺度理論與演化能動材料">2026-11-19（08:00 增量）最新入庫（聚焦：極性主動物質多尺度理論與演化能動材料）</h4>
+<ol>
+<li>
+<p><strong>Multiscale Polar Theory of Microtubule and Motor-Protein Assemblies</strong>（Tong Gao, Robert Blackwell, Matthew A. Glaser, Meredith D. Betterton, Michael Shelley，2015，<em>Physical Review Letters</em>）</p>
+<ul>
+<li>核心問題：微管與馬達蛋白構成紡錘體，以及非平衡的生物主動液晶流體。但微觀上與極性相關的馬達交互作用，怎麼放大成巨觀的流場與拓撲缺陷動力學，長期沒有統一的跨尺度數學理論。</li>
+<li>關鍵做法：結合微觀的布朗動力學模擬與巨觀連續體的 Doi–Onsager 理論。模擬找出極性主動失穩應力的兩個來源：極性分選與交叉聯結鬆弛。兩者合起來，嚴格地建立了局部極性結構與大尺度流體動力流、缺陷動力學之間的因果關係。</li>
+<li>跨領域啟發：補上亞細胞結構自組織的非平衡軟物質物理基礎，並把 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a>、<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的微觀到連續體閉合研究串起來。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/2GGGCGNW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1401.8059" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Darwin’s agential materials: evolutionary implications of multiscale competency in developmental biology</strong>（Michael G. Levin，2023，<em>Cellular and Molecular Life Sciences</em>）</p>
+<ul>
+<li>核心問題：演化理論多半把發育中的細胞看成受基因組擺佈的被動組件，很少有系統地探討這個問題：發育過程本身跨尺度的問題解決勝任力，怎麼反過來加速並引導生物演化的搜尋。</li>
+<li>關鍵做法：論證生物結構有多尺度勝任力架構。細胞、組織與器官承襲了單細胞的行為曲目，能在代謝、轉錄、生理與解剖空間展現調節可塑性。生理迴路讓能動材料有了計算屬性，演化因此能馴服並利用底層的集體智慧，這也解釋了演化搜尋為什麼又快又強健。</li>
+<li>跨領域啟發：把發育計算和 <a class="wl" href="32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a> 的演化搜尋效率分析連起來，也為 <a class="wl" href="07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a>、<a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 與 <a class="wl" href="23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 提供分層自主組件的設計哲學。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/5F5PFD5C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s00018-023-04790-z" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Distributed Swarm Morphogenesis with Neural Cellular Automata</strong>（Ray Verma, Eliseo Ferrante, Anthony Tzes，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：真實機器人群的形態發生，需要大量機器人只靠局部感知拼出複雜的目標形狀。傳統方法往往依賴預先寫死的全局目標座標清單，環境一變動或個體一故障，就很難漸進擴展。</li>
+<li>關鍵做法：把神經元胞自動機（NCA）和位點分配、防碰撞控制做模組化整合，提出去中心化的附著位點發現機制：已在陣列中的機器人即時更新並共享局部 NCA 狀態，動態指引新機器人漸進生長成形。</li>
+<li>跨領域啟發：把生物細胞的生長演算法接到 <a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的實體群體機器人控制上，做到不需要全局藍圖的自組裝工程。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/DA2DXR5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31900" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>One-Shot Generative Design for Disordered Metamaterials via Self-Organizing Neural Cellular Automata</strong>（Yujie Xiang &amp; Liwei Wang，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：無序超材料有內在隨機、不規則的微結構，力學性能覆蓋度遠超過規則晶格。但它的逆向設計長期卡在兩難之間：手工參數化的表達力不足，傳統生成式 AI 又需要大量數據，而且難以泛化。</li>
+<li>關鍵做法：利用自組織神經元胞自動機的局部生長偏置，做到無序超材料的單樣本生成式設計（One-Shot Generative Design），用很低的參數與資料成本，生成兼具隨機多樣性與目標物理性能的微結構。</li>
+<li>跨領域啟發：為 <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 中的 AI 材料發現和計算力學逆問題（<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>）提供一種樣本效率很高的自組織生成做法。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/P7VBJ8MT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.14475" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

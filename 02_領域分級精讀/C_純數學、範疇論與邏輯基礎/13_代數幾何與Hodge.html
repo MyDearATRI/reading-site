@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>13｜代數幾何與Hodge（Algebraic Geometry, Hodge Theory &amp; Motives） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="13代數幾何與hodgealgebraic-geometry-hodge-theory-motives">13｜代數幾何與Hodge（Algebraic Geometry, Hodge Theory &amp; Motives）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> · <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> · <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> · <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>代數幾何與 Hodge 理論研究的是，怎麼在離散的多項式代數、連續的複流形微積分和有限域上的算術數論這三個看似不相干的領域之間，建立像羅塞塔石碑那樣可以互相對照的翻譯。它的中心問題是：一個空間的拓撲洞（上同調類），在什麼條件下確實是由多項式方程定義出來的幾何子空間（代數閉鏈），而不只是分析上算出來的東西？</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+多項式方程組 <span class="math inline">f_1(z_1,\dots,z_n)=\dots=f_r(z_1,\dots,z_n)=0</span> 定義的空間（代數簇／概形）很剛性：只要知道它在很小一塊局部的代數資訊，全局的樣子往往就已經確定。但直接解高次多項式，或判斷兩個方程組何時等價，都很困難。數學家的做法是把這個剛性的代數物件放進複數分析裡，當成光滑複流形，用微積分與調和微分形式算出拓撲不變量（Betti 上同調與 Hodge 分解）。問題跟著出現：微積分與拓撲太寬鬆，在線性空間裡算出了大量的「拓撲洞」。怎麼反過來辨認哪些洞確實來自多項式子簇（Algebraic Cycles，這就是懸賞百萬美元的千禧年難題 Hodge 猜想）？在沒有微積分可用的奇異空間，或有限特徵的數論世界（如 <span class="math inline">\mathbb{F}_p</span> 與 <span class="math inline">\mathbb{Q}_p</span>）裡，又要怎麼重建同樣有力的幾何工具？</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+把每個代數幾何形狀想成一件樂器，不同分支的數學家拿著不同的感測器替它做光譜掃描：
+<ul>
+<li>拓撲學家做的是黑白 X 光（奇異上同調 <span class="math inline">H^k_{\mathrm{Betti}}</span>），只數得出有幾個洞。</li>
+<li>複分析學家用 Hodge 理論裝上稜鏡，發現光譜其實按全純座標 <span class="math inline">dz</span> 與反全純座標 <span class="math inline">d\bar{z}</span> 的比例分成彩色條紋 <span class="math inline">H^{p,q}</span>。正中央對稱的條紋 <span class="math inline">H^{p,p} \cap H^{2p}(X,\mathbb{Q})</span>，看起來像是實體肋骨（代數子簇）留下的投影。</li>
+<li>數論學家用素數頻率掃描（<span class="math inline">\ell</span>-進平展上同調與 <span class="math inline">p</span>-進 Hodge 理論）。
+Grothendieck 提出的 Motives（母題／動機）構想，是要找出這些掃描儀背後共同的幾何原子元素週期表：每一種上同調光譜，都是同一個幾何原子（Motive）在不同鏡頭下的投影。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+在純數學內部，它與 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>（凝聚層導出範疇 <span class="math inline">D^b\operatorname{Coh}(X)</span>）、<a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a>（<span class="math inline">\mathbb{A}^1</span>-母題同倫論）和 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>（液態分析空間與剛性 GAGA）關係密切。在理論物理中，Calabi–Yau 流形的 Hodge 結構變分（VHS）直接對應弦論的鏡像對稱（Mirror Symmetry）與量子乘積（Gromov–Witten 不變量）。在機器學習與計算理論中，多項式空間的實對數典範閾值（RLCT / 奇異消解）是 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 裡奇異學習理論（SLT，解釋神經網路泛化與相變）的主要工具；代數簇度數與不變量幾何則是 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> 裡幾何複雜度理論（GCT）的基礎。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    S0[&quot;Grothendieck 概形與層論 (Schemes &amp; Sheaves)：統一多項式幾何與數論&quot;] --&gt; H1[&quot;光滑射影簇之純 Hodge 分解：調和形式將拓撲上同調拆為 H^(p,q)&quot;]
+    H1 --&gt; HC[&quot;Hodge 猜想與代數閉鏈 (Chow 群)：哪些 (p,p)-上同調類源於代數子簇？&quot;]
+    H1 --&gt;|&quot;推廣至奇異與開簇&quot;| MHS[&quot;Deligne 混合 Hodge 結構 (MHS) 與 Griffiths 週期映射變分 (VHS)&quot;]
+    S0 &amp; MHS --&gt;|&quot;尋找萬有上同調母體&quot;| MOT[&quot;Grothendieck / Voevodsky Motives、母題積分與 p-進 Hodge 理論&quot;]
+    MOT &amp; HC --&gt; MOD[&quot;現代前沿：非阿貝爾 Hodge、凝聚層導出範疇 D^b(Coh) 與穩定性條件&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>概形與層上同調：讓代數與幾何互為鏡像（Schemes &amp; Sheaf Cohomology）</strong></p>
+<ul>
+<li>直覺理解：古典代數幾何只看方程組在複數 <span class="math inline">\mathbb{C}^n</span> 裡的零點集合，這會丟掉兩件事。一是重根資訊：<span class="math inline">x^2=0</span> 與 <span class="math inline">x=0</span> 的點集都只是原點，但前者多帶一個無窮小切方向。二是整數與有限域的算術：<span class="math inline">\mathbb{Z}</span> 上的方程在每個素數 <span class="math inline">p</span> 模下都有一張幾何切片。Grothendieck 的概形（Scheme）把任意交換環 <span class="math inline">R</span> 都變成一個幾何空間 <span class="math inline">\operatorname{Spec}(R)</span>：素理想是空間的點，環元素是空間上的函數，冪零元（Nilpotents）就是內建的無窮小探針。</li>
+<li>機制或核心表達式：局部環化空間 <span class="math inline">(X, \mathcal{O}_X)</span> 若局部同構於仿射概形 <span class="math inline">(\operatorname{Spec} R, \widetilde{R})</span>，就稱為概形。局部可自由層對應向量叢，更一般的凝聚層（Coherent Sheaves）與其導出範疇 <span class="math inline">D^b\operatorname{Coh}(X)</span> 則完整編碼了子簇、交集與形變。全局不變量由層上同調群 <span class="math inline">H^i(X, \mathcal{F}) = R^i\Gamma(X, \mathcal{F})</span> 給出，它度量的是局部截面黏合成全局截面時的障礙。</li>
+<li>能做到什麼，代價是什麼：數論（算術幾何）與連續複幾何因此可以用同一套微積分與上同調語言處理。代價是 Zariski 拓撲很粗糙（開集大到稠密），要再引入平展拓撲（Étale Topology）、凝聚拓撲（<a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>），才能找回精細的局部鄰域直覺。</li>
+</ul>
+</li>
+<li>
+<p><strong>Hodge 分解、混合 Hodge 結構與週期變分（Hodge Decomposition, MHS &amp; VHS）</strong></p>
+<ul>
+<li>直覺理解：在緊緻光滑複射影流形（Kähler 流形）<span class="math inline">X</span> 上，每個拓撲上同調類裡都恰好有唯一一個能量最低的調和微分形式（Harmonic Form），就像繃緊在洞口上的極小肥皂膜。複流形的切空間本來就分成全純方向 <span class="math inline">dz_i</span> 與共軛方向 <span class="math inline">d\bar{z}_j</span>，拉普拉斯算子又與雙分次相容，所以純拓撲的不變量多出了複分析的精細座標。空間帶有尖點奇異或挖掉邊界時，Deligne 證明這些碎片雖然不再純粹，卻會像俄羅斯娃娃一樣按權重濾過（Weight Filtration）疊成嚴格的混合 Hodge 結構（Mixed Hodge Structure）。</li>
+<li>機制或核心表達式：對光滑複射影簇 <span class="math inline">X</span>，其 <span class="math inline">k</span> 階複係數奇異上同調具有純權重 <span class="math inline">k</span> 的正交直和分解：
+<div class="math inline">H^k(X, \mathbb{C}) = \bigoplus_{p+q=k} H^{p,q}(X), \qquad \overline{H^{p,q}(X)} = H^{q,p}(X), \qquad H^{p,q}(X) \cong H^q(X, \Omega_X^p)</div>
+當 <span class="math inline">X_t</span> 隨模參數 <span class="math inline">t \in B</span> 連續形變時，全純濾過 <span class="math inline">F^p H^k(X_t,\mathbb{C}) = \bigoplus_{r \ge p} H^{r, k-r}</span> 在平坦 Gauss–Manin 聯絡 <span class="math inline">\nabla</span> 下必須滿足 Griffiths 橫截性定律（Griffiths Transversality）：
+<div class="math inline">\nabla(F^p) \subseteq F^{p-1} \otimes \Omega_B^1</div>
+也就是說，幾何形變每次最多只能讓全純指標往左滑動一格。在退化邊界處，漸近 Hodge 理論還直接對應鏡像對稱中的量子乘積與 WDVV 方程。</li>
+<li>能做到什麼，代價是什麼：可以直接推出純拓撲看不到的限制，例如奇數維 Betti 數 <span class="math inline">b_{2m+1}</span> 必為偶數、Hodge–de Rham 譜序列在特徵 <span class="math inline">0</span> 下於 <span class="math inline">E_1</span> 頁退化。代價是在正特徵 <span class="math inline">p&gt;0</span> 下這些經典機制全部失效（參見 <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 2026 年 Cheng 證明正特徵 Hodge-to-de Rham 譜序列可在任意高頁非退化），數學家只好另外發展艱深的 <span class="math inline">p</span>-進 Hodge 理論與棱柱上同調。</li>
+</ul>
+</li>
+<li>
+<p><strong>代數閉鏈與 Hodge 猜想（Algebraic Cycles, Chow Groups &amp; The Hodge Conjecture）</strong></p>
+<ul>
+<li>直覺理解：設 <span class="math inline">Z \subset X</span> 是由多項式切出來的餘維度 <span class="math inline">p</span> 代數子簇（複維度 <span class="math inline">n-p</span>，實維度 <span class="math inline">2n-2p</span>）。把微分形式在 <span class="math inline">Z</span> 上積分時，因為複子流形局部只有 <span class="math inline">n-p</span> 個全純變數，全純與反全純次數不平衡的形式積分都是零。所以代數子簇產生的上同調類 <code>[Z]</code> 一定落在正中央的 Hodge 類空間 <span class="math inline">\operatorname{Hdg}^p(X) = H^{2p}(X,\mathbb{Q}) \cap H^{p,p}(X)</span> 中。Hodge 猜想反過來問：所有有理係數的 <span class="math inline">(p,p)</span> 型上同調類，是否都來自代數子簇的有理線性組合？</li>
+<li>機制或核心表達式：定義閉鏈類映射（Cycle Class Map），從 Chow 群（子簇模去有理等價）映到 Hodge 類：
+<div class="math inline">\operatorname{cl}: \operatorname{CH}^p(X)_{\mathbb{Q}} \longrightarrow \operatorname{Hdg}^p(X) := H^{2p}(X, \mathbb{Q}) \cap H^{p,p}(X)</div>
+Hodge 猜想斷言 <span class="math inline">\operatorname{cl}</span> 在有理數係數 <span class="math inline">\mathbb{Q}</span> 下是滿射。要注意，若改為整數係數 <span class="math inline">\mathbb{Z}</span>，Atiyah–Hirzebruch 與 Soulé–Voisin 已構造出撓上同調反例與 Kollár 型非代數整類，證明整係數 Hodge 猜想為假。</li>
+<li>能做到什麼，代價是什麼：<span class="math inline">p=1</span>（Lefschetz <span class="math inline">(1,1)</span> 定理）時猜想完全成立，只靠線性代數與格點就能預言曲面上存在哪些代數曲線。但對 <span class="math inline">p \ge 2</span>，目前很缺從分析上的調和形式造出多項式方程的通用工具。而且 Chow 群本身可能是無窮維的（Mumford 定理），遠超出上同調能捕捉的範圍。</li>
+</ul>
+</li>
+<li>
+<p><strong>Motives、母題積分與導出穩定性（Motives, Motivic Integration &amp; Bridgeland Stability）</strong></p>
+<ul>
+<li>直覺理解：Chow 群太精細，單一上同調又只看到一個側面。Grothendieck 與 Voevodsky 建立的 Motives（母題），和 Kontsevich 開創的母題積分（Motivic Integration），把所有代數簇放進一個像剪紙拼圖的環 <span class="math inline">K_0(\mathsf{Var}_k)</span>：把大空間 <span class="math inline">X</span> 切成閉子簇 <span class="math inline">Z</span> 與開補集 <span class="math inline">X \setminus Z</span>，規定 <span class="math inline">[X] = [Z] + [X \setminus Z]</span>，做法很像幾何測度論。在範疇層級，Kontsevich–Soibelman 在 3 維 Calabi–Yau 導出範疇上裝備穩定性結構（Stability Structures），計數半穩定物件（物理中的 BPS 態），得到母題 Donaldson–Thomas 不變量。這些不變量在跨牆相變（Wall-Crossing）下的變化彼此協調。</li>
+<li>機制或核心表達式：在簇的 Grothendieck 環局部化 <span class="math inline">\mathcal{M}_k = K_0(\mathsf{Var}_k)[\mathbb{L}^{-1}]</span>（其中 <span class="math inline">\mathbb{L} = [\mathbb{A}^1_k]</span> 為仿射直線母題類）中，對弧空間（Arc Space <span class="math inline">\mathcal{L}_\infty(X)</span>）定義幾何測度積分 <span class="math inline">\int_{\mathcal{L}_\infty(X)} \mathbb{L}^{-\operatorname{ord}_t K_{Y/X}} d\mu</span>，由此證明：雙有理等價的 Calabi–Yau 流形（或同一個奇異簇的不同極小奇異消解 Crepant Resolutions）必定有完全相同的 Hodge 數。</li>
+<li>能做到什麼，代價是什麼：不必選定具體的上同調，就能在最一般的層級證明雙有理不變性與跨牆跳躍公式（Cluster Transformations）。代價是 Grothendieck 關於純母題阿貝爾範疇的標準猜想（Standard Conjectures）至今沒有解決，現代母題論因此轉向三角／穩定 <span class="math inline">\infty</span>-範疇（Voevodsky <span class="math inline">\mathsf{DM}(k)</span> 與母題穩定同倫範疇 <span class="math inline">\mathsf{SH}(S)</span>）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>代數閉鏈構造極限與自守上同調障礙</strong>：數論與幾何學家常希望透過 Shimura 簇上的自守表示（Automorphic Representations）與 Theta 提升來大量製造代數閉鏈。但 2026 年 Mostaed 的新工作在 <span class="math inline">\mathrm{SO}(2,26)</span> Shimura 簇的相交上同調中構造出純 <span class="math inline">(p,p)</span> 型有理自守類，並證明它是非內部類，無法來自邊界推前的代數閉鏈。同時 Laterveer 也在一般虧格 7 Fano 三維簇上，發現了阻礙乘法 Chow–Künneth 分解的非撓 Abel–Jacobi 平凡閉鏈。這些結果顯示 Chow 群與上同調之間的落差比預期更大。</li>
+<li><strong>非阿貝爾 Hodge 理論中的「墨菲定律（Murphy's Law）」與算術剛性</strong>：Simpson 猜想預測，來自幾何的局部系統應當是整的（Integral），並且有很強的算術剛性。那麼對非整的 <span class="math inline">\mathbb{Q}</span>-Hodge 結構變分，模空間到底能病態到什麼程度？2026 年 Baldi–Lam 證明了非阿貝爾 Hodge 理論中的「墨菲定律」。他們透過相對特徵簇構造出大量違反直覺的非整變分實例，挑戰了傳統認定的剛性邊界。</li>
+<li><strong><span class="math inline">p</span>-進 Hodge、凝聚分析空間與母題同倫的統一</strong>：怎麼把複幾何的 Hodge 理論、<span class="math inline">p</span>-進數論中的 de Rham／晶體／Syntomic 表示（如 2026 年 Wild 用 Bar 構造重證平展基本群冪單完備化的 <span class="math inline">p</span>-進 Hodge 定理），以及 Scholze 的液態分析空間（<a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>）都納入六函子形式主義（6-Functor Formalism），是當今算術代數幾何的最高目標。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>（奇異消解與學習相變）</strong>：神經網路的參數到函數映射是高度退化的代數／解析映射，損失曲面的零點集裡到處是奇異點。渡邊澄夫的奇異學習理論（SLT）直接借用代數幾何的 Hironaka 奇異消解與母題／Zeta 積分極點（RLCT <span class="math inline">\lambda</span>），精確預測深度模型在訓練中跨過不同退化奇異點時出現的 Grokking 與內部電路形成相變。</li>
+<li><strong>遷移至 <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 與圖訊號處理（Hodge 分解作為網路流正交拆解）</strong>：離散組合 Hodge 分解（Helmholtz–Hodge Decomposition on Simplicial Complexes）把高階網路上的邊流唯一地正交拆成三部分：梯度流（全局勢能差）<span class="math inline">\oplus</span> 旋度流（局部三角循環）<span class="math inline">\oplus</span> 調和流（全局拓撲洞環流）。它已經是排名聚合、套利檢測與拓撲深度學習的標準工具。</li>
+<li><strong>遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>（穩定性跨牆公式與相圖跳躍）</strong>：Kontsevich–Soibelman 在導出範疇上發現的跨牆公式（Wall-Crossing Formula）說的是：外部參數跨過穩定性邊界時，單個束縛態計數會不連續地跳變，但所有態組裝成的量子環面自同構乘積嚴格保持不變。分析凝聚態與多體系統的拓撲相變時，可以拿它當通用的不變量範本。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 254 篇核心文獻（其中 250 篇有 Open-Access PDF 原文直連）。所有原始 PDF 都收在隱藏庫 <code>~/.ai_papers_vault.noindex</code> 並綁定到 Zotero，不會出現在 macOS Spotlight。點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2025</td>
+<td><em>The Rising Sea: Foundations of Algebraic Geometry</em>，Ravi Vakil</td>
+<td>公開的現代概形論教科書，公認寫得最親切，也最重視幾何直覺與米田哲學（標題取自 Grothendieck「上漲的海水淹沒堅果」的比喻）。</td>
+<td>G1–G2 入門首選 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/B5NS893N" class="zotero">📚 Zotero 開啟</a> · <a href="https://math.stanford.edu/~vakil/216blog/FOAGoct2125public.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Mixed Hodge Structures</em>，Fouad Elzein, Lê Dung Trang</td>
+<td>只要有基礎上同調背景就能讀的導論，清楚說明純 Hodge 理論、極化與 Deligne 混合 Hodge 結構是怎麼構造的。</td>
+<td>G2 核心主幹 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/QCTUG5KW" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1302.5811" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2008</td>
+<td><em>Stability structures, motivic Donaldson-Thomas invariants and cluster transformations</em>，Maxim Kontsevich, Yan Soibelman</td>
+<td>建立母題跨牆理論的長文（被引 668 次），現代代數幾何、叢代數（Cluster Algebras）與弦論 BPS 態計數從這裡開始匯流。</td>
+<td>G3 經典 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/DUKP6NJX" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/0811.2435" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>1999</td>
+<td><em>An introduction to motivic integration</em>，Alastair Craw</td>
+<td>介紹 Kontsevich 母題積分的短篇導讀，入門門檻很低，一步步算出為什麼不同極小奇異消解的 Hodge 數一定相等。</td>
+<td>G2 必讀 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/FNA7SA7Z" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/9911179" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2004</td>
+<td><em>Torsion cohomology classes and algebraic cycles on complex projective manifolds</em>，C. Soule, C. Voisin</td>
+<td>說明整係數 Hodge 猜想為什麼不成立，並構造出固定維度下任意大素數階的非代數撓上同調類。</td>
+<td>G2–G3 猜想邊界 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/VPE4V4U5" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0403254" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（7 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>2007｜Maxim Kontsevich</strong>，<em>Notes on motives in finite characteristic</em>（被引 87 次，<code>[OA PDF]</code>）：把有限特徵曲線上的母題局部系統拿來和代數動力學、二維格點統計物理模型類比，並提出三個猜想。 <a href="zotero://select/library/items/XZBUP6ZZ" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0702206" rel="noopener">原文連結</a></li>
+<li><strong>2012｜C. Robles</strong>，<em>Schubert varieties as variations of Hodge structure</em>（被引 28 次，<code>[OA PDF]</code>）：完整刻畫哪些 Schubert 簇可以實現為 Hodge 結構變分（VHS），並證明其無窮小軌道張成 Griffiths 橫截性對應的特徵上同調基底。 <a href="zotero://select/library/items/9K4PX7KG" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1208.5453" rel="noopener">原文連結</a></li>
+<li><strong>2013｜Spencer Bloch, Hélène Esnault, Moritz Kerz</strong>，<em>Deformation of algebraic cycle classes in characteristic zero</em>（被引 21 次，<code>[OA PDF]</code>）：受 Grothendieck 變分 Hodge 猜想啟發，指出有理代數閉鏈的形式形變存在性與 Chow–Künneth 分解之間有等價關聯。 <a href="zotero://select/library/items/7WVF3HKF" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1310.1773" rel="noopener">原文連結</a></li>
+<li><strong>2000｜Eduardo Cattani, Javier Fernandez</strong>，<em>Asymptotic Hodge theory and quantum products</em>（被引 12 次，<code>[OA PDF]</code>）：在四維 Calabi–Yau 流形上直接證明，Gromov–Witten 量子勢能的 WDVV 方程等價於最大冪單退化邊界處的 Griffiths 橫截性。 <a href="zotero://select/library/items/TBAHW4DV" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0011137" rel="noopener">原文連結</a></li>
+<li><strong>2008｜Mikhail Kapranov</strong>，<em>Real mixed Hodge structures</em>（<code>[OA PDF]</code>）：從幾何的角度，把實混合 Hodge 結構範疇等同於複平面 <span class="math inline">\mathbb{C}</span> 上帶 <span class="math inline">\mathbb{C}^*</span>-等變聯絡（不必平坦）的向量叢範疇，為 Twistor 幾何的觀點做了準備。 <a href="zotero://select/library/items/8S5KBQ97" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/0802.0215" rel="noopener">原文連結</a></li>
+<li><strong>2008｜Javier Fernandez, Eduardo Cattani</strong>，<em>Infinitesimal Variations of Hodge Structure at Infinity</em>（<code>[OA PDF]</code>）：建立無窮遠處退化極化 Hodge 結構變分的無窮小理論，並證明它可以積分回全局極化 VHS。 <a href="zotero://select/library/items/W4T6DHZF" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/0810.0151" rel="noopener">原文連結</a></li>
+<li><strong>2020｜Peter Scholze</strong>，<em>Lectures on Analytic Spaces</em>（<code>[OA PDF]</code>）：用凝聚數學與液態向量空間統一複解析幾何與非阿基米德（<span class="math inline">p</span>-進）解析空間，重新建立現代 GAGA 的基礎（詳見 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>）。 <a href="zotero://select/library/items/EV6EE487" class="zotero">📚 Zotero 開啟</a> · <a href="https://www.math.uni-bonn.de/people/scholze/Analytic.pdf" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Nonabelian Hodge theory in positive characteristic for rank-2 vector bundles over curves</strong>，Thanh Tam Pham, Christian Pauly：把光滑射影曲線上秩 2 向量叢的正特徵 Ogus–Vologodsky 非阿貝爾 Hodge 對應，具體改寫成「用編碼曲線 <span class="math inline">W_2</span>-提升的上同調類去平移向量叢的擴張類」。由此證明次數 0 的一般秩 2 向量叢一定容許帶非零冪零 <span class="math inline">p</span>-曲率的聯絡。（<a href="zotero://select/library/items/ZT6CHHEE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.15312" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Hodge theory and topology of Bogomolov--Guan manifolds</strong>，Nikon Kurnosov, Ángel David Ríos Ortiz：非 Kähler 不可約全純辛 Bogomolov–Guan 流形有一組奇特的對比。它的 Frölicher 譜序列於 <span class="math inline">E_1</span> 退化，Hodge 菱形不對稱，Betti 數也和廣義 Kummer 流形不同；但全維度歐拉示性數，以及四維與六維的全部陳數、龐特里亞金數，卻和廣義 Kummer 流形完全一致。（<a href="zotero://select/library/items/H27N3EKJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.01210" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>p-adic Hodge theory of unipotent completions revisited</strong>，Ruth Wild（2026，<em>arXiv:2610.17169</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：<span class="math inline">p</span>-進域 <span class="math inline">K/\mathbb{Q}_p</span> 上的代數簇 <span class="math inline">X</span>，其幾何平展基本群帶有很豐富的非阿貝爾伽羅瓦表示資訊。傳統上要證明它的冪單完備化滿足 de Rham／半穩定／晶體性質，得靠繁重的比較定理。</li>
+<li>關鍵做法：統一使用代數拓撲的 Bar 構造與現代 Syntomic 方法，對「幾何平展基本群的冪單完備化是 pro-de Rham、pro-semi-stable 及 pro-crystalline 表示」給出新的概念性證明。</li>
+<li>跨領域啟發：顯示高階同倫代數（Bar 構造）可以大幅簡化算術幾何中的非阿貝爾 <span class="math inline">p</span>-進 Hodge 比較定理。</li>
+<li>連結：<a href="zotero://select/library/items/SVT99F7C" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.17169" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Murphy's law in non-abelian Hodge theory</strong>，Gregorio Baldi, Yeuk Hay Joshua Lam（2026，<em>arXiv:2608.02875</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：來自幾何的 Hodge 結構變分總是帶有整係數格（<span class="math inline">\mathbb{Z}</span>-VHS）。抽象的 <span class="math inline">\mathbb{Q}</span>-VHS 與非阿貝爾特徵簇上的局部系統，究竟能偏離幾何整性多遠？</li>
+<li>關鍵做法：利用相對特徵簇 Teichmüller 分量的 Fenchel–Nielsen 參數化，具體構造出大量非整 <span class="math inline">\mathbb{Q}</span>-Hodge 結構變分與病態算術現象，說明非阿貝爾 Hodge 模空間遵循 Vakil 式的「墨菲定律」（凡未被公理禁止的病態皆會發生）。</li>
+<li>跨領域啟發：替「真正來自幾何的表示」與「一般平坦聯絡模空間」的區分，劃出了清楚的算術反例邊界。</li>
+<li>連結：<a href="zotero://select/library/items/NNN4BB7J" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2608.02875" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批擴展追蹤2026-近期">同批擴展追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Viktor Burghardt</strong>，<em>Loyalty of the affine line in motivic homotopy theory</em>（<em>arXiv:2610.11802</em>，<code>[OA PDF]</code>）：在導出概形 <span class="math inline">S</span> 上的非 <span class="math inline">\mathbb{A}^1</span>-不變母題譜範疇 <span class="math inline">\mathrm{MS}_S</span> 中，證明整數局部可逆性由仿射直線約化母題懸置譜忠實決定，並刻畫母題球譜何時自動恢復 <span class="math inline">\mathbb{A}^1</span>-不變性。 <a href="zotero://select/library/items/J9BTQQH9" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.11802" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Charles De Clercq, Fabio Tanania</strong>，<em>Isotropic localizations of mixed initial motives</em>（<em>arXiv:2609.37862</em>，<code>[OA PDF]</code>）：定義包含內型半單代數群射影齊性簇的初始混合母題（Initial Motives）三角範疇，並用 Chow 權重結構證明各向同性局部化族在其上的保守性。 <a href="zotero://select/library/items/23MXU9E9" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.37862" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Robert Laterveer</strong>，<em>Algebraic cycles and Fano threefolds of genus 7</em>（<em>arXiv:2608.12950</em>，<code>[OA PDF]</code>）：在一般虧格 7 素 Fano 三維簇 <span class="math inline">Y</span> 的自乘積 <span class="math inline">Y \times Y</span> 上構造出 Abel–Jacobi 平凡但非撓的顯式 2-閉鏈，證明它不具備 Shen–Vial 乘法 Chow–Künneth 分解。 <a href="zotero://select/library/items/IZ9GHCXA" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2608.12950" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Amir Mostaed</strong>，<em>Automorphic Cohomology and the Limits of Algebraic Cycles</em>（<em>arXiv:2602.06865</em>，<code>[OA PDF]</code>）：在 <span class="math inline">\mathrm{SO}(2,26)</span> Shimura 簇 Baily–Borel 緊化上，由自守 Theta 提升構造純有理 Hodge 類，並證明它們構成自守類通往代數閉鏈的顯式障礙。 <a href="zotero://select/library/items/IFZT8AXS" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2602.06865" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

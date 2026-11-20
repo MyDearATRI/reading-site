@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>24｜研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="24研究方法與政策可重現性危機統計顯著性檢定模型卡與-ai-監管治理">24｜研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> ｜ <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>研究方法與政策處理人工智慧與計算科學的認識論基礎和社會契約。實驗這一端，用嚴格的變異數拆解、消融設計與統計檢定，分辨真正的進展和隨機運氣。治理這一端，用透明化文檔（Model Cards）、可驗證的執行證據鏈與風險分級法規（如 EU AI Act）約束高風險部署。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+現代機器學習與科學計算有兩個信任問題：
+<ol>
+<li><strong>實驗室內部的可重現性幻覺（Reproducibility Illusion）</strong>：在深度強化學習與複雜神經網路中，只要換五個隨機種子（Random Seeds）、微調超參數，或疊上幾個沒有拆開檢驗的技巧，就能在排行榜上刷出超過前人的「SOTA」。如果不把資料抽樣、初始化與超參數搜尋的複合變異數算進去，整個領域就是在雜訊上空轉。</li>
+<li><strong>社會部署端的黑箱擴散與責任真空</strong>：基礎模型與自主編碼智能體（Coding Agents）產出內容與代碼的速度，已經遠超過人類維護者、醫療機構與立法者審查風險、歸屬責任的能力。怎麼在不扼殺開源創新的前提下，建立可審計的透明化標準與法律護欄，是技術方法論與公共政策要一起處理的問題。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+可以把 AI 研發比作現代新藥研發與航空工程：
+<ul>
+<li>統計檢定與受控消融（Henderson / Dror / Bouthillier）是雙盲臨床試驗的統計學。不能因為三個病人吃了複合配方剛好退燒，就宣稱神藥誕生。必須把每個成分單獨拆開（Ablation），算清楚安慰劑漲落與效應量（Effect Size）。</li>
+<li>模型卡（Model Cards）與本地推理證據層（Caleta）是貼在藥盒上的適應症、禁忌症與批次 SHA-256 封條。上面清楚標示在哪些人口子群體上有效、哪些場景嚴禁使用，以及眼前的推論結果確實出自哪一版權重。</li>
+<li>歐盟 AI 法案（EU AI Act）與專案治理清單是空域分級管制與適航認證。玩具紙飛機免審放行；載客民航機（高風險醫療、司法、信貸系統）必須通過嚴格的可解釋性、人類監督與風險管理審查才能起飛。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>和 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a>、<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 相接：經驗性的 AI 論文只要涉及基準比較、模型選型或醫療／科學數據建模（如 scRNA-seq 誤差模型與醫學影像配準消融），都要受本領域的統計規範檢驗。</li>
+<li>和 <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 相接：大模型現在被大量用來從科學文獻自動抽取結構化數據。能不能靠跨模型共識與自我提示確保證據可重現，決定了 AI for Science 所依賴的文獻資料有多可靠。</li>
+<li>和 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與開源生態相接：AI 編碼代理大量向開源專案提交 PR，專案級治理清單（Governance Manifest）正成為讓全球開源協作不致崩潰的基礎設施。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Root[&quot;可信計算科學與負責任 AI 雙螺旋&quot;] --&gt; M1[&quot;方法論支柱：實驗統計嚴謹性與可重現性&quot;]
+    Root --&gt; M2[&quot;工程透明支柱：標準化文檔與可驗證推論證據鏈&quot;]
+    Root --&gt; M3[&quot;制度治理支柱：風險分級法規與開源協作治理&quot;]
+
+    M1 --&gt; StatTest[&quot;隨機演算法與 NLP 統計檢定指南 (Arcuri 2012 / Dror 2018)&quot;]
+    StatTest --&gt; RLRepro[&quot;深度強化學習可重現性警鐘 (Henderson 2017) 與基準變異數分解 (Bouthillier 2021)&quot;]
+    RLRepro --&gt; Ablation[&quot;科學機器學習基準與系統化正交消融設計 (SciML / 醫療影像 / 低資源語言)&quot;]
+
+    M2 --&gt; ModelCard[&quot;模型卡透明報告框架 (Mitchell et al. 2018)：預期用途、限制與跨群體分類評估&quot;]
+    ModelCard --&gt; TrustLayer[&quot;可重現文獻抽取共識與本地推理密碼學證據層 (Caleta 2026)&quot;]
+
+    M3 --&gt; EUAI[&quot;歐盟人工智慧法案剖析 (Veale 2021 / Pavlidis 2025)：風險金字塔、幻覺責任與 XAI 法定義務&quot;]
+    EUAI --&gt; AgentGov[&quot;智能體時代治理：開源專案代理貢獻治理清單 (Governance Manifest 2026)&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>多源實驗變異數分解與無母數統計檢定（Variance Accounting &amp; Statistical Testing）</strong></p>
+<ul>
+<li>直覺理解：只固定測試集與超參數，跑 3 個隨機種子取平均，再畫出窄窄的誤差棒，是機器學習裡最常見的偽精確。比較演算法時，真正的變異是資料抽樣、資料增強、權重初始化與超參數選擇加總起來的。分佈有偏態或離群值時，直接套用常態分佈的 <span class="math inline">t</span>-檢定還會嚴重高估顯著性。</li>
+<li>機制或核心表達式：依全變異數律（Bouthillier et al. 2021），學習管線性能指標 <span class="math inline">M</span> 在演算法 <span class="math inline">\mathcal{A}</span> 下的總變異數，必須對資料分割 <span class="math inline">D</span>、隨機初始化 <span class="math inline">\xi</span> 與超參數搜尋 <span class="math inline">\lambda</span> 聯合展開。比較隨機演算法時（Arcuri &amp; Briand 2012；Dror et al. 2018），應該同時報告無母數 Mann–Whitney <span class="math inline">U</span>／置換檢定的 <span class="math inline">p</span> 值，以及無分佈假設的 Vargha–Delaney 效應量 <span class="math inline">\hat{A}_{12}</span>（演算法 1 隨機擊敗演算法 2 的機率）：
+<div class="math inline">\mathrm{Var}(M) = \mathrm{Var}_D\!\big(\mathbb{E}_{\xi,\lambda}[M \mid D]\big) + \mathbb{E}_D\!\big[\mathrm{Var}_{\xi,\lambda}(M \mid D)\big], \qquad \hat{A}_{12} = \frac{\#(X_1 &gt; X_2) + 0.5\,\#(X_1 = X_2)}{n_1 n_2}</div></li>
+<li>能做到什麼，代價是什麼：可以濾掉兩種虛假提升：靠挑選幸運種子（Seed Cherry-Picking）得到的，以及把架構改動和正則化損失綁在一起造成的。代價是完整重跑資料分割與超參數隨機搜尋，算力成本往往是單次訓練的數十倍，需要搭配折衷的抽樣估計器（如 Bootstrap / 交叉驗證）。</li>
+</ul>
+</li>
+<li>
+<p><strong>結構化透明文檔與可驗證推論證據鏈（Model Cards &amp; Evidence-Oriented Reproducibility）</strong></p>
+<ul>
+<li>直覺理解：只把權重放上網路不等於透明，口頭宣稱「本地離線推理所以可信可重現」也不是科學證據。工程上要做到可課責，需要兩層封裝。外層是人類可讀的分類性能體檢報告（Model Cards），拆開列出模型在不同性別、族裔、年齡與邊界情境下的失效率。內層是機器可驗的密碼學執行證據層，鎖定模型雜湊值、後端算子版本，以及不洩漏提示的執行紀錄。</li>
+<li>機制或核心表達式：模型卡要求把單一全局指標 <span class="math inline">\mathrm{Score}(\mathcal{D})</span> 展開成跨人口統計與場景交叉子集（Intersectional Subgroups <span class="math inline">\mathcal{G}_1 \times \mathcal{G}_2</span>）的條件誤差矩陣 <span class="math inline">\big\{\mathrm{Error}(f \mid g_i \cap g_j)\big\}</span>。本地推理證據層（如 Caleta）則把可重現性形式化為可驗證的元組：
+<div class="math inline">\mathcal{E}_{\mathrm{exec}} = \big(\mathrm{SHA256}(\text{Weights}),\; \text{Manifest}_{\text{backend}},\; \text{Config}_{\text{sampling}},\; \text{Digest}_{\text{output}}\big)</div></li>
+<li>能做到什麼，代價是什麼：可以防止影響力大的模型被誤用在未經驗證的高風險人群上（醫療、司法、招聘），也讓開源本地推理有法庭／審計級別的可追溯性。代價是靜態文檔會隨著下游微調很快過時，需要和自動化評估流水線綁在一起持續更新。</li>
+</ul>
+</li>
+<li>
+<p><strong>風險分級法律監管與智能體協作治理（Risk-Based Regulation &amp; Agent Governance）</strong></p>
+<ul>
+<li>直覺理解：AI 監管不能一刀切地管技術本身，要按使用場景對基本人權與安全的潛在危害分級治理（EU AI Act 四級風險金字塔：禁止類、高風險類、有限透明度義務類、低風險類）。同時，對通用基礎模型（GPAI）的幻覺、版權與黑箱可解釋性另設橫向義務。在研發社群這個微觀層次，AI 智能體生成的代碼與貢獻數量龐大，專案必須建立機器和人類都能讀的治理清單（Governance Manifest），把風險等級、證據要求與人類審查閘門寫成狀態機。</li>
+<li>機制或核心表達式：專案級治理狀態機把每一筆人機混合貢獻 <span class="math inline">c</span> 映射到四元審查約束 <span class="math inline">\mathcal{G}(c) = (\mathrm{RiskLevel}, \mathrm{EvidenceReq}, \mathrm{AccountableHuman}, \mathrm{GateState})</span>。只有實證測試覆蓋與人類責任簽署達到對應的風險門檻，才允許合併上線。</li>
+<li>能做到什麼，代價是什麼：抽象的倫理口號因此變成可以執行的合規審查清單，以及開源專案的防洪閘門。代價是法律條文中的可解釋性（Explainability）和技術現實之間仍有解釋落差（Pavlidis 2025），合規成本也可能對中小型開源團隊造成不對稱的負擔。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>大模型閉源黑箱化與科學可重現性的衝突</strong>：前沿研究越來越依賴透過瀏覽器或商業 API 呼叫閉源大模型（例如用來自動抽取科學文獻資料或評審打分），而這些模型隨時會無聲更新。「固定代碼與環境就能重現」這個傳統的科學前提因此不再成立。研究者只能發展跨模型共識（Cross-Model Consensus）與本地受控推理監督層（Caleta），來重建可重現性。</li>
+<li><strong>智能體貢獻洪流（Agent-Mediated Flood）與人類審查頻寬瓶頸</strong>：生成式編碼代理讓提交開源 PR 或生成學術初稿的邊際成本趨近於零，但人類維護者驗證安全性、隱藏臭蟲與長期架構債務的認知頻寬沒有增加。「生成速度 <span class="math inline">\gg</span> 驗證速度」這種不對稱，正逼著開源與學術審稿制度全面重構。</li>
+<li><strong>歐盟 AI 法案的法學可解釋性要求與基礎模型黑箱性質之間的落差</strong>：法律要求高風險系統向受影響的當事人提供清楚易懂的決策理由。但現代千億參數模型的內部機制，連機械可解釋性專家（見 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>）都還在費力破譯。事後生成的自然語言理由，往往只是看似合理的虛構事後合理化（Post-hoc Confabulation），還可能帶來幻覺造成的法律風險。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把正交系統化消融（Orthogonal Systematic Ablation）用到所有深度學習應用領域（如 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>、<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a>）</strong>：Rashid (2026) 用腦部 MRI 配準示範了一個常見問題：許多論文同時疊加架構預對齊模組與損失函數正則化，卻宣稱兩者都必要。只有做 <span class="math inline">2 \times 2</span> 全因子正交消融並控制樣本數，才能找出真正起作用的那一個機制。</li>
+<li><strong>把跨模型共識與遞進式提示驗證用到 <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 與生物醫學系統綜述</strong>：Romanov 等人（2026）顯示，單一大模型抽取複雜科學語境的數據時容易漏讀細節。先用自我提示生成抽取規則，再用跨異構模型的共識交叉核驗，就能把高語境文獻抽取做成可重現性高的管線。</li>
+<li><strong>把治理清單（Governance Manifest）狀態機用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 多智能體自主研發系統</strong>：除了人類開源社群，多 Agent 自動寫代碼或改實驗腳本的內部迴路也適用，應該按修改的爆炸半徑分級，綁定證據門檻與人類簽核閘門。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2012</td>
+<td><em>A Hitchhiker's guide to statistical tests for assessing randomized algorithms in software engineering</em>（Andrea Arcuri）</td>
+<td>評估含隨機性演算法的實用指南：一步步說明什麼時候該放棄常態假設，改用 Mann–Whitney <span class="math inline">U</span> 檢定與 Vargha–Delaney 效應量。</td>
+<td>G2 實驗必備</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/WQQSX88A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/stvr.1486" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><em>Deep Reinforcement Learning that Matters</em>（Peter Henderson）</td>
+<td>對整個 AI 界影響很大的可重現性警告：指出隨機種子、環境非確定性與超參數，可以讓同一個深度 RL 演算法跑出完全相反的勝負結論。</td>
+<td>G1–G2 必讀警示</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/C9W459UA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1709.06560" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><em>Model Cards for Model Reporting</em>（Margaret Mitchell）</td>
+<td>🏆 <strong>L5 已審核</strong>｜現代 AI 透明治理的奠基論文，Hugging Face 等整個行業都已採用：確立了模型預期用途、適用邊界與跨子群體拆解評測的標準。</td>
+<td>G1 全員必讀</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/D3FB3RDJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1810.03993" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><em>The Hitchhiker’s Guide to Testing Statistical Significance in Natural Language Processing</em>（Rotem Dror）</td>
+<td>NLP 與大模型評測的統計指南：針對 BLEU、F1、準確率等結構不同的指標，給出如何正確挑選配對檢定與多重比較校正的決策樹。</td>
+<td>G2 評測方法論</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/IHN7TT7A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.18653/v1/p18-1128" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><em>Accounting for Variance in Machine Learning Benchmarks</em>（Xavier Bouthillier）</td>
+<td>對機器學習基準評測的全流程嚴格建模：用量化結果證明，忽略資料抽樣、初始化與超參數的變異，會產生大量虛假的 SOTA 結論。</td>
+<td>G2 深度方法論</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/8ITFPH9E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.03098" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><em>Demystifying the Draft EU Artificial Intelligence Act</em>（Michael Veale）</td>
+<td>對全球首部綜合性 AI 監管法規的法學分析：從歐盟四十年的產品安全體系出發，剖析風險分級架構及其法律外溢效應。</td>
+<td>G1–G2 政策必讀</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/73U46HJH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.03721" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2022｜Saket Choudhary &amp; Rahul Satija</strong>，<em>Comparison and evaluation of statistical error models for scRNA-seq</em>（<em>Genome Biology</em>，669 引）：生物資訊學方法論的範例。系統評測單細胞轉錄組計數的統計誤差分佈模型，用來分開技術雜訊與真實的生物變異。書目索引 ｜ <a href="zotero://select/library/items/9H8PDCK4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1186/s13059-021-02584-9" rel="noopener">原文</a></li>
+<li><strong>2022｜Jeyan Thiyagalingam, Geoffrey Fox, Tony Hey et al.</strong>，<em>Scientific machine learning benchmarks</em>（<em>Nature Reviews Physics</em>，218 引）：確立科學機器學習（SciML）基準的設計規範，把物理模擬保真度、硬體擴展性與跨學科可重現驗證連在一起。OA PDF ｜ <a href="zotero://select/library/items/I4R9B23T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.12773" rel="noopener">原文</a></li>
+<li><strong>2006｜Peter Stone et al.</strong>，<em>Keepaway Soccer: From Machine Learning Testbed to Benchmark</em>（<em>LNCS</em>，133 引）：經典案例，說明如何把一個複雜的多智能體實驗測試床整理成介面標準化、可以公平比較的社群基準。書目索引 ｜ <a href="zotero://select/library/items/KMA3CD7S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/11780519_9" rel="noopener">原文</a></li>
+<li><strong>2023｜Zihao Li</strong>，<em>The Dark Side of ChatGPT: Legal and Ethical Challenges from Stochastic Parrots and Hallucination</em>（<em>arXiv</em>，120 引）：討論生成式大模型的幻覺與隨機鸚鵡效應，對歐盟監管框架、資訊侵權責任與資料保護法帶來哪些新的法理挑戰。OA PDF ｜ <a href="zotero://select/library/items/N965E3HX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.14347" rel="noopener">原文</a></li>
+<li><strong>2025｜Georgios Pavlidis</strong>，<em>Unlocking the Black Box: Analysing the EU Artificial Intelligence Act's Framework for Explainability in AI</em>（<em>Law, Innovation and Technology</em>，70 引）：檢視歐盟 AI 法案中可解釋性原則的條文設計，分析它在醫療、信貸與刑事司法中落實時的困難。OA PDF ｜ <a href="zotero://select/library/items/86ZI2WMA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.14868" rel="noopener">原文</a></li>
+<li><strong>2002｜Richard A. Berk, Peter J. Bickel et al.</strong>，<em>Workshop on statistical approaches for the evaluation of complex computer models</em>（<em>Statistical Science</em>，33 引）：聖塔菲複雜電腦模擬評估統計工作坊的經典報告，為氣候、經濟與工程高維模擬器的客觀校準與不確定性量化奠定了思路。書目索引 ｜ <a href="zotero://select/library/items/GBZHW5DU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1214/ss/1030550860" rel="noopener">原文</a></li>
+<li><strong>2026｜Nabira Rashid</strong>，<em>Architectural and Regularization Components in Deep Learning Medical Image Registration: Systematic Ablation Study</em>（<em>arXiv</em>）：腦部 MRI 配準中，架構增強與損失正則化常被綁在一起。本文用四個變體做乾淨的受控消融，示範怎麼把實驗變因分乾淨。OA PDF ｜ <a href="zotero://select/library/items/CQGJCUH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.05484" rel="noopener">原文</a></li>
+<li><strong>2026｜Longxia Gao et al.</strong>，<em>What Makes Deep Learning Work for Traditional Chinese Medicine Tongue Diagnosis? A Comprehensive Ablation Study</em>（<em>arXiv</em>）：在嚴格的五折交叉驗證下，對 6 種骨幹網路、4 種損失與 5 種增強策略做了 20+ 個版本的全面消融，為醫療小樣本視覺建模提供實證參考。OA PDF ｜ <a href="zotero://select/library/items/38MSKH7X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.28148" rel="noopener">原文</a></li>
+<li><strong>2026｜Mullosharaf K. Arabov &amp; Svetlana S. Khaybullina</strong>，<em>Parameter-Efficient Adaptation of Large Language Models to a Low-Resource Agglutinative Language: A Corpus, Datasets, and a Reproducible Benchmark for the Bashkir Language</em>（<em>arXiv</em>）：為低資源黏著語建立完整的開源語料庫，以及涵蓋 8 種架構、可重現的參數高效微調基準。OA PDF ｜ <a href="zotero://select/library/items/HF9HD35W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31397" rel="noopener">原文</a></li>
+<li><strong>2026｜Valentin Romanov, Monique Bax &amp; Steven Niederer</strong>，<em>Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models</em>（<em>arXiv</em>）：提出自我提示與跨模型共識的四級工作流，解決用商用瀏覽器端 LLM 從科學文獻抽取高語境資訊時的可重現性瓶頸。OA PDF ｜ <a href="zotero://select/library/items/RB4BDQFW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.19025" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Jason Alexander, Yuxuan Li, Michael Licamele et al. (2026)</strong>，<em>A Crowd-Audited Atlas of Implicit Bias in LLM-Powered Agents</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：依美國時間使用調查的 17 大日常領域，建構 506 個 LLM 智能體隱性偏見場景的圖譜。再由 500 人做 8,010 次抉擇的群眾審計，發現人們會優先審查高相關、高風險、與群體一致的刻板決策。審計者自己內化的刻板印象也會影響優先級判斷。</li>
+<li>連結：<a href="zotero://select/library/items/UG69C7KT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21376" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Spandan Roy, Subhabrata Majumdar, Soudeep Deb (2026)</strong>，<em>Can AI Judge You? An Empirical Audit of Deployment Readiness in LLM-assisted Hiring Systems</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：設計一個 LLM 履歷篩選架構，把候選人證據、評估、權限控制與紀錄互相隔離，並從營運與合規兩個面向做審計。結果發現純量評分優於二元判定，成對比較會受順序偏誤影響，模型最後的錄取決策也常和它自述的理由矛盾。</li>
+<li>連結：<a href="zotero://select/library/items/PN3REXG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20140" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-190800-增量最新入庫聚焦llm-新穎性審計與小樣本物理引導實驗設計">2026-11-19（08:00 增量）最新入庫（聚焦：LLM 新穎性審計與小樣本物理引導實驗設計）</h4>
+<ol>
+<li>
+<p><strong>The novelty exposed: ablation, reproducibility and transparency in 40 technical reports of open-weight large language models (LLMs)</strong>（Bahaeddin Türkoğlu，2026，<em>arXiv (Cornell University)</em>）</p>
+<ul>
+<li>核心問題：2025 年大量進入 Hugging Face <code>transformers</code> 的「新」開源權重 LLM 多半以原創為賣點。但程式碼實際差多少、消融實驗支撐到什麼程度、可重現性資訊揭露了多少，都沒有系統性的實證檢驗。</li>
+<li>關鍵做法：稽核 2025 年新增的 48 個架構的程式碼，以及隨機抽樣的 40 份技術報告。結果是 39/48 個架構沿用其他模型至少兩大核心區塊（多為 Llama）。73 項新穎性宣稱中，只有 19 項附有受控的有無消融對照。只有 4 份報告做了多次訓練，只有 1 份同時公開資料配比／token 數／算力。作者據此提出 7 項 LLM 發布報告規範。</li>
+<li>跨領域啟發：支持 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 重視嚴謹消融的做法，也為 <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 分析 AI 技術的真實增量與修辭膨脹提供量化證據。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/TJIIB89N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20003" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Optimizing Weld Quality in High Stacking Ratio Automotive Joints: Integrated Experimental Design and Machine Learning Benchmarking with Limited Datasets</strong>（Hasan Habib，2025，<em>UWSpace (University of Waterloo)</em>）</p>
+<ul>
+<li>核心問題：厚度比 <span class="math inline">\ge 5:1</span> 的異種高強鋼（AHSS）電阻點焊，讓傳統的「20% 熔核穿透率」單一規範失效。製程參數維度又高，在有限的實驗成本下，很難同時做到精準建模和可解釋的逆向最佳化。</li>
+<li>關鍵做法：用 BBD＋LHS 實驗設計完成 80 組條件試驗，再結合 SEM/EDS 發現：在沒有可見熔核穿透的情況下，高強度來自擴散接合或局部硬焊。接著用物理關係特徵驅動梯度提升模型（<span class="math inline">R^2</span> 達 0.948／0.903，誤差從統計工具的 30% 降到 13%），並用 SHAP 歸因與雙目標逆向預測完成實驗驗證。</li>
+<li>跨領域啟發：示範如何把 DOE 實驗設計和 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的 SHAP 歸因結合，在數據有限的條件下，為工業與科學逆問題（<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>）建立可驗證的工作流。</li>
+<li>連結：書目索引 ｜ <a href="zotero://select/library/items/95PBM3F3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://hdl.handle.net/10012/22517" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Caleta: An Evidence-Oriented Trust Layer for Reproducible Local Large Language Model Inference</strong>（Joan-Marc Fisa，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：本地端大型語言模型推理常被籠統地說成「私密、已驗證且可重現」。這是三個不同的技術主張，卻被混為一談，也沒有可以獨立審計的執行證據鏈。</li>
+<li>關鍵做法：設計圍繞 <code>llama.cpp</code> 的開源監督與證據層 <code>Caleta</code>，整合版本化清單、精確檔案大小與 <code>SHA-256</code> 密碼學核驗、受控後端建構，以及不含敏感提示詞的純執行紀錄。</li>
+<li>跨領域啟發：醫療、法務與可重現科學實驗室要部署本地開源大模型時，這是一個輕量、不必改推理引擎的審計標準層。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/BI5M64SP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.10324" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Making Agent-Mediated Contributions Governable: A Project-Level Governance Manifest for Open-Source AI Collaboration</strong>（Jinjin Gao et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：生成式 AI 與自主編碼代理讓開源軟體（OSS）的代碼提交量呈指數膨脹，遠超過人類維護者評估風險、核實證據與追責的速度，開源治理有失控的危險。</li>
+<li>關鍵做法：提出專案端可治理性基礎設施（Project-Side Governability Infrastructure）與標準化的治理清單（Governance Manifest），把每筆代理貢獻的風險等級、證據要求、責任歸屬與審查閘門狀態寫成明確的結構。</li>
+<li>跨領域啟發：除了 GitHub 開源協作，也可以直接用到多智能體自動化科研（<a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a>）的人機協同品管流程。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/XUVCDZP9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.15769" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

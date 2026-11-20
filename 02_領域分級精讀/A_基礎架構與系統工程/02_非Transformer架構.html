@@ -1,0 +1,263 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02｜非 Transformer 架構（狀態空間 Mamba、連續微分方程、KAN、JEPA、脈衝與超維計算） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="02非-transformer-架構狀態空間-mamba連續微分方程kanjepa脈衝與超維計算">02｜非 Transformer 架構（狀態空間 Mamba、連續微分方程、KAN、JEPA、脈衝與超維計算）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域的架構不走「先把一切切成離散詞元，再做 <span class="math inline">O(N^2)</span> 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊樣條函數逼近（KAN）、抽象潛空間預測（JEPA）與物理事件驅動／超維代數計算（SNN / Reservoir / HDC）。它們靠 <span class="math inline">O(1)</span> 的推論狀態複雜度和貼近物理的先驗，來處理長序列與世界模型。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 在離散自然語言上是主流，但到了真實的物理與生物世界，有四個結構上不合用的地方：
+<ol>
+<li><strong>超長連續訊號的二次方成本</strong>：面對百萬步基因組、高頻無線電通道、車聯網封包流或時間戳不規則的醫療波形，KV Cache 會不斷膨脹，在邊緣端維護不起。</li>
+<li><strong>逐像素／逐詞元生成把算力花在不可預測的雜訊上</strong>：世界上到處是隨風晃動的樹葉、醫學影像的底噪。要生成模型在原始像素空間猜出每個細節，反而模糊了高層語意與解剖結構。</li>
+<li><strong>多層感知機（MLP）的黑盒節點僵化</strong>：固定激活函數配稠密線性矩陣，很難抽出精確的符號公式，在科學小樣本回歸中也容易產生譜偏置。</li>
+<li><strong>馮紐曼同步時脈的能耗極限</strong>：人腦只耗電約 20 瓦，靠的是有脈衝事件才耗能的異步稀疏動力學，而不是每秒全網同步做浮點矩陣乘法。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+如果把 Transformer 比成一位速記員，他把過去十年每一頁會議紀錄都攤在桌上逐字交叉比對，那麼這個領域有四種很不一樣的做法：
+<ol>
+<li><strong>帶智慧閥門的流體管道（Neural ODE / S4 / Mamba / RWKV）</strong>：不留整疊舊報紙，只維護一缸精煉過的當前狀態流體。遇到關鍵訊號就打開閥門寫入，遇到無關雜訊就排掉。不管序列多長，推論時只帶這一只隨身水壺（<span class="math inline">O(1)</span> 記憶體）。</li>
+<li><strong>把固定齒輪換成可塑凸輪曲線的精密機械（KAN）</strong>：傳統 MLP 在連線（邊）上只放簡單倍數，把固定的彎曲函數放在節點。KAN 反過來，節點只做加法，每一根連線都變成一條可以自由調整形狀的光滑樣條曲線。</li>
+<li><strong>只預測棋局走勢、不背誦棋盤木紋的大師（JEPA）</strong>：直接在抽象表徵空間預測被遮蔽區域的語意特徵，跳過繁瑣又容易產生幻覺的像素級重建。</li>
+<li><strong>有事才發電報的生物神經元與萬維全息記憶（SNN / 光子儲備池 / 超維計算 HDC）</strong>：直接借用光學延遲環，或萬維正交隨機向量的代數綁定，用毫瓦級功耗完成即時感知。</li>
+</ol>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+這個領域用動力學把 AI 和真實物理世界接起來。連續深度微分方程與時變液態網路通往 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>（如 2026 的 <code>LNN-PINN</code>）。HiPPO 正交多項式記憶與 Kolmogorov–Arnold 表示定理的數學根基在 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>。JEPA 非生成世界模型、脈衝神經網路與 Kanerva 超維向量代數，則是 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>（預測編碼與大腦海馬記憶）與 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>（神經形態與光子晶片）交會的地方。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    ROOT[&quot;Lukoševičius &amp; Jaeger (2009) 儲備池計算 RC ＆ Kanerva (2009) 超維計算 HDC：高維非線性動力與全息向量代數&quot;] --&gt; PHOTO[&quot;Larger et al. (2017) 時延光子儲備池 ＆ Eshraghian et al. (2023) SNN 代理梯度深度學習化&quot;]
+    CONT[&quot;Chen et al. (2018) Neural ODE：連續深度微分方程與伴隨法 O(1) 記憶體反向傳播&quot;] --&gt; LIQUID[&quot;Hasani et al. (2020-2022) LTC / CfC：狀態耦合時變時間常數與閉式連續時間解&quot;]
+    CONT --&gt; S4[&quot;Gu, Goel &amp; Ré (2021) S4：HiPPO 正交多項式歷史壓縮與卷積—遞迴雙重模式&quot;]
+    S4 --&gt; MAMBA[&quot;Gu &amp; Dao (2023) Mamba ＆ Peng et al. (2023) RWKV：輸入選擇性狀態空間與平行掃描線性序列模型&quot;]
+    REP[&quot;表徵與函數逼近新範式&quot;] --&gt; KAN[&quot;Liu et al. (2024) KAN：Kolmogorov-Arnold 邊樣條可學習激活網路&quot;]
+    REP --&gt; JEPA[&quot;Assran et al. (2023) I-JEPA → AG-JEPA ＆ Cracks in Embeddings (2026)：非生成潛空間預測與臨床穩健性稽核&quot;]
+    LIQUID --&gt; EDGE26[&quot;2026 物理與邊緣合流：LNN-PINN 純物理訓練、車聯網 VANET 即時防禦、流體天線與胎兒心臟 Liquid-Sequencer&quot;]
+    MAMBA --&gt; EDGE26
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>結構化與選擇性狀態空間模型及線性循環復興（S4, Mamba &amp; RWKV）</strong></p>
+<ul>
+<li>直覺理解：古典控制論的線性非時變（LTI）狀態空間模型有兩種等價的算法。推論時是一步一更新的 <span class="math inline">O(1)</span> 輕量遞迴，訓練時又可以展開成全局一維卷積，用 FFT 平行算完。早期的 <code>S4</code> 用 HiPPO 矩陣把連續輸入歷史即時投影到正交多項式基底上，解決了萬步長程記憶問題。但它的轉移矩陣對所有輸入一視同仁（時不變），沒辦法像注意力那樣挑重點記、把不重要的忘掉。Gu &amp; Dao 的 Mamba 改了這一點：讓步長 <span class="math inline">\Delta_t</span> 與投影矩陣 <span class="math inline">(B_t, C_t)</span> 直接成為當前輸入 <span class="math inline">x_t</span> 的函數，再用硬體感知的平行關聯掃描（Parallel Associative Scan）繞開失去 FFT 後的訓練瓶頸。</li>
+<li>機制或核心表達式：把連續狀態方程 <span class="math inline">h'(t) = A h(t) + B x(t),\; y(t) = C h(t)</span> 用零階保持（ZOH）離散化，得到步長為 <span class="math inline">\Delta_t = \mathrm{softplus}(W_\Delta x_t)</span> 的選擇性遞迴（Gu &amp; Dao, 2023）：
+<div class="math inline">\bar{A}_t = \exp(\Delta_t A), \qquad \bar{B}_t = (\Delta_t A)^{-1}\bigl(\exp(\Delta_t A) - I\bigr)\Delta_t B(x_t), \qquad h_t = \bar{A}_t h_{t-1} + \bar{B}_t x_t</div>
+<code>RWKV</code>（Peng et al., 2023）則用指數時間衰減加權的鍵值比值取代點積 Softmax。訓練時可以像 Transformer 一樣平行展開，推論時可以嚴格折疊成固定維度的狀態更新。</li>
+<li>能做到什麼，代價是什麼：訓練期是 <span class="math inline">O(N)</span> 線性擴展，推論期是 <span class="math inline">O(1)</span> 常數記憶體／延遲，在基因序列、音訊與高頻感測流上明顯勝過同規模的 Transformer。代價是固定維度的隱狀態 <span class="math inline">h_t</span> 是有損壓縮。遇到從十萬字中一字不差抄寫某組隨機密碼（In-Context Exact Copying）這類任務，仍受狀態容量限制，所以才出現與注意力混血的架構（如 <code>Liquid-Transformer</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>連續深度微分方程與時變液態動力系統（Neural ODE, LTC &amp; CfC）</strong></p>
+<ul>
+<li>直覺理解：殘差網路 <span class="math inline">h_{t+1} = h_t + f(h_t, \theta_t)</span> 就是用固定步長 <span class="math inline">\Delta t = 1</span> 走歐拉法（Euler discretization）。Chen 等人（2018）把層數推到無窮連續的極限：不堆疊離散層，讓神經網路直接學狀態演化的速度向量場，再由自適應微分方程求解器決定步長，平緩處跨大步，劇烈轉折處走小步。Hasani 等人接著引入受生物突觸啟發的液態時間常數（LTC）與閉式解（CfC），讓系統的記憶時間尺度隨當下輸入強度即時伸縮（詳見專章 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a>）。</li>
+<li>機制或核心表達式：Neural ODE（Chen et al., 2018，🏆 L5）把連續向量場參數化為 <span class="math inline">\frac{\mathrm{d}h(t)}{\mathrm{d}t} = f(h(t), t, \theta)</span>，再用龐特里亞金伴隨靈敏度法（Adjoint Sensitivity Method）逆向積分伴隨狀態 <span class="math inline">a(t) = \frac{\partial \mathcal{L}}{\partial h(t)}</span>。這樣不必儲存中間層激活值就能算出參數梯度：
+<div class="math inline">\frac{\mathrm{d}a(t)}{\mathrm{d}t} = -a(t)^\top \frac{\partial f(h(t), t, \theta)}{\partial h}, \qquad \frac{\mathrm{d}\mathcal{L}}{\mathrm{d}\theta} = -\int_{t_1}^{t_0} a(t)^\top \frac{\partial f(h(t), t, \theta)}{\partial \theta}\,\mathrm{d}t</div>
+2026 年的 <code>LNN-PINN</code>（Tao et al., 2026）把時變液態殘差塊嵌進純物理微分算子損失，不需要觀測標籤，就能自適應地化解剛性（Stiff）PDE 的多尺度梯度失衡。</li>
+<li>能做到什麼，代價是什麼：架構本身就支援任意不規則採樣的時間序列和連續正規化流的精確對數概似計算，訓練記憶體是 <span class="math inline">O(1)</span>、與步長無關。代價是數值 ODE 求解器在剛性區域的評估次數（NFE）無法預測，伴隨逆向積分也可能累積數值誤差。<code>CfC</code>（Hasani et al., 2022，🏆 L5）用緊緻閉式近似解提速 1 至 5 個數量級，針對的就是這個問題。</li>
+</ul>
+</li>
+<li>
+<p><strong>可學習邊樣條函數網路與非生成式潛空間預測（KAN &amp; JEPA）</strong></p>
+<ul>
+<li>直覺理解：這兩項工作一個改底層的神經元連線，一個改頂層的自監督目標：
+<ul>
+<li>**KAN（Kolmogorov–Arnold Networks）**的依據是蘇聯數學家 Kolmogorov 與 Arnold 的多元連續函數分解定理：任何複雜的多元函數，都能拆成有限個單變數連續函數的複合與相加。把可學習的 B-樣條（B-Splines）放到邊上之後，科學家可以直接看出每條邊學到的是 <span class="math inline">\sin(x)</span> 還是 <span class="math inline">x^2</span>，還能做符號公式修剪。</li>
+<li>**JEPA（Joint-Embedding Predictive Architecture）**來自 Yann LeCun 對自迴歸／擴散生成路線的批評：真實世界有大量不可預測的微觀隨機性，要模型在像素空間重建被遮住的區域，只會讓它去背雜訊。改在抽象嵌入空間裡，從上下文區塊 <span class="math inline">s_x</span> 預測目標區塊的表徵 <span class="math inline">s_y</span>，才學得到高階因果與解剖結構。</li>
+</ul>
+</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>KAN 邊函數層（Liu et al., 2024）</strong>：第 <span class="math inline">l</span> 層到 <span class="math inline">l+1</span> 層之間沒有固定的線性權重矩陣，每個純量連接 <span class="math inline">\phi_{l,j,i}</span> 都是基底函數與可學 B-樣條的線性組合：
+<div class="math inline">x_{l+1, j} = \sum_{i=1}^{n_l} \phi_{l,j,i}(x_{l,i}), \qquad \phi(x) = w_b\, b(x) + w_s \sum_{k} c_k B_k(x)</div></li>
+<li><strong>JEPA 潛空間預測目標（Assran et al., 2023）</strong>：上下文編碼器 <span class="math inline">f_\theta(x)</span> 的輸出與潛變數 <span class="math inline">z</span> 送進預測器 <span class="math inline">g_\phi</span>，去對齊指數移動平均（EMA）目標編碼器 <span class="math inline">f_{\bar{\theta}}(y)</span>，最小化表徵距離 <span class="math inline">\bigl\| g_\phi(f_\theta(x), z) - \mathrm{sg}\bigl(f_{\bar{\theta}}(y)\bigr) \bigr\|_2^2</span>。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：KAN 在低維物理定律發現與 PDE 擬合上，用很少的參數就有更高的精度和符號可讀性，但在大規模電腦視覺／NLP 上，樣條評估比較難跑滿 GPU TensorCore。JEPA 不需要手工資料增強，自監督訓練效率也高出許多，不過本庫兩篇 2026 L5 審核論文指出了它的問題。面對阿茲海默早期很微弱的局域病灶，需要顯式引入解剖學區域引導（<code>AG-JEPA</code>）。醫療胸部 X 光的 JEPA 編碼器在黑盒對抗與對比度偏移下，嵌入幾何仍會出現裂痕（<code>Cracks in Embeddings</code>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>儲備池物理動力學、脈衝神經網路與超維全息計算（Reservoir Computing, SNN &amp; HDC）</strong></p>
+<ul>
+<li>直覺理解：有些做法連用反向傳播更新內部權重都省掉。儲備池計算（Echo State Networks / Liquid State Machines）把輸入訊號送進一個固定不變的高維非線性物理系統（甚至可以是一圈光纖雷射延遲迴路），讓它激起豐富的暫態響應，然後只用線性回歸訓練最後一層讀出頭，就做到每秒百萬詞級別的高速分類（Larger et al., 2017）。脈衝神經網路（SNN）模擬生物膜電位，累積到閾值才發放離散的 <span class="math inline">0/1</span> 脈衝。Kanerva 的超維計算（HDC）利用測度集中現象：在一萬維空間中，任意兩個隨機向量幾乎必然正交。它直接用元素乘法（綁定變數）、加法（疊加集合）與循環移位（編碼序列），做單次學習（One-shot Learning）和抗毀損的符號運算。</li>
+<li>機制或核心表達式：在 SNN 的漏積分發火（LIF）模型 <span class="math inline">C\frac{\mathrm{d}U}{\mathrm{d}t} = -g_L(U - U_{\mathrm{rest}}) + I(t)</span> 中，發火階躍函數 <span class="math inline">S(t) = \Theta(U(t) - U_{\mathrm{th}})</span> 的導數不是零就是無窮大（Dirac <span class="math inline">\delta</span>）。Eshraghian et al.（2023）系統整理了代理梯度法（Surrogate Gradient）：前向仍用離散二元脈衝以省電，反向傳播時把不可微的導數換成平滑的鐘形近似（如 <span class="math inline">\frac{\partial S}{\partial U} \approx \frac{1}{\pi(1 + (\pi U)^2)}</span>），深度時空反向傳播（BPTT）因此可行。</li>
+<li>能做到什麼，代價是什麼：在神經形態晶片、光子硬體、無線通訊流體天線與高速機動車聯網（VANETs）上，可以做到很低的延遲、抗位元翻轉雜訊，以及微瓦至毫瓦級的推論。代價是在超大規模通用語言生成任務上，表達上限仍不及端對端訓練的稠密／狀態空間基礎模型。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>固定維度循環狀態的無損精確回憶上界，與混血架構（Hybrid SSM / Liquid-Transformer）</strong>：理論與實證都顯示，不論是 Mamba、RWKV 或 CfC，只要把長度 <span class="math inline">N</span> 的歷史壓進固定大小的狀態 <span class="math inline">O(d)</span>，依鴿籠原理與資訊瓶頸，就無法像保留完整 KV Cache 的 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 那樣，對任意早期的冷門細節做零誤差的精確查表。2026 年的研究已不再堅持用純架構取代注意力。現在的做法是大部分層用線性狀態空間／液態層處理連續時序動態，少數關鍵層穿插注意力做全局精準錨定（如伺服機構少樣本增量故障診斷的 <code>Liquid-Transformer</code>，Zhang et al., 2026）。</li>
+<li><strong>潛空間世界模型（JEPA）的表徵崩塌、局域微弱訊號漏檢與對抗脆弱性</strong>：JEPA 避開了像素空間的雜訊，但也少了「能不能重建出合理影像」這個直觀的檢驗。本領域收錄的兩篇 2026 L5 審核論文各指出一個問題。<code>AG-JEPA</code>（Singh et al., 2026）證實通用 JEPA 會忽略輕度認知障礙（MCI）轉化期只出現在少數腦區的微弱萎縮訊號，必須注入解剖學先驗遮罩。<code>Cracks in Embeddings</code>（Mansur et al., 2026）在近八萬張胸腔 X 光上發現，JEPA 嵌入空間在邊界黑盒攻擊與亮度／對比度臨床偏移下會發生結構性漂移。怎麼在非生成潛空間內建立可驗證的幾何穩定保證，是高風險醫療與自動駕駛世界模型急需解決的問題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>HiPPO 線上正交函數基底投影 → 持續學習與非平穩長時序記憶</strong>：Gu 等人（2021）用一組常微分方程，即時維護歷史訊號在 Legendre／Laguerre 多項式上的最優逼近係數。這種有界維度、滾動視窗與指數衰減的連續函數投影，可以直接搬到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> 的抗災難性遺忘記憶緩衝區，以及金融高頻微結構建模。</li>
+<li><strong>在抽象不變量空間預測，不在觀測雜訊空間重建（JEPA 原則）</strong>：面對高雜訊的分子動力學軌跡、腦電圖或社會輿論演化（<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>、<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>），不去預測微觀隨機漲落，改成預測慢變數（Slow Collective Variables）的潛表徵，樣本效率會高很多。</li>
+<li><strong>萬維擬正交全息綁定（Kanerva HDC 向量符號架構）→ 機械可解釋性與神經符號橋接</strong>：<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> 的測度集中保證，<span class="math inline">D</span> 維球面上可以放進指數級數量 <span class="math inline">\exp(c \varepsilon^2 D)</span> 個近似正交的概念向量。這是超維計算的數學根基，也替 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 中的特徵疊加態（Superposition Hypothesis）提供了一個構造性模型。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2009</td>
+<td><strong>Reservoir computing approaches to recurrent neural network training</strong>，Mantas Lukoševičius, Herbert Jaeger</td>
+<td>儲備池計算（回聲狀態網路 ESN 與液態機 LSM）引用數最高的綜述，說明如何用固定的高維非線性動力系統，搭配簡單的線性讀出來處理複雜時序。</td>
+<td><code>G1/G2 歷史基石</code></td>
+<td><a href="zotero://select/library/items/UAVIZ6S2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.cosrev.2009.03.005" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><strong>Hyperdimensional Computing: An Introduction to Computing in Distributed Representation with High-Dimensional Random Vectors</strong>，Pentti Kanerva</td>
+<td>超維計算（HDC / VSA）的奠基論文，展示萬維隨機向量的近似正交性如何把全息分散式記憶與代數符號運算統一起來。</td>
+<td><code>G1/G2 跨域必讀</code></td>
+<td><a href="zotero://select/library/items/TQSC8Q9X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s12559-009-9009-8" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><strong>Neural Ordinary Differential Equations</strong>，Ricky T. Q. Chen et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：把離散殘差網路推到連續深度微分方程的極限，用伴隨靈敏度法做到 <span class="math inline">O(1)</span> 記憶體的反向傳播與連續流建模。</td>
+<td><code>G1/G2 必讀</code></td>
+<td><a href="zotero://select/library/items/TXGW47CZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1806.07366" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Liquid Time-constant Networks</strong>，Ramin Hasani et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：設計出時間常數隨輸入與狀態動態調變的液態連續時間網路（LTC），並嚴格證明狀態與有效時間常數都雙邊有界、穩定。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/FCGXVZ2K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.04439" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><strong>Efficiently Modeling Long Sequences with Structured State Spaces</strong>，Albert Gu, Karan Goel, Christopher Ré</td>
+<td>結構化狀態空間模型（S4）的開創論文：結合 HiPPO 記憶矩陣與 Cauchy 核的對角加低秩分解，首次解出萬步級的 Path-X 超長序列基準。</td>
+<td><code>G2/G3 數學核心</code></td>
+<td><a href="zotero://select/library/items/6JZTZCIZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.00396" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>Closed-form continuous-time neural networks</strong>，Ramin Hasani et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：推導出非線性電導突觸積分 ODE 的緊緻閉式近似解（CfC），保留液態動力學，同時比數值求解器快 1–5 個數量級。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/R5CEHES9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.13898" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>Mamba: Linear-Time Sequence Modeling with Selective State Spaces</strong>，Albert Gu, Tri Dao</td>
+<td>引入輸入相依的選擇性機制與 GPU 平行掃描演算法，讓線性時間狀態空間模型在語言、基因組等資訊密集的模態上能和 Transformer 相比。</td>
+<td><code>G1/G2 必讀</code></td>
+<td><a href="zotero://select/library/items/UTKPJRZA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.00752" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>KAN: Kolmogorov-Arnold Networks</strong>，Ziming Liu et al.</td>
+<td>用邊上的可學習單變數 B-樣條取代 MLP 的固定激活與線性權重，在科學公式發現與微分方程求解上精確度高，而且是可讀的白盒。</td>
+<td><code>G1/G2 話題經典</code></td>
+<td><a href="zotero://select/library/items/TSA73J6U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.19756" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（8 篇涵蓋光子計算、SNN、RWKV 與 L5 審核醫療 JEPA）</summary>
+<p></p>
+<ul>
+<li><strong>2017｜High-Speed Photonic Reservoir Computing Using a Time-Delay-Based Architecture: Million Words per Second Classification</strong>，Laurent Larger et al.（用物理光學實現時延儲備池計算的重要實驗，展示每秒百萬詞級的高速語音分類，646 引）｜<a href="zotero://select/library/items/8NXX257B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physrevx.7.011015" rel="noopener">DOI</a></li>
+<li><strong>2019｜Artificial Neural Networks-Based Machine Learning for Wireless Networks: A Tutorial</strong>，Mingzhe Chen et al.（無線與物聯網邊緣通訊神經架構的完整教程，涵蓋回聲狀態網路、脈衝網路與超低延遲時序控制，1527 引）｜<a href="zotero://select/library/items/XZH32SCR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1710.02913" rel="noopener">原文</a></li>
+<li><strong>2020｜Backpropagation algorithms and Reservoir Computing in Recurrent Neural Networks for the forecasting of complex spatiotemporal dynamics</strong>，Pantelis Rafail Vlachas et al.（系統比較 BPTT 循環網路與儲備池計算，看兩者在混沌與高維時空偏微分動力系統的長期預測上各自的優劣邊界，478 引）｜<a href="zotero://select/library/items/RETA6VUS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.05266" rel="noopener">原文</a></li>
+<li><strong>2023｜Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</strong>，Mahmoud Assran et al.（I-JEPA 的奠基論文：不做像素重建與手工增強，直接在抽象表徵空間預測遮蔽區塊的語意，開啟了非生成世界模型這條路線，450 引）｜<a href="zotero://select/library/items/3NRQJAD4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.08243" rel="noopener">原文</a></li>
+<li><strong>2023｜RWKV: Reinventing RNNs for the Transformer Era</strong>，Bo Peng et al.（訓練期可平行化，推論期是純線性的 <span class="math inline">O(1)</span> 狀態更新，證明現代化的大規模 RNN 可以擴展到百億參數的語言模型，389 引）｜<a href="zotero://select/library/items/9AWXAD5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.13048" rel="noopener">原文</a></li>
+<li><strong>2023｜Training Spiking Neural Networks Using Lessons From Deep Learning</strong>，Jason K. Eshraghian et al.（現代脈衝神經網路 SNN 的代表性長文，完整銜接神經科學的膜電位動力學、代理梯度反向傳播與神經形態硬體部署，801 引）｜<a href="zotero://select/library/items/WT7M3DG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jproc.2023.3308088" rel="noopener">DOI</a></li>
+<li><strong>2026｜AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning</strong>，Azad Singh et al.（🏆 <strong>L5 深度審核完成</strong>：注入腦部解剖學脆弱區域的先驗來引導潛空間預測，抓到阿茲海默症輕度認知障礙轉化期的微弱局域訊號）｜<a href="zotero://select/library/items/7SPUP9HF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.18097" rel="noopener">原文</a></li>
+<li><strong>2026｜Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations</strong>，Zahid Mansur, Kalpana Yadav, Deepak Mishra（🏆 <strong>L5 深度審核完成</strong>：對四款用近八萬張胸腔 X 光訓練的 JEPA 編碼器做對抗與臨床影像退化的壓力測試，找出潛空間表徵在幾何上的脆弱處）｜<a href="zotero://select/library/items/J6EW6W9F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17905" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜State and boundary condition estimation in pipeline networks using a two-stage sliding-mode framework</strong>，Morteza Imani et al.：處理觀測器匹配條件不成立的高壓輸水管網。方法結合高階滑動模態（HOSM）四階微分器與一階滑動模態觀測器（SMO），可同步重構內部水力狀態與未知的邊界需水量。驗證涵蓋最高 164 管段／277 狀態的網路、±10% 的波速與摩擦失配，以及實體分岔銅管實驗。（<a href="zotero://select/library/items/54GIZE6C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ymssp.2026.115257" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜CMANet: cross-convolution and multi-attention Mamba enhanced Unet for infrared small target detection</strong>，Chen Yang et al.：提出紅外線弱小目標偵測網路 CMANet，只有 0.639M 參數、0.829G FLOPs。它用十字卷積 TFEM 配合小目標的高斯分佈，避免淺層特徵被淹沒，再用融合通道與空間注意力的 MMamba 做線性複雜度的長程建模。在三大基準上精度高，並達到 180.9 FPS 的即時推論。（<a href="zotero://select/library/items/2RN3QJM4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1364/ao.611182" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦免重訓反事實-jepa-世界模型與語言動力學雙潛空間分離">2026-11-19（08:00 增量）最新入庫（聚焦：免重訓反事實 JEPA 世界模型與語言、動力學雙潛空間分離）</h4>
+<ul>
+<li><strong>2026｜Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</strong>，Randall Balestriero, Yann LeCun, Kerda Varaku
+<ul>
+<li>重點：證明只用事實資料訓練的世界模型答不了反事實問題。但利用物理動力學的連續性（<em>natura non facit saltus</em>）做一階差分修正，不必重訓、不加參數，就能把 JEPA 轉成誤差有界於 <span class="math inline">O(h^2)</span> 的反事實世界模型，反事實 <span class="math inline">R^2</span> 最高升到 86–96%。</li>
+<li>連結：<a href="zotero://select/library/items/PW2ZD7ZQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24778" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</strong>，Xianhao Pan et al.
+<ul>
+<li>重點：提出約 39.1M 參數的雙潛空間架構 <code>JEPA Dots</code>。語言條件的任務特徵用來驅動流匹配策略，世界預測則靠遮罩注意力鎖定在與指令無關的動力學歷史上。在 40 項 LIBERO 任務上成功率為 84.9%。</li>
+<li>連結：<a href="zotero://select/library/items/FRRNUREQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24062" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦液態物理資訊殘差網路與車聯網極輕量即時序列防禦">2026-11-19 最新入庫（聚焦：液態物理資訊殘差網路與車聯網極輕量即時序列防禦）</h4>
+<ul>
+<li><strong>2026｜LNN-PINN: A unified physics-only training framework with liquid residual blocks</strong>，Ze Tao, Hanxuan Wang, Fujun Liu
+<ul>
+<li>重點：傳統 PINN 在沒有觀測資料、純物理訓練時，會遇到剛性梯度與多尺度失衡。本文嵌入帶動態時變時間常數的液態殘差區塊，明顯提高非線性偏微分方程求解的穩定性。</li>
+<li>連結：<a href="zotero://select/library/items/HBMRT8CK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.08935" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜A Lightweight Sequential AI Framework for Real Time Intrusion Detection in Dynamic Vehicular Networks</strong>，G. Jeyaram et al.
+<ul>
+<li>重點：針對高速移動、拓撲頻繁變動的車載自組織網路（VANETs），設計記憶體足跡極低的輕量序列狀態機入侵偵測架構，在車端有限的算力下做到毫秒級即時防禦。</li>
+<li>連結：<a href="zotero://select/library/items/HI8VTIZM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s41598-026-36103-2" rel="noopener">DOI</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-液態網路於能源調度胎兒心臟超音波流體天線與混血診斷">同批延伸選讀（2026 液態網路於能源調度、胎兒心臟超音波、流體天線與混血診斷）</h4>
+<ul>
+<li><strong>2026｜Optimization of interpretable hydropower reservoir operation rules by denoising diffusion probabilistic model, parallel chaotic cooperation search algorithm and liquid neural network</strong>，Yi-Fan Xia et al.（結合擴散生成、平行混沌協同搜尋與液態神經網路，整理出可解釋的水庫發電調度規則）｜<a href="zotero://select/library/items/6XXF4UAS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.energy.2026.140211" rel="noopener">DOI</a></li>
+<li><strong>2026｜Liquid-Sequencer: A Lightweight Liquid Neural Network for Real-Time Fetal Congenital Heart Disease Diagnosis</strong>，Sibo Qiao et al.（針對基層與偏遠地區的醫療超音波篩檢，用極輕量的 <code>Liquid-Sequencer</code> 輔助數位孿生，即時診斷胎兒先天性心臟病）｜<a href="zotero://select/library/items/EPK83NBJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jbhi.2026.3668775" rel="noopener">DOI</a></li>
+<li><strong>2026｜LNN-Powered Fluid Antenna Multiple Access</strong>，Pedro Duarte Alvim et al.（首次把流體天線多址接入的端口選擇寫成多標籤分類問題，用液態神經網路在有限觀測下即時預測信干噪比最佳的端口）｜<a href="zotero://select/library/items/XQVBF65H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.08821" rel="noopener">原文</a></li>
+<li><strong>2026｜Liquid-transformer temporal self-supervised network for few-shot class-incremental fault diagnosis of servo mechanisms</strong>，Zeming Zhang et al.（時序自監督混血網路，結合液態網路對連續時序的適應力與 Transformer 的全局特徵，用於伺服機構的少樣本類別增量故障診斷）｜<a href="zotero://select/library/items/2HA4JQ2V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.measurement.2026.121078" rel="noopener">DOI</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

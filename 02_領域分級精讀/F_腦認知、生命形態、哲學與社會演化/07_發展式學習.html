@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>07｜發展式學習：持續學習、主動推論、內在動機與開放式演化 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="07發展式學習持續學習主動推論內在動機與開放式演化">07｜發展式學習：持續學習、主動推論、內在動機與開放式演化</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> ｜ <a class="wl" href="40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>發展式學習研究的是：一個能力受限的具身智能體，處在沒有固定題庫、沒有外部獎勵、世界又持續變動的開放環境裡，怎麼靠預測誤差最小化和內在好奇心驅動自己成長，並且在不忘掉舊本領的前提下持續長出新能力。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+現代主流深度學習建立在靜態世界假設上：先把萬億級語料一次倒進靜態池，打亂成獨立同分佈（i.i.d.）的批次訓練完，之後權重就凍結。如果讓神經網路像人類嬰兒那樣按時間順序學新技能，新梯度會覆寫舊參數，造成災難性遺忘（Catastrophic Forgetting）。反過來把權重鎖死，模型又失去適應新環境的能力。這是神經科學與 AI 共同面對的可塑性與穩定性兩難（Stability–Plasticity Dilemma）。另外還有一個自主發展的難題：真實世界的外部獎勵非常稀疏時，該往哪裡探索。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+把傳統大模型想像成一次澆築成型的鋼筋混凝土摩天大樓。結構宏偉，卻沒辦法邊住人邊改格局，硬敲掉一面承重牆，整棟樓就可能垮。發展式學習比較像一株活的珊瑚礁，或人類幼童的大腦。它先替承載過關鍵舊技能的骨幹突觸塗上高剛性的保護漆（彈性權重固化），再用大腦內建的預測機器不斷猜下一秒感官會看到什麼。猜得太準的地方它覺得無聊，完全隨機的雪花雜訊它也略過，只往剛好能學會一點新東西的學習進步甜區伸出觸角。</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>對接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a>：大模型微調（SFT / RLHF / 醫療或領域適應）後指令遵循能力退化，多模態對齊破壞預訓練知識，這些都是持續學習問題。權重空間合併與 Fisher 資訊探針已經是基礎模型後訓練的標準配備。</li>
+<li>對接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a>：安全對齊與機器遺忘（Machine Unlearning）是災難性遺忘的鏡像問題，要做的是精準擦除後門或危險記憶，又不傷到通用推理。</li>
+<li>對接 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> 與 <a class="wl" href="40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a>：Karl Friston 的自由能原理（Free Energy Principle）用馬可夫毯（Markov Blanket）把非平衡態的自組織生命和貝氏變分推論放進同一個框架，成為物理、細胞發育與認知科學之間的共同語言。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Root[&quot;開放世界中的自主智能體發展難題&quot;] --&gt; P1[&quot;時間序列記憶挑戰：可塑性—穩定性兩難&quot;]
+    Root --&gt; P2[&quot;感知—行動閉環挑戰：大腦如何統一理解與控制&quot;]
+    Root --&gt; P3[&quot;無外部獎勵挑戰：稀疏回饋下如何自主探索&quot;]
+
+    P1 --&gt; EWC[&quot;持續學習正則化與重播：EWC / Fisher 資訊矩陣&quot;]
+    EWC --&gt; LLM_CL[&quot;基礎模型時代：無資料重要性探針與權重空間模型合併&quot;]
+
+    P2 --&gt; PC[&quot;階層預測編碼 (Rao &amp; Ballard 1999)：由上而下預測 vs 由下而上誤差&quot;]
+    PC --&gt; AIF[&quot;自由能原理與主動推論 (Friston)：馬可夫毯與變分自由能最小化&quot;]
+
+    P3 --&gt; IM[&quot;計算內在動機譜系 (Oudeyer 2007)：學習進步率與好奇心驅動 (ICM)&quot;]
+    IM --&gt; BabyLM[&quot;發展合理性與開放式演化：BabyLM 少樣本習得與神經演化&quot;]
+
+    AIF &lt;--&gt;|&quot;預期自由能 = 實用價值 + 認識論好奇心&quot;| IM
+    LLM_CL &lt;--&gt;|&quot;海馬迴重播 / 顯式記憶鞏固&quot;| CLS[&quot;跨接 08_情感腦認知：互補學習系統 (CLS)&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>持續學習與彈性權重固化（Continual Learning &amp; Elastic Weight Consolidation）</strong></p>
+<ul>
+<li>直覺理解：學新任務時不必把所有神經連接一律鎖死。先檢查哪些參數只要動一點點，舊任務就會崩盤。對舊任務越關鍵的突觸，綁上越硬的彈簧拉住；不重要的冗餘維度保持柔軟，留給新任務用。</li>
+<li>機制或核心表達式：從貝氏後驗更新出發，學習新任務 <span class="math inline">B</span> 時，把舊任務 <span class="math inline">A</span> 的後驗 <span class="math inline">p(\theta \mid \mathcal{D}_A)</span> 在最優點 <span class="math inline">\theta_A^*</span> 處做 Laplace 二階近似，用對角 Fisher 資訊矩陣 <span class="math inline">F_i</span> 度量每個參數 <span class="math inline">\theta_i</span> 的敏感度：
+<div class="math inline">\mathcal{L}_{\mathrm{EWC}}(\theta) = \mathcal{L}_B(\theta) + \sum_i \frac{\lambda}{2} F_i (\theta_i - \theta_{A,i}^*)^2, \quad F_i = \mathbb{E}\!\left[\left(\frac{\partial \log p(\mathcal{D}_A \mid \theta)}{\partial \theta_i}\right)^2\right]</div></li>
+<li>能做到什麼，代價是什麼：不必永久儲存龐大的舊任務原始資料，就能明顯延緩遺忘。當代的無資料探針（如 Model-Dowser）與權重合併技術也是從這裡發展出來的。代價是對角近似忽略了參數之間的高階耦合（見 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 之奇異學習理論）；任務序列無限拉長時，有限的參數空間終究會容量飽和（Capacity Saturation）。</li>
+</ul>
+</li>
+<li>
+<p><strong>階層預測編碼與主動推論（Predictive Coding &amp; Active Inference）</strong></p>
+<ul>
+<li>直覺理解：大腦皮質不像被動接收相機畫面的濾鏡，比較像一台生成機，由上而下不斷預測感官輸入。底層只把沒猜中的部分（預測誤差）往上報。要消除這個誤差，智能體有兩條路：修改腦中的信念（感知學習），或動手改變外在世界，讓感官符合預期（主動控制）。</li>
+<li>機制或核心表達式：智能體透過馬可夫毯（感官態 <span class="math inline">s</span> 與行動態 <span class="math inline">a</span>）和外部隱狀態 <span class="math inline">\vartheta</span> 隔開。它最小化變分自由能 <span class="math inline">\mathcal{F}</span>（即感官驚奇 <span class="math inline">-\ln p(s)</span> 的上界），同時驅動感知與行動；規劃未來策略 <span class="math inline">\pi</span> 時，則最小化預期自由能（Expected Free Energy）<span class="math inline">\mathcal{G}(\pi)</span>：
+<div class="math inline">\mathcal{F}(q, s) = D_{\mathrm{KL}}\!\big(q(\vartheta) \,\|\, p(\vartheta \mid s)\big) - \ln p(s), \qquad \mathcal{G}(\pi) = \underbrace{\mathbb{E}_{q}\!\big[-\ln p(s_\tau \mid C)\big]}_{\text{外在目標實現（Pragmatic）}} - \underbrace{\mathbb{E}_{q}\!\big[D_{\mathrm{KL}}\big(q(\vartheta_\tau \mid s_\tau, \pi) \,\|\, q(\vartheta_\tau \mid \pi)\big)\big]}_{\text{認識論資訊增益（Epistemic Curiosity）}}</div></li>
+<li>能做到什麼，代價是什麼：一個變分泛函就涵蓋了感知推論、PID／連續運動控制與認識論探索。代價是在高維非線性環境中，精確計算信念分佈與預期自由能非常昂貴。馬可夫毯能不能普遍刻畫一切生命系統，哲學界與動力系統界也還在爭論。</li>
+</ul>
+</li>
+<li>
+<p><strong>計算內在動機與自監督好奇心（Intrinsic Motivation &amp; Curiosity-Driven Exploration）</strong></p>
+<ul>
+<li>直覺理解：如果直接拿畫面像素的預測誤差當好奇心獎勵，機器人會站在隨風搖擺的樹葉或電視雪花螢幕前一直發呆，這叫白噪音電視機陷阱（Noisy-TV Problem）。發展式好奇心只關心和自身行動有關的可控變化，或是鎖定預測誤差正在快速下降的區域。</li>
+<li>機制或核心表達式：Pathak 等人的內在好奇心模組（ICM）用逆動力學模型（由狀態轉移 <span class="math inline">(\phi(s_t), \phi(s_{t+1}))</span> 預測動作 <span class="math inline">\hat{a}_t</span>）濾掉環境中與智能體無關的隨機干擾，只在特徵空間中定義前向預測誤差，當作內在獎勵 <span class="math inline">r_t^i</span>。Oudeyer 的學習進步假說則用誤差的一階時間導數定義動機：
+<div class="math inline">r_t^{\mathrm{ICM}} = \frac{\eta}{2} \big\| \hat{\phi}(s_{t+1}) - \phi(s_{t+1}) \big\|_2^2, \qquad r_t^{\mathrm{LP}} = \overline{e}(t - \tau) - \overline{e}(t)</div></li>
+<li>能做到什麼，代價是什麼：具身智能體在零外部獎勵下，能自己學會走迷宮、操作物體，並形成自動課程（Auto-Curriculum）。代價是特徵空間仍可能漏掉當下無法由自身控制、未來卻很重要的外部威脅或機會。開放式演化（Open-Endedness）怎麼持續產生高階的新抽象，也還沒有完全解決。</li>
+</ul>
+</li>
+<li>
+<p><strong>發展合理性與少樣本語料習得（Developmentally Plausible Learning &amp; BabyLM）</strong></p>
+<ul>
+<li>直覺理解：人類兒童到 13 歲為止，聽到的總詞彙量只有數千萬到一億詞（約 <span class="math inline">10^8</span> words），卻能穩健掌握語法結構、物理常識與社交推理。當代大模型則要讀 <span class="math inline">10^{13}</span> tokens，相當於人類數十萬年的閱讀量。研究怎麼在兒童級別的感官與語言預算下有效率地學習，可以逼出更貼近認知發展的歸納偏置。</li>
+<li>機制或核心表達式：約束是固定的小規模語料預算 <span class="math inline">|\mathcal{D}| \le 10^8</span> words，加上漸進式多模態輸入（Egocentric Vision + Child-Directed Speech）。在這些約束下聯合最佳化課程排序（Curriculum Scheduling）與架構歸納偏置，目標是最大化語法系統性與跨模態接地泛化率。</li>
+<li>能做到什麼，代價是什麼：它排除了靠算力與海量語料硬記所造成的假象，是檢驗語言習得理論與認知架構的乾淨實驗場。代價是缺少真實的具身互動回饋，只靠離線的兒童視角錄影或文本時，純觀察資料很難完全重現幼兒主動試錯的因果閉環。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>基礎模型時代的「假性持續學習」與微調遺忘悖論</strong>：預訓練大模型看起來什麼都知道，可是一旦針對醫療臨床、數學課程或新感官模態做序列式微調（SFT 或課程學習），原有的指令遵循與通用推理能力仍會大幅退化。目前主要的路線之爭是：該靠測試時上下文或外部顯式海馬迴記憶（見 <a class="wl" href="08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>）繞開權重更新，還是發展強化微調（RFT）加權重空間流形合併，做到終身的突觸可塑性。</li>
+<li><strong>自由能原理的解釋邊界（「馬可夫毯把戲」之爭）</strong>：Friston 學派想用變分自由能解釋從單細胞趨化、植物向光到人類意識的全部生命現象。以 Raja 等人為代表的批評則指出，真實的開放生物系統，邊界本身就在不斷新陳代謝與重構。線性高斯或靜態馬可夫毯假設到底是物理定律，還是事後套上去的數學重言式，還需要更嚴格的可證偽實驗來檢驗。</li>
+<li><strong>從自動課程走向開放式演化（Open-Endedness）</strong>：現有的內在動機演算法在封閉遊戲中表現很好，但環境複雜度一耗盡就停滯。怎麼像生物演化與人類文化（見 <a class="wl" href="32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a>）那樣，讓智能體自己創造新的生態位和更高維度的問題空間，是通往通用智慧路上最大的未解問題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把逆向持續學習用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 的後門清除與機器遺忘</strong>：把後門植入與安全清洗建模成三階段的序列持續學習問題，再反過來用參數重要性探針，精準誘發模型對惡意觸發器的災難性遺忘，同時用 Fisher 護欄保護正常能力。</li>
+<li><strong>把預期自由能分解用到 <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a> 與自動化實驗設計</strong>：主動推論把價值拆成目標報酬（Exploitation）和模型參數資訊增益（Epistemic Exploration）兩項。AI 科學家（AI for Science）在昂貴的濕實驗中挑下一組實驗條件時，可以直接拿它當統一的決策準則。</li>
+<li><strong>把多尺度認知邊界擴張用到 <a class="wl" href="40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a> 與 <a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a></strong>：細胞靠生物電耦合，把局部預測誤差整合成組織級目標（Levin 認知光錐）。分散式機器人與多智能體系統可以參考這個做法，設計動態共享的馬可夫毯，讓集體目標湧現出來。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1999</td>
+<td><em>Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects</em>（Rajesh P. N. Rao）</td>
+<td>預測編碼的開創論文：首次證明視覺皮質的非古典感受野效應，來自高層往下傳預測、底層只回傳殘差誤差的階層生成架構。</td>
+<td>G2 核心機制</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/RJZ46836" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/4580" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2007</td>
+<td><em>What is intrinsic motivation? A typology of computational approaches</em>（Pierre‐Yves Oudeyer）</td>
+<td>計算內在動機的奠基論文，涵蓋面很廣：系統分類了基於知識落差、能力掌控與學習進步率的好奇心數學模型。</td>
+<td>G1–G2 架構建立</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/KH5KHZMA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/neuro.12.006.2007" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Overcoming catastrophic forgetting in neural networks</em>（James Kirkpatrick）</td>
+<td>🏆 <strong>L5 已審核</strong>｜持續學習的代表論文：提出彈性權重固化（EWC），用 Fisher 資訊矩陣替舊任務的關鍵突觸加上貝氏的彈性護欄。</td>
+<td>G2 必讀推導</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/MNNEUJ6S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1612.00796" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><em>Curiosity-driven Exploration by Self-supervised Prediction</em>（Deepak Pathak）</td>
+<td>深度強化學習中好奇心方法的代表作（ICM）：用自監督的逆動力學特徵濾掉無關的背景雜訊，解決白噪音電視機陷阱。</td>
+<td>G2 演算法實作</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/ZBIIRMIR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1705.05363" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><em>The Computational Boundary of a 'Self': Developmental Bioelectricity Drives Multicellularity and Scale-Free Cognition</em>（Michael Levin）</td>
+<td>跨尺度發展認知的經典論文：提出認知光錐框架，說明單細胞怎麼靠生物電網路耦合擴張自我邊界，並在解剖形態空間中導航。</td>
+<td>G3 跨域視野</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/723J7XQ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fpsyg.2019.02688" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><em>The Markov blanket trick: On the scope of the free energy principle and active inference</em>（Vicente Raja）</td>
+<td>從哲學與數學兩面批判自由能原理：分析馬可夫毯假設在真實開放生命系統中的適用邊界，以及過度延伸的風險。</td>
+<td>G3 批判思辨</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/9WFFRIAD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.plrev.2021.09.001" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><em>Findings of the Second BabyLM Challenge: Sample-Efficient Pretraining on Developmentally Plausible Corpora</em>（Michael Y. Hu）</td>
+<td>檢驗在兒童級的一億詞預算下，語言模型與視覺語言模型能學到多少語法與認知結構，並指出純規模擴展以外的樣本效率瓶頸。</td>
+<td>G2–G3 實證基準</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/EWHUZMJK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.05149" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2019｜Yanan Sun et al.</strong>，<em>Evolving Deep Convolutional Neural Networks for Image Classification</em>（<em>IEEE TEVC</em>，779 引）：用遺傳演化演算法同時自動搜尋深度網路的拓撲架構與權重初始化，把神經架構演化和開放式設計連了起來。OA PDF ｜ <a href="zotero://select/library/items/KU6R3WFZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1710.10741" rel="noopener">原文</a></li>
+<li><strong>2006｜Lee M. Harrison, Karl John Friston et al.</strong>，<em>Extra-classical receptive field effects measured in striate cortex with fMRI</em>（<em>NeuroImage</em>，89 引）：用人腦 fMRI 實證檢驗預測編碼假說。結果顯示，全局連貫運動產生由上而下的預測時，初級視覺皮質的反應會被抑制。書目索引 ｜ <a href="zotero://select/library/items/ZPSUXWWB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neuroimage.2006.10.017" rel="noopener">原文</a></li>
+<li><strong>2019｜Manuel Baltieri &amp; Christopher L. Buckley</strong>，<em>PID Control as a Process of Active Inference with Linear Generative Models</em>（<em>Entropy</em>，71 引）：證明工業界的經典 PID 控制器，在數學上等價於線性生成模型下的主動推論過程，把控制論和貝氏腦理論接了起來。書目索引 ｜ <a href="zotero://select/library/items/TRZG86EJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/e21030257" rel="noopener">原文</a></li>
+<li><strong>2023｜Matteo Priorelli et al.</strong>，<em>Modeling motor control in continuous-time Active Inference: a survey</em>（<em>IEEE TCDS</em>，16 引）：系統整理連續時間主動推論怎麼取代傳統最優控制的成本函數，改用本體感覺的預測匹配來做生物運動控制。OA PDF ｜ <a href="zotero://select/library/items/GAARP5DE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.05144" rel="noopener">原文</a></li>
+<li><strong>2023｜Zihao Liu et al.</strong>，<em>Tactile Active Inference Reinforcement Learning for Efficient Robotic Manipulation Skill Acquisition</em>（<em>IROS</em>）：結合觸覺感知的主動推論與強化學習，大幅提高機器人在開放環境中靈巧操作的樣本效率。OA PDF ｜ <a href="zotero://select/library/items/G7QM3JVX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2311.11287" rel="noopener">原文</a></li>
+<li><strong>2026｜Mengxian Lyu et al.</strong>，<em>Countering Catastrophic Forgetting of Large Language Models for Better Instruction Following via Weight-Space Model Merging</em>（<em>arXiv</em>）：醫療等專科微調會讓 LLM 忘掉指令遵循能力。本文針對這個問題提出權重空間模型合併框架，兼顧領域專業與通用性。OA PDF ｜ <a href="zotero://select/library/items/AWBVZCJW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.01538" rel="noopener">原文</a></li>
+<li><strong>2026｜Hyeontaek Hwang et al.</strong>，<em>Model-Dowser: Data-Free Importance Probing to Mitigate Catastrophic Forgetting in Multimodal Large Language Models</em>（<em>arXiv</em>）：不需要原始預訓練資料，就能探測多模態大模型深層解碼器裡的重要參數，用來解決大規模 MLLM 下游微調後的退化。OA PDF ｜ <a href="zotero://select/library/items/9R35HJJW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.04509" rel="noopener">原文</a></li>
+<li><strong>2026｜Meng Lou et al.</strong>，<em>Overcoming Catastrophic Forgetting in Visual Continual Learning with Reinforcement Fine-Tuning</em>（<em>arXiv</em>）：用實驗比較強化微調（RFT / GRPO）與監督微調（SFT），分析前者在類別增量與領域增量視覺學習中對抗遺忘的優勢，以及還留下的瓶頸。OA PDF ｜ <a href="zotero://select/library/items/VU7IGA6D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.09640" rel="noopener">原文</a></li>
+<li><strong>2026｜Zhenqian Zhu et al.</strong>，<em>Rethinking Backdoor Adversarial Unlearning through the Lens of Catastrophic Forgetting in Continual Learning</em>（<em>arXiv</em>）：把後門植入與防禦重新表述成三階段的持續學習過程，說明表面的安全微調為什麼除不掉深層的後門記憶。OA PDF ｜ <a href="zotero://select/library/items/GJHTFQF5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.14078" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Guilherme Guedes, Marco Apolinario Lainez, Charlotte Frenkel (2026)</strong>，<em>Hypnos: A Dual-Phase End-to-End Platform for Scalable Continual Learning at the Edge</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：受大腦晝夜週期啟發，打造開源的邊緣持續學習平台 <code>Hypnos</code>。日間清醒相在 RISC-V 低功耗單晶片上執行免梯度的原型快適應，夜間充電睡眠相由智慧充電器執行重播梯度鞏固。在 CORe50 上達到 78.6% 至 81.6% 準確率，並省下 22 倍學習算力。</li>
+<li>連結：<a href="zotero://select/library/items/S8VKCGHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24637" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Mohammad Ali Vahedifar, Behzad Bozorgtabar, Qi Zhang (2026)</strong>，<em>Learning with Unlearning: Synaptic Role Partitioning for Simultaneous Continual Learning and Machine Unlearning</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：提出 <code>LwU</code> 框架，在單一突觸層級同時整合持續學習與機器遺忘。它把權重分成四區：保留凍結、刪除清空回收、用正交投影梯度上升化解衝突、用自我蒸餾學新知。不必重訓，就能支援事後即時刪除與危險內容抹除。</li>
+<li>連結：<a href="zotero://select/library/items/ACFA9FJV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24205" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Overcoming Catastrophic Forgetting: Continual Learning for Radar Waveform Classification</strong>（Mohamed Rabie et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：真實電磁環境中，新型雷達波形與調變方式不斷出現。已部署的分類器從頭重訓成本太高，直接增量更新又會嚴重遺忘既有的波形特徵。過去的研究也缺少跨方法機制的系統基準。</li>
+<li>關鍵做法：在真實感測序列場景下，對正則化、重播與架構隔離等持續學習機制做完整的基準測試，並給出資源受限的邊緣部署該怎麼選抗遺忘機制的實證準則。</li>
+<li>跨領域啟發：對非平穩的物理訊號流（通訊、聲納、醫療監測）來說，這是把持續學習從視覺玩具基準推向高可靠工程部署的一個範本。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/S6KN3S37" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.18404" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Towards Eliminating Catastrophic Forgetting in the Curriculum Learning of Math Reasoning Tasks</strong>（Zengyan Yang et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：訓練大模型做數學推理（見 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>）時，由易到難的課程學習（Curriculum Learning）會因為不同階段任務之間的參數分佈偏移，意外讓模型對早期的基礎推理技能發生災難性遺忘。</li>
+<li>關鍵做法：從參數更新動力學推導課程階段轉換時遺忘的成因，再設計能抑制跨階段分佈漂移的課程更新策略，讓推理能力單調累積，不會學了新的就丟了舊的。</li>
+<li>跨領域啟發：指出後訓練階段的課程排序與參數幾何漂移互相耦合，對多階段 RLHF 與推理訓練管線的設計有參考價值。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/2DZ2P2US" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.33655" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

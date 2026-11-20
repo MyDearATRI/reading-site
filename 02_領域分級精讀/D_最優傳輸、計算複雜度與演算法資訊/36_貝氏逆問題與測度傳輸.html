@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>36｜貝氏逆問題與測度傳輸（Bayesian Inverse Problems &amp; Measure Transport） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a></nav></header>
+<main>
+<article>
+
+<h1 id="36貝氏逆問題與測度傳輸bayesian-inverse-problems-measure-transport">36｜貝氏逆問題與測度傳輸（Bayesian Inverse Problems &amp; Measure Transport）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 D：最優傳輸、計算複雜度與演算法資訊</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>從稀疏、含噪的觀測反推無窮維的隱藏物理場，是病態的不適定問題。貝氏逆問題把它改寫成函數空間上對先驗測度的平滑加權更新，測度傳輸則用確定性最優傳輸映射與交互作用粒子流，取代在高維失效的隨機漫步抽樣。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+科學與工程裡有一大類任務是逆著因果方向往回推。已知地震波在地表的震動紀錄 <span class="math inline">y</span>，反推地底幾十公里處的岩層密度場 <span class="math inline">u</span>；已知衛星觀測到的稀疏雲圖 <span class="math inline">y</span>，反推全球大氣的完整初始狀態 <span class="math inline">u</span>；已知醫療斷層掃描投影 <span class="math inline">y</span>，重建體內病灶組織 <span class="math inline">u</span>。正向算子 <span class="math inline">\mathcal{G}(u) \mapsto y</span> 通常是會抹平高頻細節的偏微分方程（PDE），所以逆問題有 Hadamard 不適定性（Ill-Posedness）：觀測值裡一點感測器雜訊，直接反演就會被放大成劇烈震盪，而且有無數組不同的內部場都能產生幾乎相同的外部讀數。未知場 <span class="math inline">u</span> 的網格切得越細（維度 <span class="math inline">d \to \infty</span>），情況越糟。傳統有限維貝氏公式裡的 Lebesgue 體積元不存在，普通 Metropolis–Hastings 隨機漫步 MCMC 的接受率也會隨網格加密跌到 0%。這個領域的進展分兩步。Andrew Stuart 先用無窮維函數空間測度論修復了貝氏逆問題的適定性。Marzouk 等人再引入確定性測度傳輸（Measure Transport）、集合卡爾曼反演（EKI）與分數擴散粒子流，抽樣不再像大海撈針那樣隨機碰運氣，改成把簡單的高斯雲團直接推向複雜後驗分佈的流體變形。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li><strong>隔著毛玻璃猜雕像（函數空間貝氏適定性）</strong>：只看毛玻璃上的模糊黑影（觀測 <span class="math inline">y</span>），背後可能有無限種形狀。如果事先帶著「自然界雕像表面通常光滑或分片連續」的先驗信念測度 <span class="math inline">\mu_0</span>，觀測證據就不必當成要求唯一解的硬方程，可以當成替所有候選雕像重新打分的軟權重。數據微幅晃動時，整團機率雲只會在 Wasserstein／Hellinger 距離下小幅平移，不會崩潰。</li>
+<li><strong>盲人摸象隨機跳與捏黏土定向變形（MCMC 與測度傳輸）</strong>：傳統 MCMC 像蒙著眼睛在百萬維空間隨機亂跳，網格越細越容易踩空被拒絕。測度傳輸（Transport Maps）則像拿一團標準圓形黏土（標準常態分佈 <span class="math inline">\eta</span>），用學出來的光滑單調模具 <span class="math inline">T</span> 一壓，就塑造成目標後驗分佈的複雜多峰形狀。模具造好之後，要幾萬個獨立樣本只需重複壓模，樣本之間沒有自相關。</li>
+<li><strong>登山隊繩索互助（集合卡爾曼反演 EKI 與粒子流）</strong>：如果物理模擬器 <span class="math inline">\mathcal{G}</span> 是不可微分的黑盒子（例如龐大的氣象或疫情代理人模型），就派出幾十個粒子組成登山隊，直接用隊員高度與位置的經驗協方差當作無導數的指南針，集體滑向後驗山谷。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li><strong>AI for Science 與 PDE 神經算子（<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>）</strong>：FNO 與 DeepONet 處理的是快速正向模擬 <span class="math inline">\mathcal{G}_\theta</span>。本領域處理另一半：怎麼結合觀測數據反推未知的邊界條件與物理參數，並給出嚴格的不確定性量化（UQ）。</li>
+<li><strong>擴散模型與條件生成（<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a>、<a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a>）</strong>：2025–2026 很受關注的分數引導資料同化（Score-Based Data Assimilation），做法是把預訓練擴散模型當作無窮維、高表達力的先驗 <span class="math inline">\mu_0</span>，在推理階段注入物理觀測似然，零樣本求解逆問題。</li>
+<li><strong>大腦預測編碼與主動推論（<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>、<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a>）</strong>：人類視覺皮質從二維視網膜訊號重建三維世界，做的就是在連續時間內執行非線性貝氏資料同化與粒子流濾波。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    IP0[&quot;經典逆問題 y = G(u) + η：Hadamard 不適定性與雜訊爆炸&quot;] --&gt;|&quot;Tikhonov 正則化升格為機率測度&quot;| STU[&quot;Stuart 無窮維函數空間貝氏框架 (2010)：Radon–Nikodym 後驗適定性與 pCN&quot;]
+    STU --&gt;|&quot;統計極小極大收斂率&quot;| KVV[&quot;Knapik–van der Vaart–van Zanten (2011)：高斯先驗光滑度匹配與後驗收斂率&quot;]
+    IP0 --&gt;|&quot;氣象海洋高維動態狀態估計&quot;| ENKF[&quot;集合卡爾曼濾波 EnKF / 4D-EnKF / IEnKS (2000–2014)：小集合經驗協方差無伴隨同化&quot;]
+    STU --&gt;|&quot;結合 EnKF 處理一般黑盒逆問題&quot;| EKI[&quot;集合卡爾曼反演 EKI (Iglesias–Law–Stuart 2013–2017)：預條件交互粒子梯度流&quot;]
+    STU --&gt;|&quot;拋棄馬可夫鏈，改構造確定性推前映射&quot;| TM[&quot;三角測度傳輸 Knothe–Rosenblatt 與最優傳輸映射 (El Moselhy–Marzouk 2011–2016)&quot;]
+    TM --&gt;|&quot;核化 Wasserstein 梯度流 / 擴散分數先驗&quot;| SDA[&quot;SVGD 與分數引導生成式資料同化 Score-Based DA / 混沌粒子流濾波 (2024–2026)&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>無窮維函數空間貝氏公式、後驗適定性與收斂率（Stuart 範式）</strong></p>
+<ul>
+<li>直覺理解：在有限維空間，我們習慣寫「後驗密度 <span class="math inline">\propto</span> 似然 <span class="math inline">\times</span> 先驗密度」。但在無窮維希爾伯特或巴拿赫函數空間 <span class="math inline">X</span> 上，沒有平移不變的 Lebesgue 基準測度。如果先把網格離散化再隨手寫先驗，網格加密一倍，先驗與後驗就會互相奇異（Mutually Singular），演算法隨之失效。所以這個領域有一句口訣：先在連續無窮維空間立公式，最後一步才離散化。Stuart (2010) 證明，只要把後驗 <span class="math inline">\mu^y</span> 嚴格定義為對高斯或 Besov 先驗測度 <span class="math inline">\mu_0</span> 的 Radon–Nikodym 導數，逆問題就在 Hellinger 與 Wasserstein 度量下恢復 Lipschitz 連續的適定性。</li>
+<li>機制或核心表達式：
+<div class="math inline">\frac{d\mu^y}{d\mu_0}(u) = \frac{1}{Z(y)} \exp\big(-\Phi(u; y)\big), \qquad \Phi(u; y) = \frac{1}{2} \|\Gamma^{-1/2}(y - \mathcal{G}(u))\|^2</div>
+在此框架下設計的預條件 Crank–Nicolson（pCN）提案 <span class="math inline">v = \sqrt{1-\beta^2}\, u + \beta \xi</span>（<span class="math inline">\xi \sim \mu_0</span>）保持先驗測度不變，所以接受率與網格維度 <span class="math inline">d \to \infty</span> 無關。另外，Knapik, van der Vaart &amp; van Zanten (2011) 嚴格證明：先驗光滑度與真實未知函數的光滑度精確匹配時，後驗以極小極大最優速率收縮；先驗過度光滑時，貝氏可信區間的頻率覆蓋率會退化至零（過度自信陷阱）。</li>
+<li>能做到什麼，代價是什麼：消除了網格越細、抽樣越慢的維度災難，並提供嚴格的收斂與不確定性保證。代價是後驗高度非高斯、多峰或集中在彎曲低維流形時，只靠先驗提案的 pCN 探索效率仍然受限。</li>
+</ul>
+</li>
+<li>
+<p><strong>確定性測度傳輸與 Knothe–Rosenblatt 三角重排映射</strong></p>
+<ul>
+<li>直覺理解：設計馬可夫鏈在目標空間裡一步步試探，要等很長的混合時間（Mixing Time）。El Moselhy &amp; Marzouk (2011) 與 Marzouk et al. (2016) 改用 <a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 的核心想法：找一個確定性可逆映射 <span class="math inline">S: \mathbb{R}^d \to \mathbb{R}^d</span>，把很容易抽樣的標準高斯參考測度 <span class="math inline">\eta</span> 直接推前（Pushforward）成複雜的後驗測度 <span class="math inline">\mu^y = S_\#\eta</span>。選 Brenier 凸勢梯度映射，幾何失真最小。選下三角單調映射（Knothe–Rosenblatt Rearrangement），雅可比行列式 <span class="math inline">\det \nabla S</span> 就化為對角線乘積，計算量只有 <span class="math inline">O(d)</span>；每一列分量還自動對應條件分佈，可以直接讀出邊際與條件後驗。</li>
+<li>機制或核心表達式：
+<div class="math inline">S(z) = \begin{bmatrix} S_1(z_1) \\ S_2(z_1, z_2) \\ \vdots \\ S_d(z_1, \dots, z_d) \end{bmatrix}, \quad \partial_{z_k} S_k &gt; 0, \qquad \min_{S \in \mathcal{T}_\triangle} \mathrm{KL}\big(S_\#\eta \,\|\, \mu^y\big) = \mathbb{E}_{z \sim \eta}\!\left[ \tilde{\Phi}(S(z)) - \sum_{k=1}^d \ln \partial_{z_k} S_k(z_{1:k}) \right]</div>
+這個目標函數不需要知道後驗正規化常數 <span class="math inline">Z(y)</span>。如果後驗馬可夫隨機場有條件獨立的稀疏圖結構，三角映射 <span class="math inline">S</span> 也會繼承對應的稀疏結構。</li>
+<li>能做到什麼，代價是什麼：把無窮步的 MCMC 抽樣轉成確定性的凸／單調變分最佳化，訓練完成後，生成獨立後驗樣本只需一次前向函數求值。代價是高維多項式或神經樣條基底如果沒有善用低秩與條件獨立稀疏性，參數規模仍隨維度增長。</li>
+</ul>
+</li>
+<li>
+<p><strong>集合卡爾曼濾波／反演（EnKF / EKI）與無導數交互粒子動力學</strong></p>
+<ul>
+<li>直覺理解：數值天氣預報的狀態空間有百萬至十億維（Houtekamer &amp; Mitchell 2005; Hunt et al. 2004），複雜流體／代理人模擬也類似。這些場合每呼叫一次正向模型 <span class="math inline">\mathcal{G}(u)</span> 都要跑數小時超級電腦，舊版程式碼也沒有自動微分或伴隨算子（Adjoint <span class="math inline">D\mathcal{G}^*</span>）。集合卡爾曼方法（EnKF / IEnKS / EKI，Iglesias–Law–Stuart 2013）只用 <span class="math inline">J \approx 50 \sim 100</span> 個並行模擬粒子組成集合，拿參數與預測觀測之間的經驗交叉協方差 <span class="math inline">C^{up}</span> 代替缺失的梯度算子。Schillings &amp; Stuart (2017) 進一步說明它的數學結構：在連續人工時間極限下，EKI 就是粒子群在自己張成的有限維子空間內執行經驗協方差預條件的交互作用梯度流。</li>
+<li>機制或核心表達式：
+<div class="math inline">\frac{du^{(j)}}{dt} = - C^{up}(u)\, \Gamma^{-1}\big(\mathcal{G}(u^{(j)}) - y\big), \qquad C^{up}(u) = \frac{1}{J} \sum_{k=1}^J (u^{(k)} - \bar{u})\big(\mathcal{G}(u^{(k)}) - \bar{\mathcal{G}}\big)^\top \approx C^{uu}(D\mathcal{G})^\top</div></li>
+<li>能做到什麼，代價是什麼：免導數（Derivative-Free），很容易平行化，幾十次迭代內就能把百萬維未知場收斂到高品質的估計。代價是標準 EKI 會讓粒子集合坍縮至單點，喪失後驗變異數。補救辦法包括引入迭代平滑器 IEnKS、做協方差局域化／膨脹，或加上隨機擴散項構成 Ensemble Kalman Sampler（EKS），後者在線性情況下精確收斂至真後驗。</li>
+</ul>
+</li>
+<li>
+<p><strong>核化 Wasserstein 粒子流與分數引導生成式資料同化（Score-Based DA）</strong></p>
+<ul>
+<li>直覺理解：物理系統有強烈混沌分岔時（如湍流或洛倫茲非高斯吸引子），高斯協方差假設會把雙峰平均到中間的無效區域。現代測度傳輸有兩條路線。第一條是 Stein 變分梯度下降（SVGD）與粒子流濾波（Particle Flow Filter）：在再生核希爾伯特空間（RKHS）近似 Otto 水流速度場，讓粒子一邊順著後驗對數梯度爬向高峰，一邊互相排斥，填滿整個分佈寬度。第二條是 2025–2026 大量出現的分數引導資料同化（Score-Based DA，Duong 2026; Shen et al. 2026; Yamaoka et al. 2026）：先離線用擴散模型學會複雜物理場非高斯真實吸引子的分數函數 <span class="math inline">\nabla_u \ln p_t(u)</span>，上線觀測時再結合似然引導或粒子流濾波，把高斯雜訊傳輸到非高斯條件後驗。</li>
+<li>機制或核心表達式：
+<div class="math inline">\nabla_{u_t} \ln p_t(u_t \mid y) = \underbrace{\nabla_{u_t} \ln p_t(u_t)}_{\text{離線擴散模型學習之物理先驗分數}} + \underbrace{\nabla_{u_t} \ln p(y \mid u_t)}_{\text{線上物理正向算子似然引導 / SMC 修正}}</div></li>
+<li>能做到什麼，代價是什麼：可以處理強非線性混沌吸引子、多模態後驗，以及部分觀測代理人模型（ABM，Liang et al. 2026）的線上同化。代價是加噪時刻 <span class="math inline">t&gt;0</span> 的精確條件似然 <span class="math inline">p(y\mid u_t) = \int p(y\mid u_0)p(u_0\mid u_t)du_0</span> 沒有閉式解，只用高斯近似容易引入引導偏差，需要搭配序貫蒙地卡羅（SMC）重加權或譜投影校正。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>擴散先驗逆問題中加噪似然不可解性與後驗失真之間的張力（Duong 2026）</strong>：分數擴散模型是目前最強的高維非高斯先驗，但在逆向去噪的中間步 <span class="math inline">t&gt;0</span>，真實條件分數 <span class="math inline">\nabla_{u_t}\ln p(y\mid u_t)</span> 要對乾淨狀態的後驗做積分。一邊是快速的單步近似引導（如 DPS，很快，但有漸近偏差，可能扭曲不確定性區間），另一邊是漸近精確的 SMC／粒子流修正（無偏，但正向算子的呼叫次數很多）。兩者之間怎麼做線上與離線的分工，是目前生成式逆問題最主要的爭論。</li>
+<li><strong>未知模型參數與隱藏動態狀態的聯合盲同化（Joint State-Parameter &amp; Blind Inversion）</strong>：狀態轉移算子本身可能含有未知的物理常數、傳播率或空間異質擴散係數，例如 Yamaoka et al. 2026 的自組織分數同化，或 Duong 2026 針對異質反應擴散疫情閾值的早期可識別性分析。哪些參數組合能從早期稀疏觀測中唯一辨識，哪些組合有本徵的不可識別流形，決定了決策不確定性的下限。</li>
+<li><strong>小集合亞空間塌縮（Subspace Collapse）與高維多峰穿隧</strong>：無導數集合方法（EnKF / EKI）被限制在初始 <span class="math inline">J</span> 個粒子張成的仿射子空間內。若 <span class="math inline">J=100, d=10^6</span>，子空間外的百萬維分量無法靠線性組合探索。怎麼結合算子學習代理模型、隨機子空間注入與非高斯粒子流來跳出這個子空間，仍是高維地球科學與工程反演的主要難題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 與賽局推論（貝氏逆賽局 Inverse Games，Liu et al. 2026）</strong>：在自動駕駛或人機協作中，我們只觀測到其他智能體的歷史軌跡 <span class="math inline">y</span>，想反推它隱藏的獎勵／效用函數參數 <span class="math inline">u</span>。這是一個以納許均衡求解器為正向算子 <span class="math inline">\mathcal{G}(u)</span> 的貝氏逆問題。套用自編碼器或集合測度傳輸，就能即時量化對方意圖的多模態不確定性。</li>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與黑盒大語言模型／模擬器優化</strong>：遇到不可微分的系統（如複雜模擬環境、硬體編譯器或閉源 API 調參），不一定要用高方差的 REINFORCE 梯度估計。借用集合卡爾曼反演（EKI）的經驗交叉協方差預條件公式，常常能用很少的評估次數穩定收斂。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>（先定義連續極限，再離散化）</strong>：Stuart 在無窮維函數空間得到的教訓，對深度學習同樣適用。超參數（學習率、權重衰減、初始化方差）如果沒有在寬度／深度趨於無窮的連續極限下保持測度良定義（如 <span class="math inline">\mu</span>P 最大更新參數化），模型一放大就會失穩。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。本領域目前共收錄 96 篇文獻（其中 27 篇具備開放取用 OA PDF）。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2005</td>
+<td><em>Ensemble Kalman filtering</em>，P. L. Houtekamer, Herschel L. Mitchell</td>
+<td>大氣海洋作業級集合卡爾曼濾波（EnKF）的奠基論文，說明如何只靠很小的集合近似千萬維的狀態協方差。</td>
+<td>資料同化工程經典</td>
+<td><a href="zotero://select/library/items/95Z85TVM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1256/qj.05.135" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2010</td>
+<td><em>Inverse problems: a Bayesian perspective</em>，Andrew M. Stuart</td>
+<td>無窮維貝氏逆問題的奠基長文（<em>Acta Numerica</em>）：建立巴拿赫／希爾伯特空間上後驗測度的適定性，以及與維度無關的 MCMC 做法。</td>
+<td>體系奠基，第一必讀</td>
+<td><a href="zotero://select/library/items/CTU9EQBU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1302.6989" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2011</td>
+<td><em>Bayesian Inference with Optimal Maps</em>，Tarek A. El Moselhy, Youssef M. Marzouk</td>
+<td>用測度傳輸做貝氏推論的開創論文：不模擬馬可夫鏈，改用變分最佳化直接構造把先驗推前至後驗的最優傳輸映射。</td>
+<td>測度傳輸核心必讀</td>
+<td><a href="zotero://select/library/items/VSZWPCST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1109.1516" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2011</td>
+<td><em>Bayesian inverse problems with Gaussian priors</em>，B. T. Knapik, A. W. van der Vaart, J. H. van Zanten</td>
+<td>嚴格證明無母數逆問題的後驗收縮率與可信集頻率覆蓋率，並指出先驗過度光滑會讓覆蓋率歸零。</td>
+<td>統計理論深度必讀</td>
+<td><a href="zotero://select/library/items/E4552RJE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1214/11-aos920" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Ensemble Kalman methods for inverse problems</em>，Marco A. Iglesias, Kody J. H. Law, Andrew M. Stuart</td>
+<td>把氣象界的 EnKF 整理成通用的無導數反演方法，即集合卡爾曼反演（EKI），可以對任意黑盒 PDE 模擬器做快速反演。</td>
+<td>黑盒反演實戰核心</td>
+<td><a href="zotero://select/library/items/XVXU2T4B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1088/0266-5611/29/4/045001" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Sampling via Measure Transport: An Introduction</em>，Youssef Marzouk, Tarek Moselhy, Matthew Parno, Alessio Spantini</td>
+<td>確定性耦合與三角傳輸映射的入門教材，一步步串起 Knothe–Rosenblatt 重排、稀疏條件圖結構與非高斯濾波。</td>
+<td>零基礎入門首選</td>
+<td><a href="zotero://select/library/items/FHU3P88W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1602.05023" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Understanding the Ensemble Kalman Filter</em>，Matthias Katzfuss, Jonathan R. Stroud, Christopher K. Wikle</td>
+<td>寫給非氣象背景的統計與機器學習讀者的 EnKF 導讀，用精簡的統計語言說明集合近似的機制。</td>
+<td>跨領域快速上手</td>
+<td><a href="zotero://select/library/items/7JU3DCRP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1080/00031305.2016.1141709" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><em>Analysis of the Ensemble Kalman Filter for Inverse Problems</em>，Claudia Schillings, Andrew M. Stuart</td>
+<td>分析有限集合大小下的 EKI，證明它的連續時間極限等價於經驗協方差預條件的交互作用粒子梯度流。</td>
+<td>粒子梯度流理論樞紐</td>
+<td><a href="zotero://select/library/items/XQ6SDSH4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1602.02020" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>B. R. Hunt, E. Kalnay, E. J. Kostelich, E. Ott (2004)</strong>，<em>Four-dimensional ensemble Kalman filtering</em> (<em>Tellus A</em>, Citations: 308) ｜ 把集合卡爾曼濾波擴展到四維時空的異步觀測視窗（4D-EnKF），是現代時空軌跡同化的基礎。 <a href="zotero://select/library/items/WPPWN2N8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3402/tellusa.v56i4.14424" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Herschel L. Mitchell, P. L. Houtekamer (2000)</strong>，<em>An Adaptive Ensemble Kalman Filter</em> (<em>Monthly Weather Review</em>, Citations: 165) ｜ 引入自適應協方差校正與局域化的想法，緩解小集合抽樣雜訊造成的偽長程相關與濾波發散。 <a href="zotero://select/library/items/68XEN929" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1175/1520-0493(2000)128%3C0416:aaekf%3E2.0.co;2" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>M. Bocquet, P. Sakov (2014)</strong>，<em>An iterative ensemble Kalman smoother</em> (<em>Quarterly Journal of the Royal Meteorological Society</em>, Citations: 160) ｜ 提出不需要切線性與伴隨模型的迭代集合卡爾曼平滑器（IEnKS），大幅提高強非線性地球物理系統的反演精度。 <a href="zotero://select/library/items/XSSZ98D7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/qj.2236" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Gang Xu, Mengdao Xing, Lei Zhang, Yabo Liu (2011)</strong>，<em>Bayesian Inverse Synthetic Aperture Radar Imaging</em> (<em>IEEE Geoscience and Remote Sensing Letters</em>, Citations: 120) ｜ 稀疏結構貝氏先驗用於逆合成孔徑雷達（ISAR）高解析度成像反演的典型工程案例。 <a href="zotero://select/library/items/CNABI5SH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lgrs.2011.2158797" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Baojun Che, Daniel Zhengyu Huang, Xinying Mao, Weijie Wang (2026)</strong>，<em>Enhancing Exploration in Ensemble Kalman Inversion via Covariance Inflation and Projected Dropout</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：結合乘性協方差膨脹與均值投影 Dropout 修正，讓集合卡爾曼反演（EKI）既不會集合坍縮，也能離開初始仿射子空間。文中嚴格證明線性逆問題的最小平方目標以指數速率收斂，速率與病態條件數無關；在 100 維非線性與正壓流 PDE 逆問題上表現也很好。</li>
+<li>連結：<a href="zotero://select/library/items/VUPIB7RE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19845" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Sebastian Reich (2026)</strong>，<em>Online Digital Twins: Data Assimilation and Control</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：利用資料同化的平均場表徵與平均場龐特里亞金極小原理（Mean-Field Pontryagin Minimum Principle），把連續抵達數據的線上同化和滾動視窗最佳控制，統一實作成哈密頓交互作用粒子系統，為即時雙向數位孿生提供數學框架。</li>
+<li>連結：<a href="zotero://select/library/items/8SRXUP2U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.12001" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-190800-增量最新入庫聚焦大氣基礎模型聯合資料同化與間接分數隨機閉包">2026-11-19（08:00 增量）最新入庫（聚焦：大氣基礎模型聯合資料同化與間接分數隨機閉包）</h4>
+<ol>
+<li>
+<p><strong>Eliot J. Kim, Eric J. Mei, Peter D. Ivatt, Lee T. Murray, Alexander J. Turner (2026)</strong>，<em>Enabling joint chemical and meteorological data assimilation with an atmospheric foundation model</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：對流層主氧化劑 OH 佔甲烷匯 88%，卻很難約束，傳統化學氣候模式做聯合資料同化的成本又很高。本文微調 Aurora 得到 <code>AuroraChem</code>（單 GPU 模擬一年只需 12 分鐘），證實模型學到的跨場協方差能讓化學觀測改善 500 hPa 氣溫的空間相關性（0.89→0.92），並重現印度夏季季風環流。反過來，氣象觀測也能把 500 hPa OH 相關性提高到 0.93（只用 TROPOMI <span class="math inline">\mathrm{NO}_2</span> 柱濃度也達 0.93）。這為 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的代理模型用於物理與化學聯合資料同化提供了一條新路徑。</li>
+<li>連結：<a href="zotero://select/library/items/FW5XV5BG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24020" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Xinghao Dong, Huchen Yang, Jin-Long Wu (2026)</strong>，<em>Score-Based Stochastic Closure Modeling via Offline Indirect Learning and Online Data Assimilation</em> (<em>arXiv (Cornell University)</em>)</p>
+<ul>
+<li>問題與做法：多尺度降階建模需要隨機閉包來補償截斷造成的資訊流失，但閉包的直接真值很難取得。本文用分數擴散模型做離線間接訓練加線上資料同化，完全不用直接閉包資料，就在二維紊流中捕捉到非高斯閉包統計。結合已知的物理動力學後，跨工況的泛化能力更好；後驗分數同化的狀態預測也明顯優於傳統高斯假設方法。</li>
+<li>連結：<a href="zotero://select/library/items/DT2QRW4W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19676" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-首期雙篇">2026-11-19 首期雙篇</h4>
+<ol>
+<li>
+<p><strong>Duc-Lam Duong (2026)</strong>，<em>Accelerating posterior sampling in Bayesian inverse problems with diffusion models: an online-offline perspective</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：分數擴散模型是很強的學習型先驗，但用在逆問題時，加噪後驗分數無法直接由先驗分數取得，這是條件化的主要難題。這篇綜述沿離線先驗訓練與線上觀測反演兩條軸線，系統評析似然引導、譜投影與序貫蒙地卡羅（SMC）修正。</li>
+<li>連結：<a href="zotero://select/library/items/VEBHDCR8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.01300" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Zheqi Shen, Youmin Tang, Yuewei Fang (2026)</strong>，<em>A score-based particle flow filter for non-Gaussian data assimilation in high-dimensional chaotic systems</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：傳統粒子流濾波依賴高斯先驗假設，捕捉不到混沌系統的非高斯奇異吸引子。本文提出 Score-PFF，用去噪分數匹配神經網路取代參數化的先驗梯度，在高維混沌動力學中準確追蹤多峰偏態分佈。</li>
+<li>連結：<a href="zotero://select/library/items/PSQVAV4F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.22454" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-年度其他追蹤清單">2026 年度其他追蹤清單</h4>
+<ul>
+<li><strong>Yuma Yamaoka, Seiichi Uchida, Shoji Toyota (2026)</strong>，<em>Self-Organizing Score-based Data Assimilation</em> (<em>arXiv</em>) ｜ 傳統分數資料同化（SDA）要求狀態轉移參數已知，本文去掉這個限制，做到未知系統參數與高維隱藏狀態的聯合推論。 <a href="zotero://select/library/items/TFZATQE2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.28048" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Duc-Lam Duong (2026)</strong>，<em>Bayesian inverse problems and epidemic-threshold uncertainty for a heterogeneous SIS reaction-diffusion model</em> (<em>arXiv</em>) ｜ 證明在異質反應擴散傳染病模型中，即使傳播率與康復率無法分開識別，早期流行率數據仍能收斂並確定主特徵值的符號，而這個符號決定疫情是否存續。 <a href="zotero://select/library/items/TJ2UKMR9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.14468" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Siming Liang, Jacob Hauck, Minglei Yang, Adam Spannaus (2026)</strong>，<em>Score-Based Generative Data Assimilation for Integrating Aggregated Surveillance Data into Agent-Based Models in Epidemic Tracking</em> (<em>arXiv</em>) ｜ 提出生成式資料同化（GenDA），解決離散個體代理人模型（ABM）難以用稀疏的空間匯總監測數據做線上校準的問題。 <a href="zotero://select/library/items/EGBUZTES" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01434" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Xinjie Liu, Lasse Peters, Javier Alonso-Mora, Ufuk Topcu (2026)</strong>，<em>Auto-Encoding Bayesian Inverse Games</em> (<em>Springer Proceedings in Advanced Robotics</em>) ｜ 把變分自編碼與貝氏逆問題推進到多智能體互動賽局，從觀測軌跡即時推斷其他智能體隱藏目標函數的後驗分佈。 <a href="zotero://select/library/items/GVQ7GZMW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-032-09967-9_16" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

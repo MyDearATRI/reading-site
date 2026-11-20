@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>09｜社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="09社會與多智能體marl生成式社會模擬平均場賽局與計算社會選擇">09｜社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a> ｜ <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>社會與多智能體研究的是：成百上千個各有局部資訊、私人偏好與策略適應能力的智能體同時互動時，怎麼克服環境非平穩性與維度災難，進而理解、預測甚至設計合作協調、市場均衡、輿論相變與公平的集體決策制度。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+單智能體強化學習或最佳化假設環境的轉移規則固定不變。進入多智能體社會後，別人就是你的環境。所有智能體都在同時改進自己的策略，每個人眼中的世界因此不斷變動，這叫非平穩性（Non-stationarity）。聯合行動空間也隨人數 <span class="math inline">N</span> 指數成長為 <span class="math inline">|\mathcal{A}|^N</span>。再往下一層看，微觀個體各自追求理性或局部目標，宏觀層面卻常湧現回音室極化、公地悲劇、策略性賄選，或意想不到的制度均衡。微觀動機與宏觀湧現秩序之間的落差，是這個領域的核心問題。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像你要指揮一場千人交響樂，或調度整座城市的交通：
+<ul>
+<li>只有幾位樂手配合時（小規模多智能體 MARL），最好的做法是排練時看總譜、上台時憑耳力獨奏（集中式訓練、分散式執行 CTDE，如 MADDPG 與 QMIX）。</li>
+<li>人數增加到百萬車流時（平均場賽局 MFG 與社會統計物理），已經不可能追蹤每一輛車，於是把人群看成流體密度場。每個人只對整體擁擠度的平均場做最優反應，所有人的反應又剛好匯聚成那個密度場。</li>
+<li>如果每個居民還有語言記憶、社交關係與日常反思（LLM 生成式智能體），這座數位小鎮（<em>Homo silicus</em>）就能在電腦裡預演政策、謠言傳播與社會配對。配對背後的無形之手，在數學上與熵正則化最優傳輸（Sinkhorn）同構。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>對接 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 與 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>：Galichon 與 Choo–Siow 證明，經濟與社會的雙邊匹配均衡等價於熵正則化最優傳輸，Kantorovich 對偶勢就是社會均衡下的影子價格（Shadow Prices）。逆向最優傳輸（Inverse OT）還能從觀測到的跨群體流動，反推看不見的制度壁壘。</li>
+<li>對接 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>：平均場賽局由後向的 Hamilton–Jacobi–Bellman 方程和前向的 Fokker–Planck 方程耦合而成。意見動力學則直接對應統計物理中的自旋相變與對稱性破缺。</li>
+<li>對接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與自主 Agent 協作：多智能體編排、群體記憶架構與計算社會選擇（用投票聚合多個模型或人類的偏好），已經是複雜 AI 系統與 RLHF 對齊的理論基礎。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Root[&quot;多主體互動與集體秩序難題&quot;] --&gt; B1[&quot;策略學習：多智能體強化學習 (MARL)&quot;]
+    Root --&gt; B2[&quot;連續極限與物理湧現：平均場賽局與社會統計物理&quot;]
+    Root --&gt; B3[&quot;雙邊匹配與集體決策：經濟最優傳輸與計算社會選擇&quot;]
+    Root --&gt; B4[&quot;認知模擬革命：LLM 生成式智能體社會 (Homo Silicus)&quot;]
+
+    B1 --&gt; CTDE[&quot;集中式訓練・分散式執行 (CTDE)：MADDPG 集中式評論家&quot;]
+    CTDE --&gt; VFF[&quot;單調價值分解 (QMIX) 與合作博弈 MAPPO&quot;]
+
+    B2 --&gt; SocPhys[&quot;社會動力學統計物理 (Castellano 2009)：選民模型與共識相變&quot;]
+    SocPhys --&gt; MFG[&quot;平均場賽局 (Lasry-Lions)：HJB + Fokker-Planck 耦合與逆向 MFG&quot;]
+
+    B3 --&gt; EconOT[&quot;最優傳輸社會匹配 (Choo-Siow / Galichon)：影子價格與逆向最優傳輸&quot;]
+    EconOT --&gt; COMSOC[&quot;計算社會選擇 (COMSOC)：偏好聚合、抗操縱與連續體社會選擇&quot;]
+
+    B4 --&gt; GenAgents[&quot;生成式智能體 (Park 2023)：記憶流 + 反思樹 + 行動規劃&quot;]
+    GenAgents --&gt; PopScale[&quot;千人級數位雙生社會、城市交通 (GATSim) 與輿論演化模擬&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>集中式訓練與分散式執行（CTDE）及單調價值分解</strong></p>
+<ul>
+<li>直覺理解：如果每個智能體只看自己的局部視野、各學各的，別人一改動作，它就以為環境變了。如果部署時還要中央大腦即時指揮所有人，通訊延遲與維度爆炸又會讓系統癱瘓。解法是訓練時用全局視角對齊預期，執行時各自依局部觀測獨立決策，並且保證每個人把自己的局部利益調到最高時，團隊總分也剛好最高。</li>
+<li>機制或核心表達式：MADDPG 替每個智能體 <span class="math inline">i</span> 配一個能讀取全體動作與狀態的集中式評論家 <span class="math inline">Q_i^\pi(x, a_1, \dots, a_N)</span>。合作場景下的 QMIX 則用超網路，強制局部價值 <span class="math inline">Q_i(\tau_i, a_i)</span> 對聯合價值 <span class="math inline">Q_{\mathrm{tot}}(\boldsymbol{\tau}, \mathbf{a})</span> 滿足單調性約束（Individual-Global-Max, IGM）：
+<div class="math inline">\frac{\partial Q_{\mathrm{tot}}(\boldsymbol{\tau}, \mathbf{a})}{\partial Q_i(\tau_i, a_i)} \ge 0 \quad \forall i \implies \arg\max_{\mathbf{a}} Q_{\mathrm{tot}}(\boldsymbol{\tau}, \mathbf{a}) = \begin{pmatrix} \arg\max_{a_1} Q_1(\tau_1, a_1) \\ \vdots \\ \arg\max_{a_N} Q_N(\tau_N, a_N) \end{pmatrix}</div></li>
+<li>能做到什麼，代價是什麼：聯合動作的搜尋複雜度從 <span class="math inline">\mathcal{O}(|\mathcal{A}|^N)</span> 降到線性的 <span class="math inline">\mathcal{O}(N|\mathcal{A}|)</span>，足以支撐複雜協同與混合競合策略。代價是單調性約束表達不了高度非單調的協調賽局（Relative Overgeneralization），也就是雙方必須同時跨出一步、否則雙輸的情況。</li>
+</ul>
+</li>
+<li>
+<p><strong>平均場賽局（Mean-Field Games）與社會動力學統計物理</strong></p>
+<ul>
+<li>直覺理解：參與者人數 <span class="math inline">N \to \infty</span> 時，單一個體的微小選擇影響不了大局，所以高維的 <span class="math inline">N</span> 人博弈可以簡化成代表性個體與群體狀態分佈 <span class="math inline">m(t,x)</span> 之間的雙向自洽迴圈。物理學還指出，就算個體的互動規則非常簡單（如模仿鄰居），群體也會在臨界耦合強度附近發生相變（Phase Transition），從多元分裂轉為全局共識。</li>
+<li>機制或核心表達式：Lasry–Lions 平均場賽局的均衡由一組耦合的偏微分方程刻畫。後向的 Hamilton–Jacobi–Bellman（HJB）方程求解個體最優價值函數 <span class="math inline">u(t,x)</span>，前向的 Fokker–Planck（FP）方程演化群體分佈 <span class="math inline">m(t,x)</span>：
+<div class="math inline">\begin{cases} -\partial_t u - \nu \Delta u + H(x, \nabla u, m) = 0 &amp; \text{（後向最優控制 HJB）} \\ \partial_t m - \nu \Delta m - \mathrm{div}\!\big(m \, \partial_p H(x, \nabla u, m)\big) = 0 &amp; \text{（前向群體輸運 FP）} \end{cases}</div></li>
+<li>能做到什麼，代價是什麼：不再有對人數 <span class="math inline">N</span> 的指數依賴。它還能納入有戰略優勢的主導大玩家（Major Player），或用最大熵逆強化學習從群體軌跡反推潛在獎勵。代價是抹平了有限網路拓撲中的局部熟人圈結構，以及有限樣本的漲落。</li>
+</ul>
+</li>
+<li>
+<p><strong>最優傳輸社會匹配與計算社會選擇（Matching via Entropic OT &amp; COMSOC）</strong></p>
+<ul>
+<li>直覺理解：在婚姻市場、跨學科合作或資源配置中，誰和誰配對除了看顯性條件，還牽涉大量無法觀測的個人偏好異質性。Choo–Siow 與 Galichon 指出，不可觀測的偏好服從極值分佈時，市場的穩定匹配恰好等價於熵正則化最優傳輸。另一類問題是社會必須從互相衝突的偏好中選出唯一的公共決策，計算社會選擇研究的就是這時投票規則的公平公理與抗操縱複雜度。</li>
+<li>機制或核心表達式：設兩群體的分佈為 <span class="math inline">\mu, \nu</span>，聯合配對盈餘為 <span class="math inline">\Phi(x,y)</span>。社會總剩餘的最大化，對偶於 Kantorovich 影子價格（均衡效用分成 <span class="math inline">u(x), v(y)</span>）的最小化，均衡配對密度 <span class="math inline">\pi^*(x,y)</span> 則呈 Gibbs 核形式：
+<div class="math inline">\max_{\pi \in \Pi(\mu,\nu)} \int \Phi(x,y)\,d\pi(x,y) - \varepsilon \int \pi \ln \pi = \min_{u, v} \left\{ \int u\,d\mu + \int v\,d\nu + \varepsilon \int e^{\frac{\Phi(x,y)-u(x)-v(y)}{\varepsilon}} dx\,dy \right\}</div></li>
+<li>能做到什麼，代價是什麼：除了正向計算市場均衡，還能做逆向最優傳輸（Inverse OT）：從真實觀測到的配對矩陣 <span class="math inline">\hat{\pi}</span>，唯一識別出潛在的跨群體結合阻力 <span class="math inline">-\Phi(x,y)</span>。代價是可轉移效用（Transferable Utility）與可分離極值雜訊這兩個假設，在嚴格配額或非貨幣制度下需要額外修正。</li>
+</ul>
+</li>
+<li>
+<p><strong>生成式智能體與人口級數位雙生模擬（Generative Agents &amp; <em>Homo Silicus</em>）</strong></p>
+<ul>
+<li>直覺理解：傳統基於規則的 ABM（Agent-Based Modeling）把人簡化成只會加減一個數字的粒子，模擬不了真實的語言溝通與反思。Park 等人替 LLM 加上記憶流（Memory Stream）、定期高階反思（Reflection）與階層行動規劃（Planning）。智能體因此能像真實居民一樣，自發籌備派對、傳播消息，並形成社會關係網。</li>
+<li>機制或核心表達式：智能體在時間步 <span class="math inline">t</span> 檢索記憶庫 <span class="math inline">\mathcal{M}</span> 時，綜合近因性（Recency）、重要性（Importance）與查詢語義相關性（Relevance）加權計分，並且週期性地把底層記憶聚合成抽象的自我信念樹：
+<div class="math inline">s(m_k \mid q_t) = \alpha_{\mathrm{rec}} \cdot \gamma^{\Delta t_k} + \alpha_{\mathrm{imp}} \cdot I(m_k) + \alpha_{\mathrm{rel}} \cdot \cos\big(\mathbf{e}(m_k), \mathbf{e}(q_t)\big)</div></li>
+<li>能做到什麼，代價是什麼：首次做出能用自然語言互動、具人口統計分層代表性的高擬真社會沙盒（如千人級數位雙生與 GATSim 城市交通模擬）。代價是推論算力很貴，長時程下容易出現過度禮貌與趨同偏誤（Sycophancy Collapse）。模型校準與嚴謹的文檔標準（如 ODD 協議）也還沒有建立。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>生成式社會模擬（<em>Homo silicus</em>）的外部效度危機</strong>：用大模型模擬一千位選民或疫苗輿論的演化固然生動，但經過 RLHF 對齊的基礎模型，往往帶有系統性的文化偏誤，以及過度理性／順從的傾向。LLM-ABM 什麼時候是在忠實預測真實人類的群體動力學，什麼時候只是在放大預訓練語料裡的刻板印象，是目前計算社會科學爭論最激烈的問題。</li>
+<li><strong>離散有限制度與連續體極限之間的落差</strong>：傳統計算社會選擇（COMSOC）在離散有限的選民上，證明了大量不可避免的不可能性定理與 NP-hard 操縱界。真實的大型民主社會與線上平台卻更接近連續分佈（Society Continuum）。怎麼把平均場的連續工具引入社會選擇（如連續賄選與穩健性問題），又怎麼把理論做成可部署的真實集體決策軟體（COMSOC-R&amp;D），這個領域正處在轉折點上。</li>
+<li><strong>多智能體獎勵歸因與逆向均衡識別的多重解難題</strong>：不管是逆向平均場賽局（Inverse MFG）還是逆向最優傳輸，從宏觀群體行為反推底層獎勵函數，都會碰到可識別性的邊界：不同的獎勵結構可以產生相同的觀測均衡。這需要結合因果干預與最大因果熵原則來約束。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把逆向最優傳輸（Inverse OT）與影子價格用到 <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a></strong>：把學者的跨領域遷徙矩陣，或概念的跨群落引用矩陣，看成經驗配對方案 <span class="math inline">\hat{\pi}</span>，就能用 Stuart &amp; Wolfram / Galichon 的逆向 OT，反演出不同學科之間看不見的知識平移代價矩陣 <span class="math inline">c(x,y)</span>，找出被低估、有潛力的跨界連結。</li>
+<li><strong>把 CTDE 單調價值分解用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的多 Agent 軟體工程協作</strong>：在多智能體編碼或研究團隊中，訓練階段引入全局驗證評論家，解決局部代理各自刷指標、卻搞砸整體專案的信用分配難題。執行階段則維持輕量的模組化自治。</li>
+<li><strong>把計算社會選擇公理用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 與大模型憲法對齊（Collective Constitutional AI）</strong>：把多維度評測指標的聚合（Arena 排名）和多元價值觀對齊，都看成社會選擇的投票問題，就能避免違反孔多塞準則（Condorcet Criterion），或被策略性刷榜操縱。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2006</td>
+<td><em>Who Marries Whom and Why</em>（Eugene Choo）</td>
+<td>量化社會學雙邊匹配的經典論文（數學上等價於熵正則化最優傳輸 Sinkhorn）：從經驗配對頻率反推社會類別之間的跨類結合阻力與匹配盈餘。</td>
+<td>G2–G3 跨域必讀</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/UHJFNDBF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1086/498585" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2007</td>
+<td><em>Statistical physics of social dynamics</em>（Claudio Castellano）</td>
+<td>🏆 <strong>L5 已審核</strong>｜社會物理學的長篇綜述（<em>Rev. Mod. Phys.</em>）：涵蓋意見動力學、文化傳播、語言共識與群體相變模型。</td>
+<td>G1–G2 全局奠基</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/IMSS2DI5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0710.3256" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Optimal Transport Methods in Economics</em>（Alfred Galichon）</td>
+<td>把 Kantorovich 對偶變數詮釋成市場與社會均衡下的影子價格，把最優傳輸幾何和經濟匹配理論接了起來。</td>
+<td>G2–G3 數學橋樑</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/GCKKNFUZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1515/9781400883592" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><em>Multi-Agent Actor-Critic for Mixed Cooperative-Competitive Environments</em>（Ryan Lowe）</td>
+<td>🏆 <strong>L5 已審核</strong>｜深度多智能體強化學習（MADDPG）的開創論文：確立集中式評論家加分散式行動者的 CTDE 標準做法。</td>
+<td>G2 演算法基石</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/F7UKR4IW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.02275" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><em>QMIX: Monotonic Value Function Factorisation for Deep Multi-Agent Reinforcement Learning</em>（Tabish Rashid）</td>
+<td>合作型 MARL 的代表論文：用超網路強制全局與局部 Q 值滿足單調分解，以線性複雜度做到分散式最優協同。</td>
+<td>G2 核心機制</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/FEN7TCA5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1803.11485" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><em>Generative Agents: Interactive Simulacra of Human Behavior</em>（Joon Sung Park）</td>
+<td>🏆 <strong>L5 已審核</strong>｜帶起生成式社會模擬研究的斯坦福小鎮（Smallville）：提出由記憶流、反思與規劃組成的認知架構。</td>
+<td>G1–G2 必讀標竿</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/8GJIRK44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.03442" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2021｜Chao Yu et al.</strong>，<em>The Surprising Effectiveness of PPO in Cooperative, Multi-Agent Games</em>（<em>NeurIPS</em>，1343 引）：推翻了「同策略演算法在多智能體中樣本效率低」的成見，確立 MAPPO 是合作博弈的強基線。OA PDF ｜ <a href="zotero://select/library/items/JAERI4S3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.01955" rel="noopener">原文</a></li>
+<li><strong>2015｜Jacob G. Foster, Andrey Rzhetsky &amp; James A. Evans</strong>，<em>Tradition and Innovation in Scientists' Research Strategies</em>（<em>American Sociological Review</em>，618 引）：把科學家的選題建模成動態知識網路上的多主體策略博弈，量化守成鞏固與跨群落高風險創新之間的張力。OA PDF ｜ <a href="zotero://select/library/items/MMB42EFB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1302.6534" rel="noopener">原文</a></li>
+<li><strong>2019｜Andrew M. Stuart &amp; Marie-Therese Wolfram</strong>，<em>Learning to Match: Inverse Optimal Transport</em>（<em>SIAM J. Appl. Math.</em>，29 引）：提出系統化的逆向最優傳輸演算法，從帶雜訊的經驗匹配矩陣反推未知的跨空間配對代價 <span class="math inline">c(x,y)</span>。OA PDF ｜ <a href="zotero://select/library/items/2ZCKT6JX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1905.03962" rel="noopener">原文</a></li>
+<li><strong>2022｜Alfred Galichon &amp; Bernard Salanié</strong>，<em>Cupid's Invisible Hand: Social Surplus and Identification in Matching Models</em>（<em>Review of Economic Studies</em>）：用廣義的熵正則化最優傳輸，統一處理帶不可觀測異質性的社會匹配，並證明怎麼從跨群體流動唯一識別社會總剩餘。OA PDF ｜ <a href="zotero://select/library/items/QGD2J4JK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1505.02302" rel="noopener">原文</a></li>
+<li><strong>2020｜Charles Bertucci, Jean-Michel Lasry &amp; Pierre-Louis Lions</strong>，<em>Strategic advantages in mean field games with a major player</em>（<em>Comptes Rendus Mathématique</em>）：平均場賽局創始人團隊的論文，說明怎麼在閉環馬可夫策略下建模有戰略優勢的主導大玩家。OA PDF ｜ <a href="zotero://select/library/items/NRBBCKHE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.07034" rel="noopener">原文</a></li>
+<li><strong>2025｜Qi Liu, Can Li &amp; Wanjing Ma</strong>，<em>GATSim: Urban mobility simulation with generative agents</em>（<em>Transportation Research Part C</em>，27 引）：把生成式智能體擴展到城市級的交通出行模擬，捕捉真實人類的生活日程與出行決策之間的耦合。OA PDF ｜ <a href="zotero://select/library/items/ZHQGE44G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.23306" rel="noopener">原文</a></li>
+<li><strong>2026｜Dorothea Baumeister et al.</strong>，<em>Computational Social Choice: Research &amp; Development</em>（<em>arXiv</em>）：提出問題導向的 <code>COMSOC-R&amp;D</code> 研究綱領，推動計算社會選擇從純公理與複雜度研究，走向真實世界的集體決策系統工程。OA PDF ｜ <a href="zotero://select/library/items/U6WNWU5Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.20074" rel="noopener">原文</a></li>
+<li><strong>2026｜Syed Muntasir Mamun</strong>，<em>In Silico Society: A Comprehensive Analysis of Generative Agent Simulations at Population Scale</em>（<em>Zenodo</em>）：詳細分析千人分層抽樣的數位雙生社會（Agent Bank of 1,052 digital twins）在方法論上的進展與驗證上的挑戰。書目索引 ｜ <a href="zotero://select/library/items/PPSNJH79" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.22993258" rel="noopener">原文</a></li>
+<li><strong>2026｜Peer-Olaf Siebers &amp; Christopher Frantz</strong>，<em>Large Language Models as Supervised Extraction Assistants: Lowering the Barrier to Documentation Standard Adoption in Agent-Based Modelling</em>（<em>arXiv</em>）：探索用受監督的 LLM 輔助生成 ODD / TRACE 等 ABM 透明化標準文檔，以提高社會模擬的可信度。OA PDF ｜ <a href="zotero://select/library/items/CM52BGVC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.13749" rel="noopener">原文</a></li>
+<li><strong>2026｜Şevket Kaan Alkır et al.</strong>，<em>Maximum Entropy Inverse Reinforcement Learning for Mean-Field Games with Average Reward</em>（<em>arXiv</em>）：在平均獎勵、無限時域的平均場賽局中建立最大因果熵逆強化學習，從穩態的群體示範反推潛在獎勵結構。OA PDF ｜ <a href="zotero://select/library/items/425ASDUR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.16759" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Pengxin Wang, Nakjung Choi, Jingdi Chen (2026)</strong>，<em>CoSlice: Coordinated Multi-Agent Reinforcement Learning for 5G Network Slicing Allocation</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：針對 O-RAN 5G 網路切片的資源競爭，提出雙時間尺度的 <code>CoSlice</code> 框架：快尺度是偏好條件化的 MARL 智能體，慢尺度是 LLM 全局協調器。文中證明多目標部分可觀測隨機賽局的偏好相關均衡存在，並給出次線性後悔上界。</li>
+<li>連結：<a href="zotero://select/library/items/SFC96J7M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.23909" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Seongmin Kim, Woohyeon Byeon, Jiwon Jeon et al. (2026)</strong>，<em>Addressing Exogenous Variability in Cooperative Multi-Agent Reinforcement Learning</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：把團隊無法控制的環境／對手體制變動形式化為外生 Dec-POMDP，顯式分離直接響應與中介影響兩種狀態分量。提出 <code>LEICA</code> 演算法，用依逐智能體影響力加權的反事實內在獎勵來更新策略，明顯提升對手策略偏移到未見情況時的泛化。</li>
+<li>連結：<a href="zotero://select/library/items/S88KUMGG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.22067" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Continuous Computational Social Choice: A Case Study in Bribery</strong>（Martin Koutecký et al.，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：傳統計算社會選擇幾乎都把社會建模成離散有限的個體，群體一大就常陷入組合爆炸，也難以用連續分析工具刻畫選舉的安全性與穩定性。</li>
+<li>關鍵做法：仿照統計力學的流體極限，提出連續體社會選擇（Society Continuum）框架，把社會表示成無窮多個無窮小異質選民的測度分佈，並以選舉賄選問題為案例，給出新的連續最佳化刻畫。</li>
+<li>跨領域啟發：把計算社會選擇和 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 的測度空間變分法直接連起來，適合分析百萬級線上治理與投票機制的穩健性。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/TP83539V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.25444" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>A Large Language Model-Driven Agent-Based Modeling Framework with Multi-Round Communication for Simulating Vaccine Opinion Dynamics</strong>（Bo Zhang &amp; Na Jiang，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：既有的 LLM 社會模擬雖然能產出逼真的對話，但到底是哪個認知模組驅動了個體決策的改變與宏觀輿論的極化，仍然是難以拆解的黑箱。</li>
+<li>關鍵做法：把開源輕量模型（Qwen3-8B）以模組化方式嵌入多輪通訊的 ABM 框架，模擬疫苗接種態度的演化，並系統拆解個體認知處理與多輪社交說服對宏觀意見動力學的因果貢獻。</li>
+<li>跨領域啟發：示範怎麼用可控的本地端開源模型，做可重現（見 <a class="wl" href="24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a>）的認知模組消融社會實驗。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/AWPHA5MJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.07387" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

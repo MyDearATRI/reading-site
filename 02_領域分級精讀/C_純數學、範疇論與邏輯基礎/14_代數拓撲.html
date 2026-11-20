@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>14｜代數拓撲（Algebraic Topology, Spectral Sequences &amp; Chromatic Homotopy） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="14代數拓撲algebraic-topology-spectral-sequences-chromatic-homotopy">14｜代數拓撲（Algebraic Topology, Spectral Sequences &amp; Chromatic Homotopy）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> · <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>代數拓撲把可以任意拉扯扭曲的連續幾何形狀，轉換成剛性的離散代數不變量，像是替形狀取指紋。到了現代的穩定與色層同倫論（Chromatic Homotopy Theory），人們還發現高維空間裡糾纏在一起的現象，可以像白光穿過三稜鏡那樣，按素數 <span class="math inline">p</span> 與形式群高度 <span class="math inline">n</span> 分解成一張有規律的「拓撲元素週期表」。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+要判斷兩個局部性質完全相同的高維空間，在全局上能不能連續變形成對方（同胚或同倫等價），直接靠觀察或微分方程幾乎做不到。早期的同調論（Homology）靠切分三角網格數洞，很容易計算，卻丟掉了高階的扭曲資訊。例如 Hopf 纖維化把三維球面 <span class="math inline">S^3</span> 非平凡地纏繞在二維球面 <span class="math inline">S^2</span> 上，同調完全看不出來。反過來，同倫群 <span class="math inline">\pi_k(X)</span> 保留了最完整的纏繞資訊，卻非常難算：連三維球面 <span class="math inline">S^3</span> 這麼簡單的空間，高維同倫群 <span class="math inline">\pi_{3+m}(S^3)</span> 都是一串看不出規律的有限群。現代代數拓撲的主要工作，是建立譜序列（Spectral Sequences）、穩定化（Spectra）與色層分解（Chromatic Filtration）這三套工具，把這些算不動的東西拆成可以逐層逼近的代數階梯。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li>譜序列（Spectral Sequence）像逐頁對焦的多尺度顯微鏡，也像會計逐輪沖銷的帳本。想算一個龐大複雜系統真正有幾個洞，先把它切成很多層濾過（Filtration）。第 0 頁 <span class="math inline">E_0</span> 只看每一層各自獨立的碎片。翻到第 1 頁 <span class="math inline">E_1</span>，消掉相鄰層之間的假邊界。翻到第 <span class="math inline">r</span> 頁 <span class="math inline">E_r</span>，微分算子 <span class="math inline">d_r</span> 檢查的是：某個局部看似閉合的洞，跨過 <span class="math inline">r</span> 層距離後，是不是其實被遠處的一塊膜堵住了。翻到無窮頁 <span class="math inline">E_\infty</span> 時假洞全部沖銷完，剩下的就是全局真正存活的不變量。</li>
+<li>色層同倫論（Chromatic Homotopy）像幾何形狀的傅立葉頻譜，或一台光譜儀。球面穩定同倫群看起來很亂，是因為所有頻率混在一起。Quillen、Morava 與 Ravenel 發現，每個素數 <span class="math inline">p</span> 下的空間糾纏，都可以用代數幾何裡一維形式群（Formal Group Laws）的高度 <span class="math inline">n = 0, 1, 2, \dots, \infty</span> 拆成單色光：<span class="math inline">n=0</span> 是最簡單的普通有理同調（紅外線），<span class="math inline">n=1</span> 是向量叢 <span class="math inline">K</span>-理論（可見光），<span class="math inline">n=2</span> 是與橢圓曲線相連的拓撲模形式 <span class="math inline">\mathrm{TMF}</span>（紫外線）。每一層都有自己嚴格的週期律。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+在純數學裡，譜（Spectra）是 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 中穩定 <span class="math inline">\infty</span>-範疇的原型（球譜 <span class="math inline">\mathbb{S}</span> 取代整數環 <span class="math inline">\mathbb{Z}</span>，成為更底層的算術基礎），也透過母題同倫論回饋 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a>。在理論與凝聚態物理（<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>）中，對稱保護拓撲態（SPT 相）與量子反常的完整分類，用的就是配邊譜與上同調算子。在資料科學與 AI（<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a>）中，持續同調（Persistent Homology）與有向同調（Directed Cohomology）可以直接看成濾過複形譜序列第一層的實用版本。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    C0[&quot;古典不變量：基本群 π_1、奇異同調 H_n 與上同調環 H^*(X)&quot;] --&gt;|&quot;面對高維同倫群計算高牆&quot;| SS[&quot;譜序列 (Spectral Sequences) 與上同調算子 (Steenrod 代數)&quot;]
+    SS --&gt;|&quot;懸置穩定化 Σ^∞&quot;| ST[&quot;穩定同倫論與譜範疇 (Spectra)：廣義上同調之 Brown 可表性&quot;]
+    ST --&gt;|&quot;Quillen 定理連接形式群模疊&quot;| CH[&quot;色層同倫論 (Chromatic Homotopy)：Morava K(n)/E(n) 與 TMF&quot;]
+    ST --&gt;|&quot;引入群對稱與不動點轉移&quot;| EQ[&quot;真等變穩定同倫論 (Genuine Equivariant)：Hill-Hopkins-Ravenel 破局&quot;]
+    CH &amp; EQ --&gt; FR[&quot;當代前沿：雙向性 (Ambidexterity)、有向持續上同調與物理高階反常&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>譜序列：從局部碎片逐層逼近全局的計算工具（Spectral Sequences）</strong></p>
+<ul>
+<li>直覺理解：在纖維叢 <span class="math inline">F \to E \to B</span>（整體空間 <span class="math inline">E</span> 由底空間 <span class="math inline">B</span> 上的纖維 <span class="math inline">F</span> 扭曲拼成）或濾過鏈複形中，整體的上同調並不等於 <span class="math inline">H^*(B) \otimes H^*(F)</span>，因為纖維繞底空間一圈時可能發生扭轉而互相抵消。譜序列不求一步算完。它把扭轉造成的相消與擴張障礙，拆成一頁接一頁的微分算子 <span class="math inline">d_r</span>（像泰勒展開逐階修正），每一頁都是前一頁取完同調之後剩下的部分。</li>
+<li>機制或核心表達式：一個（上同調型）譜序列由雙分次頁序列 <span class="math inline">\{E_r^{p,q}, d_r\}_{r \ge r_0}</span> 組成，其中微分算子滿足雙次數跳躍 <span class="math inline">d_r: E_r^{p,q} \to E_r^{p+r, q-r+1}</span> 且 <span class="math inline">d_r \circ d_r = 0</span>，下一頁由當前頁的上同調給出：
+<div class="math inline">E_{r+1}^{p,q} \cong \frac{\ker\bigl(d_r: E_r^{p,q} \to E_r^{p+r, q-r+1}\bigr)}{\operatorname{im}\bigl(d_r: E_r^{p-r, q+r-1} \to E_r^{p,q}\bigr)} \;\Longrightarrow\; \operatorname{Gr}^p H^{p+q}_{\mathrm{total}}</div>
+計算纖維叢的 Serre 譜序列、從普通上同調逼近穩定同倫群的 Adams / Adams–Novikov 譜序列、代數幾何的 Hodge-to-de Rham 譜序列，都依同一套記帳邏輯運作。2026 年 Mladenov 還把譜序列微分解釋成 Rees 構造下形變上同調類的無窮小提升障礙。</li>
+<li>能做到什麼，代價是什麼：原本無從下手的非線性拓撲計算，變成有系統的線性代數迭代。代價是有兩道難關。第一，要判斷高階微分 <span class="math inline">d_r</span> 是否為零，往往得引入額外的上同調算子（Steenrod 平方與冪次）。第二，即使算出無窮頁 <span class="math inline">E_\infty^{p,q}</span>（分次切片），要還原出總群 <span class="math inline">H^*</span> 還得解群擴張問題（Extension Problems）。</li>
+</ul>
+</li>
+<li>
+<p><strong>穩定同倫與譜：空間有了「負維度」與加減法（Spectra &amp; Stable Homotopy）</strong></p>
+<ul>
+<li>直覺理解：對任意空間做懸置（Suspension <span class="math inline">\Sigma X</span>，把圓周 <span class="math inline">S^1</span> 懸置成球面 <span class="math inline">S^2</span>，再懸置成 <span class="math inline">S^3 \dots</span>），Freudenthal 懸置定理說：只要維度夠高，每多懸置一次，同倫群 <span class="math inline">\pi_{n+k}(S^n)</span> 就不再改變。把空間無窮次懸置，並正式允許反懸置 <span class="math inline">\Sigma^{-1}</span>，空間就成了譜（Spectrum）。在譜的世界 <span class="math inline">\mathsf{Sp}</span> 裡，球譜 <span class="math inline">\mathbb{S}</span> 是比整數 <span class="math inline">\mathbb{Z}</span> 更底層的單位環。在 <span class="math inline">\mathbb{Z}</span> 裡 <span class="math inline">1 + (-1) = 0</span> 是規定；在球譜 <span class="math inline">\mathbb{S}</span> 裡，正負號相消對應的是幾何上帶邊流形的湮滅。</li>
+<li>機制或核心表達式：譜 <span class="math inline">E = \{E_n\}_{n \in \mathbb{Z}}</span> 配備結構同倫等價 <span class="math inline">E_n \xrightarrow{\sim} \Omega E_{n+1}</span>。根據 Brown 可表性定理，任何廣義上同調理論 <span class="math inline">E^*(X)</span>（如奇異上同調 <span class="math inline">H\mathbb{Z}</span>、拓撲 <span class="math inline">K</span>-理論 <span class="math inline">KU</span>、複配邊 <span class="math inline">MU</span>）都唯一對應於穩定 <span class="math inline">\infty</span>-範疇 <span class="math inline">\mathsf{Sp}</span> 中的映射空間：
+<div class="math inline">E^n(X) \cong \pi_0 \operatorname{Map}_{\mathsf{Sp}}(\Sigma^\infty_+ X, \Sigma^n E)</div></li>
+<li>能做到什麼，代價是什麼：低維不穩定幾何的偶然現象被抹平，空間範疇有了像阿貝爾群那樣的加減法與張量積（Smash Product <span class="math inline">\wedge</span>，即 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 中的對稱么半穩定 <span class="math inline">\infty</span>-範疇）。代價是丟掉了單連通流形低維嵌入、紐結這類純不穩定（Unstable）的幾何細節。</li>
+</ul>
+</li>
+<li>
+<p><strong>色層同倫論與拓撲模形式：形式群模疊上的算術幾何（Chromatic Homotopy &amp; <span class="math inline">\mathrm{TMF}</span>）</strong></p>
+<ul>
+<li>直覺理解：複配邊譜 <span class="math inline">MU</span>（研究哪些流形是更高維流形的邊界）看起來是純幾何的對象。Quillen 卻證明，<span class="math inline">MU</span> 的同倫環同構於代數幾何中所有一維交換形式群律（Formal Group Laws）的萬有 Lazard 環。在素數 <span class="math inline">p</span> 局部化後，形式群在代數閉域上的同構類完全由一個整數分類，也就是高度（Height）<span class="math inline">n \in \{0, 1, 2, \dots, \infty\}</span>。色層同倫論的基本想法，就是把穩定同倫範疇看成形式群模疊 <span class="math inline">\mathcal{M}_{\mathrm{fg}}</span> 上的擬凝聚層。</li>
+<li>機制或核心表達式：局部化於素數 <span class="math inline">p</span> 後，球譜 <span class="math inline">\mathbb{S}_{(p)}</span> 由色層塔 <span class="math inline">L_{E(n)} \mathbb{S}</span> 逼近（Chromatic Convergence Theorem），每一個色層切片由 Morava <span class="math inline">K</span>-理論 <span class="math inline">K(n)</span> 與 Lubin–Tate 譜 <span class="math inline">E_n</span> 控制：
+<div class="math inline">\text{Height } 0 \leftrightarrow H\mathbb{Q}, \qquad \text{Height } 1 \leftrightarrow KU_p, \qquad \text{Height } 2 \leftrightarrow \mathrm{TMF}\text{（橢圓曲線模疊 }\mathcal{M}_{\mathrm{ell}}\text{ 上的 }\mathcal{O}^{\mathrm{top}}\text{ 截面）}</div>
+Hopkins–Lurie 與 Carmeli–Schlank–Yanovski 進一步發現，<span class="math inline">K(n)</span>-局部與 <span class="math inline">T(n)</span>-局部譜範疇具有無窮雙向性（<span class="math inline">\infty</span>-Semiadditivity / Ambidexterity）：除了有限直和等於直積，連任意有限 <span class="math inline">\infty</span>-群胚（高階群軌道與不動點）的同倫極限與同倫餘極限都典範同構。</li>
+<li>能做到什麼，代價是什麼：高維球面同倫群原本看似無序，現在可以整理成數論自守形式與代數幾何模疊的週期結構。代價是高度 <span class="math inline">n \ge 3</span> 時，沒有像圓周乘法群（<span class="math inline">n=1</span>）或橢圓曲線（<span class="math inline">n=2</span>）那樣的顯式幾何模型。另外，Ravenel 望遠鏡猜想（Telescope Conjecture：<span class="math inline">L_{K(n)} \stackrel{?}{=} L_{T(n)}</span>）在 <span class="math inline">n \ge 2</span> 時已被近期的工作證偽，可見高階色層的邊界相當微妙。</li>
+</ul>
+</li>
+<li>
+<p><strong>真等變穩定同倫論：對稱性與乘法範數（Genuine Equivariant Homotopy）</strong></p>
+<ul>
+<li>直覺理解：空間帶有群 <span class="math inline">G</span> 的對稱作用時（例如複共軛對稱 <span class="math inline">C_2</span> 或旋轉群 <span class="math inline">SO(2)</span>），天真等變（Naive Equivariant）只看群作用在整體上的同倫軌道。真等變穩定同倫論（Genuine <span class="math inline">G</span>-Spectra）則要求所有子群 <span class="math inline">H \le G</span> 的不動點空間同時都有反懸置（按 <span class="math inline">G</span> 的全體線性表示球 <span class="math inline">S^V</span> 做 <span class="math inline">RO(G)</span>-分次）與雙向轉移映射（Transfers &amp; Multiplicative Norms）。2009 年 Hill–Hopkins–Ravenel（HHR）就是靠 <span class="math inline">C_8</span>-真等變譜與切片濾過（Slice Filtration），解決了拓撲學界懸了近半世紀的 Kervaire 不變量為 1 問題。</li>
+<li>機制或核心表達式：在真 <span class="math inline">G</span>-譜範疇 <span class="math inline">\mathsf{Sp}^G</span> 中，懸置對任意正交表示 <span class="math inline">V</span> 的表示球 <span class="math inline">S^V</span> 皆可逆，且對子群 <span class="math inline">H \le G</span> 同時具備加法誘導／限制伴隨與 Hill–Hopkins–Ravenel 乘法範數函子（Norm Functor） <span class="math inline">N_H^G: \mathsf{CAlg}(\mathsf{Sp}^H) \to \mathsf{CAlg}(\mathsf{Sp}^G)</span>。利用切片譜序列可以證明：除維度 <span class="math inline">2, 6, 14, 30, 62</span>（及當時唯一遺留的 <span class="math inline">126</span> 維）外，球面同倫群中不存在 Kervaire 不變量為 1 的元素。</li>
+<li>能做到什麼，代價是什麼：實母題同倫論（<span class="math inline">\mathbb{R}</span>-motivic）與 <span class="math inline">C_2</span>-等變同倫論因此接了起來（如 Behrens–Shah 的 Betti 實現局部化與 Chua 的 <span class="math inline">C_2</span>-等變 <span class="math inline">\mathrm{TMF}</span>）。代價是 <span class="math inline">RO(G)</span>-分次譜序列的計算維度大幅增加。而且把有限阿貝爾群換成緊李群時（如 2026 年 Lush 對有理 <span class="math inline">SO(2)</span>-等變複射影空間的研究），表示球楔和的分裂性質會意外失效。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>正特徵代數幾何與拓撲譜序列的非退化極限</strong>：在複數域上，Hodge-to-de Rham 譜序列一定在 <span class="math inline">E_1</span> 頁退化。那麼在正特徵 <span class="math inline">p &gt; 0</span> 下，它能壞到什麼程度？2026 年 Kehao Cheng 證明：對任意頁數 <span class="math inline">n \ge 1</span> 與幾乎所有非平凡座標點 <span class="math inline">(i,j)</span>，都存在光滑射影簇，使得從 <span class="math inline">E_n^{i,j}</span> 出發的微分非零。所以正特徵下不存在普適的有限頁退化界。</li>
+<li><strong>從「全可逆群胚」走向「有向與帶伴隨高階拓撲」</strong>：古典同倫假說（Homotopy Hypothesis）把拓撲空間等同於所有態射皆可逆的 <span class="math inline">\infty</span>-群胚。但在併發計算、時間不可逆過程與範疇代數中，路徑是不可逆的。2026 年 Hadrian Heine 證明，把可逆性弱化為存在高階伴隨（Higher Categories with Adjoints）之後，仍然撐得起不亞於古典同倫論的穩定同倫體系。Goubault 則用持續模發展有向上同調算子。兩者都在開拓不可逆空間的代數拓撲。</li>
+<li><strong>高階色層結構與量子場論高階反常（Higher Anomalies）的精確算表</strong>：凝聚態物理與規範場論中的廣義對稱性（<span class="math inline">p</span>-形式對稱與高階群結構），在維度約化（把規範場限制在薄板子空間）時會引出複雜的上同調算子懸置映射（參見 2026 年 Meynet–Riedel Gårding 對壓縮 SPT 態與高階反常的顯式計算表）。怎麼用 <span class="math inline">\mathrm{TMF}</span> 與色層譜完整刻畫強關聯量子物態，仍是物理與拓撲交界處還沒解決的問題。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a>（多尺度濾過與持續同調條碼）</strong>：拓撲資料分析（TDA）中的持續同調（Persistent Homology），做的就是追蹤濾過空間譜序列 <span class="math inline">E_1 \to E_\infty</span> 的生命週期。短命的微分配對是高維點雲中的採樣雜訊；跨過多個尺度仍沒有被微分 <span class="math inline">d_r</span> 消掉的生成元，才是表徵流形（如神經網路概念空間或海馬迴網格細胞環面）真正的拓撲骨架。</li>
+<li><strong>遷移至 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 與併發系統驗證（有向代數拓撲檢測死鎖與共識障礙）</strong>：分散式系統的並行執行排程構成預立方集（Precubical Sets / Directed Spaces），其中無法填滿的高維有向洞，正好對應併發死鎖或無法達成共識的拓撲障礙（Eckmann–Hilton 類型定理與 Goubault 有向上同調算子）。</li>
+<li><strong>遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>（配邊不變量分類拓撲物態）</strong>：Kitaev、Freed–Hopkins 等人建立的現代物態分類定理指出，帶對稱群 <span class="math inline">G</span> 的有能隙量子相（SPT 相），其分類群精確同構於相應自旋／ピン結構配邊譜的扭曲等變廣義上同調群。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 189 篇核心文獻（其中 188 篇有 Open-Access PDF 原文直連）。所有原始 PDF 都收在隱藏庫 <code>~/.ai_papers_vault.noindex</code> 並綁定到 Zotero，不會出現在 macOS Spotlight。點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2002</td>
+<td><em>Algebraic Topology</em>，Allen Hatcher</td>
+<td>被引逾萬次的公開代數拓撲教科書，用很有幾何直覺的手繪插圖，把基本群、同調、上同調環與同倫論講得很清楚。</td>
+<td>G1–G2 必讀首選 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/AN7W6UPT" class="zotero">📚 Zotero 開啟</a> · <a href="https://pi.math.cornell.edu/~hatcher/AT/AT.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><em>On the non-existence of elements of Kervaire invariant one</em>，Michael A. Hill, Michael J. Hopkins, Douglas C. Ravenel</td>
+<td>二十一世紀代數拓撲的重要里程碑（HHR），開創真 <span class="math inline">C_8</span>-等變乘法範數與切片譜序列，解決了 Kervaire 不變量問題。</td>
+<td>G3 經典 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/NWSJJESM" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/0908.3724" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Affineness and chromatic homotopy theory</em>，Akhil Mathew, Lennart Meier</td>
+<td>把導出代數幾何中的仿射性（擬凝聚層等價於全局函數模範疇）搬進色層同倫論，給出拓撲模形式 <span class="math inline">\mathrm{TMF}</span> 的結構刻畫。</td>
+<td>G2–G3 幾何橋樑 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/V9BUHT9C" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1311.0514" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><em>Ambidexterity in Chromatic Homotopy Theory</em>，Shachar Carmeli, Tomer M. Schlank, Lior Yanovski</td>
+<td>推廣 Hopkins–Lurie 雙向性理論，證明所有高度的 <span class="math inline">T(n)</span>-局部譜範疇都是 <span class="math inline">\infty</span>-半加性的（極限與餘極限重合）。</td>
+<td>G3 色層核心 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/729R2UAD" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1811.02057" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><em>Proper equivariant stable homotopy theory</em>，Dieter Degrijse et al.</td>
+<td>一本專著，為一般李群（不限於緊群，藉由緊子群族檢驗等價）建立具備轉移與 Wirthmüller 同構的真恰當等變穩定同倫論。</td>
+<td>G3 專著地基 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/NG7EDCV2" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1908.00779" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（4 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>2019｜Mark Behrens, Jay Shah</strong>，<em>C_2-equivariant stable homotopy from real motivic stable homotopy</em>（被引 25 次，<code>[OA PDF]</code>）：證明 Betti 實現把 <span class="math inline">p</span>-完備 <span class="math inline">C_2</span>-等變穩定同倫範疇呈現為實數域 <span class="math inline">\mathbb{R}</span> 上胞腔母題穩定同倫範疇的局部化，在 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 與等變拓撲之間提供了一條計算捷徑。 <a href="zotero://select/library/items/9ZSNBFCU" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1908.08378" rel="noopener">原文連結</a></li>
+<li><strong>2014｜Irakli Patchkoria</strong>，<em>Rigidity in Equivariant Stable Homotopy Theory</em>（<code>[OA PDF]</code>）：證明對任意有限群 <span class="math inline">G</span>，<span class="math inline">2</span>-局部真 <span class="math inline">G</span>-等變穩定同倫範疇只有唯一的模型範疇實現（剛性定理）。也就是說，懸置、餘纖維序列與穩定 Burnside 範疇完全決定所有高階同倫資訊。 <a href="zotero://select/library/items/QSG6ZINS" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1403.5191" rel="noopener">原文連結</a></li>
+<li><strong>2009｜Simone Borghesi</strong>，<em>Cohomology operations and algebraic geometry</em>（<code>[OA PDF]</code>）：清楚整理 Voevodsky 如何受拓撲上同調算子（Steenrod 代數）啟發去構造代數簇的母題同倫範疇，交代其動機與基礎。 <a href="zotero://select/library/items/W5ZIRPHE" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/0903.4360" rel="noopener">原文連結</a></li>
+<li><strong>2021｜Dexter Chua</strong>，<em><span class="math inline">C_2</span>-equivariant topological modular forms</em>（<code>[OA PDF]</code>）：利用下降譜序列，在素數 <span class="math inline">2</span> 完整算出 <span class="math inline">C_2</span>-等變拓撲模形式不動點的同倫群，並證明它作為 <span class="math inline">\mathrm{TMF}</span>-模同構於 <span class="math inline">\mathrm{TMF}</span> 與顯式有限胞腔複形的張量積。 <a href="zotero://select/library/items/GPAQMJ72" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2101.06841" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Perspectives on the Bott spectral sequence for Lie groupoids</strong>，Annika Kraasch-Tarnowsky：把簡化可微疊 Bott–Shulman–Stasheff 雙複形上同調計算的兩條進路串起來並加以統一。一條是 Arias Abad 基於同倫表示、推廣到李群胚的 Bott 譜序列；另一條是針對真且正則李群胚伴隨可微疊的顯式列上同調模型。（<a href="zotero://select/library/items/4ITI3V6C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.30743" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Homotopy theories via the magnitude-path spectral sequence</strong>，Muriel Livernet, Emily Roff, Sarah Whitehouse：用 Magnitude-Path 譜序列（MPSS）為自然數廣義度量空間建立一族以頁碼 <span class="math inline">r</span> 為指標的同倫理論。文中證明每一頁都滿足度量版 Eilenberg–Steenrod 公理與 Mayer–Vietoris 定理，建立 Brown 範疇結構來計算 <span class="math inline">r</span>-懸置與 <span class="math inline">r</span>-球面，並在 <span class="math inline">r=1</span> 時精確限制回有向圖。（<a href="zotero://select/library/items/FPF3D67K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.09747" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦加速-adams-譜序列與豐富範疇神經之乘法性-mpss">2026-11-19（08:00 增量）最新入庫（聚焦：加速 Adams 譜序列與豐富範疇神經之乘法性 MPSS）</h4>
+<ol>
+<li>
+<p><strong>An Atiyah--Hirzebruch to Adams map and the hastened Adams spectral sequence for supercohomology</strong>，Arun Debray, Weicheng Ye, Matthew Yu（2026，<em>arXiv</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：在量子場論、拓撲物態與張量範疇的應用中，用 Atiyah–Hirzebruch 譜序列（AHSS）或標準 Adams 譜序列計算超上同調 <span class="math inline">I_{\mathbb{C}^\times}(\tau_{\le 2}\mathit{ko})</span> 往往太繁複。</li>
+<li>關鍵做法：建構一個從 AHSS 映至 <span class="math inline">\mathit{ko}</span>-模 Baker–Lazarev Adams 譜序列的濾過譜映射，再結合 Bruner–Rognes 定理，推出適用於 <span class="math inline">\mathit{ko}</span> Postnikov 截斷與連通 Adams 直和項的加速 Adams 譜序列（HASS）。文中附有使用指南、算例與常見的 <span class="math inline">\mathcal{A}(1)</span>-模圖表。</li>
+<li>跨領域啟發：可直接用於 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> 與量子場論的拓撲反常／SPT 物態分類計算，也連到 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 的張量範疇結構。</li>
+<li>連結：<a href="zotero://select/library/items/VAPWSZT3" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.24725" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Enriched nerves, interleaving distances and the multiplicative magnitude-path spectral sequence</strong>，Katsuhiko Kuribayashi（2026，<em>arXiv (Cornell University)</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：廣義度量空間與有向圖的豐富範疇神經（Enriched Nerves）有穩定的交錯距離，但它和 Magnitude 上同調、Magnitude-Path 譜序列（MPSS）的代數乘積與塌縮行為之間，還沒有系統的連結。</li>
+<li>關鍵做法：把單體偏序集豐富範疇的神經看成持續單純集，證明 <span class="math inline">r</span>-同倫等價的廣義度量空間，其神經的交錯距離不超過 <span class="math inline">r/2</span>。接著在對應的上鏈複形上引入與 Hepworth Magnitude 杯積相關聯的乘積，讓上同調型 MPSS（首頁同構於 Magnitude 上同調環）有乘法結構，並用交錯距離討論連通有限有向圖 MPSS 的塌縮頁數。</li>
+<li>跨領域啟發：在 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> 的持續同調交錯穩定性與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的有向圖拓撲不變量之間，建立了代數上的連結。</li>
+<li>連結：<a href="zotero://select/library/items/P7JBRRSA" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.22433" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>The Hodge-to-de Rham spectral sequence can be arbitrarily non-degenerate in positive characteristic</strong>，Kehao Cheng（2026，<em>arXiv:2610.35243</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：在正特徵 <span class="math inline">p&gt;0</span> 的光滑射影簇上，已知 Hodge-to-de Rham 譜序列可能不在 <span class="math inline">E_1</span> 頁退化。但高頁微分 <span class="math inline">d_n</span>（<span class="math inline">n \ge 2</span>）是否受某種隱藏的普適規律限制，學界長期不清楚。</li>
+<li>關鍵做法：證明對任意頁碼 <span class="math inline">n \ge 1</span> 與任意非平凡雙次數位置 <span class="math inline">(i,j)</span>，都能構造出光滑射影簇，使 <span class="math inline">E_n^{i,j}</span> 發出非零微分。也就是說，這個譜序列在正特徵下可以有任意高階的非退化行為。</li>
+<li>跨領域啟發：直接連結 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 與代數拓撲的譜序列障礙構造，劃清了特徵 <span class="math inline">0</span> 與特徵 <span class="math inline">p</span> 在幾何上的分界。</li>
+<li>連結：<a href="zotero://select/library/items/XP7URBKG" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.35243" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Stable homotopy theory of higher categories with adjoints</strong>，Hadrian Heine（2026，<em>arXiv:2610.35861</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：同倫假說要求高階範疇中所有態射嚴格可逆，才能看成同倫型。如果態射不可逆，但有左／右高階伴隨（Higher Adjoints），能不能建立同樣豐富的穩定同倫論？</li>
+<li>關鍵做法：證明以高階伴隨取代可逆性的高階範疇，完全撐得起穩定同倫體系，其基本不變量由迴路空間的同倫么半範疇 <span class="math inline">\Pi_n(X,x) = \operatorname{Ho}(\Omega^n(X,x))</span> 給出。</li>
+<li>跨領域啟發：在 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>、有向拓撲與配邊假說（對偶性與伴隨性正是其中的核心條件）之間建立新的穩定框架。</li>
+<li>連結：<a href="zotero://select/library/items/FSBET3GX" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.35861" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批擴展追蹤2026-近期">同批擴展追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Borislav Mladenov</strong>，<em>Deformations of cohomology classes and spectral sequences</em>（<em>arXiv:2610.32593</em>，<code>[OA PDF]</code>）：透過仿射直線上的 Rees 構造，把濾過複形看成等變族，再把高階譜序列微分用幾何解釋成上同調類向無窮小鄰域提升時的形變障礙。 <a href="zotero://select/library/items/74PA6JRV" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.32593" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Kian Lush</strong>，<em>Complex Projective Spaces in Rational <span class="math inline">SO(2)</span>-Equivariant Stable Homotopy Theory</em>（<em>arXiv:2610.28039</em>，<code>[OA PDF]</code>）：證明幾乎所有有限維複 <span class="math inline">SO(2)</span>-表示對應的複射影空間，在有理 <span class="math inline">SO(2)</span>-等變穩定同倫下不會分裂為表示球楔和，顯示連通李群與有限阿貝爾群有根本的差異。 <a href="zotero://select/library/items/K4X3AT43" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.28039" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Shani Nadir Meynet, Elias Riedel Gårding</strong>，<em>Higher anomalies, compressing SPTs and cohomology operations</em>（<em>arXiv:2609.00170</em>，<code>[OA PDF]</code>）：具體計算上同調算子的懸置映射並列成表，應用於量子場論與晶格系統廣義對稱性的維度約化、高階反常與 SPT 相壓縮（連到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>）。 <a href="zotero://select/library/items/X3FVB8WT" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.00170" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Eric Goubault</strong>，<em>Directed homological and cohomological operations</em>（<em>arXiv:2603.11967</em>，<code>[OA PDF]</code>）：用持續模（Persistence Modules）方法，建立預立方集與有向空間上的有向上同調及其上同調算子。 <a href="zotero://select/library/items/VDHBRBX9" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2603.11967" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

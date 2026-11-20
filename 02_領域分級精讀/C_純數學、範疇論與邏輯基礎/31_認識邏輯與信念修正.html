@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>31｜認識邏輯與信念修正（Epistemic Logic, Dynamic Updates &amp; AGM Belief Revision） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="31認識邏輯與信念修正epistemic-logic-dynamic-updates-agm-belief-revision">31｜認識邏輯與信念修正（Epistemic Logic, Dynamic Updates &amp; AGM Belief Revision）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a> · <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> · <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>認識邏輯與信念修正是一套形式微積分，刻畫兩件事：誰知道誰知道什麼（高階心智理論 Theory of Mind），以及新證據和舊世界觀衝突時，理性主體怎麼用最小的改動重組知識庫。多智能體社會推理、賽局共識，以及當代大型語言模型的知識編輯（Model Editing），都以它為公理基礎。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+古典一階邏輯假設事實永遠不變，而且從全知的視角看是透明的。一旦推導出 <span class="math inline">Q</span>，不管再加什麼前提，<span class="math inline">Q</span> 都為真（單調性 Monotonicity）。如果新進來的事實 <span class="math inline">\neg P</span> 和既有信念衝突，古典邏輯就觸發爆炸原理（Ex Falso Quodlibet），什麼都推得出來，系統等於失效。真實世界與多智能體系統卻有兩個古典邏輯處理不了的問題：
+<ol>
+<li><strong>非單調信念衝突（Belief Revision）</strong>：你原本相信「所有鳥都會飛」和「企鵝是鳥」，後來親眼看到企鵝不會飛。這時你得有選擇地撤銷（Contract）最脆弱的舊前提，同時保留「麻雀會飛、地球是圓的」這些絕大多數無關的信念。怎樣才算最小破壞（Minimal Change），就是 AGM 信念修正理論要回答的問題。</li>
+<li><strong>高階社會觀察與動態資訊不對稱（Dynamic Epistemic Logic, DEL）</strong>：在撲克牌、外交談判或分散式網路裡，人人都知道規則（Everyone knows <span class="math inline">p</span>），和人人都知道人人都知道……（共同知識 Common Knowledge <span class="math inline">C p</span>），是差別很大的兩件事。連一句話都沒說的公開沉默（如髒臉謎題 Muddy Children），本身也是會改變全場可能世界圖的事件。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li>**認識可能世界圖（Kripke Model）**像是把每個玩家腦中的平行宇宙連成一張圖。桌上蓋著幾張牌，對於真實世界是哪一種組合，愛麗絲分不清世界 <span class="math inline">w_1</span> 與 <span class="math inline">w_2</span>（畫一條藍色無向邊），鮑勃分不清 <span class="math inline">w_2</span> 與 <span class="math inline">w_3</span>（畫一條紅色邊）。公開宣告（Public Announcement <span class="math inline">[!\varphi]</span>）像一把大剪刀：裁判當眾宣布「至少有一張紅心」，所有人就同時把不符合 <span class="math inline">\varphi</span> 的平行宇宙剪掉。剪掉一個宇宙可能會切斷愛麗絲和鮑勃之間的模糊邊，引發連鎖反應。如果是私下偷看或竊聽（Action Models，Baltag–Moss–Solecki），就要把原世界圖和偷看動作圖做張量乘積更新，這樣能精確追蹤「鮑勃以為愛麗絲不知道他偷看了」這種任意階的欺騙與懷疑。</li>
+<li><strong>AGM 信念修正</strong>像一圈圈同心圓防波堤（Gärdenfors 認識固守度 Epistemic Entrenchment）。把信念按有多核心、多捨不得放棄排成同心圓：數學公理在最內圈，剛聽說的小道消息在最外圈。反常的新證據進來時，不必把整座城堡炸掉，只要沿著最靠近核心的那圈合適可能世界（Plausibility Grove Spheres）切一刀，做最小的修補。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+LLM 知識編輯（Model Editing / 機器遺忘 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a>）與檢索衝突消解（<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a>）是今天 AI 工程上最難處理的瓶頸之一，做的其實就是在連續參數空間裡重新發明 AGM 信念修正。Hase et al. 2024 指出其中的基本困難：局部修改權重，卻無法同步更新邏輯推論的漣漪（Ripple Effects）。在 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>、人機協作機器人與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 這邊，DEL 可以直接當成嚴格的基準生成器，用來評估和建構高階心智理論（Theory of Mind，如假信念任務與社交壓力下的元認知修正）。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    S5[&quot;Hintikka 靜態認識模態邏輯 (S5 / KD45)：K_i φ (知道) 與 B_i φ (相信) 及共同知識 C_G φ&quot;] --&gt; AGM[&quot;AGM 信念修正公設 (1985)：擴張 (+)、收縮 (-) 與修正 (*) 之最小變更定律&quot;]
+    S5 --&gt;|&quot;把認知事件本身變為算子&quot;| DEL[&quot;動態認識邏輯 DEL (Plaza / Baltag-Moss-Solecki)：公開宣告算子與動作模型乘積更新&quot;]
+    AGM --&gt;|&quot;Parikh 語言分裂局部化&quot;| LOC[&quot;相關性敏感修正與合理性序 (Plausibility Preorders)：融合 AGM 與 DEL&quot;]
+    DEL &amp; LOC --&gt; AI[&quot;當代 AI 與形式前沿：LLM 知識編輯理性公理、心智理論基準 (MindGames/MEDLEY) 與動態證明論&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>多主體可能世界與共同知識不動點（Multi-Agent Epistemic Models &amp; Common Knowledge）</strong></p>
+<ul>
+<li>直覺理解：單人邏輯只需要管什麼是真的。在多主體世界（<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>）裡，光是事實為真還不足以促成協同行動，兩軍進攻問題（Coordinated Attack Problem）就是例子。所有參與者除了知道 <span class="math inline">\varphi</span>，還要知道對方知道 <span class="math inline">\varphi</span>，這樣無窮遞迴下去達成共同知識（Common Knowledge），合作均衡才會成立。Kripke 可能世界語意把這種無窮層的嵌套轉成直觀的圖可達性（Graph Reachability）。</li>
+<li>機制或核心表達式：在多主體認識模型 <span class="math inline">M = (W, \{\sim_i\}_{i \in \mathcal{A}}, V)</span> 中，<span class="math inline">\sim_i \subseteq W \times W</span> 是智能體 <span class="math inline">i</span> 的不可區分關係（知識對應等價關係 S5，可錯信念對應串聯歐氏關係 KD45）：
+<div class="math inline">M, w \models K_i \varphi \iff \forall\, u \in W,\; (w \sim_i u \implies M, u \models \varphi)</div>
+群體 <span class="math inline">G \subseteq \mathcal{A}</span> 的「大家都知道」算子是 <span class="math inline">E_G \varphi := \bigwedge_{i \in G} K_i \varphi</span>。共同知識 <span class="math inline">C_G \varphi</span> 是 <span class="math inline">E_G</span> 的最大不動點，語意上對應聯合關係的傳遞閉包 <span class="math inline">\sim_G^* = \bigl(\bigcup_{i \in G} \sim_i\bigr)^*</span> 上的全稱可達：
+<div class="math inline">C_G \varphi \equiv \varphi \land E_G(C_G \varphi) \iff \forall\, u \in W,\; (w \sim_G^* u \implies M, u \models \varphi)</div></li>
+<li>能做到什麼，代價是什麼：它解釋了為什麼非同步的有損通訊永遠無法從零達成共同知識，也說明了賽局納許均衡背後的認識前提。代價是邏輯全知問題（Logical Omniscience）：S5 主體自動知道所有邏輯重言式與一切推論後果，沒有考慮真實人類或有限算力 AI 的推理成本。</li>
+</ul>
+</li>
+<li>
+<p><strong>AGM 信念修正三元手術與 Parikh 語言分裂（AGM Postulates, Harper/Levi Identities &amp; Language Splitting）</strong></p>
+<ul>
+<li>直覺理解：假設你的知識庫是一個演繹封閉集合 <span class="math inline">K = \operatorname{Cn}(K)</span>。收到新資訊 <span class="math inline">\varphi</span> 時有三種基本操作。擴張（Expansion <span class="math inline">K + \varphi</span>）是直接放進去再取閉包，有矛盾就爆炸。收縮（Contraction <span class="math inline">K \div \varphi</span>）是在不引入新假設的情況下，放棄對 <span class="math inline">\varphi</span> 的承諾。修正（Revision <span class="math inline">K * \varphi</span>）是接納 <span class="math inline">\varphi</span>，並清除衝突以保持一致。Alchourrón、Gärdenfors 與 Makinson（1985）證明，理性修正就是先把 <span class="math inline">\neg\varphi</span> 拿掉，再把 <span class="math inline">\varphi</span> 放進去（Levi 恆等式），而且這完全等價於在可能世界集合上維護一套合理性全預序（Grove Plausibility Spheres）。Rohit Parikh（1999）後來補上語言分裂公理（Language Splitting）：如果你學到「今天東京下雨」，只該修改氣象相關的子語言，不該動到「費馬最後定理」所在的無關知識分區。</li>
+<li>機制或核心表達式：AGM 八大公設（封閉性、成功性 <span class="math inline">\varphi \in K * \varphi</span>、包含性 <span class="math inline">K * \varphi \subseteq K + \varphi</span>、空退化性、一致性、外延性及兩條超可加／次可加關聯律），與 Levi 恆等式、Harper 恆等式一起構成對偶閉環：
+<div class="math inline">K * \varphi = (K \div \neg\varphi) + \varphi \quad\text{（Levi Identity）}, \qquad K \div \varphi = K \cap (K * \neg\varphi) \quad\text{（Harper Identity）}</div>
+語意上，給每個信念態一個世界良預序 <span class="math inline">\le_K</span>，修正後的最優世界就是滿足 <span class="math inline">\varphi</span> 的最合理世界集合 <span class="math inline">\min_{\le_K}(\llbracket \varphi \rrbracket)</span>。</li>
+<li>能做到什麼，代價是什麼：過去四十年，非單調推理、資料庫更新與反事實條件句（Lewis-Stalnaker Semantics，連接 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a>）都以它為公理標準。代價是經典 AGM 只規定單步修正後哪些句子成立，沒有直接規定連續多次正反交替修正（Iterated Belief Revision）時，整個合理性排序本身該怎麼更新。</li>
+</ul>
+</li>
+<li>
+<p><strong>動態認識邏輯與乘積更新：把私密窺探與欺騙編成代數（DEL, Action Models &amp; Moore Sentences）</strong></p>
+<ul>
+<li>直覺理解：現實生活中很少有全場透明的公開廣播。常見的情況是：愛麗絲悄悄看了一眼底牌；鮑勃看見愛麗絲看牌，但不知道牌面是什麼；查理連愛麗絲看過牌都不知道。Baltag、Moss 與 Solecki（BMS）的想法是，認知動作（Epistemic Action）本身也是一個小型 Kripke 模型（Action Model <span class="math inline">E</span>）。更新後的認知宇宙，就是原世界模型 <span class="math inline">M</span> 與動作模型 <span class="math inline">E</span> 的受限笛卡爾乘積 <span class="math inline">M \otimes E</span>。動態更新裡還會出現 Moore 悖論句，例如 <span class="math inline">\varphi := p \land \neg K_i p</span>（「正在下雨，但我不知道正在下雨」）。這句話在宣告前為真，一公開宣布就自我證偽（Self-refuting / Unsuccessful Update）。</li>
+<li>機制或核心表達式：設認識模型 <span class="math inline">M=(W,\sim_i,V)</span>，動作模型 <span class="math inline">E=(A,\approx_i,\operatorname{pre})</span>（每個動作 <span class="math inline">a \in A</span> 帶有發生前提 <span class="math inline">\operatorname{pre}(a)</span>），乘積更新模型 <span class="math inline">M \otimes E = (W', \sim'_i, V')</span> 定義為：
+<div class="math inline">W' = \bigl\{(w, a) \in W \times A \;\big|\; M, w \models \operatorname{pre}(a)\bigr\}, \qquad (w,a) \sim'_i (u,b) \iff (w \sim_i u \;\land\; a \approx_i b)</div>
+靠規約公理（Reduction Axioms），任何帶動態宣告算子 <span class="math inline">[!\varphi]\psi</span> 的公式都能有效轉譯回靜態認識邏輯，可判定性因此保住。Kurz–Palmigiano（2013）進一步用代數對偶說明乘積更新在複代數（Complex Algebras）上的餘代數結構。</li>
+<li>能做到什麼，代價是什麼：可以精確描述任意複雜的安全通訊協議、密室推理、欺騙賽局，以及機器人的多主體心智追蹤（如 Dissing–Bolander 2020 讓實體人形機器人通過高階 Sally-Anne 假信念測試）。代價是每乘一次偷看動作，可能世界的數量就指數膨脹（State-Space Explosion）。另外，標準 BMS 只會刪減或複製世界，很難自然表達撤回舊信念（Belief Contraction），這一點可參見 2026 年 Belardinelli–Zhang 的新結果。</li>
+</ul>
+</li>
+<li>
+<p><strong>LLM 知識編輯與行為元認知基準（Model Editing as Belief Revision &amp; ToM Benchmarks）</strong></p>
+<ul>
+<li>直覺理解：大型語言模型學過「英國首相是蘇納克」，我們再用 ROME / MEMIT 這類權重編輯演算法把它強行改成「英國首相是施凱爾」。之後問模型「英國首相的配偶住哪？」或反過來問，它常常前後矛盾。Hase、Hofweber 等人（2024）指出原因：現有的模型編輯只做了點狀的記憶覆蓋，違反 AGM 信念修正要求的演繹閉包與連帶修正（Entailment &amp; Contraposition Consistency）。另一方面，學界正用 DEL 自動合成沒有資料污染、任意高階的假信念推理題庫（如 <code>MindGames</code>），以及社交壓力下的信念修正評測（如 2026 年 <code>MEDLEY-BENCH</code>），來檢驗 LLM 是真的懂心智理論，還是只會統計上的迎合（Sycophancy）。</li>
+<li>機制或核心表達式：把參數化機率語言模型 <span class="math inline">p_\theta</span> 的編輯算子 <span class="math inline">\mathcal{E}(\theta, x \mapsto y)</span> 拿來對照 AGM 與貝氏更新的判準。理性的模型修正要滿足目標成功性 <span class="math inline">p_{\theta'}(y \mid x) \approx 1</span> 與無關局部性（對應 Parikh 語言分裂），還要在傳播閉包 <span class="math inline">\psi \in \operatorname{Cn}(K_\theta * \varphi)</span> 上保持聯合機率相容，並且在沒有新證據時不因社交壓力而退讓（Anti-Sycophancy）。</li>
+<li>能做到什麼，代價是什麼：四十年來形式認識論累積的精確標準，可以用來診斷基礎模型的幻覺、諂媚（Sycophancy）與持續學習中的災難性遺忘。代價是神經網路的信念不是顯式的離散集合，怎麼在連續權重流形上實作滿足 AGM 公設的更新算子，仍是未解的問題。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>在動態認識邏輯（DEL）中實現事實信念收縮（Belief Contraction）</strong>：標準 DEL 擅長用刪掉世界或調整合理性偏序（Plausibility Upgrade）來表達學到新知。但如果主體只是發現先前的證據不可靠，想退回既不知道 <span class="math inline">p</span>、也不能斷定 <span class="math inline">\neg p</span> 的開放狀態（Contraction），而模型裡本來就沒有 <span class="math inline">\neg p</span>-世界，傳統的合理性升級就做不到。2026 年 Belardinelli 與 Zhang 的研究分析了這個缺陷，並重構 DEL 中的事實信念收縮機制。</li>
+<li><strong>LLM 的理性信念修正與社交壓力下的諂媚（Sycophancy）</strong>：人類用戶質疑 LLM 的正確答案，或提供帶偏見的分析師意見時，模型是在理性地權衡證據，還是盲目順從？2026 年 Abtahi 等人發布 <code>MEDLEY-BENCH</code>，橫評 35 個主流大模型。結果顯示，模型在私下自我複查和社交壓力修正這兩種情境下的表現落差很大，而現有基準只看最終答案準確率，看不出信念修正過程有多脆弱。</li>
+<li><strong>不可知性（Unknowability / Fitch 悖論）與動態無切消證明論</strong>：Fitch 可知性悖論說的是「若一切真理皆可被知道，則一切真理現在就已被知道（全知坍縮）」。不可信／不可知公式與 Moore 函數不動點 <span class="math inline">f(\varphi)=\varphi \land \neg\Box\varphi</span> 之間，靜態與動態的界線很微妙（2026 Yamada）。另一個問題是怎麼為 DEL 建立純證明論：不依賴外部語意翻譯、結構規則可逆，而且滿足切消定理。這方面最近有進展，例如 2026 Lerouvillois–Poggiolesi 的動態超相繼式演算（Dynamic Hypersequents）。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a>（基於 Parikh 語言分裂與 AGM 固守度的 RAG／記憶庫架構）</strong>：設計長期記憶 Agent 或知識圖譜 RAG 時，替每條記憶明確標上認識固守度（Entrenchment Tier：物理定律 &gt; 官方文檔 &gt; 單次對話推斷）和簽名子語言依賴圖。檢索出現矛盾時，按 Levi 恆等式做最小的有向圖切割，就能消除 Agent 被單條髒資料污染全局設定（Prompt/Memory Poisoning）的風險。</li>
+<li><strong>遷移至 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a>（共同知識門檻與語意湧現通訊）</strong>：在多 Agent 協作或無線語意通訊（如 Thomas–Saad 2023 結合神經符號因果推理與訊號賽局）裡，把廣播頻道（直接生成共同知識 <span class="math inline">C_G \varphi</span>）和點對點私訊（只生成一階的 <span class="math inline">K_j K_i \varphi</span>）明確分開，就能精確設計無死鎖的共識協議，並省下冗餘的通訊頻寬。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a>（結合 Gärdenfors 的兩項工作）</strong>：AGM 裡的 G，和概念空間幾何的創始人，是同一位 Peter Gärdenfors。可以把信念修正裡的合理性同心球面，和概念空間裡的凸區域幾何投影結合起來：把修正信念建模成在凸概念多胞形上做最近點投影（Bregman / Wasserstein 投影，連接 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a>）。這是統一符號認識論與連續表徵幾何的一個切入點。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 190 篇核心文獻，其中 176 篇有 Open-Access PDF 原文連結。原始 PDF 都收在隱藏庫 <code>~/.ai_papers_vault.noindex</code> 並綁定到 Zotero，不會出現在 macOS Spotlight。點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀條目與原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1985</td>
+<td><em>On the logic of theory change: Partial meet contraction and revision functions</em>，Carlos E. Alchourrón, Peter Gärdenfors, David Makinson</td>
+<td>信念修正的奠基論文（AGM 論文），被引逾 3200 次。它確立擴張、部分交收縮與修正的八大公設，定義了什麼是理性的知識更新。</td>
+<td>G1–G2 奠基必讀 <code>[書目條目]</code></td>
+<td><a href="zotero://select/library/items/PNFHWHAR" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.2307/2274239" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>The Logic of Public Announcements, Common Knowledge, and Private Suspicions</em>，Alexandru Baltag, Lawrence S. Moss, Sławomir Solecki</td>
+<td>動態認識邏輯（DEL）影響最大的基礎論文（BMS 動作模型重印版，被引 611 次），把私密偷看、懷疑與欺騙統一成乘積更新。</td>
+<td>G1–G2 DEL 基礎 <code>[書目條目]</code></td>
+<td><a href="zotero://select/library/items/GCADUKME" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1007/978-3-319-20451-2_38" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>1999</td>
+<td><em>Beliefs, belief revision, and splitting languages</em>，Rohit Parikh</td>
+<td>提出語言分裂（Language Splitting）局部性公理，證明修改局部領域知識時不應波及無關的知識模組。</td>
+<td>G2 模組化核心 <code>[書目條目]</code></td>
+<td><a href="zotero://select/library/items/V86KZA64" class="zotero">📚 Zotero 開啟</a> · <a href="http://dl.acm.org/citation.cfm?id=330623" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><em>Fundamental Problems With Model Editing: How Should Rational Belief Revision Work in LLMs?</em>，Peter Hase et al.</td>
+<td>LLM 研究者應該讀：用形式認識論與信念修正，嚴格分析現有大模型權重編輯（Model Editing）為什麼在邏輯蘊含與連帶更新上都失敗。</td>
+<td>G1–G2 AI 必讀 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/AR8GTZG9" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2406.19354" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Epistemic Updates on Algebras</em>，Alexander Kurz, Alessandra Palmigiano</td>
+<td>用範疇對偶論與餘代數重構 BMS 乘積更新，把動態認識邏輯從 Kripke 點集推廣到廣義非古典代數格上（連到 <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a>）。</td>
+<td>G3 代數對偶 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/AAIN2QR5" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1307.0417" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（4 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>2023｜Christo Kurisummoottil Thomas, Walid Saad</strong>，<em>Neuro-Symbolic Causal Reasoning Meets Signaling Game for Emergent Semantic Communications</em>（被引 74 次，<code>[OA PDF]</code>）：結合神經符號因果推理與 Lewis 訊號賽局來設計湧現語意通訊系統，在極低的資料傳輸量下達成主體間的認識對齊。<a href="zotero://select/library/items/HEBAFI22" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2210.12040" rel="noopener">原文連結</a></li>
+<li><strong>2020｜Lasse Dissing, Thomas Bolander</strong>，<em>Implementing Theory of Mind on a Robot Using Dynamic Epistemic Logic</em>（被引 51 次，<code>[書目條目]</code>）：把動態認識邏輯推理引擎直接部署在實體機器人上，讓它能追蹤人類夥伴的一階與高階錯誤信念，並通過假信念測試。<a href="zotero://select/library/items/5K6VKMRC" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.24963/ijcai.2020/224" rel="noopener">原文連結</a></li>
+<li><strong>2023｜Damien Sileo, Antoine Lernould</strong>，<em>MindGames: Targeting Theory of Mind in Large Language Models with Dynamic Epistemic Modal Logic</em>（被引 23 次，<code>[OA PDF]</code>）：用動態認識模態邏輯自動生成受控、防背題的高階心智理論（ToM）推理基準，用來精確找出大型語言模型在社會認知上的缺口。<a href="zotero://select/library/items/V6TF986B" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2305.03353" rel="noopener">原文連結</a></li>
+<li><strong>2004｜Gregory R. Wheeler, Luís Moniz Pereira</strong>，<em>Epistemology and artificial intelligence</em>（被引 21 次，<code>[書目條目]</code>）：系統梳理形式認識論、非單調推理與人工智慧不確定性表徵在歷史上的交會。<a href="zotero://select/library/items/D6VNAT9K" class="zotero">📚 Zotero 開啟</a> · <a href="https://doi.org/10.1016/j.jal.2004.07.007" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Going Deep Inside Public Announcement Logic</strong>，Clara Lerouvillois, Lutz Straßburger：採用沒有多餘語法官僚的開放演繹（Open Deduction）形式體系，為公開宣告邏輯（PAL）建構第一個深度推論（Deep Inference）證明系統，可以深入公式內部拆解宣告的複合。文中完整證明了可靠性、完備性與切規則可容許性。（<a href="zotero://select/library/items/SWPVXQ4V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21157" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Shattering the Autoregressive Curse: Dynamic Epistemic Entropy Orchestrated Erasable Reinforcement Learning for LLMs</strong>，Ziliang Wang et al.：提出不需要外部驗證器的動態認識熵編排可擦除強化學習（<span class="math inline">\text{E}^3\text{RL}</span>）。它用局部自迴歸交叉熵當作內生的認識不確定性座標，切除有邏輯瑕疵的片段，並重用歷史 KV 快取。4B 與 8B 模型在 AIME 等數學推理基準上，分別比既有 SOTA 高 5.349% 與 6.514%。（<a href="zotero://select/library/items/WGS7R9MH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.17735" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>MEDLEY-BENCH: Benchmarking Behavioural Metacognition and Belief Revision Under Social Pressure in Large Language Models</strong>，Farhad Abtahi et al.（2026，<em>arXiv:2604.16009</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：傳統 LLM 評測只看單輪的最終答案準確率，看不出模型在私下自我反思和面對外部社交異議壓力時，是在做理性的證據修正，還是無原則地迎合。</li>
+<li>關鍵做法：提出 <code>MEDLEY-BENCH</code> 與 Medley 元認知分數（MMS），在同一個單人基線下，對照評估 12 個模型家族共 35 款大模型在私密自我審查與分析師引導的社交修正下的信念更新軌跡。</li>
+<li>跨領域啟發：把形式信念修正的規範，直接接到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>、<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 的大模型行為元認知評測。</li>
+<li>連結：<a href="zotero://select/library/items/IN7EPN72" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2604.16009" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Belief Contraction in Dynamic Epistemic Logic</strong>，Gaia Belardinelli, Snow Zhang（2026，<em>EPTCS 447 / arXiv:2606.31861</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：標準動態認識邏輯（BMS）靠刪減可能世界來做信念擴張。即使加上合理性序（Plausibility Orderings），只要初始模型已經排除反例世界，就無法忠實表達對事實命題的信念收縮（放棄斷言，但不轉信反面）。</li>
+<li>關鍵做法：精確分析傳統合理性提升在收縮操作上的結構缺陷，並提出新的語意機制，能在動態認識模型變換中實現 AGM 式的事實信念收縮。</li>
+<li>跨領域啟發：動態認識邏輯的擴張、修正、收縮三種操作裡，收縮長期缺席，這篇把它補上。</li>
+<li>連結：<a href="zotero://select/library/items/DHUW62KN" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2606.31861" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批延伸追蹤2026-近期">同批延伸追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Clara Lerouvillois, Francesca Poggiolesi</strong>，<em>Dynamic Proof Theory for Dynamic Epistemic Logic</em>（<em>arXiv:2609.37440</em>，<code>[OA PDF]</code>）：引入帶智能體指標與事件倉庫的動態超相繼式（Dynamic Hypersequents），為 DEL 建立邏輯規則可逆、容許切消（Cut-admissible）的純結構證明論。<a href="zotero://select/library/items/6W7EJZJ9" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.37440" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Eiji Yamada</strong>，<em>The Sources of Unknowability and Self-refutation in Epistemic and Dynamic Epistemic Logic</em>（<em>arXiv:2609.21317</em>，<code>[OA PDF]</code>）：在 K、KD、KD45 與 S5 框架下，系統刻畫不可信（<span class="math inline">\Box\varphi</span> 不可滿足）與不可知（<span class="math inline">\Box\varphi \land \varphi</span> 不可滿足）兩類公式，證明不可信公式一定是 Moore 函數的不動點，並把它和動態自我證偽連起來。<a href="zotero://select/library/items/WS9M5XAH" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.21317" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Felipe Nunes de Souza Camargo</strong>，<em>Study on Quantitative Dynamic Epistemic Logic for Belief Revision</em>（<em>arXiv:2606.20837</em>，<code>[OA PDF]</code>）：結合 AGM 公設與量化等級的動態認識模態邏輯，描述信念強度等級的動態更新，不再只分相信與不相信兩種。<a href="zotero://select/library/items/T9PMI947" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2606.20837" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

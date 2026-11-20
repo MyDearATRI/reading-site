@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01｜Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="01transformer-核心注意力機制位置幾何稀疏專家量化微調與計算擴展律">01｜Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> ｜ <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 <span class="math inline">O(1)</span>。再加上旋轉相對位置幾何、考慮 GPU 記憶體階層的演算法、細粒度稀疏混合專家（MoE）和計算最優擴展律，就是當代基礎模型共用的計算架構。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+早期的序列模型（RNN / LSTM）像單線傳話，必須把過去所有資訊塞進一個固定維度的隱藏向量。訓練時無法跨時間步平行化，距離一長，早期訊號還會指數衰減或被覆蓋。Vaswani 等人提出的 Transformer 讓每個位置都能平行看到整個序列，但也帶來三個新問題。第一，自注意力的計算量與記憶體隨序列長度以 <span class="math inline">O(N^2)</span> 成長。第二，自迴歸解碼時龐大的鍵值快取（KV Cache）受限於 GPU 高頻寬記憶體（HBM）的搬運頻寬。第三，稠密模型每生成一個詞都要動用全部千億參數，能耗很高。這個領域十年來的主要進展都在回答同一個問題：怎麼在保住任意遠距精確檢索與組合表達力的前提下，降低 <span class="math inline">O(N^2)</span> 的記憶體需求和稠密模型的算力需求。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+把序列處理想像成一場跨部門的大型破案會議：
+<ol>
+<li>傳統 RNN 是單線傳話筒。第 1 號把筆記交給第 2 號，一路傳到第 1,000 號，開頭的關鍵線索早就被稀釋得認不出來。</li>
+<li>自注意力（Self-Attention）是全場開放的圓桌檔案室。每個詞元同時拿著三張卡片：查詢單（Query：我在找什麼線索）、索引標籤（Key：我身上有什麼特徵）和實質內容（Value：我的具體資訊），全場可以同時配對。</li>
+<li>FlashAttention 是在工作檯上分批調閱。它不在倉庫大廳（慢速 HBM）鋪開百萬張交叉比對表，每次只搬一小疊卡片到高速書桌（晶片內 SRAM），算完就換下一疊。</li>
+<li>混合專家（MoE）是大型綜合醫院的分診台。醫院有上百個專科診室（兆級總參數），但每位病患（每個詞元）進門後只會被路由器派給最對症的 2 至 8 位專科醫師，所以容量大，每次看診的開銷卻小。</li>
+</ol>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+這個領域提供整個知識星圖的工業級算力基礎。它和 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的關係最緊（SRAM/HBM 讀寫階層、分頁快取與異構 NPU 推測解碼）。它和 <a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 的分歧在於要全域精確檢索，還是要線性狀態壓縮。它內部出現的歸納頭（Induction Heads）與疊加態特徵，是 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的研究對象。擴展律的冪次行為、矩陣正交化動量最佳化器（Muon）和四元數群對稱快取量化（HQMQ），則連到 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>、<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a>，以及 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的李群／多胞形幾何。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    ATT[&quot;Vaswani et al. (2017) Transformer：縮放點積自注意力與多頭子空間平行路由&quot;] --&gt; POS[&quot;Su et al. (2021) RoFormer / RoPE：複平面正交旋轉編碼相對位置幾何&quot;]
+    ATT --&gt; IO[&quot;Dao et al. (2022) FlashAttention &amp; Ainslie et al. (2023) GQA：IO 感知線上分塊與共享鍵值頭&quot;]
+    MOE0[&quot;Shazeer et al. (2017) 稀疏門控 MoE&quot;] --&gt; MOE1[&quot;Fedus et al. (2021) Switch Transformer：Top-1 路由邁向兆級參數&quot;]
+    MOE1 --&gt; MOE2[&quot;Dai et al. (2024) DeepSeekMoE：細粒度專家切分 × 共享通用專家解耦&quot;]
+    SCALE[&quot;Kaplan et al. (2020) 冪律擴展律 &amp; Rajbhandari (2019) ZeRO / Zhao (2023) FSDP 零冗餘分片&quot;] --&gt; CHIN[&quot;Hoffmann et al. (2022) Chinchilla 計算最優律：參數與資料等比例擴展&quot;]
+    CHIN --&gt; QUANT[&quot;Dettmers et al. (2023) QLoRA：4-bit NF4 量化單卡微調&quot;]
+    IO --&gt; FRONT26[&quot;2026 前沿：Hurwitz 四元數群 KV 量化 (HQMQ) ＆ EAGLE 跨加速器樹狀無損推測解碼&quot;]
+    MOE2 --&gt; OPT26[&quot;2026 前沿：矩陣正交化動量最佳化器 (NAMO / FedCoMuon) ＆ 跨模態感測專家路由&quot;]
+    QUANT --&gt; FRONT26
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>全域內容尋址路由與旋轉相對位置幾何（Scaled Dot-Product Attention &amp; RoPE）</strong></p>
+<ul>
+<li>直覺理解：點積注意力本身是一種與排列順序無關（Permutation Equivariant）的集合運算。把一句話的字序打亂，純注意力算出的關係裡看不出誰在誰前面。早期模型直接把正弦波加到詞向量上，位置和語意容易互相干擾。蘇劍林等人提出的旋轉位置編碼（RoPE）換了一個幾何做法：把詞向量兩兩一組，看成複數平面上的指針，第 <span class="math inline">m</span> 個位置逆時針轉 <span class="math inline">m\theta</span> 角，第 <span class="math inline">n</span> 個位置轉 <span class="math inline">n\theta</span> 角。兩個指針做內積時，結果只取決於夾角差 <span class="math inline">(m-n)\theta</span>。也就是說，對絕對位置做旋轉，就自動編碼了平移不變的相對距離。</li>
+<li>機制或核心表達式：給定查詢、鍵、值矩陣 <span class="math inline">Q, K \in \mathbb{R}^{N \times d_k}</span> 與 <span class="math inline">V \in \mathbb{R}^{N \times d_v}</span>，Vaswani et al.（2017）用 <span class="math inline">\sqrt{d_k}</span> 抵消高維內積的變異數膨脹，避免 Softmax 落入梯度趨近於零的飽和區：
+<div class="math inline">\mathrm{Attention}(Q, K, V) = \mathrm{softmax}\!\left(\frac{QK^\top}{\sqrt{d_k}}\right)V</div>
+RoPE（Su et al., 2021）對第 <span class="math inline">m</span> 位置的子空間對施加分塊正交旋轉矩陣 <span class="math inline">R_{\Theta, m}^d</span>（預設頻率基底 <span class="math inline">\theta_j = 10000^{-2j/d}</span>），使注意力對偶內積嚴格成為相對位移 <span class="math inline">(m-n)</span> 的函數：
+<div class="math inline">\bigl\langle R_{\Theta, m}^d \mathbf{q}_m,\; R_{\Theta, n}^d \mathbf{k}_n \bigr\rangle = \mathrm{Re}\!\left[\sum_{j=0}^{d/2-1} q_{[2j:2j+1]}\, k_{[2j:2j+1]}^*\, e^{i(m-n)\theta_j}\right]</div></li>
+<li>能做到什麼，代價是什麼：模型因此有長短頻率多尺度的相對位置感知和遠程衰減偏置，也相容於線性注意力與鍵值快取重用。代價是超過預訓練視窗長度時，高頻相位沒見過完整週期，需要搭配頻率基底縮放（NTK-aware / YaRN）外推；標準全域注意力在訓練期仍有 <span class="math inline">O(N^2 d)</span> 的算力開銷。</li>
+</ul>
+</li>
+<li>
+<p><strong>IO 感知記憶體階層演算法與快取／權重極限壓縮（FlashAttention, GQA, QLoRA &amp; HQMQ）</strong></p>
+<ul>
+<li>直覺理解：過去有許多號稱 <span class="math inline">O(N \log N)</span> 或線性的近似注意力，實際在 GPU 上跑卻常常比標準注意力還慢。Tri Dao 等人指出，瓶頸不在乘法次數（FLOPs），而在 GPU 晶片內的高速 SRAM（數十 TB/s 但僅數十 MB）與外部 HBM 顯存（數 TB/s 但容量大）之間的反覆讀寫（Memory-Bound IO）。另一方面，推論階段每生成一個新詞都要重讀整條歷史 KV Cache。分組查詢注意力（GQA）讓多個查詢頭共用一組鍵值頭，再搭配低位元量化，以及一次平行驗證整棵候選詞元樹的推測解碼（Speculative Decoding），才能把硬體算力用足。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>FlashAttention 線上分塊重縮放（Dao et al., 2022）</strong>：不把 <span class="math inline">N \times N</span> 注意力矩陣寫回 HBM，改在 SRAM 分塊掃描時動態維護局部最大值 <span class="math inline">m(x)</span> 與指數和 <span class="math inline">\ell(x)</span>，再用結合律精確合併兩個分塊 <span class="math inline">(x^{(1)}, x^{(2)})</span> 的 Softmax 統計量：
+<div class="math inline">m(x) = \max\!\bigl(m(x^{(1)}),\, m(x^{(2)})\bigr), \qquad \ell(x) = e^{m(x^{(1)}) - m(x)}\ell(x^{(1)}) + e^{m(x^{(2)}) - m(x)}\ell(x^{(2)})</div></li>
+<li><strong>QLoRA 資訊論最優量化微調（Dettmers et al., 2023）</strong>：預訓練權重近似零均值常態分佈，所以用分位數等機率切分來設計 4-bit NormalFloat（NF4）資料型態，並做雙重量化。量化基底凍結，只對低秩適配器做反向傳播：<span class="math inline">Y = X\,\mathrm{dequant}(W_0^{\mathrm{NF4}}) + X B A</span>。</li>
+<li><strong>四元數群無校準 KV 快取量化（Swain et al., 2026 <code>HQMQ</code>）</strong>：把每 4 維 KV 向量看成四元數，將單位方向分解為兩個四元數的乘積 <span class="math inline">q_p \cdot q_s</span>。其中 <span class="math inline">q_p</span> 是三維球面 <span class="math inline">S^3</span> 上正二十四胞體對稱群（24-element Hurwitz group <span class="math inline">2T</span>，兩兩夾角 <span class="math inline">60^\circ</span>）的元素，<span class="math inline">q_s</span> 來自隨機種子次級碼本。這樣不需要校準資料就能做高保真壓縮。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：FlashAttention 不損失數學精確度（Exact Attention），就把記憶體降到 <span class="math inline">O(N)</span>，並提速數倍。GQA（Ainslie et al., 2023）只用 5% 的預訓練算力，就能把既有的 MHA 檢查點升級成高速推論模型。代價是把樹狀推測解碼與塊級核心移植到異構晶片（如 Ascend NPU 或邊緣 ASIC）時，容易因為遮罩與索引語意的差異而出錯，2026 <code>EAGLE-Pangu</code> 處理的就是這個問題。</li>
+</ul>
+</li>
+<li>
+<p><strong>條件計算與細粒度稀疏混合專家架構（Sparsely-Gated MoE → Switch → DeepSeekMoE）</strong></p>
+<ul>
+<li>直覺理解：人腦在解微積分或點咖啡時，不會讓全腦百億神經元同時滿載放電。稠密模型讓所有輸入共用同一套前饋網路（FFN）參數，稀疏混合專家（MoE）則把巨大的 FFN 拆成 <span class="math inline">N</span> 個專家子網路。早期 MoE 有兩個毛病：少數熱門專家被塞爆（路由崩潰），或是多個被選中的專家都在重複學基礎常識（知識冗餘）。<code>DeepSeekMoE</code> 的做法有兩點：把專家切得更細，增加組合的靈活度；另外設立永遠開啟的共享專家（Shared Experts）專門吸收通用常識，讓路由專家專精於不重疊的垂直知識。</li>
+<li>機制或核心表達式：從 Shazeer et al.（2017）帶負載均衡雜訊的 Top-<span class="math inline">K</span> 門控，和 Fedus et al.（2021）簡化的 Top-1 <code>Switch</code> 路由出發，Dai et al.（2024）把第 <span class="math inline">l</span> 層第 <span class="math inline">t</span> 個詞元的輸出分解為殘差輸入 <span class="math inline">u_t^l</span>、<span class="math inline">N_s</span> 個常駐共享專家與 <span class="math inline">N_r</span> 個稀疏路由專家（只激活 Top-<span class="math inline">K_r</span> 個非零門控 <span class="math inline">g_{i,t}</span>）：
+<div class="math inline">h_t^l = u_t^l + \sum_{i=1}^{N_s} \mathrm{FFN}_i^{(s)}(u_t^l) + \sum_{i=1}^{N_r} g_{i,t}\,\mathrm{FFN}_i^{(r)}(u_t^l)</div></li>
+<li>能做到什麼，代價是什麼：單詞元的激活算力（FLOPs）固定，總知識記憶容量卻可以擴大數十倍，也適合多感測器異質資料（如 2026 遙測多模態 MoE）。代價是總顯存佔用很高，跨節點 All-to-All 專家平行通訊容易成為系統瓶頸，路由的離散跳躍也會增加強化學習後訓練的梯度變異。</li>
+</ul>
+</li>
+<li>
+<p><strong>計算最優擴展律、零冗餘分散式分片與矩陣正交化動量（Scaling Laws, ZeRO/FSDP &amp; Muon）</strong></p>
+<ul>
+<li>直覺理解：擴展律出現之前，訓練大模型像煉丹。Kaplan 等人與 DeepMind Chinchilla 團隊證明，交叉熵損失隨算力、參數與資料量呈現橫跨七個數量級的平滑冪律，可以像熱力學狀態方程一樣精確外推。工程上，單張 GPU 放不下千億參數的最佳化器狀態、梯度和權重。ZeRO 與 PyTorch FSDP 把這三份狀態切開，分散到上千張卡上，算到哪一層才即時通訊拼回。新一代最佳化器 Muon 則把權重當成線性變換矩陣來處理，不再視為一長串扁平向量：它對動量矩陣做正交化投影，讓奇異值各方向的更新步幅均衡。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>Chinchilla 等算力最優擴展律（Hoffmann et al., 2022）</strong>：在固定訓練算力預算 <span class="math inline">C \approx 6ND</span> 下，最小化參數化損失曲線：
+<div class="math inline">L(N, D) = E + \frac{A}{N^\alpha} + \frac{B}{D^\beta}</div>
+由此推出最優參數規模 <span class="math inline">N_{\mathrm{opt}} \propto C^{a}</span> 與最優訓練詞元數 <span class="math inline">D_{\mathrm{opt}} \propto C^{b}</span> 應該近似等比例同步擴展（<span class="math inline">a \approx b \approx 0.5</span>，約每參數配 20 個訓練詞元）。這修正了早期模型參數過大、訓練卻嚴重不足的偏差。</li>
+<li><strong>ZeRO / FSDP 零冗餘記憶體消除（Rajbhandari et al., 2019; Zhao et al., 2023）</strong>：資料平行時，每張卡原本都重複儲存 <span class="math inline">16\Psi</span> 位元組（混合精度 Adam 下的參數、梯度與一二階動量）。把它均攤到 <span class="math inline">N_d</span> 個裝置後，單卡顯存降到 <span class="math inline">O(\Psi / N_d)</span>。</li>
+<li><strong>矩陣正交化動量與自適應融合（2026 <code>NAMO</code> / <code>FedCoMuon</code>）</strong>：對二維權重梯度的動量矩陣 <span class="math inline">M_t</span> 做正交極分解近似 <span class="math inline">\mathrm{Ortho}(M_t) \approx (M_t M_t^\top)^{-1/2} M_t</span>（常用 Newton–Schulz 多項式迭代實現），再結合二階自適應矩估計（Zhang et al., 2026）或聯邦複合梯度追蹤（Yan &amp; Huang, 2026）。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：萬億參數的訓練因此成為預算可預測的系統工程，預訓練收斂也明顯加快。代價是訓練期計算最優（Chinchilla-optimal）沒有計入部署後數百億次的推論成本。所以實際生產中，業界常常故意對中小型模型做數倍的過度訓練（Over-training），用一次性的預訓練算力換長期推論的低延遲。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>訓練期計算最優與推論期記憶體、異構部署成本的錯位</strong>：Chinchilla 定律講的是怎麼省訓練算力，但現實中的成本大頭已經轉到百萬脈絡下的 KV Cache 顯存佔用和自迴歸串列延遲。樹狀推測解碼（如 EAGLE 系列）能用小草稿模型無損加速大模型與語音辨識（ASR）推論。不過 <code>EAGLE-Pangu</code>（2026）顯示，複雜的樹狀注意力遮罩與動態快取索引在不同廠商的晶片之間（如華為昇騰 Ascend NPU 與 NVIDIA GPU）很脆弱。演算法設計因此得從只假設 CUDA，轉向跨加速器安全抽象（Accelerator-Safe Semantics）。</li>
+<li><strong>逐座標自適應（AdamW）與矩陣譜結構正交化（Muon）兩條最佳化路線</strong>：十年來 Transformer 訓練幾乎都用 Adam，但它把 <span class="math inline">d_{\mathrm{out}} \times d_{\mathrm{in}}</span> 的線性層拆成孤立純量處理，忽略了矩陣奇異值譜的病態條件數。Muon 靠正交化動量收斂得很快，可是在隨機梯度劇烈波動、階層式／聯邦分散式架構下，還缺乏理論與穩定性保障。2026 年的 <code>NAMO</code>（融合 Adam 自適應矩與正交動量）與 <code>FedCoMuon</code>（聯邦複合矩陣最佳化）是這個方向最新的工作。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>用離散李群與正多胞形對稱碼本壓縮高維張量（Hurwitz 四元數群 → 科學資料壓縮與通訊編碼）</strong>：<code>HQMQ</code>（Swain et al., 2026）利用三維球面 <span class="math inline">S^3</span> 上唯一具備完美格對稱的 24 階 Hurwitz 四元數群來構造乘積量化碼本，不需要校準資料集就能均勻覆蓋高維方向。這套代數幾何／群論的碼本做法，可以搬到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的大型三維流場狀態壓縮，以及無線 MIMO 通道量化。</li>
+<li><strong>線上結合律分塊掃描（Online Tiling &amp; Associative Rescaling）</strong>：FlashAttention 的做法不限於注意力。任何需要全局歸一化的非線性算子，只要能改寫成可分塊遞迴合併的結合律半群運算，都能套用。它可以移植到 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 的十萬點級 Sinkhorn 核運算，以及生物序列的長程比對。</li>
+<li><strong>常駐共享基底加動態稀疏專科路由的架構模式</strong>：<code>DeepSeekMoE</code> 與遙測 MoE 綜述（Cui et al., 2026）顯示，把跨模態共性放在共享網路、把異質物理感測的差異交給條件路由專家，是緩解 <a class="wl" href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 和醫療多源組學梯度互相拉扯（Negative Transfer）的通用做法。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2017</td>
+<td><strong>Attention Is All You Need</strong>，Ashish Vaswani et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：以縮放點積自注意力與多頭子空間取代循環與卷積，把遠距依賴路徑壓到 <span class="math inline">O(1)</span>，是現代 AI 的奠基論文。</td>
+<td><code>G1/G2 必讀</code></td>
+<td><a href="zotero://select/library/items/CT7B2X44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.03762" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Scaling Laws for Neural Language Models</strong>，Jared Kaplan et al.</td>
+<td>首次指出交叉熵損失對模型規模、資料量與算力有橫跨七個數量級的精確冪律關係，大模型的擴展從此可以預測。</td>
+<td><code>G1/G2 觀念奠基</code></td>
+<td><a href="zotero://select/library/items/2N5V59KH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2001.08361" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><strong>RoFormer: Enhanced Transformer with Rotary Position Embedding</strong>，Jianlin Su et al.</td>
+<td>用複平面上的正交旋轉，把絕對位置轉成內積中的精確相對距離，現在幾乎所有主流開源大模型都用它做位置編碼。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/MVMESXFD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.09864" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>Training Compute-Optimal Large Language Models</strong>，Jordan Hoffmann et al.</td>
+<td>即 Chinchilla 定律：用逾 400 組實驗證明既有大模型普遍訓練不足，並確立參數與訓練詞元應等比例擴展。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/VIRAXQIS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.15556" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>FlashAttention: Fast and Memory-Efficient Exact Attention with IO-Awareness</strong>，Tri Dao et al.</td>
+<td>把 GPU SRAM/HBM 的讀寫成本納入演算法設計，用線上分塊重縮放做到零近似誤差、記憶體 <span class="math inline">O(N)</span> 的精確注意力。</td>
+<td><code>G2/G3 系統必讀</code></td>
+<td><a href="zotero://select/library/items/C8JI546Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.14135" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>QLoRA: Efficient Finetuning of Quantized LLMs</strong>，Tim Dettmers et al.</td>
+<td>結合 4-bit NormalFloat（NF4）、雙重量化與分頁最佳化器，首次在單張 48GB 顯卡上無損微調 65B 參數的大模型。</td>
+<td><code>G2 實戰必讀</code></td>
+<td><a href="zotero://select/library/items/ITHRTKUH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.14314" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models</strong>，Damai Dai et al.</td>
+<td>用細粒度專家切分，加上常駐共享專家來隔離通用知識，解決傳統 MoE 的專家知識重疊與路由退化問題。</td>
+<td><code>G2/G3 架構前沿</code></td>
+<td><a href="zotero://select/library/items/B3VGTUK9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.06066" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（5 篇稀疏路由、分散式分片與推論加速基石）</summary>
+<p></p>
+<ul>
+<li><strong>2017｜Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer</strong>，Noam Shazeer et al.（現代神經網路稀疏門控 MoE 的開創論文，確立按樣本條件激活的機制，讓容量不再和算力線性綁定，622 引）｜<a href="zotero://select/library/items/TPIEQZCU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1701.06538" rel="noopener">原文</a></li>
+<li><strong>2019｜ZeRO: Memory Optimizations Toward Training Trillion Parameter Models</strong>，Samyam Rajbhandari et al.（DeepSpeed 的基礎：消除資料平行中最佳化器狀態、梯度與參數的顯存冗餘，使兆級參數的分散式訓練可行，919 引）｜<a href="zotero://select/library/items/4E5BDFBK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.02054" rel="noopener">原文</a></li>
+<li><strong>2021｜Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity</strong>，William Fedus, Barret Zoph, Noam Shazeer（把 MoE 簡化為單專家 Top-1 路由，解決通訊開銷與訓練不穩定，並擴展到兆級參數，987 引）｜<a href="zotero://select/library/items/B2TAJKV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.03961" rel="noopener">原文</a></li>
+<li><strong>2023｜GQA: Training Generalized Multi-Query Transformer Models from Multi-Head Checkpoints</strong>，Joshua Ainslie et al.（提出分組查詢注意力 GQA 與低成本的檢查點升級配方，在 MHA 的生成品質與 MQA 的 KV 快取推論速度之間取得平衡，444 引）｜<a href="zotero://select/library/items/JIF9PM7W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.13245" rel="noopener">原文</a></li>
+<li><strong>2023｜PyTorch FSDP: Experiences on Scaling Fully Sharded Data Parallel</strong>，Yanli Zhao et al.（把完全分片資料平行原生整合進 PyTorch 生態系，讓工業級大規模基礎模型訓練管線得以普及，223 引）｜<a href="zotero://select/library/items/WRDFEPMM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.11277" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜A Sharp Turn Is Not a Phase Transition: What Training-Time Transitions in Small Language Models Establish, Why Threshold Readouts, Fast Crossovers, Developmental Stages and Critical Behaviour Are Reported Under One Name, and the Controls That Would Tell Them Apart</strong>，Pranay M. Mahendrakar：訓練動力學文獻把四類現象都叫「相變」：閾值讀出、快速過渡、可因果干預的發展階段、隨規模尖銳化的嚴格相變。本文逐一拆解，並嚴格推導證明小型字符級 Transformer 四項同步指標的轉折，其實是固定視窗計數跨過 1/2 的算術恆等與有界卜瓦松擬合效應。文中還彙整 30 項既有研究，給出標準判別測試。（<a href="zotero://select/library/items/XRUPXZH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.24355740" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜MelanoFusion: An Explainable and Uncertainty-Aware Hybrid CNN–Transformer Framework for Dermoscopic Melanoma Detection</strong>，V. Purushothama Raju et al.：結合 EfficientNetV2-S 與 Swin Transformer 雙編碼器、病灶分割先驗和不確定性預測頭，建構皮膚鏡黑色素瘤診斷框架 MelanoFusion。在 HAM10000、ISIC 2018 與 PH² 上聯合評估判別力（ROC-AUC 最高 0.844）、校準誤差（ECE 0.116）、不確定性與錯誤的關聯，以及年齡子群的敏感度落差。（<a href="zotero://select/library/items/F76JAJXP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21203/rs.3.rs-11208377/v1" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦fp4-全流程-mla-協同設計與格狀微縮放-kv-快取極限壓縮">2026-11-19（08:00 增量）最新入庫（聚焦：FP4 全流程 MLA 協同設計與格狀微縮放 KV 快取極限壓縮）</h4>
+<ul>
+<li><strong>2026｜NVFP4-MLA: Unified FP4 KV-Cache Storage and Attention Computation for Multi-Head Latent Attention</strong>，Chao Ni et al.
+<ul>
+<li>重點：協同設計量化演算法、注意力核心與快取系統，用選擇性殘差補償與二維量化分塊消除兩次 BMM 之間的重整量化，把 MLA 的快取儲存與運算都降到 FP4。在 DeepSeek-R1／Kimi-K3 上維持 9 項基準的 BF16 均分，快取壓縮逾 3 倍。</li>
+<li>連結：<a href="zotero://select/library/items/SRA77ENB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.18972" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜MiSTiQ: MicroScaling Trellis Quantization for Extreme KV Cache Compression</strong>，Ofir Gordon et al.
+<ul>
+<li>重點：結合格狀編碼儲存（搭配束搜尋）與基於塊歸一化高斯分佈的 <code>MX-Hash</code> 函數，不需要大碼本就能直接生成目標微縮放（MX）格式，用於低精度注意力計算。在約 1.25 有效位元／元素下超越基線。</li>
+<li>連結：<a href="zotero://select/library/items/NRQCBBWE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21216" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦跨模態稀疏專家路由與聯邦複合矩陣最佳化器">2026-11-19 最新入庫（聚焦：跨模態稀疏專家路由與聯邦複合矩陣最佳化器）</h4>
+<ul>
+<li><strong>2026｜Mixture-of-Experts in Remote Sensing: A Survey</strong>，Yongchuan Cui, Peng Liu, Lajiao Chen
+<ul>
+<li>重點：第一篇系統盤點混合專家模型（MoE）用於多光譜、SAR 與高光譜地球觀測的綜述。它分析如何依感測器的物理模態與時空動態設計路由與專家分工，避免讓單一稠密骨幹處理所有異質物理訊號。</li>
+<li>連結：<a href="zotero://select/library/items/TGFP8GCA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.03342" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜Federated Compositional Muon Optimizer for Matrix-Wise Models</strong>，Wang Yan, Feihu Huang
+<ul>
+<li>重點：矩陣結構最佳化器 Muon 在階層式複合目標與分散式聯邦場景下還沒有理論。本文提出 <code>FedCoMuon</code>，結合複合梯度追蹤與正交化動量更新，以低通訊複雜度做矩陣流形協同訓練。</li>
+<li>連結：<a href="zotero://select/library/items/QWJCV3QA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.12710" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-矩陣最佳化四元數-kv-壓縮與無損推測解碼">同批延伸選讀（2026 矩陣最佳化、四元數 KV 壓縮與無損推測解碼）</h4>
+<ul>
+<li><strong>2026｜Adam Improves Muon: Adaptive Moment Estimation with Orthogonalized Momentum</strong>，Minxin Zhang, Yuxuan Liu, Hayden Schaeffer（提出 <code>NAMO</code> 與 <code>NAMO-D</code>，首次從原理上融合 Adam 對隨機變異的自適應矩估計與 Muon 的權重矩陣正交化動量）｜<a href="zotero://select/library/items/FXJTP9KG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.17080" rel="noopener">原文</a></li>
+<li><strong>2026｜Hurwitz Quaternion Multiplicative Quantization for KV Cache Compression</strong>，Kabir Swain et al.（提出不需校準資料的 <code>HQMQ</code>，把 KV 的 4 維區塊看成四元數，分解為 <span class="math inline">S^3</span> 正二十四胞體 Hurwitz 群與隨機次級碼本的乘積）｜<a href="zotero://select/library/items/AH88VW75" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.27646" rel="noopener">原文</a></li>
+<li><strong>2026｜EAGLE-Pangu: Accelerator-Safe Tree Speculative Decoding on Ascend NPUs</strong>，Chang Han, Yijie Hu, Jingling Liu（處理樹狀推測解碼移植到異構晶片時，遮罩與 KV 快取佈局不相容的問題，在昇騰 NPU 上建立可重現的高平行無損加速管線）｜<a href="zotero://select/library/items/JVMKMKRT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.08088" rel="noopener">原文</a></li>
+<li><strong>2026｜Lossless Inference Acceleration for ASR via EAGLE-Style Speculative Decoding</strong>，Sen Zhang et al.（把 EAGLE 式特徵級推測解碼引入自迴歸語音辨識 Transformer/Conformer，在不降低辨識率的情況下縮短序列解碼延遲）｜<a href="zotero://select/library/items/E8C6F6MN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.13506" rel="noopener">原文</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

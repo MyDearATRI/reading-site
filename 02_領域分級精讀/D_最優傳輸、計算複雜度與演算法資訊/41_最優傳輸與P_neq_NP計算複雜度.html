@@ -1,0 +1,319 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>41｜最優傳輸與 P ≠ NP 計算複雜度（Optimal Transport &amp; P ≠ NP Computational Complexity） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">D_最優傳輸、計算複雜度與演算法資訊</a></nav></header>
+<main>
+<article>
+
+<h1 id="41最優傳輸與-p-np-計算複雜度optimal-transport-p-np-computational-complexity">41｜最優傳輸與 P ≠ NP 計算複雜度（Optimal Transport &amp; P ≠ NP Computational Complexity）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 D：最優傳輸、計算複雜度與演算法資訊</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> ｜ <a class="wl" href="29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> ｜ <a class="wl" href="33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>最優傳輸不是一整塊多項式時間可解的問題，它正好落在 <span class="math inline">\mathrm{P}</span> 與 <span class="math inline">\mathrm{NP}</span>-Hard 的分界上。從雙邊線性傳輸往外踏出半步（二次互動、三邊際耦合或高維自由重心），問題就變得連近似都很難。反過來，驅動 Sinkhorn 的矩陣／算子縮放與自旋玻璃相變，也成了研究代數版 <span class="math inline">\mathrm{VP}\neq\mathrm{VNP}</span> 與平均情況演算法極限的主要工具。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+在機器學習、物理與經濟學中，研究者常有一個錯誤的印象：既然標準雙邊最優傳輸（2-marginal OT）能用線性規劃或 Sinkhorn 快速求解，那麼把兩個空間直接對齊（Gromov–Wasserstein）、同時配對三個以上群體（多邊際 OT），或者尋找多個高維分佈的幾何重心，應該也只是規模稍大的凸最佳化。計算複雜度理論的答案是否定的。雙邊線性 OT 之所以易解，靠的是一個很脆弱的代數性質：二分圖約束矩陣的全單模性（Total Unimodularity），它保證連續分數鬆弛多胞形的頂點剛好全是整數排列。一旦引入二次關係、第三個邊際、一般圖的非二分對稱性，或讓維度增長，分數假頂點就以指數速度增加。問題變成 <span class="math inline">\mathrm{NP}</span>-hard，連給出溫和的近似解都同時受到 PCP 定理與重疊間隙性質（OGP）的限制。另一個方向上，源自 OT 的矩陣與算子縮放（Matrix &amp; Operator Scaling）在李群對稱空間上開出了測地凸最佳化這個新方向，並連到代數複雜度的核心問題：行列式與積和式的分離（<span class="math inline">\mathrm{VP}\neq\mathrm{VNP}</span>）。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像你走在山脈的稜線上，左腳邊是平坦好走的多項式平原（<span class="math inline">\mathrm{P}</span>），右腳邊是懸崖（<span class="math inline">\mathrm{NP}</span>-Hard / <span class="math inline">\#\mathrm{P}</span>）：
+<ul>
+<li><strong>雙人舞配對，對比三人組隊與座位互動</strong>：幫 <span class="math inline">n</span> 位男舞者與 <span class="math inline">n</span> 位女舞者做一對一最佳配對，就算允許「半個人跟 A 跳、半個人跟 B 跳」，最佳解也一定能拆成乾淨的一對一配對（這是 Birkhoff 多胞形的性質）。但只要改成男女加上場地三方同時配對（多邊際 OT），或是「你的快樂取決於你鄰座是誰」（二次指派／GW），連續鬆弛就會卡在無數個把每個人切成碎片的假頂點上，沒有捷徑通往真實的整數解。</li>
+<li><strong>全息防偽抽查（Håstad PCP）</strong>：連退而求其次、找個八成好的配對都辦不到，原因在這裡：任何數學證明都能重新編碼成帶有很強糾錯結構的全息帳本，裁判只需隨機翻開 3 個位元，就能以固定機率抓出假證明。這表示，如果你能輕易把高階配對算得比隨機猜測好一點點，你就能順手解開整個 <span class="math inline">\mathrm{NP}</span>。</li>
+<li><strong>結冰的彈珠迷宮（OGP 重疊間隙）</strong>：在隨機實例中，就算理論上存在很好的全局配對，這些好解在機率空間裡也像彼此隔海相望的孤立針尖，中間地帶完全沒有次好解可以過渡。任何靠每次微調一點點的局部梯度流或退火演算法，都會在抵達針尖前先凍在半山腰的玻璃態裡。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li><strong>跨域對齊與圖學習（<a class="wl" href="OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a>、<a class="wl" href="33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a>、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>）</strong>：解釋為什麼 GW 與 Gromov–Hausdorff 對齊總會卡在局部極小值，也說明何時必須改用低秩核化、樹度量嵌入或凸鬆弛。</li>
+<li><strong>代數幾何與表示論（<a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a>）</strong>：算子縮放透過李群矩映射（Moment Map）連結不變量理論與 Mulmuley–Sohoni 幾何複雜度理論（GCT），把計算下界轉化為代數簇軌道閉包的表示論重數障礙。</li>
+<li><strong>統計物理與高維學習動力學（<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a>、<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a>、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>）</strong>：重疊間隙性質（OGP）精確刻畫了統計／計算鴻溝：統計上資訊已經足夠（Information-Theoretic Limit），多項式時間演算法卻永遠學不到（Computational Gap）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    P0[&quot;雙邊際線性 OT 與二分匹配 ∈ P（全單模性 + Birkhoff 定理）&quot;]
+    P0 --&gt;|&quot;橋接 4：細粒度複雜度&quot;| FG[&quot;幾乎線性最小費用流 O(m^{1+o(1)}) vs 稠密核矩陣 SETH 二次下界&quot;]
+    P0 --&gt;|&quot;橋接 1：跨越結構相變&quot;| NPH[&quot;NP-Hard 懸崖：GW / 二次指派 (QAP)、多邊際 MMOT、高維自由支撐重心&quot;]
+    P0 --&gt;|&quot;橋接 2：非二分對稱升維&quot;| EXT[&quot;多胞形擴展複雜度：Birkhoff O(n²) vs 一般匹配 / TSP 指數級 2^{Ω(n)}&quot;]
+    P0 --&gt;|&quot;橋接 3：Sinkhorn 非交換升維&quot;| GCT[&quot;矩陣與算子縮放 → 測地凸最佳化、李群矩映射與 GCT (VP ≠ VNP)&quot;]
+    NPH --&gt;|&quot;橋接 5：最壞情況近似極限&quot;| PCP[&quot;Håstad 3-Query PCP 緊不可近似定理 → Label Cover 與 GW / QAP 近似封鎖&quot;]
+    NPH --&gt;|&quot;橋接 6：平均情況隨機相變&quot;| OGP[&quot;自旋玻璃副本對稱破缺與重疊間隙性質 (OGP) → Wasserstein 局部演化凍結&quot;]
+</pre>
+<h3 id="六大核心橋接全景對照表six-structural-bridges-between-ot-p-np">六大核心橋接全景對照表（Six Structural Bridges between OT &amp; P ≠ NP）</h3>
+<table>
+<thead>
+<tr>
+<th>橋接軸線</th>
+<th>OT／幾何端核心對象</th>
+<th>複雜度端對應定理與類別</th>
+<th>決定易解與難解的結構分界</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>1. 變體 NP-Hardness 相變</strong></td>
+<td>GW 對齊／QAP、<span class="math inline">k\ge 3</span> 多邊際 OT（MMOT）、高維自由支撐 <span class="math inline">W_2</span> 重心</td>
+<td><span class="math inline">\mathrm{NP}</span>-complete、<span class="math inline">\#\mathrm{P}</span>-complete（頂點計數與量子 Coulomb 泛函）</td>
+<td>二分全單模線性約束（整數頂點）<span class="math inline">\longrightarrow</span> 二次非凸耦合或高階張量分數假頂點</td>
+</tr>
+<tr>
+<td><strong>2. 多胞形擴展複雜度</strong></td>
+<td>Birkhoff 雙隨機多胞形 <span class="math inline">B_n</span>，對比一般圖匹配多胞形／TSP 多胞形</td>
+<td>Rothvoß 定理（匹配擴展複雜度 <span class="math inline">2^{\Omega(n)}</span>）、Fiorini et al.（TSP <span class="math inline">2^{\Omega(\sqrt{n})}</span>）</td>
+<td>能否透過多項式維度的輔助變數投影（Extended Formulation）把指數個面壓縮成小型 LP</td>
+</tr>
+<tr>
+<td><strong>3. 算子縮放與 GCT</strong></td>
+<td>Sinkhorn 矩陣縮放（逼近 Permanent）<span class="math inline">\longrightarrow</span> 量子算子縮放</td>
+<td>Valiant <span class="math inline">\mathrm{VP}\neq\mathrm{VNP}</span>（<span class="math inline">\det</span> 對 <span class="math inline">\operatorname{perm}</span>）、非交換有理恆等式判定 <span class="math inline">\in \mathrm{P}</span></td>
+<td>歐氏空間的非凸問題在正定矩陣對稱空間 <span class="math inline">\mathrm{GL}_n/\mathrm{U}_n</span> 上變為測地凸，由零矩映射刻畫不變量零錐</td>
+</tr>
+<tr>
+<td><strong>4. 細粒度複雜度與流極限</strong></td>
+<td>離散 <span class="math inline">W_1</span>／最小費用流，對比稠密一般度量 <span class="math inline">W_p</span> 與 Sinkhorn</td>
+<td>動態內點法 <span class="math inline">O(m^{1+o(1)})</span>，對比強指數時間假設（SETH）二次時間下界</td>
+<td>圖稀疏／低維歐氏／可分離核結構（近線性可解），對比一般無結構距離矩陣（<span class="math inline">\Omega(n^{2-o(1)})</span> 下界）</td>
+</tr>
+<tr>
+<td><strong>5. PCP 緊不可近似性</strong></td>
+<td>圖失真距離、Gromov–Hausdorff、二次與高階耦合對齊</td>
+<td>Håstad 3-Query PCP（MAX-E3-LIN-2 閾值 <span class="math inline">1/2+\varepsilon</span>，MAX-E3-SAT <span class="math inline">7/8+\varepsilon</span>）</td>
+<td>傅立葉長碼測試與 Label Cover 歸約，把微小的近似優勢放大為完全區分可滿足性</td>
+</tr>
+<tr>
+<td><strong>6. 自旋玻璃與 OGP</strong></td>
+<td>隨機指派、稀疏隨機圖 GW 對齊、正交框架 Wasserstein 逼近</td>
+<td>重疊間隙性質（Overlap Gap Property）、統計／計算鴻溝</td>
+<td>解空間在 Wasserstein／漢明距離下碎裂成不相連的孤島，阻斷所有局部平滑（Lipschitz）演算法</td>
+</tr>
+</tbody>
+</table>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>全單模性破缺與最優傳輸變體的 NP-Hardness（橋接 1 ＆ 橋接 2）</strong></p>
+<ul>
+<li>直覺理解：標準雙邊際 OT 在連續實數上鬆弛後不會出現分數解，原因是 Birkhoff–von Neumann 定理：<span class="math inline">n\times n</span> 雙隨機矩陣多胞形 <span class="math inline">B_n</span> 的每一個極端頂點都是 <span class="math inline">0/1</span> 排列矩陣，而且只需 <span class="math inline">n^2</span> 個不等式描述。但一加進第三個邊際（三維張量 <span class="math inline">\pi_{ijk}</span>），多胞形就長出指數多個帶分數座標的頂點（De Loera &amp; Kim 2014）。若改為二次成本（GW／QAP）或高維自由支撐 Wasserstein 重心，問題直接包含三維匹配、Hamilton 迴路與稀疏主軸搜尋，跨過 <span class="math inline">\mathrm{P}</span> 的邊界。就連本身屬於 <span class="math inline">\mathrm{P}</span> 的一般圖完美匹配（Edmonds 開花演算法），Rothvoß 也證明它的多胞形不存在多項式大小的線性規劃升維表達（擴展複雜度 <span class="math inline">2^{\Omega(n)}</span>）。也就是說，想靠小型 LP 統一處理組合最佳化，在幾何上不可能。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>二次指派／GW 形式</strong>：<span class="math inline">\min_{\Pi \in B_n} \langle A \Pi B^\top, \Pi \rangle</span>（Koopmans–Beckmann QAP，Gilmore 1962）。<span class="math inline">A, B</span> 是圖最短路徑距離矩陣時，就是離散 GW。Breitung et al. (2026) 證明圖失真距離與 GH／GW 有強不可近似性。</li>
+<li><strong>多邊際 OT 與高維重心</strong>：<span class="math inline">k</span>-邊際傳輸 <span class="math inline">\min_{\pi \in \Pi(\mu_1,\dots,\mu_k)} \langle C, \pi \rangle</span> 在 <span class="math inline">k \ge 3</span> 時（如密度泛函理論中的多電子庫侖排斥成本），以及維度 <span class="math inline">d</span> 可變的自由支撐 <span class="math inline">W_2</span> 重心，都是 <span class="math inline">\mathrm{NP}</span>-hard。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：精確劃定了凸鬆弛何時等於原問題、何時必有鬆弛間隙（Integrality Gap）。代價是面對 GW、MMOT 或高維重心時，不能指望有通用的精確黑盒求解器，要改用固定維度參數化、樹結構分解，或帶理論誤差保證的半正定／熵近似。</li>
+</ul>
+</li>
+<li>
+<p><strong>Sinkhorn 矩陣縮放、算子縮放與幾何複雜度理論 GCT（橋接 3）</strong></p>
+<ul>
+<li>直覺理解：非負矩陣 <span class="math inline">A</span> 的行列式 <span class="math inline">\det(A)</span> 可以用高斯消去法在 <span class="math inline">O(n^3)</span> 算出。把正負號全部改成正號，就得到積和式（Permanent，<span class="math inline">\operatorname{perm}(A) = \sum_{\sigma \in S_n} \prod_i A_{i,\sigma(i)}</span>，即二分完美匹配權重總和），而 Valiant 證明它是 <span class="math inline">\#\mathrm{P}</span>-complete，也是代數類 <span class="math inline">\mathrm{VNP}</span>-complete。OT 中的 Sinkhorn 矩陣縮放卻能在多項式時間判定 <span class="math inline">\operatorname{perm}(A)&gt;0</span>，並給出 <span class="math inline">e^n</span> 級的確定性近似。把它推廣到量子通道（Completely Positive Maps）上的算子縮放（Operator Scaling）之後，「多項式恆等於零嗎？」這個在歐氏空間高度非凸的問題，在正定矩陣黎曼對稱空間上變成沿測地線嚴格凸的位能最小化。算子縮放也因此連到李群表示論與 Mulmuley–Sohoni 幾何複雜度理論（GCT）。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>算子縮放與矩映射</strong>：對作用於矩陣的算子 <span class="math inline">\Phi(X) = \sum_{k=1}^m A_k X A_k^\dagger</span>，交替左右縮放使它雙隨機化（<span class="math inline">\Phi(I)=I, \Phi^*(I)=I</span>）。這等價於在 <span class="math inline">\mathrm{GL}_n(\mathbb{C})/\mathrm{U}_n</span> 測地線上最小化對數容量 <span class="math inline">\inf_{\det(g)=1} \log\det \Phi(g^\dagger g)</span>，並檢查李群作用的矩映射（Moment Map）<span class="math inline">\mu(v)=0</span> 是否可達（對應非零不變量環的零錐 Nullcone 成員判定，Wigderson 2019）。</li>
+<li><strong>GCT 整體藍圖</strong>：要證 <span class="math inline">\mathrm{VP}\neq\mathrm{VNP}</span>（代數版 <span class="math inline">\mathrm{P}\neq\mathrm{NP}</span>），就是要證積和式 <span class="math inline">\operatorname{perm}_n</span> 不在壓墊行列式 <span class="math inline">\det_m</span>（<span class="math inline">m=\mathrm{poly}(n)</span>）的 <span class="math inline">\mathrm{GL}_{m^2}</span> 軌道閉包 <span class="math inline">\overline{\mathrm{GL}_{m^2}\cdot \det_m}</span> 中。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：算子縮放在確定性多項式時間內解決了代數學界數十年未解的非交換有理恆等式測試（Non-commutative Edmonds Problem），也說明選對彎曲的幾何流形，可以把非凸問題變凸。但在交換變數的 GCT 中，只看表示是否出現（Occurrence Obstructions）已被證明不足以分離 <span class="math inline">\det</span> 與 <span class="math inline">\operatorname{perm}</span>，必須計算困難得多的表示重數差（Multiplicity Obstructions）。</li>
+</ul>
+</li>
+<li>
+<p><strong>細粒度複雜度（SETH）與 Håstad PCP 緊不可近似定理（橋接 4 ＆ 橋接 5）</strong></p>
+<ul>
+<li>直覺理解：易解側與難解側各有一道精確到常數與指數的界線：
+<ol>
+<li><strong><span class="math inline">\mathrm{P}</span> 內部的細粒度界線</strong>：稀疏圖上的最小費用流（即圖上精確 <span class="math inline">W_1</span>）已被動態內點法推進到幾乎線性的 <span class="math inline">O(m^{1+o(1)})</span>。但在一般高維點雲上，如果連距離矩陣都不顯式展開，就想在 <span class="math inline">O(n^{2-\delta})</span> 時間內算完精確雙邊 OT 或高斯核 Sinkhorn 乘法，就會違反強指數時間假設（SETH：CNF-SAT 無法在 <span class="math inline">O(2^{(1-\delta)n})</span> 內求解）。</li>
+<li><strong><span class="math inline">\mathrm{NP}</span>-hard 側的近似界線</strong>：Håstad (2001) 用 3-Query PCP 與長碼傅立葉分析證明，只要 <span class="math inline">\mathrm{P}\neq\mathrm{NP}</span>，許多高階約束問題連比隨機亂猜好 <span class="math inline">\varepsilon</span> 的多項式演算法都不存在。這個近似硬度經由 Label Cover 歸約傳到二次指派與圖度量失真距離，所以這些問題沒有通用的常數倍近似。</li>
+</ol>
+</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>Håstad 緊閾值</strong>：假設 <span class="math inline">\mathrm{P}\neq\mathrm{NP}</span>，對任意 <span class="math inline">\varepsilon&gt;0</span>，區分 <span class="math inline">\mathbb{F}_2</span> 上三元線性方程組（MAX-E3-LIN-2）是 <span class="math inline">(1-\varepsilon)</span>-可滿足還是僅 <span class="math inline">(1/2+\varepsilon)</span>-可滿足，是 <span class="math inline">\mathrm{NP}</span>-hard 的；MAX-E3-SAT 的緊閾值則為 <span class="math inline">7/8+\varepsilon</span>。</li>
+<li><strong>細粒度流與 SETH</strong>：圖最小費用流達 <span class="math inline">O(m^{1+o(1)}\log U)</span>，但高維無結構點集間的精確雙邊 OT 與無損核縮放受 <span class="math inline">\Omega(n^{2-o(1)})</span> 條件下界制約。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：告訴演算法設計者，在哪裡繼續壓低指數或追求更好的近似比已經沒有意義。大規模 OT 因此必須明確利用低固有維度、平移不變卷積核、切片投影（Sliced OT）或低秩分解，才能繞過 SETH 與 PCP 的前提。</li>
+</ul>
+</li>
+<li>
+<p><strong>自旋玻璃相變、重疊間隙性質（OGP）與統計／計算鴻溝（橋接 6）</strong></p>
+<ul>
+<li>直覺理解：實務中的資料很少是惡意構造的最壞情況（Worst-Case）。但隨機生成的稀疏高階配對、張量分解或正交框架 Wasserstein 近似（Díaz et al. 2026），在樣本量早已足夠唯一確定真實信號時，所有多項式時間演算法仍然失靈。統計物理學家從自旋玻璃（Spin Glasses）的副本對稱破缺中找到了原因，就是重疊間隙性質（OGP）。信噪比落在中間相區時，任意兩個近似最優解 <span class="math inline">\pi, \pi'</span> 之間的相似度（重疊度）只能很近（同一孤島內 <span class="math inline">\ge \nu_2</span>）或很遠（不同孤島間 <span class="math inline">\le \nu_1</span>），中間區間 <span class="math inline">(\nu_1, \nu_2)</span> 裡沒有解。任何對輸入雜訊連續穩定的局部演化（如 Langevin 動力學、梯度下降、低階多項式、局部訊息傳遞）都無法一步跳過這段空隙，所以一定會被困住。</li>
+<li>機制或核心表達式：
+<div class="math inline">\forall \pi, \pi' \in \mathcal{S}_{\mathrm{opt}}(\varepsilon), \quad \mathrm{Overlap}(\pi, \pi') \in [0, \nu_1] \cup [\nu_2, 1], \qquad 0 &lt; \nu_1 &lt; \nu_2 &lt; 1</div>
+結果是資訊理論樣本閾值 <span class="math inline">n_{\mathrm{stat}}</span> 與多項式時間可計算閾值 <span class="math inline">n_{\mathrm{comp}}</span> 之間出現數量級的差距（例如在 <span class="math inline">d</span> 維正交框架 Wasserstein 測度逼近中，統計複雜度與計算複雜度有截然不同的維度標度）。</li>
+<li>能做到什麼，代價是什麼：不需要假設 <span class="math inline">\mathrm{P}\neq\mathrm{NP}</span>，就能無條件排除整類穩定局部演算法（低階譜方法、GNN 訊息傳遞、MCMC 局部步），並把最優傳輸、統計物理與平均情況複雜度放進同一個框架。但對於有代數剛性的非穩定演算法（如高斯消去法或格基約化 LLL），OGP 不構成阻礙。怎麼統一刻畫所有多項式演算法的平均情況邊界，仍是開放問題。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>三大證明屏障（Relativization / Algebrization / Natural Proofs）與 GCT 重數障礙</strong>：Scott Aaronson 與 Avi Wigderson 多次指出，對角化、代數化與 Razborov–Rudich「自然證明屏障」已排除絕大多數初等組合下界手法。幾何複雜度理論（GCT）原本被寄予厚望，但「純存在性表示障礙」被推翻之後，怎麼在對稱群與一般線性群的 Kronecker／Plethysm 係數中找到多項式級別的重數差證據，仍是橫跨代數幾何、表示論與計算複雜度的最困難的問題。</li>
+<li><strong>統計／計算鴻溝（Statistical-to-Computational Gap）在幾何統計推論中的普適性</strong>：從正交框架 Wasserstein 逼近（Díaz et al. 2026）、稀疏 Wasserstein 主成分分析到帶噪 Gromov–Wasserstein 圖恢復，越來越多問題顯示：統計最優估計量是 <span class="math inline">\mathrm{NP}</span>-hard 的，多項式時間可算的熵正則化／半正定鬆弛則需要多出數個次方的樣本量。這個額外的樣本代價能靠新型非局部演算法消除，還是平均情況複雜度下無法跨越的限制？</li>
+<li><strong>連續熵鬆弛在組合難題上的經驗效果，對比最壞情況不可近似定理</strong>：Håstad PCP 與 Breitung et al. (2026) 證明一般 QAP 與 GW 在最壞情況下連近似都很難。但實務上對真實世界資料（自然語言嵌入、單細胞流形、物流網路）執行退火 Sinkhorn GW，往往能找到高品質的解（如 Seyedi et al. 2026）。怎麼用平滑分析（Smoothed Analysis）或內在低維流形假設，嚴格解釋真實資料的距離矩陣為何避開了 PCP 與 OGP 的病態情形，還需要理論上的進展。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> 與非凸最佳化設計（用對稱空間幾何把非凸化為測地凸）</strong>：算子縮放給的啟示是，歐氏座標下的非凸函數，換一套李群流形度量可能就是嚴格測地凸函數。神經網路權重或協方差矩陣有乘性縮放對稱性時，改用黎曼／自然梯度或矩映射平衡條件，往往能直接消除鞍點與假局部極小值。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>、<a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 與驗證機制設計</strong>：Håstad 的 PCP 定理說明，局部隨機抽查 3 個關聯位元就能高信心驗證全局一致性，前提是輸出必須經過糾錯冗餘編碼（如長碼／低次多項式擴展）。設計 AI 推理過程驗證器或防篡改水印時，要求模型輸出帶有代數一致性約束的中間表徵，比事後逐字審查原稿有效率得多。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a></strong>：深度模型在某個任務上長期停在高損失平台，之後突然頓悟（Grokking）或永久卡住時，可以用 OGP 解空間重疊分佈來診斷損失地貌。如果卡在重疊間隙，只調小學習率或延長局部 SGD 沒有用，必須透過課程學習（改變資料分佈，平滑地橋接孤島）或過參數化升維來消除間隙。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。本領域目前共收錄 1,005 篇文獻（其中 880 篇具備開放取用 OA PDF）。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1962</td>
+<td><em>Optimal and Suboptimal Algorithms for the Quadratic Assignment Problem</em>，Paul C. Gilmore</td>
+<td>二次指派問題（QAP，即離散 Gromov–Wasserstein 原型）的開創性演算法論文，給出 Gilmore–Lawler 下界，並說明問題的非凸組合性質。</td>
+<td>歷史源頭／組合原型</td>
+<td><a href="zotero://select/library/items/FZSBGHGM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1137/0110022" rel="noopener">原文連結</a> <code>📘 書目條目</code></td>
+</tr>
+<tr>
+<td>2001</td>
+<td><em>Some Optimal Inapproximability Results</em>，Johan Håstad</td>
+<td>獲 Gödel 獎的論文：用 3-Query PCP、長碼與有限群傅立葉分析，確立 MAX-E3-SAT (<span class="math inline">7/8</span>) 與 MAX-E3-LIN-2 (<span class="math inline">1/2</span>) 的緊不可近似極限。</td>
+<td>🏆 <strong>L5 已深讀</strong>／複雜度高階</td>
+<td><a href="zotero://select/library/items/N689ZC5T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://people.kth.se/~johanh/optimalinap.pdf" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><em>Computational Complexity: A Modern Approach</em>，Sanjeev Arora, Boaz Barak</td>
+<td>現代計算複雜度的標準教科書，系統涵蓋 <span class="math inline">\mathrm{P}</span> 對 <span class="math inline">\mathrm{NP}</span>、電路下界、去隨機化、<span class="math inline">\#\mathrm{P}</span>、互動式證明與 PCP 定理。</td>
+<td>體系教材／標準工具書</td>
+<td><a href="zotero://select/library/items/9DAP23BB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/CBO9780511804090" rel="noopener">原文連結</a> <code>📘 專著條目</code></td>
+</tr>
+<tr>
+<td>2011</td>
+<td><em>The Nature of Computation</em>，Cristopher Moore, Stephan Mertens</td>
+<td>把計算複雜度與統計物理、自旋玻璃相變、訊息傳遞及 MCMC 混合時間結合起來寫的跨學科專著，文筆生動。</td>
+<td>跨領域物理視角首選</td>
+<td><a href="zotero://select/library/items/JUVJJ8HI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/acprof:oso/9780199233212.001.0001" rel="noopener">原文連結</a> <code>📘 專著條目</code></td>
+</tr>
+<tr>
+<td>2014</td>
+<td><em>Combinatorics and Geometry of Transportation Polytopes: An Update</em>，Jesús A. De Loera, Edward D. Kim</td>
+<td>詳細分析雙邊與多邊際運輸多胞形的直徑、分數頂點的爆炸性增長、頂點計數 <span class="math inline">\#\mathrm{P}</span>-completeness 與多指標指派 <span class="math inline">\mathrm{NP}</span>-hardness。</td>
+<td>多胞形幾何核心</td>
+<td><a href="zotero://select/library/items/RBDBUPHX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1307.0124" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>P =? NP</em>，Scott Aaronson</td>
+<td>百頁的全景導覽：用直覺而幽默的筆法講解三大證明屏障、電路下界、GCT，以及熱力學／量子物理能否繞過 <span class="math inline">\mathrm{NP}</span>-completeness。</td>
+<td>零基礎全局鳥瞰首選</td>
+<td><a href="zotero://select/library/items/JI5MQ5UI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.scottaaronson.com/papers/pnp.pdf" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><em>Mathematics and Computation: A Theory Revolutionizing Technology and Science</em>，Avi Wigderson</td>
+<td>Abel 獎與圖靈獎得主的著作，有專章詳解 Sinkhorn 矩陣縮放、算子縮放、對稱空間測地凸最佳化與代數複雜度 <span class="math inline">\mathrm{VP}</span> 對 <span class="math inline">\mathrm{VNP}</span>。</td>
+<td>GCT 與縮放橋樑必讀</td>
+<td><a href="zotero://select/library/items/K6ITU7UF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://www.math.ias.edu/~avi/BOOK/book.pdf" rel="noopener">原文連結</a> <code>📘 官方開放專著</code></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>Graph Distortion Distances, Gromov-Hausdorff and the Hardness of Gromov-Wasserstein</em>，Jens Breitung, Timo Gervens, Julius Pörzgen</td>
+<td>直接建立圖最短路徑失真距離、Gromov–Hausdorff 與 Gromov–Wasserstein 對齊的精確計算複雜度與不可近似下界。</td>
+<td>🏆 <strong>L5 已深讀</strong>／OT 硬度核心</td>
+<td><a href="zotero://select/library/items/AJ2NRADH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.16926" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+<tr>
+<td>2026</td>
+<td><em>Wasserstein approximation of measures via orthogonal frames: statistical and computational complexities</em>，Mateo Díaz, Nicolás García Trillos, Daniel López-Castaño, Congwei Yang</td>
+<td>同時分析正交框架軸向 Wasserstein 測度逼近的統計樣本複雜度與計算複雜度，指出高維無監督基底選擇中統計與計算之間的張力。</td>
+<td>🏆 <strong>L5 已深讀</strong>／統計計算雙界</td>
+<td><a href="zotero://select/library/items/2PJWVPD7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.36581" rel="noopener">原文連結</a> <code>📄 OA PDF</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>Martial Agueh, Guillaume Carlier (2011)</strong>，<em>Barycenters in the Wasserstein Space</em> (<em>SIAM Journal on Mathematical Analysis</em>, Citations: 856) ｜ 建立多測度 Wasserstein 重心與多邊際最優傳輸的對偶等價性，是後續高維重心複雜度研究的數學起點。 <a href="zotero://select/library/items/MB33C9IP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1137/100805741" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Eliane Maria Loiola et al. (2005)</strong>，<em>A survey for the quadratic assignment problem</em> (<em>European Journal of Operational Research</em>, Citations: 771) ｜ 二次指派問題（QAP）最完整的綜述，涵蓋模型分類、複雜度下界、分支定界與啟發式鬆弛。 <a href="zotero://select/library/items/3EIB7G3W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ejor.2005.09.032" rel="noopener">原文連結</a> <code>📘 書目條目</code></li>
+<li><strong>Jean-David Benamou, Guillaume Carlier, Marco Cuturi, Luca Nenna (2015)</strong>，<em>Iterative Bregman Projections for Regularized Transportation Problems</em> (<em>SIAM J. Sci. Comput.</em>, Citations: 734) ｜ 用迭代 Bregman 投影避開多邊際與重心線性規劃的組合頂點爆炸，提供多項式時間的熵近似方案。 <a href="zotero://select/library/items/FM5TERBQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1412.5154" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Paul Vitanyi (2020)</strong>，<em>How incomputable is Kolmogorov complexity?</em> (<em>Entropy</em>, Citations: 33) ｜ 釐清比 <span class="math inline">\mathrm{NP}</span>-hard 更深一層的不可計算性邊界，以及近期近似估算路徑的理論漏洞，連到 <a class="wl" href="29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a>。 <a href="zotero://select/library/items/UB5FV9C4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.07674" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Alberto González-Sanz, Eustasio del Barrio, Marcel Nutz (2025)</strong>，<em>Sample Complexity of Quadratically Regularized Optimal Transport</em> (<em>arXiv</em>, Citations: 13) ｜ 分析稀疏二次正則化最優傳輸能否像熵正則化一樣避開高維統計的維度災難，並精確刻畫稀疏性與樣本複雜度的權衡。 <a href="zotero://select/library/items/WG577XMW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.09807" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Yifan Bai, Yantao Li, Jian Yu, Jingwei Liang (2026)</strong>，<em>Paper2Lean: Agentic Autoformalization of Mathematical Research Papers at Scale</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：提出端到端的多智能體論文形式化框架 <code>Paper2Lean</code>，靠全局依賴圖與專職智能體協作，把 20 篇數學最佳化論文全自動轉成零 <code>sorry</code>、可編譯通過的 Lean 4 專案。經人工語意審校後，釋出含 494 檔、110,910 行程式碼的 <code>OptPaper-20</code> 語料庫。</li>
+<li>連結：<a href="zotero://select/library/items/ZPQU4MUJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26272" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Roberta Raineri, Mengbin Ye, Lorenzo Zino (2026)</strong>，<em>Control of Complex Social Systems via Committed Minorities and Opinion Broadcast</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：在統一的賽局論行動與意見共演化模型下整理收斂性理論，針對植入堅定少數派與定向意見廣播這兩種複雜社會網路控制策略，建立嚴格的理論性能保證，並在由真實數據推論出的網路拓撲上驗證干預效果。</li>
+<li>連結：<a href="zotero://select/library/items/8BDI5CC3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26092" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-首期雙篇">2026-11-19 首期雙篇</h4>
+<ol>
+<li>
+<p><strong>Iman Seyedi, Antonio Candelieri, Enza Messina, Francesco Archetti (2026)</strong>，<em>Gromov–Wasserstein Meets Combinatorial Optimization: A Scalable Solver for the Capacitated Quadratic Assignment Problem</em> (<em>Mathematics</em>)</p>
+<ul>
+<li>問題與做法：帶容量限制的二次指派問題（CQAP）用經典精確求解器很快就會陷入組合爆炸。本文用熵正則化 Gromov–Wasserstein 連續鬆弛構造可擴展的近似求解器，顯示 OT 反過來用於 <span class="math inline">\mathrm{NP}</span>-hard 組合最佳化的實用潛力。</li>
+<li>連結：<a href="zotero://select/library/items/752XF9H3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.04089" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Guillaume Houry, Jean Feydy, François-Xavier Vialard (2026)</strong>，<em>Gromov-Wasserstein at Scale, Beyond Squared Norms</em> (<em>arXiv</em>)</p>
+<ul>
+<li>問題與做法：分析哪些幾何失真函數能讓原本非凸、高複雜度的 GW 點集配準精確退化為低複雜度的對齊子問題，在結構不變性與計算可擴展性之間找出一段易解的區間。</li>
+<li>連結：<a href="zotero://select/library/items/N8GHQW8B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.06658" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-年度其他追蹤清單">2026 年度其他追蹤清單</h4>
+<ul>
+<li><strong>Tao Wang, Ziv Goldfeld (2026)</strong>，<em>Neural Entropic Optimal Transport and Gromov–Wasserstein Alignment</em> (<em>IEEE Transactions on Information Theory</em>) ｜ 繞開 Sinkhorn <span class="math inline">O(n^2)</span> 的計算複雜度瓶頸，建立神經網路勢函數求解器，並給出它的統計與優化複雜度保證。 <a href="zotero://select/library/items/PSKH6TVT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.07397" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Alberto González-Sanz, Michel Groppe, Axel Munk (2026)</strong>，<em>Identifiability and exact reconstruction of the optimal transport cost on finite spaces</em> (<em>Discrete Applied Mathematics</em>) ｜ 從組合圖論與多胞形幾何的角度，刻畫有限空間上逆向最優傳輸成本重建的精確條件。 <a href="zotero://select/library/items/26UME2FG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.23146" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Daniel Mimouni et al. (2026)</strong>，<em>Scenario tree reduction via Wasserstein barycenters</em> (<em>Annals of Operations Research</em>) ｜ 用 Wasserstein 重心縮減多階段隨機規劃的情境樹規模，以控制指數級的決策複雜度。 <a href="zotero://select/library/items/TUDZIH8C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.14477" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+<li><strong>Chengsheng Zhang et al. (2026)</strong>，<em>ME-Mamba: Multi-Expert Mamba with efficient knowledge capture and fusion for multimodal survival analysis</em> (<em>Computerized Medical Imaging and Graphics</em>) ｜ 結合線性複雜度的狀態空間架構與多模態分佈對齊，降低跨模態融合的計算開銷。 <a href="zotero://select/library/items/IX2Z5D4U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.16900" rel="noopener">原文連結</a> <code>📄 OA PDF</code></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

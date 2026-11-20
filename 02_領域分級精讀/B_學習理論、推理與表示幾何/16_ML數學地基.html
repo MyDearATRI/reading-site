@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>16｜機器學習數學地基（統計泛化界、PAC-Bayes、凸與非凸最佳化、高維機率與計算複雜度） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a></nav></header>
+<main>
+<article>
+
+<h1 id="16機器學習數學地基統計泛化界pac-bayes凸與非凸最佳化高維機率與計算複雜度">16｜機器學習數學地基（統計泛化界、PAC-Bayes、凸與非凸最佳化、高維機率與計算複雜度）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 B：學習理論、推理與表示幾何</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> ｜ <a class="wl" href="06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域為所有學習系統劃出三條數學邊界：有限樣本下需要多少資訊才能保證結論不是自欺（泛化理論），有限梯度步數下能多快找到好解（最佳化理論），以及最壞情況下哪些問題不可能被高效算出（計算複雜度與高維譜幾何）。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+任何從資料中學習的演算法，都同時面對三個難題：
+<ol>
+<li><strong>統計誤差（樣本有限 <span class="math inline">n</span>）</strong>：只在 10,000 道考古題上考滿分，並不能保證明天正式上場時也考得好。</li>
+<li><strong>最佳化誤差（迭代步數有限 <span class="math inline">T</span>）</strong>：就算理想的答案確實存在於十億維的參數空間裡，只靠局部斜率（一階梯度）摸索著往下走，仍可能卡在鞍點，或者走得極慢。</li>
+<li><strong>計算複雜度限制（時間多項式有界）</strong>：有些組合最佳化問題在資訊論上答案完全唯一，但在 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span> 下，連找一個粗糙的近似解都要花上天文數字的時間。
+當現代深度神經網路的參數維度 <span class="math inline">D</span> 遠大於樣本數 <span class="math inline">n</span>（<span class="math inline">D \gg n</span>）時，經典靠數參數個數的泛化界會算出「錯誤率小於 <span class="math inline">1000\%</span>」這種沒有意義的結果（空洞界 Vacuous Bounds）。現代 ML 的數學基礎因此轉向演算法與分佈依賴的互資訊界、無維度非參數 PAC-Bayes、鏡像下降幾何，以及高維隨機矩陣譜分析。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像你在濃霧籠罩的連綿山脈中尋找最低的湖泊：
+<ul>
+<li>**計算複雜度（Arora–Barak / Håstad）**先畫出禁區地圖：如果山脈是惡意設計的迷宮，任何尋路法都注定失敗。</li>
+<li>**最佳化理論（Bubeck / Sun）**研究登山杖與步法：在光滑的碗狀山谷裡，帶著慣性衝刺（Nesterov 加速）已經是理論上最快的走法；在彎曲地形上，換一雙貼合地貌的鞋子（鏡像下降 Mirror Descent）比走直線快得多。</li>
+<li>**高維機率與隨機矩陣（Vershynin / Anderson et al.）**告訴你一件違反直覺的事：十萬維空間裡幾乎沒有局部深坑，絕大多數看似平坦的地方都是鞍點，某個方向還能往下滑。隨機噪音的特徵值則會排成標準半圓或 Marchenko–Pastur 分佈。一旦某個特徵值超出這個噪音邊界，那就是真正的知識訊號，甚至可以用來即時抓出大模型的幻覺。</li>
+<li>**現代統計學習（PAC-Bayes / 資訊泛化界）**最後檢查你的背包：只要最終找到的路徑沒有死背沿途每一顆碎石的精確座標（模型與訓練集之間的互資訊夠低），就算地圖再大張（參數再多），仍然保證能安全泛化。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+它是星系 B 乃至全庫的數學基礎。它和 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> 共用測度集中與自由機率工具，和 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> 及 <a class="wl" href="05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 共用緊不可近似定理，也為 <a class="wl" href="06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 解釋 SGD 的隱式正則化。在端側資源受限學習（On-Device ML，連到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>）與核物理等高精密科學實驗（Boehnlein et al., 2022）中，它提供嚴格的不確定性量化保證。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    SLT_CLASSIC[&quot;Vapnik (1999) VC 維與結構風險最小化 → Bartlett &amp; Mendelson (2001) 資料依賴 Rademacher 複雜度&quot;] --&gt; PACB[&quot;2026 無維度泛化革命：Dirichlet 過程非參數 PAC-Bayes、稀疏網路神諭不等式與 SGD 可預測虛擬雜訊互資訊界&quot;]
+    OPT[&quot;Bubeck (2014) 黑箱凸最佳化複雜度下界、Nesterov 加速與鏡像下降&quot;] --&gt; DL_OPT[&quot;Ruoyu Sun (2019) 深度學習非凸最佳化譜分析 &amp; Dhar et al. (2021) 端側受限學習理論&quot;]
+    HDP[&quot;Anderson, Guionnet &amp; Zeitouni (2009) 隨機矩陣理論 &amp; 高維測度集中 (2020)&quot;] --&gt; SPEC[&quot;Ettori (2026) 深度學習譜幾何：基於隨機矩陣特徵值結構的模型壓縮與即時幻覺偵測&quot;]
+    COMP[&quot;Håstad (2001) 緊不可近似定理 &amp; Arora &amp; Barak (2009) 現代計算複雜度&quot;] --&gt; GAP[&quot;統計—計算間隙 (Statistical-Computational Gap)：界定資訊可學性與多項式可算性的邊界&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>統計泛化理論的演進：從一致收斂到無維度 PAC-Bayes 與資訊論界</strong></p>
+<ul>
+<li>直覺理解：不能只看訓練集準確率，是因為如果一個假設空間靈活到連隨機擲硬幣貼上的標籤都能 100% 擬合（VC 維無窮大，或 Rademacher 複雜度過高），訓練零誤差就說明不了什麼。但經典 VC 維與傳統歐氏參數空間 PAC-Bayes 有個大問題：計算先驗與後驗分佈的 KL 散度時，數值會隨參數個數 <span class="math inline">D</span> 線性膨脹，面對百億參數的網路，界限就完全空洞。現代泛化理論有兩個進展。第一，資訊論泛化界直接衡量訓練完的模型洩漏了多少單一訓練樣本的死記資訊（互資訊 <span class="math inline">I(W; S)</span>）。第二，2026 年的新工作（Vashishtha, 2026）把 PAC-Bayes 先驗從內部歐氏參數空間 <span class="math inline">\Theta \subseteq \mathbb{R}^D</span> 移到非參數的資料分佈空間（Dirichlet 過程），不再依賴參數維度 <span class="math inline">D</span>。</li>
+<li>機制或核心表達式：Bartlett &amp; Mendelson（2001）用經驗 Rademacher 複雜度 <span class="math inline">\hat{\mathfrak{R}}_S(\mathcal{F}) = \mathbb{E}_\sigma \bigl[\sup_{f \in \mathcal{F}} \frac{1}{n}\sum_{i=1}^n \sigma_i f(x_i)\bigr]</span> 控制一致泛化誤差。在 PAC-Bayes 與資訊論框架下，對任意先驗 <span class="math inline">P</span>，後驗隨機化分類器 <span class="math inline">Q</span> 的真實風險受相對熵 <span class="math inline">D_{\mathrm{KL}}(Q \| P)</span> 控制：
+<div class="math inline">\mathbb{E}_{w \sim Q}[L(w)] \le \mathbb{E}_{w \sim Q}[\hat{L}_S(w)] + \sqrt{\frac{D_{\mathrm{KL}}(Q \| P) + \log(2\sqrt{n}/\delta)}{2n}}</div>
+針對真實的 SGD 軌跡，Partohaghighi（2026）引入依賴最佳化歷史的可預測虛擬高斯雜訊（Predictable Virtual Noise）。這種擾動只在數學證明裡注入，並與軌跡曲率適配，實際的 SGD 完全不變，互資訊卻因此嚴格可算。Futami &amp; Fujisawa（2026）則把超樣本條件互資訊（CMI）推廣到線上學習與強化學習等因果序列決策場景。</li>
+<li>能做到什麼，代價是什麼：不修改訓練演算法，就能為稀疏神經網路（Steffen &amp; Trabs, 2026）、重度過參數化網路與動態決策智能體給出非空洞（Non-vacuous）的泛化保證。代價是，要得到緊的界，往往得估計損失地景的局部曲率或條件互資訊的上界。</li>
+</ul>
+</li>
+<li>
+<p><strong>黑箱最佳化複雜度、鏡像下降與深度非凸訓練理論（Optimization Theory）</strong></p>
+<ul>
+<li>直覺理解：假設每次只能查詢某一點的函數值與梯度（黑箱一階神諭 First-Order Oracle），最少要幾步才能逼近最優解，是有明確答案的。Bubeck（2014）清楚整理了 Nemirovski 與 Nesterov 的定理：對光滑凸函數，普通梯度下降需要 <span class="math inline">O(1/\varepsilon)</span> 步，Nesterov 加速梯度法只需 <span class="math inline">O(1/\sqrt{\varepsilon})</span> 步，而且數學上已證明沒有任何一階演算法能超越這個速度下界。如果參數不在歐氏球裡，而在機率單純形上（例如注意力權重或策略分佈），把歐氏距離換成熵誘導的 Bregman 散度，就得到鏡像下降（Mirror Descent），維度懲罰從 <span class="math inline">\sqrt{D}</span> 降為 <span class="math inline">\sqrt{\log D}</span>。在深度神經網路的非凸情形（Ruoyu Sun, 2019），訓練能成功，靠的是用仔細設計的初始化與正規化壓住雅可比矩陣譜的爆炸／消失，並利用過參數化消除壞的局部極小值。</li>
+<li>機制或核心表達式：給定嚴格凸距離生成函數 <span class="math inline">\Phi</span> 誘導的 Bregman 散度 <span class="math inline">D_\Phi(x, y) = \Phi(x) - \Phi(y) - \langle \nabla\Phi(y), x - y \rangle</span>，鏡像下降在對偶空間更新梯度，再映射回原空間：
+<div class="math inline">x_{t+1} = \arg\min_{x \in \mathcal{X}} \left\{ \eta \langle g_t, x \rangle + D_\Phi(x, x_t) \right\}</div>
+這個變分形式同時涵蓋自然梯度法（Fisher-Rao 幾何）、乘性權重更新（MWU）與強化學習中的策略信賴域更新（TRPO/PPO）。</li>
+<li>能做到什麼，代價是什麼：演算法設計者可以依問題的光滑度、強凸性與約束幾何挑選理論最優的求解器，記憶體與算力嚴格受限的端側學習（Dhar et al., 2021）也靠這套理論支撐。代價是在大模型非各向同性的 Hessian 地形中（如 Transformer 塊對角曲率懸殊），經典的凸平滑假設不再全局成立，需要結合自適應預條件化（Adam / Muon）。</li>
+</ul>
+</li>
+<li>
+<p><strong>高維機率測度集中與隨機矩陣譜幾何（High-Dimensional Probability &amp; RMT）</strong></p>
+<ul>
+<li>直覺理解：人在三維空間養成的幾何直覺，到了高維空間幾乎全錯。一顆一萬維柳丁的果肉體積幾乎 100% 貼在最外層的薄果皮上（測度集中 Concentration of Measure）。隨便挑兩個高維向量，幾乎必定互相垂直。把高維點集隨機投影到對數級的低維子空間 <span class="math inline">m \gtrsim d(T)</span>，點集形狀幾乎不變。隨機矩陣理論（Anderson, Guionnet &amp; Zeitouni, 2009）還給出另一個結果：一個填滿獨立隨機雜訊的大矩陣，奇異值平方（特徵值）的分佈會精確收斂到決定性的 Marchenko–Pastur 定律，一點也不雜亂。所以只要看深度網路隱藏層激活協方差的特徵值譜，就能把純隨機雜訊主體（Bulk）和真正學到的結構尖峰（Spikes）分開。</li>
+<li>機制或核心表達式：對元素獨立同分佈（均值 0、變異 <span class="math inline">\sigma^2</span>）的隨機矩陣 <span class="math inline">X \in \mathbb{R}^{p \times n}</span>，當 <span class="math inline">p, n \to \infty</span> 且長寬比 <span class="math inline">p/n \to \gamma \in (0, 1]</span> 時，樣本協方差矩陣 <span class="math inline">\frac{1}{n}X X^\top</span> 的經驗譜分佈收斂到 Marchenko–Pastur 密度，支撐邊界為：
+<div class="math inline">\lambda_{\pm} = \sigma^2 (1 \pm \sqrt{\gamma})^2</div>
+2026 年的研究 <em>Spectral Geometry for Deep Learning</em>（Ettori, 2026）用這個結果提出 <code>EigenTrack</code>：即時監測大語言模型與視覺語言模型隱藏層激活的譜特徵偏離度，不需要外部知識庫，就能在推論當下偵測幻覺（Hallucination）與分佈外（OOD）行為，並指導無損低秩壓縮。</li>
+<li>能做到什麼，代價是什麼：把看似混沌的高維大數轉成精確的確定性譜定律（連到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a>）。代價是深度網路訓練後期常出現超出高斯獨立假設的重尾冪律譜（Heavy-Tailed Self-Regularization），需要引入自由機率（Free Probability）與非漸近界進一步刻畫。</li>
+</ul>
+</li>
+<li>
+<p><strong>計算複雜度與統計計算間隙（Computational Complexity &amp; Inapproximability）</strong></p>
+<ul>
+<li>直覺理解：設計任何機器學習目標函數之前，都該先記得 Arora &amp; Barak（2009）與 Håstad（2001）的提醒。統計上樣本已經足夠把真解唯一確定，和存在多項式時間演算法能把那個解找出來，是兩回事，兩者之間常有很大的落差（Statistical-Computational Gap）。許多看似簡單的經驗風險最小化（如在含雜訊資料上訓練單層半空間 0-1 損失、稀疏 PCA 或三元線性約束最大化），一旦允許對抗性雜訊，根據 Håstad 的緊不可近似定理，連找一個略優於隨機瞎猜的近似解都是 NP-Hard。</li>
+<li>機制或核心表達式：以三元布林線性方程組 MAX-E3-LIN-2 為例，即使系統存在能滿足 <span class="math inline">(1 - \varepsilon)</span> 比例方程的近似一致解，只要 <span class="math inline">\mathrm{P} \neq \mathrm{NP}</span>，任何多項式時間演算法都無法保證找到滿足超過 <span class="math inline">(1/2 + \varepsilon)</span> 比例的解（Håstad, 2001）。機器學習在方法論上因此有兩種應對。一是用凸代理損失（Convex Surrogates，如交叉熵、Hinge Loss）鬆弛離散的 0-1 損失。二是利用過參數化升維，把低維空間中崎嶇難解的組合約束，展開成高維連續流形上的平滑插值問題。</li>
+<li>能做到什麼，代價是什麼：研究者不必浪費數年時間，去為不可近似的目標函數找全局收斂保證。代價是最壞情況（Worst-Case）分析往往過於悲觀。現代學習理論最想得到的，是一套針對自然現實資料分佈的平均情況（Average-Case）複雜度理論。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>如何消除百億參數大模型的空洞泛化界（Vacuous Bounds）且不依賴重抽樣</strong>：基於資料空間 Dirichlet 過程的非參數 PAC-Bayes（Vashishtha, 2026）與可預測虛擬雜訊互資訊界（Partohaghighi, 2026），理論上已經擺脫對歐氏參數維度 <span class="math inline">D</span> 的直接依賴。但大模型預訓練是單遍串流（Single-Pass Streaming），資料又有很強的自回歸依賴（非 i.i.d.，如 Wu et al., 2026 探討的分佈驅動隨機函數學習）。在這種條件下，怎麼把理論上界收緊到能直接預測擴展律（Scaling Laws）指數的定量精度，仍未解決。</li>
+<li><strong>譜幾何壓縮與長尾罕見知識保留之間的張力</strong>：用隨機矩陣理論切掉 Marchenko–Pastur 雜訊主體內的奇異值（Ettori, 2026），能大幅壓縮模型並穩定日常推理。但從 <a class="wl" href="06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的疊加態理論來看，許多很罕見卻關鍵的長尾事實，可能正以微弱的能量分散編碼在看似接近雜訊底層的次要譜空間裡。怎麼在濾除幻覺雜訊的同時不誤傷長尾記憶，這個問題正推動譜幾何與稀疏字典學習合流。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>用隱藏層隨機矩陣譜（EigenTrack）做零成本的即時幻覺偵測</strong>：在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 中，傳統幻覺偵測常要讓大模型自己再抽樣回答五次來比對一致性，算力變成五倍。借用 Ettori（2026）的隨機矩陣譜幾何，只要在單次前向傳播時提取隱藏層激活協方差的譜熵與邊界異常指標，就能以幾乎零額外延遲，識別模型何時正在脫離知識流形、開始編造。</li>
+<li><strong>科學實驗閉環中的不確定性與物理約束融合</strong>：Boehnlein et al.（2022，<em>Reviews of Modern Physics</em> 核物理機器學習綜述）說明，ML 進入加速器控制與核理論反演時，統計學習的風險界與高維貝氏不確定性如何與嚴格的物理對稱性結合（連到 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>），成為整條實驗物理數據採集管線的可靠基礎。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1999</td>
+<td><strong>An overview of statistical learning theory</strong>，Vladimir N. Vapnik</td>
+<td>統計學習理論的創立者親自總結經驗風險最小化一致性、VC 維、結構風險最小化與最大邊界思想（6447 引）。</td>
+<td><code>G1/G2 歷史基石</code></td>
+<td><a href="zotero://select/library/items/9SPGE924" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/72.788640" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2001</td>
+<td><strong>Rademacher and Gaussian Complexities: Risk Bounds and Structural Results</strong>，Peter L. Bartlett, Shahar Mendelson</td>
+<td>泛化界從脫離資料的最壞 VC 計數轉向依賴資料分佈的轉折點，奠定現代核方法與神經網路的組合風險界（2054 引）。</td>
+<td><code>G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/58QNASNA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/3-540-44581-1_15" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2001</td>
+<td><strong>Some Optimal Inapproximability Results</strong>，Johan Håstad</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：證明多數基礎約束最佳化問題，連超越隨機猜測常數比的近似都是 NP-Hard，劃定學習可算性的硬邊界。</td>
+<td><code>G3 理論深潛</code></td>
+<td><a href="zotero://select/library/items/N689ZC5T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://people.kth.se/~johanh/optimalinap.pdf" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><strong>An Introduction to Random Matrices</strong>，Greg W. Anderson, Alice Guionnet, Ofer Zeitouni</td>
+<td>隨機矩陣理論的標準參考書：系統講解 Wigner 半圓律、Marchenko–Pastur 定律、大偏差原理與自由機率論（1317 引）。</td>
+<td><code>G2/G3 譜幾何經典</code></td>
+<td><a href="zotero://select/library/items/P3CZHES3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/CBO9780511801334" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><strong>Computational Complexity: A Modern Approach</strong>，Sanjeev Arora, Boaz Barak</td>
+<td>現代計算複雜度的標準教材：完整串聯對角化、電路下界、去隨機化、互動式證明、#P 與 PCP 定理。</td>
+<td><code>G2 體系教材</code></td>
+<td><a href="zotero://select/library/items/9DAP23BB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/CBO9780511804090" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2014</td>
+<td><strong>Convex Optimization: Algorithms and Complexity</strong>，Sébastien Bubeck</td>
+<td>很精煉的凸最佳化複雜度專著：用百餘頁篇幅講完黑箱下界、切割平面、加速梯度、鏡像下降與隨機近似（1242 引）。</td>
+<td><code>G1/G2 最佳化首選</code></td>
+<td><a href="zotero://select/library/items/IV2GZ3ZH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1405.4980" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>Optimization for deep learning: theory and algorithms</strong>，Ruoyu Sun</td>
+<td>專講深度網路為什麼能訓練成功：拆解梯度譜穩定、初始化／正規化、自適應梯度與過參數化損失地景（250 引）。</td>
+<td><code>G2 深度最佳化必讀</code></td>
+<td><a href="zotero://select/library/items/RPTAHURI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.08957" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（7 篇高維機率、端側學習理論、核物理應用與稀疏網路神諭界）</summary>
+<p></p>
+<ul>
+<li><strong>2020｜High-Dimensional Probability: An Introduction with Applications in Data Science</strong>，Omiros Papaspiliopoulos（Vershynin 高維機率一書的導讀：直觀說明隨機投影保距閾值 <span class="math inline">m \gtrsim d(T)</span> 與高斯寬度幾何，52 引）｜<a href="zotero://select/library/items/UJTD5X6G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1080/14697688.2020.1813475" rel="noopener">DOI</a></li>
+<li><strong>2020｜Mathematical foundation of data science</strong>，Xiaowei Fang（結構化的研讀講義，圍繞高維機率的三大支柱：集中不等式、隨機過程確界與資料科學應用）｜<a href="zotero://select/library/items/Z8PAQ6RU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.17964976" rel="noopener">DOI</a></li>
+<li><strong>2021｜A Survey of On-Device Machine Learning: An Algorithms and Learning Theory Perspective</strong>，Sauptik Dhar et al.（從演算法與學習理論的角度，系統分析記憶體／能耗受限下端側設備上訓練與泛化的權衡，217 引）｜<a href="zotero://select/library/items/2ENWZRW4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1911.00623" rel="noopener">原文</a></li>
+<li><strong>2022｜Colloquium : Machine learning in nuclear physics</strong>，A. Boehnlein et al.（<em>Reviews of Modern Physics</em> 綜述：說明統計學習與高維相關性分析如何改變核理論、探測器設計與加速器控制，287 引）｜<a href="zotero://select/library/items/WZKS9QGH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.02309" rel="noopener">原文</a></li>
+<li><strong>2023｜Understanding of Machine Learning with Deep Learning: Architectures, Workflow, Applications and Future Directions</strong>，Mohammad Mustafa Taye（寫給跨學科讀者的機器學習與深度學習架構及工作流全景導覽，1065 引）｜<a href="zotero://select/library/items/4R7CGPBB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/computers12050091" rel="noopener">DOI</a></li>
+<li><strong>2026｜A PAC-Bayes Oracle Inequality for Sparse Neural Networks</strong>，Maximilian F. Steffen, Mathias Trabs（為稀疏神經網路建立嚴格的 PAC-Bayes 神諭不等式，證明稀疏結構如何自適應逼近未知光滑度函數）｜<a href="zotero://select/library/items/8EE3IX4N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-032-01279-1_7" rel="noopener">DOI</a></li>
+<li><strong>2026｜Stochastic Functions Learning from Distribution-Driven Data: Generalization Bound and Algorithms</strong>，Jia Wu, Xian-Tao Xiao, Li-Wei Zhang（針對分佈依賴動態資料下的隨機函數學習問題，給出嚴格的泛化誤差上界與求解演算法）｜<a href="zotero://select/library/items/992K7HMM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s40305-024-00563-y" rel="noopener">DOI</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Simple Private Noisy SGD is Minimax-Optimal under Population Strong Convexity</strong>，Valentin Roth, Marco Avella Medina：嚴格證明最簡單的單次遍歷差分隱私雜訊 SGD（固定步長排程＋常數批次），在母體強凸光滑損失與 Rényi DP 下，同時具備期望與高機率兩種意義的極小極大最優性。本文也首次為隱私邏輯斯迴歸建立消去多項式對數冗餘因子的精確最優收斂率。（<a href="zotero://select/library/items/CWGK4ICU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26515" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Extending Rademacher Complexity-Based Generalization Theory to Domain Generalization</strong>，Xi Wang et al.：把領域泛化（DG）的領域空間形式化為表徵空間上的無窮維 Wasserstein 空間，借助 <span class="math inline">\mathrm{CD}(K,\infty)</span> Ricci 曲率維數理論推導出幾何相依的 Rademacher 泛化誤差上界。這個界嚴格拆開樣本層級與分佈層級的泛化，並指出泛化由表徵不變性與空間曲率共同決定。（<a href="zotero://select/library/items/8E22J37Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25650" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦dro-重構深度學習局部-auc-及其非凸收斂理論">2026-11-19（08:00 增量）最新入庫（聚焦：DRO 重構深度學習局部 AUC 及其非凸收斂理論）</h4>
+<ul>
+<li><strong>2022｜When AUC meets DRO: Optimizing Partial AUC for Deep Learning with Non-Convex Convergence Guarantee</strong>，Dixian Zhu, Gang Li, Bokun Wang, Xiaodong Wu, Tianbao Yang
+<ul>
+<li>重點：針對單向與雙向局部 AUC（pAUC）最大化問題，用分佈魯棒最佳化（DRO）為個別正樣本建構代理損失。文中推導出兩種估計器：基於 CVaR 的非光滑精確 pAUC 估計器，以及基於 KL 散度正則化 DRO 的光滑軟性估計器。據此為深度學習提出兩套梯度演算法，並嚴格證明其非凸收斂保證。</li>
+<li>連結：<a href="zotero://select/library/items/9FV8ABG6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.00176" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦無維度-dirichlet-過程-pac-bayes-泛化與隨機矩陣幻覺偵測">2026-11-19 最新入庫（聚焦：無維度 Dirichlet 過程 PAC-Bayes 泛化與隨機矩陣幻覺偵測）</h4>
+<ul>
+<li><strong>2026｜Dimension-Free PAC-Bayes Generalization for Deep Neural Networks via Dirichlet Processes</strong>，Sumit Vashishtha
+<ul>
+<li>重點：過參數化深度網路（<span class="math inline">D \gg n</span>）會讓傳統歐氏參數空間的 PAC-Bayes 泛化界達到 <span class="math inline">&gt;1000\%</span>，完全空洞，這個問題長期沒有解決。本文把先驗分佈從內部參數空間移到資料分佈的非參數空間（Dirichlet 過程），嚴格推導出完全不依賴網路參數維度 <span class="math inline">D</span> 的緊密泛化界。</li>
+<li>連結：<a href="zotero://select/library/items/25DWZ7ZU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.21340" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜Spectral Geometry for Deep Learning: Compression and Hallucination Detection via Random Matrix Theory</strong>，Davide Ettori
+<ul>
+<li>重點：用隨機矩陣理論與譜幾何，同時處理大模型的幻覺不可靠與算力成本高兩個問題。即時分析隱藏層激活的特徵值譜結構（<code>EigenTrack</code>），不需要外部重抽樣就能即時捕捉語言與視覺語言模型的幻覺與 OOD 偏移，並指導高壓縮率的結構化剪枝。</li>
+<li>連結：<a href="zotero://select/library/items/DUFNP2KT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.17357" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-資訊論泛化界向序列決策與真實-sgd-軌跡的推進">同批延伸選讀（2026 資訊論泛化界向序列決策與真實 SGD 軌跡的推進）</h4>
+<ul>
+<li><strong>2026｜Information-Theoretic Generalization Bounds for Sequential Decision Making</strong>，Futoshi Futami, Masahiro Fujisawa（傳統超樣本條件互資訊 CMI 只適用於靜態批次 i.i.d. 資料，本文首次把它推廣到線上學習、主動串流與賭博機等因果自適應序列決策）｜<a href="zotero://select/library/items/JSPZBB6V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.12190" rel="noopener">原文</a></li>
+<li><strong>2026｜Information-Theoretic Generalization Bounds for Stochastic Gradient Descent with Predictable Virtual Noise</strong>，Mohammad Partohaghighi（只在證明層面引入依賴最佳化歷史軌跡的可預測虛擬高斯雜訊，不改動真實的 SGD 演算法，就大幅收緊互資訊泛化上界）｜<a href="zotero://select/library/items/HI9H2I5X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.00064" rel="noopener">原文</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

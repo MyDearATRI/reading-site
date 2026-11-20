@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>18｜RL與多模態（策略梯度與離線強化學習、統一視覺語言模型、世界模型與具身 VLA） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="18rl與多模態策略梯度與離線強化學習統一視覺語言模型世界模型與具身-vla">18｜RL與多模態（策略梯度與離線強化學習、統一視覺語言模型、世界模型與具身 VLA）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>這個領域把看懂物理世界（多模態感知）和在世界中行動並承擔後果（序貫強化學習）合成一個閉環智能體。感知這一邊，把影像、壓縮視訊流與自然語言對齊成統一的自迴歸詞元。決策這一邊，用廣義優勢估計（GAE）、自我博弈搜尋與離線保守強化學習壓住高變異梯度與分布偏移。兩邊合起來，目標是能直接操控實體機器人的視覺語言動作模型（VLA）與物理世界模型。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+純文字大模型就算讀遍人類的圖書館，仍然像缸中之腦：看不見真實三維空間裡連續的幾何變化，也沒有手去推動現實、承受物理反作用力。要把感知、語言與行動合在一起，得同時處理兩個根本矛盾：
+<ol>
+<li><strong>模態異質，以及理解與生成的表徵分裂</strong>：自然語言是高度抽象、離散的人造符號，相機畫面與視訊流則是空間冗餘很高、連續變動的低階像素訊號。更麻煩的是，高層語意理解要忽略光影雜訊、只抓概念，精細的像素生成／模擬卻要保留每一處邊緣紋理，兩者要視覺編碼器保留的資訊正好相反。</li>
+<li><strong>非平穩互動的代價與反事實高估（Distributional Shift）</strong>：序貫決策中，策略稍微一變，智能體就會走進從沒見過的狀態空間。線上試錯（On-Policy RL）動輒需要數百萬次環境互動，放在真實機器人或臨床手術上既昂貴又可能致命。但如果只看歷史靜態紀錄來學（Offline RL），價值網路又會對歷史資料沒覆蓋到的陌生動作過度樂觀，也就是反事實高估，策略一上線就崩潰。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像訓練一位微創手術機器人的主刀醫師：
+<ul>
+<li>多模態視覺語言基座（BEiT-3 / AIMv2 / LLaVA-OneVision-2）是他的視覺皮質與醫學語言中樞。它把單張病灶特寫、多角度對照圖和長達數小時的內視鏡壓縮視訊流，都翻譯成大腦聽得懂的外語詞元。畫面靜止時省著看，器械快速切割時自動加密採樣。</li>
+<li>世界模型與離線強化學習（World Models &amp; Offline RL）是他上刀前在腦內做的百萬次沙盤模擬。不必傷到任何真實病患，就能從過往名醫的手術錄影裡提煉最優決策。遇到歷史數據沒見過的冒險動作，它會自動保守煞車。</li>
+<li>具身 VLA 與策略梯度最佳化（GAE / AlphaZero / OpenVLA）是他手眼協調的運動神經。它把眼前的畫面與主治指令直接解碼成機械臂七自由度的細微動作，並用 GAE 平滑調整短期回饋與長遠成敗的權重，逐步練出零失誤的刀法。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+本領域收錄 58 篇文獻，是靜態符號智能走向物理具身智能的中間環節。它的策略梯度與自我博弈方法直接支撐 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>（AlphaGeometry、DeepSeek-R1 長思維鏈 RL）與 <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a>（對齊微調與受約束策略最佳化）。跨模態潛空間對齊和 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>（柏拉圖表示假說、Vision-of-Thought）互為表裡。預測未來觀測的世界模型與主動探索，則接到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> 的主動推論（Active Inference）與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 的腦皮質預測編碼理論。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    PG_BASE[&quot;Schulman et al. (2015) GAE 廣義優勢估計 &amp; Silver et al. (2017) AlphaZero 零人類知識自我博弈&quot;] --&gt; OFFLINE[&quot;Levine et al. (2020) Offline RL 離線強化學習：馴服分布偏移與反事實外推誤差&quot;]
+    VL_EARLY[&quot;Burns et al. (2019) 視覺語言特徵 → Wang et al. (2023) BEiT-3『影像即外語』與 Zhang et al. (2024) VLM 全景&quot;] --&gt; AR_VIS[&quot;Li et al. (2024) LLaVA-OneVision 單圖／多圖／影片遷移 &amp; Fini et al. (2025) AIMv2 多模態自迴歸視覺預訓練&quot;]
+    OFFLINE --&gt; VLA_BRIDGE[&quot;Cao et al. (2024) LLM 增強強化學習 &amp; Kim et al. (2024) OpenVLA 開源視覺—語言—動作具身基座&quot;]
+    AR_VIS --&gt; VLA_BRIDGE
+    VLA_BRIDGE --&gt; FRONT26[&quot;2026 統一感知與稀缺資料突破：LLaVA-OV-2 位元流詞元化、InternVL-U 解耦統一模型、手術世界模型與少樣本 LLM-RL&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>低變異策略梯度、自我博弈搜尋與稀缺資料強化學習（GAE, AlphaZero &amp; Data-Scarce LLM-RL）</strong></p>
+<ul>
+<li>直覺理解：強化學習最麻煩的地方是獎勵來得太晚、訊號雜訊太大。一盤棋下了一百手才分勝負，很難說第 37 手是妙手還是敗著。等整局結束再算總帳（蒙地卡羅回報），變異數大到梯度亂跳。只看下一步的價值估計（單步 TD），又會被價值網路初期的不準確嚴重誤導。Schulman et al.（2015）提出的廣義優勢估計（GAE）用一個指數衰減權重 <span class="math inline">\lambda</span> 在這兩端之間連續調節，至今仍是 PPO 等現代大模型後訓練演算法的標準配備。AlphaZero（Silver et al., 2017）則證明，不用人類千年累積的棋譜與手工評估函數，只靠策略與價值雙頭網路加蒙地卡羅樹搜尋（MCTS）自我對弈，就能從零學出超越人類的全局規劃能力。</li>
+<li>機制或核心表達式：定義單步時間差分殘差 <span class="math inline">\delta_t^V = r_t + \gamma V(s_{t+1}) - V(s_t)</span>，GAE 把優勢函數寫成多步殘差的指數加權和：
+<div class="math inline">\hat{A}_t^{\mathrm{GAE}(\gamma, \lambda)} = \sum_{l=0}^{\infty} (\gamma \lambda)^l \, \delta_{t+l}^V</div>
+其中 <span class="math inline">\lambda = 0</span> 退化為低變異、有偏的單步估計，<span class="math inline">\lambda = 1</span> 還原為無偏、高變異的蒙地卡羅估計。到了 2026 年，大模型強化學習面臨兩個瓶頸：高品質的外部監督稀缺，模型自生成的軌跡又趨於同質。Yu et al.（2026）針對這兩點，系統整理了資料高效能 LLM-RL 的合成課程、經驗重放與內在獎勵機制。Cao et al.（2024）則為用預訓練常識輔助傳統 RL 的規劃、獎勵塑形與樣本效率提升，建立了完整的分類體系。</li>
+<li>能做到什麼，代價是什麼：高維連續控制（雙足行走、機械臂靈巧操作）與長視距組合搜尋因此能穩定收斂。代價是標準的線上策略梯度對超參數與價值網路暖機很敏感，而且在沒有精確模擬器的真實世界，承受不了大量的在線試錯。</li>
+</ul>
+</li>
+<li>
+<p><strong>離線強化學習與保守反事實推論（Offline RL &amp; Out-of-Distribution Control）</strong></p>
+<ul>
+<li>直覺理解：大語言模型靠讀靜態語料訓練。這裡問的是，智能體能不能也只讀過去收集好的歷史互動紀錄（例如醫院十年的用藥紀錄、自動駕駛車隊百萬公里的行車日誌、工廠老師傅的操作軌跡），一次都不必在真實環境冒險試錯，就拼出比歷史上任何單一示範者都強的策略。Levine et al.（2020）為離線強化學習（Offline RL）建立了理論框架，也指出它最主要的弱點：標準 Bellman 最優化算子帶有 <span class="math inline">\max_{a'}</span> 操作，只要價值網路對某個歷史資料沒見過的分布外動作（OOD Action）有一點正誤差，最大化算子就會選中這個錯誤峰值，並在反向傳播中一路放大，造成嚴重的反事實高估。</li>
+<li>機制或核心表達式：給定由未知行為策略 <span class="math inline">\pi_\beta</span> 收集的固定資料集 <span class="math inline">\mathcal{D} = \{(s_i, a_i, s'_i, r_i)\}_{i=1}^N</span>，離線 RL 用兩種對偶的思路抑制外推誤差。(1) 策略約束法：限制學習策略 <span class="math inline">\pi</span> 不能離行為支撐集太遠，也就是在最大化期望回報時加入散度約束 <span class="math inline">D_{\mathrm{KL}}\big(\pi(\cdot \mid s) \,\|\, \pi_\beta(\cdot \mid s)\big) \le \epsilon</span>。(2) 保守價值懲罰法：主動壓低分布外動作的 <span class="math inline">Q</span> 值上界（悲觀原則 Pessimism under Uncertainty）：
+<div class="math inline">\min_Q \; \alpha \, \mathbb{E}_{s \sim \mathcal{D}} \!\left[ \log \sum_a \exp Q(s,a) - \mathbb{E}_{a \sim \pi_\beta(\cdot|s)}[Q(s,a)] \right] + \frac{1}{2}\mathcal{L}_{\mathrm{Bellman}}(Q; \mathcal{D})</div></li>
+<li>能做到什麼，代價是什麼：工業、醫療與機器人領域閒置的歷史數據庫，因此可以變成安全的決策引擎，從次優的歷史軌跡中縫合（Stitching）出最優路徑。代價是保守約束太強時，會退化成單純的行為克隆（Behavior Cloning），失去超越歷史數據平均水準的空間。</li>
+</ul>
+</li>
+<li>
+<p><strong>原生多模態自迴歸、動態位元流詞元化與理解生成解耦（BEiT-3, AIMv2, LLaVA-OV-2 &amp; InternVL-U）</strong></p>
+<ul>
+<li>直覺理解：這裡的問題是怎麼讓視覺與語言說同一種語言。早期方法靠雙塔對比學習（如 CLIP）或複雜的跨模態融合頭。BEiT-3（Wang et al., 2023）提出把影像當作一門外語（Image as a Foreign Language），用統一的遮罩式完形填空同時預訓練單模態與跨模態表徵。AIMv2（Fini et al., 2025）進一步證明，直接用多模態自迴歸目標（同時預測下一個影像區塊像素與下一個文字 Token），就能訓練出可擴展性很好、表現頂尖的視覺編碼器。2026 年又有兩項進展。LLaVA-OneVision-2（An et al., 2026）首創編解碼位元流詞元化（Codec-Stream Tokenization），把壓縮影片看成連續的位元成本流，畫面劇烈變化時多給 Token，靜態冗餘時大幅壓縮。InternVL-U（Tian et al., 2026）則在只有 4B 的輕量規模下，把語意理解與視覺生成的表徵解耦，再共用一個統一的上下文主幹，同時具備理解、推理、生圖與修圖四種能力。</li>
+<li>機制或核心表達式：在多模態自迴歸預訓練（如 <em>AIMv2</em>）中，輸入序列交錯排列影像區塊 <span class="math inline">\{v_1, \dots, v_M\}</span> 與文本詞元 <span class="math inline">\{w_1, \dots, w_L\}</span>，最大化聯合因果似然：
+<div class="math inline">\mathcal{L}_{\mathrm{MM-AR}}(\theta) = \sum_{m=1}^M \log p_\theta(v_m \mid v_{&lt;m}) + \sum_{\ell=1}^L \log p_\theta(w_\ell \mid v_{\le M}, w_{&lt;\ell})</div>
+處理長視訊時，<em>LLaVA-OV-2</em> 依視訊壓縮位元率的動態 <span class="math inline">\Delta b(t)</span>，自適應調整局部視窗注意力與時間軸上的詞元分配密度 <span class="math inline">\rho(t) \propto g(\Delta b(t))</span>，同時顧到原生高解析度的局部細節與超長視訊的全局上下文。這和 Shinde et al., 2025 綜述的邊緣高效 VLM 剪枝量化路線方向一致。</li>
+<li>能做到什麼，代價是什麼：單一模型就能在單圖、多圖比較、長影片時序理解與圖像編輯之間直接切換（<em>LLaVA-OneVision</em> 系列）。代價是原生高解析度的視覺 Token 數量很容易讓二次方注意力的顯存爆掉，需要 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的分塊預填充與 KV 壓縮配合。</li>
+</ul>
+</li>
+<li>
+<p><strong>視覺語言動作具身策略與生成式世界模型（OpenVLA &amp; Surgical World Models）</strong></p>
+<ul>
+<li>直覺理解：VLM 已經看懂桌面上的杯子，也聽懂「把紅色馬克杯放進瀝水架」之後，離真正動手只差一步：把動作也變成語言模型詞彙表裡的特殊單字。OpenVLA（Kim et al., 2024）融合兩個視覺編碼器，DINOv2 擅長空間幾何細節，SigLIP 擅長細粒度語意對齊，並在 97 萬條真實的跨機器人示範軌跡上預訓練。它證明開源的 7B VLA 模型能跨本體泛化、控制多種機械臂，也能靠參數高效微調（LoRA）與量化在消費級 GPU 上即時運行。另一方面，在真實互動數據非常有限的高風險臨床場域（如微創外科手術），Huang et al.（2026）描述了從擴散模型走向手術影片世界模型（Surgical World Models）的轉變：讓生成模型學會在給定當前內視鏡畫面與手術器械動作時，預測組織形變與出血反應的未來影格，直接當作機器人策略學習的合成物理訓練場。</li>
+<li>機制或核心表達式：<em>OpenVLA</em> 把連續的機械臂動作空間 <span class="math inline">\mathbf{a}_t = (\Delta x, \Delta y, \Delta z, \Delta \phi, \Delta \theta, \Delta \psi, g_{\text{gripper}}) \in \mathbb{R}^7</span> 按各維度的分位數離散化成 256 個區間（Bins），對應到語言模型詞表最末的 256 個動作詞元，直接用自迴歸交叉熵學習具身控制策略：
+<div class="math inline">\pi_\theta(\mathbf{a}_t \mid I_t, \ell_{\text{task}}) = \prod_{d=1}^{7} p_\theta\!\left(\mathrm{bin}(a_{t,d}) \,\Big|\, \phi_{\text{DINOv2}}(I_t),\, \phi_{\text{SigLIP}}(I_t),\, \ell_{\text{task}},\, \mathrm{bin}(\mathbf{a}_{t,&lt;d})\right)</div></li>
+<li>能做到什麼，代價是什麼：網際網路級別的物理常識與開放詞彙指代能力，因此可以直接注入低階的感測運動迴路，不必為每個新物件從頭訓練控制器。代價有兩個。自迴歸逐維生成動作 Token，推論頻率（約數十 Hz）低於高動態全身運動控制的需求，常需搭配連續的 Flow Matching 動作頭。現有的視覺世界模型在長時程推演（Rollout）下，也還會累積物理不自洽的漂移。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>統一多模態架構中語意壓縮（Understanding）與高頻保真（Generation）的內在衝突</strong>：<em>InternVL-U</em>（Tian et al., 2026）與最新的《Large Vision-Language Models》專書（2026）都分析過這一點。判別式推理希望把一隻貓的大量像素摺疊成不隨光線改變的不變量概念，生成與像素級編輯卻要求精確記住每一根鬍鬚的空間相位。完全共用單一離散視覺詞元化器，往往兩邊都受損。怎麼在模組化解耦視覺雙通路的同時，維持跨模態深層因果推理的一致性，仍是架構設計上競爭最激烈的問題。</li>
+<li><strong>資料驅動垂直微調的標註瓶頸，與世界模型視覺逼真但物理失真的問題</strong>：不論是衛星遙測的多光譜大幅面影像（Zhou et al., 2026）、醫療手術機器人（Huang et al., 2026），還是大模型強化學習後訓練（Yu et al., 2026），通用基礎模型一進入專業科學領域，就遇到高品質互動／推理數據嚴重不足。用擴散世界模型合成訓練環境可以緩解數據不足。但如果模型只學到像素的統計相關，沒有內化剛體／軟組織的力學守恆律，策略網路很容易在模擬器裡學會利用物理漏洞穿模得分（Simulator Exploitation），回到真實物理世界就失效。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>用視訊編解碼器（Codec）的位元成本流引導神經運算資源分配</strong>：<em>LLaVA-OneVision-2</em>（An et al., 2026）不把影片當成等距的圖片陣列，而是直接讀取壓縮編碼流的位元率變化。資訊熵暴增的地方（場景切換、高速運動）密集投放視覺 Token，靜止不變的地方大幅壓縮。這種用底層無損／有損壓縮殘差來分配深度網路注意力預算的做法，可以搬到 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 的非均勻時間步長控制、地震波／腦電長時程監測，以及 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> 的自適應表徵學習。</li>
+<li><strong>離線強化學習對未知保持悲觀（Pessimism under Uncertainty）的原則在其他領域的用處</strong>：線上探索強調對不確定性保持樂觀（UCB），鼓勵冒險收集新資訊。但當無法再做實驗、只能根據既有歷史數據做高風險決策時（如臨床精準醫療方案推薦、金融極端壓力下的資產配置、工業製程參數最佳化），Offline RL 的保守價值下界約束提供一套嚴謹的數學框架，確保最佳化器不會去利用歷史數據稀疏區的模型幻覺（可接到 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a> 的反事實穩健估計）。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2015</td>
+<td><strong>High-Dimensional Continuous Control Using Generalized Advantage Estimation</strong>，John Schulman et al.</td>
+<td>強化學習的必讀基礎論文（逾 2,000 引）：提出 GAE(<span class="math inline">\gamma,\lambda</span>) 指數加權優勢估計，處理高維連續控制策略梯度在偏差與變異數之間的兩難。</td>
+<td><code>G2 演算法地基</code></td>
+<td><a href="zotero://select/library/items/K98SZ6NB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1506.02438" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><strong>Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm</strong>，David Silver et al.</td>
+<td>AlphaZero 論文：不用任何人類棋譜與領域手工特徵，只靠單一通用的自我博弈強化學習加 MCTS，就在西洋棋、將棋與圍棋上都勝出。</td>
+<td><code>G1/G2 思想典範</code></td>
+<td><a href="zotero://select/library/items/S4VHXASZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.01815" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems</strong>，Sergey Levine et al.</td>
+<td>離線強化學習的標準參考文獻：分析靜態數據決策中分布偏移與反事實價值高估的根源，並統整策略約束與保守價值兩類方法。</td>
+<td><code>G1/G2 核心必讀</code></td>
+<td><a href="zotero://select/library/items/AEC4AUSN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.01643" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>Image as a Foreign Language: BEIT Pretraining for Vision and Vision-Language Tasks</strong>，Wenhui Wang et al.</td>
+<td>CVPR 高引用論文（BEiT-3）：把影像視為外語詞元，用統一的遮罩建模同時訓練單模態視覺與跨模態圖文理解的主幹。</td>
+<td><code>G2 多模態基石</code></td>
+<td><a href="zotero://select/library/items/Q5BEDQMC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/cvpr52729.2023.01838" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>Vision-Language Models for Vision Tasks: A Survey</strong>，Jingyi Zhang et al.</td>
+<td><em>IEEE TPAMI</em> 上引用上千的綜述：系統整理視覺語言預訓練範式、下游視覺檢測分割的遷移，以及知識蒸餾。</td>
+<td><code>G1 全局導覽</code></td>
+<td><a href="zotero://select/library/items/XHDQBH89" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tpami.2024.3369699" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><strong>OpenVLA: An Open-Source Vision-Language-Action Model</strong>，Moo Jin Kim et al.</td>
+<td>開源具身智能的重要論文：融合 DINOv2 與 SigLIP 雙視覺表徵，在百萬級機器人軌跡上預訓練 7B VLA，帶起微調通用視覺語言控制策略的做法。</td>
+<td><code>G1/G2 具身進展</code></td>
+<td><a href="zotero://select/library/items/C5TUT48E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.09246" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇視覺語言遷移、高效部署與 LLM 增強強化學習代表作）</summary>
+<p></p>
+<ul>
+<li><strong>2019｜Language Features Matter: Effective Language Representations for Vision-Language Tasks</strong>，Andrea Burns et al.（ICCV 論文：用實驗分析詞嵌入與語言編碼器的選擇如何影響視覺定位與圖文檢索的上限，14 引）｜<a href="zotero://select/library/items/8MJH5N48" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/iccv.2019.00757" rel="noopener">DOI</a></li>
+<li><strong>2024｜Survey on Large Language Model-Enhanced Reinforcement Learning: Concept, Taxonomy, and Methods</strong>，Yuji Cao et al.（<em>IEEE TNNLS</em> 高引用綜述：把大語言模型在強化學習中扮演的資訊處理器、獎勵設計者、決策者與世界生成器四種角色整理成標準分類法，171 引）｜<a href="zotero://select/library/items/E6HWG36S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.00282" rel="noopener">原文</a></li>
+<li><strong>2024｜Multitask Vision-Language Prompt Tuning</strong>，Sheng Shen et al.（WACV：探索跨任務共享知識的多工視覺語言提示微調，用很小的參數開銷適配多種下游視覺任務，56 引）｜<a href="zotero://select/library/items/XS9UB23X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/wacv57701.2024.00556" rel="noopener">DOI</a></li>
+<li><strong>2024｜LLaVA-OneVision: Easy Visual Task Transfer</strong>，Bo Li et al.（首個在單一開源多模態模型內同時提升單圖、多圖與影片理解表現的代表作，並展現跨場景視覺任務的湧現遷移，45 引）｜<a href="zotero://select/library/items/TXA8RJ43" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.03326" rel="noopener">原文</a></li>
+<li><strong>2025｜A Survey on Efficient Vision-Language Models</strong>，Gaurav Shinde et al.（盤點面向邊緣與資源受限設備的 VLM 視覺 Token 壓縮、輕量投影架構、量化與蒸餾技術，28 引）｜<a href="zotero://select/library/items/6GDEXPT4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.09724" rel="noopener">原文</a></li>
+<li><strong>2025｜Multimodal Autoregressive Pre-training of Large Vision Encoders</strong>，Enrico Fini et al.（CVPR <code>AIMv2</code>：把視覺編碼器配上多模態自迴歸解碼器，同步預測影像區塊與文字詞元，用很簡單的預訓練流程得到頂尖的通用視覺表徵，24 引）｜<a href="zotero://select/library/items/7GRDX8HS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.14402" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Probing the &quot;Conscious&quot; Mind: Selective Access and Global Workspace in Vision-Language Models</strong>，Jiahao Huang, Jun Wang：借用意識科學的全局工作空間理論（GWT），提出多模態雅可比透鏡 MC-Lens 與詞元集反事實干預。結果證實 VLM 中間層的概念經查詢選擇性提取後，確實參與下游推理。在訓練過程的發育時序上，選擇性提取比原始概念可及性晚成熟。（<a href="zotero://select/library/items/I5G72KGT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26590" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Risk-Controlled Test-Time Adaptation for Vision-Language-Action Models</strong>，Zixuan Liu et al.：提出風險受控的檢索增強視覺語言動作框架 R2-VLA，結合動作不確定性預測器、任務級失敗風險校準門檻，以及把專家修正持續寫回記憶庫的機制。在三種 VLA 骨幹與四套 LIBERO 基準上，平均成功率提升 9.2–11.2 個百分點，向專家求助的次數也減少。（<a href="zotero://select/library/items/JE2SP6UA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26438" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦大型視覺語言模型的專著與科學遙測轉向資料驅動">2026-11-19 最新入庫（聚焦：大型視覺語言模型的專著，與科學遙測轉向資料驅動）</h4>
+<ul>
+<li><strong>2026｜Large Vision-Language Models</strong>，<em>Advances in Computer Vision and Pattern Recognition</em> 專書合輯
+<ul>
+<li>重點：以專書的篇幅，系統整合大型視覺語言模型的理論與工程，範圍從視覺編碼、跨模態投影對齊、指令微調、多模態強化學習後訓練，到抗幻覺評測。</li>
+<li>連結：<a href="zotero://select/library/items/FKD44IND" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-94969-2" rel="noopener">DOI</a></li>
+</ul>
+</li>
+<li><strong>2026｜Data-Driven Vision-Language Models for Remote Sensing: A Survey</strong>，Yue Zhou, Shujun Zhao, Xue Yang, Ruigang Li
+<ul>
+<li>重點：發表於 <em>IEEE GRSM</em>。文中指出垂直領域正從手工改網路架構，轉向用領域資料微調通用 VLM，並整理大幅面多光譜遙測影像的資料合成與高效適配方法。</li>
+<li>連結：<a href="zotero://select/library/items/DP4IT882" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31304" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-統一理解生成視訊位元流詞元化手術世界模型與稀缺資料-rl">同批延伸選讀（2026 統一理解生成、視訊位元流詞元化、手術世界模型與稀缺資料 RL）</h4>
+<ul>
+<li><strong>2026｜InternVL-U: Democratizing Unified Multimodal Models for Understanding, Reasoning, Generation and Editing</strong>，Changyao Tian et al.（只用 4B 參數，結合解耦視覺表徵與統一上下文建模，緩解多模態模型在高層語意理解與精細影像生成編輯之間的固有取捨）｜<a href="zotero://select/library/items/Q7USMDCD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.09877" rel="noopener">原文</a></li>
+<li><strong>2026｜A Survey of Reinforcement Learning for Large Language Models under Data Scarcity: Challenges and Solutions</strong>，Zhiyin Yu et al.（首篇針對大模型強化學習後訓練中高品質監督稀缺與模型自生經驗受限這兩個瓶頸的資料高效 RL 綜述）｜<a href="zotero://select/library/items/8WTGXBE7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.17312" rel="noopener">原文</a></li>
+<li><strong>2026｜LLaVA-OneVision-2: Towards Next-Generation Perceptual Intelligence</strong>，Xiang An et al.（引入原生解析度視窗注意力與編解碼位元流詞元化 Codec-Stream Tokenization，依視訊壓縮位元的動態自適應分配感知計算）｜<a href="zotero://select/library/items/XMU3T8D6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.25979" rel="noopener">原文</a></li>
+<li><strong>2026｜Surgical Video Generation From Diffusion to World Models: A Survey</strong>，Fuxiang Huang et al.（從醫療隱私與臨床數據稀缺的問題出發，描繪從醫療擴散視訊生成走向可互動手術模擬與機器人策略訓練用世界模型的演進路線）｜<a href="zotero://select/library/items/9KQBFVCF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.26214" rel="noopener">原文</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

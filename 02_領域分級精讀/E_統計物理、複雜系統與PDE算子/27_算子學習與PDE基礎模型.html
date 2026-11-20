@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>27｜算子學習與 PDE 基礎模型（Operator Learning &amp; PDE Foundation Models） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">E_統計物理、複雜系統與PDE算子</a></nav></header>
+<main>
+<article>
+
+<h1 id="27算子學習與-pde-基礎模型operator-learning-pde-foundation-models">27｜算子學習與 PDE 基礎模型（Operator Learning &amp; PDE Foundation Models）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 E：統計物理、複雜系統與 PDE 算子</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a> · <a class="wl" href="35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">35_分數階微積分與非局域擴散</a> · <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>把深度學習從有限維固定像素網格上的向量擬合（<span class="math inline">\mathbb{R}^n \to \mathbb{R}^m</span>），推廣為無窮維函數空間之間的連續算子映射（<span class="math inline">\mathcal{G}^\dagger: \mathcal{A} \to \mathcal{U}</span>）。再把物理守恆律與辛幾何結構內嵌進神經網路，目標是做出能跨解析度、跨方程、以毫秒級速度推演真實物理世界演化的科學基礎模型。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+支配大氣環流、湍流空氣動力學、核融合電漿與結構力學的偏微分方程（PDE），過去七十年都靠有限元素法（FEM）或譜方法求解。這些方法嚴謹可靠，但每換一個初始條件、幾何形狀或材料係數，就得在超級電腦上從頭算幾小時甚至幾天，沒辦法做即時的逆問題反演或控制。反過來，如果直接拿標準 CNN 或 ViT 當代理模型（Surrogate），模型會綁定訓練時的網格解析度（<span class="math inline">64\times 64</span> 訓練的模型放到 <span class="math inline">256\times 256</span> 上就失真），而且在長時間自迴歸滾動推演（Autoregressive Rollout）時，會因為違反能量／動量守恆而快速累積誤差。這個領域要處理的矛盾是：既要算得快，又要有解析度無關性（Discretization Invariance）和長期的物理可靠性。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+傳統神經網路像一位只背熟了標準 <span class="math inline">64 \times 64</span> 方格稿紙座標的臨摹畫工，換成三角形網格或放大十倍的高清畫布，他就不知道筆該落在哪裡。傳統數值求解器則像一位每次都從牛頓定律開始、一筆一畫慢慢做微積分的工匠。神經算子（Neural Operator）學的是稿紙背後的物理透鏡（格林函數積分核），而不是稿紙上的離散點。給它一團初始溫度場函數（不管用粗網格還是細網格採樣），它直接在頻域或基底函數空間裡算出整個未來的演化解函數，所以可以在粗網格上訓練、在高解析度上零樣本推論（Zero-Shot Super-Resolution）。辛／哈密頓神經網路更進一步：不讓網路直接猜速度向量，只讓它學一張能量地形圖（Hamiltonian），再順著等高線走，從架構上排除能量憑空增加或耗散。</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li><strong>無窮維貝氏逆問題的加速</strong>：在 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a> 中，每次 MCMC 或集合卡爾曼反演都要呼叫上萬次正向 PDE 算子。神經算子加上可微梯度，可以帶來千倍至十萬倍的加速。</li>
+<li><strong>序列架構與連續時間模型的統一</strong>：Fourier Neural Operator（FNO）在頻域做全局摺積，可以看成 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 中長程狀態空間模型（SSM）與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 全局核注意力的連續泛函前身。KAN-PINN 則把 Kolmogorov–Arnold 表示直接引進微分方程殘差求解。</li>
+<li><strong>幾何與拓撲不變性</strong>：在任意曲面網格與守恆系統上演化，體現了 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的等變性與幾何歸納偏置（Symplectic &amp; Equivariant Inductive Bias）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;傳統科學計算瓶頸 (數值求解器極慢 vs 標準離散 NN 綁死網格且違反物理守恆)&quot;] --&gt; B[&quot;單實例物理殘差約束 (PINNs / KINN: 自動微分將 PDE 寫入 Loss)&quot;]
+    A --&gt; C[&quot;無窮維函數空間算子學習 (Neural Operators: 離散無關映射 A → U)&quot;]
+    A --&gt; D[&quot;幾何結構保持網路 (Hamiltonian / Lagrangian NNs &amp; SympNets)&quot;]
+    C --&gt; E[&quot;雙塔基底展開派 (DeepONet: Branch 編碼輸入函數 × Trunk 編碼查詢座標)&quot;]
+    C --&gt; F[&quot;積分核迭代派 (Graph Kernel / MeshGraphNets / FNO 傅立葉神經算子)&quot;]
+    B &amp; E &amp; F &amp; D --&gt; G[&quot;多物理場 PDE 基礎模型 (ClimaX / 局部線性 Transformer / 無監督物理微調)&quot;]
+    G --&gt; H[&quot;2026 前沿攻堅：算子導數逼近拓撲與長時推演自癒 (Rollout Reliability &amp; Context Healing)&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>物理資訊神經網路與微分殘差約束（PINNs &amp; Kolmogorov–Arnold-Informed NNs）</strong></p>
+<ul>
+<li>直覺理解：感測器觀測資料很稀疏時（例如流場裡只有幾個壓力探針），純資料驅動的網路只能亂猜。PINNs 利用神經網路平滑、而且可以對輸入座標 <span class="math inline">(x,t)</span> 做精確自動微分（AutoDiff）的特性，把偏微分方程本身當成隨處可用、不花成本的監督訊號：在定義域內隨機撒幾萬個配點（Collocation Points），只要網路輸出的導數不滿足物理方程，就給予懲罰。</li>
+<li>機制或核心表達式：設未知場 <span class="math inline">u_\theta(x,t)</span> 由神經網路（MLP 或樣條基底 KAN）參數化。面對非線性偏微分方程 <span class="math inline">\mathcal{N}[u; \lambda] = f</span> 與邊界條件 <span class="math inline">\mathcal{B}[u] = g</span>，總損失函數把資料項與物理殘差耦合在一起：
+<div class="math inline">\mathcal{L}(\theta, \lambda) = w_{\text{data}} \sum_{i} \lvert u_\theta(x_i, t_i) - u_i^{\text{obs}} \rvert^2 + w_{\text{pde}} \sum_{j} \lvert \mathcal{N}[u_\theta; \lambda](x_j^r, t_j^r) - f(x_j^r, t_j^r) \rvert^2 + w_{\text{bc}} \mathcal{L}_{\mathcal{B}}(\theta)</div>
+未知的物理參數 <span class="math inline">\lambda</span>（如黏滯係數、熱擴散率）可以和網路權重 <span class="math inline">\theta</span> 在同一個梯度下降迴圈中一起反演求得。</li>
+<li>能做到什麼，代價是什麼：不需要生成網格，就能在同一套框架內同時解正向問題與病態逆問題。代價是它屬於單實例求解（換一個初始條件就得重新訓練網路），而且高階導數會造成病態的 Hessian 譜與多尺度頻率偏置（Spectral Bias），在激波或高雷諾數湍流處很難收斂。</li>
+</ul>
+</li>
+<li>
+<p><strong>無窮維算子學習的兩條路線：DeepONet 與傅立葉神經算子（FNO）</strong></p>
+<ul>
+<li>直覺理解：要擺脫換一個條件就重訓一次的限制，就得學整個解算子 <span class="math inline">\mathcal{G}^\dagger: a(\cdot) \mapsto u(\cdot)</span>（例如把任意滲透率場 <span class="math inline">a(x)</span> 直接映射成壓力解場 <span class="math inline">u(x)</span>）。學界發展出兩條互補的路線：
+<ul>
+<li><strong>DeepONet（基底展開視角）</strong>：模仿分離變數法。用一個 Branch Net 讀取輸入函數在固定感測點上的數值，決定展開係數 <span class="math inline">b_k(a)</span>；再用一個 Trunk Net 讀取任意連續目標座標 <span class="math inline">y</span>，學出自適應基底函數 <span class="math inline">t_k(y)</span>。兩者做內積，就得到任意點上的解。</li>
+<li><strong>FNO（格林函數摺積視角）</strong>：模仿線性 PDE 的格林函數積分 <span class="math inline">u(x) = \int \kappa(x-y)a(y)\,dy</span>。先用快速傅立葉變換（FFT）轉到頻域做逐模態的複數矩陣乘法，再逆變換回空間域，加上局部非線性激活。這樣一層層迭代，逼近高度非線性的 PDE 算子。</li>
+</ul>
+</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>DeepONet</strong>（基於 Chen &amp; Chen 泛函萬有逼近定理）：
+<div class="math inline">\mathcal{G}_\theta(a)(y) = \sum_{k=1}^p b_k\bigl(a(x_1),\dots,a(x_m)\bigr) \cdot t_k(y) + b_0</div></li>
+<li><strong>FNO 單層積分核更新</strong>（利用摺積定理 <span class="math inline">\mathcal{K}(v)(x) = \mathcal{F}^{-1}(R_\phi \cdot \mathcal{F}(v))(x)</span>）：
+<div class="math inline">v_{\ell+1}(x) = \sigma\!\Bigl( W_\ell v_\ell(x) + \mathcal{F}^{-1}\bigl( R_{\phi,\ell} \cdot (\mathcal{F} v_\ell) \bigr)(x) \Bigr)</div>
+其中 <span class="math inline">R_{\phi,\ell}</span> 只截斷並參數化前 <span class="math inline">k_{\max}</span> 個低頻傅立葉模態，所以參數量與輸入網格點數 <span class="math inline">N</span> 無關（達成 Discretization Invariance，複雜度只有 <span class="math inline">\mathcal{O}(N \log N)</span>）。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：推論速度比傳統數值求解器快 <span class="math inline">10^3 \sim 10^5</span> 倍。FNO 支援零樣本超解析度，MeshGraphNets 則支援複雜的非結構化工程網格。代價是訓練階段通常需要大量高保真模擬資料。標準 FNO 截斷高頻模態，會抹平激波間斷；遇到非週期的複雜幾何邊界，還需要額外的座標變換或局部線性注意力來修補。</li>
+</ul>
+</li>
+<li>
+<p><strong>保結構幾何學習：哈密頓、拉格朗日與辛網路（HNN, LNN &amp; SympNets）</strong></p>
+<ul>
+<li>直覺理解：如果讓普通神經網路直接預測行星或分子下一時刻的位置與動量 <span class="math inline">(\dot{q}, \dot{p}) = f_\theta(q, p)</span>，即使單步誤差只有 <span class="math inline">10^{-5}</span>，跑一萬步之後，軌道也會因為微小的人為能量漂移而螺旋墜毀或飛離。保結構網路把諾特定理（對稱性對應守恆律）與相空間體積守恆（Liouville 定理）寫死在架構裡：網路只輸出一個純量能量 <span class="math inline">H_\theta(q,p)</span>（或不需要正則動量的拉格朗日量 <span class="math inline">L_\theta(q,\dot{q})</span>），再透過反對稱辛矩陣導出運動場。SympNets 則直接由嚴格保辛的映射（Symplectomorphism）模組複合而成。</li>
+<li>機制或核心表達式：在哈密頓神經網路（HNN）中，時間演化嚴格服從辛結構：
+<div class="math inline">\begin{pmatrix} \dot{q} \\ \dot{p} \end{pmatrix} = J \nabla H_\theta(q, p), \quad J = \begin{pmatrix} 0 &amp; I \\ -I &amp; 0 \end{pmatrix} \implies \frac{d H_\theta}{dt} = (\nabla H_\theta)^\top J \nabla H_\theta \equiv 0</div>
+SympNets 則直接構造離散時間流映射 <span class="math inline">\Psi_\theta = \psi_K \circ \cdots \circ \psi_1</span>，使每一步的雅可比矩陣嚴格滿足 <span class="math inline">(D\Psi_\theta)^\top J (D\Psi_\theta) = J</span>，步長較大時也不會破壞長期的相空間拓撲。</li>
+<li>能做到什麼，代價是什麼：在天體力學、分子動力學與無耗散波動系統中，可以做到超長時間尺度的零能量漂移。代價是真實工程系統往往同時有摩擦、黏滯耗散與外部驅動，需要擴展為廣義端口哈密頓或 GENERIC 熱力學相容架構（連到 <a class="wl" href="28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a>）。</li>
+</ul>
+</li>
+<li>
+<p><strong>多物理場 PDE 基礎模型與長時推演自癒（PDE Foundation Models &amp; Rollout Reliability）</strong></p>
+<ul>
+<li>直覺理解：過去每換一條方程（Navier–Stokes 流體、淺水波、熱傳導、反應擴散）就要重訓一個專屬的神經算子。從 ClimaX 開始的 PDE 基礎模型路線，用跨變數詞元化（Variable Tokenization）與多尺度局部／全局注意力，在數十種異質物理場資料集上聯合預訓練，讓模型學會平流、擴散、色散與非線性耦合這些通用的組成部件。下游遇到新的氣候或流場任務時，只要很少的樣本，甚至只做無監督的物理殘差微調，就能遷移。</li>
+<li>機制或核心表達式：在自迴歸部署 <span class="math inline">\hat{u}_{t+\Delta t} = \mathcal{M}_\theta(\hat{u}_t)</span> 中，定義長短時誤差放大因子（Error Amplification Factor）：
+<div class="math inline">G = \frac{E(H_{\text{full}})}{E(H_{\text{short}})}</div>
+近期研究顯示，單步局部誤差很低的基礎模型，<span class="math inline">G</span> 值仍可能隨長時推演急劇上升。最新的做法有兩種：用局部線性注意力（Local Linear Transformer）抑制非物理的高頻震盪，或引入事件觸發上下文自癒（Event-Triggered Context Healing, ETCH），表面稀疏感測器的殘差一超標，就啟動條件擴散模型重建無偏的流場上下文。</li>
+<li>能做到什麼，代價是什麼：新物理場景所需的模擬資料大幅減少，在氣象預報與數位孿生中泛化能力很強。代價是跨量綱、跨維度（2D 到 3D 複雜邊界）的統一表徵與嚴格誤差上界都還在發展中。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>算子本身容易逼近，但算子的導數（Fréchet 微分）在強拓撲下逼近失效</strong>：在 PDE 最佳控制、形狀設計與 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a> 的伴隨梯度（Adjoint / Variational Assimilation）中，只有神經算子 <span class="math inline">\mathcal{G}_\theta(a) \approx \mathcal{G}^\dagger(a)</span> 準確還不夠，它對輸入函數的導數 <span class="math inline">D\mathcal{G}_\theta(a) \approx D\mathcal{G}^\dagger(a)</span> 也要準確。2026 年的數學結果（de Feo, <em>arXiv:2605.15285</em>）嚴格證明：現有的算子學習架構在經典 Fréchet 緊緻開拓撲（<span class="math inline">C^k_F</span>）與算子範數下，無法達成算子及其導數的萬有逼近；必須退到較弱的 Bastiani 拓撲（<span class="math inline">C^k_B</span>）與加權 Bastiani–Sobolev 空間，才能恢復萬有逼近性。這解釋了為什麼用神經算子做梯度反演時，常出現偽高頻梯度震盪。</li>
+<li><strong>單步預測排名與長時自迴歸推演崩潰之間的落差</strong>：多數 PDE 基礎模型在基準測試上以 1 至 5 步的預測誤差排名。但 2026 年的系統基準測試（Park et al., <em>arXiv:2610.31935</em>）發現，短時精度的優勢在長時自迴歸回饋下經常消失，甚至反轉。如何在預訓練、無真值解的物理無監督適應（Unsupervised PDE Adaptation）與稀疏觀測線上校正之間建立穩定的閉環，決定了這類模型能不能從論文走到工業級的工程模擬。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>解析度無關（Resolution-Agnostic）的泛函觀點 → <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> / <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a></strong>：不要把影像、音訊或時空軌跡看成固定長度的離散 Token 陣列，可以把它們看成底層連續場在不同採樣率下的投影。FNO 與連續核算子的設計，啟發了多模態任意解析度視覺編碼器與連續時間決策策略。</li>
+<li><strong>不學向量場，改學位能／守恆生成元 → <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> / <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a></strong>：HNN 與 SympNets 說明，與其用正則化去懲罰違規行為，不如在架構層面透過反對稱辛矩陣或梯度流結構，讓網路在數學上寫不出違反守恆律的輸出。這個想法正被用到流匹配生成（Flow Matching）與安全受限強化學習。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。標註 <strong>🏆 L5 已完成</strong> 的論文附有深度審核導讀，也可參見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2019</td>
+<td><strong>DeepONet: Learning nonlinear operators for identifying differential equations based on the universal approximation theorem of operators</strong>（Lu Lu, Pengzhan Jin, George Em Karniadakis, <em>Nature Machine Intelligence</em>）</td>
+<td>🏆 <strong>L5 已完成</strong>｜算子學習兩大支柱之一：把泛函萬有逼近定理做成 Branch–Trunk 雙塔架構，證明神經網路能以很低的泛化誤差學習無窮維非線性微分算子。</td>
+<td>入門必讀經典</td>
+<td><a href="zotero://select/library/items/3953Q66E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.03193" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Fourier Neural Operator for Parametric Partial Differential Equations</strong>（Zongyi Li, Nikola Kovachki et al., <em>ICLR 2021</em>）</td>
+<td>算子學習兩大支柱之二：直接在傅立葉頻域參數化積分核，首次在 Navier–Stokes 湍流上做到零樣本超解析度與千倍加速，奠定現代神經算子的工業標準。</td>
+<td>入門必讀經典</td>
+<td><a href="zotero://select/library/items/7N79E27E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.08895" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><strong>Physics-informed neural networks: A deep learning framework for solving forward and inverse problems involving nonlinear partial differential equations</strong>（Maziar Raissi, Paris Perdikaris, George Em Karniadakis, <em>JCP</em>）</td>
+<td>引用超過兩萬次的科學機器學習開創論文：用自動微分把 PDE 殘差寫入損失函數，讓稀疏觀測數據與物理定律可以在同一個框架裡融合。</td>
+<td>入門必讀經典</td>
+<td><a href="zotero://select/library/items/DP7T3DP5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.jcp.2018.10.045" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2023</td>
+<td><strong>Neural Operator: Learning Maps Between Function Spaces With Applications to PDEs</strong>（Nikola Kovachki, Zongyi Li et al., <em>JMLR</em>）</td>
+<td>90 餘頁的長文，是無窮維算子學習最主要的數學參考：在一般 Banach 空間上統一定義離散無關的神經算子（涵蓋 GKN、FNO、DeepONet 的比較），並給出完整的逼近複雜度理論。</td>
+<td>理論體系經典</td>
+<td><a href="zotero://select/library/items/WKP28JM4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2108.08481" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><strong>Hamiltonian Neural Networks</strong>（Samuel Greydanus, Misko Dzamba, Jason Yosinski, <em>NeurIPS 2019</em>）</td>
+<td>保結構物理學習的代表作：不預測導數向量，改學哈密頓純量場，讓神經網路直接從資料中學到精確的能量守恆與辛相空間結構。</td>
+<td>幾何物理必讀</td>
+<td><a href="zotero://select/library/items/F3GZ8W2R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1906.01563" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（7 篇）</summary>
+<p></p>
+<ul>
+<li><strong>Inverse problems: a Bayesian perspective</strong>，Andrew M. Stuart (2010, <em>Acta Numerica</em>, 1,799 引用)：在無窮維 Banach/Hilbert 空間上，建立貝氏逆問題良定性與函數空間採樣的數學基礎（連到 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>）。 <a href="zotero://select/library/items/CTU9EQBU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1302.6989" rel="noopener">原文</a></li>
+<li><strong>Learning Mesh-Based Simulation with Graph Networks (MeshGraphNets)</strong>，Tobias Pfaff, Meire Fortunato, Alvaro Sanchez-Gonzalez, Peter W. Battaglia (2020, <em>ICLR 2021</em>, 399 引用)：把圖訊息傳遞拓展到非結構化自適應工程網格，可以準確模擬空氣動力學、布料碰撞與結構變形。 <a href="zotero://select/library/items/3BBSAIZJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.03409" rel="noopener">原文</a></li>
+<li><strong>Neural Operator: Graph Kernel Network for Partial Differential Equations</strong>，Zongyi Li et al. (2020, <em>arXiv:2003.03485</em>, 396 引用)：用圖核訊息傳遞逼近格林函數積分算子，是後續神經算子的奠基性前身，支援任意不規則幾何採樣點。 <a href="zotero://select/library/items/8IGRCVGM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2003.03485" rel="noopener">原文</a></li>
+<li><strong>Lagrangian Neural Networks</strong>，Miles Cranmer, Sam Greydanus, Stephan Hoyer, Peter Battaglia (2020, <em>arXiv:2003.04630</em>, 256 引用)：不再像 HNN 那樣必須預先知道正則動量座標 <span class="math inline">(q,p)</span>，可以在任意廣義座標下直接學習拉格朗日量，再用歐拉-拉格朗日方程反解加速度。 <a href="zotero://select/library/items/9XANP8RH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2003.04630" rel="noopener">原文</a></li>
+<li><strong>Kolmogorov–Arnold-Informed neural network (KINN)</strong>，Yizheng Wang et al. (2024, <em>CMAME</em>, 218 引用)：用可學習單變數樣條激活的 KAN 取代傳統 MLP 來求解正向與逆 PDE，明顯緩解多尺度頻率偏置，並提升奇異點精度。 <a href="zotero://select/library/items/K3DIKCG4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.11045" rel="noopener">原文</a></li>
+<li><strong>SympNets: Intrinsic structure-preserving symplectic networks for identifying Hamiltonian systems</strong>，Pengzhan Jin et al. (2020, <em>Neural Networks</em>, 184 引用)：不經由 ODE 數值積分器，直接用線性與梯度辛模組構造內稟保辛映射，並證明辛映射的萬有逼近定理。 <a href="zotero://select/library/items/JIXNBM6T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2001.03750" rel="noopener">原文</a></li>
+<li><strong>ClimaX: A foundation model for weather and climate</strong>，Tung Nguyen, Johannes Brandstetter, Ashish Kapoor, Jayesh K. Gupta (2023, <em>ICML / arXiv:2301.10343</em>, 174 引用)：最早用大氣與氣候的多物理變數、多時空解析度異質資料做預訓練的 PDE 基礎模型。 <a href="zotero://select/library/items/WJH88VWK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.10343" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Dibyajyoti Nayak, Yuze Pu, Kami Mohammadi, Somdatta Goswami (2026)</strong>，<em>Temporal Extrapolation of Elastic Seismic Wave Propagation in Layered Media Using Neural Operators</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：把內嵌四階 Runge–Kutta 的 <code>TI-DeepONet</code> 時間預測器與 <code>FNO</code> 空間殘差修正器耦合起來，在參考應力條件化下，對多層土壤的彈性剪力波做時間外推，外推時長達訓練區間的兩倍。外推視窗的峰值歸一化均方根誤差降到 0.61% 至 2.82%。</li>
+<li>連結：<a href="zotero://select/library/items/XAXPIW9K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25130" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Abdul Qadir Ibrahim, Martin Burger, Abel Maviano Jonathan (2026)</strong>，<em>Conformally Calibrated Adaptive Computation in Neural Operators</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：用共形校準在固定誤差預算下，動態選擇神經算子的傅立葉模態或通道寬度。實驗顯示，成本主要來自全網格變換與通道混合，所以裁剪模態並不能降低延遲；而且用同一規則校準的靜態窄寬度基線，往往比動態輸入選擇器更快，覆蓋率也更高。</li>
+<li>連結：<a href="zotero://select/library/items/CMK9NTGS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.23440" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-首期每領域最新焦點加上近期高價值預印本">2026-11-19 首期（每領域最新焦點，加上近期高價值預印本）</h4>
+<ol>
+<li>
+<p><strong>Universal Approximation of Nonlinear Operators and Their Derivatives</strong>（Filippo de Feo, 2026, <em>arXiv:2605.15285</em>）</p>
+<ul>
+<li>問題與做法：算子學習用在科學逆問題與最佳控制時，必須對輸入函數求導，但學界長期缺乏無窮維算子導數逼近的嚴格保證。本文先給出否定結果，再給出重建定理：證明現有算子架構在經典 Fréchet 緊緻開拓撲（<span class="math inline">C^k_F</span>）與 Fréchet–Sobolev 範數下逼近必定失敗，並首次在一般 Banach 空間的 Bastiani 拓撲（<span class="math inline">C^k_B</span>）與加權 Bastiani–Sobolev 空間中，完整恢復非線性算子及其高階導數的萬有逼近定理。</li>
+<li>連結：<a href="zotero://select/library/items/PBGVHVVK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.15285" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Beyond Local Accuracy: Benchmarking the Rollout Reliability of PDE Foundation Models</strong>（Jaewan Park, Seid Koric et al., 2026, <em>arXiv:2610.31935</em>）</p>
+<ul>
+<li>問題與做法：PDE 基礎模型的短時預測誤差很低，但自迴歸反覆滾動數百步之後是否還可靠，並不清楚。作者定義誤差放大因子 <span class="math inline">G = E(H_f)/E(H_s)</span>，用 7 大模型與 7 組二維動態 PDE 做嚴格評測，發現短時領先的模型在長時推演中頻繁失穩，並為 PDE 基礎模型提出新的可靠性評估標準。</li>
+<li>連結：<a href="zotero://select/library/items/ZB3QP5W2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31935" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<details class="callout" data-kind="note"><summary>展開更多 2026 近期前沿預印本（4 篇）</summary>
+<p></p>
+<ul>
+<li><strong>Stabilizing Autoregressive PDE Foundation Model Rollouts with Event-Triggered Context Healing</strong>，Jaewan Park, Jay Phil Yoo, Kazuma Kobayashi, Seid Koric (2026, <em>arXiv:2609.32321</em>)：針對上面提到的長時自迴歸誤差累積問題，提出事件觸發上下文自癒（ETCH）。它只靠圓柱表面的 12 個稀疏壓力探針，在誤差超標時啟動條件擴散 Transformer 重建速度與壓力場，大幅壓低長時飄移。 <a href="zotero://select/library/items/2EFG3N6G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.32321" rel="noopener">原文</a></li>
+<li><strong>Unsupervised Adaptation of PDE Foundation Models</strong>，Ziye Song, Zhao Wei, Xin Yu, Ivor Tsang (2026, <em>arXiv:2608.07053</em>)：在多尺度鄰域注意力預訓練的基礎模型之上，提出不需要昂貴真值解（Ground-Truth Solutions）的無監督 PDE 物理微調框架，可以在沒有真值的情況下快速遷移到未知的新方程。 <a href="zotero://select/library/items/WVBQC7B6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.07053" rel="noopener">原文</a></li>
+<li><strong>LLT: Local Linear Transformer for PDE Operator Learning</strong>，Oded Ovadia, Eli Turkel (2026, <em>arXiv:2607.07718</em>)：同時解決標準 Transformer 用在 PDE 網格時的兩個缺陷：二次方複雜度瓶頸，以及缺乏局部微分交互的歸納偏置。 <a href="zotero://select/library/items/DU3BQDAZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.07718" rel="noopener">原文</a></li>
+<li><strong>Foundation Neural Operators: A Survey on Pretraining Methods, the Data Ecosystem, and Efficient Adaptation</strong>，Xingyu Ren et al. (2026, <em>TechRxiv</em>)：全面整理基礎神經算子的預訓練策略、開源科學模擬資料生態與參數高效微調方法。 <a href="zotero://select/library/items/BNW8X8QD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.36227/techrxiv.177100284.48520964/v1" rel="noopener">原文</a></li>
+</ul>
+</details>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

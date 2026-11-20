@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>42｜LNN 液態與邏輯神經網路（MIT 連續時間液態動力學 LTC/CfC/NCP × IBM 實值區間全向邏輯推理） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></nav></header>
+<main>
+<article>
+
+<h1 id="42lnn-液態與邏輯神經網路mit-連續時間液態動力學-ltccfcncp-ibm-實值區間全向邏輯推理">42｜LNN 液態與邏輯神經網路（MIT 連續時間液態動力學 LTC/CfC/NCP × IBM 實值區間全向邏輯推理）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明（雙脈絡消歧與結構共鳴）</p>
+<p>這個領域收的是當代 AI 裡兩支都簡稱 LNN 的學派。兩者著力的層面不同，但都不走龐大黑盒模型的路。一支是 MIT 從線蟲突觸得到啟發的液態神經網路（Liquid Neural Networks：LTC / CfC / NCP / Liquid-S4），神經元的記憶時間常數會像流體一樣隨輸入即時伸縮。另一支是 IBM 開創的神經符號邏輯神經網路（Logical Neural Networks），每顆神經元嚴格等同一個帶權重的實值邏輯閘，在開放世界真值區間 <span class="math inline">[L, U]</span> 上同時支援演繹、溯因與矛盾偵測的全向推理。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+主流的稠密深度網路部署到無人機、低軌衛星、高鐵機電與臨床診斷這類安全關鍵系統時，會同時出兩種問題：底層的連續感知很脆弱，頂層的符號推理是黑盒。
+<ol>
+<li><strong>連續物理時間側的僵化（Liquid NN 處理的問題）</strong>：傳統離散網路，甚至標準 Neural ODE，動態反應速率在訓練後就固定了。一旦環境突然出現高頻震盪、感測採樣間隔不規則，或遇到沒見過的野外干擾（Out-of-Distribution），數百萬參數的模型就會失控。相較之下，秀麗隱桿線蟲（<em>C. elegans</em>）只靠 302 顆非脈衝電導突觸神經元，就能完成覓食與避障。</li>
+<li><strong>符號邏輯推理側被壓成黑盒（Logical NN 處理的問題）</strong>：多數「神經＋符號」方法把邏輯公式塞進高維連續嵌入向量，精確語意就沒了。這樣既不能保證假言推理（<span class="math inline">A, A\to B \vdash B</span>）100% 成立，也不能反向做否定後件推理（<span class="math inline">\neg B, A\to B \vdash \neg A</span>）。它們還採用「沒查到就當作假」的封閉世界假設，遇到未知或自相矛盾的知識就無法處理。</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+可以把這兩種 LNN 想成一架高可靠自主飛行器的小腦與大腦：
+<ol>
+<li><strong>液態神經網路（Liquid NN：LTC / CfC / NCP）是會自動變速的流體小腦</strong>：每顆神經元像一只裝了感壓自動閥門的液壓缸。平穩巡航時閥門關小，時間常數變長，維持長程的穩定。遇到亂流時閥門大開，時間常數急縮，在毫秒內閃避。靠線蟲啟發的精簡四層迴路（<code>NCP</code>）和不需數值積分的閉式解（<code>CfC</code>），只要 19 顆神經元就能直接從相機像素學會盯住道路地平線、穩定駕駛。</li>
+<li><strong>邏輯神經網路（IBM Logical NN）是雙向透明的水晶邏輯電路板</strong>：它不讓向量糊成一團黑盒，電路板上每顆神經元都清楚對應一個 <code>AND</code>、<code>OR</code> 或 <code>IMPLIES</code> 邏輯閘。每個節點裡流動的是一段真值可信上下界區間 <span class="math inline">[L, U]</span>，不是單一機率點：<span class="math inline">[1,1]</span> 是確定為真，<span class="math inline">[0,0]</span> 是確定為假，<span class="math inline">[0,1]</span> 代表承認目前未知（開放世界）。一旦上下界交叉變成 <span class="math inline">L &gt; U</span>，該節點就亮紅燈，指出是哪兩條規則互相矛盾。它還能從結論反推前提缺了什麼條件。</li>
+</ol>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+這兩條脈絡同時連到星系 A、B、C、E、F，這樣的領域不多。Liquid NN 往上承接 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 與神經形態儲備池（Maass 液態機 LSM、IBM <code>TrueNorth</code> 65mW 晶片），橫向和 <a class="wl" href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 的 S4 結合成 <code>Liquid-S4</code>，也被用到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>，產生 2026 的 <code>LNN-PINN</code>。Logical NN 則把 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>、<a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a>（開放世界不確定性與矛盾修復）和 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>（Łukasiewicz 實值資源連接詞）變成可以用梯度下降學習權重的工業級神經符號引擎（如低軌衛星星座聯邦防禦 <code>FedLTN-CubeSat</code>）。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    subgraph LIQUID[&quot;脈絡一：連續時間液態神經網路（Liquid Neural Networks — MIT / 生物動力學派）&quot;]
+        LSM[&quot;Maass &amp; Markram (2004, 2011) 液態機 LSM ＆ Verstraeten / Jaeger (2005-2009) 儲備池統一與 TrueNorth (2015)&quot;] --&gt; LTC[&quot;Hasani, Lechner &amp; Rus (2020) LTC 液態時間常數網路 ＆ NCP 線蟲稀疏神經迴路策略&quot;]
+        LTC --&gt; CFC[&quot;Hasani et al. (2022) CfC 閉式連續時間網路 ＆ Liquid-S4：免 ODE 求解器提速 1-5 數量級並融合狀態空間&quot;]
+    end
+
+    subgraph LOGICAL[&quot;脈絡二：實值雙向邏輯神經網路（Logical Neural Networks — IBM / 神經符號學派）&quot;]
+        LTN[&quot;Serafini &amp; Garcez (2016) 邏輯張量網路 LTN (Real Logic) ＆ Evans &amp; Grefenstette (2018) ∂ILP 抗雜訊規則歸納&quot;] --&gt; IBMLNN[&quot;Riegel, Gray et al. (2020) IBM Logical Neural Networks：1對1 邏輯閘同構、[L,U] 開放世界真值界與全向推理&quot;]
+        IBMLNN --&gt; NS[&quot;Hitzler et al. (2022) 神經符號 AI 統一分類譜系&quot;]
+    end
+
+    CFC --&gt; CPS26[&quot;2026 高可靠資訊物理系統合流：LNN-PINN 純物理殘差、胎兒心臟 Liquid-Sequencer、受電弓視覺物理監測 ＆ FedLTN-CubeSat 星載聯邦神經符號防禦&quot;]
+    NS --&gt; CPS26
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>液態脈絡 I：非脈衝化學突觸與液態時間常數網路（LSM → LTC &amp; NCP）</strong></p>
+<ul>
+<li>直覺理解：Maass 早期提出的液態機（Liquid State Machine, LSM）把隨機連接的脈衝神經網當成一池被石頭激起波紋的液體，但內部權重固定，不能微調。Hasani、Lechner 與 Daniela Rus 轉而研究生物界最精簡的秀麗隱桿線蟲神經系統。線蟲神經元不靠離散 <span class="math inline">0/1</span> 脈衝，而是透過分級電位化學突觸直接改變下游細胞膜的離子電導率。寫成微分方程後可以看到，非線性網路 <span class="math inline">f(x, I)</span> 不只是加在右邊的推力，還直接乘在狀態 <span class="math inline">x(t)</span> 前面，動態改寫系統的衰減時間常數。再搭配模仿線蟲「感測→中間→指令→運動」四層稀疏接線的 NCP（Neural Circuit Policies），網路就有很強的因果注意力聚焦和有界穩定性。</li>
+<li>機制或核心表達式：在 <code>Liquid Time-Constant Networks</code>（Hasani et al., 2020，🏆 L5）中，隱狀態 <span class="math inline">x(t) \in \mathbb{R}^D</span> 由電導突觸反轉電位 <span class="math inline">A</span> 與非線性閘門 <span class="math inline">f(x(t), I(t), t, \theta) \ge 0</span> 共同驅動：
+<div class="math inline">\frac{\mathrm{d}x(t)}{\mathrm{d}t} = -\left[\frac{1}{\tau} + f\bigl(x(t), I(t), t, \theta\bigr)\right] x(t) + f\bigl(x(t), I(t), t, \theta\bigr)\odot A</div>
+整理上式可以看出，瞬時的有效液態時間常數（Liquid Time-Constant）會隨輸入與狀態即時調變，而且狀態軌跡嚴格有界，不會發散：
+<div class="math inline">\tau_{\mathrm{sys}}(t) = \frac{\tau}{1 + \tau\, f\bigl(x(t), I(t), t, \theta\bigr)}, \qquad \min(0, A_i^{\min}) \le x_i(t) \le \max(0, A_i^{\max})</div></li>
+<li>能做到什麼，代價是什麼：只用數十到數百顆神經元的小模型，在野外光線劇變、感測雜訊與分佈外控制任務上就勝過百萬參數的黑盒網路，突觸層級的因果關係也清楚可解釋。代價是直接求解剛性（Stiff）非線性 ODE 時，每一步都要多次呼叫高階 Runge–Kutta 求解器，訓練和微控制器即時推論的延遲偏高。</li>
+</ul>
+</li>
+<li>
+<p><strong>液態脈絡 II：閉式連續時間解析近似與狀態空間融合（CfC &amp; Liquid-S4）</strong></p>
+<ul>
+<li>直覺理解：LTC 慢在每毫秒都要跑十幾步數值積分求解器，所以自然會想把這道非線性突觸積分微分方程直接在數學上解出來。Hasani 等人（2022）推導出緊緻有界的閉式連續時間神經網路（Closed-form Continuous-time, CfC）。它不用昂貴的數值 ODE 求解器，把經過的時間差 <span class="math inline">t</span> 代入一組由 Sigmoid 時變閘門調控的顯式解析公式，一次算出任意未來時刻的狀態。為了兼顧萬步級長序列的全局記憶，Liquid-S4 進一步把液態輸入耦合項線性化，接在結構化狀態空間（HiPPO 矩陣）上。這樣既有 S4 的對數線性平行卷積訓練速度，也有液態網路依輸入而變的動態適應力。</li>
+<li>機制或核心表達式：<code>CfC</code>（Hasani et al., 2022，🏆 L5）用雙分支漸近插值精確逼近標量電導突觸積分 ODE 的解，其中 <span class="math inline">\sigma(-f(x, I; \theta_f)\,t)</span> 是顯式依賴連續時間戳 <span class="math inline">t</span> 的液態衰減門控：
+<div class="math inline">x(t) = \sigma\!\bigl(-f(x, I; \theta_f)\,t\bigr)\odot g(x, I; \theta_g) + \Bigl[\mathbf{1} - \sigma\!\bigl(-f(x, I; \theta_f)\,t\bigr)\Bigr]\odot h(x, I; \theta_h)</div>
+在 Liquid-S4 中，連續狀態方程擴充為雙線性液態耦合 <span class="math inline">\dot{x}(t) = \bigl(A + B_{\mathrm{liquid}}(u(t))\bigr)x(t) + B u(t)</span>，再展開 Volterra 級數的輸入相關卷積核，捕捉長程、跨時間尺度的相關性。</li>
+<li>能做到什麼，代價是什麼：液態時變動力學和雙邊狀態邊界保證都完整保留，速度則比數值 ODE 求解器快 <span class="math inline">10^1</span> 至 <span class="math inline">10^5</span> 倍，因此能直接部署在醫療超音波邊緣晶片（如 2026 <code>Liquid-Sequencer</code>）和高速無線流體天線上。代價是純液態循環狀態在超大規模離散知識檢索上，仍要和注意力或外部符號規則協作。</li>
+</ul>
+</li>
+<li>
+<p><strong>邏輯脈絡 I：嚴格 1 對 1 邏輯閘同構與開放世界 <span class="math inline">[L, U]</span> 全向推理（IBM Logical Neural Networks）</strong></p>
+<ul>
+<li>直覺理解：傳統神經網路的激活函數沒有固定的邏輯意義，古典布林邏輯又太脆弱：百萬筆資料裡只要有一筆雜訊，推理就全盤崩潰，而且不能求導來學習權重。IBM Research 團隊（Riegel et al., 2020）提出的 Logical Neural Networks（IBM LNN）定下一條規則：語法圖就是網路拓撲（1-to-1 Correspondence）。一階邏輯公式裡的每個命題和每個連接詞（<span class="math inline">\land, \lor, \neg, \to, \forall, \exists</span>）都直接對應一顆專屬神經元，不引入多餘的隱藏層。另外，每個節點儲存的是真值上下界區間 <span class="math inline">[L, U] \subseteq [0, 1]</span>。邏輯連接詞對每個輸入變數都可以反解，所以訊息除了能從前提往結論向上算（演繹），也能從已知結論往未知前提向下反推（溯因與定理證明）。這就是全向推理（Omnidirectional Inference）。</li>
+<li>機制或核心表達式：在 <code>Logical Neural Networks</code>（Riegel et al., 2020，🏆 L5）中：
+<ul>
+<li><strong>四態認識語意與開放世界假設</strong>：設閾值 <span class="math inline">\alpha \in (\tfrac{1}{2}, 1]</span>，區間 <span class="math inline">[L, U]</span> 可以直接表達真（<span class="math inline">L \ge \alpha</span>）、假（<span class="math inline">U \le 1-\alpha</span>）、開放世界未知 Unknown（<span class="math inline">[0, 1]</span>，沒有證據時不強迫判為假），以及顯式邏輯矛盾 Contradiction（推理收緊使下界超過上界 <span class="math inline">L &gt; U</span> 時立即觸發）。</li>
+<li><strong>帶權重實值 Łukasiewicz 合取神經元</strong>：不同前提可以有可學習的非負重要性權重 <span class="math inline">w_i \ge 0</span> 與偏置 <span class="math inline">\beta</span>，同時用投影約束確保它在經典極端點嚴格符合真值表公理：
+<div class="math inline">f_{\land}^{\beta, \mathbf{w}}(\mathbf{x}) = \mathrm{clamp}_{[0,1]}\!\left(\beta - \sum_{i=1}^n w_i (1 - x_i)\right)</div></li>
+<li><strong>全向邊界傳播與受約束梯度學習</strong>：對複合公式節點 <span class="math inline">Z = A \land B</span>，向上傳播更新 <span class="math inline">Z</span> 的上下界，向下傳播則用逆算子收緊子節點 <span class="math inline">A</span> 的區間 <span class="math inline">[L_A', U_A'] = [L_A, U_A] \cap f_{\land \to A}^{-1}([L_Z, U_Z], [L_B, U_B])</span>，直到全圖收斂到不動點。訓練時在單調邏輯不等式約束下，同時最小化監督誤差與全網矛盾損失 <span class="math inline">\mathcal{L}_{\mathrm{contra}} = \sum_{v \in V} \max(0,\, L_v - U_v)</span>。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：它同時有古典一階邏輯 100% 的白盒可審計性、開放世界容錯性、雙向演繹／反演能力，以及神經網路從含噪資料學習規則權重的彈性。代價是一階量詞（<span class="math inline">\forall x, \exists y</span>）在大規模實體庫做關係連接（Grounding / Join）時，如果沒有稀疏索引剪枝，會有組合展開的開銷。</li>
+</ul>
+</li>
+<li>
+<p><strong>邏輯脈絡 II 與硬體基底：實值張量邏輯接地、抗噪規則歸納與超低功耗神經形態晶片（LTN, <span class="math inline">\partial</span>ILP &amp; TrueNorth）</strong></p>
+<ul>
+<li>直覺理解：有時人類專家還沒寫好完整的邏輯規則樹，有時輸入是原始感測張量（影像、衛星遙測封包），這兩種情況需要別的做法。Serafini &amp; Garcez 的邏輯張量網路（Logic Tensor Networks, LTN）提出實值邏輯（Real Logic）：把邏輯常數接地（Grounding）為連續特徵向量，把謂詞接地為可微張量神經網路，整個一階知識庫就變成軟約束最佳化目標。DeepMind 的 Evans &amp; Grefenstette 提出 <span class="math inline">\partial</span>ILP（可微歸納邏輯程式設計），把離散規則搜尋空間鬆弛為規則模板張量的機率加權，即使訓練資料有 20% 的錯誤標籤，仍能從零歸納出乾淨的符號規則。在矽晶片這一層，IBM TrueNorth（65 毫瓦驅動百萬神經元）與光學儲備池為這類事件驅動、高可靠的邊緣感知與推理提供了很省電的物理載體。</li>
+<li>機制或核心表達式：LTN（Serafini &amp; Garcez, 2016）定義接地映射 <span class="math inline">\mathcal{G}</span>，把常數 <span class="math inline">c</span> 映射為向量 <span class="math inline">\mathcal{G}(c) \in \mathbb{R}^d</span>，把 <span class="math inline">k</span> 元謂詞 <span class="math inline">P</span> 映射為神經算子 <span class="math inline">\mathcal{G}(P): (\mathbb{R}^d)^k \to [0,1]</span>，再用模糊 t-norm 與廣義平均聚合量詞，最大化知識庫 <span class="math inline">\mathcal{K}</span> 的總滿意度 <span class="math inline">\max_\theta \bigoplus_{\phi \in \mathcal{K}} \mathcal{G}_\theta(\phi)</span>。2026 的 <code>FedLTN-CubeSat</code>（Yang et al., 2026）把這套機制用到低軌立方衛星星座上，在很緊的功耗限制下做星間聯邦神經符號入侵防禦。</li>
+<li>能做到什麼，代價是什麼：底層的原始連續感測張量和頂層的符號規則庫可以端對端聯合訓練，並部署到星載／車載邊緣裝置。代價是模糊邏輯算子（Gödel、Product、Łukasiewicz t-norms）在深層公式複合時各有梯度消失或局部極小值的問題，算子族要仔細挑選（參見 Hitzler et al., 2022 譜系分析）。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>神經符號推理的模糊算子梯度病態與量詞接地爆炸（Grounding Bottleneck）</strong>：IBM LNN、LTN 與 <span class="math inline">\partial</span>ILP 把布林邏輯連續化為 <span class="math inline">[0,1]</span> 實值 t-norm 時，有一個根本的權衡。Gödel 最小／最大算子每次只把梯度傳給單一分支，Łukasiewicz 線性截斷算子在區間外梯度歸零（Dead Zone），乘積算子多層串接時則指數衰減。更難處理的是，一階全稱規則含多個變數時，對萬級實體做笛卡兒積實例化會立刻用光顯存。怎麼做不完全展開的稀疏提升推理（Lifted Neuro-Symbolic Inference），是這個方向最主要的未解問題。</li>
+<li><strong>極簡因果物理小腦（Liquid NN）與符號規則護欄（Logical NN）的深層雙系統閉環整合</strong>：在安全關鍵場域（如 2026 高鐵受電弓物理視覺檢測、低軌衛星 <code>FedLTN-CubeSat</code>、水庫混沌擴散液態調度與胎兒先心病 <code>Liquid-Sequencer</code>），連續微分動力先驗與可微邏輯規則已經分別證明，在資源極度受限的條件下有效。但怎麼把底層 <code>CfC</code> 連續時間狀態的不確定性包絡，無損轉換成頂層 <code>IBM LNN</code> 的開放世界真值上下界 <span class="math inline">[L(t), U(t)]</span> 並觸發即時安全煞車，仍是兩個學派之間剛開始成形的空白地帶。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>開放世界真值區間 <span class="math inline">[L, U]</span> 與矛盾指示器 <span class="math inline">L &gt; U</span> → 多源 RAG 事實查核與多智能體信念修正</strong>：傳統分類器和大模型遇到沒見過的問題，只會輸出校準失真的單點 Softmax 機率，分不出兩種情況：正反證據都是零的無知 <span class="math inline">[0,1]</span>，以及正反證據強烈衝突的矛盾 <span class="math inline">L &gt; U</span>。把 IBM LNN 的雙邊界傳播搬到 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a> 和 <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的多文件衝突檢索，就能立即自動標出互相矛盾的知識源，不必取平均把衝突抹掉。</li>
+<li><strong>狀態耦合可變時間常數 <span class="math inline">\tau_{\mathrm{sys}}(x, I)</span> → 剛性偏微分算子與非平穩隨機系統</strong>：LTC/CfC 讓電導閘門直接調變自身的衰減率。這個設計已被 2026 <code>LNN-PINN</code> 搬到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>，用來處理剛性物理殘差。同樣的結構也可以移植到 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> 的快慢雙時間尺度弛豫過程建模，以及高頻金融流動性突變預測。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2004</td>
+<td><strong>On the computational power of circuits of spiking neurons</strong>，Wolfgang Maass, Henry Markram</td>
+<td>液態機（LSM）計算能力的理論基礎：嚴格證明生物異質脈衝神經迴路不需要離散時脈，就有即時的萬能流映射能力。</td>
+<td><code>G2/G3 歷史源頭</code></td>
+<td><a href="zotero://select/library/items/J7A8KMUS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.jcss.2004.04.001" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2015</td>
+<td><strong>TrueNorth: Design and Tool Flow of a 65 mW 1 Million Neuron Programmable Neurosynaptic Chip</strong>，Filipp Akopyan et al.</td>
+<td>神經形態硬體的里程碑：只用 65 毫瓦就能驅動百萬事件驅動神經元與 2.56 億突觸，確立了非馮紐曼邊緣計算這條路線。</td>
+<td><code>G1/G2 硬體經典</code></td>
+<td><a href="zotero://select/library/items/HSMAR8V5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tcad.2015.2474396" rel="noopener">DOI</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><strong>Logic Tensor Networks: Deep Learning and Logical Reasoning from Data and Knowledge</strong>，Luciano Serafini, Artur d’Avila Garcez</td>
+<td>提出實值邏輯（Real Logic）與 LTN 框架，把一階邏輯符號接地為實數特徵張量，讓資料驅動學習和知識庫演繹接在一起。</td>
+<td><code>G2 邏輯脈絡必讀</code></td>
+<td><a href="zotero://select/library/items/IJSNZVXW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.04422" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2018</td>
+<td><strong>Learning Explanatory Rules from Noisy Data</strong>，Richard Evans, Edward Grefenstette</td>
+<td>DeepMind 的 <span class="math inline">\partial\text{ILP}</span> 經典論文：把離散歸納邏輯程式設計轉成可微張量收縮，從含錯標雜訊的資料中自動歸納可解釋的符號規則。</td>
+<td><code>G2 邏輯脈絡必讀</code></td>
+<td><a href="zotero://select/library/items/QPNXXS2F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1711.04574" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Liquid Time-constant Networks</strong>，Ramin Hasani et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：MIT 液態神經網路（LTC）的開創論文，證明時變電導突觸讓連續時間網路有雙邊有界的穩定性和很強的軌跡表達力。</td>
+<td><code>G1/G2 液態必讀</code></td>
+<td><a href="zotero://select/library/items/FCGXVZ2K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.04439" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>Logical Neural Networks</strong>，Ryan Riegel, Alexander Gray et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：IBM 邏輯神經網路的奠基論文，建立神經元與邏輯連接詞的 1 對 1 同構、開放世界 <span class="math inline">[L,U]</span> 真值界全向推理，以及矛盾最小化學習。</td>
+<td><code>G1/G2 邏輯必讀</code></td>
+<td><a href="zotero://select/library/items/MSX7CB5B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.13155" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>Closed-form continuous-time neural networks</strong>，Ramin Hasani et al.</td>
+<td>🏆 <strong>L5 深度審核完成</strong>：推導出液態突觸積分微分方程的緊緻閉式近似解（CfC），不需要數值 ODE 求解器，推論與訓練快 1–5 個數量級。</td>
+<td><code>G1/G2 液態必讀</code></td>
+<td><a href="zotero://select/library/items/R5CEHES9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.13898" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><strong>Neuro-symbolic approaches in artificial intelligence</strong>，Pascal Hitzler et al.</td>
+<td>《國家科學評論》上的神經符號 AI 全景綜述：系統整理邏輯張量、可微規則與雙系統融合架構的分類和開放挑戰。</td>
+<td><code>G1 全景導覽</code></td>
+<td><a href="zotero://select/library/items/S67JFVAF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/nsr/nwac035" rel="noopener">DOI</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇液態狀態機、儲備池統一實驗與光學／無線實現基石）</summary>
+<p></p>
+<ul>
+<li><strong>2005｜Isolated word recognition with the Liquid State Machine: a case study</strong>，D. Verstraeten et al.（液態狀態機早期的重要實證：驗證脈衝液態儲備池在真實語音時序辨識上的抗噪能力與讀出設計，311 引）｜<a href="zotero://select/library/items/8TATT2JG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ipl.2005.05.019" rel="noopener">DOI</a></li>
+<li><strong>2007｜An experimental unification of reservoir computing methods</strong>，D. Verstraeten et al.（首次在統一的實驗框架下系統整合回聲狀態網路 ESN、液態狀態機 LSM 與反向傳播去相關學習，「儲備池計算」這個學科名稱由此確立，1353 引）｜<a href="zotero://select/library/items/IR36M2B6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neunet.2007.04.003" rel="noopener">DOI</a></li>
+<li><strong>2009｜Reservoir computing approaches to recurrent neural network training</strong>，Mantas Lukoševičius, Herbert Jaeger（總結儲備池動態記憶容量、回聲狀態性質（Echo State Property）與讀出正則化的經典文獻，2953 引）｜<a href="zotero://select/library/items/UAVIZ6S2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.cosrev.2009.03.005" rel="noopener">DOI</a></li>
+<li><strong>2011｜Liquid State Machines: Motivation, Theory, and Applications</strong>，Wolfgang Maass（Maass 自己寫的液態機完整理論專章，說明為什麼連續暫態動力比離散圖靈機更適合描述生物皮質的即時計算，278 引）｜<a href="zotero://select/library/items/JGUQ8SFT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/9781848162778_0008" rel="noopener">DOI</a></li>
+<li><strong>2017｜High-Speed Photonic Reservoir Computing Using a Time-Delay-Based Architecture: Million Words per Second Classification</strong>，Laurent Larger et al.（用單一非線性光電節點加時間延遲環實現高維液態儲備池，做到超高速的物理時序分類，646 引）｜<a href="zotero://select/library/items/8NXX257B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physrevx.7.011015" rel="noopener">DOI</a></li>
+<li><strong>2019｜Artificial Neural Networks-Based Machine Learning for Wireless Networks: A Tutorial</strong>，Mingzhe Chen et al.（教程，涵蓋液態／回聲狀態網路與脈衝神經網路在超可靠低延遲無線通訊資源分配上的應用，1527 引）｜<a href="zotero://select/library/items/XZH32SCR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1710.02913" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜ContiLNN: Mitigating Slice Sampling Discontinuity with Liquid Neural Networks for Medical Image Restoration</strong>，Jialei He et al.：臨床三維醫學影像的切層間距常常不規則。本文在二維修復骨幹中嵌入雙向閉式連續時間液態模組（Bi-CfC），用切片間距直接調變門控，不需要數值 ODE 積分。在 CT 去噪、MRI 超解析與低計數 PET 上都超越 Restore-RWKV，延遲比 Bi-GRU 低 52.8%，峰值顯存低 57.0%。（<a href="zotero://select/library/items/5MVEVTI7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.12337" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜PLAN: Parallel Liquid-Inspired Approximation Network for Efficient Representation Learning in Flexible Job Shop Scheduling</strong>，Dhivya Dharshini Kannan et al.：把連續液態動力學改寫成可平行的離散近似，並把局部狀態演化和全局脈絡聚合解耦，提出彈性零工車間排程的輕量骨幹 PLAN。只用基線 22% 至 47% 的參數，就在確定性、隨機與動態 FJSP 上都縮短完工時間，推論延遲最多減少 69.2%。（<a href="zotero://select/library/items/2JT4WKWT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.03041" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-190800-增量最新入庫聚焦多任務共享液態醫療監測與記憶增強圖液態跨域交通預測">2026-11-19（08:00 增量）最新入庫（聚焦：多任務共享液態醫療監測與記憶增強圖液態跨域交通預測）</h4>
+<ul>
+<li><strong>2026｜MTLiquid: Enabling Efficient Multi-Task Learning using Liquid Neural Networks for Lightweight Healthcare Monitoring Systems</strong>，Rachmad Vidya Wicaksana Putra, Fahad Abdul Rauf, Muhammad Shafique
+<ul>
+<li>重點：多個任務的輸入／輸出頭共用一個液態神經網路骨幹，搭配損失加權與比例資料呈現。在不規則採樣的 ICU 死亡率（P12）與敗血症（P19）預測上，AUROC 達 0.84／0.94，記憶體開銷減少 44% 至 94%。</li>
+<li>連結：<a href="zotero://select/library/items/8NH53P4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.33232" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li><strong>2026｜Continuous Cross-Domain Traffic State Prediction via Memory-Augmented Graph Liquid Time-Constant Networks</strong>，Jinrong Xiang, Ming Xu
+<ul>
+<li>重點：結合局部時空單元分解、帶圖耦合循環電導的連續時間 <code>GLTC</code> 動力學，以及記憶式遷移儲存（MTS），處理感測稀疏區域的跨域交通預測和未見狀態的適配。在五個公開資料集上都穩定降低預測誤差。</li>
+<li>連結：<a href="zotero://select/library/items/97BWMFG9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.15807" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="2026-11-19-最新入庫聚焦高鐵機電視覺物理約束網路與低軌衛星星座聯邦神經符號防禦">2026-11-19 最新入庫（聚焦：高鐵機電視覺物理約束網路與低軌衛星星座聯邦神經符號防禦）</h4>
+<ul>
+<li><strong>2026｜Application of machine-vision-driven physics-informed neural networks in pantograph–catenary system state detection</strong>，Jingke Yan et al.
+<ul>
+<li>重點：高速鐵路的受電弓與接觸網是強耦合系統，在高速振動和複雜遮擋下很難監測接觸狀態。本文把連續力學微分方程約束嵌入機器視覺感知迴路，兼顧高幀率推論與物理一致性。</li>
+<li>連結：<a href="zotero://select/library/items/DV6HEB8C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ymssp.2026.114577" rel="noopener">DOI</a></li>
+</ul>
+</li>
+<li><strong>2026｜FedLTN-CubeSat: Neuro-Symbolic Federated Learning for Intrusion Detection in LEO CubeSat Constellations</strong>，Gang Yang et al.
+<ul>
+<li>重點：低軌立方衛星星座在尺寸、重量與功耗（SWaP-C）上的限制很嚴。本文提出聯邦邏輯張量網路 <code>FedLTN-CubeSat</code>，把一階安全規則轉成可微的實值滿意度目標，同時顧到準確率、輕量與告警可解釋性這三項難以兼得的要求。</li>
+<li>連結：<a href="zotero://select/library/items/353ESJB5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/math14061047" rel="noopener">DOI</a></li>
+</ul>
+</li>
+</ul>
+<h4 id="同批延伸選讀2026-液態物理殘差車載安全可解釋水庫調度與胎兒心臟診斷">同批延伸選讀（2026 液態物理殘差、車載安全、可解釋水庫調度與胎兒心臟診斷）</h4>
+<ul>
+<li><strong>2026｜LNN-PINN: A unified physics-only training framework with liquid residual blocks</strong>，Ze Tao, Hanxuan Wang, Fujun Liu（在不用標籤、只靠物理的微分方程求解器中，引入時間常數動態時變的液態殘差塊，明顯緩解剛性 PDE 的梯度病態）｜<a href="zotero://select/library/items/HBMRT8CK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.08935" rel="noopener">原文</a></li>
+<li><strong>2026｜A Lightweight Sequential AI Framework for Real Time Intrusion Detection in Dynamic Vehicular Networks</strong>，G. Jeyaram et al.（為高機動、去中心化的車聯網 VANETs 設計延遲很低的輕量序列入侵偵測模型）｜<a href="zotero://select/library/items/HI8VTIZM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s41598-026-36103-2" rel="noopener">DOI</a></li>
+<li><strong>2026｜Optimization of interpretable hydropower reservoir operation rules by denoising diffusion probabilistic model, parallel chaotic cooperation search algorithm and liquid neural network</strong>，Yi-Fan Xia et al.（融合去噪擴散模型、平行混沌搜尋與液態神經網路，為水電站水庫建立兼顧最優效益與可解釋性的操作規則）｜<a href="zotero://select/library/items/6XXF4UAS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.energy.2026.140211" rel="noopener">DOI</a></li>
+<li><strong>2026｜Liquid-Sequencer: A Lightweight Liquid Neural Network for Real-Time Fetal Congenital Heart Disease Diagnosis</strong>，Sibo Qiao et al.（用輕量級 <code>Liquid-Sequencer</code> 驅動基層超音波心臟數位孿生，做到即時、算力門檻低的胎兒先天性心臟病篩檢）｜<a href="zotero://select/library/items/EPK83NBJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jbhi.2026.3668775" rel="noopener">DOI</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

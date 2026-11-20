@@ -1,0 +1,107 @@
+/* Reading 網站：極簡樣式 */
+:root {
+  --bg: #fcfcfb;
+  --fg: #1c1c1e;
+  --muted: #74747a;
+  --line: #e7e7e4;
+  --accent: #2c5a85;
+  --code: #f3f3f0;
+  --max: 44rem;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #131313;
+    --fg: #e6e6e3;
+    --muted: #96969b;
+    --line: #2a2a2a;
+    --accent: #8db3d9;
+    --code: #1c1c1c;
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--fg);
+  font: 17px/1.8 -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Helvetica Neue", sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+header.site, main, footer.site { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+header.site {
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0 .2rem;
+  padding-top: 2.5rem; padding-bottom: .5rem;
+  font-size: .88rem; color: var(--muted);
+}
+.brand { color: var(--fg); font-weight: 600; letter-spacing: .03em; margin-right: .2rem; }
+.crumbs a { color: var(--muted); }
+.crumbs .sep { margin: 0 .45em; opacity: .45; }
+
+main { padding-bottom: 4rem; overflow-wrap: break-word; }
+
+h1, h2, h3, h4, h5, h6 { line-height: 1.35; font-weight: 600; }
+h1 { font-size: 1.85rem; margin: 1.6rem 0 1.4rem; }
+h2 { font-size: 1.3rem; margin: 2.8rem 0 .8rem; }
+h3 { font-size: 1.1rem; margin: 2.1rem 0 .6rem; }
+h4, h5, h6 { font-size: 1rem; margin: 1.7rem 0 .5rem; }
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { text-decoration: underline; text-underline-offset: .2em; }
+.brand:hover, .list a:hover { text-decoration: none; opacity: .7; }
+
+p, ul, ol, dl, table, pre, blockquote, .callout { margin: 0 0 1.1rem; }
+ul, ol { padding-left: 1.4rem; }
+li { margin: .15rem 0; }
+li > ul, li > ol { margin: .15rem 0 0; }
+hr { border: 0; border-top: 1px solid var(--line); margin: 2.6rem 0; }
+img { max-width: 100%; }
+strong { font-weight: 600; }
+
+code { font: .86em/1.5 ui-monospace, "SF Mono", Menlo, monospace; background: var(--code); padding: .1em .35em; border-radius: 4px; }
+pre { background: var(--code); padding: 1rem 1.1rem; border-radius: 6px; overflow-x: auto; }
+pre code { background: none; padding: 0; font-size: .84rem; }
+
+blockquote { padding-left: 1rem; margin-left: 0; border-left: 2px solid var(--line); color: var(--muted); }
+
+table { border-collapse: collapse; display: block; overflow-x: auto; font-size: .92rem; }
+th, td { border-bottom: 1px solid var(--line); padding: .45rem .75rem .45rem 0; text-align: left; vertical-align: top; }
+th { font-weight: 600; white-space: nowrap; }
+
+/* Obsidian callout */
+.callout { border-left: 2px solid var(--accent); padding: .1rem 0 .1rem 1rem; }
+.callout-title, .callout > summary { font-weight: 600; margin: 0 0 .35rem; }
+.callout > summary { cursor: pointer; list-style: none; }
+.callout > summary::-webkit-details-marker { display: none; }
+.callout > summary::before { content: "▸"; display: inline-block; width: 1.1em; color: var(--muted); transition: transform .15s; }
+.callout[open] > summary::before { transform: rotate(90deg); }
+.callout > p:empty { display: none; }
+.callout > :last-child { margin-bottom: 0; }
+.callout[data-kind="nav"] { border-left-color: var(--line); font-size: .93rem; }
+.callout[data-kind="warning"] { border-left-color: #c58a2a; }
+
+.wl-missing { color: var(--muted); }
+a.zotero { white-space: nowrap; }
+
+pre.mermaid { background: none; text-align: center; padding: .5rem 0; }
+.math.block { overflow-x: auto; margin: 1.2rem 0; }
+
+/* 清單頁 */
+.lede { color: var(--muted); margin-top: -.6rem; }
+ul.list { list-style: none; padding: 0; margin-top: .4rem; }
+ul.list li { display: flex; align-items: baseline; gap: .9rem; margin: 0; padding: .6rem 0; border-bottom: 1px solid var(--line); }
+ul.list li:first-child { border-top: 1px solid var(--line); }
+ul.list a { color: var(--fg); }
+.num { color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; min-width: 1.6rem; }
+.dated .num { min-width: 5.6rem; }
+.count { margin-left: auto; color: var(--muted); font-size: .82rem; font-variant-numeric: tabular-nums; }
+
+footer.site { color: var(--muted); font-size: .78rem; padding-top: 1.2rem; padding-bottom: 3rem; border-top: 1px solid var(--line); }
+
+@media (max-width: 600px) {
+  body { font-size: 16px; }
+  header.site { padding-top: 1.6rem; }
+  h1 { font-size: 1.55rem; }
+}

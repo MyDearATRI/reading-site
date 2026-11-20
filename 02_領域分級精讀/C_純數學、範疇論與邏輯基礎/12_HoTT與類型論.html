@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>12｜HoTT與類型論（Homotopy Type Theory &amp; Univalent Foundations） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="12hott與類型論homotopy-type-theory-univalent-foundations">12｜HoTT與類型論（Homotopy Type Theory &amp; Univalent Foundations）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> · <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> · <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> · <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>同倫類型論（HoTT）把三樣東西合而為一：程式／資料型別、邏輯命題／證明、拓撲空間／連續路徑，影響遍及邏輯、計算機科學與幾何學。數學家日常的直覺是「同構的結構即可視為相等」，它透過單價公理（Univalence）給這個直覺一個嚴格、可由電腦驗算的基礎。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+百年來，數學一直分裂在兩套語言之間。紙筆上的數學家自然地奉行結構主義（Structuralism）：只要兩個群或流形同構（<span class="math inline">A \simeq B</span>），對 <span class="math inline">A</span> 成立的一切結構性質就直接搬到 <span class="math inline">B</span> 上。底層的 ZFC 集合論與傳統定理證明器卻很死板：用柯西序列定義的實數和用戴德金分割定義的實數是兩個不同的集合，想把定理從一個搬到另一個，得手動重寫成百上千條轉譯引理（Setoid Hell）。另一方面，Martin-Löf 內涵依賴類型論中的相等類型 <span class="math inline">\operatorname{Id}_A(x,y)</span> 長期困擾邏輯學家：為什麼兩個元素相等的證明不一定唯一？HoTT 同時回答了這兩個問題。類型是帶有高維洞與迴路的拓撲空間（<span class="math inline">\infty</span>-群胚），不是扁平的點集，相等的證明就是連接兩點的連續路徑。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+想像你在寫一套型別程式語言，它自帶空間幾何直覺，還能自動重構：
+<ul>
+<li>類型 <span class="math inline">A</span> 是一座島嶼（空間），元素 <span class="math inline">x : A</span> 是島上的一個座標點。</li>
+<li>相等類型 <span class="math inline">x =_A y</span> 不是 <code>true/false</code> 的判斷，而是島上從 <span class="math inline">x</span> 走到 <span class="math inline">y</span> 的所有實體步道的集合。如果島中央有座火山湖（例如圓周 <span class="math inline">S^1</span>），順時針繞半圈與逆時針繞半圈就是兩個不同的相等證明，無法連續拉成一樣（非平凡迴路 <span class="math inline">\pi_1(S^1) = \mathbb{Z}</span>）。</li>
+<li>單價公理（Univalence）是編譯器級別的自動轉接器。只要你提供一個無損的雙向轉換介面（等價 <span class="math inline">A \simeq B</span>），系統就把它升級為宇宙空間中的一條真實路徑 <span class="math inline">A =_{\mathcal{U}} B</span>。所有依賴 <span class="math inline">A</span> 寫好的函式庫與定理，都能透過路徑傳輸（Transport）搬到 <span class="math inline">B</span> 上，不花額外成本。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+它是 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 中 <span class="math inline">(\infty,1)</span>-Topos 原生的內部程式語言，讓我們能像寫一般數學證明一樣，直接推導 <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 中的同倫群，不必碰點集拓撲。在 AI 與軟體工程這一側，依賴類型論（Rocq / Agda / Cubical Agda / Lean）是 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 與可驗證程式合成（Vericoding / Certified Synthesis）的核心工具。加上模態算子後，它還延伸出 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 中的內聚類型論（Cohesive HoTT）與有向類型論（Directed Type Theory）。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    MLTT[&quot;Martin-Löf 依賴類型論 (MLTT)：Curry-Howard 命題即類型&quot;] --&gt;|&quot;Hofmann-Streicher 群胚模型&quot;| AW[&quot;Awodey-Warren / Voevodsky：相等類型 Id_A(x,y) 即路徑空間&quot;]
+    AW --&gt; UA[&quot;Voevodsky 單價公理 (Univalence)：(A = B) ≃ (A ≃ B)&quot;]
+    AW --&gt; HIT[&quot;高階歸納類型 (HITs)：用點與路徑建構子直接生成球面與商空間&quot;]
+    UA &amp; HIT --&gt;|&quot;解決單價公理不可計算問題&quot;| CTT[&quot;立方類型論 (Cubical Type Theory)：高維立方體區間與可計算 Kan 填充&quot;]
+    UA &amp; CTT --&gt; EXT[&quot;前沿擴展：有向類型論 (合成 ∞-範疇) / 內聚模態 HoTT / 多模態形式化合成&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>同倫字典與同倫層級（Propositions-as-Some-Types &amp; Homotopy Levels / <span class="math inline">n</span>-Types）</strong></p>
+<ul>
+<li>直覺理解：早期的 Curry–Howard 對應說「命題即類型」。但如果一個類型有好幾個不同的元素（例如圓周有一圈無窮多個迴路），把它當成普通的是非題，就會破壞排中律或選擇公理的一致性。Voevodsky 引入同倫層級（h-levels）澄清了這一點。傳統的邏輯命題只是最多只有一個元素（要嘛空、要嘛可收縮成一點）的 <span class="math inline">(-1)</span>-類型。普通集合是點與點之間最多只有一條路徑（沒有高維迴路）的 <span class="math inline">0</span>-類型。再往上是群胚（<span class="math inline">1</span>-類型）與高維空間（<span class="math inline">n</span>-類型）。邏輯、集合論與同倫論因此成了同一個階梯上的不同樓層。</li>
+<li>機制或核心表達式：以遞迴方式定義類型的截斷層級 <span class="math inline">\operatorname{is-\mathit{n}-type}(A)</span>：
+<div class="math inline">\operatorname{isContr}(A) :\equiv \sum_{a:A} \prod_{x:A} (a =_A x) \quad \text{（$-2$-類型：唯一存在／可收縮空間）}</div>
+<div class="math inline">\operatorname{is-\mathit{(n+1)}-type}(A) :\equiv \prod_{x,y:A} \operatorname{is-\mathit{n}-type}(x =_A y)</div>
+對應地，<span class="math inline">(-1)</span>-類型為單純命題（Mere Proposition，<span class="math inline">\operatorname{isProp}</span>），<span class="math inline">0</span>-類型為普通集合（<span class="math inline">\operatorname{isSet}</span>，滿足公理 UIP），<span class="math inline">1</span>-類型為群胚（Groupoid）。透過命題截斷 <span class="math inline">\|A\|_{-1}</span>，可以把構造性存在 <span class="math inline">\Sigma</span> 投影為抹除具體見證的純存在命題 <span class="math inline">\exists</span>。</li>
+<li>能做到什麼，代價是什麼：不帶見證的古典邏輯推理，和攜帶完整對稱群的高階幾何構造，可以在同一套形式系統裡共存。代價是寫證明時必須隨時分辨純命題存在 <span class="math inline">\|A\|_{-1}</span> 與帶數據構造 <span class="math inline">\Sigma_{x:A} P(x)</span>，不能隨意從純命題中抽出具體元素。</li>
+</ul>
+</li>
+<li>
+<p><strong>單價公理與結構恆等性原理（Univalence Axiom &amp; Structure Identity Principle）</strong></p>
+<ul>
+<li>直覺理解：在宇宙類型 <span class="math inline">\mathcal{U}</span> 中，任何一條相等路徑 <span class="math inline">p : A =_{\mathcal{U}} B</span> 都能透過路徑歸納誘導出一個雙向等價函式 <span class="math inline">\operatorname{idtoequiv}(p) : A \simeq B</span>。傳統系統只允許字面完全一樣的類型相等。Voevodsky 的單價公理斷言：這個從相等到等價的映射本身就是一個等價。換句話說，在類型宇宙裡，兩個類型相等的唯一判準就是它們同倫等價。而且每一個具體的自同構（例如布林值 <code>not : Bool ≃ Bool</code>）都會在宇宙裡產生一條真實的非平凡相等迴路。</li>
+<li>機制或核心表達式：對任意類型宇宙 <span class="math inline">\mathcal{U}</span> 中的 <span class="math inline">A, B : \mathcal{U}</span>，典範映射
+<div class="math inline">\operatorname{idtoequiv}_{A,B} : (A =_{\mathcal{U}} B) \xrightarrow{\;\sim\;} (A \simeq B)</div>
+為同倫等價，其逆記作 <span class="math inline">\operatorname{ua} : (A \simeq B) \to (A =_{\mathcal{U}} B)</span>，並滿足計算律：對任意類型族 <span class="math inline">P : \mathcal{U} \to \mathcal{U}</span>（例如「是阿貝爾群」或「上同調群」），沿路徑傳輸即等價作用：
+<div class="math inline">\operatorname{transport}^{\mathrm{Id}_{\mathcal{U}}}(\operatorname{ua}(e), x) = e(x)</div></li>
+<li>能做到什麼，代價是什麼：可以自動推導函數外延性（Function Extensionality）與結構恆等性原理（SIP）。後者是說同構的群、環、範疇在邏輯上完全不可區分，所以定理可以沿著同構直接搬運。代價是原始《HoTT Book》把 <span class="math inline">\operatorname{ua}</span> 當作外加公理，這會卡住項歸約，破壞正規化（Canonicity）：算一個自然數，卻卡在未展開的 <span class="math inline">\operatorname{ua}</span> 上。這個問題到立方類型論才解決。</li>
+</ul>
+</li>
+<li>
+<p><strong>高階歸納類型與合成同倫論（Higher Inductive Types &amp; Synthetic Homotopy Theory）</strong></p>
+<ul>
+<li>直覺理解：傳統歸納類型（如自然數 <span class="math inline">\mathbb{N}</span>、列表 <code>List</code>）只能規定有哪些點（建構子 <span class="math inline">0, \operatorname{succ}</span>）。高階歸納類型（HITs）允許我們在定義資料型別的同時，直接規定點與點之間有哪些內建的路徑與高維面。例如定義圓周 <span class="math inline">S^1</span> 不需要實數座標 <span class="math inline">x^2+y^2=1</span>，只要寫兩行：有一個基點 <span class="math inline">\mathsf{base} : S^1</span>，以及一條從基點回到基點的基本迴路 <span class="math inline">\mathsf{loop} : \mathsf{base} =_{S^1} \mathsf{base}</span>。</li>
+<li>機制或核心表達式：以圓周 <span class="math inline">S^1</span> 與商類型 <span class="math inline">A / R</span> 為例，HIT 同時給出點建構子與路徑建構子：
+<div class="math inline">\mathsf{data}\; S^1 : \mathcal{U} \;\mathsf{where}\quad \mathsf{base} : S^1,\quad \mathsf{loop} : \mathsf{base} =_{S^1} \mathsf{base}</div>
+要定義從 <span class="math inline">S^1</span> 出發的依賴函數 <span class="math inline">f : \prod_{x:S^1} P(x)</span>，只需指定基點值 <span class="math inline">b : P(\mathsf{base})</span>，以及沿 <span class="math inline">\mathsf{loop}</span> 繞一圈回到原處的依賴路徑 <span class="math inline">\ell : \operatorname{transport}^P(\mathsf{loop}, b) = b</span>。結合單價公理（利用覆蓋空間編碼碼族 <span class="math inline">\mathsf{code}: S^1 \to \mathcal{U}</span> 將 <span class="math inline">\mathsf{loop}</span> 映為 <span class="math inline">\operatorname{succ} : \mathbb{Z} \simeq \mathbb{Z}</span>），只要十餘行純類型論推理，就能構造性地證明 <span class="math inline">\pi_1(S^1) \simeq \mathbb{Z}</span>。Brunerie 更進一步，在純 HoTT 中算出 <span class="math inline">\pi_4(S^3) \simeq \mathbb{Z}/2\mathbb{Z}</span>。</li>
+<li>能做到什麼，代價是什麼：不需要測度與歐氏空間分析，就能直接對拓撲空間、同倫推出（Pushouts）與集合商集做純代數的構造驗證。代價有兩點。一般的任意高階歸納類型，語法模式（Schema）與一致性語意都很微妙。另外，像 Brunerie 數 <span class="math inline">n</span>（<span class="math inline">\pi_4(S^3) \simeq \mathbb{Z}/n\mathbb{Z}</span> 中 <span class="math inline">n=\pm 2</span>）的純歸約計算曾經耗盡超級電腦的記憶體，可見計算效率很重要。</li>
+</ul>
+</li>
+<li>
+<p><strong>立方類型論與有向／模態擴展（Cubical, Directed &amp; Cohesive Type Theories）</strong></p>
+<ul>
+<li>直覺理解：這一項的問題是怎麼讓電腦真的算出單價公理的結果。Cohen–Coquand–Huber–Mörtberg（CCHM）提出的立方類型論（Cubical Type Theory）在語法中直接引入抽象單位區間 <span class="math inline">\mathbb{I}</span>（含端點 <span class="math inline">0,1</span>）。路徑定義為帶區間參數的函數 <span class="math inline">p : \mathbb{I} \to A</span>，同倫變形定義為高維超立方體 <span class="math inline">\mathbb{I}^n \to A</span>，Kan 盒子填充則成為內建的可執行計算指令（<code>hcomp</code> / <code>Glue</code>）。再進一步，如果區間 <span class="math inline">\mathbb{I}</span> 不允許反向翻轉（Directed Interval），路徑就變成不可逆的有向箭頭，HoTT 就成了有向類型論（Directed Type Theory），可以用來合成化推理 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>。</li>
+<li>機制或核心表達式：在立方類型論（如 <code>Cubical Agda</code>）中，路徑類型為 <span class="math inline">\operatorname{Path}_A(x,y) :\equiv \{ f : \mathbb{I} \to A \mid f(0) \equiv x,\, f(1) \equiv y \}</span>。透過 <code>Glue</code> 類型把等價 <span class="math inline">e : A \simeq B</span> 黏貼在區間端點 <span class="math inline">i=0</span> 上，<span class="math inline">\operatorname{ua}(e) : \mathbb{I} \to \mathcal{U}</span> 就成為可計算的定理，不再是外加公理。閉項正規化也完全恢復（Canonicity：任何類型為 <span class="math inline">\mathbb{N}</span> 的封閉項必定在有限步內歸約為具體數字 <span class="math inline">n</span>）。</li>
+<li>能做到什麼，代價是什麼：單價數學因此成為可執行的程式語言（已成功跑出 Brunerie 數 <span class="math inline">= 2</span> 及實數構造）。代價是不同的立方區間代數（De Morgan 代數、笛卡爾立方、2026 年 Cavallo–Sattler 研究的消去反轉算子立方系統）在連接性（Connections）與高階凝聚模型對齊上各有細緻的語意取捨。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>內部高階範疇論的無窮相容性障礙（Wild Categories 與 Coherent <span class="math inline">\infty</span>-Categories）</strong>：在純 HoTT 內部直接定義範疇或半單純類型（Semisimplicial Types）是公開難題。如果只寫有限層結合律，得到的只是狂野範疇（Wild Category），許多古典定理不再自動成立。例如 2026 年 Perry Hart 指出，「左伴隨保持餘極限」在狂野範疇中會失效，必須額外加上 2-coherence 條件。學界目前有兩條路線：一是在外層加入有向單純形區間（Riehl–Shulman / <code>rzk</code>），二是引入二級類型論（Two-Level Type Theory, 2LTT），讓嚴格相等與同倫相等共存。</li>
+<li><strong>有向類型論（Directed Type Theory）的統一語法與對偶扭轉</strong>：HoTT 能刻畫所有箭頭皆可逆的 <span class="math inline">\infty</span>-群胚，但計算機科學（狀態轉移、重寫系統）與一般範疇論充滿不可逆態射。怎麼在依賴類型論中自然處理協變與逆變依賴，仍是主要的設計難題。2026 年 Chu Rivera–North 的扭轉有向類型論，以及 Lossin 在 <code>rzk</code> 中形式化餘笛卡爾纖維化，都在處理這個問題。</li>
+<li><strong>大型形式化生態分裂與 AI 自動驗證合成（Vericoding）</strong>：目前主流的 AI 數學推理生態（<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 中的 Lean 4 Mathlib）採用命題證明無關（Proof Irrelevance / <code>Prop</code>）的集合級基礎，換取工程上的便利。Cubical Agda / HoTT-Rocq 則堅持單價高階基礎。怎麼在神經程式合成（如 2026 年 Feng et al. 多模態驗證器合成）中兼顧高階類型安全與規格自動對齊，是純類型論與 AI 工程之間尚待解決的問題。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 與軟體架構（Representation Independence / 單價介面設計）</strong>：單價公理對應到軟體工程，就是型別抽象屏障（Parametricity &amp; Representation Independence）。為稀疏矩陣與稠密矩陣建立雙向無損介面時，用商類型與依賴傳輸的想法設計 API，可以從型別層面防止下游演算法洩漏底層實作細節。</li>
+<li><strong>遷移至 <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 與資料整合（高階歸納類型作為無衝突合併結構 CRDTs）</strong>：分散式系統中的衝突免除複製資料型別（CRDTs），就是把操作交換律當作 2-維路徑建構子來定義的高階歸納類型。不同節點亂序執行的狀態軌跡，由二維填充子保證收斂到同一個同倫等價類。</li>
+<li><strong>遷移至 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 與物理學（模態類型論分離拓撲與同倫）</strong>：Shulman 與 Schreiber 的實內聚同倫類型論（Real-Cohesive HoTT）顯示，只要在類型論中加入一組伴隨模態（離散化 <span class="math inline">\flat \dashv \sharp</span> 餘離散化），就能在不寫任何 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 的情況下，把連續拓撲黏連與同倫路徑空間分開，並直接給出 Brouwer 不動點定理的純構造性證明。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 194 篇核心文獻，其中 192 篇有 Open-Access PDF 原文直連。原始 PDF 都收在 <code>~/.ai_papers_vault.noindex</code> 並綁定到 Zotero，不會出現在 macOS Spotlight。點下方的 <code>📚 Zotero 開啟</code>，就能直接在 Zotero 讀原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2013</td>
+<td><em>Homotopy Type Theory: Univalent Foundations of Mathematics</em>，The Univalent Foundations Program</td>
+<td>普林斯頓高研院集體合著的「HoTT Book」，從零建立依賴類型、單價公理、高階歸納類型與合成同倫論。</td>
+<td>G1–G2 必讀經典 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/7Q5RC6RT" class="zotero">📚 Zotero 開啟</a> · <a href="https://homotopytypetheory.org/book/" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><em>Introduction to Homotopy Type Theory</em>，Egbert Rijke</td>
+<td>教學脈絡清楚的現代標準教科書，循序漸進帶讀者親手推導函數外延性、單價公理與圓周基本群。</td>
+<td>G1–G2 入門首選 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/4KHXIBFT" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2212.11082" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2007</td>
+<td><em>Homotopy theoretic models of identity types</em>，Steve Awodey, Michael A. Warren</td>
+<td>開啟 HoTT 研究的里程碑論文，證明內涵類型論的相等類型可以在任意 Quillen 模型範疇中詮釋為路徑物件。</td>
+<td>G2 歷史樞紐 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/KAHSHGDR" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/0709.0248" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2016</td>
+<td><em>Cubical Type Theory: a constructive interpretation of the univalence axiom</em>，Cyril Cohen et al.</td>
+<td>給單價公理真正計算語意的論文（CCHM），用高維立方體區間讓 <code>ua</code> 可以歸約計算，Cubical Agda 由此而來。</td>
+<td>G2–G3 核心必讀 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/Q7KDXWAN" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1611.02108" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><em>A type theory for synthetic infinity-categories</em>，Emily Riehl, Michael Shulman</td>
+<td>在單純同倫類型論中引入有向區間、Segal 類型與 Rezk 類型，率先用類型論直接做合成 <span class="math inline">(\infty,1)</span>-範疇論。</td>
+<td>G3 跨域橋樑 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/KCV7JTJX" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1705.07442" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>2000｜Charles Rezk</strong>，<em>A model for the homotopy theory of homotopy theory</em>（被引 385 次，<code>[OA PDF]</code>）：提出完備 Segal 空間（Complete Segal Spaces）。其中的完備性條件（同倫等價空間等於物件路徑空間），就是 Voevodsky 單價公理在 <span class="math inline">(\infty,1)</span>-範疇語意下的幾何前身。 <a href="zotero://select/library/items/8Z39NXVH" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/9811037" rel="noopener">原文連結</a></li>
+<li><strong>2001｜Jean-Yves Girard</strong>，<em>Locus Solum: From the rules of logic to the logic of rules</em>（被引 268 次，<code>[OA PDF]</code>）：提出 Ludics，試圖從互動軌跡、位址（Loci）與正交對偶重新推出邏輯與類型規則，可以和類型語意互相對照（詳見 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>）。 <a href="zotero://select/library/items/XEPMW4DN" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0004088" rel="noopener">原文連結</a></li>
+<li><strong>2013｜Urs Schreiber</strong>，<em>Differential cohomology in a cohesive infinity-topos</em>（被引 83 次，<code>[OA PDF]</code>）：為內聚同倫類型論（Cohesive HoTT）提供高階 Topos 模型與微分規範場詮釋。 <a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1310.7930" rel="noopener">原文連結</a></li>
+<li><strong>2015｜Michael Shulman</strong>，<em>Brouwer's fixed-point theorem in real-cohesive homotopy type theory</em>（被引 71 次，<code>[OA PDF]</code>）：用伴隨模態與清脆變數（Crisp Variables）區分連續拓撲路徑與抽象同倫相等，在純類型論中構造性證明 Brouwer 不動點定理。 <a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1509.07584" rel="noopener">原文連結</a></li>
+<li><strong>2016｜Guillaume Brunerie</strong>，<em>On the homotopy groups of spheres in homotopy type theory</em>（被引 33 次，<code>[OA PDF]</code>）：合成同倫論的代表作，只用高階歸納類型、Hopf 纖維化與 James 構造證明 <span class="math inline">\pi_4(S^3) \simeq \mathbb{Z}/2\mathbb{Z}</span>。 <a href="zotero://select/library/items/M6DDJB3S" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1606.05916" rel="noopener">原文連結</a></li>
+<li><strong>2015｜Éric Tanter, Nicolas Tabareau</strong>，<em>Gradual Certified Programming in Coq</em>（被引 19 次，<code>[OA PDF]</code>）：把漸進式型別（Gradual Typing）引入依賴類型驗證，允許開發者延後部分性質的證明，改為執行期契約檢查，降低認證程式設計的採用門檻。 <a href="zotero://select/library/items/TTK486CU" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1506.04205" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Models for dagger <span class="math inline">(\infty,1)</span>-categories III: Univalent flagged dagger <span class="math inline">(\infty,1)</span>-categories and unitarily complete dagger Segal anima</strong>，Keima Akasaka：反轉單純靈魂與厄米旗標間的實現／神經伴隨，把匕首 Bergner／Joyal／Rezk 模型所呈現的 <span class="math inline">(\infty,1)</span>-範疇內蘊地識別為單值旗標匕首 <span class="math inline">(\infty,1)</span>-範疇。文中嚴格確立單值性與么正完備性、單值化與厄米完備化之間的精確對應。（<a href="zotero://select/library/items/JGZJ5BDB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.17311" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Functorial Neural Architectures from Higher Inductive Types</strong>，Karen Sargsyan：把高階歸納類型（HIT）的基點、路徑構造子與 2-胞腔直接編譯為嚴格么半函子神經解碼器，以可學習的同倫表達代數商關係。文中證明標準 Softmax 自注意力無法同時滿足嚴格么半複合與非平凡商空間下降，並在環面與克萊因瓶實驗中以 2–10 倍精度超越基線（2-胞腔填平 46% 誤差缺口）。（<a href="zotero://select/library/items/U8M7TICM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.16123" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>On Left Adjoints Preserving Colimits in Homotopy Type Theory</strong>，Perry Hart（2026，<em>arXiv:2608.28473</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：在一階範疇論中，「左伴隨函子必保持餘極限（LAPC）」是兩行就能證完的定理。但在純 HoTT 內部的狂野範疇（Wild Categories）中，因為缺乏無窮階相容條件，標準證明會失效。</li>
+<li>關鍵做法：構造出在狂野伴隨下確實不保持餘極限的反例，並提煉出名為「2-相容性（2-coherence）」的充分條件，讓 LAPC 定理在合成同倫論中重新嚴格成立。</li>
+<li>跨領域啟發：顯示有限層等式截斷與真正的 <span class="math inline">\infty</span>-相容性之間有落差，在證明助手中設計高階代數介面時應當留意。</li>
+<li>連結：<a href="zotero://select/library/items/FC3RFFFV" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2608.28473" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Eliminating reversals from cubical type theories</strong>，Evan Cavallo, Christian Sattler（2026，<em>arXiv:2605.15080</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：立方類型論常在單位區間 <span class="math inline">\mathbb{I}</span> 上假設對合反轉算子 <span class="math inline">i \mapsto 1-i</span>（如 De Morgan 立方）。但反轉算子會讓某些商模型失效，也妨礙向不可逆的有向立方類型論平滑過渡。</li>
+<li>關鍵做法：證明對於具有自對偶區間理論（如最小雙端點區間或有界分配格）的立方類型論，外加反轉算子是保守擴展（Conservative Extension）。也就是說，可以消去區間反轉，不損失單價性與表達力。</li>
+<li>跨領域啟發：統一不同派別的立方模型（笛卡爾與 De Morgan），並為有向同倫類型論打下元理論基礎。</li>
+<li>連結：<a href="zotero://select/library/items/79BJXBH9" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2605.15080" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批延伸追蹤2026-近期">同批延伸追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Jackson Brough</strong>，<em>Formalizing the Real Numbers in Homotopy Type Theory with Cubical Agda</em>（<em>arXiv:2604.24782</em>，<code>[OA PDF]</code>）：在 Cubical Agda 中形式化《HoTT Book》的高階歸納-歸納類型（HIIT）柯西實數，不需要可數選擇公理，也不用做 Setoid 的繁瑣記帳。 <a href="zotero://select/library/items/WUG4UE7V" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2604.24782" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Benno Lossin</strong>，<em>Fibrations in Directed Type Theory</em>（<em>arXiv:2604.18668</em>，<code>[OA PDF]</code>）：在實驗性證明助手 <code>rzk</code> 中形式化 Riehl–Shulman 合成 <span class="math inline">\infty</span>-範疇的餘笛卡爾纖維化及其封閉性質。 <a href="zotero://select/library/items/PUAPUKIN" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2604.18668" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Yueyang Feng et al.</strong>，<em>Certified Program Synthesis with a Multi-Modal Verifier</em>（<em>ASE 2026 / arXiv:2604.16584</em>，<code>[OA PDF]</code>）：探討從自然語言同時生成程式、形式規格與對齊證明（Vericoding）時，怎麼檢測規格過強／過弱，以及多模態驗證器如何協同，與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 相關。 <a href="zotero://select/library/items/WNK2SSJZ" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2604.16584" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Fernando Rafael Chu Rivera, Paige Randall North</strong>，<em>Directed type theory, with a twist</em>（<em>arXiv:2602.17480</em>，<code>[OA PDF]</code>）：針對一般範疇（而非群胚）的語意，提出帶扭轉結構的新型有向依賴類型論。 <a href="zotero://select/library/items/QXRAE9DH" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2602.17480" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

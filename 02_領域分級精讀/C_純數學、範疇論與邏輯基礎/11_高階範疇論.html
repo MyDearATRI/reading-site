@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>11｜高階範疇論（Higher Category Theory &amp; Derived Geometry） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a></nav></header>
+<main>
+<article>
+
+<h1 id="11高階範疇論higher-category-theory-derived-geometry">11｜高階範疇論（Higher Category Theory &amp; Derived Geometry）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> · <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>兩個物件「以哪一種方式同構」（見證路徑、路徑之間的變形，乃至無窮階相容性），在數學裡到處出現，傳統集合論卻把它抹平。高階範疇論把這些資訊全部保留為一等公民，替現代幾何、拓撲與物理提供一套通用的組裝框架，不丟失高階對稱性與橫截相交資訊。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+在傳統數學（集合論與一階範疇論）裡，我們習慣問兩個物件是否相等（<span class="math inline">A = B</span>）或是否同構（<span class="math inline">A \cong B</span>）。一旦確認同構，往往直接把兩者捏合成同一個點（取商集 Quotient）。但在幾何、拓撲與規範場論中，「如何同構」本身帶有關鍵的結構資訊。群作用在空間上有不動點時，強行取商會破壞流形的平滑性。兩個子流形非橫截相交（例如兩條相切的曲線）時，傳統交集會丟失重數與高階修正項。鏈複形做完上同調取商後，局部的資料就無法再黏合（Gluing）回全局物件，這就是導出範疇局部化之後不可黏合的問題。高階範疇論要處理的，就是這種一取商就失真的情況。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+把普通集合想像成只記錄結果數值的靜態試算表，把一階範疇論想像成記錄城市之間單程航班的路線圖。<span class="math inline">({\infty},1)</span>-範疇則像一套 Git 版本控制加上連續飛行軌跡的系統：
+<ul>
+<li>0-胞腔（物件）是程式碼狀態／空間位置。</li>
+<li>1-胞腔（態射）是從狀態 <span class="math inline">A</span> 轉換到 <span class="math inline">B</span> 的 Commit／飛行航線。</li>
+<li>2-胞腔（同倫）是見證紀錄，證明兩條不同的飛行航線可以連續平移變形成彼此（Merge/Rebase 證明）。</li>
+<li>3-胞腔乃至 <span class="math inline">n</span>-胞腔是更高階的見證，證明兩種變形方案本身也彼此相容。
+你不必強迫兩條航線字面上完全相同。只要填滿它們之間的三角形與高維單純形（Horn Filling），無窮層級的組裝就能保持自洽。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+現代純數學基礎的重構以它為核心。它為 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 提供導出代數幾何（Derived Algebraic Geometry）來處理奇異模空間，為 <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 提供譜（Spectra）的穩定 <span class="math inline">\infty</span>-範疇。它和 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 結合，為分析學與物理規範場（內聚 <span class="math inline">\infty</span>-Topos）提供公理框架。在計算與 AI 這一端，它的內部語言就是 <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>（如 Lean 4 Mathlib 高階結構形式化）。它的層論（Sheaf / Cosheaf）下降條件，則啟發了 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 中的層神經網路（Sheaf Neural Networks）與局部到全局的一致性學習。</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    P0[&quot;古典瓶頸：取同倫商範疇 Ho(C) 導致極限與黏合失效&quot;] --&gt; M1[&quot;Quillen 模型範疇：弱等價、纖維化與上纖維化三元組&quot;]
+    M1 --&gt;|&quot;消除模型人為依賴&quot;| Q1[&quot;Joyal 擬範疇與 Lurie (∞,1)-範疇：單純形內角填充&quot;]
+    Q1 --&gt; T1[&quot;高階 Topos 理論：局部到全局的同倫下降 (Descent) 與層論&quot;]
+    Q1 --&gt; S1[&quot;高階代數 (Higher Algebra)：穩定 ∞-範疇、譜與 E_∞ 環&quot;]
+    Q1 --&gt;|&quot;脫離單一座標系&quot;| C1[&quot;Riehl-Verity ∞-Cosmos 與合成 ∞-範疇類型論&quot;]
+    T1 &amp; S1 --&gt; DAG[&quot;導出代數幾何與內聚物理場論：奇異模空間與規範對稱&quot;]
+    DAG &lt;--&gt;|&quot;形式化與資料局部黏合&quot;| X1[&quot;跨領域接口：HoTT 單價基礎 / 凝聚數學 / 幾何深度學習&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>擬範疇與內角填充（Quasi-Categories &amp; Inner Horn Lifting）</strong></p>
+<ul>
+<li>直覺理解：在普通範疇裡，只要有箭頭 <span class="math inline">f: x \to y</span> 與 <span class="math inline">g: y \to z</span>，就存在唯一的複合箭頭 <span class="math inline">g \circ f</span>。但在帶有連續變形的世界裡，複合路徑的選法不唯一（例如先加速再減速，或勻速前進）。所有合理的複合路徑應該彼此同倫等價，構成一個可收縮的空間（Contractible Space）。Joyal 與 Lurie 的想法是：不需要人工指定哪一條複合才是標準答案，只要規定「凡是有兩段相接的邊，中間一定能補上一塊三角形薄片作為複合的見證」就夠了。</li>
+<li>機制或核心表達式：把 <span class="math inline">(\infty,1)</span>-範疇建模為單純集合（Simplicial Set）<span class="math inline">\mathcal{C}: \Delta^{\mathrm{op}} \to \mathsf{Set}</span>，要求它對所有維度 <span class="math inline">n \ge 2</span> 及內部頂點 <span class="math inline">0 &lt; k &lt; n</span> 滿足內角提升性質（Inner Horn Lifting Property）：
+<div class="math inline">\forall\, 0 &lt; k &lt; n,\quad \operatorname{Hom}_{\mathsf{sSet}}(\Lambda^n_k, \mathcal{C}) \twoheadrightarrow \operatorname{Hom}_{\mathsf{sSet}}(\Delta^n, \mathcal{C}) \quad \text{為滿射（且解空間可收縮）}</div>
+其中 <span class="math inline">\Lambda^n_k \subset \Delta^n</span> 是挖掉第 <span class="math inline">k</span> 個對面與內部的 <span class="math inline">n</span> 維角（例如 <span class="math inline">\Lambda^2_1</span> 就是兩條首尾相接的邊 <span class="math inline">0 \to 1 \to 2</span>）。填滿 <span class="math inline">\Delta^2</span>，就同時得到複合邊 <span class="math inline">0 \to 2</span> 和見證它們相等的 2-單純形。如果對外角 <span class="math inline">k=0, n</span> 也能填充，所有 1-態射都可逆，就退化為純拓撲空間對應的 Kan 複形（<span class="math inline">\infty</span>-群胚）。</li>
+<li>能做到什麼，代價是什麼：不必再手寫無窮多條結合律相容等式（Pentagon, Stasheff Associahedra...），避開了組合爆炸，也統一了範疇論與同倫論。代價是單純集合屬於特定座標實現（Model-Dependent），初學時要先學會大量的組合單純形引理。Riehl–Verity 的 <span class="math inline">\infty</span>-Cosmos 與合成類型論路線也是因此而出現的。</li>
+</ul>
+</li>
+<li>
+<p><strong>高階 Topos、同倫極限與下降條件（<span class="math inline">\infty</span>-Topoi, Homotopy Limits &amp; Descent）</strong></p>
+<ul>
+<li>直覺理解：科學與幾何中最基本的操作是分而治之再拼裝（Local-to-Global Gluing）：把複雜流形切成簡單開集，在每塊上定義局部場或數據，再沿交集黏起來。傳統的層（Sheaf）要求交集處嚴格相等。但如果局部物件帶有自身的對稱群（如規範場或橢圓曲線），情況就不同了。在兩塊交集處選了同構見證 <span class="math inline">\phi_{ij}</span> 之後，三塊交集處的 <span class="math inline">\phi_{jk} \circ \phi_{ij}</span> 與 <span class="math inline">\phi_{ik}</span> 往往不相等，而是相差一個 2-階規範變換，四塊交集又有 3-階相容條件，依此類推。高階 Topos 就是讓這種無窮階的軟黏合（Homotopy Descent）可以無損運作的環境。</li>
+<li>機制或核心表達式：在 <span class="math inline">(\infty,1)</span>-範疇中，極限與餘極限本來就是同倫不變的，不必再手動取投射／內射分解。高階層 <span class="math inline">\mathcal{F}: \mathcal{C}^{\mathrm{op}} \to \mathcal{S}</span>（取值於空間／<span class="math inline">\infty</span>-群胚範疇 <span class="math inline">\mathcal{S}</span>）對覆蓋篩 <span class="math inline">U_\bullet \to X</span> 滿足 Čech 同倫下降條件：
+<div class="math inline">\mathcal{F}(X) \xrightarrow{\;\sim\;} \lim_{[n] \in \Delta} \prod_{i_0,\dots,i_n} \mathcal{F}(U_{i_0} \times_X \cdots \times_X U_{i_n})</div>
+Lurie 的 Giraud 定理證明：凡滿足可呈現性（Presentability）、餘極限普適性與群胚物件有效性（Groupoid Objects are Effective）的 <span class="math inline">\infty</span>-範疇，都等價於某個小 <span class="math inline">\infty</span>-範疇上的 <span class="math inline">\infty</span>-層局部化範疇。</li>
+<li>能做到什麼，代價是什麼：一次涵蓋高階疊（Higher Stacks）、非阿貝爾上同調與高階規範場分類空間。代價是必須用空間 <span class="math inline">\mathcal{S}</span> 取代集合 <span class="math inline">\mathsf{Set}</span> 作為基礎原子，直覺也要從布林真假值換成同倫截斷層級（<span class="math inline">(-2)</span>-截斷為可縮唯一、<span class="math inline">(-1)</span>-截斷為命題、<span class="math inline">0</span>-截斷才是普通集合）。</li>
+</ul>
+</li>
+<li>
+<p><strong>穩定 <span class="math inline">\infty</span>-範疇與高階代數（Stable <span class="math inline">\infty</span>-Categories &amp; <span class="math inline">\mathbb{E}_k</span>-Algebras）</strong></p>
+<ul>
+<li>直覺理解：過去半個世紀，同調代數家用 Verdier 的三角範疇（Triangulated Categories）研究鏈複形。三角範疇有個嚴重的缺陷：錐構造（Cone）不是函子性的。給你一個態射的映射錐，卻無法自然誘導出態射之間的唯一映射，局部資料因此無法黏合成層。穩定 <span class="math inline">\infty</span>-範疇可以看成三角範疇被壓扁之前的立體原貌。在這裡，加減法與微積分式的長正合序列會自然出現。</li>
+<li>機制或核心表達式：一個帶零物件 <span class="math inline">0</span> 的 <span class="math inline">(\infty,1)</span>-範疇 <span class="math inline">\mathcal{C}</span> 稱為穩定的（Stable），若任意纖維序列與餘纖維序列重合，即方形
+<div class="math inline">\begin{CD} X @&gt;&gt;&gt; Y \\ @VVV @VVV \\ 0 @&gt;&gt;&gt; Z \end{CD}</div>
+為同倫拉回（Pullback）當且僅當它是同倫推出（Pushout）。此時懸置算子與迴路算子構成互逆等價 <span class="math inline">\Sigma \dashv \Omega: \mathcal{C} \xrightarrow{\sim} \mathcal{C}</span>，同倫範疇 <span class="math inline">\operatorname{Ho}(\mathcal{C})</span> 自動獲得典範的三角範疇結構。再引入 <span class="math inline">\infty</span>-運算元（<span class="math inline">\infty</span>-Operads），就能定義從結合性到完全同倫交換性的階層：
+<div class="math inline">\mathbb{E}_1\text{-環（結合環譜）} \supset \mathbb{E}_2\text{-環（辮狀交換）} \supset \cdots \supset \mathbb{E}_\infty\text{-環（完全同倫交換環譜）}</div></li>
+<li>能做到什麼，代價是什麼：在譜（Spectra）上做交換代數與代數幾何因此可行（如拓撲模形式 <span class="math inline">\mathrm{TMF}</span> 與棱柱上同調）。代價是在特徵 <span class="math inline">0</span> 以外，<span class="math inline">\mathbb{E}_\infty</span>-環與嚴格交換的動畫環（Animated Rings / Simplicial Commutative Rings）不再一致，上同調算子會有細微的差異。</li>
+</ul>
+</li>
+<li>
+<p><strong>導出幾何與模型無關合成公理化（Derived Geometry &amp; Synthetic <span class="math inline">\infty</span>-Categories）</strong></p>
+<ul>
+<li>直覺理解：兩個曲面在三維空間相交，正常情況會交出一條 1 維曲線（維度 <span class="math inline">2+2-3=1</span>）。但如果兩張平面剛好完全重合，傳統交集的維度會跳成 2 維，原本的相交數公式就失效了。導出代數幾何（DAG）用動畫環／<span class="math inline">\mathbb{E}_\infty</span>-環取代普通交換環，把方程組線性相依的冗餘度編碼進高階同倫群 <span class="math inline">\pi_k</span>，讓托爾公式（Serre Tor Formula）成為結構層的一部分，病態相交因此恢復虛擬維度守恆。另一方面，Riehl–Verity 與 Riehl–Shulman 推動模型無關（Model-Independent）的合成框架，讓數學家不必再處理擬範疇、完備 Segal 空間等具體編碼細節，直接用純範疇／類型論公理推導定理。</li>
+<li>機制或核心表達式：古典仿射概形纖維積 <span class="math inline">\operatorname{Spec}(A) \times_{\operatorname{Spec}(R)} \operatorname{Spec}(B) = \operatorname{Spec}(A \otimes_R B)</span> 在導出範疇中換成導出張量積 <span class="math inline">A \otimes_R^{\mathbb{L}} B</span>，它的高階同倫群精確記錄高階相交重數：
+<div class="math inline">\pi_i(A \otimes_R^{\mathbb{L}} B) \cong \operatorname{Tor}_i^R(A, B)</div></li>
+<li>能做到什麼，代價是什麼：把奇異模空間（如 Kontsevich 穩定映射模空間、Donaldson–Thomas 不變量）變成平滑可控的導出疊。代價是幾何直覺必須同時追蹤底層的古典軌跡（Classical Truncation <span class="math inline">\pi_0</span>）與無窮層的高階無窮小結構。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<h3 id="核心開放張力">核心開放張力</h3>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong><span class="math inline">({\infty},n)</span>-範疇與配邊假說（Cobordism Hypothesis）的模型鴻溝</strong>：對 <span class="math inline">(\infty,1)</span>-範疇，各種模型（擬範疇、完備 Segal 空間、單純範疇）之間的等價已經釐清。但高維態射也不可逆時（<span class="math inline">(\infty,n)</span>-範疇與 <span class="math inline">(\infty,\infty)</span>-範疇，如拓撲量子場論 TQFT 所需的全擴展配邊範疇），嚴格相容性與對偶性（Dualizability）的形式化非常困難。可參見 2026 年 Riva 的新嘗試：用迭代餘跨度 <span class="math inline">n</span>-cospan contexts 把高階配邊還原為 1-範疇語句。</li>
+<li><strong><span class="math inline">\mathbb{E}_\infty</span>-環與動畫環（Animated Rings）在正特徵與導出幾何中的分裂</strong>：在特徵 <span class="math inline">p &gt; 0</span> 或整係數下，拓撲來源的 <span class="math inline">\mathbb{E}_\infty</span>-環（對稱群同倫軌道帶有 Steenrod 類算子）與代數幾何來源的動畫環（保留嚴格交換乘法與 Frobenius 自同態）不再等價。怎麼在導出代數幾何中重建 Tannaka 對偶，是目前最活躍的方向，例如 2026 年 Mundinger–Sahai 引入 <span class="math inline">\Theta</span>-範疇來捕捉動畫環的嚴格交換性。</li>
+<li><strong>計算與形式化驗證的可擴展性挑戰</strong>：Lurie《Higher Topos Theory》與《Higher Algebra》合計逾兩千頁。如果直接用單純集合在互動式定理證明器（Lean 4 / Rocq）中硬寫，會遇到嚴重的組合膨脹。學界正在探索怎麼透過合成 <span class="math inline">\infty</span>-範疇類型論（如 Riehl–Shulman 的 <code>rzk</code> 系統）與 <span class="math inline">\infty</span>-Cosmos，做出機器可讀的高階代數庫。</li>
+</ol>
+</aside>
+<h3 id="跨域結構遷移指南">跨域結構遷移指南</h3>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>（同倫鬆弛取代硬約束）</strong>：在多模態對齊或圖上的層神經網路（Sheaf NN）中，傳統的一致性損失要求循環映射嚴格滿足 <span class="math inline">\phi_{ik} = \phi_{jk}\phi_{ij}</span>。借用高階層的同倫下降，可以允許局部轉移算子在潛空間中透過高階修正項（2-cochains / 注意力殘差）達成軟相容，避免過度約束造成的表示坍縮（Over-squashing / Representation Collapse）。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 與軟體工程（保留見證而非布林抹除）</strong>：這是 Proof-relevant 的設計原則。編譯器、資料庫遷移或自動推理系統判定兩個結構等價時，不要只回傳 <code>true</code> 布林值，應該回傳具體的轉換雙射與逆映射（Equivalence Witness），下游模組才能沿著見證自動搬運屬性與不變量。</li>
+<li><strong>遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> 與 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>（高階對稱與反常分類）</strong>：凝聚態拓撲物態（SPT 相）與量子場論中的高階規範對稱（Higher-form Symmetries），就是高階群胚作用於內聚 <span class="math inline">\infty</span>-Topos 中的主叢。反常（Anomalies）對應高階下降障礙類。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>本領域共收錄 184 篇核心文獻，其中 182 篇有 Open-Access PDF 原文直連。原始 PDF 都收在 <code>~/.ai_papers_vault.noindex</code> 並綁定到 Zotero，不會出現在 macOS Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2016</td>
+<td><em>Category Theory in Context</em>，Emily Riehl</td>
+<td>進入高階範疇論之前適合先讀的一階範疇論公開教材，用萬有性質與米田引理貫穿代數、拓撲與同調的實例。</td>
+<td>G1–G2 入門首選 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/7R7V4X4T" class="zotero">📚 Zotero 開啟</a> · <a href="https://emilyriehl.github.io/files/context.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><em>Higher Topos Theory</em>，Jacob Lurie</td>
+<td>現代 <span class="math inline">(\infty,1)</span>-範疇與高階 Topos 的奠基專著，建立擬範疇的極限、拉回、直像與同倫下降體系。</td>
+<td>G2–G3 奠基經典 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/J63KFJUU" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0608040" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2017</td>
+<td><em>Higher Algebra</em>，Jacob Lurie</td>
+<td>接續 HTT 的第二部專著，定義穩定 <span class="math inline">\infty</span>-範疇、<span class="math inline">\infty</span>-運算元、<span class="math inline">\mathbb{E}_k</span>-環譜與導出交換代數。</td>
+<td>G3 專題深潛 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/RDF694GQ" class="zotero">📚 Zotero 開啟</a> · <a href="https://www.math.ias.edu/~lurie/papers/HA.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2022</td>
+<td><em>Elements of infinity-Category Theory</em>，Emily Riehl, Dominic Verity</td>
+<td>用 <span class="math inline">\infty</span>-Cosmos 建立模型無關（Model-Independent）的高階範疇論，讀者不必處理大量的單純形組合細節。</td>
+<td>G2 現代主幹 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/7DWNWIDQ" class="zotero">📚 Zotero 開啟</a> · <a href="https://emilyriehl.github.io/files/elements.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2019</td>
+<td><em>Higher Categories and Homotopical Algebra</em>，Denis-Charles Cisinski</td>
+<td>用精簡的現代手法，從單純集合一路講到 Joyal 模型結構與高階範疇，篇幅只有 HTT 的三分之一，寫得很清楚。</td>
+<td>G2–G3 嚴格導讀 <code>[OA PDF]</code></td>
+<td><a href="zotero://select/library/items/UX5QX6UT" class="zotero">📚 Zotero 開啟</a> · <a href="https://cisinski.app.uni-regensburg.de/CatLR.pdf" rel="noopener">原文連結</a></td>
+</tr>
+<tr>
+<td>2024</td>
+<td><em>Kerodon: An Online Resource for Homotopy-Coherent Mathematics</em>，Jacob Lurie</td>
+<td>Lurie 仿照 Stacks Project 建立的大型線上同倫相容數學百科，以模組化方式重寫單純集合與 <span class="math inline">\infty</span>-範疇的細節。</td>
+<td>G2–G3 隨查字典 <code>[線上百科]</code></td>
+<td><a href="zotero://select/library/items/CKPGTZBQ" class="zotero">📚 Zotero 開啟</a> · <a href="https://kerodon.net" rel="noopener">原文連結</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（6 篇經典樞紐）</summary>
+<p></p>
+<ul>
+<li><strong>2004｜Bertrand Toen, Gabriele Vezzosi</strong>，<em>Homotopical Algebraic Geometry II: geometric stacks and applications</em>（被引 395 次，<code>[OA PDF]</code>）：同倫代數幾何（HAG）的開創論文，在對稱么半模型範疇上建立導出幾何疊（Geometric Stacks）與切複形理論，現代導出代數幾何由此發展出來。 <a href="zotero://select/library/items/FUURNC89" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0404373" rel="noopener">原文連結</a></li>
+<li><strong>2017｜Emily Riehl, Michael Shulman</strong>，<em>A type theory for synthetic infinity-categories</em>（被引 350 次，<code>[OA PDF]</code>）：引入 Segal 類型與 Rezk 類型，建立單純同倫類型論，可以直接在依賴類型論中做合成 <span class="math inline">(\infty,1)</span>-範疇推理，是通往 <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 的主要連結。 <a href="zotero://select/library/items/KCV7JTJX" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1705.07442" rel="noopener">原文連結</a></li>
+<li><strong>2013｜Urs Schreiber</strong>，<em>Differential cohomology in a cohesive infinity-topos</em>（被引 83 次，<code>[OA PDF]</code>）：在內聚 <span class="math inline">(\infty,1)</span>-Topos 內以合成方式重構微分幾何、高階規範場與微分上同調，顯示高階範疇可以當作理論物理的基礎語言。 <a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1310.7930" rel="noopener">原文連結</a></li>
+<li><strong>2019｜Peter Scholze</strong>，<em>Lectures on Condensed Mathematics</em>（<code>[OA PDF]</code>）：用極端不連通緊空間上的凝聚層取代傳統拓撲空間，把泛函分析納入穩定 <span class="math inline">\infty</span>-範疇與同調代數的處理範圍（詳見 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>）。 <a href="zotero://select/library/items/AWXPXFI7" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2605.03658" rel="noopener">原文連結</a></li>
+<li><strong>2019｜David Gepner</strong>，<em>An Introduction to Higher Categorical Algebra</em>（<code>[OA PDF]</code>）：《Handbook of Homotopy Theory》中的綜述章節，用六十餘頁濃縮 Lurie《Higher Algebra》裡的穩定 <span class="math inline">\infty</span>-範疇、譜與環譜模範疇。 <a href="zotero://select/library/items/DC2RUTPC" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1907.02904" rel="noopener">原文連結</a></li>
+<li><strong>2001｜J. Daniel Christensen, William G. Dwyer, Daniel C. Isaksen</strong>，<em>Obstruction Theory in Model Categories</em>（<code>[OA PDF]</code>）：在一般帶基點恰當模型範疇中，把提升問題（Lifting Problem）函子化為障礙理論，說明古典同倫障礙類在模型範疇層次的普適來源。 <a href="zotero://select/library/items/98KU84JM" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/math/0109170" rel="noopener">原文連結</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ul>
+<li><strong>2026｜Categorified Koszul duality and deformation theory of higher categories</strong>，Isamu Iwanari：引入完備 <span class="math inline">t</span>-結構穩定可表現 <span class="math inline">(\infty,n)</span>-範疇（<span class="math inline">n&gt;1</span>），並建立高階範疇化 Koszul 對偶。文中證明這類高階範疇的形變問題構成由 Hochschild 上同調決定的良性形式模問題，並應用到完美疊上的範疇層。（<a href="zotero://select/library/items/PRX4G7PT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.23899" rel="noopener">官方連結</a>）</li>
+<li><strong>2026｜Models for dagger <span class="math inline">(\infty,1)</span>-categories II: Dagger complete Segal spaces and the Joyal--Tierney equivalence</strong>，Keima Akasaka：發展匕首 <span class="math inline">(\infty,1)</span>-範疇的單純空間表現，建構同倫常值解析模型與么正完備匕首 Segal 空間模型結構。文中證明匕首版 Joyal–Tierney Quillen 等價，把匕首 Bergner、Joyal 與 Rezk 三個模型的等價鏈完整接起來。（<a href="zotero://select/library/items/KW2C29I7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.06935" rel="noopener">官方連結</a>）</li>
+</ul>
+<h4 id="2026-11-19-最新入庫2-篇">2026-11-19 最新入庫（2 篇）</h4>
+<ol>
+<li>
+<p><strong>Higher zeroes in pointed infinity-categories</strong>，Thomas Rush Brown（2026，<em>arXiv:2611.04167</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：在帶基點（Pointed）的 <span class="math inline">\infty</span>-範疇中，零態射不只是單一箭頭，而是穿過零物件 <span class="math inline">0</span> 的所有複合路徑。問題是怎麼為任意小 <span class="math inline">\infty</span>-範疇自由添加零物件，同時保持無窮階相容的零態射選擇。</li>
+<li>關鍵做法：在單純集合上構造類比餘錐（Co-cone）的自由添零自函子，並證明它誘導出從一般小 <span class="math inline">\infty</span>-範疇到帶基點 <span class="math inline">\infty</span>-範疇包含函子的左伴隨，由此給出高階相容零態射（Coherent Null Morphisms）的內蘊定義。</li>
+<li>跨領域啟發：為穩定同倫論中的纖維序列與合成高階代數提供更底層的組合構造基元。</li>
+<li>連結：<a href="zotero://select/library/items/7XB5KT5K" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.04167" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Infinity operad pairs, higher distributivity and spectral Tambara functors</strong>，Aowen Fan（2026，<em>arXiv:2611.09115</em>，<code>[OA PDF]</code>）</p>
+<ul>
+<li>核心問題：加法與乘法之間的分配律（Distributivity）在高階同倫的設定下很難公理化，因為乘法展開的順序與同倫變形會互相糾纏。這妨礙了等變穩定同倫論中譜級 Tambara 函子的統一構造。</li>
+<li>關鍵做法：建立 <span class="math inline">\infty</span>-運算元對（<span class="math inline">\infty</span>-Operad Pairs）與雙么半 <span class="math inline">\infty</span>-範疇的 Day 卷積框架，嚴格定義高階分配函子，並證明有限群 <span class="math inline">G</span> 的有限 <span class="math inline">G</span>-集跨度範疇上的運算元分配函子恰好刻畫譜級 Tambara 函子。</li>
+<li>跨領域啟發：把高階運算元代數和 <a class="wl" href="14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 中的等變上同調乘法範數（Multiplicative Norms）直接連起來。</li>
+<li>連結：<a href="zotero://select/library/items/RGTWNRXF" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.09115" rel="noopener">原文連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="同批延伸追蹤2026-近期">同批延伸追蹤（2026 近期）</h4>
+<ul>
+<li><strong>2026｜Lorenzo Riva</strong>，<em>Cospan contexts and higher categories</em>（<em>arXiv:2610.24473</em>，<code>[OA PDF]</code>）：證明任意 <span class="math inline">n</span>-範疇都可以用 <span class="math inline">n</span>-cospan contexts 建模，也就是配備迭代餘跨度與推出複合的 1-範疇。這為把配邊假說轉譯成 1-範疇命題提供了新途徑。 <a href="zotero://select/library/items/6ISFM8RI" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.24473" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Joshua Mundinger, Shubhankar Sahai</strong>，<em>Tannakian reconstruction in derived algebraic geometry</em>（<em>arXiv:2608.00999</em>，<code>[OA PDF]</code>）：利用 Nuiten–Toën 的 <span class="math inline">\Theta</span>-範疇捕捉動畫環的嚴格交換結構，把 Lurie 與 Bhatt–Halpern-Leistner 的 Tannaka 重建定理推廣到動畫環譜構成的導出代數幾何。 <a href="zotero://select/library/items/HE2CJB68" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2608.00999" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Julia E. Bergner, Brandon T. Shapiro, Inna Zakharevich</strong>，<em>Recognizing CGW categories among pointed stable double Segal spaces</em>（<em>arXiv:2607.12327</em>，<code>[OA PDF]</code>）：精確識別代數 <span class="math inline">K</span>-理論兩個一般輸入框架（CGW 範疇與帶基點穩定雙 Segal 空間）之間的分類圖等價關係。 <a href="zotero://select/library/items/Z8QBZ29E" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.12327" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Eric Hoffbeck, Ieke Moerdijk</strong>，<em>Koszul duality for algebras over infinity-operads</em>（<em>arXiv:2602.08851</em>，<code>[OA PDF]</code>）：把線性 <span class="math inline">\infty</span>-運算元與 <span class="math inline">\infty</span>-餘運算元之間的 Koszul 對偶提升到它們的代數與餘代數範疇層級。 <a href="zotero://select/library/items/ZCJV82UX" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2602.08851" rel="noopener">原文連結</a></li>
+</ul>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

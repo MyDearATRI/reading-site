@@ -1,0 +1,805 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026-11-19｜每日跨領域精讀日報（每領域最新 2 篇） · Reading</title>
+<link rel="stylesheet" href="../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="index.html">每日跨領域精讀</a></nav></header>
+<main>
+<article>
+
+<h1 id="2026-11-19每日跨領域精讀日報每領域最新-2-篇">2026-11-19｜每日跨領域精讀日報（每領域最新 2 篇）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 歷史日報：<a class="wl" href="00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a> ｜ 旗艦 L5 導讀庫：<a class="wl" href="../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a></p>
+</aside>
+<h2 id="第一層g15-分鐘看完今日各領域重點">第一層（G1）｜5 分鐘看完今日各領域重點</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">今日 43 領域裡最值得注意的五則</p>
+<p></p>
+<ol>
+<li><strong>神經符號邏輯與物理微分守恆，用到資源極度受限、沒有標註的場域</strong>：今天有好幾篇論文都不走純黑盒擬合。例子包括低軌立方衛星星座的聯邦邏輯張量網路 <code>FedLTN-CubeSat</code>（橫跨 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>）、變工況旋轉機械的規則引導 Transformer、嵌入動態時間常數的純物理訓練框架 <code>LNN-PINN</code>（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a>）、不需要真值解就能做物理微調的無監督 PDE 基礎模型（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>），以及用於核子散射位勢反演的雙向液態神經網路 <code>BiLNN</code>（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a>）。它們都把可微的一階規則和連續時間物理算子合在一起用，高可靠的科學計算與邊緣系統正往這個方向走。</li>
+<li><strong>最優傳輸（OT）在神經加速、逆問題辨識、因果擴展與複雜度下界四個方向同時有進展</strong>：神經熵最優傳輸越過了離散 Sinkhorn 與 Gromov-Wasserstein 的 <span class="math inline">O(n^2)</span> 瓶頸（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a>）。逆向最優傳輸則嚴格給出可辨識條件，說明何時能從觀測到的配對重建未知的底層代價矩陣（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a>）。其他幾篇分別處理圖失真距離與 GW 計算難度歸約（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a>）、有向無環圖與連續時間非線性濾波上的因果最優傳輸（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a>），以及非光滑 Alexandrov 彎曲空間上 Wasserstein 重心的定量穩定性（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a>）。跨域幾何對齊的理論因此更嚴密。</li>
+<li><strong>大模型內部表徵的研究從被動觀察，轉向可證偽的幾何、主動干預，以及從外部解剖數位 DNA</strong>：世界模型版的柏拉圖表示假說證明，預測一致性帶來的選擇壓力會讓異質模型收斂到同構的潛幾何（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>）。數概念幾何的研究發現，跨任務共享的是相對幾何關係，不是概念點本身；線性表示假說（LRH）也有了可證偽的判準（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a>）。工程上，下面這些工具可以接成一條完整的流程：3,400 萬特徵規模的稀疏自編碼器與「定位、引導、改進」管線（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>）、用隨機矩陣譜幾何即時偵測幻覺的 <code>EigenTrack</code>（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a>）、掛進生產級推理引擎內部的 <code>vLLM Hook</code>（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>），以及純黑盒反推預訓練語料配比的 <code>LLMSurgeon</code>（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a>）。</li>
+<li><strong>高階範疇、類型論、博弈語意與弱算子拓撲，處理了學習、力學與驗證的幾個基礎障礙</strong>：David Spivak 用平滑自適應配置運算子和透鏡內化（Lens Internalization），把梯度下降學習與哈密頓力學寫成同一套語法的函子語意。隨機與非決定性系統也有了範疇時鐘系統的表徵（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a>）。乘積交互（Product Interaction）用代數乘法統一了卷積、注意力與狀態空間架構（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>）。另外，Banach 空間上非線性算子含高階導數的萬有逼近原本會失敗，Bastiani 弱拓撲修復了這個障礙（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>）；Cahiers Topos 補上無窮噴流叢射影極限的證明（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a>）。多模態驗證器程式合成（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>）與不動點邏輯的 <span class="math inline">\mu</span>-to-<span class="math inline">\nu</span> 博弈語意轉換（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>）則讓形式驗證更容易自動化、更貼近實際使用。</li>
+<li><strong>計算有界資訊論（Epiplexity）與跨尺度主體性的研究，改變了對學習、合作與科學發現的看法</strong>：古典資訊論預設觀察者有無限算力。Epiplexity 指出這個預設的盲點，證明確定性轉換能為計算有界的智能體創造可學習的新結構資訊（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a>）。哲學與基礎智能體研究嚴格論證「機率抽樣並非具承諾之選擇」（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a>），並用 Stack Theory 把視窗表象的身分，和受因果行動約束的真實主體同一性分開。其他幾篇涵蓋神經元胞自動機的去中心化群體形態發生（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a>）、多層網路與拓撲陷阱中的合作演化（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a>）、千人數位孿生社會模擬（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>），以及「理論、方法、結果」多維新穎性的組合規律（<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a>）。合起來看，範圍從個體心智一路到科學共同體的演化。</li>
+</ol>
+</aside>
+<h2 id="第二層g243-領域最新-2-篇精讀卡共-86-篇">第二層（G2）｜43 領域最新 2 篇精讀卡（共 86 篇）</h2>
+<aside class="callout" data-kind="tip"><p class="callout-title">怎麼讀</p>
+<p></p>
+<ul>
+<li>日常 10 分鐘泛讀：依六大知識星系瀏覽各領域最新 2 篇論文，每張卡依序看核心問題、關鍵做法、跨領域啟發，很快就能找到可以搬到其他學科的結構。</li>
+<li>用 Zotero 深讀：看到想細讀推導或圖表的文獻，直接點 <code>📚 Zotero 開啟</code>，就能在本地 Zotero 找到該篇條目與隱藏庫裡的原文 PDF。也可以查閱已完成雙重語意檢驗的 <a class="wl" href="../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</li>
+</ul>
+</aside>
+<h2 id="星系-a基礎架構與系統工程">星系 A｜基礎架構與系統工程</h2>
+<blockquote>
+<p>這個星系涵蓋現代序列模型、連續時間與神經符號的新架構、生成與後訓練工具鏈、多模態強化學習、攻防安全，以及底層的硬體推理系統：</p>
+</blockquote>
+<h3 id=""><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a></h3>
+<h4 id="1-mixture-of-experts-in-remote-sensing-a-survey2026">1. Mixture-of-Experts in Remote Sensing: A Survey（2026）</h4>
+<ul>
+<li>作者與出處：Yongchuan Cui, Peng Liu, Lajiao Chen · <em>Journal Article (https://www.icck.org/article/abs/jgrs.2025.140654)</em></li>
+<li>核心問題：地球觀測與遙測資料有多光譜／SAR／高光譜等異質模態，時空尺度的變化也很劇烈。傳統的稠密視覺或序列骨幹很難在單一模型裡同時顧到全模態表達力和推論效率，學界也還沒有系統化的設計分類框架。</li>
+<li>關鍵做法：整理混合專家模型（MoE）在遙測領域的路由機制、專家特化分工與跨模態融合策略，說明動態稀疏激活如何依地物語意與感測器特性，把輸入分配給專屬的子網路。</li>
+<li>跨領域啟發：依感測器物理特性設計動態路由的做法，可以搬到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 和醫療多模態基礎模型，避免讓單一稠密參數空間處理所有異質物理訊號。</li>
+<li>連結：<a href="zotero://select/library/items/TGFP8GCA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.03342" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-federated-compositional-muon-optimizer-for-matrix-wise-models2026">2. Federated Compositional Muon Optimizer for Matrix-Wise Models（2026）</h4>
+<ul>
+<li>作者與出處：Wang Yan, Feihu Huang · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：近期出現的矩陣級最佳化器 Muon 在深度網路權重矩陣的更新上表現很好。但在分散式聯邦學習，以及具階層結構的複合函數最佳化（Compositional Optimization）場景裡，它還缺乏理論收斂保證與通訊協調機制。</li>
+<li>關鍵做法：提出聯邦複合 Muon 最佳化器（FedCoMuon），結合複合梯度追蹤（Compositional Gradient Tracking）與正交化動量更新，直接在矩陣流形結構上解分散式雙層／階層最佳化問題。</li>
+<li>跨領域啟發：矩陣正交化動量加上聯邦梯度追蹤，是一種高效率的二階結構替代方案，可用於 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> 的非歐氏最佳化，也適用於跨機構、需要保護隱私的大模型微調。</li>
+<li>連結：<a href="zotero://select/library/items/QWJCV3QA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.12710" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-1"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a></h3>
+<h4 id="1-lnn-pinn-a-unified-physics-only-training-framework-with-liquid-residual-blocks2026">1. LNN-PINN: A unified physics-only training framework with liquid residual blocks（2026）</h4>
+<ul>
+<li>作者與出處：Ze Tao, Hanxuan Wang, Fujun Liu · <em>Computer Physics Communications</em></li>
+<li>核心問題：傳統物理資訊神經網路（PINN）求解複雜的非線性偏微分方程時，固定的激活層無法調節動態時間尺度，常造成剛性（Stiff）梯度病態，純物理、無資料的訓練也難以收斂。</li>
+<li>關鍵做法：提出統一的純物理訓練框架 LNN-PINN，在殘差區塊裡嵌入液態殘差模組（Liquid Residual Blocks），模組的時間常數會隨時間動態變化。不需要觀測標籤，就能自適應匹配多尺度微分算子的殘差。</li>
+<li>跨領域啟發：這篇把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 直接接了起來，證明連續時間液態門控能有效緩解物理殘差損失的譜偏置與剛性瓶頸。</li>
+<li>連結：<a href="zotero://select/library/items/HBMRT8CK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.08935" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-lightweight-sequential-ai-framework-for-real-time-intrusion-detection-in-dynamic-vehicular-networks2026">2. A Lightweight Sequential AI Framework for Real Time Intrusion Detection in Dynamic Vehicular Networks（2026）</h4>
+<ul>
+<li>作者與出處：G. Jeyaram, V. Vidhya, Rajesh Kumar Dhanaraj, Abdulatif Alabdultif · <em>Scientific Reports</em></li>
+<li>核心問題：車載自組織網路（VANETs）的節點高速移動，拓撲頻繁斷連，車端算力又嚴格受限。傳統的重型 Transformer 或靜態圖網路很難在毫秒級延遲內完成即時入侵偵測。</li>
+<li>關鍵做法：設計輕量化的序列型 AI 入侵偵測架構，對去中心化車聯網的封包時序流做低複雜度的狀態更新與異常模式識別。記憶體足跡很小，在高機動環境下仍能顧到即時防禦的準確率。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的邊緣推論最佳化、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 互補，顯示非 Transformer 的輕量序列狀態機在資訊物理系統（CPS）的即時防護上不可替代。</li>
+<li>連結：<a href="zotero://select/library/items/HI8VTIZM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s41598-026-36103-2" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-2"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a></h3>
+<h4 id="1-application-of-machine-vision-driven-physics-informed-neural-networks-in-pantographcatenary-system-state-detection2026">1. Application of machine-vision-driven physics-informed neural networks in pantograph–catenary system state detection（2026）</h4>
+<ul>
+<li>作者與出處：Jingke Yan, Ning Zhou, Yao Cheng, Fan Zhang · <em>Mechanical Systems and Signal Processing</em></li>
+<li>核心問題：高速鐵路的受電弓與接觸網（Pantograph–Catenary）耦合系統在高速振動和複雜天候下，很容易出現接觸力突變與電弧故障。純機器視覺方法遇到遮擋和極端工況時，容易違反力學相容性。</li>
+<li>關鍵做法：把機器視覺觀測和物理資訊神經網路（PINN）結合，將受電弓與接觸網的動力學微分約束嵌入視覺狀態估計迴路，做出物理上一致、感知幀率又高的狀態監測。</li>
+<li>跨領域啟發：示範怎麼把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的連續力學守恆律注入工程視覺感測器，可為機器人具身控制提供抗雜訊的物理先驗。</li>
+<li>連結：<a href="zotero://select/library/items/DV6HEB8C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ymssp.2026.114577" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-fedltn-cubesat-neuro-symbolic-federated-learning-for-intrusion-detection-in-leo-cubesat-constellations2026">2. FedLTN-CubeSat: Neuro-Symbolic Federated Learning for Intrusion Detection in LEO CubeSat Constellations（2026）</h4>
+<ul>
+<li>作者與出處：Gang Yang, Lin Ni, Junfeng Geng, Xiang Peng · <em>Mathematics</em></li>
+<li>核心問題：低軌立方衛星巨型星座（LEO CubeSat）的尺寸、重量、功耗與成本（SWaP-C）都被壓到極限。傳統的深度入侵偵測模型卡在一個不可能三角：高準確率、極度輕量、安全可解釋，三者難以兼得。</li>
+<li>關鍵做法：提出聯邦神經符號框架 FedLTN-CubeSat，把邏輯張量網路（Logic Tensor Networks）的一階邏輯規則轉成實值、可微的滿意度目標，並在星間聯邦聚合時一起更新神經感知與符號防護規則。</li>
+<li>跨領域啟發：這篇連接 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 與太空邊緣系統安全。它證明實值可微邏輯能提供人類可稽核的告警依據，在樣本稀缺的極端邊緣節點上還能當作強正則化器。</li>
+<li>連結：<a href="zotero://select/library/items/353ESJB5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/math14061047" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-3"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a></h3>
+<h4 id="1-constrained-group-relative-policy-optimization2026">1. Constrained Group Relative Policy Optimization（2026）</h4>
+<ul>
+<li>作者與出處：Roger Girgis, Rodrigue de Schaetzen, Luke Rowe, Azalée Robitaille · <em>arXiv</em></li>
+<li>核心問題：群組相對策略最佳化（GRPO）已是無 Critic 大模型強化學習的主流工具。但在安全關鍵場景下，如果先把獎勵與安全代價線性加權、再做群組正規化，會造成拉格朗日乘子失效與約束違規，而且是結構性的崩潰。</li>
+<li>關鍵做法：提出 Constrained GRPO。論文分析群組標準差正規化如何扭曲拉格朗日對偶梯度，然後把獎勵優勢的正規化與約束違反的懲罰解耦，在不用價值網路的前提下嚴格守住安全邊界。</li>
+<li>跨領域啟發：可直接用於 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 的推理模型後訓練，解決測試時強化學習（RLVR）為了追求高分而犧牲合規約束的工程問題。</li>
+<li>連結：<a href="zotero://select/library/items/7D56F29T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.05863" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-efficient-swe-agent-benchmarking-via-trajectory-aware-evaluation2026">2. Efficient SWE Agent Benchmarking via Trajectory-Aware Evaluation（2026）</h4>
+<ul>
+<li>作者與出處：Kefeng Duan, Dewu Zheng, Yanlin Wang, Xiwen Wang · <em>arXiv</em></li>
+<li>核心問題：在真實的大型程式碼庫上評測軟體工程智能體（SWE Agents），要反覆執行多步探索與容器測試，成本很高。現有的精簡評測法只擬合最終「通過／失敗」的二元矩陣，智能體解題過程中的工具調用軌跡訊號全部丟失。</li>
+<li>關鍵做法：提出特權軌跡感知試題反應理論（PTA-IRT），在離線校準階段納入搜尋路徑、編輯動作與測試回饋等軌跡特徵，藉此更準確地估計試題鑑別度。之後只要執行很小的代表性子集，就能高準確度還原整個基準的排名。</li>
+<li>跨領域啟發：這是心理計量學 IRT 與智能體執行軌跡的結合，可以直接推廣到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 的動態基準壓縮，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 自動定理證明器的高效評測。</li>
+<li>連結：<a href="zotero://select/library/items/668583BG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01603" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-4"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a></h3>
+<h4 id="1-detecting-data-contamination-in-large-language-models2026">1. Detecting Data Contamination in Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Juliusz Janicki, Savvas Chamezopoulos, Evangelos Kanoulas, Georgios Tsatsaronis · <em>arXiv</em></li>
+<li>核心問題：大型語言模型的預訓練語料動輒數兆詞元，明細很少公開，版權爭議與測試集資料污染因此難以查證。現有的黑盒成員推論攻擊（MIA）高度依賴複雜的擾動調參，也缺乏公平、統一的橫向比較基準。</li>
+<li>關鍵做法：在嚴格的黑盒假設下建立統一評估協議，系統性比較當前最先進的成員推論與污染檢測演算法，看它們在不同語料分布與改寫程度下的真實檢出率與誤報邊界。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> 的版權合規審計和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 的隱私洩漏風險量化提供標準化的度量方式，防止基準分數因測試集洩漏而虛高。</li>
+<li>連結：<a href="zotero://select/library/items/G5NDSKME" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.19561" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-llmsurgeon-diagnosing-data-mixture-of-large-language-models2026">2. LLMSurgeon: Diagnosing Data Mixture of Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Yaxin Luo, Jiacheng Cui, Xiaohan Zhao, Xinyi Shang · <em>arXiv</em></li>
+<li>核心問題：預訓練資料配比（Data Mixture）可以看成大模型的數位 DNA，直接決定模型的推理上限與偏見模式。但閉源模型和多數開源權重模型都不公開語料組成，外界很難事後逆向稽核。</li>
+<li>關鍵做法：正式定義資料配比解剖（Data Mixture Surgery）任務，並提出 LLMSurgeon。只要對目標模型採樣生成文本，就能在預先定義的領域分類樹下，高精準度反推底層預訓練語料的領域分布比例。</li>
+<li>跨領域啟發：可以和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> 的壓縮率特徵及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 結合，從外部行為反推黑盒模型的知識結構偏置。</li>
+<li>連結：<a href="zotero://select/library/items/D7SXFN8T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.30348" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-5"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a></h3>
+<h4 id="1-large-vision-language-models2026">1. Large Vision-Language Models（2026）</h4>
+<ul>
+<li>作者與出處：專書／合輯作者群 · <em>Advances in Computer Vision and Pattern Recognition</em></li>
+<li>核心問題：視覺語言模型（LVLMs）從早期的雙塔對齊，很快演進到原生多模態自迴歸與強化學習推理。跨模態詞元化、長上下文視覺記憶與幻覺抑制等技術相當零散，需要系統性的理論與架構綜述。</li>
+<li>關鍵做法：以專書的篇幅統整大型視覺語言模型的視覺編碼、跨模態投影對齊、指令微調、多模態強化學習後訓練與高維感知評測體系，並梳理從感知理解走向具身行動的演進脈絡。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 提供完整的多模態表徵工程參照，並釐清視覺連續訊號與離散語言符號之間介面設計的取捨。</li>
+<li>連結：<a href="zotero://select/library/items/FKD44IND" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-94969-2" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-data-driven-vision-language-models-for-remote-sensing-a-survey2026">2. Data-Driven Vision-Language Models for Remote Sensing: A Survey（2026）</h4>
+<ul>
+<li>作者與出處：Yue Zhou, Shujun Zhao, Xue Yang, Ruigang Li · <em>IEEE Geoscience and Remote Sensing Magazine, vol. 14, no. 5, pp. 232-267, Oct. 2026</em></li>
+<li>核心問題：遙測視覺研究正從為單一任務客製化網路架構，轉向用領域資料微調通用的視覺語言基礎模型。但遙測影像解析度高、幅面大，又有多光譜通道，專業標註也稀缺，通用 VLM 直接遷移時常常失靈。</li>
+<li>關鍵做法：從資料驅動（Data-Driven）的角度系統盤點遙測 VLM 的圖文對構建、合成指令生成、跨解析度對齊與參數高效適配策略，歸納垂直科學領域落地時最主要的資料工程原則。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 的遙測 MoE 綜述互補，一篇談資料配比，一篇談稀疏架構。對醫療影像與材料顯微學等科學多模態領域很有參考價值。</li>
+<li>連結：<a href="zotero://select/library/items/DP4IT882" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31304" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-6"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a></h3>
+<h4 id="1-defense-against-prompt-injection-attacks-via-intention-emphasis2027">1. Defense Against Prompt Injection Attacks via Intention Emphasis（2027）</h4>
+<ul>
+<li>作者與出處：Weilang Liao, Li Li · <em>Communications in Computer and Information Science</em></li>
+<li>核心問題：大型語言模型接上外部網頁、郵件與工具鏈之後，藏在不可信資料裡的間接提示注入（Prompt Injection）很容易劫持模型的注意力，讓它偏離使用者原本合法授權的意圖。</li>
+<li>關鍵做法：提出意圖強化（Intention Emphasis）防禦機制，在推論與上下文處理階段持續錨定並放大系統與使用者核心指令意圖的表徵，阻斷外部惡意文本對控制流的覆寫。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的激活引導（Activation Steering），以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 中 <code>vLLM Hook</code> 的推論期內部干預很容易搭配，可以用來實作低延遲的安全護欄。</li>
+<li>連結：<a href="zotero://select/library/items/KV47BWZ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-92-0291-1_30" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-how-real-is-your-jailbreak-fine-grained-jailbreak-evaluation-with-anchored-reference2027">2. How Real is Your Jailbreak? Fine-Grained Jailbreak Evaluation with Anchored Reference（2027）</h4>
+<ul>
+<li>作者與出處：Songyang Liu, Chaozhuo Li, Rui Pu, Litian Zhang · <em>Lecture Notes of the Institute for Computer Sciences, Social Informatics and Telecommunications Engineering</em></li>
+<li>核心問題：現有的越獄攻擊（Jailbreak）評測多半靠粗糙的關鍵詞拒答檢測，或單一裁判模型打分。答非所問、語無倫次，或毫無實質危害操作性的回覆只是偽成功，卻常被誤判為真實的越獄突破。</li>
+<li>關鍵做法：提出基於錨定參照（Anchored Reference）的細粒度越獄評估框架，同時衡量有害意圖順從度、資訊的實質危險性，以及相對於基準錨點的語意可用性，把虛假的越獄成功案例濾掉。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 的錨定校準想法帶進紅隊攻防基準，避免安全對齊研究被雜訊很多的攻擊成功率指標誤導。</li>
+<li>連結：<a href="zotero://select/library/items/WPBXUHQU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-032-37274-1_1" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-7"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a></h3>
+<h4 id="1-roofline-guided-mixed-quantization-and-kernel-co-optimization-for-efficient-large-language-model-inference-on-arm-cpus2026">1. Roofline-Guided Mixed Quantization and Kernel Co-Optimization for Efficient Large Language Model Inference on Arm CPUs（2026）</h4>
+<ul>
+<li>作者與出處：Quan Zhou · <em>IEEE / Preprint Venue</em></li>
+<li>核心問題：邊緣與通用伺服器環境沒有高頻寬 GPU。在這類環境用 Arm CPU 跑大型語言模型推論，會受限於記憶體頻寬牆和計算單元利用率失衡，單一精度的量化很難同時顧到延遲與模型品質。</li>
+<li>關鍵做法：用硬體 Roofline 效能模型做精確的定量導引，聯合最佳化混合精度量化配置（Mixed Quantization）與底層 Arm SIMD／矩陣核心算子排程，讓推論吞吐量貼近硬體的理論上限。</li>
+<li>跨領域啟發：直接支撐 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> 在邊緣端的模型壓縮部署，把抽象的位元率分配落實為針對真實微架構快取與頻寬的硬體共設計。</li>
+<li>連結：<a href="zotero://select/library/items/M64GSMDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/dipca70202.2026.11565905" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-vllm-hook-v0-a-plug-in-for-programming-model-internals-on-vllm2026">2. vLLM Hook v0: A Plug-in for Programming Model Internals on vLLM（2026）</h4>
+<ul>
+<li>作者與出處：Ching-Yun Ko, Pin-Yu Chen · <em>arXiv</em></li>
+<li>核心問題：生產級推理引擎 vLLM 為了把 PagedAttention 與計算圖加速做到最好，把模型內部的隱藏態高度封裝起來。激活引導（Steering）、動態探針與測試時對齊演算法因此無法在線上高吞吐環境中使用。</li>
+<li>關鍵做法：開發外掛式框架 <code>vLLM Hook v0</code>，在不破壞生產級排程與高吞吐批次推論的前提下開放一組可程式化的介面，能讀取並即時修改已部署模型各層的內部激活態。</li>
+<li>跨領域啟發：補上 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>「定位、引導、改進」流程走向工業部署的最後一段，也為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> 的線上譜特徵幻覺監測提供底層的系統掛鉤。</li>
+<li>連結：<a href="zotero://select/library/items/IKTEBHQ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.06588" rel="noopener">官方連結</a></li>
+</ul>
+<hr />
+<h2 id="星系-b學習理論推理與表示幾何">星系 B｜學習理論、推理與表示幾何</h2>
+<blockquote>
+<p>這個星系研究深度網路內部為什麼能學出結構、不同模型的表示空間怎麼對齊，也包括形式化推理與概念空間幾何：</p>
+</blockquote>
+<h3 id="-8"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a></h3>
+<h4 id="1-gaussian-sheaf-neural-networks2026">1. Gaussian Sheaf Neural Networks（2026）</h4>
+<ul>
+<li>作者與出處：André Ribeiro, Ana Luiza Tenório, Tiago da Silva, Diego Mesquita · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：傳統圖神經網路（GNN）預設節點特徵是歐氏實向量。當節點帶的是高斯機率分布（均值與共變異數矩陣）這類不確定性表徵時，直接把參數攤平串接、再做線性訊息傳遞，會破壞統計流形與正定幾何結構。</li>
+<li>關鍵做法：提出高斯層論神經網路（Gaussian Sheaf Neural Networks），在細胞層（Cellular Sheaf）上用推前與截面一致性約束來組織局部高斯分布的訊息傳播，嚴格保留不確定性幾何，並緩解過度平滑。</li>
+<li>跨領域啟發：結合了 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 的層論截面語言與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 的高斯 Wasserstein／Bures 幾何，適用於帶感測器共變異數的多智能體融合與貝氏圖學習。</li>
+<li>連結：<a href="zotero://select/library/items/AC7486FB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.21435" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-product-interaction-an-algebraic-formalism-for-deep-learning-architectures2026">2. Product Interaction: An Algebraic Formalism for Deep Learning Architectures（2026）</h4>
+<ul>
+<li>作者與出處：Haonan Dong, Chun-Wun Cheng, Angelica I. Avilés-Rivero · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：卷積、注意力、狀態空間（SSM）與幾何等變網路長期被當成彼此無關的經驗性工程構造，沒有統一的代數生成語法可以用來系統化推導新架構。</li>
+<li>關鍵做法：提出乘積交互（Product Interaction）代數形式體系。它把資料表徵看成特定代數結構中的元素，核心計算原語從純線性變換換成雙線性／代數乘法，主流深度架構於是統一成不同代數乘法表的實例。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 的么半結構，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a>、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 相呼應，讓架構搜尋可以從盲目試錯改為依代數公理來設計。</li>
+<li>連結：<a href="zotero://select/library/items/ZIXUJ35A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.02573" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-9"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a></h3>
+<h4 id="1-platonic-representation-hypothesis-on-world-models2026">1. Platonic Representation Hypothesis on World Models（2026）</h4>
+<ul>
+<li>作者與出處：Wenhow Li, Chengwei MA, Hui Xiong, Ying-Cong Chen · <em>arXiv</em></li>
+<li>核心問題：世界模型（World Models）能有效模擬複雜的環境動態。但用不同架構、不同感測模態訓練出來的世界模型，內部潛空間是各不相同，還是會收斂到同一個真實世界的幾何結構，目前還沒有理論解釋。</li>
+<li>關鍵做法：把柏拉圖表示假說推廣到動態環境建模，提出預測一致性假設（Predictive Consistency Assumption），證明共享的狀態轉移預測目標會形成演化選擇壓力，驅使異質世界模型收斂到同構的潛在表徵幾何。</li>
+<li>跨領域啟發：連結 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 的具身世界模型，解釋了不同的機器人本體為什麼能靠潛空間對齊做到零樣本技能遷移。</li>
+<li>連結：<a href="zotero://select/library/items/UFR9V7N9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.23720" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-vot-vision-of-thought-for-unified-multimodal-representation-alignment2026">2. VoT: Vision-of-Thought for Unified Multimodal Representation Alignment（2026）</h4>
+<ul>
+<li>作者與出處：Jingxiang Sun, Chao Liao, Zhengxiong Luo, Chaorui Deng · <em>arXiv</em></li>
+<li>核心問題：現有的文生圖系統多半讓文本編碼器直接調變連續擴散雜訊，中間是黑盒，沒有可讀、可組合的視覺推理層，複雜的空間關係與多物件屬性綁定因此容易失真。</li>
+<li>關鍵做法：提出視覺思維鏈（Vision-of-Thought, VoT），在視覺語言理解模型與擴散解碼器之間插入一層離散的視覺思考表徵，用結構化的中間視覺語意銜接高階語言邏輯與底層像素生成。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 的顯式中間步驟帶進多模態生成，也為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 的視覺與語言組合語意學提供可干預的中間瓶頸。</li>
+<li>連結：<a href="zotero://select/library/items/BJ9ACK59" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.07815" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-10"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a></h3>
+<h4 id="1-fedltn-cubesat-neuro-symbolic-federated-learning-for-intrusion-detection-in-leo-cubesat-constellations2026">1. FedLTN-CubeSat: Neuro-Symbolic Federated Learning for Intrusion Detection in LEO CubeSat Constellations（2026）</h4>
+<ul>
+<li>作者與出處：Gang Yang, Lin Ni, Junfeng Geng, Xiang Peng · <em>Mathematics</em></li>
+<li>核心問題：低軌衛星星座網路的算力與通訊頻寬都極度受限，既要防禦未知的網路攻擊，又要讓地面控制中心能形式化驗證每一筆異常告警背後的邏輯規則鏈。</li>
+<li>關鍵做法：用聯邦邏輯張量網路（FedLTN-CubeSat）把領域安全公理編譯成實值模糊邏輯約束項，直接參與本地端的梯度最佳化與星間聯邦參數聚合，同時保有形式規則的可追溯性與分散式自適應學習。</li>
+<li>跨領域啟發：從形式推理的角度對照 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a>，展示如何把不可微的一階謂詞演算平滑鬆弛，變成資源受限分散式系統的可微訓練目標。</li>
+<li>連結：<a href="zotero://select/library/items/353ESJB5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/math14061047" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-rule-guided-transformers-for-dynamic-knowledge-adaptation-in-rotating-machinery-fault-diagnosis2026">2. Rule guided transformers for dynamic knowledge adaptation in rotating machinery fault diagnosis（2026）</h4>
+<ul>
+<li>作者與出處：Eduard Hogea, Darian M. Onchiş, Ruqiang Yan, Zheng Zhou · <em>Advanced Engineering Informatics</em></li>
+<li>核心問題：工業旋轉機械在變轉速、變負載的工況下，振動頻譜漂移得很厲害。純數據驅動的 Transformer 很容易因分布偏移而做出不可信的誤判，達不到工業預知保養要求的高可靠度。</li>
+<li>關鍵做法：構建規則引導 Transformer（Rule-Guided Transformers），把 Transformer 的時頻特徵抽取，和邏輯張量網路（LTN）中一階物理故障規則的可微滿意度損失結合起來，做到跨工況的動態知識適配。</li>
+<li>跨領域啟發：把專家的物理診斷邏輯轉成連續可微的語意錨點，為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> 的跨工況域適應與高可靠工程 AI 提供「符號護欄＋神經感知」的範本。</li>
+<li>連結：<a href="zotero://select/library/items/MMHRQTGM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.aei.2026.104444" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-11"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a></h3>
+<h4 id="1-locate-steer-and-improve-a-practical-survey-of-actionable-mechanistic-interpretability-in-large-language-models2026">1. Locate, Steer, and Improve: A Practical Survey of Actionable Mechanistic Interpretability in Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Hengyuan Zhang, Zhihao Zhang, Mingyang Wang, Zunhai Su · <em>Computer Science Review</em></li>
+<li>核心問題：過去的機械可解釋性（Mechanistic Interpretability）綜述大多停在被動觀察電路、事後畫圖解釋，沒有一套能直接指導模型除錯、去偏與能力增強的工程化行動指南。</li>
+<li>關鍵做法：提出以「定位、引導、改進（Locate, Steer, and Improve）」三階段閉環為主軸的實務框架，系統化分類因果定位診斷、推論期激活干預與權重級精準編輯方法，讓可解釋性成為可操作的模型工程學。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的 <code>vLLM Hook</code> 及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 可以接成完整的閉環：先用稀疏特徵定位風險迴路，再到線上推論引擎即時施加精準的向量引導。</li>
+<li>連結：<a href="zotero://select/library/items/X3DRMNNG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.14004" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-scaling-monosemanticity-extracting-interpretable-features-from-claude-3-sonnet2026">2. Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet（2026）</h4>
+<ul>
+<li>作者與出處：Adly Templeton, Tom Conerly, Jonathan Marcus, Jack Lindsey · <em>arXiv</em></li>
+<li>核心問題：字典學習與稀疏自編碼器（SAE）過去只在很小的玩具 Transformer 上驗證有效。面對數百億參數以上的生產級主力大模型，疊加態（Superposition）還能不能拆解成單語意特徵，學界長期存疑。</li>
+<li>關鍵做法：依據擴展律，在生產級大模型 Claude 3 Sonnet 的中間層殘差流上訓練 3,400 萬特徵的稀疏自編碼器，抽取出高度可解釋、能跨語言也能跨模態泛化的單語意抽象概念（涵蓋程式碼漏洞、欺騙意圖與科學概念），並證實操控特徵就能因果地改變模型行為。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> 的線性表示假說提供了迄今規模最大的實證，也讓 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 多了內部概念層級監控這個新的方向。</li>
+<li>連結：<a href="zotero://select/library/items/7UKS79JV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.29358" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-12"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a></h3>
+<h4 id="1-a-pac-bayes-oracle-inequality-for-sparse-neural-networks2026">1. A PAC-Bayes Oracle Inequality for Sparse Neural Networks（2026）</h4>
+<ul>
+<li>作者與出處：Maximilian F. Steffen, Mathias Trabs · <em>Springer Proceedings in Mathematics &amp; Statistics</em></li>
+<li>核心問題：深度神經網路高度過參數化，傳統以參數維度為基礎的泛化上界因此變得真空，不再有用。如何證明稀疏神經網路在真實函數光滑度未知時，仍能自適應逼近最優風險，是統計學習理論的核心難題。</li>
+<li>關鍵做法：為稀疏神經網路建立 PAC-Bayes 神諭不等式（Oracle Inequality），用稀疏先驗與後驗KL散度精確平衡逼近誤差與估計複雜度，證明網路能自適應匹配目標函數內在的低維結構。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> 的最小描述長度（MDL）與模型壓縮剪枝提供嚴格的非漸近統計泛化依據。</li>
+<li>連結：<a href="zotero://select/library/items/8EE3IX4N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-032-01279-1_7" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-stochastic-functions-learning-from-distribution-driven-data-generalization-bound-and-algorithms2026">2. Stochastic Functions Learning from Distribution-Driven Data: Generalization Bound and Algorithms（2026）</h4>
+<ul>
+<li>作者與出處：Jia Wu, Xian-Tao Xiao, Li-Wei Zhang · <em>Journal of the Operations Research Society of China</em></li>
+<li>核心問題：當代科學計算與決策問題裡，要學的目標常常是由底層機率分布驅動的隨機函數（Stochastic Functions），不是靜態的點對點純量映射。傳統獨立同分布的經驗風險最小化理論很難直接刻畫它的泛化行為。</li>
+<li>關鍵做法：針對分布驅動資料上的隨機函數學習問題，推導嚴格的統計泛化誤差界，並設計配套的隨機最佳化演算法，量化樣本分布估計誤差與函數空間複雜度之間的耦合效應。</li>
+<li>跨領域啟發：直接連到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 中帶隨機係數的算子學習，為不確定性量化演算法的樣本複雜度分析打下基礎。</li>
+<li>連結：<a href="zotero://select/library/items/992K7HMM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s40305-024-00563-y" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-13"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a></h3>
+<h4 id="1-the-representational-geometry-of-number2026">1. The Representational Geometry of Number（2026）</h4>
+<ul>
+<li>作者與出處：Zhimin Hu, Lanhao Niu, Sashank Varma · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：認知科學長期爭論一件事：大腦與神經網路是把概念壓到共享的低維流形來做跨任務泛化，還是拆到正交子空間來避免多任務干擾。這兩種幾何現象看起來互相矛盾，一直沒有統一的機制解釋。</li>
+<li>關鍵做法：以數概念（Number Concepts）作為理想的實驗對象，證明跨任務真正共享的是概念之間的相對幾何關係結構，不是概念點本身的絕對座標。子空間旋轉可以消除任務干擾，同時完整保留內在的關係拓撲。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 的 Gromov-Wasserstein 純關係對齊提供了認知神經科學上的印證。</li>
+<li>連結：<a href="zotero://select/library/items/FQ3AFR33" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.06843" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-survey-on-the-linear-representation-hypothesis2026">2. A Survey on the Linear Representation Hypothesis（2026）</h4>
+<ul>
+<li>作者與出處：Sewoong Lee, Marc E. Canby, Ikhyun Cho, Julia Hockenmaier · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：線性表示假說（Linear Representation Hypothesis, LRH）在 AI、神經科學與認知科學都被廣泛引用，但各領域對什麼算線性表徵的定義鬆散、不一致，甚至常常落入不可證偽的情況：只要允許任意的非線性重編碼，假說就平凡成立。</li>
+<li>關鍵做法：系統分析各流派 LRH 定義的內在矛盾，指出線性表示的主張必須明確綁定容許的讀出算子類別、組合運算結構與干預因果判準，才是嚴格可證偽的科學假說。論文並據此重建統一的方法論分類。</li>
+<li>跨領域啟發：對 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的稀疏自編碼器熱潮做了一次冷靜的科學哲學檢查，也直接對應 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 的心理表徵結構論題。</li>
+<li>連結：<a href="zotero://select/library/items/2CPUUBPB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.22695" rel="noopener">官方連結</a></li>
+</ul>
+<hr />
+<h2 id="星系-c純數學範疇論與邏輯基礎">星系 C｜純數學、範疇論與邏輯基礎</h2>
+<blockquote>
+<p>這個星系從高階範疇、同倫與有向類型論、凝聚數學，到定量認識邏輯與博弈語意學，為組合性與推理語意提供最底層的語言：</p>
+</blockquote>
+<h3 id="-14"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a></h3>
+<h4 id="1-tannakian-reconstruction-in-derived-algebraic-geometry2026">1. Tannakian reconstruction in derived algebraic geometry（2026）</h4>
+<ul>
+<li>作者與出處：Joshua Mundinger, Shubhankar Sahai · <em>arXiv</em></li>
+<li>核心問題：古典版與 Lurie 版的 Tannakian 重構定理在 <span class="math inline">\mathbb{E}_\infty</span>-環譜框架下運作良好。但導出代數幾何以動畫環（Animated Rings）的譜為基本幾何對象，在這裡對稱么半 <span class="math inline">\infty</span>-範疇不足以捕捉動畫環上的嚴格交換結構。</li>
+<li>關鍵做法：用 Nuiten–Toën 提出的 <span class="math inline">\Theta</span>-範疇（增強型對稱么半 <span class="math inline">\infty</span>-範疇）取代傳統的對稱么半結構，在動畫環導出代數幾何的語境下證明了 Lurie 型與 Bhatt–Halpern-Leistner 型的 Tannakian 重構定理。</li>
+<li>跨領域啟發：加深了 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 的高階範疇基礎，指出從對稱作用群的表現完整重構幾何空間時，究竟需要哪些高階交換代數資訊。</li>
+<li>連結：<a href="zotero://select/library/items/HE2CJB68" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.00999" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-higher-zeroes-in-pointed-infinity-categories2026">2. Higher zeroes in pointed infinity-categories（2026）</h4>
+<ul>
+<li>作者與出處：Thomas Rush Brown · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：在普通範疇裡自由添加一個零對象（Zero Object）很容易。但在 <span class="math inline">(\infty,1)</span>-範疇與單純集模型中，零態射的合成必須滿足無窮階層的相容同倫條件，一直沒有顯式且函子化的自由構造。</li>
+<li>關鍵做法：在小單純集範疇上構造一個顯式的自函子來自由伴隨零對象，證明它誘導出「帶基點 <span class="math inline">\infty</span>-範疇包含函子」的左伴隨，並由此給出高階相容零態射（Higher Zeroes）的規範定義。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 的穩定同倫論、纖維序列與譜範疇提供簡潔的底層組合單純集工具，也示範了怎麼用伴隨的萬有性質處理無窮高階的相容性。</li>
+<li>連結：<a href="zotero://select/library/items/7XB5KT5K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.04167" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-15"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a></h3>
+<h4 id="1-certified-program-synthesis-with-a-multi-modal-verifier2026">1. Certified Program Synthesis with a Multi-Modal Verifier（2026）</h4>
+<ul>
+<li>作者與出處：Yueyang Feng, Dipesh Kafle, Vladimir Gladshtein, Vitaly Kurin · <em>IEEE/ACM International Conference on Automated Software Engineering (ASE)</em></li>
+<li>核心問題：從自然語言自動合成附帶機器可檢驗證明的程式碼（Vericoding）有兩個瓶頸。一是自動生成的規格說明很容易過弱而空洞，或過強而無法實作；二是單一的形式驗證器難以覆蓋異質的性質。</li>
+<li>關鍵做法：提出結合多模態驗證器（Multi-Modal Verifier）的認證程式合成框架，讓測試反例探測、語意雙向校驗與形式定理證明器協同運作，自動找出規格退化的缺陷，並產出通過機器驗證的實作與證明。</li>
+<li>跨領域啟發：直接連到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的軟體工程智能體。對於 AI 寫的程式怎樣才能有數學等級的零漏洞保證，這篇給了一條可以落地的規格檢查管線。</li>
+<li>連結：<a href="zotero://select/library/items/WNK2SSJZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.16584" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-directed-type-theory-with-a-twist2026">2. Directed type theory, with a twist（2026）</h4>
+<ul>
+<li>作者與出處：Fernando Rafael Chu Rivera, Paige Randall North · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：同倫類型論（HoTT）的相等類型本身是對稱的（對應 <span class="math inline">\infty</span>-群胚）。但在重寫系統、併發計算與多數數學結構中，態射有不可逆的方向性（對應範疇而非群胚），現有的有向類型論處理對偶與變異性時仍然繁瑣。</li>
+<li>關鍵做法：提出帶扭轉的有向類型論（Directed Type Theory, with a twist），用上下文極性與扭轉構造，在類型語法內部自然地表達協變／反變函子性與有向同態射語意。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 的不可逆開放系統、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>，以及帶因果方向性的程式驗證提供原生的內部類型語言。</li>
+<li>連結：<a href="zotero://select/library/items/QXRAE9DH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.17480" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-16"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a></h3>
+<h4 id="1-p-adic-hodge-theory-of-unipotent-completions-revisited2026">1. p-adic Hodge theory of unipotent completions revisited（2026）</h4>
+<ul>
+<li>作者與出處：Ruth Wild · <em>arXiv</em></li>
+<li>核心問題：對 <span class="math inline">p</span>-進體有限擴張上的代數簇，要證明其幾何平展基本群（Étale Fundamental Group）的冪單完備化具有 pro-de Rham、pro-半穩定與 pro-晶體（Crystalline）性質。傳統的證明路徑分散，技術上也很繁複。</li>
+<li>關鍵做法：以代數拓撲的 Bar 構造（Bar Construction）與 Syntomic 上同調方法為共同工具，為平展基本群冪單完備化的三大 <span class="math inline">p</span>-進 Hodge 比較定理給出結構一致、概念清楚的新證明。</li>
+<li>跨領域啟發：展示 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a> 的同調代數構造如何簡化算術幾何裡的艱深定理，也和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 的導出上同調方法相呼應。</li>
+<li>連結：<a href="zotero://select/library/items/SVT99F7C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.17169" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-murphys-law-in-non-abelian-hodge-theory2026">2. Murphy's law in non-abelian Hodge theory（2026）</h4>
+<ul>
+<li>作者與出處：Gregorio Baldi, Yeuk Hay Joshua Lam · <em>arXiv</em></li>
+<li>核心問題：在非阿貝爾 Hodge 理論中，相對特徵簇（Character Varieties）與 <span class="math inline">\mathbb{Q}</span>-Hodge 結構變分究竟能出現多極端的算術與幾何病態（也就是 Vakil 意義下的「墨菲定律」），長期缺乏顯式反例與丟番圖刻畫。</li>
+<li>關鍵做法：利用相對特徵簇 Teichmüller 分量的 Fenchel–Nielsen 參數化，顯式構造非整 <span class="math inline">\mathbb{Q}</span>-Hodge 結構變分與各類病態現象。論文同時推導 <span class="math inline">S</span>-整點的丟番圖性質，並給出 Beauville 橢圓曲線族古典定理的新證明。</li>
+<li>跨領域啟發：提醒 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與模空間幾何的研究者：即使有自然的幾何約束，表示模空間的局部奇異性與算術障礙也可能達到「一切不被禁止的病態皆會發生」的程度。</li>
+<li>連結：<a href="zotero://select/library/items/NNN4BB7J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.02875" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-17"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">14_代數拓撲</a></h3>
+<h4 id="1-the-hodge-to-de-rham-spectral-sequence-can-be-arbitrarily-non-degenerate-in-positive-characteristic2026">1. The Hodge-to-de Rham spectral sequence can be arbitrarily non-degenerate in positive characteristic（2026）</h4>
+<ul>
+<li>作者與出處：Kehao Cheng · <em>arXiv</em></li>
+<li>核心問題：特徵零光滑射影簇的 Hodge-to-de Rham 譜序列必定在 <span class="math inline">E_1</span> 頁退化。正特徵 <span class="math inline">p &gt; 0</span> 下已知有不退化的例子，但能不能在任意高階頁 <span class="math inline">E_n</span> 的任意非平凡位置 <span class="math inline">(i,j)</span> 精準製造出非零微分，仍未解決。</li>
+<li>關鍵做法：證明正特徵下的 Hodge-to-de Rham 譜序列有「任意非退化性」：對任意 <span class="math inline">n \ge 1</span> 與任何非平凡座標 <span class="math inline">(i,j)</span>，都能顯式構造一個光滑射影簇，使它的譜序列在 <span class="math inline">E_n^{i,j}</span> 處出現非零微分。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 關係密切，從反面界定了正特徵代數幾何中上同調升降（Lifting）與無窮階同調障礙可以豐富到什麼程度。</li>
+<li>連結：<a href="zotero://select/library/items/XP7URBKG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.35243" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-deformations-of-cohomology-classes-and-spectral-sequences2026">2. Deformations of cohomology classes and spectral sequences（2026）</h4>
+<ul>
+<li>作者與出處：Borislav Mladenov · <em>arXiv</em></li>
+<li>核心問題：譜序列（Spectral Sequences）在計算上很強大，但它的高階微分常被當成純代數的黑盒，缺乏直觀的幾何形變詮釋，也沒有統一的模組論退化判準。</li>
+<li>關鍵做法：用 Rees 構造把濾過複形（Filtered Complex）詮釋為仿射直線上的等變族，證明高階譜序列微分就是把上同調類沿特殊纖維的無窮小鄰域逐階提升時遇到的幾何形變障礙，並推導出 Ext 譜序列的退化判準。</li>
+<li>跨領域啟發：把抽象的濾過代數轉譯成直觀的單參數形變幾何，對 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 中持續同調（Persistent Homology）的多尺度濾過穩定性也有結構上的啟發。</li>
+<li>連結：<a href="zotero://select/library/items/74PA6JRV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.32593" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-18"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a></h3>
+<h4 id="1-clock-systems-for-stochastic-and-non-deterministic-categorical-systems-theories2026">1. Clock systems for stochastic and non-deterministic categorical systems theories（2026）</h4>
+<ul>
+<li>作者與出處：Owen Lynch, David Jaz Myers, Eigil Fjeldgren Rischel, Sam Staton · <em>arXiv</em></li>
+<li>核心問題：在範疇系統論中，時鐘系統（Clock Systems）能保證系統行為構成表現良好的可表函子。但隨機（Stochastic）與非決定性（Non-deterministic）的開放系統是否有規範的時鐘系統，學界之前一直不清楚。</li>
+<li>關鍵做法：為隨機與非決定性範疇系統論顯式構造出對應的時鐘系統與雙範疇行為表示，證明馬可夫核與非決定性轉移系統的外部行為軌跡同樣能用萬有態射簡潔地刻畫。</li>
+<li>跨領域啟發：直接連到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> 的馬可夫過程，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 中部分可觀測隨機環境的組合建模。</li>
+<li>連結：<a href="zotero://select/library/items/PTHRU35A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.29573" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-compositional-dynamics-in-learning-and-mechanics2026">2. Compositional Dynamics in Learning and Mechanics（2026）</h4>
+<ul>
+<li>作者與出處：David I. Spivak · <em>arXiv</em></li>
+<li>核心問題：深度學習的反向傳播梯度下降，和古典物理的哈密頓力學演化，數學形式非常相似：兩者都有雙向的狀態與餘狀態傳遞，也都有位勢函數。但一直沒有一套嚴格的組合語法，能把兩者看成同一結構的不同語意。</li>
+<li>關鍵做法：David Spivak 提出運算子語法 <code>Arr</code>（平滑自適應配置：由參數空間、雙向光滑透鏡 Lens 與實值位勢構成），並證明核心定理「透鏡內化（Lens Internalization）」。梯度學習與哈密頓力學由此統一成同一組合語法上的函子語意。</li>
+<li>跨領域啟發：這是今天最值得看的跨星系連結之一：它把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的辛結構與範疇雙向透鏡放進同一個框架。</li>
+<li>連結：<a href="zotero://select/library/items/K7EIHC5G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.28984" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-19"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a></h3>
+<h4 id="1-synthetic-differential-jet-bundles-are-reduced2026">1. Synthetic Differential Jet Bundles are Reduced（2026）</h4>
+<ul>
+<li>作者與出處：Grigorios Giotopoulos, Igor Khavkine, Hisham Sati, Urs Schreiber · <em>arXiv</em></li>
+<li>核心問題：把偏微分方程的解空間看成無窮噴流叢（Infinite Jet Bundles）中的 Diffieties，並嵌入合成微分幾何的 Cahiers Topos 時，學界長期默認這個嵌入函子會保持定義無窮噴流叢所需的射影極限，卻一直沒有嚴格證明。</li>
+<li>關鍵做法：嚴格證明從 Fréchet 光滑流形範疇到形式光滑集 Cahiers Topos 的嵌入確實保持無窮噴流叢的射影極限，而且合成微分噴流叢具備約化性（Reduced），補上了偏微分方程餘單子（Comonadic）形式化的邏輯缺口。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 與場論幾何提供嚴格的無窮維合成微分基礎，避免在交換無窮階導數的極限時掉進拓撲陷阱。</li>
+<li>連結：<a href="zotero://select/library/items/PNMF46EU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.15862" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-proof-of-coherent-duality-via-techniques-from-condensed-mathematics2026">2. A Proof of Coherent Duality via Techniques from Condensed Mathematics（2026）</h4>
+<ul>
+<li>作者與出處：Cedric Brendel · <em>arXiv</em></li>
+<li>核心問題：古典代數幾何中的凝聚對偶（Coherent Duality，即 Grothendieck–Serre 對偶）在處理帶拓撲結構的模與完備化時，常伴隨繁瑣的拓撲張量積與極限相容性問題。</li>
+<li>關鍵做法：運用 Clausen–Scholze 凝聚數學（Condensed Mathematics）中的凝聚阿貝爾群、固態模（Solid Modules）與層上同調工具，為凝聚對偶定理給出一套結構清楚、概念自足的現代證明與導讀。</li>
+<li>跨領域啟發：連結 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>，展示凝聚數學如何用範疇論與同調代數消除拓撲向量空間中病態的分析細節。</li>
+<li>連結：<a href="zotero://select/library/items/98ZB79VK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.14120" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-20"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31_%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AF%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">31_認識邏輯與信念修正</a></h3>
+<h4 id="1-bidirectional-neural-networks-for-global-nucleon-nucleus-optical-model-calculations2026">1. Bidirectional neural networks for global nucleon-nucleus optical model calculations（2026）</h4>
+<ul>
+<li>作者與出處：Jin Lei · <em>Physical Review C</em></li>
+<li>核心問題：核子與原子核散射的光學模型計算及不確定性量化，需要成千上萬次求解耦合微分方程並反演位勢參數。傳統的數值求解器不可微，也很難同時做好正向的波函數預測與逆向的參數推論。</li>
+<li>關鍵做法：提出以雙向液態神經網路（BiLNN）為基礎的全可微核光學模型模擬器，在光學位勢參數與散射波函數之間建立高精度的雙向可微映射，可直接用於梯度最佳化與貝氏不確定性反演。</li>
+<li>跨領域啟發：橫跨 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a>，展示雙向連續時間神經網路用在科學逆問題的信念更新上很有效。</li>
+<li>連結：<a href="zotero://select/library/items/TUW6T9VR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.22500" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-study-on-quantitative-dynamic-epistemic-logic-for-belief-revision2026">2. Study on Quantitative Dynamic Epistemic Logic for Belief Revision（2026）</h4>
+<ul>
+<li>作者與出處：Felipe Nunes de Souza Camargo · <em>arXiv</em></li>
+<li>核心問題：古典的 AGM 信念修正公設與標準動態認識邏輯（DEL）主要處理「全有或全無」的定性信念切換，難以表達智能體面對帶權重的證據時，如何定量、漸進地修正信念強度。</li>
+<li>關鍵做法：研究定量動態認識邏輯（Quantitative DEL），把 AGM 信念修正公設與帶定量認識狀態的模態語意結合，精確刻畫證據宣告之後主體信念強度的數值重分配與邏輯一致性。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的群體共識演化，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 中大模型面對互相衝突的檢索證據（RAG）時的信念更新，提供形式公理上的參照。</li>
+<li>連結：<a href="zotero://select/library/items/T9PMI947" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.20837" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-21"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a></h3>
+<h4 id="1-large-language-model-and-formal-concept-analysis-a-comparative-study-for-topic-modeling2026">1. Large Language Model and Formal Concept Analysis: a comparative study for Topic Modeling（2026）</h4>
+<ul>
+<li>作者與出處：Fabrice Boissier, Monica Sen, Irina Rychkova · <em>arXiv</em></li>
+<li>核心問題：大型語言模型常用來做文本主題摘要，但產出的主題邊界模糊、帶隨機性，也沒有階層保證。形式概念分析（FCA）能建構嚴格的概念格，卻很少在真實的主題建模場景裡和 LLM 直接對照。</li>
+<li>關鍵做法：對 LLM 與形式概念分析（FCA）在主題建模上做系統的實證比較，分析 LLM 語意概括的彈性，與 FCA 概念格（Concept Lattice）可追溯的階層決定性，各自的優勢範圍在哪裡，以及兩者互補混合的潛力。</li>
+<li>跨領域啟發：對 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的 GraphRAG 與知識庫建構有啟發：可以先用 LLM 抽取屬性關係，再交給 FCA 的 Galois 連接自動產生沒有幻覺的概念格階層。</li>
+<li>連結：<a href="zotero://select/library/items/3BGS66G5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.01933" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-order-embeddings-of-real-matrix-domains2026">2. Order embeddings of real matrix domains（2026）</h4>
+<ul>
+<li>作者與出處：Peter Semrl · <em>arXiv</em></li>
+<li>核心問題：這篇問的是：在 <span class="math inline">n \times n</span> 實對稱矩陣空間 <span class="math inline">S_n</span> 的開連通子域上，如果一個映射雙向保持 Loewner 半正定偏序（<span class="math inline">X \le Y \iff \varphi(X) \le \varphi(Y)</span>），它是否必然被剛性地限制為特定的代數形式。</li>
+<li>關鍵做法：完整刻畫實矩陣域上保序嵌入（Order Embeddings）的一般代數解析形式（當 <span class="math inline">n \neq 1</span> 時），證明局部開連通域上的雙向矩陣偏序結構足以唯一決定映射的幾何與代數骨架。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的高斯共變異數流形、量子態密度矩陣偏序，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> 都有密切關聯，顯示算子偏序有很強的代數剛性。</li>
+<li>連結：<a href="zotero://select/library/items/W5DU6X98" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.20126" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-22"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a></h3>
+<h4 id="1-inferentialist-game-semantics-extended-abstract2026">1. Inferentialist Game Semantics (Extended Abstract)（2026）</h4>
+<ul>
+<li>作者與出處：Joaquim T. Waddington, Alexander V. Gheorghiu, David J. Pym · <em>arXiv</em></li>
+<li>核心問題：傳統邏輯語意學多半用靜態的集合論模型定義「真值」，忽略了推理與計算是證明者（Player）與反駁環境（Environment）之間的動態互動，過程中有資源消耗，也有來回詰問。</li>
+<li>關鍵做法：結合證明論的推論主義（Inferentialism）與 Hyland–Ong 博弈語意學，建立推論主義博弈語意學，把公式的意義直接建立在證明搜尋的互動軌跡與合法策略的組合上，不需要訴諸外部的靜態真值表。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 的雙智能體辯論驗證（Prover–Skeptic Games）與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 的推論角色語意論提供嚴格的計算博弈模型。</li>
+<li>連結：<a href="zotero://select/library/items/QRVQGJCH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.13855" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-solving-first-order-fixed-point-logics-via-a-least-to-greatest-transformation-based-on-game-semantics2026">2. Solving First-Order Fixed-Point Logics via a Least-to-Greatest Transformation Based on Game Semantics（2026）</h4>
+<ul>
+<li>作者與出處：Satoshi Kura, Hiroshi Unno · <em>arXiv</em></li>
+<li>核心問題：一階不動點邏輯（含最小不動點 <span class="math inline">\mu</span> 與最大不動點 <span class="math inline">\nu</span>）是驗證程式終止性與安全性的核心語言，但交替不動點的有效性判定非常困難，現有的 <span class="math inline">\mu</span>-to-<span class="math inline">\nu</span> 轉換也缺乏清楚的語意指導。</li>
+<li>關鍵做法：引入以博弈語意學為基礎的最小至最大不動點（<span class="math inline">\mu</span>-to-<span class="math inline">\nu</span>）轉換框架，從雙人奇偶／可達性驗證博弈中必勝策略的對偶出發，把困難的終止性／活性證明系統化地歸約為安全性不變量的求解。</li>
+<li>跨領域啟發：直接強化 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 與自動化軟體形式驗證工具鏈，把抽象的邏輯不動點交替難題轉成較直觀的博弈必勝策略構造。</li>
+<li>連結：<a href="zotero://select/library/items/D4FUPTPW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.10650" rel="noopener">官方連結</a></li>
+</ul>
+<hr />
+<h2 id="星系-d最優傳輸計算複雜度與演算法資訊">星系 D｜最優傳輸、計算複雜度與演算法資訊</h2>
+<blockquote>
+<p>這個星系從兩個角度看問題：最小變形／傳輸代價，以及計算資源有界所設下的限制。內容涵蓋幾何測度、逆問題、因果推論與計算有界資訊論：</p>
+</blockquote>
+<h3 id="-23"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a></h3>
+<h4 id="1-neural-entropic-optimal-transport-and-gromovwasserstein-alignment2026">1. Neural Entropic Optimal Transport and Gromov–Wasserstein Alignment（2026）</h4>
+<ul>
+<li>作者與出處：Tao Wang, Ziv Goldfeld · <em>IEEE Transactions on Information Theory</em></li>
+<li>核心問題：最優傳輸（OT）與 Gromov-Wasserstein（GW）跨域對齊有嚴謹的幾何意義。但在大規模連續或百萬級樣本的場景下，古典經驗估計會遇到維度詛咒，離散 Sinkhorn 迭代也仍受 <span class="math inline">O(n^2)</span> 的時間與記憶體限制。</li>
+<li>關鍵做法：提出神經熵最優傳輸與神經 GW 對齊框架（Neural Entropic OT / GW）。用對偶位勢和結構化神經網路做參數化，直接逼近連續的熵正則化傳輸泛函，既有母數級統計收斂率，也能擴展到大規模資料。</li>
+<li>跨領域啟發：可以直接用來升級 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 的跨模態潛空間縫合工具，讓異質大模型表徵空間的 Gromov-Wasserstein 對齊不再受二次方離散網格限制。</li>
+<li>連結：<a href="zotero://select/library/items/PSKH6TVT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.07397" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-identifiability-and-exact-reconstruction-of-the-optimal-transport-cost-on-finite-spaces2026">2. Identifiability and exact reconstruction of the optimal transport cost on finite spaces（2026）</h4>
+<ul>
+<li>作者與出處：Alberto González-Sanz, Michel Groppe, Axel Munk · <em>Discrete Applied Mathematics</em></li>
+<li>核心問題：經典最優傳輸假設地面移動代價矩陣已知，再去求最優配對。但在經濟婚姻市場、貿易流與生物細胞配對中，我們往往只能觀測到最後的均衡配對結果或傳輸目標值，底層真實的偏好／代價函數反而未知。</li>
+<li>關鍵做法：系統性處理有限空間上的逆向最優傳輸（Inverse OT）問題。嚴格刻畫了在什麼代數與組合條件下（充要條件），可以從部分傳輸計畫或目標函數值唯一辨識底層代價矩陣，並精確重建它。</li>
+<li>跨領域啟發：給 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的偏好反演和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 的逆向強化學習（IRL）一個新的角度：從觀測到的群體配對反推隱含的效用結構。</li>
+<li>連結：<a href="zotero://select/library/items/26UME2FG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.23146" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-24"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a></h3>
+<h4 id="1-neural-entropic-optimal-transport-and-gromovwasserstein-alignment2026-1">1. Neural Entropic Optimal Transport and Gromov–Wasserstein Alignment（2026）</h4>
+<ul>
+<li>作者與出處：Tao Wang, Ziv Goldfeld · <em>IEEE Transactions on Information Theory</em></li>
+<li>核心問題：未加正則化的 Gromov-Wasserstein 內含二次指派（QAP）這個 NP-hard 核心。能不能在不犧牲幾何對齊品質的前提下，從資訊論與計算複雜度的角度繞開組合爆炸，得到多項式級的統計與計算效率？</li>
+<li>關鍵做法：從資訊論的對偶變分表徵切入，證明熵正則化如何把 GW 的非凸組合奇異點平滑掉，再用神經位勢逼近建立有限樣本誤差界，以及計算複雜度上的可擴展保證。</li>
+<li>跨領域啟發：可以和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> 裡 GW 精確計算的難度下界對照著讀：熵平滑鬆弛正是繞過最壞情況 NP-hard 難度的途徑。</li>
+<li>連結：<a href="zotero://select/library/items/PSKH6TVT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.07397" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-identifiability-and-exact-reconstruction-of-the-optimal-transport-cost-on-finite-spaces2026-1">2. Identifiability and exact reconstruction of the optimal transport cost on finite spaces（2026）</h4>
+<ul>
+<li>作者與出處：Alberto González-Sanz, Michel Groppe, Axel Munk · <em>Discrete Applied Mathematics</em></li>
+<li>核心問題：在離散組合最佳化與逆問題中，給定最優解去反推目標函數，常會遇到嚴重的不可辨識簡併：多個代價矩陣會產生完全相同的最優配對。到底需要多少觀測資訊，才能消除簡併並在有限步驟內精確還原？</li>
+<li>關鍵做法：利用有限度量與多胞形的對偶結構，給出有限空間逆向最優傳輸代價矩陣的精確可辨識邊界，以及決定性的重構演算法，並釐清資訊充分性與組合複雜度之間的關係。</li>
+<li>跨領域啟發：連結 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a> 與計算經濟學，說明在離散組合結構上，逆問題的適定性如何轉化為多面體幾何與圖論上的可重構性條件。</li>
+<li>連結：<a href="zotero://select/library/items/26UME2FG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.23146" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-25"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a></h3>
+<h4 id="1-a-comprehensive-survey-on-large-language-model-compression-for-artificial-intelligence-applications-in-edge-systems2026">1. A Comprehensive Survey on Large Language Model Compression for Artificial Intelligence Applications in Edge Systems（2026）</h4>
+<ul>
+<li>作者與出處：Yuzhu Liang, Changfu Xu, Yaxin Mei, Haodong Zou · <em>IEEE Internet of Things Journal</em></li>
+<li>核心問題：百億參數的大型語言模型記憶體占用大、算力消耗高，無法直接部署在物聯網與邊緣終端。現有的剪枝、量化、低秩分解與知識蒸餾研究多半各做各的，缺少一套面向邊緣系統、全棧協同的統一壓縮藍圖。</li>
+<li>關鍵做法：全面綜述面向邊緣智慧系統的 LLM 模型壓縮技術譜系。從削減資訊冗餘度的角度，把量化、結構化剪枝、蒸餾，以及與邊緣硬體推理引擎的協同設計放在一起討論。</li>
+<li>跨領域啟發：把演算法資訊論的最小描述長度（MDL）用到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的邊緣節點上，說明在很緊的位元預算下，怎麼保留密度最高的任務語意資訊。</li>
+<li>連結：<a href="zotero://select/library/items/RV38ZD5Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jiot.2026.3675866" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-from-entropy-to-epiplexity-rethinking-information-for-computationally-bounded-intelligence2026">2. From Entropy to Epiplexity: Rethinking Information for Computationally Bounded Intelligence（2026）</h4>
+<ul>
+<li>作者與出處：Marc Finzi, Shikai Qiu, Yiding Jiang, Pavel Izmailov · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：古典 Shannon 資訊論與 Kolmogorov 複雜度預設觀察者有無限的計算能力，因此斷言確定性轉換不可能創造新資訊。但這解釋不了一件事：為什麼數學推導、合成資料重組或程式執行，能讓算力有限的學習者得到新的可學知識。</li>
+<li>關鍵做法：提出 Epiplexity（表觀結構複雜度）這個新概念，針對計算資源有界的智能體，重新定義資料中實際可提取的結構資訊量。並證明確定性的演算法轉換能把計算上不可及的隱含規律解壓出來，變成有界模型吸收得了的新資訊。</li>
+<li>跨領域啟發：今日日報中最重要的理論基礎之一：它為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 的合成資料訓練、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 的思維鏈推理增益及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a> 建立統一的計算有界資訊論。</li>
+<li>連結：<a href="zotero://select/library/items/PZC3EGR7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.03220" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-26"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a></h3>
+<h4 id="1-on-the-size-of-planar-graphs-with-positive-linluyau-ricci-curvature2026">1. On the size of planar graphs with positive Lin–Lu–Yau Ricci curvature（2026）</h4>
+<ul>
+<li>作者與出處：Linyuan Lu, Zhiyu Wang · <em>European Journal of Combinatorics</em></li>
+<li>核心問題：黎曼幾何裡，Myers 定理保證正 Ricci 曲率的緊流形直徑有界。離散圖論裡有個對應的問題：滿足嚴格正 Lin–Lu–Yau 曲率（基於最優傳輸的離散 Ricci 曲率）的平面圖，最多能有多少頂點？這長期是極值組合幾何的核心猜想。</li>
+<li>關鍵做法：用離散最優傳輸曲率的局部條件，加上對平面圖歐拉結構的分析，嚴格推導出具正 Lin–Lu–Yau Ricci 曲率的平面圖的頂點規模上界與組合結構限制。</li>
+<li>跨領域啟發：<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 用圖 Ricci 曲率做圖重連（Graph Rewiring）來消除資訊瓶頸（Over-squashing），這篇為那類做法提供精確的離散幾何容量定理。</li>
+<li>連結：<a href="zotero://select/library/items/2VXFHMXX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.03716" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-graph-distortion-distances-gromov-hausdorff-and-the-hardness-of-gromov-wasserstein2026">2. Graph Distortion Distances, Gromov-Hausdorff and the Hardness of Gromov-Wasserstein（2026）</h4>
+<ul>
+<li>作者與出處：Jens Breitung, Timo Gervens, Julius Pörzgen · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：比較兩張異質圖的全局幾何形狀時，可以用基於最短路徑距離矩陣對齊的圖失真距離（Graph Distortion Distances）、離散 Gromov-Hausdorff（GH）或 Gromov-Wasserstein（GW）。這幾種距離之間精確的複雜度層級是什麼？</li>
+<li>關鍵做法：把最大失真、平均失真與歐氏範數失真三類圖失真度量的計算複雜度放在一起研究，並建立它們與 Gromov-Hausdorff、Gromov-Wasserstein 難度下界之間嚴格的多項式歸約鏈。</li>
+<li>跨領域啟發：橫跨 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a>。對做圖神經網路與形狀分析的研究者，它指出哪些幾何對齊目標在計算上本來就困難，必須靠凸鬆弛或熵鬆弛。</li>
+<li>連結：<a href="zotero://select/library/items/AJ2NRADH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.16926" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-27"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a></h3>
+<h4 id="1-self-organizing-score-based-data-assimilation2026">1. Self-Organizing Score-based Data Assimilation（2026）</h4>
+<ul>
+<li>作者與出處：Yuma Yamaoka, Seiichi Uchida, Shoji Toyota · <em>arXiv</em></li>
+<li>核心問題：基於擴散模型分數函數的資料同化（Score-based Data Assimilation, SDA）能處理高維非線性狀態空間的推論。但只要底層狀態轉移的物理方程含有未知的待估參數，標準預訓練分數模型就會因條件失配而無法直接套用。</li>
+<li>關鍵做法：提出自組織分數資料同化（Self-Organizing SDA），把未知的動力學參數擴增進潛狀態，一起放進聯合後驗的推論迴路。這樣在時間序列觀測流中，可以同時完成高維狀態軌跡的同化和物理參數的識別。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的擴散生成先驗接到氣象海洋資料同化，以及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 裡未知係數的偏微分方程逆問題。</li>
+<li>連結：<a href="zotero://select/library/items/TFZATQE2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.28048" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-bayesian-inverse-problems-and-epidemic-threshold-uncertainty-for-a-heterogeneous-sis-reaction-diffusion-model2026">2. Bayesian inverse problems and epidemic-threshold uncertainty for a heterogeneous SIS reaction-diffusion model（2026）</h4>
+<ul>
+<li>作者與出處：Duc-Lam Duong · <em>arXiv</em></li>
+<li>核心問題：在空間異質環境的傳染病反應擴散（SIS Reaction-Diffusion）模型中，傳播率、康復率與感染者擴散係數往往彼此高度不可辨識。只靠疫情初期的稀疏觀測，能不能可靠量化「疫情是否會長期定殖爆發」這個閾值的不確定性？</li>
+<li>關鍵做法：嚴格證明有兩件事取決於同一組參數組合（淨傳播差與擴散係數）：一是早期盛行率的主導動力學，二是決定長期存續性的主特徵值符號。所以即使個別參數無法單獨辨識，仍能透過貝氏逆問題讓疫情存續閾值的後驗不確定性收斂。</li>
+<li>跨領域啟發：對 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> 的公共衛生早期預警與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">35_分數階微積分與非局域擴散</a> 的啟示是：把注意力放在與決策相關的算子特徵值上，往往可以繞開底層微觀參數的病態不可辨識性。</li>
+<li>連結：<a href="zotero://select/library/items/TJ2UKMR9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.14468" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-28"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a></h3>
+<h4 id="1-graph-causal-optimal-transport-and-wasserstein-distances2026">1. Graph Causal Optimal Transport and Wasserstein Distances（2026）</h4>
+<ul>
+<li>作者與出處：Jan Obłój, Vlad Tuchilus · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：標準 Wasserstein 距離允許任意的全知耦合，不管變數之間的因果先後與條件獨立結構。所以它無法直接度量兩個結構因果模型（SCM）在干預與反事實層面上的差異。</li>
+<li>關鍵做法：把時間序列的適配最優傳輸推廣到有向無環圖（DAG），完整刻畫了圖結構要滿足什麼充要條件，「圖因果 Wasserstein 差異」才會是嚴格的度量。另外證明了因果耦合黏合引理、Monge 映射稠密性與適配拓撲等價性。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 的因果表示學習提供一個有完整拓撲與度量保證的幾何距離工具。</li>
+<li>連結：<a href="zotero://select/library/items/38Q8VDPN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.13716" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-analytical-approach-to-continuous-time-causal-optimal-transport2026">2. Analytical Approach to Continuous-Time Causal Optimal Transport（2026）</h4>
+<ul>
+<li>作者與出處：Julio Backhoff, Erhan Bayraktar, Ibrahim Ekren, Antonios Zitridis · <em>arXiv</em></li>
+<li>核心問題：來源過程是有限狀態馬可夫鏈、目標過程是連續擴散過程時，連續時間因果最優傳輸（Continuous-Time Causal OT）受非預期性（Non-anticipative）濾波約束限制，長期缺少可以解析刻畫它的偏微分方程工具。</li>
+<li>關鍵做法：把來源過程換成給定目標觀測軌跡下的條件濾波分布，由此證明這個連續時間因果傳輸值可以用擴大狀態空間上的完全非線性拋物型主方程（Master Equation）精確刻畫。它也等價於單純形上對 Kushner–Stratonovich 非線性濾波方程的隨機控制問題。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">36_貝氏逆問題與測度傳輸</a> 的隨機濾波、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的主方程和因果傳輸接在一起，為金融動態對沖與連續時間反事實控制提供解析基礎。</li>
+<li>連結：<a href="zotero://select/library/items/WJRHQT8G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.19978" rel="noopener">官方連結</a></li>
+</ul>
+<hr />
+<h2 id="星系-e統計物理複雜系統與-pde-算子">星系 E｜統計物理、複雜系統與 PDE 算子</h2>
+<blockquote>
+<p>這個星系把莫爾量子幾何、非平衡態變分自由能、隨機矩陣的高維譜普適性、非局域分數階擴散和偏微分方程神經算子放在一起讀：</p>
+</blockquote>
+<h3 id="-29"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a></h3>
+<h4 id="1-chiral--wave-superconductivity-proximate-to-a-fractional-chern-insulator-and-a-topological-charge-density-wave-in-a-moiré-chern-band2026">1. Chiral <span class="math inline">p</span>-Wave Superconductivity Proximate to a Fractional Chern Insulator and a Topological Charge Density Wave in a Moiré Chern Band（2026）</h4>
+<ul>
+<li>作者與出處：Yunze Ouyang, Fengcheng Wu · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：扭轉二硒化鉬／二碲化鉬（twisted <span class="math inline">\mathrm{MoTe}_2</span>）的莫爾陳能帶中，實驗觀測到鄰近分數陳絕緣體（FCI）的反常超導態。純短程排斥交互作用如何在沒有聲子輔助的情況下產生拓撲手徵配對，是目前強關聯凝態物理最受關注的問題。</li>
+<li>關鍵做法：對自旋極化的莫爾陳能帶做精確對角化與弱耦合 Kohn–Luttinger 分析。結果發現，在填充因子 <span class="math inline">\nu=2/3</span> 的分數陳絕緣體與 <span class="math inline">\nu=3/4</span> 的拓撲電荷密度波之間，<span class="math inline">0.7 \lesssim \nu \lesssim 0.77</span> 這段區間會出現手徵 <span class="math inline">p</span>-波超導配對與有限的超流剛度。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> L5 經典的魔角石墨烯超導研究，往前推到零磁場分數量子反常霍爾與手徵拓撲超導交會的方向，對拓撲量子計算的馬約拉納零模很重要。</li>
+<li>連結：<a href="zotero://select/library/items/38BNPUQ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.40469" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-quantum-geometry-of-moiré-flat-bands-beyond-the-valley-paradigm2026">2. Quantum Geometry of Moiré Flat Bands Beyond the Valley Paradigm（2026）</h4>
+<ul>
+<li>作者與出處：Xiaoting Zhou, Yi-Chun Hung, Arun Bansil · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：主流的莫爾超晶格平帶理論高度依賴類石墨烯的能谷（Valley）範式。但越來越多沒有能谷結構的扭轉異質雙層材料，出現了「平帶數量隨扭轉角可調」這類傳統連續模型無法解釋的現象。</li>
+<li>關鍵做法：針對二部晶格的扭轉異質雙層建立嚴格的緊束縛模型，不再依賴能谷範式，改從布洛赫波函數的量子幾何張量（Fubini–Study 度量與貝里曲率）出發，解析地說明無能谷莫爾平帶的生成機制與拓撲相圖。</li>
+<li>跨領域啟發：把量子態空間的微分幾何（量子度量張量）和複雜晶格的湧現能譜連起來。它的幾何分析工具與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> 及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的譜幾何很相近。</li>
+<li>連結：<a href="zotero://select/library/items/ADX484X9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.20852" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-30"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a></h3>
+<h4 id="1-universal-approximation-of-nonlinear-operators-and-their-derivatives2026">1. Universal Approximation of Nonlinear Operators and Their Derivatives（2026）</h4>
+<ul>
+<li>作者與出處：Filippo de Feo · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：在物理資訊算子學習與反問題最佳化中，神經算子除了要逼近非線性算子本身，還必須同時精確逼近它的高階導數（Fréchet 導數）。作者卻證明：在標準的 Fréchet 緊開拓撲 <span class="math inline">C^k_F</span> 與算子範數下，非線性算子及其導數的萬有逼近定理並不成立。</li>
+<li>關鍵做法：指出障礙來自無窮維 Banach 空間上的強算子導數拓撲，並改用更自然的弱拓撲，也就是 Bastiani 光滑緊開拓撲 <span class="math inline">C^k_B</span> 與新構造的加權 Bastiani–Sobolev 空間。在這個設定下，建立了一般 Banach 空間上非線性算子含高階導數的首個完整萬有逼近定理。</li>
+<li>跨領域啟發：和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 的無窮維光滑結構相呼應：在無窮維微積分裡選錯拓撲，深度算子的梯度訓練在數學上就會失效。</li>
+<li>連結：<a href="zotero://select/library/items/PBGVHVVK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.15285" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-unsupervised-adaptation-of-pde-foundation-models2026">2. Unsupervised Adaptation of PDE Foundation Models（2026）</h4>
+<ul>
+<li>作者與出處：Ziye Song, Zhao Wei, Xin Yu, Ivor Tsang · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：預訓練的偏微分方程基礎模型（PDE Foundation Models）有跨方程遷移的潛力。但面對新的物理系統時，傳統微調仍需要大量昂貴的高解析度數值模擬真值解（Ground-Truth Solutions），這嚴重限制了零數據的科學探索。</li>
+<li>關鍵做法：提出完全不需要真值解的無監督 PDE 基礎模型自適應框架。先用鄰域注意力 Transformer 在多尺度時變 PDE 上預訓練可遷移的表徵，再只靠目標方程本身的物理守恆殘差損失，完成對下游系統的快速適配。</li>
+<li>跨領域啟發：結合了 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 的局部注意力預訓練與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 的純物理殘差微調，提出「預訓練算子基礎模型＋零模擬數據適配」這種新做法。</li>
+<li>連結：<a href="zotero://select/library/items/WVBQC7B6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.07053" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-31"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a></h3>
+<h4 id="1-a-framework-for-the-use-of-generative-modelling-in-non-equilibrium-statistical-mechanics2026">1. A framework for the use of generative modelling in non-equilibrium statistical mechanics（2026）</h4>
+<ul>
+<li>作者與出處：Karl John Friston, Maxwell J. D. Ramstead, Dalton A R Sakthivadivel · <em>Proceedings of the Royal Society A Mathematical Physical and Engineering Sciences</em></li>
+<li>核心問題：開放、自組織的非平衡態系統裡，內部子系統彼此高度耦合。在高維複雜交互下，直接求解隨機動力學方程（Langevin / Fokker–Planck）往往在解析上和數值上都不可行。</li>
+<li>關鍵做法：Karl Friston 等人提出，用狀態或軌跡之間依賴關係的生成模型（Generative Modelling）取代顯式的隨機動力學方程。他們證明變分自由能原理（Variational Free-Energy Principle）可以用計算上可行的變分推論，刻畫遠離平衡的自組織系統的穩態與馬可夫毯耦合。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> 的主動推論（Active Inference）、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 的貝氏大腦連起來，在高層次上把物理與認知兩邊的描述統一起來。</li>
+<li>連結：<a href="zotero://select/library/items/TWDJMZTQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.11630" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-quantitative-stability-of-wasserstein-barycenters-over-alexandrov-spaces-with-lower-curvature-bounds2026">2. Quantitative Stability of Wasserstein Barycenters over Alexandrov Spaces with Lower Curvature Bounds（2026）</h4>
+<ul>
+<li>作者與出處：Bang-Xian Han, Zhuo-Nan Zhu · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：在光滑的歐氏空間與黎曼流形上，多個機率測度的 Wasserstein 重心（Barycenter）有良好的穩定性。奇異的 Alexandrov 度量空間則只有截面曲率下界，沒有光滑微分結構。重心在這種空間上對輸入測度的擾動是否有定量穩定性，仍是未解問題。</li>
+<li>關鍵做法：結合 Carlier–Delalande–Mérigot 變分策略與熱核正則化（Heat-Kernel Regularization），在有曲率下界的非光滑 Alexandrov 空間上補足對偶凸性所需的正則度。由此證明重心變異泛函有顯式的強凸模數，Wasserstein 重心有定量的 Hölder 連續穩定性。</li>
+<li>跨領域啟發：橫跨 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a>、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OT_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E8%B7%A8%E5%9F%9F%E5%B9%B3%E7%A7%BB.html">OT_最優傳輸與跨域平移</a> 與熱擴散半群。它保證在帶奇異點的度量空間上做分布聚合與聯邦模型融合時，不會出現災難性的跳躍。</li>
+<li>連結：<a href="zotero://select/library/items/6IGMXHD9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.25448" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-32"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a></h3>
+<h4 id="1-structure-and-redundancy-in-large-language-models-a-spectral-study-via-random-matrix-theory2026">1. Structure and Redundancy in Large Language Models: A Spectral Study via Random Matrix Theory（2026）</h4>
+<ul>
+<li>作者與出處：Davide Ettori · <em>arXiv</em></li>
+<li>核心問題：大型語言模型規模變大後，同時有兩個問題。一是內部表徵高度黑盒化，分布偏移下頻繁出現幻覺。二是大量冗餘參數帶來很高的推論能耗。這兩個問題缺少一套共用的高維數學診斷語言。</li>
+<li>關鍵做法：以譜幾何（Spectral Geometry）與隨機矩陣理論（RMT）建立統一的分析框架。追蹤隱藏層激活共變異數的特徵值譜動力學、相對 Marchenko–Pastur 體譜的偏離與尖峰結構，同時診斷內部資訊冗餘度與分布外失穩。</li>
+<li>跨領域啟發：把古典隨機矩陣的譜普適性，直接變成 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 可用的無監督內省探針。</li>
+<li>連結：<a href="zotero://select/library/items/XZK7I6BM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.22345" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-spectral-geometry-for-deep-learning-compression-and-hallucination-detection-via-random-matrix-theory2026">2. Spectral Geometry for Deep Learning: Compression and Hallucination Detection via Random Matrix Theory（2026）</h4>
+<ul>
+<li>作者與出處：Davide Ettori · <em>arXiv</em></li>
+<li>核心問題：不改模型權重，也不靠外部檢索或多次採樣這類高成本手段，能不能在單次前向傳播中即時偵測大型語言模型與視覺語言模型的幻覺，並用來指導無損的結構化壓縮？</li>
+<li>關鍵做法：提出即時譜監測方法 <code>EigenTrack</code> 與配套的譜幾何壓縮策略。它利用隱藏激活矩陣的隨機矩陣譜熵、尾部奇異值衰減率與有效秩特徵，在語言與多模態任務上即時捕捉幻覺與 OOD 異常，並準確裁剪冗餘子空間。</li>
+<li>跨領域啟發：可以直接掛到 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的 <code>vLLM Hook</code> 線上服務管線上，也和 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">29_演算法資訊理論與索羅門諾夫歸納</a> 的邊緣壓縮在理論上前後銜接。</li>
+<li>連結：<a href="zotero://select/library/items/DUFNP2KT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.17357" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-33"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">35_分數階微積分與非局域擴散</a></h3>
+<h4 id="1-fractional-diffusion-on-graphs-superposition-of-laplacian-semigroups-and-memory2026">1. Fractional Diffusion on Graphs: Superposition of Laplacian Semigroups and Memory（2026）</h4>
+<ul>
+<li>作者與出處：Nikita Deniskin, Ernesto Estrada · <em>Fractal and Fractional</em></li>
+<li>核心問題：圖上的時間分數階次擴散（Subdiffusion）通常形式化寫成 Caputo 分數階微分方程。但它背後的微觀隨機物理機制是什麼？非馬可夫記憶核打破了無記憶性，為什麼仍能保持質量守恆？這些問題長期缺少清楚的算子半群結構刻畫。</li>
+<li>關鍵做法：證明圖上的 Mittag-Leffler 分數階擴散動力學是由一種隨機時間變換驅動的，這種變換會壓縮操作時間、產生重尾等待時間。而且這個動力學精確等價於標準拉普拉斯半群在不同時間尺度上的凸保質疊加（Convex Superposition）。</li>
+<li>跨領域啟發：對 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的圖神經網路設計有啟發：用多尺度熱核的凸疊加，就能讓 GNN 有長程歷史記憶和抗過度平滑的能力，而且不必破壞質量守恆與線性可解性。</li>
+<li>連結：<a href="zotero://select/library/items/6Q8QSS4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.14977" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-numerical-approximation-of-fractional-diffusion-equations-on-metric-graphs2026">2. Numerical approximation of fractional diffusion equations on metric graphs（2026）</h4>
+<ul>
+<li>作者與出處：David Bolin, Lenin Riera-Segura, Alexandre B. Simas · <em>arXiv</em></li>
+<li>核心問題：緊度量圖（Metric Graphs，如血管網路、神經樹突與電力網，每條邊都是一維連續區間）上的空間分數階擴散，由移位 Kirchhoff–Laplacian 的分數次冪控制。這個算子高度非局域，交界點的耦合又複雜，很難建立有收斂保證的全離散數值格式。</li>
+<li>關鍵做法：為緊度量圖上的分數階擴散方程建立嚴格的泛函分析框架，並結合向後歐拉時間步進、有限元素空間離散，以及分數階算子的有理函數逼近（Rational Approximation）。這樣原本昂貴的非局域稠密算子求解，就化約成一系列可以獨立求解的稀疏移位線性系統。</li>
+<li>跨領域啟發：連結 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 的神經樹突網路電訊號模擬，示範有理逼近如何處理連續網路上的非局域分數階算子。</li>
+<li>連結：<a href="zotero://select/library/items/MPDUH9RD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.01932" rel="noopener">官方連結</a></li>
+</ul>
+<hr />
+<h2 id="星系-f腦認知生命形態哲學與社會演化">星系 F｜腦認知、生命形態、哲學與社會演化</h2>
+<blockquote>
+<p>題材從去中心化的群體形態發生、人類幼兒的具身詞彙習得，一路到語言模型哲學、科學學演化與人口尺度的多智能體社會模擬：</p>
+</blockquote>
+<h3 id="-34"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a></h3>
+<h4 id="1-countering-catastrophic-forgetting-of-large-language-models-for-better-instruction-following-via-weight-space-model-merging2026">1. Countering Catastrophic Forgetting of Large Language Models for Better Instruction Following via Weight-Space Model Merging（2026）</h4>
+<ul>
+<li>作者與出處：Mengxian Lyu, Cheng Peng, Ziyi Chen, Mengyuan Zhang · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：把通用大型語言模型微調到醫療臨床文書這類高度專業的領域時，模型很容易發生嚴重的災難性遺忘，失去原本良好的通用指令遵循與多步對話格式能力。</li>
+<li>關鍵做法：提出以權重空間模型融合（Weight-Space Model Merging）對抗遺忘的框架。不需要回放龐大的通用預訓練語料，直接在參數空間融合醫療領域的微調權重與原始通用指令模型的權重，讓模型同時保有臨床專業度與通用指令遵循能力。</li>
+<li>跨領域啟發：延續 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> L5 經典 EWC 的思路，並把它帶到大模型的後訓練階段，為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的低成本垂直領域模型交付提供不必重訓的解法。</li>
+<li>連結：<a href="zotero://select/library/items/AWBVZCJW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.01538" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-model-dowser-data-free-importance-probing-to-mitigate-catastrophic-forgetting-in-multimodal-large-language-models2026">2. Model-Dowser: Data-Free Importance Probing to Mitigate Catastrophic Forgetting in Multimodal Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Hyeontaek Hwang, Nguyen Dinh Son, Daeyoung Kim · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：多模態大型語言模型（MLLMs）在下游任務微調時，只要動到語言解碼器的深層參數，就很容易忘掉預訓練得到的跨模態泛化能力。現有的重要性估計法多半要回放原始預訓練資料，在大規模模型上既拿不到資料，也難以擴展。</li>
+<li>關鍵做法：提出免資料的重要性探測框架 <code>Model-Dowser</code>。它不必存取任何原始預訓練樣本，就能探測各層參數對維持預訓練多模態知識有多敏感，進而在深層微調時保護核心記憶通道。</li>
+<li>跨領域啟發：把 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的參數敏感度定位接起來，在隱私合規（沒有原始資料）的條件下做到持續的多模態演化。</li>
+<li>連結：<a href="zotero://select/library/items/9R35HJJW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.04509" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-35"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a></h3>
+<h4 id="1-on-the-robustness-of-modeling-grounded-word-learning-through-a-childs-egocentric-input2026">1. On the Robustness of Modeling Grounded Word Learning Through a Child’s Egocentric Input（2026）</h4>
+<ul>
+<li>作者與出處：Wai Keen Vong, Brenden M. Lake · <em>Open Mind</em></li>
+<li>核心問題：當代多模態大模型往往要靠數十億網路圖文對才學會詞義，人類幼兒卻只靠很有限、充滿雜訊的第一人稱日常視角（Egocentric Input），就能穩健習得具身詞彙接地（Grounded Word Learning）。機器學習模型在同樣受限的條件下有多脆弱？</li>
+<li>關鍵做法：Wai Keen Vong 與 Brenden Lake 針對用幼兒第一人稱頭戴攝影機真實輸入訓練的跨模態詞彙學習模型，做了系統性的穩健性壓力測試，分析參考消歧、視覺分布偏移與時間共現統計對幼兒級樣本效率的影響。</li>
+<li>跨領域啟發：延續 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> L5 旗艦論文 Lake et al. (2016) 的核心問題，也為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 的符號接地問題提供來自真實發展心理學的量化證據。</li>
+<li>連結：<a href="zotero://select/library/items/DQRZ9IIF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.14749" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-miniature-brain-transformer-thalamic-gating-hippocampal-lateralization-amygdaloid-salience-and-prefrontal-working-memory-in-attention-coupled-latent-memory2026">2. A Miniature Brain Transformer: Thalamic Gating, Hippocampal Lateralization, Amygdaloid Salience, and Prefrontal Working Memory in Attention-Coupled Latent Memory（2026）</h4>
+<ul>
+<li>作者與出處：Hong Jeong · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：標準 Transformer 把所有記憶混進單一、沒有分化的 KV Cache 注意力機制，缺少哺乳動物大腦那種功能上的解耦與互補協作：視丘門控、杏仁核顯著性加權、前額葉工作記憶緩衝、小腦快徑，以及左右海馬迴的胼胝體抑制互聯。</li>
+<li>關鍵做法：設計微型大腦 Transformer（Miniature Brain Transformer），在注意力耦合的潛記憶架構中，顯式實作視丘中繼門控、杏仁核顯著性模組、前額葉工作記憶緩衝區、小腦快徑與雙側海馬迴抑制交互。並在情節記憶聯想回想（MQAR）與規則模算術兩個基準上驗證各模組的協同效益。</li>
+<li>跨領域啟發：把認知神經科學的互補學習系統（CLS）轉成 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 的模組化記憶架構，為分離長程情節記憶與規則推理提供一種新設計。</li>
+<li>連結：<a href="zotero://select/library/items/FWP9MXIA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.07217" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-36"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a></h3>
+<h4 id="1-computational-social-choice-research-development2026">1. Computational Social Choice: Research &amp; Development（2026）</h4>
+<ul>
+<li>作者與出處：Dorothea Baumeister, Ratip Emin Berker, Niclas Boehmer, Sylvain Bouveret · <em>arXiv</em></li>
+<li>核心問題：計算社會選擇（Computational Social Choice, COMSOC）過去數十年累積了大量投票公理、公平分配與複雜度定理，但大多停在紙面理論。它們和真實的數位民主平台、公民預算、多方偏好聚合系統的工程落地之間，有很大的落差。</li>
+<li>關鍵做法：由這個領域的多位主要學者聯合發起計算社會選擇研發議程（COMSOC-R&amp;D），系統界定以真實世界問題驅動的集體決策系統該如何設計、實作、做人機互動驗證與部署，並畫出路線圖。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的多用戶對齊（Pluralistic Alignment）與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> 的演算法公共治理，提供一套經過公理檢驗的集體決策機制庫。</li>
+<li>連結：<a href="zotero://select/library/items/U6WNWU5Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.20074" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-in-silico-society-a-comprehensive-analysis-of-generative-agent-simulations-at-population-scale2026">2. In Silico Society: A Comprehensive Analysis of Generative Agent Simulations at Population Scale（2026）</h4>
+<ul>
+<li>作者與出處：Syed Muntasir Mamun · <em>Zenodo (CERN European Organization for Nuclear Research)</em></li>
+<li>核心問題：傳統個體基模型（ABM）的行為規則過度簡化，難以捕捉真實人類社會複雜的語意互動。生成式智能體從數十人的虛擬小鎮，擴展到「全美分層抽樣一千名真實受試者數位孿生」的人口尺度後，行為保真度如何，方法論的邊界又在哪裡？</li>
+<li>關鍵做法：深入分析千人規模的生成式社會模擬（<em>Homo silicus</em>，1,052 個基於深度訪談建構的數位孿生智能體庫）。全面檢驗它在態度複製、政策干預反事實推演上的突破，以及群體同質化偏誤、長程漂移與倫理風險。</li>
+<li>跨領域啟發：直接銜接 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> L5 經典 Park et al. (2023) <em>Generative Agents</em>，代表計算社會科學進入人口尺度、可檢驗的模擬階段。</li>
+<li>連結：<a href="zotero://select/library/items/PPSNJH79" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.22993258" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-37"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a></h3>
+<h4 id="1-categorial-grammar-and-existential-graphs2027">1. Categorial Grammar and Existential Graphs（2027）</h4>
+<ul>
+<li>作者與出處：Nathan Haydon · <em>Lecture Notes in Computer Science</em></li>
+<li>核心問題：範疇語法（Categorial Grammar / Lambek 演算）用代數類型推演刻畫自然語言的句法與語意組合，Peirce 存在圖（Existential Graphs）則用二維拓撲圖形表達一階邏輯推理。這兩套經典形式體系之間精確的函子與圖形對應，長期沒有人建立起來。</li>
+<li>關鍵做法：在範疇語法與存在圖之間建立嚴格的數學對應，說明自然語言的組合類型推導如何直接轉譯成存在圖的拓撲圍欄與連接線變換規則。</li>
+<li>跨領域啟發：串起 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 的弦圖（String Diagrams）與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>，為自然語言邏輯推理提供直觀的二維圖形演算介面。</li>
+<li>連結：<a href="zotero://select/library/items/22A3H28R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-032-34178-5_11" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-compositionality-with-primitives-a-unified-view-from-euclidean-to-hyperbolic-vision-language-models2026">2. Compositionality with Primitives: A Unified View from Euclidean to Hyperbolic Vision-Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Puru Vaish, Meelad Dashti, Christoph Brune, Pascal Mettes · <em>arXiv</em></li>
+<li>核心問題：組合零樣本學習（CZSL）要求視覺語言模型認出「已知屬性＋已知物體」的未見新組合。現有方法多半只在歐氏切空間做分解，難以同時捕捉概念階層樹狀結構所帶有的非歐氏雙曲幾何特性。</li>
+<li>關鍵做法：提出從歐氏到雙曲視覺語言模型的統一原語組合視角（Compositionality with Primitives），並推廣測地線可分解嵌入（GDE）框架。在流形 Fréchet 均值切空間與雙曲階層空間中提取視覺原語方向，再重組出未見的「屬性＋物體」概念。</li>
+<li>跨領域啟發：同時涉及 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a>、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a>，證明結合流形測地線結構能大幅強化 VLM 的系統組合泛化。</li>
+<li>連結：<a href="zotero://select/library/items/QHQPH8S6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29811" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-38"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a></h3>
+<h4 id="1-the-philosophy-of-language-models2026">1. The Philosophy of Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Raphaël Millière, Cameron J. Buckner · <em>Philosophy Compass</em></li>
+<li>核心問題：面對大型語言模型出色的語言與推理表現，學界分成兩派論戰：一派認為已湧現類人的認知理解，另一派認為只是淺層的統計鸚鵡。雙方常因混淆了底層的心靈哲學與語言哲學預設而各說各話。</li>
+<li>關鍵做法：Raphaël Millière 與 Cameron Buckner 撰寫了一篇綜述，涵蓋語意接地、組合性、世界模型、心智理論與推理能力五個主要哲學議題。文章把經驗證據之爭與概念定義之爭分開處理，建立一個超越二元對立的漸進能力評估光譜。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> 與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 提供清楚的概念座標，釐清「行為通過測試」與「具備內在認知機制」之間的哲學界線。</li>
+<li>連結：<a href="zotero://select/library/items/G7HJV6E3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1111/phc3.70095" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-why-sampling-is-not-choosing-intentionality-agency-and-moral-responsibility-in-large-language-models2026">2. Why Sampling Is Not Choosing: Intentionality, Agency, and Moral Responsibility in Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Joseph Keshet · <em>arXiv</em></li>
+<li>核心問題：自主語言智能體越來越常參與決策，有些論者主張應賦予 LLM 行動主體性（Agency），甚至道德責任。但從條件機率分布中抽樣詞元（Sampling），在哲學與規範意義上等同於主體的選擇（Choosing）嗎？</li>
+<li>關鍵做法：論證抽樣不是選擇（Sampling Is Not Choosing）。道德責任預設一種承擔承諾型的主體性（Commitment-bearing Agency），它植根於內在意向性（Intrinsic Intentionality）與自我歸因的行動。LLM 的隨機解碼沒有這個本體論基礎，所以規範責任必須回到人類的設計、部署與監理鏈上。</li>
+<li>跨領域啟發：與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a> 的智能體同一性理論、<a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> 的 AI 法律問責制可以互相參照，堵住「把工程失誤推給演算法自主意圖」這個哲學漏洞。</li>
+<li>連結：<a href="zotero://select/library/items/6IE6SGHH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.13441" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-39"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a></h3>
+<h4 id="1-architectural-and-regularization-components-in-deep-learning-medical-image-registration-systematic-ablation-study2026">1. Architectural and Regularization Components in Deep Learning Medical Image Registration: Systematic Ablation Study（2026）</h4>
+<ul>
+<li>作者與出處：Nabira Rashid · <em>arXiv</em></li>
+<li>核心問題：深度學習醫療影像配準的論文習慣同時疊加架構增強（如仿射預對齊模組）與損失函數增強（如形變場正則化），結果社群無法分辨性能提升到底來自網路結構，還是來自目標函數的正則化。</li>
+<li>關鍵做法：在 OASIS 腦部 3D MRI 資料集上做嚴格受控的正交消融實驗（Systematic Ablation）。把基礎 3D U-Net、仿射預對齊與形變正則化損失完全拆開做交叉驗證，量化各組件對配準精度與解剖拓撲折疊率的獨立貢獻。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 與所有科學機器學習領域示範一種可重現的研究方法：不把組件疊成黑箱，回到嚴謹的單因子歸因。</li>
+<li>連結：<a href="zotero://select/library/items/CQGJCUH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.05484" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-what-makes-deep-learning-work-for-traditional-chinese-medicine-tongue-diagnosis-a-comprehensive-ablation-study2026">2. What Makes Deep Learning Work for Traditional Chinese Medicine Tongue Diagnosis? A Comprehensive Ablation Study（2026）</h4>
+<ul>
+<li>作者與出處：Longxia Gao, Linan Wang, Yuhe Han, Junze Geng · <em>arXiv</em></li>
+<li>核心問題：傳統中醫舌診自動化的深度學習研究長期有幾個問題：小樣本過擬合、標註標準不一，以及骨幹架構、損失函數與資料擴增策略隨意拼湊，又沒有統計顯著性檢驗。</li>
+<li>關鍵做法：在專家精標與萬級樣本的資料集上，用嚴格的五折交叉驗證橫向消融 20 餘種模型配置（涵蓋 6 種骨幹、4 種損失、5 種擴增與 6 種訓練策略），找出在小樣本、高品質專家標註的條件下，實際決定泛化上限的設計因子。</li>
+<li>跨領域啟發：示範如何把嚴謹的實驗設計與消融統計規範帶進高變異的臨床輔助診斷領域，呼應 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a> L5 經典 <em>Model Cards</em> 的透明報告精神。</li>
+<li>連結：<a href="zotero://select/library/items/38MSKH7X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.28148" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-40"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a></h3>
+<h4 id="1-large-teams-consistently-develop-science2026">1. Large Teams Consistently Develop Science（2026）</h4>
+<ul>
+<li>作者與出處：Yiling Lin, Lulin Yang, Lingfei Wu · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：科學學近年有個廣為人知的發現：「小團隊顛覆科學、大團隊發展科學」（基於顛覆性指標 <span class="math inline">D</span>）。這個發現受到強烈的方法論質疑。批評者指出指標 <span class="math inline">D</span> 會受參考文獻長度的機械性干擾，改用修正指標 <span class="math inline">\text{one}D</span> 後，甚至得出「大團隊更具顛覆性」這個完全相反的結論。</li>
+<li>關鍵做法：Lingfei Wu 團隊結合諾貝爾獎經典案例的分析與大規模實證檢驗來回應這場爭議。他們指出 <span class="math inline">\text{one}D</span> 忽略了高被引奠基文獻的共引結構，因而把漸進擴展誤判成顛覆。排除引文膨脹偏誤後，「大團隊穩健發展既有範式、小團隊開創顛覆突破」這個核心規律依然成立。</li>
+<li>跨領域啟發：提醒 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 與知識圖譜的研究者：任何單一的圖拓撲指標都藏有結構偏誤，必須用真實的歷史機制來校驗，才不會得出反直覺的偽結論。</li>
+<li>連結：<a href="zotero://select/library/items/AXPE5NQW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.27649" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-beyond-single-dimension-novelty-how-combinations-of-theory-method-and-results-based-novelty-shape-scientific-impact2026">2. Beyond Single-Dimension Novelty: How Combinations of Theory, Method, and Results-based Novelty Shape Scientific Impact（2026）</h4>
+<ul>
+<li>作者與出處：Yi Zhao, Yang Chenggang, Yuzhuo Wang, Tong Bao · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：過去的科學創新研究多半把新穎性（Novelty）壓成單一維度的指標，因此無法解釋：同樣是高新穎性的論文，為什麼有些很快引起跨學科的高被引迴響，有些卻長期受主流範式排斥。</li>
+<li>關鍵做法：把科學新穎性拆成理論新穎性、方法新穎性與結果新穎性三個正交維度，再大規模量化分析三者的不同組合（如「成熟方法＋顛覆結果」對比「全新理論＋全新方法」）如何非線性地影響短期阻力與長期科學影響力。</li>
+<li>跨領域啟發：可以直接用在本知識庫的跨領域選題策略上：在 <a class="wl" href="../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> 做跨域嫁接時，用可信的既有形式工具去處理全新領域的問題，往往既可驗證，又有高顛覆潛力。</li>
+<li>連結：<a href="zotero://select/library/items/S9G5R99R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.12471" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-41"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/32_%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E8%AB%96%E8%88%87%E6%96%87%E5%8C%96%E6%BC%94%E5%8C%96.html">32_演化博弈論與文化演化</a></h3>
+<h4 id="1-topological-traps-in-evolutionary-games2026">1. Topological traps in evolutionary games（2026）</h4>
+<ul>
+<li>作者與出處：Jose Segovia-Martin · <em>arXiv</em></li>
+<li>核心問題：在 Nowak–May 經典的二維空間囚徒困境中，背叛誘惑參數一旦超過 <span class="math inline">T \approx 5/3</span>，合作率會急遽崩跌。但在這麼嚴苛的環境下，為什麼偶爾還是會出現局部的合作團塊？它的成核機率和局部網路拓撲陷阱之間的關係，還沒有精確的動力學刻畫。</li>
+<li>關鍵做法：深入分析演化博弈中的拓撲陷阱（Topological Traps）機制，量化空間格點的局部幾何構型如何改變合作團塊的成核率、邊界擴張與長期演化穩定性。</li>
+<li>跨領域啟發：連結 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> 的成核相變物理與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>，解釋局部通訊拓撲如何在高背叛誘因的環境下保護合作種子不被吞沒。</li>
+<li>連結：<a href="zotero://select/library/items/9FA3PQGV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.17821" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-evolution-of-cooperation-in-multiplex-interaction-networks2026">2. Evolution of cooperation in multiplex interaction networks（2026）</h4>
+<ul>
+<li>作者與出處：Zijie Chen, Xingru Chen, Feng Fu · <em>arXiv</em></li>
+<li>核心問題：真實的人類與生物社會裡，個體同時身處多個重疊的互動網路（家庭、職場、線上社群），每一層又受不同表型特徵的同質性偏好（Homophily）驅動。單層圖的演化博弈模型無法刻畫跨層表型耦合對合作演化的影響。</li>
+<li>關鍵做法：建立多層互動網路（Multiplex Networks）上合作演化的解析框架，推導出各層表型特徵彼此獨立或相關時，自然選擇偏好利他合作湧現的精確解析閾值條件。</li>
+<li>跨領域啟發：為 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的多維社會網路模擬提供可解析的判準：多維度身分重疊與跨層同質性配對如何共同決定群體合作能否存續。</li>
+<li>連結：<a href="zotero://select/library/items/F8HKHVH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.00196" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="-42"><a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">40_形態發生與多尺度生物計算</a></h3>
+<h4 id="1-time-identity-and-consciousness-in-language-model-agents2026">1. Time, Identity and Consciousness in Language Model Agents（2026）</h4>
+<ul>
+<li>作者與出處：Elija Perrier, Michael Timothy Bennett · <em>Proceedings of the AAAI Symposium Series</em></li>
+<li>核心問題：目前的機器意識與智能體評估幾乎完全依賴外部語言輸出與工具調用行為。結果是，語言模型智能體即使在做行動決策的當下根本沒有激活對應的內在約束，仍能說出看似高度自覺的正確自我描述。</li>
+<li>關鍵做法：用 Stack Theory 嚴格區分兩種同一性：表象主體同一性（Apparent Identity，只有上下文視窗內的統計共現）與真實主體同一性（Genuine Agent Identity，跨時間尺度對行動選擇有因果約束力），由此建立超越表面語言行為的主體性判準。</li>
+<li>跨領域啟發：與 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a> 的「抽樣非選擇」論點相通，也呼應 Michael Levin 的認知光錐理論：主體性必須體現在跨時間尺度的目標保持與誤差修正閉環上。</li>
+<li>連結：<a href="zotero://select/library/items/W4R5XGCK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.09043" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-distributed-swarm-morphogenesis-with-neural-cellular-automata2026">2. Distributed Swarm Morphogenesis with Neural Cellular Automata（2026）</h4>
+<ul>
+<li>作者與出處：Ray Verma, Eliseo Ferrante, Anthony Tzes · <em>arXiv</em></li>
+<li>核心問題：群體機器人形態發生（Swarm Morphogenesis）要求大量機器人只靠局部感測與鄰近通訊，組裝出複雜的目標幾何形狀。傳統方法往往依賴預先算好的全局座標清單，規模一擴大或遇到局部碰撞，就失去自組織的彈性。</li>
+<li>關鍵做法：把受生物形態發生啟發的神經元胞自動機（Neural Cellular Automata, NCA），與去中心化的附著點動態發現和避碰控制整合起來。已在結構內的機器人透過局部交換來更新 NCA 狀態，即時長出新的附著位點，不需要任何全局藍圖清單。</li>
+<li>跨領域啟發：實現了多尺度生物計算裡「沒有中央控制器、只靠局部規則湧現全局幾何形態」的設想，可以直接啟發 <a class="wl" href="../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">02_非Transformer架構</a> 的分散式自修復硬體與群體具身智慧。</li>
+<li>連結：<a href="zotero://select/library/items/DA2DXR5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31900" rel="noopener">官方連結</a></li>
+</ul>
+<hr />
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+</body>
+</html>

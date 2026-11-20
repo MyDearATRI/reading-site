@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>32｜演化博弈論與文化演化：複製子動力學、合作湧現、訊號賽局與累積文化演化 · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">F_腦認知、生命形態、哲學與社會演化</a></nav></header>
+<main>
+<article>
+
+<h1 id="32演化博弈論與文化演化複製子動力學合作湧現訊號賽局與累積文化演化">32｜演化博弈論與文化演化：複製子動力學、合作湧現、訊號賽局與累積文化演化</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 F：腦認知、生命形態、哲學與社會演化</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> ｜ <a class="wl" href="21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> ｜ <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> ｜ <a class="wl" href="07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> ｜ <a class="wl" href="25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>演化博弈論與文化演化研究的是一群能力有限的個體：沒有全知的理性大腦，也沒有中央設計者。問題是這樣的群體怎麼只靠自然選擇、社會模仿與跨世代傳遞瓶頸，就從自私的衝突中長出穩定合作，並從雜亂的訊號中自發演化出高度結構化的語言慣例與累積文明。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+古典博弈論（Nash 均衡）假設參與者有無限算力和共同理性知識，能瞬間算出所有人的策略。真實的生物界、人類社會與分散式 AI 群落不是這樣運作的：策略是一步步試出來的，誰活得好，誰的策略就被複製／模仿。這裡有三個主要謎題：
+<ol>
+<li><strong>合作悖論</strong>：在囚徒困境裡，單次互動中背叛永遠佔優。那麼生物細胞、人類社會與多層網路為什麼能出現大規模的利他合作？</li>
+<li><strong>無設計者的結構起源（Design without a Designer）</strong>：沒有人開會規定語法。最初毫無規則的隨機符號，怎麼演化出有組合性（Compositionality）的自然語言？</li>
+<li><strong>AI 群體的自發社會慣例與集體偏誤</strong>：成百上千個大語言模型智能體或 6G 通訊代理在沒有中心協調的情況下彼此對話，會自發形成什麼樣的溝通協議和隱性的群體偏見？</li>
+</ol>
+</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li>複製子動力學與合作的空間拓撲，像生態草原上鷹與鴿的消長，也像珊瑚聚落。全是好鬥的鷹會兩敗俱傷，全是溫馴的鴿子又擋不住一隻突變的鷹，最後群體會停在誰也入侵不了的演化穩定策略（ESS）。在空間網格或多層社交網路中，合作者只要能抱團成簇，或靠跨群體的橋樑把孤島縫合起來，就能抵擋背叛者的侵蝕。不過網路如果卡在局部的拓撲陷阱裡，合作的晶核也可能擴散不出去。</li>
+<li>累積文化演化與迭代學習（Kirby 傳話筒效應）像一代代師徒口耳相傳時的記憶篩網。每一代學徒只聽得到師父說過的少數幾個例句（傳遞瓶頸 Transmission Bottleneck）。毫無規律、只能死背的密碼記不住，在傳遞中自然被淘汰。只有有規則、能舉一反三的組合語法，才穿得過這張窄篩網留下來。所以語言有語法，是因為語言本身在演化，以適應人類大腦的學習瓶頸。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li>對接 <a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a>：Baronchelli 團隊（<em>Science Advances</em> 2025）的實證發現，去中心化 LLM 群體即使每個單體都沒有偏見，反覆局部互動後也會自發出現全局的社會慣例和強烈的集體偏誤（Collective Bias）。單一模型對齊了，不代表多模型生態就安全。</li>
+<li>對接 <a class="wl" href="21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 與 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>（Agentic 6G Networking）：Lewis 訊號賽局與神經湧現通訊（Emergent Communication）正從認知科學走向下一代的智能體原生通訊網路（AgentNet），讓異質的 AI 代理依任務動態協商高壓縮的通訊協議。</li>
+<li>對接 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>：複製子方程在數學上與乘法權重更新（MWU）、自然梯度流（Fisher–Rao 資訊幾何度量下的梯度流）完全同構。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    Root[&quot;無中央設計者的群體秩序與符號湧現&quot;] --&gt; E1[&quot;演化博弈動力學：從鷹鴿衝突到多層網路合作&quot;]
+    Root --&gt; E2[&quot;訊號賽局與湧現通訊：意義如何從零誕生？&quot;]
+    Root --&gt; E3[&quot;累積文化演化與 AI 群體慣例：跨世代傳遞與集體偏誤&quot;]
+
+    E1 --&gt; ESS[&quot;演化穩定策略 ESS (Maynard Smith 1974) 與複製子動力學 (Hofbauer &amp; Sigmund 2003)&quot;]
+    ESS --&gt; CoopNet[&quot;空間與社交網路合作：跨群體縫合 (Fotouhi &amp; Nowak 2018)、拓撲陷阱、多層網路與時變資訊 (2026)&quot;]
+
+    E2 --&gt; Skyrms[&quot;Lewis-Skyrms 訊號賽局：發訊者—收訊者協同演化與語意資訊湧現&quot;]
+    Skyrms --&gt; NeuralEC[&quot;神經湧現通訊：Lewis 賽局過擬合診斷、語意規則自動檢測 (ASRD) 與 AgentNet 泛化界&quot;]
+
+    E3 --&gt; IterLearn[&quot;實驗室累積文化演化與迭代學習瓶頸 (Kirby et al. 2008 / Richerson &amp; Christiansen)&quot;]
+    IterLearn --&gt; LLMConv[&quot;大模型群體演化 (2025-2026)：LLM 自發社會慣例、文化演化驅動雙向神經通訊與集體認識論風險&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>演化穩定策略（ESS）、複製子動力學與網路合作機制</strong></p>
+<ul>
+<li>直覺理解：在混合均勻的大群體中，如果某個策略 <span class="math inline">i</span> 目前的平均收益高於群體的整體平均收益，採用它的比例 <span class="math inline">x_i</span> 就會增長。如果一種策略 <span class="math inline">\sigma^*</span> 面對任何極小比例 <span class="math inline">\varepsilon</span> 的突變策略 <span class="math inline">\sigma</span> 入侵時，都能拿到嚴格更高的收益（或在收益相等時，對突變者自身更優），它就是不可入侵的演化穩定策略（ESS）。在非均勻的社交網路中，合作能不能勝過背叛，要看網路拓撲（如多層同質性連接、跨社群橋接與時變外部資訊）能不能讓合作的收益形成正向聚集。</li>
+<li>機制或核心表達式：設收益矩陣為 <span class="math inline">A</span>，策略頻率向量 <span class="math inline">\mathbf{x} \in \Delta^{n-1}</span> 的連續時間複製子方程（Replicator Equation）與 Maynard Smith 的 ESS 條件為：
+<div class="math inline">\dot{x}_i = x_i \Big( (A\mathbf{x})_i - \mathbf{x}^\top A \mathbf{x} \Big), \qquad \text{ESS: } u(\sigma^*, \sigma^*) &gt; u(\sigma, \sigma^*) \;\text{ or }\; \big[u(\sigma^*, \sigma^*) = u(\sigma, \sigma^*) \land u(\sigma^*, \sigma) &gt; u(\sigma, \sigma)\big]</div></li>
+<li>能做到什麼，代價是什麼：不需要理性計算的假設，就能精確刻畫頻率依賴選擇、極限環與渾沌演化軌跡，也能得到一些反直覺的結果。例如 Fotouhi &amp; Nowak 證明，兩個各自維持不了合作的孤立背叛社群，妥善縫合之後反而能挽回全局合作。代價是在空間晶格與複雜圖上，系統很容易卡在亞穩態的拓撲陷阱（Topological Traps）裡（Segovia-Martin 2026），要靠成核漲落才能越過能壘。</li>
+</ul>
+</li>
+<li>
+<p><strong>Lewis–Skyrms 訊號賽局與神經湧現通訊（Signaling Games &amp; Emergent Communication）</strong></p>
+<ul>
+<li>直覺理解：發訊者（Sender）看得到世界狀態 <span class="math inline">w</span>，卻不能行動，只能發出原本沒有意義的符號 <span class="math inline">m</span>。收訊者（Receiver）看不見世界，只能依符號採取行動 <span class="math inline">a</span>。雙方共享成敗收益。Skyrms 證明，不靠共同理性知識，只用簡單的強化學習或複製子動力學，雙方也會自發鎖定一套一一對應的原始語意訊號系統。</li>
+<li>機制或核心表達式：發訊策略 <span class="math inline">S_\theta(m \mid w)</span> 與收訊策略 <span class="math inline">R_\phi(a \mid m)</span> 最大化合作期望效用（如重建準確率），並受通訊通道容量或壓縮瓶頸正則化：
+<div class="math inline">\max_{\theta, \phi} \; \mathbb{E}_{w \sim P(W),\, m \sim S_\theta(\cdot \mid w),\, a \sim R_\phi(\cdot \mid m)} \big[ U(w, a) \big] - \lambda \, I_\theta(W; M)</div></li>
+<li>能做到什麼，代價是什麼：它解釋了生物警戒叫聲、人類詞彙慣例，以及自主 AI 代理自訂通訊協議（Agentic AI Networking）的自發起源。代價是，如果只讓一對固定的神經智能體對練（Rita et al. 2022），很容易對訓練集的共現產生嚴重的協同過擬合（Co-adaptation Overfitting），演化出人類無法解讀、也沒有組合泛化力的加密黑話。要引入群體輪換與文化代際傳遞，才會出現良構的規則。</li>
+</ul>
+</li>
+<li>
+<p><strong>累積文化演化、迭代學習瓶頸與大群體慣例湧現（Cumulative Cultural Evolution &amp; Convention Dynamics）</strong></p>
+<ul>
+<li>直覺理解：只靠一對智能體互動，只會產生當下方便的行話。讓語言長出可組合語法的，是跨世代的文化傳遞和群體規模的共識。在迭代學習（Iterated Learning）中，第 <span class="math inline">t+1</span> 代學習者只觀測到第 <span class="math inline">t</span> 代產出的有限樣本 <span class="math inline">D_t</span>（瓶頸大小 <span class="math inline">b</span>）。語言演化因此受兩股相反的力量拉扯：一邊是可壓縮性（易學性先驗 <span class="math inline">P(h)</span>），一邊是表達精確度（不讓所有意思都退化成同一個詞的溝通壓力），演化的結果是在兩者之間逼近帕累托前沿。</li>
+<li>機制或核心表達式：跨世代的假設分佈經由貝氏學習與抽樣形成馬可夫鏈，穩態分佈偏向先驗高、可壓縮（組合結構化）的語法 <span class="math inline">h</span>。在去中心化命名賽局（Naming Game / LLM 群體互動）中，少數意見影響者或隨機漲落一旦跨過臨界閾值 <span class="math inline">p_c</span>，整個群體就發生對稱性破缺，鎖定單一的社會慣例：
+<div class="math inline">P(h_{t+1} \mid h_t) = \sum_{D_t : |D_t|=b} P_{\mathrm{learn}}(h_{t+1} \mid D_t)\, P_{\mathrm{prod}}(D_t \mid h_t)</div></li>
+<li>能做到什麼，代價是什麼：Kirby 等人在人類實驗室、Toquebiau 等人（EMNLP 2026）在雙向神經智能體群落中都證實，文化演化不需要外部監督，就能自發驅動共享通訊慣例與組合結構的湧現。代價是文化傳遞同樣會忠實地放大群體級偏誤，甚至憑空製造出偏誤。另外，如果人類過度依賴 LLM 的外部可靠傳輸，失去內在反思理解（Internalist Justification）（Hila 2025），制度性的集體智慧有退化的風險。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>LLM 多智能體生態中微觀無偏、宏觀卻有偏誤的湧現悖論</strong>：Flint, Aiello &amp; Baronchelli (<em>Science Advances</em> 2025) 報告了一個讓 AI 安全界很意外的現象。單獨測試時中立無偏的 LLM，放進去中心化群體反覆配對溝通之後，會自發收斂出全局的社會慣例，還會出現單體身上沒有的強烈集體偏見（Collective Bias）。而且只要極少數堅定的智能體（Committed Minorities / Influencers），就能劫持全體的共識。</li>
+<li><strong>神經湧現語言的黑話加密化與可解釋性破譯難題</strong>：自主智能體為了最大化任務獎勵而演化出的連續或離散訊號，往往不符合人類語言的齊夫定律（Zipf's Law）與組合性。這些訊號很難泛化到新環境（AgentNet 泛化界問題，Xiao et al. 2026），也造成嚴重的安全監控盲區。因此需要自動化的語意規則提取演算法（如 ASRD，Vanderplaetse et al. 2026）來即時破譯。</li>
+<li><strong>人類與 AI 混合文化演化中的集體認識論萎縮</strong>：Hila (2025) 從雙系統與集體認識論出發指出，健康的人類制度知識同時依賴外在的可靠傳遞（Externalist）和內在地理解為什麼為真（Internalist）。如果社會把推理外包給大模型，只留下結論的複製，丟掉人類內在的理解鏈，累積文化演化的棘輪（Cultural Ratchet）可能會倒轉。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>把迭代學習傳遞瓶頸（Iterated Learning / Knowledge Distillation Reset）用到 <a class="wl" href="07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">04_表示對齊與類比</a></strong>：神經網路持續訓練，容易失去可塑性與組合性。一個對策是定期引入新一代的空白學生網路，只透過有限頻寬向老網路學習核心行為（世代重置蒸餾）。這和文化演化的篩網一樣，能自動洗掉過擬合的雜訊，留下高度組合化的緊湊表徵。</li>
+<li><strong>把多層網路同質性與時變資訊演化用到 <a class="wl" href="09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的制度機制設計</strong>：真實的合作橫跨多個特徵維度層（Multiplex Networks，Chen et al. 2026），資訊流也隨時間起伏（Zhao et al. 2026），不是發生在單一的靜態圖上。設計線上協作平台時，適度建立跨群組的弱連結，比封閉的小圈子更能促成全局合作。</li>
+<li><strong>把任務導向湧現通訊泛化界用到 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 與邊緣分散式推理</strong>：在頻寬非常有限的邊緣機器人群或 6G AgentNet 中，不必傳完整的高維中間張量或冗長的自然語言。用有泛化界保證的輕量訊號協議，只傳決策等價類的資訊就夠了。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1974</td>
+<td><em>The theory of games and the evolution of animal conflicts</em>（J. Maynard Smith）</td>
+<td>演化博弈論的奠基論文：提出演化穩定策略（ESS）與消耗戰／鷹鴿模型，影響遍及生物學、經濟學與多智能體理論。</td>
+<td>G1–G2 必讀源頭</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/IDMXSARP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/0022-5193(74)90110-6" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2003</td>
+<td><em>Evolutionary game dynamics</em>（Josef Hofbauer）</td>
+<td>演化博弈動力學在數學上的標準參考（<em>Bull. AMS</em>）：用同一套框架處理複製子常微分方程、最優反應微分包含與離散演化動力系統。</td>
+<td>G2 數學骨幹</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/RNZC845A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1090/s0273-0979-03-00988-1" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2008</td>
+<td><em>Cumulative cultural evolution in the laboratory: An experimental approach to the origins of structure in human language</em>（Simon Kirby）</td>
+<td>語言演化實驗的里程碑（<em>PNAS</em>）：在人類受試者的迭代學習實驗中，直接觀察到亂碼般的人工語言自發長出組合語法，即「無設計者的設計」。</td>
+<td>G1 全員必讀</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/8NFBEV9T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1073/pnas.0707835105" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2011</td>
+<td><em>Signals: Evolution, Learning, and Information, by Brian Skyrms</em>（Peter Godfrey‐Smith）</td>
+<td>對 Skyrms 訊號演化理論的深入評析：說明發訊者與收訊者兩個主體不必預設心智理性，只靠學習與演化就能自發建立語意資訊通道。</td>
+<td>G1–G2 概念橋樑</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/U9VEQGCC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/mind/fzs002" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2013</td>
+<td><em>Cultural evolution: society, technology, language, and religion</em>（Peter J. Richerson）</td>
+<td>跨學科的文化演化文集：集合生物學、心理學、語言學與人類學的重要學者，為制度、技術與語言的雙重繼承演化勾勒出統一的全景。</td>
+<td>G1 宏觀視野</td>
+<td>書目索引 ｜ <a href="zotero://select/library/items/28HAE3TI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="http://hdl.handle.net/1885/35696" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2025</td>
+<td><em>Emergent social conventions and collective bias in LLM populations</em>（Ariel Flint）</td>
+<td>發表於 <em>Science Advances</em>：證明去中心化 LLM 群體能自發湧現全局社會慣例，同時發現隱蔽的集體偏誤與少數派操縱效應。</td>
+<td>G1–G3 必讀前沿</td>
+<td>OA PDF ｜ <a href="zotero://select/library/items/DRU5SQC4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.08948" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作</summary>
+<p></p>
+<ul>
+<li><strong>2018｜Babak Fotouhi, Benjamin Allen &amp; Martin A. Nowak</strong>，<em>Conjoining uncooperative societies facilitates evolution of cooperation</em>（<em>Nature Human Behaviour</em>，65 引）：演化圖論中一個反直覺的結果。證明把原本抑制合作的孤立群落用跨群連結縫合起來，反而能促成全局合作。OA PDF ｜ <a href="zotero://select/library/items/DNKK39RR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1805.12215" rel="noopener">原文</a></li>
+<li><strong>2012｜Henry P. W. Franks, Nathan Griffiths &amp; Arshad Jhumka</strong>，<em>Manipulating convention emergence using influencer agents</em>（<em>AAMAS</em>，50 引）：探討在複雜網路拓撲中部署極少數高影響力智能體（Influencers），如何加速或定向操控全局慣例的湧現。書目索引 ｜ <a href="zotero://select/library/items/2NG2S5MU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10458-012-9193-x" rel="noopener">原文</a></li>
+<li><strong>2023｜Christian Hilbe, Maria Kleshnina &amp; Kateřina Staňková</strong>，<em>Evolutionary Games and Applications: Fifty Years of ‘The Logic of Animal Conflict’</em>（<em>Dynamic Games and Applications</em>，12 引）：紀念 Maynard Smith &amp; Price 五十週年的回顧文章，整理演化博弈在癌症治療、生態治理與 AI 中的現代擴展。書目索引 ｜ <a href="zotero://select/library/items/RRA7PJZQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s13235-023-00545-4" rel="noopener">原文</a></li>
+<li><strong>2025｜Angjelin Hila</strong>，<em>The Epistemological Consequences of Large Language Models: Rethinking collective intelligence and institutional knowledge</em>（<em>AI &amp; Society</em>，12 引）：區分內在反思理解與外在可靠傳輸，分析人機混合社會中制度知識與集體理性的認識論風險。OA PDF ｜ <a href="zotero://select/library/items/DQ7UN7JU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.19570" rel="noopener">原文</a></li>
+<li><strong>2022｜Mathieu Rita et al.</strong>，<em>Emergent Communication: Generalization and Overfitting in Lewis Games</em>（<em>arXiv</em>，10 引）：診斷用強化學習訓練 Lewis 訊號賽局時，為什麼容易演化出缺乏組合性與泛化力的過擬合通訊協議。OA PDF ｜ <a href="zotero://select/library/items/HINF45DK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2209.15342" rel="noopener">原文</a></li>
+<li><strong>2004｜Christopher T. Kello</strong>，<em>Characterizing the evolutionary dynamics of language</em>（<em>Trends in Cognitive Sciences</em>）：描述語言結構在個體認知學習、群體交際互動與歷史演化三個時間尺度上耦合演進的主要特徵。書目索引 ｜ <a href="zotero://select/library/items/HG8I9RB7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.tics.2004.07.004" rel="noopener">原文</a></li>
+<li><strong>2026｜Jose Segovia-Martin</strong>，<em>Topological traps in evolutionary games</em>（<em>arXiv</em>）：分析二維空間囚徒困境在背叛誘惑很強的臨界區附近，合作模體的成核率，以及拓撲陷阱造成的動力學阻礙。OA PDF ｜ <a href="zotero://select/library/items/9FA3PQGV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.17821" rel="noopener">原文</a></li>
+<li><strong>2026｜Zijie Chen, Xingru Chen &amp; Feng Fu</strong>，<em>Evolution of cooperation in multiplex interaction networks</em>（<em>arXiv</em>）：針對多維表型同質性的多層互動網路（Multiplex Networks），推導自然選擇有利於合作的解析臨界條件。OA PDF ｜ <a href="zotero://select/library/items/F8HKHVH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.00196" rel="noopener">原文</a></li>
+<li><strong>2026｜Bastien Vanderplaetse, Xavier Siebert &amp; Stéphane Dupont</strong>，<em>Automated Semantic Rules Detection (ASRD) for Emergent Communication Interpretation</em>（<em>arXiv</em>）：提出自動語意規則檢測演算法 <code>ASRD</code>，從自主多智能體湧現通訊的訊息流中提取人類看得懂的語意模式。OA PDF ｜ <a href="zotero://select/library/items/P34HJ52A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.03254" rel="noopener">原文</a></li>
+<li><strong>2026｜Yong Xiao et al.</strong>，<em>Generalization Bounds of Emergent Communications for Agentic AI Networking</em>（<em>arXiv</em>）：針對 6G 智能體原生網路（AgentNet），首次為自主任務導向的湧現通訊協議建立理論泛化誤差界。OA PDF ｜ <a href="zotero://select/library/items/TTXJ9JV3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.08613" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Zhao Song, Manh Hong Duong, The Anh Han (2026)</strong>，<em>Equilibrium Statistics and Stability in Random Two-Population and Three-Population Evolutionary Games</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：分析二群體與三群體隨機演化博弈中均衡存在的機率與穩定性。文中證明，多樣性賽局與排他性賽局的內部均衡機率相同，但只有後者有漸近穩定的共存。三群體系統和二群體相比，完全混合均衡的頻率更低，多穩態更多。</li>
+<li>連結：<a href="zotero://select/library/items/WH4EJB94" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.23223" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Daisuke Hirota (2026)</strong>，<em>Payoff-Based Certificates for Convergence to Pure Nash Equilibria under Replicator Dynamics</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：結合對數機率比的增長下界與二維比較系統的第一積分，提出複製子動力學收斂到嚴格純納許均衡的純報酬判據 <span class="math inline">E&gt;0</span>（允許用玩家間的優勢補償初期的機率下滑）。文中給出有理數的有限精確測試和閉式的收斂時間界，並推廣到多玩家與指數權重學習。</li>
+<li>連結：<a href="zotero://select/library/items/WPERQG96" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20407" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-最新入庫本領域最新-2-篇">2026-11-19 最新入庫（本領域最新 2 篇）</h4>
+<ol>
+<li>
+<p><strong>Cultural Evolution Drives the Emergence of Conventions in Neural Emergent Communication</strong>（Maxime Toquebiau et al.，2026，<em>EMNLP 2026</em>）</p>
+<ul>
+<li>核心問題：過去的神經語言演化研究多半有三種限制：只有兩個智能體、說者與聽者的角色固定分離，或暗中共享內部參數。這樣模擬不了真實人類社群靠個體雙向適應與文化累積演化出共享語言慣例的過程。</li>
+<li>關鍵做法：建立一群有雙向說聽能力（Bi-directional）、不共享參數的獨立神經智能體，用實驗證明跨夥伴的文化演化壓力本身，就足以讓整個社群收斂出高效而共享的通訊慣例。</li>
+<li>跨領域啟發：去中心化、異構、多廠商的 AI 智能體（無共享權重）要在開放環境自發建立可互操作的語言，本文提供了一個認知演化的原型。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/FQC4SADR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.00006" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Evolution of cooperation with temporal information</strong>（Tianxing Zhao, Lei Zhou, Aming Li，2026，<em>arXiv</em>）</p>
+<ul>
+<li>核心問題：經典演化博弈模型幾乎都假設，個體學習策略時能取得的資訊來源與資訊量不隨時間改變。但真實的生物與社會個體面對的是持續波動的時變外部資訊流。</li>
+<li>關鍵做法：建立帶時變資訊（Temporal Information）的廣義演化動力學框架，精確分析資訊的時間起伏與非對稱獲取如何改變集體合作的演化相圖。</li>
+<li>跨領域啟發：把非平穩的線上社群推薦演算法和多智能體策略演化連起來，指出資訊披露的節奏本身就是調控合作的有力手段。</li>
+<li>連結：OA PDF ｜ <a href="zotero://select/library/items/XQT6SCQK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.16816" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>34｜高維機率與隨機矩陣（High-Dimensional Probability &amp; Random Matrix Theory） · Reading</title>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+</head>
+<body>
+<header class="site"><a class="brand" href="../../index.html">Reading</a><nav class="crumbs"><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">E_統計物理、複雜系統與PDE算子</a></nav></header>
+<main>
+<article>
+
+<h1 id="34高維機率與隨機矩陣high-dimensional-probability-random-matrix-theory">34｜高維機率與隨機矩陣（High-Dimensional Probability &amp; Random Matrix Theory）</h1>
+<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 E：統計物理、複雜系統與 PDE 算子</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
+相關領域：<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> · <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> · <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> · <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">33_度量幾何與離散曲率</a> · <a class="wl" href="22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a></p>
+</aside>
+<h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
+<p>空間維度 <span class="math inline">d</span> 與矩陣尺寸 <span class="math inline">N</span> 大到數千乃至數十億時，我們在二、三維世界養成的幾何直覺不再成立，取而代之的是兩種確定性的規律。一是測度集中：一切都縮聚到薄殼上，取值近乎常數。二是隨機矩陣譜的普適律：大量隨機耦合的特徵值會自動排成精確可解的確定性連續分佈。</p>
+</aside>
+<ul>
+<li>這個領域要解決什麼問題？
+古典統計學預設特徵維度 <span class="math inline">p</span> 固定且很小，樣本數 <span class="math inline">n \to \infty</span>。這時大數法則保證樣本協方差矩陣會收斂到真實協方差。但在現代科學與人工智慧（基因組學、量化金融、十億參數 LLM 權重與萬維向量檢索庫）中，維度 <span class="math inline">p</span> 與樣本數 <span class="math inline">n</span> 往往同階增長（<span class="math inline">p/n \to \gamma \in (0, \infty)</span>），甚至 <span class="math inline">p \gg n</span>。在這個高維比例極限下，純白雜訊的特徵值不會縮成一點，而會攤開成一大片看似有結構的譜（Marchenko–Pastur 分佈），把微弱的真實訊號蓋過去。同時，高維嵌入空間中任意兩點的距離都趨於相等，直覺上的最近鄰檢索因此變得不穩。這個領域研究的是：怎麼用測度集中不等式、Stieltjes 變換與自由機率論，在高維下精確分開隨機雜訊基底和真實訊號結構，並推導超大規模神經網路的精確極限動力學。</li>
+<li>直覺模型（不用公式也能懂的比喻）：
+<ul>
+<li><strong>高維柳丁只有皮沒有肉（測度集中）</strong>：在三維空間切一顆柳丁，果肉佔了絕大部分體積。到了一萬維空間，單位球體 <span class="math inline">99.999\%</span> 的體積都擠在離表面不到 <span class="math inline">0.01</span> 厚的薄果皮上，而且絕大多數果皮又集中在赤道附近一圈。所以高維空間裡任何平滑（Lipschitz）函數在隨機點上的取值幾乎不再跳動，近乎一個常數。</li>
+<li><strong>雜訊海平面與訊號孤島（隨機矩陣譜與 BBP 相變）</strong>：把一百萬個獨立隨機數字填進對稱大矩陣，每個格子都是亂數，特徵值直方圖卻像用圓規畫出來的，100% 貼合 Wigner 半圓。如果真實世界有幾個關鍵潛在因子（低秩真實訊號）疊在隨機雜訊上，訊號強度要跨過一個精確的臨界水位（BBP 相變點），才能像火山島一樣冒出雜訊海平面，成為離群特徵值（Outlier Eigenvalue）。低於這個水位時，PCA 再怎麼做也只能撈到與真實方向正交的純雜訊。</li>
+</ul>
+</li>
+<li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
+<ul>
+<li><strong>超大規模神經網路擴展與 <span class="math inline">\mu</span>P 超參數遷移</strong>：Greg Yang 的 Tensor Programs 利用高維矩陣的自由獨立性，推導出任意架構無限寬神經網路的前向／反向精確定律。現代大模型能在小模型上調好學習率，再不經修改直接搬到百億參數的大模型，就是從這套理論來的（橋接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>）。</li>
+<li><strong>LLM 模型壓縮、幻覺偵測與雙重下降</strong>：用隨機矩陣理論檢視隱藏層激活與損失曲面 Hessian（GOE 統計），不需要額外訓練資料就能即時找出模型的冗餘層與分佈外幻覺（橋接 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>），也能精確算出弱到強泛化（Weak-to-Strong Generalization）的泛化誤差曲線。</li>
+<li><strong>RAG 向量檢索穩定性與高維採樣下界</strong>：高維距離集中（Hubness 現象）決定了 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 中向量資料庫的檢索可靠度。對數 Sobolev 不等式則界定了高維擴散與 MCMC 採樣的查詢複雜度下界。</li>
+</ul>
+</li>
+</ul>
+<h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;低維古典機率失效 (維度災難 / p 與 n 同階增長時古典大數法則對矩陣譜失真)&quot;] --&gt; B[&quot;高維幾何與測度集中 (Sub-Gaussian 尾部 / Talagrand 凸距離 / 對數 Sobolev 不等式 LSI)&quot;]
+    A --&gt; C[&quot;經典隨機矩陣普適律 (Wigner 半圓律 / Marchenko-Pastur 樣本協方差律 / BBP 尖峰相變)&quot;]
+    C --&gt; D[&quot;非交換自由機率論 (Voiculescu 漸近自由獨立 / R-變換與 S-變換譜加法乘法)&quot;]
+    B &amp; D --&gt; E[&quot;神經網路矩陣定律 (Tensor Programs 無限寬極限 / Hessian GOE 譜統計 / 確定性等價)&quot;]
+    B &amp; E --&gt; F[&quot;2026 前沿突破：LLM 譜幾何幻覺偵測、弱到強泛化精確解、RAG 高維距離集中與強對數凹採樣下界&quot;]
+</pre>
+<h3 id="主要概念白話說法對照嚴格定義">主要概念（白話說法對照嚴格定義）</h3>
+<ol>
+<li>
+<p><strong>測度集中與泛函不等式（Concentration of Measure &amp; Log-Sobolev Inequalities）</strong></p>
+<ul>
+<li>直覺理解：為什麼高維隨機投影（Johnson–Lindenstrauss 引理）能把十萬維向量壓到幾百維，兩兩距離卻幾乎不變？因為由大量獨立（或弱相關）隨機變數構成的平滑幾何量，偏離期望值的機率會以高斯指數的速度趨近於零。對數 Sobolev 不等式（LSI）更進一步，用一個常數 <span class="math inline">\alpha</span> 同時控制兩件事：靜態機率的指數集中，以及動態 Langevin 採樣向平衡態收斂的指數速率。</li>
+<li>機制或核心表達式：若機率測度 <span class="math inline">\mu</span> 滿足常數為 <span class="math inline">\alpha &gt; 0</span> 的對數 Sobolev 不等式，則對任意光滑函數 <span class="math inline">f</span>，相對熵受 Fisher 資訊控制：
+<div class="math inline">\mathrm{Ent}_\mu(f^2) \equiv \int f^2 \ln \frac{f^2}{\int f^2\,d\mu}\,d\mu \le \frac{2}{\alpha} \int \lVert \nabla f \rVert^2\,d\mu</div>
+由此經 Herbst 論證可得：對任意 <span class="math inline">L</span>-Lipschitz 函數 <span class="math inline">g: \mathbb{R}^d \to \mathbb{R}</span>，偏離均值的尾部機率滿足與維度 <span class="math inline">d</span> 無關的次高斯集中（Sub-Gaussian Concentration）：
+<div class="math inline">\mathbb{P}_\mu\!\bigl( \lvert g(X) - \mathbb{E}_\mu[g(X)] \rvert \ge t \bigr) \le 2 \exp\!\Bigl( -\frac{\alpha t^2}{2 L^2} \Bigr)</div></li>
+<li>能做到什麼，代價是什麼：它是統計學習泛化界、壓縮感知與高維隨機採樣分析的通用工具。代價有兩個。目標分佈一旦有多模態的雙井位能（非凸損失），LSI 常數 <span class="math inline">\alpha</span> 會隨能壘高度指數惡化。高維度本身也有副作用：餘弦相似度集中到零，歐氏距離的對比度崩塌（Contrast Collapse），近鄰檢索因此受到衝擊。</li>
+</ul>
+</li>
+<li>
+<p><strong>Wigner 半圓律、Marchenko–Pastur 定律與尖峰相變（RMT Spectral Universality）</strong></p>
+<ul>
+<li>直覺理解：物理學家 Wigner 為了解釋重原子核複雜能階間距的排斥現象，用隨機對稱矩陣取代未知的核力哈密頓量，結果發現特徵值密度與矩陣元素的具體分佈無關（普適性 Universality）。資料科學最常用的是 <span class="math inline">p \times n</span> 資料矩陣 <span class="math inline">X</span>。當 <span class="math inline">p, n \to \infty</span> 且長寬比 <span class="math inline">p/n \to \gamma</span> 時，純白雜訊協方差矩陣 <span class="math inline">\hat{\Sigma} = \frac{1}{n}XX^\top</span> 的特徵值會嚴格鋪滿區間 <span class="math inline">[\sigma^2(1-\sqrt{\gamma})^2,\, \sigma^2(1+\sqrt{\gamma})^2]</span>。</li>
+<li>機制或核心表達式：用預解式（Resolvent）<span class="math inline">G(z) = (M - zI)^{-1}</span> 的跡定義 Stieltjes 變換 <span class="math inline">m(z) = \frac{1}{p}\mathrm{Tr}\,G(z)</span>。當 <span class="math inline">p/n \to \gamma \in (0, 1]</span> 時，純雜訊的經驗譜密度收斂到 Marchenko–Pastur（MP）定律：
+<div class="math inline">\rho_{\text{MP}}(\lambda) = \frac{\sqrt{(\lambda_+ - \lambda)(\lambda - \lambda_-)}}{2\pi \sigma^2 \gamma \lambda} \mathbf{1}_{[\lambda_-, \lambda_+]}, \quad \lambda_\pm = \sigma^2(1 \pm \sqrt{\gamma})^2</div>
+若真實協方差含秩一訊號尖峰 <span class="math inline">\Sigma = \sigma^2 I + \theta u u^\top</span>，就會發生 Baik–Ben Arous–Péché（BBP）相變。只有訊號強度 <span class="math inline">\theta &gt; \sigma^2\sqrt{\gamma}</span> 時，最大經驗特徵值才會脫離 <span class="math inline">\lambda_+</span> 邊界，經驗特徵向量與真實方向 <span class="math inline">u</span> 也才有非零內積。若 <span class="math inline">\theta \le \sigma^2\sqrt{\gamma}</span>，特徵向量在球面上的方向就完全隨機。</li>
+<li>能做到什麼，代價是什麼：它給金融投資組合去噪（Potters &amp; Bouchaud 非線性收縮估計）、神經網路權重剪枝與激活冗餘診斷一條不需要超參數的純雜訊基準線。代價是經典 MP 定律假設樣本與特徵之間獨立同分佈，遇到結構化的相關輸入，就得改用確定性等價（Deterministic Equivalents）或自由摺積。</li>
+</ul>
+</li>
+<li>
+<p><strong>非交換自由機率論與神經網路矩陣定律（Free Probability &amp; Tensor Programs）</strong></p>
+<ul>
+<li>直覺理解：在古典機率中，兩個獨立的純量隨機變數相加 <span class="math inline">X+Y</span>，可以用傅立葉變換算它的分佈（特徵函數的對數相加，也就是累積量相加）。但如果相加的是兩個 <span class="math inline">N \times N</span> 矩陣 <span class="math inline">A</span> 與 <span class="math inline">U B U^\top</span>（經隨機正交／酉矩陣旋轉），矩陣乘法不可交換（<span class="math inline">AB \neq BA</span>），特徵值分佈要怎麼算？Voiculescu 與 Speicher 創立的自由機率論指出，高維隨機旋轉會讓兩個矩陣進入漸近自由獨立（Asymptotic Freeness）的狀態。這時只要把特徵值的 Stieltjes 變換轉成 R-變換，兩個自由矩陣之和的譜，就由各自的 R-變換直接相加得到。Greg Yang 的 Tensor Programs 進一步發現，深度神經網路中交錯出現的線性權重乘法與逐元素非線性激活，在寬度趨於無窮大時，也服從一套可以機械式遞迴求解的「神經矩陣定律」。</li>
+<li>機制或核心表達式：
+<ul>
+<li><strong>自由加法（Free Additive Convolution <span class="math inline">\boxplus</span>）</strong>：設 <span class="math inline">G_\mu(z)</span> 為譜測度 <span class="math inline">\mu</span> 的 Cauchy–Stieltjes 變換，定義 R-變換 <span class="math inline">R_\mu(w) = G_\mu^{\langle -1 \rangle}(w) - \frac{1}{w}</span>。若 <span class="math inline">A, B</span> 漸近自由，則：
+<div class="math inline">R_{\mu_{A+B}}(w) = R_{\mu_A}(w) + R_{\mu_B}(w)</div></li>
+<li><strong>Tensor Programs 無限寬漸近獨立性（Yang 2020）</strong>：在任意交錯矩陣乘法與非線性映射的計算圖中，當寬度 <span class="math inline">n \to \infty</span> 時，中間層的前激活向量在座標分佈的意義下，對隨機初始權重矩陣呈現受控的高斯條件獨立，並帶有精確的修正項（Master Theorem）。</li>
+</ul>
+</li>
+<li>能做到什麼，代價是什麼：隨機矩陣的精確解析計算因此從單層線性代數，擴大到任意深層 ResNet、Transformer、無序凝聚態系統（Wegner <span class="math inline">n</span>-軌道 CPA 模型）與過參數化學習曲線（雙重下降與弱到強泛化）。代價是網路在有限寬度下做大步長特徵學習（Feature Learning Regime）、權重又發展出重尾相關時，自由獨立性假設會部分失效。</li>
+</ul>
+</li>
+</ol>
+<h2 id="g3開放問題與跨域遷移">G3｜開放問題與跨域遷移</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>高維採樣中強對數凹與高斯的複雜度差距</strong>：最佳化與統計學界長期猜測，只要目標分佈平滑且強對數凹（Strongly Log-Concave，條件數 <span class="math inline">\kappa = O(1)</span>，自動滿足強 LSI），一階隨機採樣演算法就應該和採樣標準高斯分佈一樣，達到關於維度 <span class="math inline">d</span> 的多項式對數（Polylogarithmic）查詢複雜度。2026 年的理論結果（Zhou &amp; Suzuki, <em>arXiv:2611.05813</em>）給出了否定的下界：即使條件數 <span class="math inline">\kappa=2</span> 且有常數熱啟動（Warm Start），任何隨機採樣器仍至少需要 <span class="math inline">\exp(\Omega(\log^{1/3} d))</span> 次查詢。這在資訊論層面嚴格區分了一般強對數凹採樣與高斯採樣的難度。</li>
+<li><strong>萬維嵌入空間的檢索失穩（Retrieval Instability）與大模型幻覺的譜信號</strong>：在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的 RAG 系統中，工程師習慣不斷提高 Embedding 維度（從 768 到 4096 維），好塞進更多語意細節。但高維機率指出，維度升高會同時加劇距離集中與樞紐點效應（Hubness：少數異常向量成為成千上萬無關查詢的最近鄰）。有兩個問題還沒解決。一是怎麼在保留高維語意表達力的同時，消除局部各向異性退化。二是怎麼利用隱藏層激活協方差譜的離群特徵軌跡（如 EigenTrack）即時攔截 LLM 幻覺。兩個問題都落在理論與系統工程的交界。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
+<p></p>
+<ul>
+<li><strong>先減掉 Marchenko–Pastur 雜訊基底，再談結構解釋（可借到 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>、<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/25_%E7%A7%91%E5%AD%B8%E5%AD%B8%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E6%BC%94%E5%8C%96.html">25_科學學與知識空間演化</a>）</strong>：分析神經網路注意力矩陣、大腦功能連接組（fMRI）或科學引文共現矩陣時，不要看到前十個主成分就急著解釋。先算出長寬比 <span class="math inline">\gamma = p/n</span> 對應的 MP 上界 <span class="math inline">\lambda_+</span>。落在 <span class="math inline">[\lambda_-, \lambda_+]</span> 區間內的特徵模態，在統計上都和純白雜訊無法區分，只有超過 BBP 閾值的尖峰才是真正學到的知識結構。</li>
+<li><strong>用確定性等價（Deterministic Equivalents）化解隨機複雜度（可借到 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>、<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>）</strong>：弱老師教出強學生（Weak-to-Strong Generalization）這類雙層耦合問題，看起來充滿隨機初始化與有限資料的雜訊。隨機矩陣的預解式技巧可以把巨大的隨機矩陣逆運算，精確換成只含幾個純量自洽方程的確定性表達式，泛化增益何時呈二次方放大也就看得清楚。</li>
+</ul>
+</aside>
+<h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。標註 <strong>🏆 L5 已完成</strong> 的論文附有深度審核導讀，也可參見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+</aside>
+<h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
+<table>
+<thead>
+<tr>
+<th>年份</th>
+<th>標題與第一作者</th>
+<th>為什麼值得點開讀（一句話）</th>
+<th>建議切入級別</th>
+<th>Zotero 與原文連結</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2020</td>
+<td><strong>Tensor Programs III: Neural Matrix Laws</strong>（Greg Yang, <em>arXiv:2009.10685</em>）</td>
+<td>🏆 <strong>L5 已完成</strong>｜現代大模型擴展理論的基礎：嚴格證明隨機初始化神經網路的前激活在無限寬極限下漸近獨立於權重矩陣，統一了 NTK、平均場與自由機率類推。</td>
+<td>深度學習必讀</td>
+<td><a href="zotero://select/library/items/QIDVGPAG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2009.10685" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2020</td>
+<td><strong>A First Course in Random Matrix Theory: for Physicists, Engineers and Data Scientists</strong>（Marc Potters &amp; Jean-Philippe Bouchaud, <em>Cambridge University Press</em>）</td>
+<td>對跨領域讀者友善、直覺講得清楚的現代 RMT 教科書。不堆砌繁瑣的測度論，直接從預解式、Stieltjes 變換、自由機率講到高維協方差清洗與機器學習應用。</td>
+<td>入門首選專書</td>
+<td><a href="zotero://select/library/items/8UZ3PTG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/9781108768900" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2009</td>
+<td><strong>An Introduction to Random Matrices</strong>（Greg W. Anderson, Alice Guionnet, Ofer Zeitouni, <em>Cambridge University Press</em>）</td>
+<td>數學界公認的隨機矩陣理論標準參考書：嚴格建立 Wigner 半圓律、行列式點過程（Determinantal Point Processes）、大偏差原理與 Voiculescu 自由機率論。</td>
+<td>純數嚴格專書</td>
+<td><a href="zotero://select/library/items/P3CZHES3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/CBO9780511801334" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>1994</td>
+<td><strong>Random matrix theory for CPA: Generalization of Wegner's <span class="math inline">n</span>--orbital model</strong>（Peter Neu &amp; Roland Speicher, <em>J. Phys. A</em>）</td>
+<td>自由機率論創立者之一 Speicher 把隨機旋轉矩陣系綜與非交換機率引入無序凝聚態系統（相干位能近似 CPA 與 Anderson 局域化），示範如何用自由機率求解格林函數。</td>
+<td>自由機率物理經典</td>
+<td><a href="zotero://select/library/items/KDC26RRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cond-mat/9410063" rel="noopener">原文</a></td>
+</tr>
+<tr>
+<td>2021</td>
+<td><strong>Appearance of Random Matrix Theory in Deep Learning</strong>（Nicholas P. Baskerville, Diego Granziol, Jonathan P. Keating, <em>Physica A</em>）</td>
+<td>兼用實證與理論，指出深度神經網路損失曲面 Hessian 的局部譜統計與高斯正交系綜（GOE）高度吻合，開了用 RMT 刻畫真實網路損失幾何的先例。</td>
+<td>跨域橋接代表作</td>
+<td><a href="zotero://select/library/items/7FFFZ6VT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2102.06740" rel="noopener">原文</a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-高引用代表作">B. 高引用代表作</h3>
+<details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（3 篇）</summary>
+<p></p>
+<ul>
+<li><strong><span class="math inline">q</span>-deformation of the Marchenko-Pastur law</strong>，Sung-Soo Byun, Yeong-Gwang Jung, Guido Mazzuca (2026, <em>arXiv:2601.09427</em>)：在雙重標度極限 <span class="math inline">q = e^{-\lambda/N}</span> 下，推導離散 little-<span class="math inline">q</span> Laguerre 酉系綜的極限譜分佈，指出 Marchenko–Pastur 定律在臨界參數 <span class="math inline">\lambda_c</span> 處會發生精確的譜相變。 <a href="zotero://select/library/items/7M3MQXSA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.09427" rel="noopener">原文</a></li>
+<li><strong>Structure and Redundancy in Large Language Models: A Spectral Study via Random Matrix Theory</strong>，Davide Ettori (2026, <em>arXiv:2602.22345</em>)：用譜幾何與隨機矩陣理論系統分析大型語言模型隱藏層激活的特徵值動力學，同時量化層間的結構冗餘與面對分佈偏移的脆弱性。 <a href="zotero://select/library/items/XZK7I6BM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.22345" rel="noopener">原文</a></li>
+<li><strong>A Topological Characterization of Graph Neural Networks via Stochastic Block Model Embeddings on the n-Sphere</strong>，Gopal Anantharaman (2026, <em>arXiv:2606.07598</em>)：結合隨機區塊模型（SBM）、Graphon 切距離緊緻性與高維單位球面嵌入，建立一套比較已訓練圖神經網路（MPNN）的拓撲與高維機率框架。 <a href="zotero://select/library/items/3C7J449N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.07598" rel="noopener">原文</a></li>
+</ul>
+</details>
+<h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
+<!-- DAILY_UPDATES_START -->
+<h4 id="2026-11-20-每日新增">2026-11-20 每日新增</h4>
+<ol>
+<li>
+<p><strong>Jingyang Huang, Sihong Shao, Yuxuan Zhang (2026)</strong>，<em>Efficient scheduling of particle annihilation for long-time Wigner simulations</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：把 Wigner 分支隨機漫步中粒子湮滅（PA）的傳播方差、重抽樣方差與平方偏差精確分開，證明 PA 能把指數爆炸的方差壓成線性增長，緩解數值符號問題。作者再用內稟時間重參數化提出方差約束的最佳化排程，逼近精度與成本的柏拉圖前沿。</li>
+<li>連結：<a href="zotero://select/library/items/AMXAVUAH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20426" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Georg Junker, Hassan Hassanabadi (2026)</strong>，<em>On the Power-Law Duality in Wigner-Yang Quantum Mechanics</em> (<em>arXiv</em>)</p>
+<ul>
+<li>關鍵做法：證明經典力學與量子力學中的 Hooke–Newton 冪次律勢能譜對偶，同樣適用於含反射算子的 Wigner–Yang 形變量子力學。形變參數需要做一個含反射算子的類 Langer 重縮放，而能量與耦合常數的互換律在三種力學體系中完全一致。</li>
+<li>連結：<a href="zotero://select/library/items/VCVSWED5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19246" rel="noopener">官方連結</a></li>
+</ul>
+</li>
+</ol>
+<h4 id="2026-11-19-首期入庫每領域最新焦點加上近期預印本">2026-11-19 首期入庫（每領域最新焦點，加上近期預印本）</h4>
+<ol>
+<li>
+<p><strong>Towards the Query Complexity of Sampling under Strong Log-Concavity and Log-Sobolev Inequalities</strong>（Huanjian Zhou, Taiji Suzuki, 2026, <em>arXiv:2611.05813</em>）</p>
+<ul>
+<li>問題與做法：一階隨機採樣在強對數凹的目標分佈上，能不能達到對維度的多項式對數複雜度？本文證明，即使條件數 <span class="math inline">\kappa=2</span> 且有常數熱啟動，任何隨機採樣器在 <span class="math inline">\mathbb{R}^d</span> 上仍至少需要 <span class="math inline">\exp(\Omega(\log^{1/3} d))</span> 次查詢。多項式對數維度依賴的猜想因此被嚴格否定。文中也給出一般 <span class="math inline">\alpha</span>-對數 Sobolev 不等式下更細的複雜度刻畫。</li>
+<li>連結：<a href="zotero://select/library/items/FKBT2K8H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.05813" rel="noopener">原文</a></li>
+</ul>
+</li>
+<li>
+<p><strong>Quadratic Weak-to-Strong Generalization in Random Feature Networks via Random Matrix Theory</strong>（Deborah Oliveira, Elliot Paquette, 2026, <em>arXiv:2610.09044</em>）</p>
+<ul>
+<li>問題與做法：超對齊（Superalignment）的核心議題是弱老師監督強學生：為什麼寬度更大的學生網路，能超越給它偽標籤的弱老師？作者用隨機矩陣的確定性等價（Deterministic Equivalents）精確解出梯度流訓練下的母體測試誤差，說明 ReLU 隨機特徵網路中，弱到強泛化增益為何呈二次方標度。</li>
+<li>連結：<a href="zotero://select/library/items/ARA3TDWS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.09044" rel="noopener">原文</a></li>
+</ul>
+</li>
+</ol>
+<details class="callout" data-kind="note"><summary>展開更多 2026 近期前沿預印本（2 篇）</summary>
+<p></p>
+<ul>
+<li><strong>High-Dimensional Concentration and Retrieval Instability in Embedding Spaces: Implications for Retrieval-Augmented Generation</strong>，E. López Fune (2026, <em>arXiv:2606.28330</em>)：用受控的數值實驗，系統分析高維嵌入空間中的距離集中、餘弦集中、對比度崩塌與樞紐點效應（Hubness），指出 RAG 檢索失穩在高維幾何上的原因（橋接 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a>）。 <a href="zotero://select/library/items/9PQCDJ3G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.28330" rel="noopener">原文</a></li>
+<li><strong>Spectral Geometry for Deep Learning: Compression and Hallucination Detection via Random Matrix Theory</strong>，Davide Ettori (2026, <em>arXiv:2601.17357</em>)：提出即時譜追蹤方法 EigenTrack。它用隱藏層激活的隨機矩陣特徵值指標，在語言模型與視覺語言模型中即時偵測幻覺與 OOD 異常，也用來指導無損模型壓縮。 <a href="zotero://select/library/items/DUFNP2KT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.17357" rel="noopener">原文</a></li>
+</ul>
+</details>
+<!-- DAILY_UPDATES_END -->
+</article>
+</main>
+<footer class="site">建置於 2026-11-20</footer>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:matchMedia('(prefers-color-scheme: dark)').matches?'dark':'neutral'});mermaid.run();</script>
+</body>
+</html>
