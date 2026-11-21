@@ -47,7 +47,13 @@
     ".rdg-rd-body .rdg-rd-wait { position: absolute; left: 0; right: 0; top: 38%; text-align: center; font: 500 12.5px/16px var(--sans); color: var(--muted); opacity: 0; transition: opacity .2s var(--ease) .25s; pointer-events: none }",
     ".rdg-rd-body.loading .rdg-rd-wait { opacity: 1 }",
     "#os.reduce .rdg-rd-body iframe, #os.reduce .rdg-rd-body .rdg-rd-wait { transition: none }",
-    "@media (prefers-reduced-motion: reduce) { .rdg-rd-body iframe, .rdg-rd-body .rdg-rd-wait { transition: none } }"
+    "@media (prefers-reduced-motion: reduce) { .rdg-rd-body iframe, .rdg-rd-body .rdg-rd-wait { transition: none } }",
+    // a sleeping window: its page is unloaded to save memory; one click brings it back
+    ".rdg-rd-body .rdg-rd-sleep { display: none }",
+    ".rdg-rd-body.asleep { background: var(--paper, #f7f6f0) }",
+    ".rdg-rd-body.asleep .rdg-rd-sleep { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; width: 100%; border: 0; background: transparent; cursor: pointer; font: inherit; color: var(--muted) }",
+    ".rdg-rd-sleep-t { font: 700 10.5px/14px var(--sans); letter-spacing: .12em; text-transform: uppercase; color: var(--ink) }",
+    ".rdg-rd-sleep-h { font: 400 13px/18px var(--sans) }"
   ].join("\n"));
 
   /* ---------- the catalog (rdg-system owns it; the page's own JSON is the fallback) ---------- */
@@ -157,18 +163,57 @@
     (doc.head || doc.documentElement).appendChild(s);
   }
 
-  function makeWindow(app, url, o) {
-    o = o || {};
-    var n0 = noteAtUrl(url);
-    var r = { hist: [url], pos: 0, id: n0 ? n0.id : null, url: url, title: n0 ? n0.title : "Reader", depthOff: null, doc: null };
-
-    var body = A.el("div", "rdg-rd-body loading");
+  /* ---------- memory: only the most recently used notes stay loaded ----------
+     Every Reader window holds a whole page (KaTeX, Mermaid, the desk layer). Like a browser discarding tabs,
+     only the MAX_LIVE most recently used windows keep their page. The others sleep: the page is unloaded and a
+     placeholder shows, and the note reloads at the same scroll position when the window is used again.
+     A minimised window sleeps at once, and a restored session wakes only the window in front. */
+  var MAX_LIVE = 3, useTick = 0, booting = true;   // while the session restores, focus only orders windows
+  function mountFrame(r, url) {
     var frame = A.el("iframe");
     frame.setAttribute("allow", "clipboard-write; fullscreen");
     frame.title = r.title;
-    body.appendChild(frame);
+    frame.rdgReader = { go: function (u) { go(r, u, true); } };
+    frame.addEventListener("load", function () { loaded(r); });
+    r.body.insertBefore(frame, r.body.firstChild);
+    r.frame = frame; r.asleep = false;
+    r.body.classList.remove("asleep");
+    startLoading(r);
+    frame.src = url;
+  }
+  function sleep(r) {
+    if (!r || r.asleep || !r.frame || (r.win && r.win.closing)) return;
+    try { var se = r.frame.contentDocument && r.frame.contentDocument.scrollingElement; r.scrollY = se ? se.scrollTop : 0; } catch (e) {}
+    clearTimeout(r.revealT); cancelAnimationFrame(r.poll);
+    if (r.depthOff) r.depthOff();
+    var f = r.frame; r.frame = null; r.doc = null; r.asleep = true;
+    try { f.rdgReader = null; f.src = "about:blank"; } catch (e) {}
+    if (f.parentNode) f.parentNode.removeChild(f);
+    r.body.classList.remove("loading"); r.body.classList.add("asleep");
+  }
+  function wake(r) { if (r && r.asleep && !(r.win && r.win.closing)) mountFrame(r, r.url || r.hist[r.pos]); }
+  function touch(r) { if (!r) return; r.used = ++useTick; if (booting) return; wake(r); enforce(r); }
+  function enforce(keep) {
+    var live = readerWins().map(function (w) { return w.rdr; })
+      .filter(function (x) { return x && !x.asleep && x !== keep; })
+      .sort(function (a, b) { return (b.used || 0) - (a.used || 0); });
+    live.slice(Math.max(0, MAX_LIVE - (keep && !keep.asleep ? 1 : 0))).forEach(sleep);
+  }
+
+  function makeWindow(app, url, o) {
+    o = o || {};
+    var n0 = noteAtUrl(url);
+    var r = { hist: [url], pos: 0, id: n0 ? n0.id : null, url: url, title: n0 ? n0.title : "Reader", depthOff: null, doc: null, frame: null };
+
+    var body = A.el("div", "rdg-rd-body loading");
     body.appendChild(A.el("div", "rdg-rd-wait", "Opening…"));
-    r.frame = frame; r.body = body;
+    var nap = A.el("button", "rdg-rd-sleep");
+    nap.type = "button";
+    nap.appendChild(A.el("span", "rdg-rd-sleep-t", "Paused to save memory"));
+    nap.appendChild(A.el("span", "rdg-rd-sleep-h", "Click to continue reading"));
+    nap.addEventListener("click", function () { touch(r); if (r.win && typeof r.win.focus === "function") r.win.focus(); });
+    body.appendChild(nap);
+    r.body = body;
 
     var tb = A.el("div", "rdg-rd-tb"), nav = A.el("div", "rdg-rd-nav"), acts = A.el("div", "rdg-rd-acts");
     var bBack = A.ui.iconButton("back", "Back (⌥[)", function () { back(r); });
@@ -188,24 +233,24 @@
       x: o.x, y: o.y, minW: 380, minH: 300, focus: o.focus,
       onResize: function (win) { win.el.classList.toggle("rdg-tight", win.w < 600); },
       onFocus: function (win) {
+        touch(r);                                                  // a sleeping note wakes; the oldest live one may sleep
         var a = document.activeElement;
-        if (a && win.el.contains(a) && a !== frame) return;      // a toolbar button keeps the keyboard
-        try { frame.contentWindow.focus(); } catch (e) {}
+        if (a && win.el.contains(a) && a !== r.frame) return;    // a toolbar button keeps the keyboard
+        try { if (r.frame) r.frame.contentWindow.focus(); } catch (e) {}
       },
       onClosed: function () {
         clearTimeout(r.revealT); cancelAnimationFrame(r.poll);
         if (r.depthOff) r.depthOff();
-        try { frame.rdgReader = null; } catch (e) {}
+        try { if (r.frame) { r.frame.rdgReader = null; r.frame.src = "about:blank"; } } catch (e) {}
+        r.frame = null; r.doc = null;
       }
     });
     r.win = w; w.rdr = r; w.kind = "reader";
     w.el.classList.toggle("rdg-tight", w.w < 600);
-    frame.rdgReader = { go: function (u) { go(r, u, true); } };
-    frame.addEventListener("load", function () { loaded(r); });
     setDoc(r);
     sync(r);
-    startLoading(r);
-    frame.src = url;
+    if (o.asleep) { r.asleep = true; body.classList.remove("loading"); body.classList.add("asleep"); }
+    else { mountFrame(r, url); r.used = ++useTick; enforce(r); }
     return w;
   }
 
@@ -236,6 +281,7 @@
     if (isOsUrl(u.href)) { if (typeof R.showShelf === "function") R.showShelf(); return; }
     var href = u.href, cur = r.hist[r.pos];
     if (push) { r.hist = r.hist.slice(0, r.pos + 1); if (href !== cur) r.hist.push(href); r.pos = r.hist.length - 1; }
+    if (r.asleep || !r.frame) { r.url = href; r.scrollY = 0; touch(r); sync(r); saveSoon(); return; }   // a sleeping window wakes on the new page
     var cw = null; try { cw = r.frame.contentWindow; } catch (e) {}
     var sameDoc = false; try { sameDoc = !!cw && bare(cw.location.href) === bare(href); } catch (e) {}
     if (!sameDoc) startLoading(r);
@@ -270,6 +316,11 @@
     r.doc = doc;
     ensureEmbed(doc, cw);
     hook(r);
+    // woken from sleep: back to where the reader was (after the desk layer and KaTeX have laid the page out)
+    if (r.scrollY) {
+      var y = r.scrollY; r.scrollY = 0;
+      setTimeout(function () { try { if (r.doc === doc && doc.scrollingElement) doc.scrollingElement.scrollTop = y; } catch (e) {} }, 350);
+    }
     if (r.depthOff) r.depthOff();
     var onDepth = function () { depthUI(r); };
     doc.addEventListener("rdg:depth", onDepth);
@@ -347,6 +398,26 @@
   A.bus.on("rdg:depth", function (v) {
     readerWins().forEach(function (w) { var d = depthOf(w.rdr); if (d) { try { d.set(v, { persist: false }); } catch (e) {} } });
   });
+  // memory: a minimised note sleeps at once; after a restored session only the front Reader wakes
+  A.bus.on("win:minimize", function (w) { if (w && w.rdr) sleep(w.rdr); });
+  A.bus.on("desktop:ready", function () {
+    // A.session.restore brings windows back one per 70 ms after desktop:ready; wait for the last one
+    var n = 0; try { var s = JSON.parse(localStorage.getItem("rdg-os-session") || "null"); n = s && s.wins ? s.wins.length : 0; } catch (e) {}
+    setTimeout(wakeFront, n ? n * 70 + 250 : 0);
+  });
+  function wakeFront() {
+    booting = false;
+    var f = A.wm.focused();
+    if (f && f.rdr) { touch(f.rdr); return; }
+    // nothing of the Reader's has the keyboard: wake the topmost visible Reader window, if any
+    var top = null, z = -1;
+    readerWins().forEach(function (w) {
+      if (w.minimized) return;
+      var zi = parseInt((w.el && w.el.style.zIndex) || "0", 10) || 0;
+      if (zi > z) { z = zi; top = w; }
+    });
+    if (top) touch(top.rdr);
+  }
 
   // a /Reading stub (or ~/Reading, a link to it) names its note by path, and its Page: line by address
   function noteForFile(path) {
@@ -405,7 +476,9 @@
       if (A.wm.narrow()) return;                  // a phone opens notes as plain pages, never at boot
       var url = stateUrl(st); if (!url) return;
       app.running = true;
-      makeWindow(app, url, f ? { x: f.x, y: f.y, w: f.w, h: f.h } : {});
+      // restored windows come back asleep, so a long session does not load every page at once; desktop:ready
+      // wakes the one in front
+      makeWindow(app, url, f ? { x: f.x, y: f.y, w: f.w, h: f.h, asleep: true } : { asleep: true });
     },
     menus: function () {
       // what a menu item runs, as a shell line (shown on a rest or with ⌥, kept in ~/.sh_history), only where a

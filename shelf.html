@@ -51,7 +51,10 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 #tip .tf { font: 600 13px/17px var(--sans); display: flex; align-items: center; gap: 7px }
 #tip .tf::before { content: ""; width: 9px; height: 9px; border-radius: 50%; background: var(--ch) }
 #tip .tb { font: 700 14px/18px var(--sans); color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis }
-.fx { width: 100%; height: 100%; will-change: transform }
+/* rdg memory: no permanent will-change on 530 plates (one GPU layer each, a common cause of tab crashes);
+   only a plate that is being pulled, dragged or pushed gets its own layer while it moves */
+.fx { width: 100%; height: 100%; }
+.node.magnet .fx, .node.dragging .fx { will-change: transform }
 .node.magnet { z-index: 60 }
 .node.magnet .plate { box-shadow: 0 20px 48px rgba(34,33,28,.26) }
 .node.magnet .bob { animation-play-state: paused }
@@ -84,6 +87,8 @@ button { font: inherit; color: inherit; cursor: pointer; background: none; borde
 .wire.k1 line { stroke-dasharray: 5 5 }
 .wire { opacity: .7; transition: opacity .3s var(--ease) }
 #app.wires-quiet .wire { opacity: 0 }
+/* rdg memory: ~1,300 quiet wires leave rendering altogether (opacity 0 still keeps them in it); lit wires show */
+#app.wires-quiet .wire:not(.hot) { visibility: hidden }
 .wire.hot { opacity: 1 !important }
 .wire.hot line { stroke: var(--wire-hot); stroke-width: 2 }
 .wire.hot circle { fill: var(--wire-hot) }
@@ -811,7 +816,8 @@ html.os .rec-h { border-top: 0; margin-top: 0 }
   }
   applyStill();
   nodesEl.addEventListener("animationend", function (ev) { if (ev.animationName === "pop") { var el = ev.target.closest(".node"); if (el) el.classList.remove("enter"); } });
-  function setPos(n) { n.el.style.transform = "translate3d(" + (n.x - n.w / 2) + "px," + (n.y - n.h / 2) + "px,0)"; }
+  // rdg memory: a plain 2D translate; translate3d gave every resting plate its own compositor layer
+  function setPos(n) { n.el.style.transform = "translate(" + (n.x - n.w / 2) + "px," + (n.y - n.h / 2) + "px)"; }
 
   // field discs: invisible until the cursor is over that field
   $("#labels").innerHTML = G.chapters.map(function (c) { var d = discs[c.n]; return '<div class="cdisc" data-ch="' + c.n + '" style="left:' + (d.x - d.r) + "px;top:" + (d.y - d.r) + "px;width:" + 2 * d.r + "px;height:" + 2 * d.r + "px;--ch:" + PAL[c.n] + '"></div>'; }).join("");
