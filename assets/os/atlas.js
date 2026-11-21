@@ -7655,7 +7655,7 @@
 })(window.ATLAS = window.ATLAS || {});
 /* Reading OS vendored file atlas-shell.js
    Source: Atlas OS 0.2.2, "Atlas OS.html" lines 8402-9565 (sha256 0c9f4b58319f7303...).
-   Patches: P2, P4, P5, P6, P17 (each marked rdg: Pn). Do not edit by hand; regenerate with .scripts/os/vendor.py. */
+   Patches: P2, P4, P5, P6, P17, P18 (each marked rdg: Pn). Do not edit by hand; regenerate with .scripts/os/vendor.py. */
 /* ==========================================================================
    Atlas OS · shell
    The menu bar and the Dock (the glass at the top and bottom edges), the
@@ -8069,7 +8069,7 @@
   }
   // Activity Monitor's tile is live while it runs: a 2 px ink sparkline of the 1-minute load
   var loadHist = [];
-  setInterval(function () {
+  /* rdg: P18 */ if (A.apps && A.apps.get("activity")) setInterval(function () {
     var la = 0; try { la = +K.loadavg()[0] || 0; } catch (e) {}
     loadHist.push(la); if (loadHist.length > 24) loadHist.shift();
     var app = A.apps.get("activity"); if (!dockEl || !app || !app.running || A.reduced && loadHist.length > 1) return;

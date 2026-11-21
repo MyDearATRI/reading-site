@@ -83,7 +83,18 @@
     }
     try { w.document.documentElement.classList.toggle("os-aside", !!aside); } catch (e) {}
     pushInsets();
+    pushStill();
     flush();
+  }
+  // rdg perf: the desk holds still when Breathing is off, motion is reduced, or another app is in front
+  // (Atlas's own big icon views hold still for the same reason: hundreds of breathing covers halve the frame rate)
+  function pushStill() {
+    var still = false;
+    try {
+      var front = A.apps.active();
+      still = !A.prefs.get("com.atlas.desktop", "breathing", true) || !!A.reduced || !!(front && app && front !== app);
+    } catch (e) {}
+    var b = board(); if (b && b.setStill) b.setStill(still);
   }
 
   /* ---------- in front, hidden, shown ---------- */
@@ -228,6 +239,8 @@
   });
   // the Dock's size or autohide changed, or the screen did: the board's floating parts move with it
   A.bus.on("prefs:com.atlas.dock", pushInsets);
+  A.bus.on("app:active", pushStill);
+  A.bus.on("prefs:com.atlas.desktop", pushStill);
   var rzT = 0; window.addEventListener("resize", function () { clearTimeout(rzT); rzT = setTimeout(pushInsets, 120); });
   // the board changed Links, Papers or a status itself: the menu's ticks follow
   window.addEventListener("storage", function (e) { if (e.key === "rdg-wires" || e.key === "rdg-papers" || e.key === "rdg-progress") { if (A.apps.active() === app) changed(); } });

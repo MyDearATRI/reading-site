@@ -4,8 +4,8 @@
    wrapped in try/catch, so a private window or blocked site data only means nothing is kept.
 
    Moved from board.html (the Today block): the reread clock, the latest daily report, the Today list and the
-   once-a-day boot check. No counts, no lateness, no badges (K1). Loaded by shelf.html (assets/rdg-core.js) and by
-   the OS page (assets/os/rdg-core.js) before anything that uses it. */
+   once-a-day boot check. No counts, no lateness, no badges (K1). Built once as assets/rdg-core.js and loaded by
+   both shelf.html and the OS page before anything that uses it. */
 (function (root) {
   "use strict";
   if (root.RDG && root.RDG.v) return;
