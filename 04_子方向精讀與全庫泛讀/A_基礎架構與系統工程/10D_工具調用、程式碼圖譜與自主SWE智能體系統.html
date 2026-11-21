@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>10D｜工具調用、程式碼圖譜與自主SWE智能體系統 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-cab23e03" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="10d工具調用程式碼圖譜與自主swe智能體系統">10D｜工具調用、程式碼圖譜與自主SWE智能體系統</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a>
+同領域子方向：<a class="wl" href="10A_%E6%AA%A2%E7%B4%A2%E5%A2%9E%E5%BC%B7%E7%94%9F%E6%88%90RAG%E3%80%81%E5%9C%96%E8%AD%9C%E6%AA%A2%E7%B4%A2%E8%88%87%E9%95%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AD%89%E6%93%9A%E7%AF%A9%E9%81%B8.html">檢索增強生成RAG、圖譜檢索與長上下文證據篩選</a> · <a class="wl" href="10B_%E6%B5%81%E5%8C%B9%E9%85%8DFlow%20Matching%E3%80%81%E6%95%B4%E6%B5%81%E6%B5%81%E8%88%87%E9%80%A3%E7%BA%8C%E6%93%B4%E6%95%A3%E7%94%9F%E6%88%90.html">流匹配Flow Matching、整流流與連續擴散生成</a> · <a class="wl" href="10C_%E5%81%8F%E5%A5%BD%E5%B0%8D%E9%BD%8ADPO%E3%80%81RLHF%E8%88%87%E5%BE%8C%E8%A8%93%E7%B7%B4%E5%83%B9%E5%80%BC%E5%BE%AE%E8%AA%BF.html">偏好對齊DPO、RLHF與後訓練價值微調</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A503_%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8%E3%80%81Wasserstein%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E7%94%9F%E6%88%90%E6%93%B4%E6%95%A3.html">隨機熱力學、Wasserstein 梯度流與生成擴散</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a> 的系統整合層，研究語言模型如何從單輪文本生成轉化為具備外部工具調用、分層記憶管理與程式碼庫級別感知能力的自主軟體工程（SWE）智能體。核心矛盾在於真實程式碼庫具備跨檔案的深層依賴且多輪互動軌跡極長，如何在有限上下文視窗、無時間資料洩漏與可接受推論成本下維持正確決策。演進主線由早期交替推理行動（ReAct）與自監督 API 呼叫（Toolformer），走向作業系統式虛擬上下文（MemGPT），再進展至 2026 年的階層式程式碼圖譜零洩漏評估（<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_23_2026_Xianpeng_Time_Consistent_Evaluation_of_Hierarchical_Code.html">Time-Consistent Evaluation of Hierarchical Code Graphs for SWE Agents</a>）、光學軌跡壓縮（TraceLite）、軌跡感知評測（PTA-IRT）與可執行訓練資料流建置（SWE-Stream）。</p>
+</aside>
+<ul>
+<li>核心問題：純語言模型缺乏外部執行環境與即時事實檢索介面，在算術、精確查詢與多步驟程式碼修改中易產生幻覺與狀態漂移。將智能體部署至大型程式碼庫時，多輪探索、編輯與測試產生的觀察軌跡會快速耗盡上下文視窗與推論預算；同時，傳統扁平語法樹（如 Tree-sitter AST）難以呈現系統容器與架構模組間的高層依賴。此外，現行 SWE 基準若未嚴格鎖定歷史提交節點與知識圖譜快照，會因時間軸污染與提示詞洩漏解答而高估智能體能力，且重跑全量基準的測試成本極高。</li>
+<li>直覺模型：自主 SWE 智能體像一位在陌生大型工廠檢修管線的工程師：他不能憑記憶盲猜閥門位置，必須邊推理邊拿工具量測（ReAct 與 Toolformer），把剛查過的圖紙留在桌面、舊紀錄歸檔至資料室或縮印成小圖卡（MemGPT 與 TraceLite）。若工廠只提供逐顆螺絲的零件清單（扁平 AST），工程師仍會迷失；先看廠區管線總圖與車間模組關聯（兩層階層程式碼圖譜），才能精準定位故障並驗證修復結果。</li>
+<li>分階段閱讀路線：第一步先讀 Yao 等人（2022）與 Schick 等人（2023），建立推理軌跡與外部行動交錯（ReAct）及模型自監督學習 API 呼叫時機與參數（Toolformer）的基礎框架。第二步閱讀 Packer 等人（2023）、Wang 等人（2023）與 Masterman 等人（2024），理解借鑒作業系統分級記憶體與中斷機制的虛擬上下文管理（MemGPT），以及單智能體與多智能體在規劃、執行與反思階段的架構分歧。第三步精讀 Xianpeng 等人（2026）、Duan 等人（2026）、Xiao 等人（2026）與 Liu 等人（2026），掌握 2026 年針對 SWE 智能體的階層程式碼圖譜時間一致性基準、軌跡感知項目反應理論評估（PTA-IRT）、免訓練軌跡壓縮（TraceLite）與彈性串流可執行任務建置（SWE-Stream）。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;ReAct 推理與行動交錯 (Yao 2022)&quot;] --&gt; B[&quot;Toolformer 自監督 API 調用 (Schick 2023)&quot;]
+    B --&gt; C[&quot;MemGPT 作業系統式分層記憶 (Packer 2023)&quot;]
+    B --&gt; D[&quot;單一與多智能體規劃反思架構 (2023-2024)&quot;]
+    C --&gt; E[&quot;TraceLite 近期文本與歷史光學壓縮 (Xiao 2026)&quot;]
+    D --&gt; F[&quot;ServiceExplorer 階層程式碼圖譜與零洩漏基準 (Xianpeng 2026)&quot;]
+    F --&gt; G[&quot;PTA-IRT 過程與結果融合評測 (Duan 2026)&quot;]
+    D --&gt; H[&quot;SWE-Stream 漸進建置可執行軌跡資料 (Liu 2026)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>交替推理行動與自監督工具調用（ReAct &amp; Toolformer）</strong></p>
+<ul>
+<li>直覺理解：將內部的思考步驟與外部的環境查詢交錯編排，並讓模型透過少量示範自行學會「何時呼叫哪個 API 以及如何把回傳值接回後續生成」。</li>
+<li>機制或核心表達式：ReAct 在語言模型的狀態空間中將動作集合擴充為 <span class="math inline">\hat{\mathcal{A}} = \mathcal{A} \cup \mathcal{L}</span>，其中 <span class="math inline">\mathcal{L}</span> 為自由文本推理空間；語言空間的推理步驟 <span class="math inline">a_t \in \mathcal{L}</span> 用於追蹤與更新行動計畫及處理異常，而環境動作 <span class="math inline">a_t \in \mathcal{A}</span> 觸發外部知識庫或工具回傳觀察 <span class="math inline">o_t</span>。Toolformer 則針對單一工具在少量示範下採樣候選 API 呼叫，並以呼叫前後對未來詞元預測交叉熵損失的降幅 <span class="math inline">\mathcal{L}^- - \mathcal{L}^+</span> 篩選保留有益的工具調用範例，再以此自監督微調策略模型。</li>
+<li>能做到什麼，代價是什麼：ReAct 顯著降低知識問答（HotpotQA）與事實驗證（FEVER）中的幻覺並提高決策可解釋性，Toolformer 則能在不損及通用語言建模能力下以較小模型達成零樣本工具增強；代價是推理步驟與外部 I/O 增加了延遲與上下文長度消耗。</li>
+</ul>
+</li>
+<li>
+<p><strong>作業系統式虛擬上下文與光學軌跡壓縮（MemGPT &amp; TraceLite）</strong></p>
+<ul>
+<li>直覺理解：把有限的上下文視窗當作高速主記憶體，透過分級搬移或將過時觀察渲染為緊湊圖像，在不遺失語意的前提下壓縮長互動軌跡的 token 成本。</li>
+<li>機制或核心表達式：MemGPT 借鑒傳統作業系統的分層記憶體架構，將主上下文（類比 RAM）與外部檢索儲存（類比磁碟）分離，由模型主動透過控制流中斷（interrupts）函式在快慢記憶體間搬運資料，突破固定視窗長度限制。TraceLite 針對 SWE 智能體的異質長軌跡採用免訓練壓縮策略：完整保留最近步驟的高保真文本，將歷史步驟的觀察結果渲染為低成本光學圖像，消除跨步驟重疊內容，並在程式碼編輯完成後丟棄階段性失效的觀察載荷。</li>
+<li>能做到什麼，代價是什麼：MemGPT 實現跨越單次視窗上限的多輪對話與大型文件分析，TraceLite 免除額外離線微調或輔助 LLM 摘要的延遲；代價分別在於函數呼叫中斷帶來的多輪系統開銷，以及光學圖像編碼在極細粒度字元符號辨識上的壓縮失真風險。</li>
+</ul>
+</li>
+<li>
+<p><strong>時間一致性零洩漏評估與階層程式碼圖譜（Time-Consistent Eval &amp; ServiceExplorer）</strong></p>
+<ul>
+<li>直覺理解：評估修改程式碼的智能體時，必須嚴格把知識圖譜與倉庫狀態鎖在歷史截斷點之前，並以「系統容器」與「架構模組」兩層圖譜取代平坦的語法樹。</li>
+<li>機制或核心表達式：依據時間一致性零洩漏協議（<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_23_2026_Xianpeng_Time_Consistent_Evaluation_of_Hierarchical_Code.html">Time-Consistent Evaluation of Hierarchical Code Graphs for SWE Agents</a>），系統將倉庫快照與程式碼知識圖譜嚴格鎖定於歷史截斷提交 <span class="math inline">T_0</span>，僅對 <span class="math inline">T_0</span> 之後的 100 個真實 Pull Request 在四種提示粒度（Minimal、Concise、Contextual、Guided）下測試。對比基準組、扁平 Tree-sitter AST 圖譜與確定性兩層依賴圖譜 ServiceExplorer（Level-1 系統與套件容器、Level-2 架構模組），在 DragonFly（C++）與 React（JS/TS）跨六個基礎模型進行 7,200 組配對評估。</li>
+<li>能做到什麼，代價是什麼：完全排除時間污染與提示級解答洩漏，精準衡量架構依賴圖譜帶來的淨增益；代價是建構嚴格封存於 <span class="math inline">T_0</span> 的可編譯容器與雙層靜態分析管線工程複雜度較高。</li>
+</ul>
+</li>
+<li>
+<p><strong>軌跡感知項目反應理論與彈性串流資料建置（PTA-IRT &amp; SWE-Stream）</strong></p>
+<ul>
+<li>直覺理解：挑選高性價比評測子集時不能只看最後是否通過測試，而要融合智能體探索過哪些檔案與嘗試過哪些編輯；在訓練端則透過漸進補全環境建置大規模可執行任務軌跡。</li>
+<li>機制或核心表達式：PTA-IRT（Privileged Trajectory-Aware IRT）將歷史執行軌跡中的探索上下文、嘗試編輯與解題路徑作為特權過程訊號，與二元 pass/fail 結果矩陣共同納入項目反應理論模型，藉此挑選高資訊量的校準子集以低預算估計全量基準排名。SWE-Stream 則從 10,728 個跨六種語言的倉庫發展史中，透過漸進式候選驗證與非同步彈性排程（優先重用現存建置構件、僅對缺漏處做定向補全），產出 80,874 個可驗證任務與 118,688 條成功軌跡，用以微調 Qwen3-30B-A3B-Thinking-2507。</li>
+<li>能做到什麼，代價是什麼：PTA-IRT 在低校準預算下於四個 SWE 基準上均取得優於傳統結果導向 IRT 的分數與排名恢復能力，SWE-Stream 則大幅擴增可驗證訓練任務規模；限制在於 PTA-IRT 依賴歷史模型軌跡作為特權資訊，而倉庫歷史重建仍受限於環境依賴的不可複現性。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>時間一致性零洩漏評估與扁平 AST 圖譜的侷限</strong>：為什麼在評估 SWE 智能體引入程式碼圖譜的效果時，必須將程式碼倉庫與圖譜快照嚴格鎖定在目標 Pull Request 之前的截斷提交 <span class="math inline">T_0</span>？相較於扁平的 Tree-sitter AST 圖譜，兩層階層式依賴圖譜 ServiceExplorer 在設計上解決了什麼資訊結構問題？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>若圖譜建置時間晚於待測 PR，PR 中新增或修改的符號與依賴關係會直接提前洩漏給智能體，導致評估高估檢索與圖譜增強的真實效益；此外，提示詞若過度具體也會形成提示級洩漏。扁平的 Tree-sitter AST 僅呈現局部檔案內的語法節點與細碎邊緣，缺乏跨檔案的系統邊界視角。ServiceExplorer 透過 Level-1 系統與套件容器、Level-2 架構模組的雙層抽象，使智能體先掌握跨模組的依賴拓撲再下鑽至具體符號。</p>
+</details>
+<ol start="2">
+<li><strong>TraceLite 的階段性丟棄與 PTA-IRT 的過程訊號價值</strong>：TraceLite 為何能在不微調模型、不呼叫輔助 LLM 摘要的前提下削減 SWE 智能體的 token 消耗？而 PTA-IRT 在挑選基準測試子集時，僅依賴 pass/fail 結果矩陣與融合歷史執行軌跡在資訊量上有何差別？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>TraceLite 利用兩個觀察：光學渲染能在中等壓縮率下保留足夠語意，因此可將較早的歷史觀察轉為圖像、僅保留近期觀察為純文本；同時在智能體完成程式碼編輯後，前一探索階段的過期觀察載荷已失去決策價值，可直接清除跨步冗餘與失效負載。至於基準抽樣，傳統 IRT 只看題目難度與模型對錯的二元結果，無法區分模型是靠運氣猜對還是沿正確路徑探索；PTA-IRT 引入探索上下文、嘗試編輯與解題路徑作為特權資訊，能在極少樣本預算下更準確估計智能體真實能力與排名。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>光學與階段性軌跡壓縮的長程資訊遺失風險</strong>：TraceLite 等免訓練壓縮框架將歷史觀察渲染為圖像並在編輯階段後丟棄舊載荷，雖有效壓低推論 token 成本，但當智能體在跨越多個模組的長程除錯中需要回溯數十步之前的精確符號名稱、錯誤行號或編譯器日誌細節時，圖像降採樣或載荷丟棄可能造成不可逆的資訊缺口。</li>
+<li><strong>大規模可執行訓練環境的建置成本與泛化偏差</strong>：SWE-Stream 雖然透過彈性排程從逾萬個倉庫建置了八萬餘個可執行任務，但真實歷史提交普遍面臨環境相依破損、測試缺漏與構件不一致等問題。如何確保經過局部定向補全的任務不偏離原始軟體工程分布，以及如何將軌跡感知評測（PTA-IRT）從現有模型族平滑外推至全新架構的智能體，仍是開放挑戰。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>階層圖譜索引與長上下文多跳檢索結構</strong>：ServiceExplorer 區分容器層與模組層的階層依賴圖譜，以及時間一致性基準對檢索邊界與提示粒度的控制協議，可直接與 <a class="wl" href="10A_%E6%AA%A2%E7%B4%A2%E5%A2%9E%E5%BC%B7%E7%94%9F%E6%88%90RAG%E3%80%81%E5%9C%96%E8%AD%9C%E6%AA%A2%E7%B4%A2%E8%88%87%E9%95%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AD%89%E6%93%9A%E7%AF%A9%E9%81%B8.html">檢索增強生成RAG、圖譜檢索與長上下文證據篩選</a> 中的圖譜增強檢索（GraphRAG）與多跳證據篩選策略對接。</li>
+<li><strong>可執行成功軌跡與無評論家群組強化學習對齊</strong>：SWE-Stream 產出的 118,688 條可驗證成功軌跡與測試回饋訊號，以及 PTA-IRT 對探索過程與編輯嘗試的過程級評估特徵，可作為 <a class="wl" href="10C_%E5%81%8F%E5%A5%BD%E5%B0%8D%E9%BD%8ADPO%E3%80%81RLHF%E8%88%87%E5%BE%8C%E8%A8%93%E7%B7%B4%E5%83%B9%E5%80%BC%E5%BE%AE%E8%AA%BF.html">偏好對齊DPO、RLHF與後訓練價值微調</a> 中 GRPO 等線上強化學習的過程獎勵與難度分層採樣依據。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-react-synergizing-reasoning-and-acting-in-language-models2022">1. ReAct: Synergizing Reasoning and Acting in Language Models（2022）</h4>
+<ul>
+<li>作者與出處：Shunyu Yao, Jeffrey Zhao, Dian Yu, Nan Du, Izhak Shafran · <em>arXiv</em></li>
+<li>核心問題：既有研究將語言模型的內部推理（如思維鏈）與外部環境互動分開處理，導致純推理容易產生事實幻覺與錯誤傳播，純行動又缺乏高層計畫追蹤能力。</li>
+<li>關鍵做法：提出 ReAct 框架，讓語言模型交替生成自然語言推理軌跡與任務特定動作。推理軌跡幫助模型歸納、追蹤並修正行動計畫與處理異常，外部動作則向知識庫或環境取回最新觀察結果；在 HotpotQA 與 FEVER 基準上有效減少幻覺並提升決策可解釋性。</li>
+<li>跨領域啟發：確立現代自主智能體「思考–行動–觀察」交錯迴圈的基礎範式。</li>
+<li>連結：<a href="zotero://select/library/items/CW9CSQ8Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.03629" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-toolformer-language-models-can-teach-themselves-to-use-tools2023">2. Toolformer: Language Models Can Teach Themselves to Use Tools（2023）</h4>
+<ul>
+<li>作者與出處：Timo Schick, Jane Dwivedi-Yu, Roberto Dessì, Roberta Raileanu, Maria Lomeli · <em>arXiv</em></li>
+<li>核心問題：大型語言模型雖具備強大的上下文少樣本學習能力，卻在基礎算術、精確事實檢索或日期計算等簡單功能上表現不穩，且傳統工具整合依賴大量人工標註的呼叫資料。</li>
+<li>關鍵做法：提出自監督訓練方法 Toolformer，僅需為每個 API 提供少量示範，模型便能自主採樣工具呼叫並根據是否降低後續詞元預測損失來篩選樣本，學會決定何時呼叫、呼叫哪個工具、傳入何種參數及如何整合結果，整合計算機、問答系統、搜尋引擎、翻譯與行事曆等工具後顯著提升零樣本表現。</li>
+<li>跨領域啟發：揭示如何以語言建模本身的交叉熵降幅作為自監督訊號來內化 API 工具調用能力。</li>
+<li>連結：<a href="zotero://select/library/items/Z7KF8PFC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2302.04761" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-memgpt-towards-llms-as-operating-systems2023">3. MemGPT: Towards LLMs as Operating Systems（2023）</h4>
+<ul>
+<li>作者與出處：Charles Packer, Sarah Wooders, Kevin Lin, Vivian Fang, Shishir G. Patil · <em>arXiv</em></li>
+<li>核心問題：受限於固定長度的上下文視窗，大型語言模型在長文件分析與跨越數十輪的長期對話中難以維持連貫記憶與控制流。</li>
+<li>關鍵做法：提出受作業系統階層記憶體啟發的虛擬上下文管理系統 MemGPT，透過在快速主上下文與慢速外部儲存之間動態搬移資料，營造遠超原生視窗的記憶空間，並利用中斷機制管理模型與使用者或外部儲存之間的控制流切換。</li>
+<li>跨領域啟發：將作業系統分頁與中斷抽象引入語言模型系統工程，直接啟發後續智能體記憶管理與觀察壓縮設計。</li>
+<li>連結：<a href="zotero://select/library/items/KZINZ8PQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.08560" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-time-consistent-evaluation-of-hierarchical-code-graphs-for-swe-agents2026">4. Time-Consistent Evaluation of Hierarchical Code Graphs for SWE Agents（2026）</h4>
+<ul>
+<li>作者與出處：Xianpeng, Sun, Tian Yu, Haonan Sun, Sheng Ma · <em>arXiv</em></li>
+<li>核心問題：現有倉庫級軟體工程（SWE）智能體基準常存在時間污染與提示級解答洩漏，且欠缺在嚴格無洩漏條件下對比不同層級程式碼圖譜的配對評測。</li>
+<li>關鍵做法：將 DragonFly（C++）與 React（JS/TS）的倉庫快照與知識圖譜鎖定於歷史截斷提交 <span class="math inline">T_0</span>，評估 <span class="math inline">T_0</span> 之後的 100 個 Pull Request 與四種提示粒度，並於六個基礎模型進行 7,200 組配對實驗，系統性對比無增強基準、扁平 Tree-sitter AST 圖譜以及兩層確定性架構依賴圖譜 ServiceExplorer。</li>
+<li>跨領域啟發：為程式碼圖譜增強智能體建立嚴格零洩漏評估規範，並凸顯高層架構容器與模組拓撲相較純語法樹的結構優勢（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_23_2026_Xianpeng_Time_Consistent_Evaluation_of_Hierarchical_Code.html">Time-Consistent Evaluation of Hierarchical Code Graphs for SWE Agents</a>）。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_23_2026_Xianpeng_Time_Consistent_Evaluation_of_Hierarchical_Code.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/QUCJ6HBA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17388" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-efficient-swe-agent-benchmarking-via-trajectory-aware-evaluation2026">5. Efficient SWE Agent Benchmarking via Trajectory-Aware Evaluation（2026）</h4>
+<ul>
+<li>作者與出處：Kefeng Duan, Dewu Zheng, Yanlin Wang, Xiwen Wang, Ensheng Shi · <em>arXiv</em></li>
+<li>核心問題：在真實 SWE 基準上執行多步驟程式碼探索、編輯與測試代價高昂，而既有的高效抽樣評測方法僅依賴歷史 pass/fail 結果矩陣或靜態任務語意，丟失了智能體解題過程資訊。</li>
+<li>關鍵做法：提出 PTA-IRT（特權軌跡感知項目反應理論），將歷史執行軌跡中的探索上下文、嘗試編輯與解題路徑作為特權過程證據與最終結果訊號融合，用於校準測試子集挑選與智能體能力估計；在低校準預算下於四個 SWE 基準上的分數與排名恢復均優於先前 IRT 基線。</li>
+<li>跨領域啟發：展示執行過程軌跡作為過程級訊號在基準壓縮與能力診斷中的數學價值。</li>
+<li>連結：<a href="zotero://select/library/items/668583BG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01603" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-tracelite-efficient-trace-reduction-for-swe-agents-via-optical-compression-and-redundancy-removal2026">6. TraceLite: Efficient Trace Reduction for SWE Agents via Optical Compression and Redundancy Removal（2026）</h4>
+<ul>
+<li>作者與出處：Jingyu Xiao, Qianxi Liu, Yintong Huo, Yuan Jiang, Michael R. Lyu · <em>arXiv</em></li>
+<li>核心問題：SWE 智能體透過反覆調用工具解決倉庫級任務時，互動軌跡持續膨脹並帶來高額 token 消耗與推論延遲，而既有壓縮法常需額外訓練、呼叫輔助 LLM 或限定特定內容格式。</li>
+<li>關鍵做法：提出免訓練、免輔助 LLM 的異質觀察壓縮框架 TraceLite：保留近期步驟為高保真純文本，將歷史步驟觀察渲染為緊湊圖像（光學壓縮），移除跨步驟重疊內容，並在程式碼編輯完成後丟棄階段性過期的觀察載荷，在 SWE-bench Verified 與 DeepSWE 上搭配 GPT-5.6-Luna 與 Gemini-3.8Flash 驗證效益。</li>
+<li>跨領域啟發：利用多模態光學編碼與智能體執行階段的生命週期特性，在不改動模型權重下壓縮長互動軌跡。</li>
+<li>連結：<a href="zotero://select/library/items/9RMSTD6J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.28612" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-9-篇">G5｜本子方向全量文獻泛讀清單（共 9 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 9 篇文獻（含開放存取 PDF 9 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進4-篇">A. 奠基經典、專著與核心演進（4 篇）</h3>
+<ul>
+<li><strong>2023｜A Survey on Large Language Model based Autonomous Agents</strong>，Lei Wang et al.（<em>Frontiers of Computer Science</em>，1878 引）：自主智能體架構引用數最高的綜述，確立角色剖析、記憶機制、任務規劃與外部工具行動這四個模組的標準劃分。 <a href="zotero://select/library/items/MEXHAA49" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2308.11432" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Toolformer: Language Models Can Teach Themselves to Use Tools</strong>，Timo Schick et al.（<em>arXiv</em>）：提出 Toolformer 模型，僅需每個 API 極少數範例即可透過自監督學習自主決定何時呼叫計算機、問答系統、搜尋引擎、翻譯與行事曆等外部工具及傳入參數，大幅提升零樣本任務表現。 <a href="zotero://select/library/items/Z7KF8PFC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2302.04761" rel="noopener">官方連結</a></li>
+<li><strong>2023｜MemGPT: Towards LLMs as Operating Systems</strong>，Charles Packer et al.（<em>arXiv</em>）：借鏡作業系統階層式虛擬記憶體管理機制提出 MemGPT，透過在快速上下文視窗與外部慢速記憶體間動態搬移資料並以中斷機制管理控制流，使大型語言模型突破有限視窗進行長程對話與文件分析。 <a href="zotero://select/library/items/KZINZ8PQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.08560" rel="noopener">官方連結</a></li>
+<li><strong>2022｜ReAct: Synergizing Reasoning and Acting in Language Models</strong>，Shunyu Yao et al.（<em>arXiv</em>）：提出 ReAct 框架，讓大語言模型交錯生成推理軌跡與任務特定動作，以推理規劃並處理例外、以動作查詢外部知識庫或環境，在語言與決策任務上超越既有基線並提升可解釋性。 <a href="zotero://select/library/items/CW9CSQ8Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.03629" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2026｜Time-Consistent Evaluation of Hierarchical Code Graphs for SWE Agents</strong>，Xianpeng et al.（<em>arXiv</em>）：🏆 L5 深度審核完成：在真實大型 C++ 與 JS/TS 專案的演化史上強制執行零時間洩漏隔離，量出階層式程式碼圖譜對 SWE 智能體的實際增益。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_23_2026_Xianpeng_Time_Consistent_Evaluation_of_Hierarchical_Code.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/QUCJ6HBA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17388" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Efficient SWE Agent Benchmarking via Trajectory-Aware Evaluation</strong>，Kefeng Duan et al.（<em>arXiv</em>）：提出特權軌跡感知試題反應理論（PTA-IRT），在離線校準階段納入搜尋路徑、編輯動作與測試回饋等軌跡特徵，藉此更準確地估計試題鑑別度。之後只要執行很小的代表性子集，就能高準確度還原整個基準的排名。 <a href="zotero://select/library/items/668583BG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01603" rel="noopener">官方連結</a></li>
+<li><strong>2026｜SWE-Stream: Scaling Executable Training Data for SWE Agents via Progressive Construction and Elastic Streaming</strong>，Chengyang Liu et al.（<em>arXiv</em>）：提出擴展軟體工程代理可執行訓練資料的系統 SWE-Stream，從涵蓋六種語言的 10,728 個程式碼庫開發歷史中漸進驗證並重用建置產物，配合非同步彈性排程大規模產出可執行任務。 <a href="zotero://select/library/items/H48GKS58" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.20193" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TraceLite: Efficient Trace Reduction for SWE Agents via Optical Compression and Redundancy Removal</strong>，Jingyu Xiao et al.（<em>arXiv</em>）：提出免訓練且無須輔助模型呼叫的 SWE 代理軌跡壓縮框架 TraceLite，將近期觀測保留為高保真文本、歷史觀測光學渲染為緊緻影像，並去除跨步重疊與過期階段負載以削減推論詞元開銷。 <a href="zotero://select/library/items/9RMSTD6J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.28612" rel="noopener">官方連結</a></li>
+<li><strong>2024｜The Landscape of Emerging AI Agent Architectures for Reasoning, Planning, and Tool Calling: A Survey</strong>，Tula Masterman et al.（<em>arXiv</em>）：綜述具備推理、規劃與工具調用能力的單智能體與多智能體 AI 系統架構進展，系統梳理單多智能體設計模式、領導機制、智能體間通訊方式與規劃階段選擇對目標達成的整體影響。 <a href="zotero://select/library/items/BBAFWXZI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.11584" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-cab23e03">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a><span class="rs">工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。</span></li><li><a href="10A_%E6%AA%A2%E7%B4%A2%E5%A2%9E%E5%BC%B7%E7%94%9F%E6%88%90RAG%E3%80%81%E5%9C%96%E8%AD%9C%E6%AA%A2%E7%B4%A2%E8%88%87%E9%95%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AD%89%E6%93%9A%E7%AF%A9%E9%81%B8.html">檢索增強生成RAG、圖譜檢索與長上下文證據篩選</a></li><li><a href="10C_%E5%81%8F%E5%A5%BD%E5%B0%8D%E9%BD%8ADPO%E3%80%81RLHF%E8%88%87%E5%BE%8C%E8%A8%93%E7%B7%B4%E5%83%B9%E5%80%BC%E5%BE%AE%E8%AA%BF.html">偏好對齊DPO、RLHF與後訓練價值微調</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

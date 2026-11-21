@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>36C｜擴散後驗抽樣與物理約束逆問題生成求解 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-82214816" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 最優傳輸、計算複雜度與演算法資訊</span>
+<article>
+
+<h1 id="36c擴散後驗抽樣與物理約束逆問題生成求解">36C｜擴散後驗抽樣與物理約束逆問題生成求解</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a>
+同領域子方向：<a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> · <a class="wl" href="36B_Knothe-Rosenblatt%E4%B8%89%E8%A7%92%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8%E8%88%87Stein%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSVGD.html">Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M37_Statistical%20Rethinking%20%E9%9A%8E%E5%B1%A4%E6%A8%A1%E5%9E%8B.html">Statistical Rethinking 階層模型</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a> 結合生成式擴散先驗與物理約束求解的前沿分支，接續 <a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> 的狀態參數同化需求與 <a class="wl" href="36B_Knothe-Rosenblatt%E4%B8%89%E8%A7%92%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8%E8%88%87Stein%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSVGD.html">Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</a> 的連續測度傳輸視角。演進主線從解決擴散模型先驗分數已知但加噪後驗似然難解的條件化瓶頸出發，發展到離線與線上計算分工、未知參數自組織擴散同化、多尺度代理人宏微觀一致性投影以及降階隨機閉合建模。</p>
+</aside>
+<ul>
+<li>核心問題：當物理先驗具有多峰結構、強非高斯混沌吸引子或複雜空間異質性時，高斯先驗與傳統粒子集合方法（如標準 EKI）難以精確刻畫先驗幾何；分數擴散模型雖能從資料學習極高表達力的先驗分數 <span class="math inline">\nabla_{u_t} \log p_t(u_t)</span>，但在逆向去噪過程中時刻 <span class="math inline">t &gt; 0</span> 的加噪條件似然 <span class="math inline">p_t(y \mid u_t) = \int p(y \mid u_0) p(u_0 \mid u_t) du_0</span> 必須對乾淨狀態空間積分而無解析封閉解。此外，實務中的物理與疫情系統往往伴隨極稀疏觀測下的先驗敏感度、轉移模型參數未知、以及代理人微觀狀態與聚合宏觀觀測之間的跨尺度斷層。</li>
+<li>直覺模型：可以把擴散後驗抽樣想成根據模糊線索修復受損影片：預訓練擴散模型是一位只看過無數清晰自然影片的畫師，擅長把隨機雪花逐步修回合理的物理畫面；但現在他必須邊畫邊聽現場物理感測器的回報修正筆觸。難題在於畫面還滿是雜訊的中途時刻，感測器只能看懂完全清晰後的成品卻評不出半成品的分數，因此研究者必須在「現場猜測近似導引」、「靠粒子群重加權篩選」或「事前花時間訓練專用條件畫師」之間做計算分工，同時確保修出來的結果滿足物理守恆律與微觀個體的一致性。</li>
+<li>分階段閱讀路線：第一階段先讀 Duong (2026, online-offline survey) 與 Igea and Cicirello (2024)，建立擴散模型用於貝氏逆問題的核心條件化困難、離線與線上成本分工架構，以及稀疏觀測下透過交互 Wasserstein 梯度流評估最優與最壞先驗的穩健推論觀念。第二階段閱讀 Duong (2026, SIS reaction-diffusion) 與 Yamaoka, Uchida, and Toyota (2026)，掌握反應擴散逆問題的全球弱適定性、閾值參數可識別性與 Hellinger 收斂率，以及利用自組織技術擴展分數資料同化（SDA）以聯合推論未知轉移參數的機制。第三階段閱讀 Liang et al. (2026)（GenDA）與 Dong, Yang, and Wu (2026)，深入分數生成同化如何透過宏微觀重指派維持代理人模型一致性，以及如何藉由離線間接學習與線上同化建構二維湍流隨機閉合模型。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;Igea 與 Cicirello 2024 穩健貝氏與交互 Wasserstein 流&quot;] --&gt; B[&quot;Duong 2026a 擴散後驗條件化與離線線上權衡&quot;]
+  B --&gt; C[&quot;似然引導、譜投影、SMC 修正與攤銷條件訓練&quot;]
+  B --&gt; D[&quot;Yamaoka et al. 2026 自組織 SDA 聯合參數狀態同化&quot;]
+  E[&quot;Duong 2026b 異質反應擴散適定性與 Hellinger 界&quot;] --&gt; F[&quot;物理可識別性與低盛行率展開近似&quot;]
+  C --&gt; G[&quot;Liang et al. 2026 GenDA 宏微觀一致代理人同化&quot;]
+  C --&gt; H[&quot;Dong et al. 2026 離線間接分數隨機閉合與湍流 DA&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>擴散後驗條件化問題與離線線上分工 (Diffusion Posterior Conditioning and Offline–Online Split)</strong></p>
+<ul>
+<li>直覺理解：預訓練擴散模型只學會了無條件先驗的去噪方向，要在去噪中途把觀測似然融合進去，就得估算加噪狀態對應的條件似然梯度，不同做法本質上是在離線訓練投資與線上正向模擬開銷之間取捨。</li>
+<li>機制或核心表達式：依據 Duong (2026a) 綜述的形式化，擴散逆問題的目標是從條件分數 <span class="math inline">\nabla_{u_t} \log p_t(u_t \mid y) = \nabla_{u_t} \log p_t(u_t) + \nabla_{u_t} \log p_t(y \mid u_t)</span> 抽樣。由於僅有乾淨端 <span class="math inline">t=0</span> 的正向似然 <span class="math inline">p(y \mid u_0)</span> 可計算，加噪端似然 <span class="math inline">p_t(y \mid u_t) = \int p(y \mid u_0) p_{0|t}(u_0 \mid u_t) du_0</span> 並無封閉表達式。主流策略按離線與線上成本分配為四類：無須重訓練的線上似然引導（likelihood guidance）、利用線性或結構算子的譜與投影法（spectral and projection methods）、消除引導近似偏差的序貫蒙地卡羅修正（SMC corrections，銜接 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a>），以及事前把觀測條件直接編碼進網路的攤銷條件訓練（amortized conditional training）。</li>
+<li>能做到什麼，代價是什麼：免訓練的似然引導與譜投影法具備零樣本跨任務彈性，能隨時更換觀測算子；但單步高斯近似容易產生後驗偏差，SMC 修正雖能恢復漸近無偏性卻會倍增粒子評估量，而攤銷訓練雖線上極快卻失去對未見正向算子的通用性。</li>
+</ul>
+</li>
+<li>
+<p><strong>自組織擴散同化、宏微觀重指派與間接隨機閉合 (Self-Organizing SDA, Macro–Micro Reassignment, and Indirect Closure)</strong></p>
+<ul>
+<li>直覺理解：當系統不只隱藏狀態未知，連動力轉移參數或未解析的小尺度效應也未知時，可以把參數併入擴充狀態做自組織生成更新，或透過宏觀誤差修正再投影回微觀代理人／物理動力學。</li>
+<li>機制或核心表達式：Yamaoka et al. (2026) 將古典狀態空間模型的自組織（self-organization）技術嵌入分數資料同化（SDA），把未知轉移參數併同潛在狀態執行聯合生成推論，同時維持 SDA 的訓練效率。針對部分觀測的疫情代理人模型（ABM），Liang et al. (2026) 提出 GenDA：結合免訓練的分數生成宏觀狀態修正、根據宏觀誤差直接更新異質傳輸參數場，以及恢復代理人微觀狀態一致性的宏微觀重指派（macro–micro reassignment）。在多尺度物理降階模型中，Dong et al. (2026) 利用分數擴散模型進行無須直接閉合資料的離線間接學習（indirect offline learning），再配合已知物理動力學與線上資料同化執行二維湍流隨機閉合建模。</li>
+<li>能做到什麼，代價是什麼：突破了標準 SDA 要求已知轉移參數與必須取得昂貴的第一性原理閉合標籤資料的限制；代價是宏微觀重指派與自組織參數擴充在非線性強耦合區域仍依賴合理的觀測摘要與宏觀誤差可識別性。</li>
+</ul>
+</li>
+<li>
+<p><strong>穩健先驗鄰域流與反應擴散可識別性界線 (Robust Prior Gradient Flows and Reaction–Diffusion Identifiability)</strong></p>
+<ul>
+<li>直覺理解：當感測器觀測非常稀疏時，後驗結果高度受限於事前選定的先驗假設；與其盲信單一先驗，不如計算鄰域內最優與最壞先驗造成的後驗波動範圍，並釐清早期動態觀測究竟能辨識出哪些物理參數組合。</li>
+<li>機制或核心表達式：Igea and Cicirello (2024) 針對結構健康監測等低資訊量感測情境，在名義先驗鄰域內以交互作用的 Wasserstein 梯度流同時求解最優與最壞先驗及其對應後驗，成功處理如雙香蕉後驗（double-banana posterior）等高度非線性多峰基準問題（連結 <a class="wl" href="36B_Knothe-Rosenblatt%E4%B8%89%E8%A7%92%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8%E8%88%87Stein%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSVGD.html">Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</a>）。在偏微分方程分析層面，Duong (2026b) 研究異質 SIS 反應擴散模型早期盛行率觀測的貝氏逆問題：證明前導盛行率動態僅透過「傳播率與康復率之差」及「感染者擴散係數」決定（此組合正好決定判定疫情持續的主特徵值），並建立全球弱適定性、定量參數穩定性以及當初始感染規模與雜訊標準差同為 <span class="math inline">\varepsilon</span> 階時，非線性後驗在 Hellinger 距離下以 <span class="math inline">O(\varepsilon)</span> 速率收斂至低盛行率展開近似。</li>
+<li>能做到什麼，代價是什麼：為生成式與粒子流逆問題提供了嚴格的先驗穩健區間與參數可識別性邊界（銜接 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a>）；代價是交互 Wasserstein 梯度流在超高維先驗鄰域上的優化成本較高，且漸近展開與 Hellinger 誤差界依賴小初始擾動假設。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何有了預訓練擴散模型的先驗分數，仍無法直接寫出準確的加噪後驗分數</strong>：在利用分數擴散模型求解逆問題 <span class="math inline">y = \mathcal{G}(u_0) + \eta</span> 時，為什麼不能直接把乾淨資料端計算的似然梯度 <span class="math inline">\nabla_{u_0} \log p(y \mid u_0)</span> 當作時刻 <span class="math inline">t &gt; 0</span> 的條件引導項？各類方法如何在計算代價與誤差之間取捨？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>由貝氏規則，加噪時刻 <span class="math inline">t</span> 的條件分數等於先驗分數 <span class="math inline">\nabla_{u_t} \log p_t(u_t)</span> 加上加噪似然分數 <span class="math inline">\nabla_{u_t} \log p_t(y \mid u_t)</span>。但 <span class="math inline">p_t(y \mid u_t) = \int p(y \mid u_0) p_{0|t}(u_0 \mid u_t) du_0</span> 必須對條件後驗去噪分佈積分，在非線性或高維 <span class="math inline">\mathcal{G}</span> 下沒有解析解。直接對條件期望值 <span class="math inline">\mathbb{E}[u_0 \mid u_t]</span> 求值雖快但會引入 Jensen 型近似偏差；依 Duong (2026a) 的離線線上視角，我們可以改在線上用 SMC 重加權修正近似偏差，或在離線階段多付訓練成本進行攤銷條件訓練以換取線上快速無偏推理。</p>
+</details>
+<ol start="2">
+<li><strong>從異質 SIS 反應擴散早期觀測推論疫情閾值的可識別性結構</strong>：依據 Duong (2026b) 對異質 SIS 反應擴散模型的分析，為何早期盛行率觀測即使無法分別精確確定個別傳播率與康復率，卻仍足以推斷系統是否跨過持續性閾值（persistence threshold）？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>考慮初始感染規模為 <span class="math inline">\varepsilon</span> 階的線性化前導動態：二階均勻展開顯示，早期盛行率演化主要依賴傳播率與康復率之差以及感染者擴散係數這組有效參數，而這組參數恰好決定了線性化反應擴散算子的主特徵值（principal eigenvalue）符號與疫情持續閾值。反過來說，個別傳播率在領先階僅透過發病率（incidence）顯式進入系統；當雜訊標準差與 <span class="math inline">\varepsilon</span> 成正比時，完整非線性貝氏後驗會在 Hellinger 距離下以 <span class="math inline">O(\varepsilon)</span> 速率收斂至該低盛行率展開的近似後驗。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>擴散後驗抽樣中近似引導的速度優勢與無偏不確定性量化之間的張力</strong>：如 Duong (2026a) 綜述所整理，免訓練的似然引導與譜投影方法計算速度快且易於適配新正向算子，但在強烈非線性或非高斯情形下往往扭曲後驗尾部分佈與可信區間；而納入序貫蒙地卡羅（SMC）重加權雖提供漸近理論修正，在高維空間卻可能遭遇權重退化與正向算子呼叫次數暴增的問題。如何在不犧牲物理守恆約束下縮減無偏擴散後驗抽樣的線上算力成本，是實務落地的主要瓶頸。</li>
+<li><strong>未知動力參數與不可微微觀系統下的條件擴散同化一致性</strong>：當物理模型包含未知轉移參數（Yamaoka et al., 2026）、非線性隨機閉合缺失項（Dong et al., 2026）或不可微分的離散代理人規則（Liang et al., 2026）時，線上修正後的宏觀狀態必須反饋回參數空間或微觀代理個體。如何保證宏微觀重指派不會破壞微觀動力學的不變流形，以及在僅有間接觀測資料時確保離線閉合分數模型在未見物理流態下的外推穩定性，目前尚缺乏統一的收斂保證。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>將穩健先驗鄰域梯度流與無導數集合反演互相嵌合</strong>：Igea and Cicirello (2024) 以交互 Wasserstein 梯度流界定先驗擾動上下界的機制，可直接補強 <a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> 在低資訊感測資料下的單一高斯先驗脆弱性；同時該類交互粒子流在幾何形式上與 <a class="wl" href="36B_Knothe-Rosenblatt%E4%B8%89%E8%A7%92%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8%E8%88%87Stein%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSVGD.html">Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</a> 的核化梯度流屬於同一變分族系。</li>
+<li><strong>離線間接分數學習與神經算子隨機閉合的跨界橋接</strong>：Dong et al. (2026) 利用分數擴散模型執行無須直接閉合標籤的離線間接學習並耦合線上同化，與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 所探討的高維物理神經算子、非局域記憶補償與測度傳輸架構相互呼應，亦為 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M37_Statistical%20Rethinking%20%E9%9A%8E%E5%B1%A4%E6%A8%A1%E5%9E%8B.html">Statistical Rethinking 階層模型</a> 的多層次潛在誤差建模提供非參數生成實現途徑。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-an-interacting-wasserstein-gradient-flow-strategy-to-robust-bayesian-inference2024">1. An Interacting Wasserstein Gradient Flow Strategy to Robust Bayesian Inference（2024）</h4>
+<ul>
+<li>作者與出處：Felipe Igea, Alice Cicirello · <em>arXiv</em></li>
+<li>核心問題：在結構健康監測等工程逆問題中，感測器資料往往資訊量不足，使後驗預測與維護決策高度敏感於主觀選定的先驗分佈假設。</li>
+<li>關鍵做法：提出基於交互作用 Wasserstein 梯度流的穩健貝氏推論策略，在名義先驗鄰域內同時搜尋並評估最優先驗與最壞情況先驗及其對應後驗，並於雙香蕉後驗（double-banana posterior）與雙樑結構數值案例中驗證對稀疏觀測不確定性的刻畫能力。</li>
+<li>跨領域啟發：建立先驗敏感度界線與粒子梯度流之間的直接連結，補齊 <a class="wl" href="36B_Knothe-Rosenblatt%E4%B8%89%E8%A7%92%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8%E8%88%87Stein%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSVGD.html">Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</a> 與 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M37_Statistical%20Rethinking%20%E9%9A%8E%E5%B1%A4%E6%A8%A1%E5%9E%8B.html">Statistical Rethinking 階層模型</a> 在稀疏證據情境下的穩健推論維度。</li>
+<li>連結：<a href="zotero://select/library/items/6IHIBSZI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.11607" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-accelerating-posterior-sampling-in-bayesian-inverse-problems-with-diffusion-models-an-online-offline-perspective2026">2. Accelerating posterior sampling in Bayesian inverse problems with diffusion models: an online-offline perspective（2026）</h4>
+<ul>
+<li>作者與出處：Duc-Lam Duong · <em>arXiv</em></li>
+<li>核心問題：分數擴散模型能替貝氏逆問題提供強表達力的學習先驗，但加噪狀態下的後驗分數無法直接從無條件先驗分數獲得，形成核心條件化（conditioning）計算難題。</li>
+<li>關鍵做法：從離線準備與線上推論的計算分工視角出發，系統梳理並比較四類主流擴散後驗抽樣方法，涵蓋似然引導、譜與投影方法、序貫蒙地卡羅（SMC）修正及攤銷條件訓練，詳細對照各類方法的理論假設、加速效果與限制。</li>
+<li>跨領域啟發：是掌握擴散後驗抽樣全貌的結構化地圖，清楚對接 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a> 的 SMC 修正與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 的離線線上權衡。</li>
+<li>連結：<a href="zotero://select/library/items/VEBHDCR8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.01300" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-bayesian-inverse-problems-and-epidemic-threshold-uncertainty-for-a-heterogeneous-sis-reaction-diffusion-model2026">3. Bayesian inverse problems and epidemic-threshold uncertainty for a heterogeneous SIS reaction-diffusion model（2026）</h4>
+<ul>
+<li>作者與出處：Duc-Lam Duong · <em>arXiv</em></li>
+<li>核心問題：從空間異質 SIS 反應擴散模型的早期盛行率觀測反推疫情持續性閾值時，個別傳播與康復參數往往難以獨立辨識，亟需釐清數學適定性與參數穩定界線。</li>
+<li>關鍵做法：證明 SIS 系統的全球弱適定性與定量參數穩定性以確立貝氏適定性，指出領先階盛行率動態僅依賴傳播與康復率之差及感染擴散係數（恰好決定主特徵值與持續閾值）；針對規模為 <span class="math inline">\varepsilon</span> 的初始感染推導二階均勻展開，並證明當雜訊標準差與 <span class="math inline">\varepsilon</span> 成正比時，非線性後驗在 Hellinger 距離下以 <span class="math inline">O(\varepsilon)</span> 收斂至低盛行率近似。</li>
+<li>跨領域啟發：示範如何嚴格結合偏微分方程穩定性估計與 <a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> 的 Hellinger 後驗收斂分析，釐清逆問題中的可識別流形。</li>
+<li>連結：<a href="zotero://select/library/items/TJ2UKMR9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.14468" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-self-organizing-score-based-data-assimilation2026">4. Self-Organizing Score-based Data Assimilation（2026）</h4>
+<ul>
+<li>作者與出處：Yuma Yamaoka, Seiichi Uchida, Shoji Toyota · <em>arXiv</em></li>
+<li>核心問題：分數資料同化（SDA）雖擅長處理非線性高維狀態空間模型，但當潛在狀態轉移本身依賴未知物理或統計參數時，標準 SDA 無法直接與狀態聯合推論。</li>
+<li>關鍵做法：將古典狀態空間建模中的自組織（self-organization）參數擴充技術整合進現代 SDA 框架，使系統在保有 SDA 高訓練效率的同時，能同步執行潛在狀態與未知轉移參數的聯合貝氏推論，並透過數值實驗驗證有效性。</li>
+<li>跨領域啟發：把經典狀態空間參數聯合估計技巧成功移植到擴散資料同化，直接對應 <a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> 的狀態參數聯合濾波難題。</li>
+<li>連結：<a href="zotero://select/library/items/TFZATQE2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.28048" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-score-based-generative-data-assimilation-for-integrating-aggregated-surveillance-data-into-agent-based-models-in-epidemic-tracking2026">5. Score-Based Generative Data Assimilation for Integrating Aggregated Surveillance Data into Agent-Based Models in Epidemic Tracking（2026）</h4>
+<ul>
+<li>作者與出處：Siming Liang, Jacob Hauck, Minglei Yang, Adam Spannaus, Heidi Hanson · <em>arXiv</em></li>
+<li>核心問題：疫情代理人模型（ABM）能刻畫個體接觸異質性與局部干預措施，但監視資料通常經過空間聚合、含噪且稀疏，導致線上同時校準微觀狀態與異質參數極為困難。</li>
+<li>關鍵做法：提出生成式資料同化框架 GenDA，結合免訓練的分數生成宏觀狀態更新、依據宏觀狀態差異直接更新異質參數場，以及恢復與 ABM 微觀結構一致性的宏微觀重指派步驟；在地理顯式合成實驗中成功重建區域感染負荷、熱點結構與有效異質傳播率。</li>
+<li>跨領域啟發：提供解決不可微宏微觀跨尺度同化的具體操作模板，示範物理或規則約束如何透過重指派步驟嵌入分數生成更新迴圈。</li>
+<li>連結：<a href="zotero://select/library/items/EGBUZTES" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01434" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-score-based-stochastic-closure-modeling-via-offline-indirect-learning-and-online-data-assimilation2026">6. Score-Based Stochastic Closure Modeling via Offline Indirect Learning and Online Data Assimilation（2026）</h4>
+<ul>
+<li>作者與出處：Xinghao Dong, Huchen Yang, Jin-Long Wu · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：大型多尺度多物理系統的降階物理模擬因資訊流失需要隨機閉合模型，但直接取得或計算閉合項訓練資料往往極度昂貴甚至不可行。</li>
+<li>關鍵做法：建立基於分數擴散模型的隨機閉合建模框架，結合無須直接閉合資料的離線間接學習與線上資料同化，並把學得的隨機閉合與已知物理動力學耦合；在二維湍流實驗中準確捕捉關鍵閉合統計量並改善系統狀態預測。</li>
+<li>跨領域啟發：將分數生成先驗與已知 PDE 動力學結合用於未知次網格隨機閉合，直接匯入 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 的多物理場代理建模路線。</li>
+<li>連結：<a href="zotero://select/library/items/DT2QRW4W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19676" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-6-篇">G5｜本子方向全量文獻泛讀清單（共 6 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 6 篇文獻（含開放存取 PDF 6 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="b-20242026-近期推進與前沿文獻6-篇">B. 2024–2026 近期推進與前沿文獻（6 篇）</h3>
+<ul>
+<li><strong>2026｜Self-Organizing Score-based Data Assimilation</strong>，Yuma Yamaoka, Seiichi Uchida, Shoji Toyota（<em>arXiv</em>）：提出自組織分數資料同化（Self-Organizing SDA），把未知的動力學參數擴增進潛狀態，一起放進聯合後驗的推論迴路。這樣在時間序列觀測流中，可以同時完成高維狀態軌跡的同化和物理參數的識別。 <a href="zotero://select/library/items/TFZATQE2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.28048" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Score-Based Generative Data Assimilation for Integrating Aggregated Surveillance Data into Agent-Based Models in Epidemic Tracking</strong>，Siming Liang et al.（<em>arXiv</em>）：提出生成式資料同化（GenDA），解決離散個體代理人模型（ABM）難以用稀疏的空間匯總監測數據做線上校準的問題。 <a href="zotero://select/library/items/EGBUZTES" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01434" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Accelerating posterior sampling in Bayesian inverse problems with diffusion models: an online-offline perspective</strong>，Duc-Lam Duong（<em>arXiv</em>）：分數擴散模型是很強的學習型先驗，但用在逆問題時，加噪後驗分數無法直接由先驗分數取得，這是條件化的主要難題。這篇綜述沿離線先驗訓練與線上觀測反演兩條軸線，系統評析似然引導、譜投影與序貫蒙地卡羅（SMC）修正。 <a href="zotero://select/library/items/VEBHDCR8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.01300" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Bayesian inverse problems and epidemic-threshold uncertainty for a heterogeneous SIS reaction-diffusion model</strong>，Duc-Lam Duong（<em>arXiv</em>）：嚴格證明有兩件事取決於同一組參數組合（淨傳播差與擴散係數）：一是早期盛行率的主導動力學，二是決定長期存續性的主特徵值符號。所以即使個別參數無法單獨辨識，仍能透過貝氏逆問題讓疫情存續閾值的後驗不確定性收斂。 <a href="zotero://select/library/items/TJ2UKMR9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.14468" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Score-Based Stochastic Closure Modeling via Offline Indirect Learning and Online Data Assimilation</strong>，Xinghao Dong, Huchen Yang, Jin-Long Wu（<em>arXiv (Cornell University)</em>）：建構一套基於分數擴散模型（Score-Based Diffusion Models）的隨機閉包建模框架，結合離線間接訓練（Offline Indirect Learning）與線上資料同化（Online Data Assimilation），全程不需要直接閉包資料。在二維紊流（2D Turbulent Flows）數值實驗中，離線間接學習能準確捕捉關鍵的閉包統計特性，並改善系統狀態預測。和純資料驅動、直接預測系統狀態的模型相比，把學到的隨機閉包嵌入已知物理動力學後，跨工況（Regime）的泛化能力更強。另外，和假設高斯的標準資料同化方法相比，基於後驗分數的同化（Posterior-Score Assimilation）更能刻畫閉包模型的非高斯特徵，和狀態層級的資料同化結合後，還能再提高系統狀態預測精度。 <a href="zotero://select/library/items/DT2QRW4W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.19676" rel="noopener">官方連結</a></li>
+<li><strong>2024｜An Interacting Wasserstein Gradient Flow Strategy to Robust Bayesian Inference</strong>，Felipe Igea, Alice Cicirello（<em>arXiv</em>）：針對結構健康監測模型更新對先驗假設敏感的問題，提出基於交互式 Wasserstein 梯度流的穩健貝氏推論策略，能在名義先驗鄰域內搜尋最優與最壞情況先驗及其對應的後驗分佈。 <a href="zotero://select/library/items/6IHIBSZI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.11607" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-82214816">在地圖上查看</a><div class="rg"><h3>相關<span class="n">6</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a><span class="rs">從稀疏、含噪的觀測反推無窮維的隱藏物理場，是病態的不適定問題。貝氏逆問題把它改寫成函數空間上對先驗測度的平滑加權更新，測度傳輸則用確定性最優傳輸…</span></li><li><a href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a></li><li><a href="36B_Knothe-Rosenblatt%E4%B8%89%E8%A7%92%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8%E8%88%87Stein%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E4%B8%8B%E9%99%8DSVGD.html">Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a><span class="tag-plan">計劃</span><span class="rs">Blitzstein &amp; Hwang 第 11–13 章：Markov 鏈、MCMC、Poisson 過程</span></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a><span class="tag-plan">計劃</span><span class="rs">Wasserman 其餘：第 7–8 章（CDF 估計、Bootstrap）、第 9 章其餘、第 11–14 章（Bayes 推論、決策理論、線…</span></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M37_Statistical%20Rethinking%20%E9%9A%8E%E5%B1%A4%E6%A8%A1%E5%9E%8B.html">Statistical Rethinking 階層模型</a><span class="tag-plan">計劃</span><span class="rs">McElreath，*Statistical Rethinking* 第 2 版</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

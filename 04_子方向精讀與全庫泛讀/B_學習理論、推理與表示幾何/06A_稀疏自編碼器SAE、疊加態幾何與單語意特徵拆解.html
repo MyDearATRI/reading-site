@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>06A｜稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-39f1a8d5" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="06a稀疏自編碼器sae疊加態幾何與單語意特徵拆解">06A｜稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a>
+同領域子方向：<a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> · <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a> · <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> 的表徵幾何起點，為下游 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 提供單語意特徵節點，並與 <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a> 共同追蹤表徵在訓練中的相變。研究主線從解決多義神經元的過完備稀疏字典學習出發，推進至千萬級特徵擴展、多維子空間拆解、擴展圖參數壓縮以及跨層與跨領域因果干預。</p>
+</aside>
+<ul>
+<li>核心問題：類神經網路的隱藏層維度 <span class="math inline">m</span> 遠小於需要表達的獨立概念數 <span class="math inline">n</span>，模型因此透過近正交疊加態（superposition）將多個特徵壓縮進同一組神經元，造成單一神經元的多義性（polysemanticity）與表徵黑箱。固定非線性的單向量稀疏自編碼器在擴展時又會面臨 <span class="math inline">O(mn)</span> 參數瓶頸、多維特徵分裂（feature splitting），以及跨模型遷移或因果干預時的「破壞球（wrecking-ball）」全局崩潰。</li>
+<li>直覺模型：把神經網路的殘差流想像成空間有限卻要容納上萬種訊號的無線電頻譜，模型為了塞進更多概念而讓不同訊號在近正交方向上重疊廣播。稀疏自編碼器就像一組高維頻譜濾波器，先將混疊的訊號展開到更寬敞但每次僅少數頻道亮起的稀疏座標系，再確認每條獨立頻道能否被單獨調強或關閉而不干擾其他訊號。</li>
+<li>分階段閱讀路線：建議分三階段閱讀：先讀 Yan et al. (2024) 與 Pach et al. (2025)，釐清單語意性與模型容量的關聯並認識 SAE 如何從語言模型擴展至視覺語言模型（CLIP）；第二階段精讀 Templeton et al. (2026) 掌握 3,400 萬特徵的縮放律與安全相關因果操控，接著讀 Dalili 與 Mahdavi (2026) 及 Mendoza-Smith (2026)，理解多維特徵分裂的幾何根源與 Expander 圖結構的參數壓縮；最後讀 Bouchacourt 與 Brison (2026)（對應 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_22_2026_Bouchacourt_Explanations_that_Transfer_Interpreting_Medical_Retrieval.html">Explanations that Transfer: Interpreting Medical Retrieval with Sparse AutoEncoders</a>）以及 Patil et al. (2026)，檢視 SAE 在醫療檢索跨域遷移與物理知識神經網路（PINNs）因果定位上的前沿驗證。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;疊加態與多義神經元\n概念數遠大於隱藏維度&quot;] --&gt; B[&quot;過完備稀疏自編碼器\nL1或TopK重建與單語意拆解&quot;]
+    B --&gt; C[&quot;大規模與多模態擴展\n34M特徵縮放律與VLM跨模態操控&quot;]
+    B --&gt; D[&quot;編碼幾何改良\nSASA子空間與可訓練有理函數&quot;]
+    B --&gt; E[&quot;結構化參數壓縮\nExpander圖稀疏遮罩降為O(dn)&quot;]
+    C --&gt; F[&quot;跨層語意最優傳輸\n激活分佈Wasserstein距離匹配&quot;]
+    D --&gt; G[&quot;領域遷移與反事實干預\n醫療檢索InfoNCE與PINNs物理因果定位&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>過完備稀疏字典學習與圖壓縮編碼（Overcomplete SAE &amp; Expander Masking）</strong></p>
+<ul>
+<li>直覺理解：神經網路將 <span class="math inline">n</span> 個稀疏概念擠進 <span class="math inline">m</span> 維空間（<span class="math inline">n \gg m</span>）產生多義混合。SAE 透過更寬的隱藏層與稀疏門控把向量展開回 <span class="math inline">n</span> 維基底，而 Expander SAE 進一步利用稀疏圖連接把原本稠密的投影矩陣大幅瘦身。</li>
+<li>機制或核心表達式：給定隱藏層激活 <span class="math inline">\mathbf{h} \in \mathbb{R}^m</span>，編碼器計算稀疏編碼 <span class="math inline">\mathbf{z} = \sigma(\mathbf{W}_{\text{enc}}(\mathbf{h} - \mathbf{b}_{\text{dec}}) + \mathbf{b}_{\text{enc}}) \in \mathbb{R}^n_{\ge 0}</span>，其中 <span class="math inline">\sigma</span> 可為 TopK、JumpReLU 或 Yin 與 Yu (2026) 提出的可訓練有理函數；解碼器重建 <span class="math inline">\hat{\mathbf{h}} = \mathbf{W}_{\text{dec}}\mathbf{z} + \mathbf{b}_{\text{dec}}</span> 並最小化 <span class="math inline">\|\mathbf{h} - \hat{\mathbf{h}}\|_2^2 + \lambda\|\mathbf{z}\|_1</span>（或直接約束 <span class="math inline">\|\mathbf{z}\|_0 \le k</span>）。為避免稠密矩陣 <span class="math inline">\mathbf{W}_{\text{dec}} \in \mathbb{R}^{m \times n}</span> 耗費 <span class="math inline">O(mn)</span> 參數，Mendoza-Smith (2026) 將權重限制於左 <span class="math inline">d</span>-正則擴展圖遮罩（<span class="math inline">d \ll m</span>），使參數降至 <span class="math inline">dn</span> 並將匹配追蹤步 <span class="math inline">\mathbf{W}^\top \mathbf{r}</span> 化為 <span class="math inline">O(dn)</span> 的 gather-and-reduce 運算。</li>
+<li>能做到什麼，代價是什麼：能在百萬至千萬級字典規模下萃取出多語、多模態與安全相關的因果可操控特徵（Templeton et al., 2026）；代價是重建誤差與稀疏度之間存在根本權衡，且固定激活函數容易扭曲預激活幾何。</li>
+</ul>
+</li>
+<li>
+<p><strong>多維特徵分裂與子空間稀疏自編碼器（Feature Splitting &amp; Subspace-Aware SAEs）</strong></p>
+<ul>
+<li>直覺理解：標準 SAE 假設每個概念只是一條一維射線，但若真實概念本身是二維圓環或高維流形，強制用單向量去擬合與稀疏懲罰會把一個完整概念切碎成許多互相冗餘的小碎片。SASA 改用可調維度的子空間群組來承接多維概念。</li>
+<li>機制或核心表達式：Dalili 與 Mahdavi (2026) 證明：當真實特徵為多維時，在固定共同激活預算下以一維解碼向量精確重建可能需要指數級數量的方向，且增加額外方向會嚴格降低 <span class="math inline">\ell_1</span> 正則化的母體風險，從而在最佳化層面誘發特徵分裂。Subspace-Aware SAE（SASA）將潛在空間劃分為群組子空間 <span class="math inline">\mathbf{D}_g \in \mathbb{R}^{m \times r_g}</span>，以 Top-<span class="math inline">s</span> 群組門控控制激活數，並透過核範數正則項 <span class="math inline">\sum_g \gamma \|\mathbf{D}_g\|_*</span> 自適應調整各子空間秩數。</li>
+<li>能做到什麼，代價是什麼：在理想單特徵模型與實際語言模型上都能避免一維解碼器強制切分多維流形的問題；代價是引入群組劃分超參數與核範數計算成本，對純一維離散實體概念的收益較有限。</li>
+</ul>
+</li>
+<li>
+<p><strong>對比目標遷移、語意最優傳輸與冷凍態干預（Contrastive Transfer, Semantic OT &amp; Causal Steering）</strong></p>
+<ul>
+<li>直覺理解：抽出的稀疏碼若只管重建原始向量，未必保留下游任務的判別資訊，也難以直接比較不同網路層的特徵。透過對比損失保序、激活分佈的最優傳輸對齊，以及繞過解碼器的直接狀態干預，SAE 才成為跨層與跨領域的可驗證工具。</li>
+<li>機制或核心表達式：Bouchacourt 與 Brison (2026) 在醫療檢索中將 SAE 重建損失與 InfoNCE 對比損失結合，確保稀疏編碼維持查詢與文獻的相關性排序。跨層匹配上，Cao et al. (2026) 不以單一解碼向量代表特徵，而是將特徵表示為隱藏狀態上的激活加權分佈，投影至共享參考空間後以 Wasserstein 距離量測語意距離，使度量對激活縮放具備不變性。因果驗證則可直接作用於凍結的原始隱藏態（Patil et al., 2026）：<span class="math inline">\mathbf{h}_{\text{cf}} = \mathbf{h} - \alpha z_k \mathbf{d}_k</span>，量測消融對特定物理量或任務指標的空間局部化影響。</li>
+<li>能做到什麼，代價是什麼：顯著改善跨域檢索遷移並可建立跨層超節點壓縮；但在臨床 EEG 等高度糾纏的表徵上（Lehn-Schiøler et al., 2026），干預單一特徵可能因年齡與病理混淆而造成「破壞球」式全局效能崩潰。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>多維特徵為何誘發 <span class="math inline">\ell_1</span> 特徵分裂</strong>：根據 Dalili 與 Mahdavi (2026) 的幾何與最佳化分析，當一組基底已經能精確重建某個多維特徵時，為何標準一維 SAE 在最小化 <span class="math inline">\ell_1</span> 正則化母體風險時仍傾向把該特徵分裂成更多解碼方向？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考 <span class="math inline">\ell_1</span> 範數對線性組合係數的懲罰與重建幾何之間的關係：當多維流形上的點偏離少數正交基底軸向時，以較少基底表示需要較大的係數 <span class="math inline">\ell_1</span> 和；若在流形周圍加入額外的過度完備方向，樣本點就能用更貼近該方向、係數 <span class="math inline">\ell_1</span> 總和更小的線性組合來表示。這種優化誘因會隨特徵維度上升而加劇，因此 SASA 改以 Top-<span class="math inline">s</span> 群組門控搭配核範數來容納多維子空間。</p>
+</details>
+<ol start="2">
+<li><strong>跨模型模態的疊加態差異與選擇性干預失效</strong>：在時間序列預測模型 PatchTST 上訓練 SAE（Yıldırım, 2026）與在擴散語言模型（Wang et al., 2026）或臨床 EEG 模型（Lehn-Schiøler et al., 2026）上訓練 SAE，分別觀察到哪些與自回歸大語言模型截然不同的現象？這對「所有 Transformer 都高度依賴疊加態」的假設提出什麼限制？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>整理三項實證反差：第一，PatchTST 在擴張字典至 4.0 倍時大量原子保持未激活，因果干預僅使預測平均變動 0.214%，顯示該類模型未必利用高密度疊加態，也說明為何線性模型 DLinear 仍具競爭力；第二，在擴散語言模型早期層插入 SAE 反而能降低交叉熵損失，與自回歸 LLM 通常伴隨損失懲罰不同；第三，EEG 模型中年齡與病理等臨床概念常高度糾纏，缺乏純淨的可分離方向。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>疊加態的普遍性邊界與非語言模態的結構差異</strong>：Yıldırım (2026) 在時間序列 Transformer 中發現過完備 SAE 字典大多閒置且介入幾乎不影響輸出，Wang et al. (2026) 則在擴散語言模型早期層觀察到插入 SAE 反而降低交叉熵損失。這些異例顯示不同架構與資料模態對疊加態的依賴程度差異甚大，尚未有一致理論預測何時會出現高密度特徵疊加。</li>
+<li><strong>真實概念糾纏與因果操控的「破壞球」風險</strong>：Lehn-Schiøler et al. (2026) 透過 target vs. off-target 探針面積指標指出，許多編碼特徵實際上處於「可解碼但彼此糾纏」的狀態，針對單一臨床概念（如年齡與病變）進行消融常引發模型整體表現崩解。如何在不依賴事後監督的條件下區分純淨單語意方向與糾纏混雜方向，仍是可操控性的關鍵難題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>稀疏單語意原子向跨層電路定位與自動歸因圖遷移</strong>：本子方向萃取的過完備特徵原子與 Cao et al. (2026) 的語意最優傳輸超節點壓縮，直接作為 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 中稀疏特徵電路與歸因圖追蹤的基礎節點，解決傳統以多義注意力頭為單位導致電路無法解釋的困境。</li>
+<li><strong>字典健康度與隨機矩陣幾何向訓練動力學相變遷移</strong>：特徵去相關正則化（Yan et al., 2024）、子空間秩壓縮以及不同擴展倍數下的原子活躍度分佈，可遷移至 <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a> 與 <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a> 中用於追蹤 lazy-to-rich 特徵學習轉折，並與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a> 的高維譜分析對接。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-encourage-or-inhibit-monosemanticity-revisit-monosemanticity-from-a-feature-decorrelation-perspective2024">1. Encourage or Inhibit Monosemanticity? Revisit Monosemanticity from a Feature Decorrelation Perspective（2024）</h4>
+<ul>
+<li>作者與出處：Hanqi Yan et al. · <em>Conference on Empirical Methods in Natural Language Processing (EMNLP)</em></li>
+<li>核心問題：既有單語意性研究雖致力於找出對應單一概念的神經元，但對於「提高單語意性究竟有益還是有損模型容量」長期存在正反爭論。本文從特徵去相關（feature decorrelation）視角重新檢驗單語意性與模型表現的因果關係。</li>
+<li>關鍵做法：跨模型驗證發現先前「降低單語意性有助效能」的結論在更換模型後不再成立，並在偏好對齊（preference alignment）過程中觀察到單語意性與模型容量呈正相關，進而將特徵相關性作為代理指標並於動態偏好最佳化中加入特徵去相關正則項。</li>
+<li>跨領域啟發：為 SAE 追求單語意拆解提供訓練目標層面的理論支持，也銜接 <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a> 對表徵結構與容量關係的討論。</li>
+<li>連結：<a href="zotero://select/library/items/GRWJH446" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.17969" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-sparse-autoencoders-learn-monosemantic-features-in-vision-language-models2025">2. Sparse Autoencoders Learn Monosemantic Features in Vision-Language Models（2025）</h4>
+<ul>
+<li>作者與出處：Mateusz Pach et al. · <em>neural information processing systems</em></li>
+<li>核心問題：SAE 在純文字大語言模型雖已廣泛應用，但其在視覺語言模型（如 CLIP）中能否維持神經元層級的單語意性與跨模態因果可控性仍缺乏人類感知對齊的系統評估。本文旨在將 SAE 推廣至視覺表徵拆解與多模態操控。</li>
+<li>關鍵做法：建立基於大規模使用者研究的視覺單語意性基準測試，系統驗證稀疏度與寬潛在維度（wide latents）是提升神經元單語意性的主因，並證實直接干預 CLIP 視覺編碼器的 SAE 特徵即可無需修改語言模型權重而操控 LLaVA 輸出。</li>
+<li>跨領域啟發：展示跨模態表徵幾何中單語意字典的可遷移性，說明視覺編碼器內部的稀疏原子可直接沿多模態介面傳導至下游自回歸解碼器。</li>
+<li>連結：<a href="zotero://select/library/items/SZRCJFQK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.02821" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-scaling-monosemanticity-extracting-interpretable-features-from-claude-3-sonnet2026">3. Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet（2026）</h4>
+<ul>
+<li>作者與出處：Adly Templeton et al. · <em>arXiv</em></li>
+<li>核心問題：早期 SAE 多在小型玩具模型上驗證，字典學習方法能否擴展至工業級生產規模的大語言模型仍是未決問題。本文探討超大規模神經網路殘差流中的特徵可分解性與安全干預能力。</li>
+<li>關鍵做法：依據縮放律（scaling laws）選取超參數，在 Claude 3 Sonnet 中間層殘差流訓練高達 3,400 萬個特徵的 SAE，發現涵蓋多語、多模態、抽象概念（反諷、程式碼錯誤）以及欺騙、迎合、偏見等安全風險的特徵，並驗證因果操控效力。</li>
+<li>跨領域啟發：確立千萬級稀疏字典在生產模型上的可行基準，並為 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 的大規模特徵電路追蹤提供標準化特徵詞彙。</li>
+<li>連結：<a href="zotero://select/library/items/7UKS79JV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.29358" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-subspace-aware-sparse-autoencoders-for-effective-mechanistic-interpretability2026">4. Subspace-Aware Sparse Autoencoders for Effective Mechanistic Interpretability（2026）</h4>
+<ul>
+<li>作者與出處：Seyed Arshan Dalili, Mehrdad Mahdavi · <em>arXiv</em></li>
+<li>核心問題：標準 SAE 為每個潛在特徵僅指派單一解碼方向向量，隱含所有概念皆為一維的假設，導致真實多維特徵被迫分裂為大量碎片。本文從幾何與最佳化角度形式化特徵分裂成因並提出子空間解決方案。</li>
+<li>關鍵做法：證明固定共同激活預算下重建多維特徵可能需要指數級向量且額外方向會嚴格降低 <span class="math inline">\ell_1</span> 母體風險；據此提出 Subspace-Aware SAE（SASA），以可學習子空間取代單向量解碼器，結合 Top-<span class="math inline">s</span> 群組門控與核範數秩正則化。</li>
+<li>跨領域啟發：從幾何根本修正一維字典學習的結構假設，其群組子空間秩自適應視角亦可對照 <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a> 中的有效秩壓縮分析。</li>
+<li>連結：<a href="zotero://select/library/items/5F7URW36" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.06333" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-expander-sparse-autoencoders-parameter-efficient-dictionaries-for-mechanistic-interpretability2026">5. Expander Sparse Autoencoders: Parameter-Efficient Dictionaries for Mechanistic Interpretability（2026）</h4>
+<ul>
+<li>作者與出處：Rodrigo Mendoza-Smith · <em>arXiv</em></li>
+<li>核心問題：過完備字典 <span class="math inline">\mathbf{W} \in \mathbb{R}^{m \times n}</span> 隨特徵數 <span class="math inline">n</span> 擴大時，稠密解碼器與綁定編碼器需要 <span class="math inline">O(mn)</span> 參數與乘加運算，成為大規模可解釋性的記憶體與算力瓶頸。本文研究如何在保持 <span class="math inline">(m, n, k)</span> 稀疏編碼問題不變下壓縮字典參數。</li>
+<li>關鍵做法：提出 Expander SAE，將 TopK SAE 的解碼器與綁定編碼器限制於左 <span class="math inline">d</span>-正則擴展圖（<span class="math inline">d \ll m</span>）稀疏遮罩上，使學習參數降至 <span class="math inline">dn</span> 並將正交匹配追蹤（OMP）的相關步 <span class="math inline">\mathbf{W}^\top \mathbf{r}</span> 轉化為 <span class="math inline">O(dn)</span> gather-and-reduce 運算，於 Pythia、Qwen2.5-3B 與 Llama-3.2-1B 驗證儲存與保真度前沿。</li>
+<li>跨領域啟發：將壓縮感知（compressed sensing）與稀疏擴展圖理論引入大規模 SAE 工程設計，顯著降低跨層與全模型字典訓練的硬體門檻。</li>
+<li>連結：<a href="zotero://select/library/items/VBUG239B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.01799" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-explanations-that-transfer-interpreting-medical-retrieval-with-sparse-autoencoders2026">6. Explanations that Transfer: Interpreting Medical Retrieval with Sparse AutoEncoders（2026）</h4>
+<ul>
+<li>作者與出處：Diane Bouchacourt, Gaëtan Brison · <em>arXiv</em></li>
+<li>核心問題：醫療資訊檢索依賴稠密文本嵌入，微調雖能提升領域內檢索準確率，卻會犧牲表徵可解釋性並降低對未見臨床語料庫的遷移能力。本文探討如何讓檢索模型兼顧稀疏可解釋性與跨語料泛化。</li>
+<li>關鍵做法：將重建目標與 InfoNCE 對比損失結合以訓練醫療檢索嵌入的 SAE，在保留查詢與文獻相關性排序的同時輸出語意可解釋稀疏編碼，在六個醫療檢索資料集上提升領域內檢索並減少領域外效能退化。</li>
+<li>跨領域啟發：本論文對應專屬精讀筆記 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_22_2026_Bouchacourt_Explanations_that_Transfer_Interpreting_Medical_Retrieval.html">Explanations that Transfer: Interpreting Medical Retrieval with Sparse AutoEncoders</a>，示範如何以任務導向對比損失防止無監督稀疏重建傷害判別與遷移幾何。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_22_2026_Bouchacourt_Explanations_that_Transfer_Interpreting_Medical_Retrieval.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/MTIUVKPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.18179" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-33-篇">G5｜本子方向全量文獻泛讀清單（共 33 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 33 篇文獻（含開放存取 PDF 33 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進1-篇">A. 奠基經典、專著與核心演進（1 篇）</h3>
+<ul>
+<li><strong>2022｜Toy Models of Superposition</strong>，Nelson Elhage et al.（<em>arXiv</em>）：建構可完全解析神經元多義性的玩具模型，揭示模型透過「疊加」（superposition）壓縮儲存多餘稀疏特徵時產生的相變現象、與均勻多胞形幾何的關聯以及對抗樣本成因線索。 <a href="zotero://select/library/items/MDBXMA26" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2209.10652" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻32-篇">B. 2024–2026 近期推進與前沿文獻（32 篇）</h3>
+<ul>
+<li><strong>2026｜Explanations that Transfer: Interpreting Medical Retrieval with Sparse AutoEncoders</strong>，Diane Bouchacourt, Gaëtan Brison（<em>arXiv</em>）：🏆 L5 深度審核完成：用稀疏自編碼器拆解醫療密集檢索嵌入，既給出檢索機制的白盒解釋，也顧及跨臨床語料庫的可遷移性。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_22_2026_Bouchacourt_Explanations_that_Transfer_Interpreting_Medical_Retrieval.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/MTIUVKPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.18179" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Sparse Autoencoders Learn Monosemantic Features in Vision-Language Models</strong>，Mateusz Pach et al.（<em>neural information processing systems</em>，7 引）：Sparse Autoencoders Learn Monosemantic Features in Vision-Language Models，Mateusz Pach et al.（NeurIPS 2025：把 SAE 推進到 CLIP 等視覺語言模型，建立與人類視覺感知對齊的神經元級單義性評測框架）。 <a href="zotero://select/library/items/SZRCJFQK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.02821" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Encourage or Inhibit Monosemanticity? Revisit Monosemanticity from a Feature Decorrelation Perspective</strong>，Hanqi Yan et al.（<em>Conference on Empirical Methods in Natural Language Processing (EMNLP)</em>，3 引）：Encourage or Inhibit Monosemanticity? Revisit Monosemanticity from a Feature Decorrelation Perspective，Hanqi Yan et al.（EMNLP 2024：從特徵去相關的角度分析強迫原始神經元單義化對模型容量的正反兩面影響，釐清表徵壓縮與可解釋性之間的界線）。 <a href="zotero://select/library/items/GRWJH446" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.17969" rel="noopener">官方連結</a></li>
+<li><strong>2026｜DLM-Scope: Mechanistic Interpretability of Diffusion Language Models via Sparse Autoencoders</strong>，Xu Wang et al.（<em>arXiv</em>）：DLM-Scope: Mechanistic Interpretability of Diffusion Language Models via Sparse Autoencoders，Xu Wang et al.（第一個專為非自回歸擴散語言模型設計的 SAE 機械可解釋性與行為干預工具箱）。 <a href="zotero://select/library/items/5434RKEH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.05859" rel="noopener">官方連結</a></li>
+<li><strong>2026｜MoRFI: Monotonic Sparse Autoencoder Feature Identification</strong>，Dimitris Dimakopoulos, Shay B. Cohen, Ioannis Konstas（<em>arXiv</em>）：透過受控閉卷問答微調實驗（涵蓋 Llama 3.1 8B、Gemma 2 9B 與 Mistral 7B v03）檢驗監督微調引入參數外新知識比例與訓練輪數如何誘發幻覺退化，並於潛在表徵空間定位具因果關聯的特徵方向。 <a href="zotero://select/library/items/8W5SUXIG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.26866" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Superposition Is Not Necessary: A Mechanistic Interpretability Analysis of Transformer Representations for Time Series Forecasting</strong>，Alper Yıldırım（<em>arXiv</em>）：以稀疏自編碼器 (SAE) 探測時序預測 Transformer (PatchTST) 內部表徵，發現單層窄維度模型即可追平深層架構效能，且擴張 SAE 字典（0.5 倍至 4.0 倍）對下游幾乎無增益，說明疊加態對時序預測並非必要。 <a href="zotero://select/library/items/UAJ65Q66" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.05151" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Mechanistic Interpretability of EEG Foundation Models via Sparse Autoencoders</strong>，William Lehn-Schiøler et al.（<em>arXiv</em>）：將 TopK 稀疏自編碼器 (SAE) 應用於 SleepFM、REVE 與 LaBraM 三種腦電基礎模型嵌入並對照臨床分類學基準，提出目標對非目標探針面積指標量化概念導引選擇性，揭露三種表徵編碼狀態。 <a href="zotero://select/library/items/P2FDAQQS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.13930" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Semantic Optimal Transport for Sparse Autoencoder Feature Matching and Circuit Compression</strong>，Tue M. Cao, Nguyen Do, My T. Thai（<em>arXiv</em>）：將 SAE 跨層特徵匹配與電路超節點壓縮統一為激發流形上的語義距離估計問題，改以隱藏狀態的激發加權分布表徵特徵並投影至共享參考空間，透過 Wasserstein 距離實現兩項任務的統一度量。 <a href="zotero://select/library/items/U7R4C3V3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.28567" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Scaling Monosemanticity: Extracting Interpretable Features from Claude 3 Sonnet</strong>，Adly Templeton et al.（<em>arXiv</em>）：依據擴展律，在生產級大模型 Claude 3 Sonnet 的中間層殘差流上訓練 3,400 萬特徵的稀疏自編碼器，抽取出高度可解釋、能跨語言也能跨模態泛化的單語意抽象概念（涵蓋程式碼漏洞、欺騙意圖與科學概念），並證實操控特徵就能因果地改變模型行為。 <a href="zotero://select/library/items/7UKS79JV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.29358" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Subspace-Aware Sparse Autoencoders for Effective Mechanistic Interpretability</strong>，Seyed Arshan Dalili, Mehrdad Mahdavi（<em>arXiv</em>）：剖析標準 SAE 假設特徵一維而在多維特徵上導致特徵分裂與指數級方向需求的問題，提出 Subspace-Aware SAE (SASA)，改以可學習子空間作為解碼單元並結合 Top-<span class="math inline">s</span> 群組閘控與自適應群秩學習。 <a href="zotero://select/library/items/5F7URW36" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.06333" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Rational Sparse Autoencoder</strong>，Naiyu Yin, Yue Yu（<em>arXiv</em>）：針對現有 SAE 受限於 ReLU 或 TopK 等固定編碼器激發函數而扭曲重建與稀疏權衡的問題，提出採用可訓練有理函數作為編碼器非線性的 RSAE，能在緊支撐上一致逼近各類既有激發原語並適應前激發幾何。 <a href="zotero://select/library/items/7VPDPRWV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.14990" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Mechanistic Interpretability and Causal Feature Steering of Neural Quantum States via Sparse Autoencoders</strong>，Zihao Qi, Christopher Earls（<em>arXiv</em>）：運用稀疏自編碼器無監督解析神經量子態 (NQS) 殘差流，發現與序參量、交錯磁化強度及半鏈關聯高度相關的特徵，並證實其在基態與即時動力學對物理觀測量具因果調控作用。 <a href="zotero://select/library/items/4GS442DH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.01336" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Expander Sparse Autoencoders: Parameter-Efficient Dictionaries for Mechanistic Interpretability</strong>，Rodrigo Mendoza-Smith（<em>arXiv</em>）：為緩解高特徵維度下稠密字典參數達 <span class="math inline">O(mn)</span> 的成本，提出以左 <span class="math inline">d</span>-正則擴展圖遮罩支撐編解碼器的 Expander SAE，在保持 <span class="math inline">(m,n,k)</span> 稀疏編碼問題不變下僅需學習 <span class="math inline">dn</span> 個參數，並將 OMP 相關計算降為 <span class="math inline">O(dn)</span> 聚集歸約運算。 <a href="zotero://select/library/items/VBUG239B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.01799" rel="noopener">官方連結</a></li>
+<li><strong>2026｜CircuitSteer: Geometrically Aligned Multi-Layer Steering via Sparse Autoencoder Circuits</strong>，Mehrshad Saadatinia et al.（<em>arXiv</em>）：針對單層激活加法干預難跨層維持調控的問題，提出 CircuitSteer，依 SAE 特徵共激發與解碼器幾何對齊定位跨層語義子電路，並合成稠密引導向量實施多層對齊控制。 <a href="zotero://select/library/items/XUTTVXU6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.05732" rel="noopener">官方連結</a></li>
+<li><strong>2026｜PhysSAE: Mechanistic Interpretability of PINNs with Sparse Autoencoders</strong>，Nandita N. Patil, Eshwar R. A., Gajanan V. Honnavar（<em>arXiv</em>）：提出 PhysSAE 框架對物理資訊神經網路（PINN）倒數第二層激活訓練過完備稀疏自編碼器，跨 6 類 PDE 證實所學字典原子與物理觀測量高度對齊（最高 <span class="math inline">|r|=0.951</span>），且因果消融影響在空間上集中 1.2 至 4.2 倍。 <a href="zotero://select/library/items/8ZVCTNUG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.07061" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Test-Time Unlearning via Sparse Autoencoder</strong>，Pingzhi Li et al.（<em>arXiv</em>）：為避免權重微調式機器遺忘帶來的效用退化與遺忘知識復發，提出推論期遺忘方法 ARIA，在不改動模型權重下利用稀疏自編碼器（SAE）潛在特徵訓練線性偵測器並僅於觸發目標狀態時執行干預。 <a href="zotero://select/library/items/6I6UA8BD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.16229" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TSAE: Structured Sparse Autoencoders for Interpreting Time-Series Forecasting Models</strong>，Baoxi Liu, Yi Xie（<em>arXiv (Cornell University)</em>）：提出結構化稀疏自編碼器 TSAE 以解釋時間序列預測模型，結合共享與變數路由私有字典刻劃跨變數結構，並以門控編碼分離特徵偵測與強度估計，同時依原始序列片段相似度約束稀疏碼時間連續性。 <a href="zotero://select/library/items/3VQUGGPB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.04925" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Sparse Autoencoders for Mechanistic Interpretability in NLP: A Critical Survey of Recoverability, Interpretability, and Utility</strong>，Salima Lamsiyah et al.（<em>arXiv</em>）：涵蓋 138 篇 NLP 稀疏自編碼器研究的批判性綜述。它系統檢驗字典設計假設與下游實效之間的落差，從真實特徵可恢復性、人類可解釋性、因果干預實用性三個維度建立嚴格的任務分類法，並整理出常見的陷阱。 <a href="zotero://select/library/items/5AZ9F6TU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.20139" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Temporal Island Sparse Autoencoders for Interpreting Clinical Time-Series Models</strong>，Muhan Yeo et al.（<em>arXiv (Cornell University)</em>）：提出時間島稀疏自編碼器 TI-SAE，從凍結的電子健康紀錄預測模型表徵中，以時間高斯島與稀疏變數組合向量學習跨病患共享的臨床概念字典，並透過解耦選擇器分離表徵學習與歸因。 <a href="zotero://select/library/items/Z4TSU7DB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.03420" rel="noopener">官方連結</a></li>
+<li><strong>2026｜SAE Interprets MoE: Sparse AutoEncoders Reveal That MoE Experts Exhibit Human-Interpretable Fine-Grained Specialization</strong>，Anyuan Zhuo et al.（<em>arXiv (Cornell University)</em>）：在 MoE 層輸出訓練稀疏自編碼器 SAE，利用線性編碼性質將隱特徵預激活精確分解至各專家貢獻，於 Qwen3-30B-A3B 實測顯示專家在特徵空間的貢獻較路由閘控更為集中。 <a href="zotero://select/library/items/IGHRMMX5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.08089" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TEAM: Topology-Aware, Semantic-Sensitive, General Transformer for Multimodal-Attributed Graphs</strong>，Yushuo Li et al.（<em>arXiv (Cornell University)</em>）：針對多模態屬性圖上節點級傳播易掩蓋細粒度模態貢獻的問題，提出以節點模態詞元為單位的框架 TEAM，將局部拓撲展開為模態編碼樹並執行樹錨定語意證據獲取以擴展可及證據空間。 <a href="zotero://select/library/items/J6RSTFPG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.11189" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Beyond Job Titles: Interpreting Early-Career Job Advertisements with Sparse Autoencoders and Semantic Clustering</strong>，Yisong Cao et al.（<em>arXiv (Cornell University)</em>）：資料是 2025 年 12 月至 2026 年 10 月自美國 LinkedIn 蒐集的 36,081 筆早期職涯職缺公告。作者設計並比較兩套結合深度學習與 Transformer 表徵的解析管線。第一套是 <code>PERC</code>（前處理 P、嵌入 E、降維 R、聚類 C）：先由 GPT-6 Luna 把職缺段落分類為團隊脈絡（Team context）、角色任務（Role task）與資格條件（Qualifications），再對不同段落組合做嵌入與聚類，並用最大均值差異（MMD）排序不同嵌入分佈之間的顯著差異。第二套用預訓練稀疏自編碼器（SAE）從 <code>Llama-3.1-8B-Instruct</code> 第 19 層表徵提取單義特徵，由 GPT-6 Luna 提出角色特徵模式的假說，再交給 GPT-6.1 Terra 在未見公司的保留測試職缺上驗證假說是否成立。實證結果指出，Data Scientist 職缺更強調機器學習模型開發，Data Analyst 側重商業績效報表，Machine Learning Engineer 則聚焦於把已開發的模型部署到真實場域。作者也觀察到 Data Analyst 與 Business Analyst 在特定月份的應用差異，但提醒資料規模有限、覆蓋不均，不宜過度解讀。 <a href="zotero://select/library/items/WSIUI6K4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21586" rel="noopener">官方連結</a></li>
+<li><strong>2026｜GateWatch: Low-Overhead LLM Monitoring with Boolean Circuits</strong>，Firas Spanioli, Yaniv David（<em>arXiv</em>）：作者提出緊湊的白盒監控分類器 <code>GateWatch</code>。在給定的邏輯閘預算下，它把整個安全監控決策規則直接編譯成顯式的布林邏輯電路（Boolean Circuits），電路只作用在極少數二值化 SAE 特徵上。配套的 <code>GateWatchServe</code> 引擎專為線上服務設計：推論時只按需計算被選中的少數 SAE 特徵，跨層串流傳遞二進位值，再用緊湊查表法（Lookup Tables）一次平行評估上千個監控電路。在 <code>Gemma-2-9B</code> 的 24 項任務上，<code>GateWatch</code> 平均每個探針只用 3.8 個 SAE 特徵與 3.5 個邏輯閘，平均測試準確率 80.49%，比完整 16K 特徵 SAE 探針低 1.17 個百分點（其中 10 項任務持平或勝出），探針記憶體開銷則減少 99.98%。整合進 <code>vLLM</code> 後，即使同時掛載 1,000 個跨層多詞元並發監控器，仍保有 97% 至 98% 的原始推論吞吐量與 99.8% 的 KV 快取容量。 <a href="zotero://select/library/items/HP7CJX8J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24619" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Separating Interpretability and Reconstruction in Sparse Autoencoders</strong>，Anh Tien Nguyen, Dimitris Samaras, Mahdi S. Hosseini（<em>arXiv</em>）：作者提出模組化雙分支框架 <code>DualSAE</code>。標準 SAE 當作稀疏語意分支（Sparse Branch），專門捕捉主導的語意概念。旁邊另加一條殘差分支（Residual Branch），吸收稀疏分支捨棄的非語意背景資訊。為了不讓殘差分支搶走主語意的貢獻，作者引入去相關損失（Decorrelation Loss），最小化兩分支對重建結果的重疊度，並採兩階段訓練：先把稀疏分支訓練穩定，再耦合接入殘差分支。實驗橫跨 2 個視覺資料集與 2 個語言訓練語料，涵蓋多組編碼器與 SAE 的配置。<code>DualSAE</code> 的重建保真度相對提升約 29%，可解釋性（單義性分數）同時相對提升約 34%。更純的語意特徵也讓主題建模、科學假說生成與 LLM 激活引導（Steering）等下游任務一致變好。 <a href="zotero://select/library/items/IE8XG7KZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25165" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Interpreting and Steering Protein Language Models through Sparse Autoencoders</strong>，Edith Natalia Villegas Garcia, Alessio Ansuini（<em>arXiv</em>）：將稀疏自編碼器（SAE）應用於 ESM-2 8M 蛋白質語言模型，透過統計檢定將潛在特徵對應至穿膜區與結合位點等生物註釋，並利用篩選出的特徵向量引導模型生成鋅指結構域等目標序列。 <a href="zotero://select/library/items/N8QTZKQ2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.09135" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Resurrecting the Salmon: Rethinking Mechanistic Interpretability with Domain-Specific Sparse Autoencoders</strong>，Charles O'Neill, Mudith Jayasekara, Max Kirkby（<em>arXiv</em>）：發現於寬泛資料訓練稀疏自編碼器易產生重建誤差「暗物質」，改以特定領域（19.5 萬筆臨床問答）訓練 Gemma-2 JumpReLU SAE 後可多解釋達 20% 變異數並降低線性殘差誤差。 <a href="zotero://select/library/items/6VDJSCW6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.09363" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Mechanistic Interpretability with Sparse Autoencoder Neural Operators</strong>，Bahareh Tolooshams, Ailsa Shen, Anima Anandkumar（<em>arXiv</em>）：提出運作於函數空間的稀疏自編碼器神經算子（SAE-NO）並以傅立葉神經算子（SAE-FNO）實例化，將概念參數化為積分算子函數並結合概念與區域雙重稀疏性，同時刻劃概念出現與空間分佈。 <a href="zotero://select/library/items/BTJJ8NUS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.03738" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Mechanistic Interpretability of Code Correctness in LLMs via Sparse Autoencoders</strong>，Kriz Tahimic, Charibeth Cheng（<em>arXiv</em>）：運用稀疏自編碼器 SAE 拆解大語言模型中對應程式碼正確性的特徵方向，發現其可穩定預測錯誤程式碼但干預修正存在破壞正確程式的權衡，且成功生成高度依賴對測試案例的注意力配置。 <a href="zotero://select/library/items/862T7WGV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2510.02917" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Equivariant Sparse Autoencoders: Mechanistic Interpretability of Neural Networks on Symmetric Data</strong>，Ege Erdogan, Ana Lucic（<em>arXiv</em>）：指出科學資料常見的旋轉等對稱性會加劇稀疏自編碼器 SAE 的不可識別性問題，將線性表示假說推廣至對稱群設定並提出等變稀疏自編碼器，於合成與真實科學資料集上驗證其特徵忠實度。 <a href="zotero://select/library/items/BQ7U6TD4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.09432" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Superposition as Lossy Compression: Measure with Sparse Autoencoders and Connect to Adversarial Vulnerability</strong>，Leonard Bereska et al.（<em>Transactions on Machine Learning Research, 2025</em>）：將神經網路疊加態視為有損壓縮，對稀疏自編碼器激活套用 Shannon 熵以計算模擬「虛擬神經元」的有效特徵數，據此量化表徵自由度與干擾代價並連結至模型對抗脆弱性。 <a href="zotero://select/library/items/954RA54B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.13568" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Scaling and evaluating sparse autoencoders</strong>，Leo Gao et al.（<em>arXiv</em>）：採用 <span class="math inline">k</span>-稀疏自編碼器直接控制稀疏度以改善重建與稀疏前沿，並透過改進設計在大規模下大幅抑制死潛變數，從而得出模型規模與稀疏度間的清晰擴展律及多項新特徵評估指標。 <a href="zotero://select/library/items/HM8AWG2U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.04093" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Gemma Scope: Open Sparse Autoencoders Everywhere All At Once on Gemma 2</strong>，Tom Lieberum et al.（<em>arXiv</em>）：公開涵蓋 Gemma 2 2B 與 9B 預訓練模型全數層級與子層（另含指令微調 9B 與部分 27B 層）的開源 JumpReLU 稀疏自編碼器套件 Gemma Scope，並釋出標準指標評測結果以促進模型安全與可解釋性研究。 <a href="zotero://select/library/items/76WWUMA7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.05147" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-39f1a8d5">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a><span class="rs">這個領域一方面追蹤深度神經網路在訓練時間軸上的非線性相變（雙重下降與頓悟 Grokking），另一方面用稀疏自編碼器（SAE）與因果特徵電路，把…</span></li><li><a href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a></li><li><a href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a></li><li><a href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

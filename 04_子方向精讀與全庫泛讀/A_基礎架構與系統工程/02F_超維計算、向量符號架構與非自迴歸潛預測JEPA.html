@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>02F｜超維計算、向量符號架構與非自迴歸潛預測JEPA · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-e1b691ba" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="02f超維計算向量符號架構與非自迴歸潛預測jepa">02F｜超維計算、向量符號架構與非自迴歸潛預測JEPA</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a>
+同領域子方向：<a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> · <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> · <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> · <a class="wl" href="02D_Kolmogorov-Arnold%E7%B6%B2%E8%B7%AF%E8%88%87%E5%87%BD%E6%95%B8%E5%9F%BA%E5%BA%95%E5%AD%B8%E7%BF%92.html">Kolmogorov-Arnold網路與函數基底學習</a> · <a class="wl" href="02E_%E8%84%88%E8%A1%9D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E7%A5%9E%E7%B6%93%E5%BD%A2%E6%85%8B%E4%BA%8B%E4%BB%B6%E8%A8%88%E7%AE%97.html">脈衝神經網路與神經形態事件計算</a>
+跨領域關聯子方向：<a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> · <a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a> · <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a> · <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31A_%E5%8B%95%E6%85%8B%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AFDEL%E3%80%81%E5%85%AC%E5%85%B1%E5%AE%A3%E5%91%8A%E8%88%87%E9%AB%98%E9%9A%8E%E7%BE%A4%E9%AB%94%E7%9F%A5%E8%AD%98.html">動態認識邏輯DEL、公共宣告與高階群體知識</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>在 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a> 中，本子方向彙整三條跳脫標準自迴歸因果注意力與逐詞素預測的計算路線：以高維準正交向量代數表達符號結構的超維計算（HDC/VSA）、以能量函數與連續聯想記憶重構表徵的現代 Hopfield 網路與聯合嵌入預測架構（JEPA），以及以雙向去噪替代單向次詞素生成的大規模掩碼離散擴散語言模型（MDM）。三者共同面向如何低成本編碼組合結構、避免像素或詞素級過度擬合，並支援非自迴歸平行推理。</p>
+</aside>
+<ul>
+<li>核心問題：標準自迴歸 Transformer 面臨三重結構限制：其一，局部神經網路若缺乏代數綁定機制，容易在組合推理時發生表徵混疊，無法低成本承載顯式符號樹狀結構；其二，輸入空間的生成式自監督（如逐像素重建或逐詞素最大似然）會把模型容量浪費在不可預測的高頻細節或局部詞序雜訊上；其三，嚴格的因果遮罩限制了語言模型的雙向語境利用與生成平行度，而直接套用傳統自迴歸不確定性估計又會失去平行推理的效率優勢。</li>
+<li>直覺模型：超維計算像把整組屬性打包進一支上萬維的隨機指紋裡，靠向量加法收集多筆特徵、靠座標綁定把「角色與數值」配對而不互相蓋掉；JEPA 則像在抽象地圖而非街景照片上預測被遮住的建築輪廓，只保留語義結構而忽略牆面反光雜訊；掩碼擴散語言模型則像同時在整張填字遊戲紙上反覆填補並修改空缺，每一輪都看得到前後文的雙向線索。</li>
+<li>分階段閱讀路線：第一步先讀 Kleyko 等人（2021，Part I）與 Ramsauer 等人（2020），建立高維隨機向量的綁定與疊加代數，以及連續狀態 Hopfield 能量極小值如何等價於單步注意力檢索；第二步精讀 Assran 等人（2023）的 I-JEPA（搭配 Dawid 與 LeCun 2023 的潛變量能量世界模型視角）與 Sahoo 等人（2024）的 MDLM，掌握潛空間語境預測與 Rao-Blackwell 化離散擴散目標；第三步進入 2026 年前沿，閱讀兩篇 L5 深度剖析論文 Mansur 等人（2026，<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_06_2026_Mansur_Cracks_in_Embeddings_Robustness_and_Stability.html">Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations</a>）與 Singh 等人（2026，<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_05_2026_Singh_AG_JEPA_Anatomically_Guided_Joint_Embedding.html">AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning</a>）檢視 JEPA 嵌入穩健性與醫學解剖引導軌跡建模，並對照 Nie 等人（2026）的 8B 雙向擴散語言模型 iLLaDA 與 Hong 等人（2026）對語言局部偏差導致 MDM 訓練緩慢的分析。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;非自迴歸表徵動機 組合結構 語義抽象 雙向平行&quot;] --&gt; B[&quot;超維計算 HDC VSA 準正交綁定與疊加&quot;]
+  A --&gt; C[&quot;連續聯想記憶 現代 Hopfield 指數儲存容量&quot;]
+  A --&gt; D[&quot;非生成潛空間預測 JEPA 遮罩區塊表徵&quot;]
+  A --&gt; E[&quot;離散掩碼擴散 MDM 雙向重掩碼去噪&quot;]
+  C --&gt; D
+  D --&gt; F[&quot;2026 JEPA 前沿 解剖引導 預測器遷移與對抗微調&quot;]
+  E --&gt; G[&quot;2026 LLDM 前沿 iLLaDA 12T 擴展與零樣本不確定性量化&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>超維計算與向量符號代數（HDC/VSA Algebraic Operations）</strong></p>
+<ul>
+<li>直覺理解：在高維空間裡隨便抽兩支隨機向量幾乎彼此垂直，因此可以把物件和它的屬性「綁定」成一支全新的垂直向量再直接相加打包，需要時再用反操作解綁出來，不會嚴重干擾其他項目。</li>
+<li>機制或核心表達式：給定高維空間（例如 <span class="math inline">\mathbb{R}^D</span>、<span class="math inline">\{-1, 1\}^D</span> 或二元空間，<span class="math inline">D \gg 10^3</span>）中兩獨立隨機向量 <span class="math inline">u, v</span>，集中測度保證歸一化內積 <span class="math inline">\langle u, v \rangle / \|u\|\|v\| \approx 0</span>。VSA 依賴三個基本算子：疊加（Bundling, <span class="math inline">+</span>）將集合元素聚合為同時與各成員保持高相似度的超向量；綁定（Binding, <span class="math inline">\otimes</span>，如全息縮減表徵 HRR 的圓卷積或 MAP 的逐元素乘積）將鍵值對 <span class="math inline">(k, v)</span> 映成與 <span class="math inline">k, v</span> 均近似正交的複合表徵，且存在近似逆元滿足 <span class="math inline">k^{-1} \otimes (k \otimes v) \approx v</span>；置換（Permutation, <span class="math inline">\rho</span>）則對座標作循環移位以編碼序列位置與非交換樹狀層級。</li>
+<li>能做到什麼，代價是什麼：具備低精度硬體友善度、單次解析計算（無須梯度反覆迭代）以及對高維分量雜訊與位元翻轉的天然容錯性；代價是超向量容量隨疊加項目數增加而出現交叉幹擾雜訊（須依賴清理記憶或 Hopfield 吸引子去噪），在需要高度非線性感知特徵抽取時仍需與神經編碼器結合。</li>
+</ul>
+</li>
+<li>
+<p><strong>現代 Hopfield 網路與聯合嵌入預測架構（Modern Hopfield and JEPA）</strong></p>
+<ul>
+<li>直覺理解：現代 Hopfield 把注意力看成沿能量地形滾落至記憶原型點的一步更新；JEPA 則把這個想法用於預測，不試圖畫出被遮住的原圖像素，只在抽象潛空間裡預測目標區塊的編碼向量。</li>
+<li>機制或核心表達式：Ramsauer 等人（2020）定義連續狀態 Hopfield 能量函數 <span class="math inline">E(\xi) = -\beta^{-1} \log \sum_{i=1}^N \exp(\beta x_i^T \xi) + \frac{1}{2}\xi^T \xi + C</span>，對其作單步極小化更新得 <span class="math inline">\xi^{\mathrm{new}} = X \mathrm{softmax}(\beta X^T \xi)</span>，在形式上等價於 Transformer 的縮放點積注意力並可在維度 <span class="math inline">d</span> 下儲存指數級數量原型。JEPA（Assran et al., 2023）則將輸入 <span class="math inline">x</span> 分為語境塊與多個目標塊 <span class="math inline">y_j</span>，分別通過可訓練編碼器 <span class="math inline">E_\theta</span> 與動量目標編碼器 <span class="math inline">E_{\bar{\theta}}</span>，再由預測器 <span class="math inline">P_\phi</span> 結合位置潛變量 <span class="math inline">z_j</span> 最小化潛空間回歸損失 <span class="math inline">\sum_j \|P_\phi(E_\theta(x), z_j) - \mathrm{sg}(E_{\bar{\theta}}(y_j))\|_2^2</span>；正如 Nguyen 與 Nguyen（2026）所示，凍結的 <span class="math inline">P_\phi</span> 本質上構成可透過單一線性投影跨編碼器家族遷移的遮擋特徵補全算子。</li>
+<li>能做到什麼，代價是什麼：JEPA 避開像素重建的計算開銷並集中保留高階語義特徵，對大尺度結構遮擋具備優良遷移性；代價是必須靠不對稱架構（EMA 目標編碼器）或變異正則防止表徵坍塌，且如 Mansur 等人（2026）實測，原始冷凍 JEPA 編碼器在邊界攻擊與影像擾動下仍會出現餘弦相似度降至 0.33 的裂縫，需以對抗微調預測器補強。</li>
+</ul>
+</li>
+<li>
+<p><strong>Rao-Blackwell 化掩碼離散擴散與雙向語言生成（Masked Discrete Diffusion, MDM）</strong></p>
+<ul>
+<li>直覺理解：相較於從左到右一個字一個字吐出的自迴歸模型，掩碼擴散模型從整段全是 [MASK] 的序列開始，依隨機遮罩比例學會在任意上下文中同時預測多個被蓋住的詞素，推論時逐輪解鎖高信心位置。</li>
+<li>機制或核心表達式：設前向吸收過程在連續時間 <span class="math inline">t \in [0, 1]</span> 以機率 <span class="math inline">\alpha_t</span> 保留原詞素 <span class="math inline">x_0</span>、以 <span class="math inline">1 - \alpha_t</span> 將其替換為吸收態 <code>[MASK]</code>。Sahoo 等人（2024）推導出的 Rao-Blackwell 化負對數似然變分上界可化簡為加權的古典掩碼語言模型（MLM）交叉熵混合：<span class="math inline">\mathcal{L}_{\mathrm{MDLM}} = \mathbb{E}_{t, x_t} \left[ w(t) \sum_{i: x_t^i = \mathrm{M}} (-\log p_\theta(x_0^i \mid x_t)) \right]</span>，其中權重 <span class="math inline">w(t) = -\frac{\alpha_t'}{1 - \alpha_t}</span>。推論採雙向注意力並可結合信心排序與變長解碼（Nie et al., 2026）；Vazhentsev 等人（2026）進一步證明，多步去噪軌跡間的期望語義不相似性構成 MDM 訓練目標的下界，可作為免額外訓練的零樣本不確定性分數。</li>
+<li>能做到什麼，代價是什麼：支援雙向語境條件生成、可控編輯與多詞素平行採樣；代價是自然語言的局部相依偏差（Hong et al., 2026）導致均勻時間採樣的梯度效率低於自迴歸模型（需採鐘形時間採樣才能加速收斂約 4 倍），且平行解碼需精細控制每步揭露數量以避免同時生成的詞素彼此矛盾。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>I-JEPA 遮罩尺度設計與凍結預測器的潛空間裂縫</strong>：為何 Assran 等人（2023）在設計 I-JEPA 時強調「目標區塊必須具備足夠大的語義尺度，而語境區塊需在空間上廣泛分散」？結合 Mansur 等人（2026，<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_06_2026_Mansur_Cracks_in_Embeddings_Robustness_and_Stability.html">Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations</a>）與 Nguyen 等人（2026）的實驗結果，說明為何凍結編碼器雖能被遷移預測器補全，卻仍需對預測器進行對抗微調？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>若目標區塊過小，預測器只需依賴相鄰紋理插值即可達成低潛空間誤差，無法迫使編碼器抽取長距離語義表徵；足夠大尺度的目標塊配合分散語境塊才能避免局部捷徑。然而，潛空間不對齊高頻像素並不自動等價於對對抗擾動不變：Mansur 等人在 ChestX-ray14 測得 Boundary 與 SPSA 黑箱攻擊可使冷凍編碼器餘弦相似度跌至 0.33、AUROC 下降 0.12。將輕量預測器放在乾淨與擾動樣本上聯合對抗微調，可在不動主幹權重下重新校準決策邊界，將一致性拉回 0.97 以上。</p>
+</details>
+<ol start="2">
+<li><strong>掩碼擴散語言模型的局部偏差與變分下界不確定性</strong>：參考 Sahoo 等人（2024）、Hong 等人（2026）與 Vazhentsev 等人（2026）：在 MDM 訓練目標中，為何標準均勻時間採樣會使訓練顯著慢於自迴歸模型，而鐘形（bell-shaped）時間採樣如何改善？若要在不重新採樣多條獨立生成序列的前提下量化 LLDM 的幻覺風險，去噪軌跡提供了什麼訊號？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>語言的預測資訊高度集中在鄰近詞素位置（locality bias）。在極高遮罩率 <span class="math inline">t \to 1</span> 時上下文近乎空白，模型學不到局部約束；在極低遮罩率 <span class="math inline">t \to 0</span> 時幾乎所有鄰居都已知，任務過於簡單，兩端對有效表徵學習貢獻有限。鐘形時間採樣把算力集中於中等遮罩比例區間，使相同驗證集 NLL 達成約 4 倍加速。推論階段則可追蹤疊代去噪時的中間生成序列、token 重掩碼（remasking）動態以及軌跡語義不相似性，該量在數學上構成擴散訓練目標的下界且不需多次從頭重採樣。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>JEPA 表徵幾何的對抗脆弱性與物理／解剖先驗約束</strong>：Mansur 等人（2026，<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_06_2026_Mansur_Cracks_in_Embeddings_Robustness_and_Stability.html">Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations</a>）證實了即便是大規模自監督醫學 JEPA 編碼器，在黑箱邊界攻擊與對比度偏移下也會嚴重退化；雖然 Singh 等人（2026，<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_05_2026_Singh_AG_JEPA_Anatomically_Guided_Joint_Embedding.html">AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning</a>）透過解剖詞元引導潛空間軌跡大幅提升阿茲海默症進展預測，但如何在一般世界模型（Dawid &amp; LeCun, 2023）中同時保證潛空間不坍塌、具因果軌跡一致性又抗物理擾動，仍是開放難題。</li>
+<li><strong>HDC/VSA 符號代數與大規模雙向擴散模型的可擴展融合</strong>：HDC/VSA（Kleyko et al., 2021）在低精度組合結構運算與理論學習保證（Thomas et al., 2021）上具有優勢，而 iLLaDA（Nie et al., 2026）已證明從頭訓練 8B 雙向擴散語言模型可在數學與程式碼基準逼近自迴歸模型，但兩者至今缺乏統一架構：如何將 VSA 的無梯度顯式綁定算子嵌入神經潛預測器或離散去噪過程以降低長距離組合推理幻覺，尚待系統性探索。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>VSA 組合符號算子與實值邏輯及認識推理</strong>：HDC/VSA 的綁定與疊加代數可為 <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a> 提供分散式變數綁定基底，或用於編碼 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31A_%E5%8B%95%E6%85%8B%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AFDEL%E3%80%81%E5%85%AC%E5%85%B1%E5%AE%A3%E5%91%8A%E8%88%87%E9%AB%98%E9%9A%8E%E7%BE%A4%E9%AB%94%E7%9F%A5%E8%AD%98.html">動態認識邏輯DEL、公共宣告與高階群體知識</a> 中的多層巢狀信念結構，在固定維度向量空間內完成近似符號更新。</li>
+<li><strong>現代 Hopfield 能量極小化與線性循環／狀態空間對偶</strong>：Ramsauer 等人（2020）建立的現代 Hopfield 能量梯度與注意力等價性，以及 Dawid 與 LeCun（2023）的潛變量能量模型視角，可與 <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> 的核化關聯記憶矩陣及 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 的連續記憶衰減機制相互對應。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-a-survey-on-hyperdimensional-computing-aka-vector-symbolic-architectures-part-i-models-and-data-transformations2021">1. A Survey on Hyperdimensional Computing aka Vector Symbolic Architectures, Part I: Models and Data Transformations（2021）</h4>
+<ul>
+<li>作者與出處：Denis Kleyko, Dmitri A. Rachkovskij, Evgeny Osipov, Abbas Rahimi · <em>ACM Computing Surveys</em></li>
+<li>核心問題：超維計算（HDC）與向量符號架構（VSA）橫跨認知科學、電子工程與機器學習，早期模型命名與符號系統分散（如 TPR、HRR、MAP、BSC 等），使跨領域研究者難以建立統一比較基礎。</li>
+<li>關鍵做法：這篇兩部曲綜述的第一部系統整理 HDC/VSA 的歷史脈絡與核心要素，詳細歸納 Tensor Product Representations、Holographic Reduced Representations、Multiply-Add-Permute 與 Binary Spatter Codes 等主流代數模型，並比較不同資料型態轉換為高維分散向量的編碼方法。</li>
+<li>跨領域啟發：提供所有符號向量代數的標準參考架構，其分散式角色填充綁定可直接遷移至 <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a>。</li>
+<li>連結：<a href="zotero://select/library/items/5JU2KX9U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.06077" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-hopfield-networks-is-all-you-need2020">2. Hopfield Networks is All You Need（2020）</h4>
+<ul>
+<li>作者與出處：Hubert Ramsauer, Bernhard Schäfl, Johannes Lehner, Philipp Seidl, Michael Widrich · <em>arXiv</em></li>
+<li>核心問題：古典二元 Hopfield 網路受限於線性記憶容量，且缺乏與現代深度學習可微層無縫整合的連續狀態更新規則。</li>
+<li>關鍵做法：作者提出連續狀態現代 Hopfield 網路與對應能量函數，證明其在關聯空間維度下可儲存指數級數量模式並於單步更新內以指數級小誤差完成檢索，同時揭示其更新規則與 Transformer 自注意力機制等價，並依據能量極小值將注意力頭區分為全域平均、亞穩態部分平均與單點檢索三類。</li>
+<li>跨領域啟發：在連續能量模型與深度網路層之間搭起精確代數橋樑，並為 <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> 的記憶檢索機制提供動力學詮釋。</li>
+<li>連結：<a href="zotero://select/library/items/QKMQR6SE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2008.02217" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-self-supervised-learning-from-images-with-a-joint-embedding-predictive-architecture2023">3. Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture（2023）</h4>
+<ul>
+<li>作者與出處：Mahmoud Assran, Quentin Duval, Ishan Misra, Piotr Bojanowski, Pascal Vincent · <em>CVPR</em></li>
+<li>核心問題：對比式自監督學習高度依賴手工設計的影像資料增強先驗，而像素重建式生成自監督則容易把計算與表徵容量消耗在無關語義的低階細節上。</li>
+<li>關鍵做法：作者提出 Image-based JEPA（I-JEPA），從單一空間分散的語境區塊預測同一張影像中多個大尺度語義目標區塊的編碼器表徵，完全捨棄影像像素重建與手工增強。搭配 ViT-Huge/14 在 ImageNet 上用 16 張 A100 於 72 小時內訓練完成，並在線性分類、物件計數與深度預測取得穩健表現。</li>
+<li>跨領域啟發：確立「在潛空間預測而非像素空間生成」的設計範式，延伸至 Dawid 與 LeCun（2023）規劃的階層式自主智能世界模型。</li>
+<li>連結：<a href="zotero://select/library/items/3NRQJAD4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.08243" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-simple-and-effective-masked-diffusion-language-models2024">4. Simple and Effective Masked Diffusion Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Subham Sahoo, Marianne Arriola, Yair Schiff, Aaron Gokaslan, Edgar Marroquin · <em>NeurIPS</em></li>
+<li>核心問題：雖然連續擴散模型在影像生成表現出色，離散文字領域的擴散模型長期在困惑度與訓練穩定性上落後於自迴歸語言模型。</li>
+<li>關鍵做法：作者提出簡潔的掩碼離散擴散語言模型（MDLM），推導出經過 Rao-Blackwell 化的變分訓練目標，將其化簡為古典掩碼語言模型（MLM）損失的時間加權混合。該框架只使用純編碼器骨幹即可搭配高效採樣器並支援類自迴歸的任意長度生成，明顯縮小與自迴歸困惑度的差距。</li>
+<li>跨領域啟發：示範非自迴歸雙向生成如何從連續擴散理論落地為簡潔的離散遮罩損失，成為後續大規模雙向語言擴散模型的基礎公式。</li>
+<li>連結：<a href="zotero://select/library/items/9B8PGGVN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.07524" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-cracks-in-embeddings-robustness-and-stability-of-jepa-based-chest-x-ray-representations2026">5. Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations（2026）</h4>
+<ul>
+<li>作者與出處：Zahid Mansur, Kalpana Yadav, Deepak Mishra · <em>arXiv</em></li>
+<li>核心問題：JEPA 模型日益頻繁地被應用於醫學影像表徵學習，但學界對於這類潛空間模型在真實世界影像擾動、黑箱對抗攻擊與標籤稀缺情境下的表徵穩定性缺乏量化評估。</li>
+<li>關鍵做法：作者於 78,468 張 NIH ChestX-ray14 影像上系統測試四種醫學 JEPA 編碼器在 SPSA／Boundary 黑箱攻擊、高斯雜訊、亮度／對比度偏移與少標籤下的表現，發現最差情境下編碼器餘弦相似度跌至 0.33 且 AUROC 下降達 0.12；進而驗證在凍結編碼器上對輕量預測器進行乾淨與擾動樣本聯合對抗微調，可將嵌入一致性提升至 0.97 以上並使 I-JEPA AUROC 提升 0.10。</li>
+<li>跨領域啟發：與另一篇 L5 論文 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_05_2026_Singh_AG_JEPA_Anatomically_Guided_Joint_Embedding.html">AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning</a> 互補，一面揭示通用 JEPA 的幾何脆弱裂縫，一面示範醫學領域應如何針對預測器與解剖先驗加以補強。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_06_2026_Mansur_Cracks_in_Embeddings_Robustness_and_Stability.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/J6EW6W9F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17905" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-improved-large-language-diffusion-models2026">6. Improved Large Language Diffusion Models（2026）</h4>
+<ul>
+<li>作者與出處：Shen Nie, Qiyang Min, Shaoxuan Xu, Zihao Huang, Yuxuan Song · <em>arXiv</em></li>
+<li>核心問題：大型語言模型幾乎清一色採用因果注意力與單向自迴歸分解，非自迴歸的雙向擴散語言模型能否在數兆詞素預訓練規模與指令微調後具備同等競爭力尚未得到充分驗證。</li>
+<li>關鍵做法：作者從頭訓練具備完全雙向注意力的 8B 掩碼擴散語言模型 iLLaDA，於預訓練階段擴展至 12T tokens 並在 25B 指令語料上微調 12 個 epoch，同時引入變長生成與基於信心的選擇題計分機制。相較先前 LLaDA，iLLaDA-Base 在 BBH 提升 21.6 分、ARC-Challenge 提升 14.9 分，iLLaDA-Instruct 在 MATH 提升 14.5 分、HumanEval 提升 16.5 分，在多項基準上可與 Qwen2.5 7B 競爭。</li>
+<li>跨領域啟發：以 8B 與 12T 詞素規模實證純雙向掩碼擴散在推理與程式任務上的可行性，並與 Hong 等人（2026）及 Vazhentsev 等人（2026）共同構成非自迴歸大型語言模型的核心研究叢。</li>
+<li>連結：<a href="zotero://select/library/items/92ADSJGX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.25331" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-29-篇">G5｜本子方向全量文獻泛讀清單（共 29 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 29 篇文獻（含開放存取 PDF 25 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進9-篇">A. 奠基經典、專著與核心演進（9 篇）</h3>
+<ul>
+<li><strong>2009｜Hyperdimensional Computing: An Introduction to Computing in Distributed Representation with High-Dimensional Random Vectors</strong>，Pentti Kanerva（<em>Cognitive Computation</em>，975 引）：超維計算（HDC / VSA）的奠基論文，展示萬維隨機向量的近似正交性如何把全息分散式記憶與代數符號運算統一起來。 <a href="zotero://select/library/items/TQSC8Q9X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s12559-009-9009-8" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture</strong>，Mahmoud Assran et al.（<em>IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings - IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings</em>，450 引）：Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture，Mahmoud Assran et al.（I-JEPA 的奠基論文：不做像素重建與手工增強，直接在抽象表徵空間預測遮蔽區塊的語意，開啟了非生成世界模型這條路線，450 引）。 <a href="zotero://select/library/items/3NRQJAD4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.08243" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Hopfield Networks is All You Need</strong>，Hubert Ramsauer et al.（<em>arXiv (Cornell University)</em>，237 引）：提出具連續狀態與新更新律的現代 Hopfield 網路，能以指數級容量儲存模式並單步精準檢索，並證明其更新律等價於 Transformer 注意力機制，藉此解析各層注意力頭的平均行為。 <a href="zotero://select/library/items/QKMQR6SE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2008.02217" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Survey on Hyperdimensional Computing aka Vector Symbolic Architectures, Part II: Applications, Cognitive Models, and Challenges</strong>，Denis Kleyko et al.（<em>ACM Computing Surveys (2023), vol. 55, no. 9</em>，140 引）：全面綜述超維計算與向量符號架構 HDC/VSA（第二部），系統歸納其在多領域的實際應用、認知科學模型建構進展及尚未解決的開放挑戰。 <a href="zotero://select/library/items/F3GINIRN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.15424" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Survey on Hyperdimensional Computing aka Vector Symbolic Architectures, Part I: Models and Data Transformations</strong>，Denis Kleyko et al.（<em>ACM Computing Surveys (2022), vol. 55, no. 6</em>，136 引）：全面綜述超維計算 HDC 與向量符號架構 VSA（第一部），系統梳理 TPR、HRR 與二元濺射碼等主流代數模型及其高維分散式表徵的資料編碼變換機制。 <a href="zotero://select/library/items/5JU2KX9U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.06077" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Theoretical Perspective on Hyperdimensional Computing</strong>，Anthony Hitchcock Thomas, Sanjoy Dasgupta, Tajana Rosing（<em>Journal of Artificial Intelligence Research</em>，102 引）：系統性梳理超維計算（HDC）的理論基礎，探討高維低精度分散式表徵的數學性質，並分析這類具低延遲、省能與抗噪特性的表徵如何支援機器學習任務。 <a href="zotero://select/library/items/ZPT83VXM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.07426" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Introduction to Latent Variable Energy-Based Models: A Path Towards Autonomous Machine Intelligence</strong>，Anna Dawid, Yann LeCun（<em>J. Stat. Mech. (2024) 104011</em>，38 引）：系統介紹 Yann LeCun 提出的自主機器智慧架構藍圖，闡述基於能量的模型與潛變數模型之數學基礎，並說明兩者如何結合為階層聯合嵌入預測架構 H-JEPA 以學習世界模型。 <a href="zotero://select/library/items/VUQ5TXR2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.02572" rel="noopener">官方連結</a></li>
+<li><strong>2002｜Deflection-Based Analysis Techniques for Jointed Concrete Pavement Systems</strong>，James A Crovetti（<em>Transportation Research Record Journal of the Transportation Research Board</em>，17 引）：基於密實液體地基模型（dense-liquid foundation model）提出接縫混凝土路面撓度分析技術，利用板中、板邊與板角撓度計算地基反應模數 k 值與支撐比，當比值低於 0.75 時可判定為不均勻支撐。 <a href="zotero://select/library/items/JVRGFRST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3141/1809-01" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Discrete Diffusion Modeling by Estimating the Ratios of the Data Distribution</strong>，Aaron Lou, Chenlin Meng, Stefano Ermon（<em>arXiv (Cornell University)</em>，5 引）：針對標準擴散模型分數匹配難以推廣至離散資料的限制，提出「分數熵」損失函數並建立離散擴散模型 SEDD，在語言建模任務較既有離散擴散範式降低 25% 至 75% 困惑度並超越 GPT-2。 <a href="zotero://select/library/items/XNWKF99H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.16834" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻20-篇">B. 2024–2026 近期推進與前沿文獻（20 篇）</h3>
+<ul>
+<li><strong>2026｜Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations</strong>，Zahid Mansur, Kalpana Yadav, Deepak Mishra（<em>arXiv</em>）：Cracks in Embeddings: Robustness and Stability of JEPA-Based Chest X-Ray Representations，Zahid Mansur, Kalpana Yadav, Deepak Mishra（🏆 L5 深度審核完成：對四款用近八萬張胸腔 X 光訓練的 JEPA 編碼器做對抗與臨床影像退化的壓力測試，找出潛空間表徵在幾何上的脆弱處）。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_06_2026_Mansur_Cracks_in_Embeddings_Robustness_and_Stability.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/J6EW6W9F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.17905" rel="noopener">官方連結</a></li>
+<li><strong>2026｜AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning</strong>，Azad Singh et al.（<em>arXiv</em>）：AG-JEPA: Anatomically Guided Joint Embedding Predictive Architecture for Neurodegenerative Representation Learning，Azad Singh et al.（🏆 L5 深度審核完成：注入腦部解剖學脆弱區域的先驗來引導潛空間預測，抓到阿茲海默症輕度認知障礙轉化期的微弱局域訊號）。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_05_2026_Singh_AG_JEPA_Anatomically_Guided_Joint_Embedding.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/7SPUP9HF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.18097" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Simple and Effective Masked Diffusion Language Models</strong>，Subham Sahoo et al.（<em>neural information processing systems</em>，47 引）：推導簡化的 Rao–Blackwell 化訓練目標（等效於遮罩語言模型損失之混合）並改進訓練配方，使離散遮罩擴散語言模型能以僅含編碼器架構支援半自迴歸任意長度高效採樣。 <a href="zotero://select/library/items/9B8PGGVN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.07524" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Byte Latent Transformer: Patches Scale Better Than Tokens</strong>，Artidoro Pagnoni et al.（<em>Annual Meeting of the Association for Computational Linguistics (ACL)</em>，18 引）：發表於 ACL 2025 的非傳統詞元化序列模型研究，提出 Byte Latent Transformer 架構，探討以動態位元組區塊（patches）取代固定詞彙 token 進行語言模型規模化擴展的方法。 <a href="zotero://select/library/items/TX68VGMS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.18653/v1/2025.acl-long.453" rel="noopener">官方連結</a></li>
+<li><strong>2026｜LNN-PINN: A unified physics-only training framework with liquid residual blocks</strong>，Ze Tao, Hanxuan Wang, Fujun Liu（<em>Computer Physics Communications</em>，14 引）：提出統一的純物理訓練框架 LNN-PINN，在殘差區塊裡嵌入液態殘差模組（Liquid Residual Blocks），模組的時間常數會隨時間動態變化。不需要觀測標籤，就能自適應匹配多尺度微分算子的殘差。 <a href="zotero://select/library/items/HBMRT8CK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.08935" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Liquid Fourier Latent Dynamics Networks for fast GPU-based numerical simulations in computational cardiology</strong>，Matteo Salvador, Alison  Lesley Marsden（<em>Computers in Biology and Medicine</em>，6 引）：發表於《Computers in Biology and Medicine》，探討結合液態神經網路連續時間動力學與傅立葉潛在動態網路架構（Liquid Fourier Latent Dynamics Networks），以支援計算心臟學領域的 GPU 加速數值模擬。 <a href="zotero://select/library/items/A6V363FX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.09818" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Liquid-transformer temporal self-supervised network for few-shot class-incremental fault diagnosis of servo mechanisms</strong>，Zeming Zhang et al.（<em>Measurement</em>，5 引）：Liquid-transformer temporal self-supervised network for few-shot class-incremental fault diagnosis of servo mechanisms，Zeming Zhang et al.（時序自監督混血網路，結合液態網路對連續時序的適應力與 Transformer 的全局特徵，用於伺服機構的少樣本類別增量故障診斷）。 <a href="zotero://select/library/items/2HA4JQ2V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.measurement.2026.121078" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Scale Is Not All You Need: Revisiting the Biomimetic Roots of Deep Learning to Overcome Fundamental Limitations</strong>，Malek Wahidi, Anthony Rizk, Rodrigue Imad（<em>IEEE Access</em>，3 引）：系統綜述單靠擴展規模之深度學習相較於自然智慧的根本限制，並從神經科學與仿生原理出發，梳理液態神經網路、循環視覺架構與預測編碼等神經啟發解方。 <a href="zotero://select/library/items/6S5V4TCX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/access.2025.3589514" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Understanding and Accelerating the Training of Masked Diffusion Language Models</strong>，Chunsan Hong et al.（<em>arXiv (Cornell University)</em>）：剖析遮罩擴散語言模型 (MDM) 訓練慢於自回歸模型的根源在於語言局部性偏置（預測資訊高度集中於鄰近位置），據此提出鐘形時間取樣訓練策略，使驗證集負對數似然達到相同水準的速度提升最高約四倍。 <a href="zotero://select/library/items/QZP5VKS7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.13026" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Uncertainty Quantification for Large Language Diffusion Models</strong>，Artem Vazhentsev et al.（<em>arXiv (Cornell University)</em>）：針對大型語言擴散模型 (LLDM) 展開首項系統性不確定性量化研究，利用疊代去噪過程中的中間生成、記號重遮罩動態與去噪複雜度建構免訓練零樣本不確定性訊號，並結合遮罩擴散概似與軌跡語意相異度。 <a href="zotero://select/library/items/U2Q8U9QA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.14570" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Improved Large Language Diffusion Models</strong>，Shen Nie et al.（<em>arXiv (Cornell University)</em>）：從頭以全雙向注意力訓練 8B 遮罩擴散語言模型 iLLaDA，將預訓練擴展至 12T token 並搭配可變長度生成與基於信心的多選評分；相較 LLaDA，在 BBH、MATH 與 HumanEval 等基準分別提升 21.6、14.5 與 16.5 分。 <a href="zotero://select/library/items/92ADSJGX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.25331" rel="noopener">官方連結</a></li>
+<li><strong>2026｜The JEPA Predictor: A Transferable Operator for Occluded Feature Completion</strong>，William Nguyen, Christopher Nguyen（<em>arXiv (Cornell University)</em>）：發現保留 JEPA 預測器可大幅提升重度遮罩分類準確率，並證實 I-JEPA 與 V-JEPA 2 的凍結預測器僅需單一線性投影即可遷移至 CLIP、DINOv2、MAE 等非 JEPA 編碼器。 <a href="zotero://select/library/items/84BI2MG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.16274" rel="noopener">官方連結</a></li>
+<li><strong>2026｜GUI-JEPA: Candidate-Conditioned JEPA Latents as a Fast Action Policy for Mobile GUI Agents</strong>，Bingchao Wang et al.（<em>arXiv</em>）：提出免文字解碼器的行動裝置介面代理策略 GUI-JEPA，於無標註螢幕截圖預訓練的 JEPA 潛在空間中由動作與區域條件預測器產生候選動作潛向量，僅須單次批次前傳即可為所有候選動作評分。 <a href="zotero://select/library/items/BHPDHNFH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.36877" rel="noopener">官方連結</a></li>
+<li><strong>2026｜JEPA-Inspired Latent Field Prediction for Sparse-Pilot MIMO-OFDM Channel Reconstruction</strong>，Yuzhi Yang et al.（<em>arXiv</em>）：針對密集導頻開銷過高且直接預測原始通道狀態資訊（CSI）極易受相位擾動影響的問題，提出受 JEPA 啟發的無線傳播場潛在世界模型，於更穩定且具時空頻關聯的潛空間重建稀疏導頻 MIMO-OFDM 通道。 <a href="zotero://select/library/items/2IK5W7KH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.37391" rel="noopener">官方連結</a></li>
+<li><strong>2026｜ActWorld-JEPA: Action-Conditioned JEPA World Models Meet Latent Planning for End-to-End Autonomous Driving</strong>，Ziying Song et al.（<em>arXiv</em>）：針對端到端自動駕駛提出 ActWorld-JEPA，結合以軌跡意圖引導潛空間遞迴預測的 PC-JEPA 與評估規劃和未來表徵一致性的殘差重排模組 <span class="math inline">R^3</span>，僅憑觀測與候選軌跡即可排序駕駛計畫。 <a href="zotero://select/library/items/CSMPHHMK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.16579" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Asymmetric Multimodal Learning with Decomposed JEPAs</strong>，Yusuf Shihata（<em>arXiv</em>）：針對資訊不對稱的多模態任務，證明單純跨模態對齊會抹除模態獨有結構與跨模態協同資訊（對齊冗餘界），據此提出 D-JEPA 將潛表徵分解為對齊共享核心與模態專屬纖維。 <a href="zotero://select/library/items/I6DMH626" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.16639" rel="noopener">官方連結</a></li>
+<li><strong>2026｜JEPA Dots: Dual-Latent World Model for Language-Guided Robot Control</strong>，Xianhao Pan et al.（<em>arXiv</em>）：提出只有約 39.1M 參數的緊緻雙潛空間框架 <code>JEPA Dots</code>（Dynamics-Oriented Task Separation）。它把動力學表徵（Dynamics）與任務表徵（Task）分開，聯合學習視覺動力學與語言控制。語言條件化的任務特徵用來驅動流匹配策略（Flow-Matching Policy），世界預測則被遮罩注意力（Masked Attention）嚴格限制，只能存取與指令無關的動力學歷史和輸入動作。在 40 項已訓練 LIBERO 任務的閉環評測中，總成功率為 84.9%（對照：161.0M 參數的 NanoVLA-S 在不同評測協議下已發表的數字是 78.7%）。在對照基準實驗中，總成功率也從任務 ID 條件化適配基線的 76.0% 提高到 84.9%，其中 LIBERO-Goal 從 67.1% 升到 88.5%。指令切換測試顯示，任務表徵與策略輸出會隨語言改變而更新，動力學表徵與世界預測則維持嚴格不變。 <a href="zotero://select/library/items/FRRNUREQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24062" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Counterfactual World Models: JEPAs That Reason About &quot;What If&quot;</strong>，Randall Balestriero, Yann LeCun, Kerda Varaku（<em>arXiv</em>）：依據物理動力學的基本連續性質，也就是「自然不做跳躍」（<em>natura non facit saltus</em>）。控制動作與隱藏干擾作為獨立力量作用時，兩者的交互項在時間上是二階的。因此在一階近似下，反事實結果等於實際觀測結果，加上世界模型在替代動作與實際動作下預測結果的差。這個做法不需要反事實訓練資料、額外參數或重新訓練。作者對時間步長 <span class="math inline">h</span> 證明了與干擾變異數相關的 <span class="math inline">O(h^2)</span> 誤差上界，建立了來自未配對事實資料的緊緻極小極大（Minimax）下界，並刻畫在斷裂不連續、座標摺疊與縮放控制指令之干擾下的失效條件。驗證用凍結的 DINOv2 與 MAE 編碼器結合像素級 JEPA：在四個模擬器上，反事實 <span class="math inline">R^2</span> 從 38–46% 提高到 86–96%；在水下載具模擬器達 90–94%（相當於 16 倍事實資料的效果）；在 DINOv3、SigLIP 2、CLIP 與 EVA-02 上也達 81–95%。事後回溯規劃（Hindsight Planning）找到達標動作的比例為 35–69%，不知道實際結果的模擬器神諭規劃器只有 14–23%。 <a href="zotero://select/library/items/PW2ZD7ZQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24778" rel="noopener">官方連結</a></li>
+<li><strong>2026｜FetalHeart AI: A Dual-Architecture Self-supervised Learning Framework Using I-JEPA and V-JEPA 2 for Congenital Heart Disease Detection in Fetal Ultrasound</strong>，Nhi Yen Duong Banh, Cuong Danh Tran, Hiep Xuan Huynh（<em>Lecture notes in computer science</em>）：發表於 2026 年《LNCS》的論文，提出結合 I-JEPA 與 V-JEPA 2 雙架構的自監督潛預測框架 FetalHeart AI，探討胎兒超音波影像的先天性心臟病偵測。 <a href="zotero://select/library/items/B893BGVM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-92-2891-1_17" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Your Absorbing Discrete Diffusion Secretly Models the Conditional Distributions of Clean Data</strong>，Jingyang Ou et al.（<em>arXiv (Cornell University)</em>）：揭示吸收態離散擴散模型中的具體分數等價於乾淨資料條件機率乘以解析時間純量，據此提出無須時間條件的重參數化模型 RADD，可快取網路輸出以減少函數評估次數並加速採樣。 <a href="zotero://select/library/items/N35HIW33" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.03736" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-e1b691ba">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a><span class="rs">這個領域的架構不走「先把一切切成離散詞元，再做 O(N^2) 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊…</span></li><li><a href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a></li><li><a href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31A_%E5%8B%95%E6%85%8B%E8%AA%8D%E8%AD%98%E9%82%8F%E8%BC%AFDEL%E3%80%81%E5%85%AC%E5%85%B1%E5%AE%A3%E5%91%8A%E8%88%87%E9%AB%98%E9%9A%8E%E7%BE%A4%E9%AB%94%E7%9F%A5%E8%AD%98.html">動態認識邏輯DEL、公共宣告與高階群體知識</a></li><li><a href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a></li><li><a href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

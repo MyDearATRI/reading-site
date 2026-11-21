@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>11C｜導出代數幾何、導出疊與位移辛幾何 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-91e992b5" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="11c導出代數幾何導出疊與位移辛幾何">11C｜導出代數幾何、導出疊與位移辛幾何</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a>
+同領域子方向：<a class="wl" href="11A_%E6%93%AC%E7%AF%84%E7%96%87%E3%80%81%E5%AE%8C%E5%82%99Segal%E7%A9%BA%E9%96%93%E8%88%87%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E6%A8%A1%E5%9E%8B%E7%8D%A8%E7%AB%8B%E5%9F%BA%E7%A4%8E.html">擬範疇、完備Segal空間與無窮範疇模型獨立基礎</a> · <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a>
+跨領域關聯子方向：<a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A506_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E3%80%81%E6%9D%8E%E7%BE%A4%E7%AE%97%E5%AD%90%E7%B8%AE%E6%94%BE%E8%88%87%E5%B9%BE%E4%BD%95%E8%A4%87%E9%9B%9C%E5%BA%A6%E7%90%86%E8%AB%96GCT.html">代數幾何、李群算子縮放與幾何複雜度理論 GCT（矩映射、不變量環與積和式分離）</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M36_Aluffi%20%E7%AF%84%E7%96%87%E8%AA%9E%E8%A8%80%E3%80%81%E7%BE%A4%E3%80%81%E7%92%B0.html">Aluffi 範疇語言、群、環</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M48_%E5%9F%BA%E6%9C%AC%E7%AF%84%E7%96%87%E8%AB%96%EF%BC%88Leinster%EF%BC%89.html">基本範疇論</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M55_%E7%AF%84%E7%96%87%E8%AB%96%EF%BC%88Riehl%EF%BC%89.html">範疇論</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M64_%E6%95%B8%E5%AD%B8%E5%8E%9F%E5%85%B8%EF%BC%9AHilbert%E3%80%81G%C3%B6del%E3%80%81Grothendieck%E3%80%81Lawvere.html">數學原典：Hilbert、Gödel、Grothendieck、Lawvere</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a> 的幾何與代數應用端，銜接 <a class="wl" href="11A_%E6%93%AC%E7%AF%84%E7%96%87%E3%80%81%E5%AE%8C%E5%82%99Segal%E7%A9%BA%E9%96%93%E8%88%87%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E6%A8%A1%E5%9E%8B%E7%8D%A8%E7%AB%8B%E5%9F%BA%E7%A4%8E.html">擬範疇、完備Segal空間與無窮範疇模型獨立基礎</a> 與 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 所建立的 <span class="math inline">(\infty,1)</span>-範疇及高階 Topos 基礎。它以可縮空間與同倫代數取代集合與嚴格等式，把經典概形與代數疊推廣為導出疊與譜概形，並透過餘切複形與位移辛形式建立變形量子化與模空間相交理論的統一框架。</p>
+</aside>
+<ul>
+<li>核心問題：在經典代數幾何中，非橫截纖維積 <span class="math inline">X \times_S Y</span> 與非自由群作用商空間會丟失高階 <span class="math inline">\mathrm{Tor}</span> 障礙與自同構相干資訊，因為普通交換環截斷在零階同倫 <span class="math inline">\pi_0</span>，無法保存高階同調關係。此外，當結構層從普通交換環換成 <span class="math inline">\mathbb{E}_\infty</span>-環譜或單純交換環（動畫環）時，混合特徵下的同倫結合與嚴格交換結構會出現差異，使經典環空間、Tannaka 重建與形式 GAGA 定理必須在導出與譜的設定下重新建構。</li>
+<li>直覺模型：可以把普通概形想成只記錄物體投影輪廓的二維平面圖，當兩個曲面相切或重疊相交時，交線厚度看起來一樣；導出代數幾何則保留相交處的微擾彈性與高階自由度，把單純交點擴展成帶有切空間與障礙複形的微空間。位移辛幾何進一步為這些微空間配上可平移次數的配對尺，使兩個拉格朗日流形即便非橫截相交，也能在降一階的位移次數上保持非退化辛結構。</li>
+<li>分階段閱讀路線：第一階段先讀 Toen 與 Vezzosi (2004) 確立單純模範疇上的幾何導出疊與下降公理，並配合 Toën (2014) 綜述掌握導出疊與變形量子化的整體脈絡。第二階段精讀 Lurie (2007) 與 Lurie (2009)，從高階有色 Operad 與 <span class="math inline">\mathbb{E}_\infty</span>-環譜出發，理解以結構化 <span class="math inline">(\infty,1)</span>-Topos 統一概形、Deligne–Mumford 疊與導出幾何的作法。第三階段進入 2024 至 2026 年前沿，先讀 Chough (2024) 對照導出與譜設定下的形式 GAGA 定理，再讀 Mundinger 與 Sahai (2026) 以 <span class="math inline">\Theta</span>-範疇處理動畫環譜的導出 Tannaka 重建。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;單純交換環與動畫環&quot;] --&gt; B[&quot;同倫代數幾何導出疊 (Toen-Vezzosi 2004)&quot;]
+  C[&quot;無窮Operad與E_inf環譜 (Lurie 2007)&quot;] --&gt; D[&quot;結構化無窮Topos空間 (Lurie 2009)&quot;]
+  B --&gt; E[&quot;餘切複形與變形量子化 (Toen 2014)&quot;]
+  D --&gt; E
+  D --&gt; F[&quot;導出形式GAGA與譜比較 (Chough 2024)&quot;]
+  B --&gt; G[&quot;Theta範疇與導出Tannaka重建 (Mundinger-Sahai 2026)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>幾何導出疊與結構空間（Derived Geometric Stacks and Structured Spaces）</strong></p>
+<ul>
+<li>直覺理解：在函數點觀點下，導出疊把動畫環或 <span class="math inline">\mathbb{E}_\infty</span>-環譜映到同倫空間，取代經典幾何映到集合或群胚的做法，並要求黏合滿足超覆蓋下降；在結構空間觀點下，則把普通拓撲空間與結構環層推廣為 <span class="math inline">(\infty,1)</span>-Topos 加上帶有局部性條件的譜層。</li>
+<li>機制或核心表達式：在 Toën–Vezzosi 的設定中，取基底對稱么半模型範疇 <span class="math inline">C = \mathrm{s}k\text{-Mod}</span>（單純 <span class="math inline">k</span>-模），定義導出前疊 <span class="math inline">F: \mathrm{Comm}(C) \to \mathrm{sSet}</span> 滿足平展拓撲下的超下降，並透過光滑圖集 <span class="math inline">\coprod U_i \to F</span> 歸納定義 <span class="math inline">n</span>-幾何導出疊。在 Lurie 的幾何譜設定中，定義幾何 <span class="math inline">\mathcal{G}</span> 與預幾何，結構空間為對 <span class="math inline">(\mathcal{X}, \mathcal{O}_{\mathcal{X}})</span>，其中 <span class="math inline">\mathcal{X}</span> 為 <span class="math inline">(\infty,1)</span>-Topos 且 <span class="math inline">\mathcal{O}_{\mathcal{X}}: \mathcal{G} \to \mathcal{X}</span> 為左正合函子，態射須局部保留容許覆蓋。</li>
+<li>能做到什麼，代價是什麼：兩套架構皆能精確處理任意維度的纖維積與非自由商，代價是連同態射結合律與交換律都必須維持無窮相干資料，日常計算需依賴模型範疇表現或截斷譜序列（如 Postnikov 塔）降維分析。</li>
+</ul>
+</li>
+<li>
+<p><strong>動畫環與 <span class="math inline">\mathbb{E}_\infty</span>-環譜的比較（Animated Rings vs. <span class="math inline">\mathbb{E}_\infty</span>-Ring Spectra）</strong></p>
+<ul>
+<li>直覺理解：在特徵為零的有理數域上，以多項式環做單純消解得到的動畫環，與同調代數裡的 <span class="math inline">\mathbb{E}_\infty</span>-代數等價；但在正特徵或混合特徵下，多項式自由代數帶有額外的冪次運算與 Frobenius 結構，使得兩種導出環理論分道揚鑣。</li>
+<li>機制或核心表達式：動畫環範疇 <span class="math inline">\mathrm{Ani}(\mathrm{Ring})</span> 可定義為從有限生成自由多項式環 <span class="math inline">\mathrm{Poly}_{\mathbb{Z}}</span> 映到空間 <span class="math inline">\mathcal{S}</span> 的保有限積函子範疇，其底層可透過忘卻函子映至連通 <span class="math inline">\mathbb{E}_\infty</span>-環譜 <span class="math inline">\mathrm{CAlg}^{\mathrm{cn}}</span>，即存在函子 <span class="math inline">\Theta: \mathrm{Ani}(\mathrm{Ring}) \to \mathrm{CAlg}^{\mathrm{cn}}_{H\mathbb{Z}}</span>。這對映射在 <span class="math inline">H\mathbb{Q}</span> 上為等價，但在特徵 <span class="math inline">p &gt; 0</span> 時 <span class="math inline">\pi_*(\mathbb{S}) \otimes \mathbb{F}_p</span> 與 Dyer–Lashof 運算帶來差異；為了在張量範疇層面捉住動畫環的嚴格交換結構，Mundinger 與 Sahai (2026) 採用 Nuiten–Toën 的 <span class="math inline">\Theta</span>-範疇取代普通的對稱么半 <span class="math inline">\infty</span>-範疇以證明導出 Tannaka 重建。</li>
+<li>能做到什麼，代價是什麼：動畫環保留經典交換代數的直覺與冪次運算，適合算術幾何與凝聚比較；<span class="math inline">\mathbb{E}_\infty</span>-環譜則能直接接入穩定同倫論與複配邊等廣義上同調理論，兩者在形式 GAGA 等橋接定理上需分別建立對應（如 Chough 2024）。</li>
+</ul>
+</li>
+<li>
+<p><strong>導出餘切複形與位移辛結構（Derived Cotangent Complex and Shifted Symplectic Structures）</strong></p>
+<ul>
+<li>直覺理解：餘切複形把普通流形的微分 1-形式推廣成可測量奇點與相交障礙的鏈複形；當一個導出疊配上 <span class="math inline">n</span>-位移閉 2-形式並滿足非退化條件時，即使其底層古典空間有奇點，它仍表現得像一個帶有高階泊松括號的辛流形。</li>
+<li>機制或核心表達式：對導出疊 <span class="math inline">X</span>，於每個點 <span class="math inline">x: \mathrm{Spec} A \to X</span> 定義餘切複形 <span class="math inline">\mathbb{L}_{X,x}</span> 為分類 <span class="math inline">A</span>-模導子的譜或模複形。<span class="math inline">p</span>-形式空間定義為切複形外冪截面的同倫不變空間，而閉 2-形式空間 <span class="math inline">\mathcal{A}^{2,\mathrm{cl}}(X, n)</span> 帶有透過 de Rham 微分誘導的底層 2-形式映象 <span class="math inline">\omega_0 \in \pi_0 \mathcal{A}^2(X, n)</span>。若 <span class="math inline">\omega_0</span> 誘導的態射 <span class="math inline">\mathbb{T}_X \to \mathbb{L}_X[n]</span> 為擬同構，則稱 <span class="math inline">(X, \omega)</span> 為 <span class="math inline">n</span>-位移辛導出疊；特別地，兩個拉格朗日態射 <span class="math inline">L_1 \to X \leftarrow L_2</span> 的導出纖維積 <span class="math inline">L_1 \times_X^h L_2</span> 自然繼承 <span class="math inline">(n-1)</span>-位移辛結構。</li>
+<li>能做到什麼，代價是什麼：位移辛結構直接串聯模空間相交理論、臨界軌跡（<span class="math inline">(-1)</span>-位移）與變形量子化（Toën 2014），但對非局部有限表現的無限維疊或一般解析幾何，存在性與量子化構造仍高度依賴基底特徵與緊緻性條件。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>非橫截相交中普通纖維積與導出纖維積的差異</strong>：考慮普通概形 <span class="math inline">X = \mathrm{Spec} k[x]/(x)</span> 與自身在 <span class="math inline">S = \mathrm{Spec} k[x]</span> 上做纖維積。若改為導出纖維積 <span class="math inline">X \times_S^h X</span>，其結構環的同倫群 <span class="math inline">\pi_*(k \otimes_{k[x]}^{\mathbb{L}} k)</span> 與普通張量積 <span class="math inline">k \otimes_{k[x]} k</span> 有何具體差別，這如何對應到幾何相交重數？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>將左邊的 <span class="math inline">k</span> 在 <span class="math inline">k[x]</span>-模範疇中取自由消解 <span class="math inline">0 \to k[x] \xrightarrow{\cdot x} k[x] \to k \to 0</span>，再與右邊的 <span class="math inline">k</span> 做普通張量積。結果複形在次數 <span class="math inline">0</span> 與 <span class="math inline">1</span> 皆為 <span class="math inline">k</span> 且微分為零，因此 <span class="math inline">\pi_0 \cong k</span> 而 <span class="math inline">\pi_1 \cong k</span>，這與普通張量積僅得單點 <span class="math inline">k</span> 不同。這個非零的 <span class="math inline">\pi_1</span> 正好記錄了 <span class="math inline">X</span> 在 <span class="math inline">S</span> 中切向相交的額外維度（Serre 的 Tor 公式與局部相交重數）。</p>
+</details>
+<ol start="2">
+<li><strong>動畫環與 <span class="math inline">\mathbb{E}_\infty</span>-環譜在 Tannaka 重建中的角色區分</strong>：在 Mundinger 與 Sahai (2026) 的導出 Tannaka 重建中，為何不能直接套用普通的對稱么半 <span class="math inline">\infty</span>-範疇來刻畫動畫環譜（spectra of animated rings）上的擬凝聚層，而必須引入 <span class="math inline">\Theta</span>-範疇？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>在普通譜代數幾何中，<span class="math inline">\mathbb{E}_\infty</span>-環上的模範疇天然構成一個對稱么半 <span class="math inline">\infty</span>-範疇，其對稱么半結構只捕捉到同倫意義下的完全結合與交換性。然而在導出代數幾何中，動畫環的基礎生成元來自多項式環，隱含了特徵 <span class="math inline">p</span> 下比 <span class="math inline">\mathbb{E}_\infty</span> 更嚴格的交換構造。Nuiten–Toën 的 <span class="math inline">\Theta</span>-範疇正是在對稱么半 <span class="math inline">\infty</span>-範疇之上加入額外相干結構以反映這種嚴格交換性，從而讓 Tannaka 函子得以唯一還原動畫環譜。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>正特徵與混合特徵下的非線性變形量子化</strong>：在特徵為零時，導出疊上的 <span class="math inline">n</span>-位移辛結構與 <span class="math inline">n</span>-位移泊松結構已建立等價關係並推動變形量子化（Toën 2014），但在特徵 <span class="math inline">p &gt; 0</span> 或混合特徵的動畫環設定下，由於 <span class="math inline">\mathbb{E}_\infty</span>-結構與嚴格交換結構分離，位移泊松結構與量子化存在性仍缺乏與特徵零同等完備的構造。</li>
+<li><strong>導出代數幾何與凝聚解析幾何的橋接規模</strong>：Scholze (2019) 以凝聚集合與固態模（solid modules）重整拓撲向量空間的同調代數，而在 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 中進一步構造解析疊；如何把導出代數幾何的形式 GAGA（Chough 2024）與導出 Tannaka 重建系統性地延伸到非阿基米德與複解析凝聚疊，仍是活躍中的開放課題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>從導出幾何疊到凝聚解析疊的同調工具遷移</strong>：導出幾何裡處理超下降（hyperdescent）、固態／核模及形式完備化的範疇工具，可直接遷移至 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a>，用來解決傳統拓撲向量空間範疇非阿貝爾所導致的層上同調障礙。</li>
+<li><strong>對稱么半 <span class="math inline">\infty</span>-範疇跡空間與幾何表示論</strong>：Steinebrunner (2018) 利用一維奇異配邊假說計算對稱么半 <span class="math inline">\infty</span>-範疇中的跡變換模空間並還原 Toën–Vezzosi 跡定理；該對偶與跡形式化方法可遷移至 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 及 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a> 的拓撲量子場論不變量分析。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-homotopical-algebraic-geometry-ii-geometric-stacks-and-applications2004">1. Homotopical Algebraic Geometry II: geometric stacks and applications（2004）</h4>
+<ul>
+<li>作者與出處：Bertrand Toen, Gabriele Vezzosi · <em>Memoirs of the American Mathematical Society</em></li>
+<li>核心問題：如何在抽象的對稱么半模型範疇上建立與具體基底無關的同倫代數幾何，並特化出導出幾何疊的嚴格定義。傳統疊論無法在單純環與鏈複形上保留等價不變性。</li>
+<li>關鍵做法：作者先在一般么半模型範疇中推廣導子、平展態射、光滑態射、平坦模與射影模，再運用模型範疇上的疊論定義幾何疊。當基底特化為單純 <span class="math inline">k</span>-模 <span class="math inline">\mathrm{s}k\text{-Mod}</span> 時，此構造給出導出代數幾何的核心幾何對象與經典模疊的導出版本。</li>
+<li>跨領域啟發：確立函數點觀點的導出疊標準語言，為後續 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 與高階幾何疊提供對照基線。</li>
+<li>連結：<a href="zotero://select/library/items/FUURNC89" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0404373" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-derived-algebraic-geometry2014">2. Derived Algebraic Geometry（2014）</h4>
+<ul>
+<li>作者與出處：Bertrand Toën · <em>EMS Surveys in Mathematical Sciences</em></li>
+<li>核心問題：導出代數幾何在模型範疇與 <span class="math inline">(\infty,1)</span>-範疇間技術門檻高，需要一套串聯基礎定義與應用出口的幾何脈絡。</li>
+<li>關鍵做法：這篇綜述整理了導出概形、導出疊、餘切複形與準凝聚層等核心概念與定理，並特別指向這些結構與變形量子化（及相關辛幾何不變量）之間的介面。</li>
+<li>跨領域啟發：適合作為從抽象同倫代數切入幾何應用與量子化問題的總覽路標，連結至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A506_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E3%80%81%E6%9D%8E%E7%BE%A4%E7%AE%97%E5%AD%90%E7%B8%AE%E6%94%BE%E8%88%87%E5%B9%BE%E4%BD%95%E8%A4%87%E9%9B%9C%E5%BA%A6%E7%90%86%E8%AB%96GCT.html">代數幾何、李群算子縮放與幾何複雜度理論 GCT（矩映射、不變量環與積和式分離）</a> 的模空間結構。</li>
+<li>連結：<a href="zotero://select/library/items/MGF7XX67" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1401.1044" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-derived-algebraic-geometry-iii-commutative-algebra2007">3. Derived Algebraic Geometry III: Commutative Algebra（2007）</h4>
+<ul>
+<li>作者與出處：Jacob Lurie · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：如何在 <span class="math inline">(\infty,1)</span>-範疇中系統化描述滿足高階同倫結合律與交換律的代數結構，並將經典交換代數推廣到交換環譜。</li>
+<li>關鍵做法：作者建構有色 Operad（colored operads）的高階範疇版本（即 <span class="math inline">\infty</span>-Operad），並以此給出對稱么半 <span class="math inline">\infty</span>-範疇與其中交換代數對象的無模型描述。該理論直接應用於研究拓撲與譜代數幾何中的交換環譜。</li>
+<li>跨領域啟發：提供從代數端構造譜概形的基礎工具，直接銜接 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 中的穩定同倫結構。</li>
+<li>連結：<a href="zotero://select/library/items/77UCFSAA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0703204" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-derived-algebraic-geometry-v-structured-spaces2009">4. Derived Algebraic Geometry V: Structured Spaces（2009）</h4>
+<ul>
+<li>作者與出處：Jacob Lurie · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：如何把普通概形、Deligne–Mumford 疊及其導出與譜推廣納入同一套「帶結構層的空間」抽象公理中。</li>
+<li>關鍵做法：作者定義幾何（geometry）與結構化 <span class="math inline">(\infty,1)</span>-Topos 的一般理論，透過控制結構層必須保留的覆蓋與態射條件，同時涵蓋經典概形、Deligne–Mumford 疊與導出／譜幾何空間。</li>
+<li>跨領域啟發：在拓撲與層論層面補全了函數點方法的另一視角，可直接對照 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a> 中的經典 Topos 幾何化。</li>
+<li>連結：<a href="zotero://select/library/items/TXJ8V34Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0905.0459" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-formal-derived-algebraic-geometry2024">5. Formal Derived Algebraic Geometry（2024）</h4>
+<ul>
+<li>作者與出處：Chang-Yeon Chough · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：在 Lurie 已有形式譜代數幾何的基礎下，基於單純交換環的形式導出代數幾何尚需同等級的基礎建構與導出與譜之間的精確橋樑。</li>
+<li>關鍵做法：作者平行於譜設定建構形式導出代數幾何的基礎，建立導出與譜幾何對象之間的密切連結，並利用此連結證明導出設定下的形式 GAGA（formal GAGA）定理。</li>
+<li>跨領域啟發：直接展現動畫環與 <span class="math inline">\mathbb{E}_\infty</span>-環譜在形式完備化層面的比較技術，對 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 的解析完備化有直接參考價值。</li>
+<li>連結：<a href="zotero://select/library/items/SUX6Z4TM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.13506" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-tannakian-reconstruction-in-derived-algebraic-geometry2026">6. Tannakian reconstruction in derived algebraic geometry（2026）</h4>
+<ul>
+<li>作者與出處：Joshua Mundinger, Shubhankar Sahai · <em>arXiv</em></li>
+<li>核心問題：Lurie 與 Bhatt–Halpern-Leistner 的導出 Tannaka 重建定理原以 <span class="math inline">\mathbb{E}_\infty</span>-環譜為基礎，若要把基礎幾何對象改為動畫環譜，普通的對稱么半 <span class="math inline">\infty</span>-範疇不足以刻畫動畫環的嚴格交換結構。</li>
+<li>關鍵做法：作者在動畫環譜的導出代數幾何設定下證明 Tannaka 重建定理的類比版本，將對稱么半 <span class="math inline">\infty</span>-範疇替換為 Nuiten–Toën 的 <span class="math inline">\Theta</span>-範疇，藉此精確捕捉動畫環上的嚴格交換性。</li>
+<li>跨領域啟發：展示純同倫代數中兩種導出環理論的結構差異，並為 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a> 的合成幾何內部語言提供新的範疇模型。</li>
+<li>連結：<a href="zotero://select/library/items/HE2CJB68" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.00999" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-8-篇">G5｜本子方向全量文獻泛讀清單（共 8 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 8 篇文獻（含開放存取 PDF 8 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進6-篇">A. 奠基經典、專著與核心演進（6 篇）</h3>
+<ul>
+<li><strong>2019｜Lectures on Condensed Mathematics</strong>，Peter Scholze（<em>University of Bonn (Author Official Lecture Notes)</em>）：凝聚數學的奠基講義。第一講就用很直白的語言說明傳統拓撲阿貝爾群為什麼失敗，以及緊探針上的層怎麼補救。 <a href="zotero://select/library/items/AWXPXFI7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.03658" rel="noopener">官方連結</a></li>
+<li><strong>2004｜Homotopical Algebraic Geometry II: geometric stacks and applications</strong>，Bertrand Toen, Gabriele Vezzosi（<em>Memoirs of the American Mathematical Society</em>，395 引）：同倫代數幾何（HAG）的開創論文，在對稱么半模型範疇上建立導出幾何疊（Geometric Stacks）與切複形理論，現代導出代數幾何由此發展出來。 <a href="zotero://select/library/items/FUURNC89" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0404373" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Derived Algebraic Geometry</strong>，Bertrand Toën（<em>EMS Surveys in Mathematical Sciences</em>，250 引）：發表於《EMS Surveys in Mathematical Sciences》的導出代數幾何（derived algebraic geometry）綜述論文，系統介紹該領域的一般概念與核心結果，並聚焦近期與形變量子化（deformation quantization）交叉方向的發展。 <a href="zotero://select/library/items/MGF7XX67" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1401.1044" rel="noopener">官方連結</a></li>
+<li><strong>2007｜Derived Algebraic Geometry III: Commutative Algebra</strong>，Jacob Lurie（<em>arXiv (Cornell University)</em>，57 引）：《Derived Algebraic Geometry III》建立彩色操作算子的高階範疇論版本，並將這套導出代數幾何理論應用於交換環譜（commutative ring spectra）研究。 <a href="zotero://select/library/items/77UCFSAA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0703204" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Derived Algebraic Geometry V: Structured Spaces</strong>，Jacob Lurie（<em>arXiv (Cornell University)</em>，55 引）：建立具有結構層之空間（structured spaces）的一般理論，將古典概形、Deligne–Mumford 疊以及它們在導出代數幾何中的各種推廣統一納入同一框架。 <a href="zotero://select/library/items/TXJ8V34Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0905.0459" rel="noopener">官方連結</a></li>
+<li><strong>2018｜The space of traces in symmetric monoidal infinity categories</strong>，Jan Steinebrunner（<em>The Quarterly Journal of Mathematics, Volume 72, Issue 4, December 2021, Pages 1461-1493</em>）：在對稱么半 <span class="math inline">\infty</span>-範疇的可對偶化對象上定義共軛不變的類跡自然變換（tracelike transformations），運用帶奇點的一維配邊假設算出其模空間，證明古典線性代數跡在可縮選擇空間意義下可唯一延拓為 <span class="math inline">\infty</span>-範疇跡，並重現 Toën–Vezzosi 定理。 <a href="zotero://select/library/items/A3IXTM7M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.11654" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻2-篇">B. 2024–2026 近期推進與前沿文獻（2 篇）</h3>
+<ul>
+<li><strong>2026｜Tannakian reconstruction in derived algebraic geometry</strong>，Joshua Mundinger, Shubhankar Sahai（<em>arXiv</em>）：用 Nuiten–Toën 提出的 <span class="math inline">\Theta</span>-範疇（增強型對稱么半 <span class="math inline">\infty</span>-範疇）取代傳統的對稱么半結構，在動畫環導出代數幾何的語境下證明了 Lurie 型與 Bhatt–Halpern-Leistner 型的 Tannakian 重構定理。 <a href="zotero://select/library/items/HE2CJB68" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.00999" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Formal Derived Algebraic Geometry</strong>，Chang-Yeon Chough（<em>arXiv (Cornell University)</em>）：參照Jacob Lurie的形式譜代數幾何理論建立形式導出代數幾何（formal derived algebraic geometry）基礎，在導出與譜架構代數幾何對象間建立緊密連結並證明導出環境下的形式GAGA定理。 <a href="zotero://select/library/items/SUX6Z4TM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.13506" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-91e992b5">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a><span class="rs">兩個物件「以哪一種方式同構」（見證路徑、路徑之間的變形，乃至無窮階相容性），在數學裡到處出現，傳統集合論卻把它抹平。</span></li><li><a href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a></li><li><a href="11A_%E6%93%AC%E7%AF%84%E7%96%87%E3%80%81%E5%AE%8C%E5%82%99Segal%E7%A9%BA%E9%96%93%E8%88%87%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E6%A8%A1%E5%9E%8B%E7%8D%A8%E7%AB%8B%E5%9F%BA%E7%A4%8E.html">擬範疇、完備Segal空間與無窮範疇模型獨立基礎</a></li><li><a href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a><span class="tag-plan">計劃</span><span class="rs">Mac Lane &amp; Moerdijk，*Sheaves in Geometry and Logic* 第 I–IV、VI 章</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>17A｜預訓練資料篩選、去重與動態配比最佳化 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-c20af2c0" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="17a預訓練資料篩選去重與動態配比最佳化">17A｜預訓練資料篩選、去重與動態配比最佳化</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a>
+同領域子方向：<a class="wl" href="17B_%E5%90%88%E6%88%90%E8%B3%87%E6%96%99%E7%94%9F%E6%88%90%E3%80%81%E6%A8%A1%E5%9E%8B%E5%9D%8D%E7%B8%AE%E8%88%87%E8%87%AA%E8%88%89%E6%93%B4%E5%B1%95%E9%82%8A%E7%95%8C.html">合成資料生成、模型坍縮與自舉擴展邊界</a> · <a class="wl" href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a> 的上游供給端，處理預訓練與微調語料如何從原始網路抓取轉化為高資訊密度訓練分布的問題。其核心矛盾在於詞元數量擴張與資料品質稀釋之間的張力，演進主線從早期的啟發式規則過濾與去重，發展為基於模型分類器的品質篩選、資料混合律（Data Mixing Laws）預測，以及雙層最佳化與訓練期動態選樣。</p>
+</aside>
+<ul>
+<li>核心問題：直接以未經篩選的網頁語料進行最大似然預訓練時，模型會將大量參數容量與梯度更新浪費在重複片段、樣板雜訊與低品質文本上。語料中的長字串重複與近似重複會導致模型逐字背誦訓練集內容並抬高訓練與驗證集的重疊率，而標準跨領域混合比例過去多依賴高成本的經驗試錯。當候選語料達到兆級詞元規模時，窮舉不同領域比例或逐筆人工清理在算力上不可行，需要低成本代理模型、逆問題推斷與可控篩選算子來替代全量試訓。</li>
+<li>直覺模型：可以把大型語言模型的預訓練想像成整理數萬箱剛從港口卸下的紙本檔案：如果直接按原箱順序通讀，半數時間會耗在反覆閱讀同一份影印傳單與廣告夾頁。去重與品質過濾相當於先剔除重複影本與破損頁，資料配比最佳化則像是依據目標能力預先調配教科書、程式碼庫與論文集的閱讀比例，並隨著閱讀進展動態替換下一批教材。</li>
+<li>分階段閱讀路線：第一步先讀 Lee et al. (2021) 與 Albalak et al. (2024)，理解重複文本如何引發逐字記憶與評測洩漏，並建立資料選擇方法論的整體分類框架。第二步精讀 Soldaini et al. (2024)、Penedo et al. (2024)、Li et al. (2024) 與 Ye et al. (2024)，掌握開放兆級語料的去重管線、模型分類器篩選基準，以及跨規模預測領域配比的資料混合律。第三步推進至 2025–2026 年前沿：讀 Cotter (2025) 的階層貝氏資料納入推斷，再看 Luo et al. (2026) 如何從黑箱生成文本逆推預訓練混合先驗，最後讀 Shi et al. (2026) 與 Zhao et al. (2026) 在安全微調與多模態工具使用中的雙層與自適應選樣策略。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;原始網路語料（如 Common Crawl）&quot;] --&gt; B[&quot;精確與近似去重（Lee 2021）&quot;]
+  B --&gt; C[&quot;規則與模型分類器過濾（Dolma / FineWeb / DCLM）&quot;]
+  C --&gt; D[&quot;領域配比與混合律建模（Ye 2024）&quot;]
+  D --&gt; E[&quot;雙層與貝氏選樣最佳化（Cotter 2025 / Shi 2026）&quot;]
+  D --&gt; F[&quot;訓練期能力自適應選樣（Zhao 2026）&quot;]
+  E --&gt; G[&quot;黑箱語料配方逆向診斷（Luo 2026）&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>子串與近似去重（Exact Substring &amp; Near-Duplicate Deduplication）</strong></p>
+<ul>
+<li>直覺理解：網路語料中同一段免責聲明、新聞轉載或程式樣板常重複出現數萬次，去重就是把這些冗餘拷貝折疊，避免梯度更新反覆偏向相同序列並降低模型背誦風險。</li>
+<li>機制或核心表達式：在文檔層級，常以 <span class="math inline">k</span>-shingle 集合的 Jaccard 相似度 <span class="math inline">J(A, B) = |A \cap B| / |A \cup B|</span> 配合 MinHash 與局部敏感雜湊（LSH）偵測近似重複；在子串層級，Lee et al. (2021) 利用後綴陣列（Suffix Array）在 <span class="math inline">O(N \log N)</span> 時間內找出所有長度超過門檻 <span class="math inline">L</span>（如 <span class="math inline">50</span> 個詞元）的完全重複子串並予以移除，消除單一序列出現數萬次的長重複片段。</li>
+<li>能做到什麼，代價是什麼：去重能讓模型逐字輸出訓練語料的頻率下降十倍，並以更少訓練步數維持或提升準確率同時減少訓練與驗證集重疊。代價是後綴陣列與全域 MinHash 在兆級詞元上需要大量記憶體與分散式歸併開銷，且過度激進的跨快照去重可能誤刪高頻出現但具結構意義的標準引用或程式碼慣用法。</li>
+</ul>
+</li>
+<li>
+<p><strong>資料混合律與領域配比最佳化（Data Mixing Laws）</strong></p>
+<ul>
+<li>直覺理解：把不同來源的文本當作配方原料，不必每次都消耗完整算力重訓大模型，而是先用小模型測試幾組配方，建立配方比例與最終損失之間的函數關係，再去推估大模型的最佳配比。</li>
+<li>機制或核心表達式：設預訓練語料由 <span class="math inline">K</span> 個領域構成，配比向量為 <span class="math inline">\mathbf{p} = (p_1, \dots, p_K) \in \Delta^{K-1}</span>（滿足 <span class="math inline">\sum_{i=1}^K p_i = 1, p_i \ge 0</span>）。Ye et al. (2024) 在樣本混合比例上擬合經驗混合律函數 <span class="math inline">L(\mathbf{p})</span>，並將其與模型參數量 <span class="math inline">N</span> 及訓練步數 <span class="math inline">S</span> 的縮放律（Scaling Laws）進行嵌套結合，先在低算力下觀測不同配比對驗證損失的影響，再外推預測目標規模 <span class="math inline">(N, S)</span> 下的最佳混合分布 <span class="math inline">\mathbf{p}^*</span>。</li>
+<li>能做到什麼，代價是什麼：此方法能以小規模代理實驗代替大模型訓前試錯，顯著降低調參成本。然而它依賴跨規模與跨步數的函數外推穩定性；若領域之間存在非線性交互作用，或目標下游能力未在代理規模顯現，外推預測就會出現偏差。</li>
+</ul>
+</li>
+<li>
+<p><strong>雙層資料選擇與校準逆問題審計（Bilevel Data Selection &amp; Inverse Mixture Diagnosis）</strong></p>
+<ul>
+<li>直覺理解：有些任務不能只看單筆文本是否像教科書，還得檢驗把這筆資料放進訓練集後，模型在安全或工具推理上的驗證表現是否改善；反過來，面對配方不公開的模型，也能從輸出分布反推原始語料比例。</li>
+<li>機制或核心表達式：雙層選樣（如 Shi et al., 2026 的 S-BDS）將樣本權重向量 <span class="math inline">\mathbf{w}</span> 視為上層變數，在內層參數最佳化 <span class="math inline">\theta^*(\mathbf{w}) = \arg\min_\theta \sum_i w_i \ell_{\text{train}}(x_i; \theta)</span> 的約束下，最小化外層驗證損失 <span class="math inline">\mathcal{L}_{\text{val}}(\theta^*(\mathbf{w}))</span>，並控制選樣權重集中度以避免少數樣本主導梯度。相對地，Luo et al. (2026) 的 LLMSurgeon 將資料混合診斷（DMS）建模為標籤偏移（Label-Shift）假設下的逆問題：設真實混合先驗為 <span class="math inline">\boldsymbol{\pi}</span>，領域分類器的校準軟混淆矩陣為 <span class="math inline">\mathbf{C}</span>，觀測到的生成文本分類分布為 <span class="math inline">\mathbf{q} \approx \mathbf{C}\boldsymbol{\pi}</span>，進而求解單純形約束下的最佳化問題 <span class="math inline">\min_{\boldsymbol{\pi} \in \Delta^{K-1}} \|\mathbf{C}\boldsymbol{\pi} - \mathbf{q}\|_2^2</span> 來還原潛在配比。</li>
+<li>能做到什麼，代價是什麼：雙層選樣能針對安全與特定能力對齊給出精準樣本排序，但計算超梯度或代理評分需要額外前向與反向傳播。基於標籤偏移的逆推框架無需存取原始權重或訓練集，其還原精度仍受限於領域分類器的邊界定義以及生成提示分布是否覆蓋目標先驗。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>子串去重與訓練與測試重疊的雙重效應</strong>：為何 Lee et al. (2021) 指出單純做文檔層級（document-level）去重不足以消除語言模型的逐字記憶，還需要子串層級（substring-level）去重？若移除重複子串使訓練詞元總數減少，為什麼模型的驗證集表現與下游準確率仍能維持甚至提升？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考兩篇不同網頁（例如兩篇包含相同頁尾免責聲明或相同新聞引文的獨立文章）在文檔層級 Jaccard 相似度下可能低於去重門檻，但該固定長子串在全庫出現數萬次後仍會被模型背誦。另一方面，高頻重複序列會降低有效梯度多樣性並加劇局部過擬合。可從記憶頻率下降十倍、消除超過 4% 驗證集重疊以及提高每步有效資訊密度三個面向推導。</p>
+</details>
+<ol start="2">
+<li><strong>資料混合律外推與逆推混淆矩陣的病態條件</strong>：在 LLMSurgeon（Luo et al., 2026）將資料混合診斷寫成線性逆問題 <span class="math inline">\mathbf{q} = \mathbf{C}\boldsymbol{\pi}</span> 時，為什麼不能直接把領域分類器對生成樣本的預測比例當作預訓練配比估計，而必須估計軟混淆矩陣 <span class="math inline">\mathbf{C}</span> 並求解約束逆問題？如果某些領域在分類特徵空間高度重疊，逆問題的解會發生什麼現象？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>領域分類器本身具有非對稱的誤判率（例如學術論文與技術部落格互相混淆），直接平均分類結果會把系統性誤判混入真實混合比例。透過估計條件機率矩陣 <span class="math inline">C_{ij} = P(\hat{Y}=i \mid Y=j)</span> 並求解 <span class="math inline">\mathbf{C}\boldsymbol{\pi} \approx \mathbf{q}</span> 可校正該偏誤。若 <span class="math inline">\mathbf{C}</span> 的條件數（Condition Number）過大或存在近似線性相依的列向量，逆問題會變得病態（ill-conditioned），取樣雜訊會被放大為 <span class="math inline">\boldsymbol{\pi}</span> 的劇烈震盪。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>靜態品質分類器與模型動態能力邊界的錯位</strong>：DataComp-LM（Li et al., 2024）與 FineWeb-Edu（Penedo et al., 2024）驗證了靜態模型分類器篩選高品質教育文本的效果，但 Zhao et al. (2026) 在多模態以圖思考訓練中發現，樣本效用取決於模型當前的能力狀態：當問題不需呼叫放大工具就能答對時，模型會忽略回傳證據而形成不忠實推理。如何把靜態預訓練過濾升級為隨訓練步數演進的線上課程選樣，仍是尚未收斂的演算法與工程課題。</li>
+<li><strong>微調階段資料選擇中的效用與安全性權衡</strong>：在醫療等高風險領域，大量領域指令資料能提升專業問答能力，但未經篩選的樣本會削弱原有的安全對齊。Shi et al. (2026) 透過控制雙層選樣權重集中度來兼顧能力與安全，然而在數百萬候選樣本池中精確估計樣本級別的邊際安全風險，同時避免篩選過度保守而縮減知識覆蓋率，仍缺乏統一的理論邊界與低成本驗證協議。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>逆問題混合推斷與標籤偏移校準向評測污染審計的遷移</strong>：LLMSurgeon（Luo et al., 2026）透過校準混淆矩陣從黑箱輸出分布反推潛在訓練先驗的思路，可直接遷移至 <a class="wl" href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a> 的語料來源審計，並與 <a class="wl" href="17B_%E5%90%88%E6%88%90%E8%B3%87%E6%96%99%E7%94%9F%E6%88%90%E3%80%81%E6%A8%A1%E5%9E%8B%E5%9D%8D%E7%B8%AE%E8%88%87%E8%87%AA%E8%88%89%E6%93%B4%E5%B1%95%E9%82%8A%E7%95%8C.html">合成資料生成、模型坍縮與自舉擴展邊界</a> 中偵測訓練集是否混入人工生成文本的比例估計問題共享同一套統計架構。</li>
+<li><strong>階層貝氏與雙層選樣對知識治理與可信度賦權的啟發</strong>：Cotter (2025) 同時推斷模型參數與單筆觀測納入機率的階層貝氏框架，以及 Shi et al. (2026) 的雙層樣本加權機制，對應於對異質來源報告進行可信度賦權，可遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a> 中的多來源科學證據篩選與信念聚合。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-deduplicating-training-data-makes-language-models-better2021">1. Deduplicating Training Data Makes Language Models Better（2021）</h4>
+<ul>
+<li>作者與出處：Katherine Lee, Daphne Ippolito, Andrew Nystrom, Chiyuan Zhang, Douglas Eck · <em>ACL (2021)</em></li>
+<li>核心問題：既有語言建模資料集存在大量近似重複樣本與長重複子串，導致模型在無提示生成時超過 1% 的輸出逐字複製訓練集內容。同時，超過 4% 的標準驗證集存在訓練與測試集重疊，使評測結果失真。</li>
+<li>關鍵做法：作者實作精確子串去重與近似文檔去重兩套工具，例如從 C4 語料移除單一出現超過 60,000 次的 61 詞英文句子。實驗顯示去重讓模型逐字輸出訓練文本的頻率下降十倍，並以更少訓練步數達到相同或更高準確率。</li>
+<li>跨領域啟發：本篇確立了去重作為預訓練資料管線基礎步驟的實證依據，其揭露的訓練與測試重疊問題直接銜接至 <a class="wl" href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a>。</li>
+<li>連結：<a href="zotero://select/library/items/R2MZFMGG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.06499" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-survey-on-data-selection-for-language-models2024">2. A Survey on Data Selection for Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Alon Albalak, Yanai Elazar, Sang Michael Xie, Shayne Longpre, Nathan Lambert · <em>arXiv (2024)</em></li>
+<li>核心問題：高品質資料篩選能降低語言模型訓練的算力與碳排成本，但大規模資料實驗昂貴，有效實務長期集中在少數不公開配方的機構。學界缺乏統一分類架構來比較各種候選樣本納入與取樣策略。</li>
+<li>關鍵做法：本文系統梳理語言模型預訓練與微調階段的資料選擇文獻，將現有方法依選擇準則、評分訊號與取樣調度機制分類整理。作者也分析不同領域與模型規模下的計算開銷瓶頸，指出開放基準與可重現實驗的缺口。</li>
+<li>跨領域啟發：整理了資料選擇的評分訊號與取樣調度分類，幫助讀者在進入 FineWeb、DCLM 與資料混合律前先對齊術語與實驗框架。</li>
+<li>連結：<a href="zotero://select/library/items/3W5RIVC5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.16827" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-data-mixing-laws-optimizing-data-mixtures-by-predicting-language-modeling-performance2024">3. Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance（2024）</h4>
+<ul>
+<li>作者與出處：Jiasheng Ye, Peiju Liu, Tianxiang Sun, Jun Zhan, Yunhua Zhou · <em>arXiv (2024)</em></li>
+<li>核心問題：預訓練語料由網頁、學術論文與程式碼等多個領域構成，領域比例大幅影響模型能力，但過去多靠人工試錯或定性啟發調整配比。如何在不重訓大模型的前提下定量預測未見過配比的表現，是配比最佳化的主要難題。</li>
+<li>關鍵做法：作者提出資料混合律（Data Mixing Laws），將模型驗證損失表示為領域混合比例的可擬合函數。進一步將資料混合律與訓練步數、模型大小的縮放律嵌套結合，僅用小規模訓練即可預測大模型最佳配方，在 RedPajama 1B/100B 實驗中追平相當於多跑 48% 步數的預設配比表現。</li>
+<li>跨領域啟發：把領域配比從手工試錯轉化為函數擬合與縮放律外推問題，其參數化方法可與 <a class="wl" href="17B_%E5%90%88%E6%88%90%E8%B3%87%E6%96%99%E7%94%9F%E6%88%90%E3%80%81%E6%A8%A1%E5%9E%8B%E5%9D%8D%E7%B8%AE%E8%88%87%E8%87%AA%E8%88%89%E6%93%B4%E5%B1%95%E9%82%8A%E7%95%8C.html">合成資料生成、模型坍縮與自舉擴展邊界</a> 的真實與合成比例最佳化對照。</li>
+<li>連結：<a href="zotero://select/library/items/4V457XUN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.16952" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-datacomp-lm-in-search-of-the-next-generation-of-training-sets-for-language-models2024">4. DataComp-LM: In search of the next generation of training sets for language models（2024）</h4>
+<ul>
+<li>作者與出處：Jeffrey Li, Alex Fang, Georgios Smyrnis, Maor Ivgi, Matt Jordan · <em>arXiv (2024)</em></li>
+<li>核心問題：預訓練資料工程缺乏可控制變因的標準化實驗平台，研究者難以公正比較去重、過濾與混合策略在不同模型規模下的實際效果。</li>
+<li>關鍵做法：作者推出 DataComp for Language Models（DCLM）試驗床，包含來自 Common Crawl 的 240T 詞元標準化語料、基於 OpenLM 的訓練配方與 53 項下游評測。實驗驗證基於模型的過濾是組裝高品質訓練集的核心，產出的 DCLM-Baseline 讓 7B 模型以 2.6T 詞元在 MMLU 達到 64% 5-shot 準確率，較 MAP-Neo 提高 6.6 個百分點並節省 40% 算力。</li>
+<li>跨領域啟發：將資料集設計本身固定為受控架構下的實驗變因，為評估上游篩選演算法提供了標準基準。</li>
+<li>連結：<a href="zotero://select/library/items/HCKEEX47" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.11794" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-llmsurgeon-diagnosing-data-mixture-of-large-language-models2026">5. LLMSurgeon: Diagnosing Data Mixture of Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Yaxin Luo, Jiacheng Cui, Xiaohan Zhao, Xinyi Shang, Jiacheng Liu · <em>arXiv (2026)</em></li>
+<li>核心問題：商用與部分開源語言模型鮮少揭露預訓練語料的領域配比，使得事後審計資料組成與來源追溯困難。直接統計領域分類器對生成文本的輸出，會被系統性分類誤判扭曲。</li>
+<li>關鍵做法：作者將資料混合診斷（DMS）形式化為標籤偏移假設下的逆問題，提出 LLMSurgeon 框架：先估計校準後的軟混淆矩陣，再求解約束逆問題以校正領域混淆並還原潛在配比。同時建構採用公開配方開源模型的評估套件 LLMScan，驗證該框架能高保真還原預訓練混合比例。</li>
+<li>跨領域啟發：從下游黑箱生成分布逆推上游語料配方，使資料工程與 <a class="wl" href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a> 的來源審計結合。</li>
+<li>連結：<a href="zotero://select/library/items/D7SXFN8T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.30348" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-safety-preserving-medical-llm-fine-tuning-via-bilevel-data-selection2026">6. Safety-Preserving Medical LLM Fine-Tuning via Bilevel Data Selection（2026）</h4>
+<ul>
+<li>作者與出處：Ruoxuan Shi, Sheng Yang, Zhengxing Su, Xiaoyang Hou, Yating Liu · <em>arXiv (2026)</em></li>
+<li>核心問題：將通用語言模型微調至面向病患的醫療應用時，大規模醫療指令資料能增強專業能力，但其中的不安全回應會削弱原有安全對齊。如何在大規模未審查候選池中同時兼顧能力與安全是核心挑戰。</li>
+<li>關鍵做法：作者提出可擴展雙層資料選擇（S-BDS），透過控制選樣權重集中度，在大規模候選池中穩定排序出能提升醫療能力並控制病患風險的樣本。在 Llama 與 Qwen 上結合臨床安全資料與篩選樣本微調後，於 HealthBench 與 PatientSafetyBench 取得比較方法中最高的安全率。</li>
+<li>跨領域啟發：示範了如何把外層安全指標轉寫為內層樣本權重約束，為高風險領域的資料治理提供可操作的選樣機制。</li>
+<li>連結：<a href="zotero://select/library/items/AMQCQ274" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20643" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-31-篇">G5｜本子方向全量文獻泛讀清單（共 31 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 31 篇文獻（含開放存取 PDF 13 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進17-篇">A. 奠基經典、專著與核心演進（17 篇）</h3>
+<ul>
+<li><strong>2021｜Deduplicating Training Data Makes Language Models Better</strong>，Katherine Lee et al.（<em>Annual Meeting of the Association for Computational Linguistics (ACL)</em>，303 引）：ACL 的經典論文：指出主流語料庫中有大量重複片段（單句重複逾 6 萬次），並用精確與近似去重把模型的逐字背誦率降低 10 倍，同時加速收斂。 <a href="zotero://select/library/items/R2MZFMGG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.06499" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Automated Oracle Data Selection Support</strong>，Gregory Gay et al.（<em>IEEE Transactions on Software Engineering</em>，24 引）：Automated Oracle Data Selection Support，Gregory Gay et al.（<em>IEEE TSE</em> 經典論文，研究軟體測試中如何自動選出最能暴露系統缺陷的測試神諭觀察子集，24 引）。 <a href="zotero://select/library/items/ZDIV6UJ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tse.2015.2436920" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Efficient data selection for ASR</strong>，Neil Taylor Kleynhans, Etienne Barnard（<em>Language Resources and Evaluation</em>，7 引）：Efficient data selection for ASR，Neil Taylor Kleynhans, Etienne Barnard（語音辨識領域訓練資料子集篩選的早期實證，探討用資訊量過濾壓縮訓練集規模時，如何維持甚至提升辨識率）。 <a href="zotero://select/library/items/65NEHB32" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10579-014-9285-0" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Data Selection for Neural Networks</strong>，Mirosław Kordos（<em>Schedae Informaticae</em>，5 引）：Data Selection for Neural Networks，Mirosław Kordos（系統比較實例選擇、原型壓縮與雜訊濾除這幾類演算法，對神經網路訓練效率與決策邊界平滑度的影響）。 <a href="zotero://select/library/items/CW6J3NEJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4467/20838476si.16.012.6193" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Training Data Augmentation and Data Selection</strong>，Martin Karafiát et al.（<em>New Era for Robust Speech Recognition</em>，3 引）：Training Data Augmentation and Data Selection，Martin Karafiát et al.（結合資料增強與依目標域相似度做的資料選擇，提升聲學模型在真實高雜訊環境下的穩健泛化能力）。 <a href="zotero://select/library/items/ZIHARGPN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-64680-0_10" rel="noopener">官方連結</a></li>
+<li><strong>2007｜Map-Aided Secondary Data Selection</strong>，Scott D. Berger, William L. Melvin, Gregory A. Showman（<em>2007 IEEE Radar Conference</em>，3 引）：發表於 2007 IEEE Radar Conference，研究結合地圖資訊輔助雷達次級資料篩選（Secondary Data Selection）的方法，屬雷達訊號處理文獻而非語言模型資料工程（未附摘要）。 <a href="zotero://select/library/items/ZMD7DDIT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/radar.2007.374315" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Data Selection With Fewer Words</strong>，Amittai Axelrod et al.（<em>Proceedings of the Tenth Workshop on Statistical Machine Translation</em>，1 引）：發表於統計機器翻譯研討會（WMT 2015）的資料篩選研究，探討如何僅依賴較少詞彙資訊或精簡特徵來篩選高品質平行訓練語料，以降低計算成本並維持翻譯效能。 <a href="zotero://select/library/items/XIIFWRRJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.18653/v1/w15-3003" rel="noopener">官方連結</a></li>
+<li><strong>2023｜DoReMi: Optimizing Data Mixtures Speeds Up Language Model Pretraining</strong>，Sang Michael Xie et al.（<em>arXiv</em>）：提出 DoReMi 方法，先以分組分布穩健最佳化訓練 2.8 億參數代理模型取得領域配比權重，再重抽樣訓練 80 億參數語言模型，在 The Pile 上全面改善困惑度並提升少樣本準確率 6.5 個百分點。 <a href="zotero://select/library/items/MPQ8QCI9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.10429" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Data Selection Criteria</strong>，Unknown Author（<em>Definitions</em>）：登載於 Qeios Definitions 平台的術語詞條，界定研究設計與資料工程流程中「資料篩選準則（Data Selection Criteria）」的定義與使用範圍。 <a href="zotero://select/library/items/B5APV3PG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.32388/quljsc" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Data Selection Media Discourses</strong>，Unknown Author（<em>Global Norms with a Local Face</em>）：收錄於專書 Global Norms with a Local Face 的章節，探討媒體論述分析中的資料篩選（Data Selection）準則與方法論問題，因關鍵詞對應 17A 主題而納入。 <a href="zotero://select/library/items/D3SIHJVP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/9781316771341.011" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Data Selection and Evaluation</strong>，Kipton J. Powell et al.（<em>IUPAC Standards Online</em>）：收錄於 IUPAC 線上標準資料庫的技術規範文件，針對化學與分析實驗數據建立資料篩選準則（Data Selection）與品質評估程序，以確保數據彙編之可靠性。 <a href="zotero://select/library/items/KCG3W8XP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1515/iupac.79.0720" rel="noopener">官方連結</a></li>
+<li><strong>2015｜5. Methodology and data selection</strong>，Unknown Author（<em>Discourse Approaches to Politics, Society and Culture</em>）：收錄於 Discourse Approaches to Politics, Society and Culture 專書第五章，闡述話語分析研究的研究方法論與語料資料篩選原則，因檢索關鍵詞歸入 17A 書目。 <a href="zotero://select/library/items/GTD7X6AT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1075/dapsac.62.05ch5" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Interactive Data Selection</strong>，Adam Aspin（<em>High Impact Data Visualization with Power View, Power Map, and Power BI</em>）：選自 2014 年商業智慧視覺化專書的章節，介紹在 Power View 與 Power BI 等視覺化分析環境中實作互動式資料篩選的操作方法。 <a href="zotero://select/library/items/T4ZZN3K4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4302-6617-4_6" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Smart Data Selection</strong>，Shannon Wigent, Andrea Mazzario（<em>Defense Technical Information Center</em>）：美國國防技術資訊中心（DTIC）技術報告，探討面向國防資訊處理或感測資料分析場景的智慧型資料篩選（Smart Data Selection）架構與自動化過濾原則。 <a href="zotero://select/library/items/Z6458FUF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21236/ada623994" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Data selection</strong>，Unknown Author（<em>Nordic Council of Ministers</em>）：北歐部長理事會（2012）出版報告中的「Data selection」章節，討論統計或實證研究中的資料篩選原則與收錄準則，供資料處理與品質檢核參考。 <a href="zotero://select/library/items/SSQH4UZT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.6027/9789289330183-4-en" rel="noopener">官方連結</a></li>
+<li><strong>2002｜Data Selection and Manipulation</strong>，Robert L. Miller et al.（<em>SPSS for Social Scientists</em>）：選自 2002 年 SPSS 社會科學統計專書的章節，介紹社會科學統計實務中的資料篩選（data selection）與資料前處理操作方法。 <a href="zotero://select/library/items/QKC6QK2D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-0-230-62968-4_5" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Discussion of data selection</strong>，Unknown Author（<em>Chemical Thermodynamics</em>）：收錄於 Chemical Thermodynamics，針對化學熱力學中的資料篩選原則與評估討論加以說明，因關鍵詞對應 17A 資料篩選主題而收入本庫。 <a href="zotero://select/library/items/X29I26Q9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-444-82281-9.50013-1" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻14-篇">B. 2024–2026 近期推進與前沿文獻（14 篇）</h3>
+<ul>
+<li><strong>2025｜Hierarchical Bayesian Data Selection</strong>，Simon L. Cotter（<em>ACM Transactions on Probabilistic Machine Learning</em>，1 引）：提出階層貝氏資料篩選方法，在單一貝氏框架下同時推論模型參數與各筆觀測資料的納入機率信念，自動辨識應排除的異常或受污染資料點並找出各自適配的資料子區域。 <a href="zotero://select/library/items/I86QEGUQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3699721" rel="noopener">官方連結</a></li>
+<li><strong>2026｜LLMSurgeon: Diagnosing Data Mixture of Large Language Models</strong>，Yaxin Luo et al.（<em>arXiv</em>）：正式定義資料配比解剖（Data Mixture Surgery）任務，並提出 LLMSurgeon。只要對目標模型採樣生成文本，就能在預先定義的領域分類樹下，高精準度反推底層預訓練語料的領域分布比例。 <a href="zotero://select/library/items/D7SXFN8T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.30348" rel="noopener">官方連結</a></li>
+<li><strong>2026｜SciGraphSelect: Auditable Scientific Data Selection through Knowledge--Reasoning Graphs</strong>，MiHyeon Kim et al.（<em>arXiv</em>）：SciGraphSelect 將領域知識、可重用推理操作與具參考文獻佐證的關係建構成具型別的知識推理圖譜，再從概念覆蓋度、關係與路徑共同支持度以及方向對齊三個面向為候選文獻評分。設計上在參考端保留豐富關係結構，對候選端證據則採保守處理而不預設關係蘊含，藉此對每筆入選語料暴露可追溯的參考依據。 <a href="zotero://select/library/items/4GHMMD5G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.41280" rel="noopener">官方連結</a></li>
+<li><strong>2026｜LACS: Distribution-Sensitive Label-Agnostic Confidence Selection for Dynamic Data Pruning</strong>，Heejin Choi（<em>arXiv</em>）：作者提出無標籤信心選擇器 LACS，僅依據無符號最大預測信心（無需選擇當下標籤或單樣本梯度），移除高於 log-mean-exp 參考值加邊際的樣本，並推導出在 <span class="math inline">0&lt;\rho&lt;1</span> 時移除比例至多為 <span class="math inline">\rho</span> 且至少保留一樣本的理論界線。在神經網路、語言模型與梯度提升七項任務中，LACS 減少 10% 至 35% 反向傳播活躍列（CIFAR-10 減少 29% 後準確率為 89.77% 對比全量 89.82%），14 個表格資料集的二次提升平均測試誤差由 23.36% 降至 22.96%；作者亦釐清目前神經實作因額外評分前向傳播，反向稀疏尚未直接轉換為實際壁鐘加速。 <a href="zotero://select/library/items/29NXHHIV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.05616" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Safety-Preserving Medical LLM Fine-Tuning via Bilevel Data Selection</strong>，Ruoxuan Shi et al.（<em>arXiv</em>）：提出可擴展雙層資料選擇框架 <code>S-BDS</code>（Scalable Bilevel Data Selection），把「提升臨床醫療能力」與「控制病患端安全風險」建模為雙層最佳化。它透過控制選擇權重集中度（Selection-Weight Concentration），從龐大的未篩檢醫療指令池中穩定挑出既能增進專業能力、又不破壞安全護欄的高價值樣本，再和臨床醫師驗證過的安全資料混合微調。在 Llama 與 Qwen 模型家族上，同時用 <code>HealthBench</code>（臨床能力）與 <code>PatientSafetyBench</code>（病患安全）兩個面向實測，<code>S-BDS</code> 的安全率是所有方法中最高的，分別領先最強基線 4.64 與 3.00 個百分點，醫療專業水準則維持相當。調整安全導向權重，還能平滑控制專業能力與安全性之間的權衡曲線。 <a href="zotero://select/library/items/AMQCQ274" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20643" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Learning to Think with Images Faithfully via Adaptive Data Selection</strong>，Yu Zhao et al.（<em>arXiv</em>）：提出隨模型能力演進而動態對齊的自適應資料選擇（Adaptive Data Selection）管線，有三個部分：（1）持續篩選「只有依賴正確的放大證據，當前模型才答得對」的樣本來訓練，確保放大工具在整個訓練週期都有真實的資訊增益；（2）搭配資料合成管線，自動定位微小物件並建構可驗證的細節問答；（3）引入自適應獎勵（Adaptiveness Reward），在不需要放大的簡單情境明確獎勵不用工具直接作答。這套做法不需要對中間推理過程施加人工監督，就明顯提升工具推理的忠實度，並在視覺搜尋基準刷新 SOTA（<code>V*</code> +11.6%、<code>HR-Bench 4K</code> +7.9%、<code>HR-Bench 8K</code> +9.4%），在多模態幻覺基準上也全面勝過既有 TwI 基線。 <a href="zotero://select/library/items/2IW72TWQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26199" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Offline Behavioral Data Selection</strong>，Shiye Lei, Zhihao Cheng, Dacheng Tao（<em>Proceedings of the 32nd ACM SIGKDD Conference on Knowledge Discovery and Data Mining V.1</em>）：發表於 ACM SIGKDD 2026，在資料篩選與最佳化脈絡下探討離線行為資料選擇（Offline Behavioral Data Selection）問題（未附摘要）。 <a href="zotero://select/library/items/6U3IXE6S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3770854.3780320" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Dolma: an Open Corpus of Three Trillion Tokens for Language Model Pretraining Research</strong>，Luca Soldaini et al.（<em>arXiv</em>）：針對開源大語言模型常缺乏訓練語料與配方細節的研究障礙，建構並開源包含三兆個詞元的英文預訓練語料庫 Dolma，涵蓋網頁、論文、程式碼與書籍等多源文本，並詳述過濾建構流程與分析實驗。 <a href="zotero://select/library/items/5PKFZ4V7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.00159" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Survey on Data Selection for Language Models</strong>，Alon Albalak et al.（<em>arXiv</em>）：系統綜述大語言模型預訓練階段的資料選擇方法，整理如何從龐大文本中篩選候選資料並設計採樣配比策略，以克服網路語料品質參差的問題，在提升訓練效果的同時降低運算與碳足跡成本。 <a href="zotero://select/library/items/3W5RIVC5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.16827" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Data Mixing Laws: Optimizing Data Mixtures by Predicting Language Modeling Performance</strong>，Jiasheng Ye et al.（<em>arXiv</em>）：發現能以函數形式定量預測大語言模型隨預訓練各領域資料配比變化之表現的「資料混合律（Data Mixing Laws）」，並巢狀結合訓練步數與模型規模擴展律，實現僅靠小規模訓練即可最佳化大規模語料配比。 <a href="zotero://select/library/items/4V457XUN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.16952" rel="noopener">官方連結</a></li>
+<li><strong>2024｜DataComp-LM: In search of the next generation of training sets for language models</strong>，Jeffrey Li et al.（<em>arXiv</em>）：推出大型語言模型預訓練資料受控實驗基準 DataComp-LM（DCLM），提供 240 兆詞元語料與 53 項下游評測，並以模型篩選建構 DCLM-Baseline 資料集，使 7B 模型於 2.6 兆詞元上達成 64% MMLU 五樣本準確率。 <a href="zotero://select/library/items/HCKEEX47" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.11794" rel="noopener">官方連結</a></li>
+<li><strong>2024｜The FineWeb Datasets: Decanting the Web for the Finest Text Data at Scale</strong>，Guilherme Penedo et al.（<em>arXiv</em>）：公開自 96 個 Common Crawl 快照萃取與去重篩選的 15 兆詞元預訓練資料集 FineWeb 及完整的消融實驗紀錄，並釋出經教育品質篩選的 1.3 兆詞元 FineWeb-Edu 子集以大幅強化知識類任務表現。 <a href="zotero://select/library/items/7B3MWG9G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.17557" rel="noopener">官方連結</a></li>
+<li><strong>2024｜RedPajama: an Open Dataset for Training Large Language Models</strong>，Maurice Weber et al.（<em>arXiv</em>）：針對開源LLM缺乏資料策展透明度與高品質大規模公開資料的問題，發布復現LLaMA訓練集的RedPajama-V1以及附帶策展分析中繼資料的RedPajama-V2資料集。 <a href="zotero://select/library/items/ZKCHZK3U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.12372" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Advanced Data Selection</strong>，Unknown Author（<em>Beginning Databases with PostgreSQL</em>）：選自 PostgreSQL 資料庫入門專書的章節，介紹關聯式資料庫環境中進階資料篩選（advanced data selection）條件設定與查詢操作技術。 <a href="zotero://select/library/items/4FA6PIAM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4302-0018-5_7" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-c20af2c0">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a><span class="rs">如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。</span></li><li><a href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a></li><li><a href="17B_%E5%90%88%E6%88%90%E8%B3%87%E6%96%99%E7%94%9F%E6%88%90%E3%80%81%E6%A8%A1%E5%9E%8B%E5%9D%8D%E7%B8%AE%E8%88%87%E8%87%AA%E8%88%89%E6%93%B4%E5%B1%95%E9%82%8A%E7%95%8C.html">合成資料生成、模型坍縮與自舉擴展邊界</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>37A｜結構因果模型SCM、Do演算與因果圖發現 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-a8ca982b" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 最優傳輸、計算複雜度與演算法資訊</span>
+<article>
+
+<h1 id="37a結構因果模型scmdo演算與因果圖發現">37A｜結構因果模型SCM、Do演算與因果圖發現</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">因果推論與反事實最優傳輸</a>
+同領域子方向：<a class="wl" href="37B_%E9%81%A9%E9%85%8DWasserstein%E8%B7%9D%E9%9B%A2%E3%80%81%E5%9C%96%E5%9B%A0%E6%9E%9C%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E5%A4%9A%E7%B6%AD%E5%8F%8D%E4%BA%8B%E5%AF%A6%E4%BC%B0%E8%A8%88.html">適配Wasserstein距離、圖因果最優傳輸與多維反事實估計</a>
+跨領域關聯子方向：<a class="wl" href="41A_%E4%BA%8C%E6%AC%A1%E6%8C%87%E6%B4%BEQAP%E3%80%81%E5%9C%96%E5%8C%B9%E9%85%8D%E8%88%87Gromov-Wasserstein%E8%A8%88%E7%AE%97%E7%A1%AC%E5%BA%A6.html">二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</a> · <a class="wl" href="OTD_Gromov-Wasserstein%E8%88%87%E7%95%B0%E6%A7%8B%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%9C%96%E8%AD%9C%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%B0%8D%E9%BD%8A.html">Gromov-Wasserstein與異構概念及圖譜無監督對齊</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M38_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%B7%EF%BC%9A%E5%9B%A0%E6%9E%9C%E5%9C%96%E8%88%87%E5%BE%8C%E9%96%80%E6%BA%96%E5%89%87.html">因果推斷：因果圖與後門準則</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M62_%E5%9B%A0%E6%9E%9C%EF%BC%88Pearl%20%E8%88%87%20Imbens%E2%80%93Rubin%EF%BC%89.html">因果</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M65_%E7%B5%B1%E8%A8%88%E5%8E%9F%E5%85%B8%EF%BC%9ABootstrap%E3%80%81Lasso%E3%80%81%E5%9B%A0%E6%9E%9C%E5%9C%96.html">統計原典：Bootstrap、Lasso、因果圖</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S34_%E7%B5%B1%E8%A8%88%E3%80%81%E5%9B%A0%E6%9E%9C%E8%88%87%E8%A8%88%E7%AE%97%E7%9A%84%E6%AC%8A%E8%A1%A1.html">統計、因果與計算的權衡</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向在 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">因果推論與反事實最優傳輸</a> 中負責建立結構化因果表示的數學基礎，從 Pearl 的結構因果模型（SCM）與圖發現公理出發，向上銜接 <a class="wl" href="37B_%E9%81%A9%E9%85%8DWasserstein%E8%B7%9D%E9%9B%A2%E3%80%81%E5%9C%96%E5%9B%A0%E6%9E%9C%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E5%A4%9A%E7%B6%AD%E5%8F%8D%E4%BA%8B%E5%AF%A6%E4%BC%B0%E8%A8%88.html">適配Wasserstein距離、圖因果最優傳輸與多維反事實估計</a> 中的動態耦合與傳輸幾何。核心脈絡探討如何把有向無環圖 <span class="math inline">G</span> 與結構方程 <span class="math inline">f_i</span> 所規定的干預不變性，轉寫為可度量、可最佳化的分布距離與表示約束。</p>
+</aside>
+<ul>
+<li>核心問題：傳統監督學習與標準最優傳輸（OT）只依賴聯合分布 <span class="math inline">P(X,Y)</span>，在面對分布偏移、未觀測干擾因子（confounders）與干預操作 <span class="math inline">\mathrm{do}(X=x)</span> 時，會因把相關性當成因果機制而失效。即便在古典因果圖模型中，僅靠單純圖拓樸（如馬可夫等價類）也常無法識別兩變數因果方向或精確界定結構方程擾動下的風險邊界，因此需要將因果獨立性假設、表示平衡界與圖約束傳輸結合進統一的數學框架。</li>
+<li>直覺模型：可以把觀察分布想像成從山谷拍到的多張地面照片，單看照片無法分辨哪座山擋住哪座山；介入實驗或結構因果模型則像沿著特定方向推動地塊並觀察陰影變化，藉此區分上游原因與下游結果。當我們要把一個治療組人群映射到對照組人群時，傳統傳輸只看終點是否重合，而因果傳輸要求路徑必須沿著這套地形的先後坡度前進。</li>
+<li>分階段閱讀路線：第一步先讀 Janzing 等人（2014）與 Shalit 等人（2016），分別從資訊幾何因果方向判定與表示空間的 Integral Probability Metric（IPM）泛化界建立問題直覺；第二步讀 Cheridito 與 Eckstein（2025）及 Ehyaei 等人（2025），掌握將有向無環圖 <span class="math inline">G</span> 與結構方程嵌入最優傳輸耦合與分布強健最佳化（DRO）模糊集的核心構造；第三步讀 Nareklishvili 等人（2026）與 Messou 等人（2026），了解如何透過生成式貝氏計算夾逼個體處理效應邊界，以及如何把後門準則與因果分數匹配嵌入深度生成與語言模型架構。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;結構因果模型 SCM 與有向無環圖 G&quot;] --&gt; B[&quot;因果機制獨立性與資訊幾何方向判定&quot;]
+  A --&gt; C[&quot;干預分佈 do(X=x) 與後門準則&quot;]
+  C --&gt; D[&quot;表示平衡界 IPM 與 Wasserstein 距離&quot;]
+  A --&gt; E[&quot;G-因果最優傳輸耦合計畫&quot;]
+  E --&gt; F[&quot;結構方程模糊集與強健最佳化 DRO&quot;]
+  D --&gt; G[&quot;生成式貝氏傳輸與多維反事實界定&quot;]
+  C --&gt; H[&quot;因果分數匹配與圖約束注意力機制&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>結構因果模型與干預運算（Structural Causal Model and do-Calculus）</strong></p>
+<ul>
+<li>直覺理解：把系統拆成一組各自獨立運作的局部物理機制：每個變數只由它的直接父節點與獨立外生雜訊決定，做實驗干預就是把其中一個變數的原本機制拔掉、強行設定成常數，其餘機制維持不變。</li>
+<li>機制或核心表達式：一個 SCM 定義為四元組 <span class="math inline">\mathcal{M} = (U, V, F, P(U))</span>，其中 <span class="math inline">V = \{V_1, \dots, V_d\}</span> 為內生變數，<span class="math inline">U</span> 為獨立外生變數，結構方程為 <span class="math inline">V_i = f_i(\mathrm{PA}_i, U_i)</span>，對應有向無環圖 <span class="math inline">G</span>。依因果馬可夫性質，聯合分布分解為 <span class="math inline">P(V) = \prod_{i=1}^d P(V_i \mid \mathrm{PA}_i)</span>。施行干預 <span class="math inline">\mathrm{do}(V_k = v_k)</span> 會將第 <span class="math inline">k</span> 條方程替換為常數賦值，產生截斷分解 <span class="math inline">P(V \mid \mathrm{do}(V_k = v_k)) = \prod_{i \neq k} P(V_i \mid \mathrm{PA}_i) \mathbf{1}\{V_k = v_k\}</span>；當變數集 <span class="math inline">Z</span> 滿足對 <span class="math inline">(X,Y)</span> 的後門準則時，因果效應可識別為 <span class="math inline">P(Y \mid \mathrm{do}(X=x)) = \sum_z P(Y \mid X=x, Z=z) P(Z=z)</span>。</li>
+<li>能做到什麼，代價是什麼：此架構在 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M38_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%B7%EF%BC%9A%E5%9B%A0%E6%9E%9C%E5%9C%96%E8%88%87%E5%BE%8C%E9%96%80%E6%BA%96%E5%89%87.html">因果推斷：因果圖與後門準則</a> 與 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M62_%E5%9B%A0%E6%9E%9C%EF%BC%88Pearl%20%E8%88%87%20Imbens%E2%80%93Rubin%EF%BC%89.html">因果</a> 中為可識別性的標準起點，但前提是 DAG 結構 <span class="math inline">G</span> 正確且沒有遺漏未觀測共同原因；當真實機構存在循環回饋或高維隱變數時，單靠觀測資料僅能辨識馬可夫等價類。</li>
+</ul>
+</li>
+<li>
+<p><strong>資訊幾何因果推論與機制獨立性（IGCI and Independence of Mechanisms）</strong></p>
+<ul>
+<li>直覺理解：在純觀測資料中，輸入分布是怎麼挑選樣本的，與系統內部如何把輸入轉換成輸出這件事本身彼此無關；如果硬從果反推因，果的邊際分布形狀就會與反向機制的斜率糾纏在一起。</li>
+<li>機制或核心表達式：對於無雜訊確定性映射 <span class="math inline">Y = f(X)</span>，Janzing 等人（2014）將輸入密度 <span class="math inline">p_X</span> 與機制斜率 <span class="math inline">\log |f'|</span> 的獨立性形式化為資訊空間中的正交條件 <span class="math inline">\int \log |f'(x)| p_X(x) dx = \int \log |f'(x)| u_X(x) dx</span>（相對於參考測度 <span class="math inline">u_X</span>）。該條件蘊含相對熵的不對稱關係，並解釋為何半監督學習在預測 <span class="math inline">P(Y \mid X)</span> 時通常無助於利用未標記的 <span class="math inline">p_X</span> 資訊，而在反因果方向 <span class="math inline">X \to Y</span> 下 <span class="math inline">p_Y</span> 卻攜帶關於 <span class="math inline">P(X \mid Y)</span> 的結構資訊。</li>
+<li>能做到什麼，代價是什麼：不需干預實驗即可對雙變數進行方向判定，但強依賴平滑與高信噪比假設，且參考測度 <span class="math inline">u_X, u_Y</span> 的選取會影響判定穩定性，難以直接套用於強隨機雜訊或高度多對一的結構方程。</li>
+</ul>
+</li>
+<li>
+<p><strong>表示平衡與 <span class="math inline">G</span>-因果最優傳輸（Representation Balancing and <span class="math inline">G</span>-Causal Optimal Transport）</strong></p>
+<ul>
+<li>直覺理解：估計個體治療效應時，我們同時要求表徵既能準確預測結果，又讓治療組與對照組在表徵空間看起來分布相近；若進一步考量變數間的因果圖 <span class="math inline">G</span>，就必須限制傳輸耦合不能破壞父節點到子節點的條件依賴順序。</li>
+<li>機制或核心表達式：在表示學習設定下，Shalit 等人（2016）證明個體處理效應期望誤差 <span class="math inline">\epsilon_{\mathrm{PEHE}}(\Phi, h)</span> 受限於事實誤差與治療／對照表徵分佈的積分機率度量（如 Wasserstein 或 MMD）之和：<span class="math inline">\epsilon_{\mathrm{PEHE}} \le 2(\epsilon_F^{t=0} + \epsilon_F^{t=1} + B_\Phi \cdot \mathrm{IPM}_G(p_\Phi^{t=1}, p_\Phi^{t=0}))</span>。進一步在因果模型之間比較距離時，Cheridito 與 Eckstein（2025）定義受限於有向圖 <span class="math inline">G</span> 的因果傳輸計畫集合 <span class="math inline">\Pi_G(\mu, \nu)</span>，要求傳輸核在按拓樸序逐層展開時維持雙因果或因果條件結構：完全圖退化為標準 OT，線性鏈圖對應隨機過程的因果 OT，空圖則連結至因子化 OT 與 Gromov–Wasserstein 距離；同時平均治療效應（ATE）對此 <span class="math inline">G</span>-因果 Wasserstein 距離具備 Lipschitz 連續性。</li>
+<li>能做到什麼，代價是什麼：將 IPM 與圖因果耦合引入估計理論後，可取得跨環境擾動的穩定上界並進行因果模型內插；代價是隨著圖節點數 <span class="math inline">d</span> 增加，條件核約束導致線性規劃或對偶求解的計算複雜度顯著上升，常需透過熵正則化或結構方程鬆弛來近似。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>從完全圖到空圖的 <span class="math inline">G</span>-因果最優傳輸退化行為</strong>：在 Cheridito 與 Eckstein（2025）的 <span class="math inline">G</span>-因果最優傳輸定義中，當底層有向圖 <span class="math inline">G</span> 分別為（1）完全圖、（2）單向線性鏈 <span class="math inline">1 \to 2 \to \dots \to d</span>、（3）無邊的空圖時，容許耦合集 <span class="math inline">\Pi_G(\mu, \nu)</span> 的條件約束各會退化成什麼傳輸問題？這對估計反事實效應的自由度有何意義？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>由因果傳輸核在圖拓樸序上的條件獨立限制切入：在完全圖下所有節點皆相鄰，過去集合包羅其他節點而不施加額外因果條件限制，因此回到經典 Kantorovich 耦合 <span class="math inline">\Pi(\mu, \nu)</span>；在線性鏈圖下，第 <span class="math inline">t</span> 步的聯合耦合僅依賴於 <span class="math inline">(1, \dots, t)</span> 的歷史邊際，對應離散時間隨機過程的因果最優傳輸；在空圖下各座標彼此無因果路徑相連，耦合需分別對齊各座標結構而連結至因子化 OT 與協同最優傳輸（CO-OT）。越稀疏的圖代表容許耦合集合越受結構限制，從而避免把跨非因果方向的誤差混淆進距離度量。</p>
+</details>
+<ol start="2">
+<li><strong>結構方程模糊集與單純圖模糊集在分布強健最佳化中的差異</strong>：為何 Ehyaei 等人（2025）指出，在設計分布強健最佳化（DRO）的模糊集時，只使用因果圖 <span class="math inline">G</span> 的適配或 <span class="math inline">G</span>-因果最優傳輸仍不足以排除不切實際的對抗分布，而必須進一步納入結構方程 <span class="math inline">f_i</span>？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>從模糊集的幾何大小與保守性切入：僅知道 DAG <span class="math inline">G</span> 的條件獨立結構只能限制耦合核的支援依賴關係，但並未限制條件分佈 <span class="math inline">P(V_i \mid \mathrm{PA}_i)</span> 的函數形式與外生雜訊結構；若允許對抗者任意改動條件機制而不受原本結構方程約束，模糊集會包含現實中不可能出現的反事實機制，導致決策過度保守。引入結構因果最優傳輸將擾動綁定於真實 SCM 方程，並可將硬性因果約束改寫為正則懲罰項以換取可解的計算效率。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>圖約束因果傳輸的可計算性與可識別性張力</strong>：在實際問題中，將高維結構方程約束或雙層因果傳輸核納入統計與神經網路目標（如 Ehyaei 等人 2025 的結構因果模糊集，或 Messou 等人 2026 的因果分數匹配 <span class="math inline">\mathcal{O}(d^3)</span> 複雜度）時，精確執行硬性圖約束常導致高計算成本；然而一旦改用正則鬆弛或表示空間巴氏中心對齊（Murakami 等人 2026），鬆弛誤差是否仍能保持嚴格的因果效應辨識上界，目前尚缺緊緻的一般性刻畫。</li>
+<li><strong>潛在空間與大語言模型中的因果投影真實性</strong>：近期工作嘗試將 DAG 約束或後門準則直接編碼進 Transformer 注意力與擴散模型潛在軌跡（如 Messou 等人 2026 的 Backdoor-Adjusted Attention 與 Zhao 2026 的 PertAdapt 正交擾動通道），雖然在合成高階反事實與 OOD 測試指標上呈現提升，但當底層真實資料缺乏明確已知 DAG 或包含未觀測混雜因子時，神經潛在空間學到的線性或正交子空間是否對應真實的 SCM 機制，仍缺乏無監督條件下的嚴格可識別性保證。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>由 <span class="math inline">G</span>-因果耦合遷移至適配傳輸拓樸與多維反事實估計</strong>：本子方向建立的圖條件傳輸計畫集合 <span class="math inline">\Pi_G</span> 與結構方程模糊集，可直接作為 <a class="wl" href="37B_%E9%81%A9%E9%85%8DWasserstein%E8%B7%9D%E9%9B%A2%E3%80%81%E5%9C%96%E5%9B%A0%E6%9E%9C%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E5%A4%9A%E7%B6%AD%E5%8F%8D%E4%BA%8B%E5%AF%A6%E4%BC%B0%E8%A8%88.html">適配Wasserstein距離、圖因果最優傳輸與多維反事實估計</a> 中分析拓樸等價性、動態規劃原理與連續時間隨機控制對偶的有限維幾何雛形，並與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 銜接測度空間上的因果演化。</li>
+<li><strong>從因子化與融合圖對齊遷移至無監督圖譜匹配與計算複雜度</strong>：在空圖與多處理模式對齊下，Cheridito 與 Eckstein（2025）對因子化 OT 與 Gromov–Wasserstein 的歸約，以及 Murakami 等人（2026）將二次配對複雜度降為線性的 Barycentric Fused Gromov–Wasserstein 目標，可直接遷移至 <a class="wl" href="OTD_Gromov-Wasserstein%E8%88%87%E7%95%B0%E6%A7%8B%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%9C%96%E8%AD%9C%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%B0%8D%E9%BD%8A.html">Gromov-Wasserstein與異構概念及圖譜無監督對齊</a> 與 <a class="wl" href="41A_%E4%BA%8C%E6%AC%A1%E6%8C%87%E6%B4%BEQAP%E3%80%81%E5%9C%96%E5%8C%B9%E9%85%8D%E8%88%87Gromov-Wasserstein%E8%A8%88%E7%AE%97%E7%A1%AC%E5%BA%A6.html">二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</a> 中處理大規模異構圖的近似重心求解與鬆弛分析。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-justifying-information-geometric-causal-inference2014">1. Justifying Information-Geometric Causal Inference（2014）</h4>
+<ul>
+<li>作者與出處：Dominik Janzing, Bastian Steudel, Naji Shajarisales, Bernhard Schölkopf · <em>arXiv</em></li>
+<li>核心問題：當僅有雙變數純觀測資料且缺乏實驗干預時，傳統統計相關性與馬可夫性質對稱，無法分辨因果方向。文章檢驗資訊幾何因果推論（IGCI）如何為「原因分布獨立於因果機制」建立嚴格數學定義。</li>
+<li>關鍵做法：論文將輸入邊際密度 <span class="math inline">p_X</span> 與確定性機制對數斜率 <span class="math inline">\log |f'|</span> 的獨立性表述為資訊空間中的正交條件，推導出連接參考測度的相對熵不對稱關係。並進一步證明該獨立性與「半監督學習僅在反因果方向（由果推因）有效」的現象具等價結構。</li>
+<li>跨領域啟發：為因果圖發現提供無需多變數條件獨立檢定即可運作的機制不對稱基礎，對應 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M65_%E7%B5%B1%E8%A8%88%E5%8E%9F%E5%85%B8%EF%BC%9ABootstrap%E3%80%81Lasso%E3%80%81%E5%9B%A0%E6%9E%9C%E5%9C%96.html">統計原典：Bootstrap、Lasso、因果圖</a> 中的結構識別問題。</li>
+<li>連結：<a href="zotero://select/library/items/NHIUT2FR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1402.2499" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-estimating-individual-treatment-effect-generalization-bounds-and-algorithms2016">2. Estimating individual treatment effect: generalization bounds and algorithms（2016）</h4>
+<ul>
+<li>作者與出處：Uri Shalit, Fredrik D. Johansson, David Sontag · <em>arXiv</em></li>
+<li>核心問題：在強可忽略性假設下從觀測資料估計個體處理效應（ITE）時，治療組與對照組共變數分佈不平衡會導致反事實預測出現系統性外推誤差。需釐清表徵空間分佈距離與反事實泛化誤差之間的定量關係。</li>
+<li>關鍵做法：作者提出一套基於表徵映射 <span class="math inline">\Phi</span> 的學習演算法，證明預期 ITE 誤差上界由事實回歸誤差與治療組、對照組誘導分佈之間的積分機率度量（IPM）組成，並給出 Wasserstein 距離與 MMD 的顯式邊界。</li>
+<li>跨領域啟發：將古典潛在結果架構（<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a>）與最優傳輸距離正式接軌，奠定後續使用 Wasserstein 與重心對齊處理多處理因果效應的範式。</li>
+<li>連結：<a href="zotero://select/library/items/6HSGG6HD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.03976" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-optimal-transport-and-wasserstein-distances-for-causal-models2025">3. Optimal transport and Wasserstein distances for causal models（2025）</h4>
+<ul>
+<li>作者與出處：Patrick Cheridito, Stephan Eckstein · <em>Bernoulli</em></li>
+<li>核心問題：標準 Wasserstein 距離忽視變數間的因果序結構，使得隨機過程或結構因果模型的小幅干擾在統計上可能產生過大或錯誤的距離評估。需設計尊重底層有向圖 <span class="math inline">G</span> 的因果傳輸距離。</li>
+<li>關鍵做法：作者提出以有向圖 <span class="math inline">G</span> 刻畫耦合容許條件的 <span class="math inline">G</span>-因果最優傳輸，證明完全圖、線性圖與空圖分別對應標準 OT、時序因果 OT 以及與 CO-OT 與 Gromov–Wasserstein 相關的結構。進而證明平均治療效應對 <span class="math inline">G</span>-因果 Wasserstein 距離具有連續性，並建構因果模型間的幾何內插。</li>
+<li>跨領域啟發：直接作為連接本子方向與 <a class="wl" href="37B_%E9%81%A9%E9%85%8DWasserstein%E8%B7%9D%E9%9B%A2%E3%80%81%E5%9C%96%E5%9B%A0%E6%9E%9C%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E5%A4%9A%E7%B6%AD%E5%8F%8D%E4%BA%8B%E5%AF%A6%E4%BC%B0%E8%A8%88.html">適配Wasserstein距離、圖因果最優傳輸與多維反事實估計</a> 的理論樞紐。</li>
+<li>連結：<a href="zotero://select/library/items/5KCDRZZZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3150/24-bej1773" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-designing-ambiguity-sets-for-distributionally-robust-optimization-using-structural-causal-optimal-transport2025">4. Designing Ambiguity Sets for Distributionally Robust Optimization Using Structural Causal Optimal Transport（2025）</h4>
+<ul>
+<li>作者與出處：Ahmad Reza Ehyaei, Golnoosh Farnadi, Samira Samadi · <em>Proceedings of the AAAI Conference on Artificial Intelligence</em></li>
+<li>核心問題：傳統以適配或 <span class="math inline">G</span>-因果 OT 建構的分布強健最佳化（DRO）模糊集僅利用因果圖拓樸而忽略結構方程，容易納入不符合真實物理機制的對抗分佈而過度保守。同時硬性因果約束在實務最佳化上難以直接求解。</li>
+<li>關鍵做法：提出結構因果最優傳輸及其對應模糊集，將完整 DAG 與結構方程一併編碼進傳輸成本與擾動範圍。為了解決計算瓶頸，作者設計出一種鬆弛版本，以正則化項替代複雜的因果約束，使最佳化問題能高效求解。</li>
+<li>跨領域啟發：將 SCM 嚴格整合進 DRO 穩健推論，對 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S34_%E7%B5%B1%E8%A8%88%E3%80%81%E5%9B%A0%E6%9E%9C%E8%88%87%E8%A8%88%E7%AE%97%E7%9A%84%E6%AC%8A%E8%A1%A1.html">統計、因果與計算的權衡</a> 中模型保守性與可計算性之間的取捨提供具體範例。</li>
+<li>連結：<a href="zotero://select/library/items/XMGBJZ5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1609/aaai.v39i16.33808" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-optimal-transport-for-causal-inference2026">5. Optimal Transport for Causal Inference（2026）</h4>
+<ul>
+<li>作者與出處：Maria Nareklishvili, Nicholas G. Polson, Vadim Sokolov · <em>Elsevier BV</em></li>
+<li>核心問題：在缺少條件獨立或未確認混雜強度下，個體處理效應（ITE）僅能部分識別（partial identification），難以同時對所有凸泛函給出緊緻上下界與穩健統計推論。</li>
+<li>關鍵做法：將因果最優傳輸連接到生成式貝氏計算（GBC）：複合跨治療組的 GBC 生成器得到反事實邊際傳輸映射，共享基礎抽樣選取凸序極小值（保守耦合），對偶反抽樣選取極大值以夾逼所有 ITE 凸泛函。進一步推導傾斜基礎測度的敏感度分析、銳利傾向性箱型界，以及保守泛函的有效影響函數與雙重穩健單步估計量。</li>
+<li>跨領域啟發：把非參數有效影響函數理論（<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a>）與生成式傳輸耦合，提供兼顧部分識別界限與貝氏模擬計算的實作路徑。</li>
+<li>連結：<a href="zotero://select/library/items/CXPP49T7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.7243331" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-large-language-models-for-temporal-sensor-networks-graph-constrained-multi-llm-ensembles-via-structural-causal-models2026">6. Large Language Models for Temporal Sensor Networks: Graph-Constrained Multi-LLM Ensembles via Structural Causal Models（2026）</h4>
+<ul>
+<li>作者與出處：Franck Junior Aboya Messou, Zihan Zhao, Jinhua Chen, Shilong Zhang, Tong Liu · <em>IEEE Vehicular Technology Conference</em></li>
+<li>核心問題：多變量感測時序與大語言模型結合時，模型往往捕捉虛假統計相關而非因果機制，導致高風險情境下的解釋缺乏反事實一致性與可稽核性。</li>
+<li>關鍵做法：提出 Causal Sensor-Language Models（CSLM），包含三項機制：將分數擴散模型推廣至干預分布的因果分數匹配（複雜度 <span class="math inline">O(d^3)</span> 並具收斂性保證）、把 Pearl 後門準則編碼進 Transformer 注意力矩陣的 Backdoor-Adjusted Attention，以及在微調多 LLM 整合時強制滿足反事實一致性的損失函數 CCLT。</li>
+<li>跨領域啟發：示範古典 SCM 與後門準則如何轉化為深度擴散算子與注意力遮罩，呈現 2026 年結構因果建模與多 LLM 系統結合的落地方向。</li>
+<li>連結：<a href="zotero://select/library/items/D95PTI9J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/vtc2026-spring68026.2026.11756800" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-9-篇">G5｜本子方向全量文獻泛讀清單（共 9 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 9 篇文獻（含開放存取 PDF 4 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進3-篇">A. 奠基經典、專著與核心演進（3 篇）</h3>
+<ul>
+<li><strong>2010｜Choosing Optimal Causal Backgrounds for Causal Discovery</strong>，Itxaso Barberia et al.（<em>Quarterly Journal of Experimental Psychology</em>，1 引）：實驗心理學視角：說明人類在探測生成性原因與預防性原因時，會主動挑選低基率或高基率的最優因果背景環境，以最大化因果辨識力。 <a href="zotero://select/library/items/MGTWW6V4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1080/17470211003770904" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Estimating individual treatment effect: generalization bounds and algorithms</strong>，Uri Shalit, Fredrik D. Johansson, David Sontag（<em>arXiv</em>）：在強可忽略性假設下針對觀察資料的個體處理效應（ITE）估計問題，提出學習平衡表徵以拉近實驗組與對照組分佈的演算法，並以標準泛化誤差與積分機率度量（IPM）距離給出期望 ITE 誤差上界。 <a href="zotero://select/library/items/6HSGG6HD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.03976" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Justifying Information-Geometric Causal Inference</strong>，Dominik Janzing et al.（<em>arXiv</em>）：為基於資訊空間正交性的資訊幾何因果推論（IGCI）提供兩種直覺重釋以釐清其獨立性假設，並論證該假設與「半監督與非監督學習僅在由果推因時有效」的假說相通。 <a href="zotero://select/library/items/NHIUT2FR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1402.2499" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻6-篇">B. 2024–2026 近期推進與前沿文獻（6 篇）</h3>
+<ul>
+<li><strong>2025｜Optimal transport and Wasserstein distances for causal models</strong>，Patrick Cheridito, Stephan Eckstein（<em>Bernoulli</em>，8 引）：從時間鏈走向一般因果圖的轉折點（<em>Bernoulli</em>）：把全連接圖（標準 OT）、線性鏈（時間因果 OT）與任意有向圖納入同一個圖適配最優傳輸框架。 <a href="zotero://select/library/items/5KCDRZZZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3150/24-bej1773" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Designing Ambiguity Sets for Distributionally Robust Optimization Using Structural Causal Optimal Transport</strong>，Ahmad Reza Ehyaei, Golnoosh Farnadi, Samira Samadi（<em>Proceedings of the AAAI Conference on Artificial Intelligence</em>，1 引）：結合結構因果模型（SCM）與最優傳輸，構造真實可達的分佈穩健最佳化（DRO）模糊集，緩解傳統 Wasserstein 球過度保守的問題。 <a href="zotero://select/library/items/XMGBJZ5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1609/aaai.v39i16.33808" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Barycentric Fused Gromov-Wasserstein Balancing for Causal Inference under Multiple Treatments</strong>，Yuki Murakami, Takumi Hattori, Kohsuke Kubota（<em>arXiv (Cornell University)</em>）：用重心融合 Gromov–Wasserstein 取代傳統 <span class="math inline">O(K^2)</span> 的成對分佈平衡，在多重同時處置下保住局部近鄰幾何，並降低反事實估計方差。 <a href="zotero://select/library/items/7CWEMFMA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.22024" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Large Language Models for Temporal Sensor Networks: Graph-Constrained Multi-LLM Ensembles via Structural Causal Models</strong>，Franck Junior Aboya Messou et al.（<em>IEEE Vehicular Technology Conference</em>）：提出因果感測器語言模型（CSLM），將 Pearl 結構因果模型融入多 LLM 整合架構以處理時序感測資料，設計因果分數匹配（CSM）、後門調整注意力（BAT）與反事實一致性損失（CCLT）。 <a href="zotero://select/library/items/D95PTI9J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/vtc2026-spring68026.2026.11756800" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Integrating structural causal models into large language models: the PertAdapt framework</strong>，Zihao Zhao（<em>International Conference on Photonic Computing, Algorithms, and Machine Vision (PCAMV)</em>）：提出整合有向無環圖約束的因果適應框架 PertAdapt，於潛空間建構正交解耦擾動通道並以殘差閉環調整邊權重，使大模型在高階反事實干擾下達 86.7% 準確率且 OOD 指標升至 0.832。 <a href="zotero://select/library/items/ZPS92DV7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1117/12.3125695" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Optimal Transport for Causal Inference</strong>，Maria Nareklishvili, Nicholas G. Polson, Vadim Sokolov（<em>Elsevier BV</em>）：將因果推論最優傳輸連結至生成式貝氏計算（GBC），藉串接處理組生成器建構反事實映射並夾逼個體處理效應的凸泛函，再以測度傾斜完成敏感度分析，在中等傾向分數下使估計區間減半。 <a href="zotero://select/library/items/CXPP49T7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.7243331" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-a8ca982b">在地圖上查看</a><div class="rg"><h3>相關<span class="n">9</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">因果推論與反事實最優傳輸</a><span class="rs">經典 Wasserstein 距離的耦合可以偷看未來，也不管因果箭頭的方向。</span></li><li><a href="37B_%E9%81%A9%E9%85%8DWasserstein%E8%B7%9D%E9%9B%A2%E3%80%81%E5%9C%96%E5%9B%A0%E6%9E%9C%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87%E5%A4%9A%E7%B6%AD%E5%8F%8D%E4%BA%8B%E5%AF%A6%E4%BC%B0%E8%A8%88.html">適配Wasserstein距離、圖因果最優傳輸與多維反事實估計</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M38_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E6%96%B7%EF%BC%9A%E5%9B%A0%E6%9E%9C%E5%9C%96%E8%88%87%E5%BE%8C%E9%96%80%E6%BA%96%E5%89%87.html">因果推斷：因果圖與後門準則</a><span class="tag-plan">計劃</span><span class="rs">因果推斷其餘：Pearl, Glymour, Jewell 的 *Primer*；Hernán &amp; Robins 的 *What If* 其餘選…</span></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M62_%E5%9B%A0%E6%9E%9C%EF%BC%88Pearl%20%E8%88%87%20Imbens%E2%80%93Rubin%EF%BC%89.html">因果</a><span class="tag-plan">計劃</span><span class="rs">Pearl，*Causality* 第 1–7 章；Imbens &amp; Rubin 選章（含經濟線原 E46 的因果框架項）</span></li><li><a href="OTD_Gromov-Wasserstein%E8%88%87%E7%95%B0%E6%A7%8B%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%9C%96%E8%AD%9C%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%B0%8D%E9%BD%8A.html">Gromov-Wasserstein與異構概念及圖譜無監督對齊</a></li><li><a href="41A_%E4%BA%8C%E6%AC%A1%E6%8C%87%E6%B4%BEQAP%E3%80%81%E5%9C%96%E5%8C%B9%E9%85%8D%E8%88%87Gromov-Wasserstein%E8%A8%88%E7%AE%97%E7%A1%AC%E5%BA%A6.html">二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M65_%E7%B5%B1%E8%A8%88%E5%8E%9F%E5%85%B8%EF%BC%9ABootstrap%E3%80%81Lasso%E3%80%81%E5%9B%A0%E6%9E%9C%E5%9C%96.html">統計原典：Bootstrap、Lasso、因果圖</a><span class="tag-plan">計劃</span><span class="rs">統計原典：Efron 1979（Bootstrap）、Tibshirani 1996（Lasso）、Pearl 1995（Biometrika）</span></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a><span class="tag-plan">計劃</span><span class="rs">Wasserman 其餘：第 7–8 章（CDF 估計、Bootstrap）、第 9 章其餘、第 11–14 章（Bayes 推論、決策理論、線…</span></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S34_%E7%B5%B1%E8%A8%88%E3%80%81%E5%9B%A0%E6%9E%9C%E8%88%87%E8%A8%88%E7%AE%97%E7%9A%84%E6%AC%8A%E8%A1%A1.html">統計、因果與計算的權衡</a><span class="tag-plan">計劃</span><span class="rs">S3 候選方向，題目到時由學習者選。路線檔註記：主脊 4、1；接經濟的計量</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

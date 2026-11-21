@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>18B｜視覺語言模型VLM、跨模態指令微調與感知對齊 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-cad28a8a" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="18b視覺語言模型vlm跨模態指令微調與感知對齊">18B｜視覺語言模型VLM、跨模態指令微調與感知對齊</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a>
+同領域子方向：<a class="wl" href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a> · <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>
+課程章節：<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a> · <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a> 的感知與語意整合層，承接單模態視覺編碼器與純文字語言模型之間的跨模態對齊問題。演進主線從早期的視覺投影接頭與多任務指令微調（LLaVA 系列），推進到自回歸生圖與編碼預訓練（ANOLE、AIMV2），再到兼顧原生解析度長影片壓縮與理解生成統一架構的 2025–2026 模型（InternVL-U、LLaVA-OneVision-2）。</p>
+</aside>
+<ul>
+<li>核心問題：傳統對比學習編碼器（如 CLIP、SigLIP）只對影像整體語意與文字做全域對齊，容易遺失細粒度空間定位與計數資訊；而早期將凍結視覺塔接上語言模型的拼接方案，在同時處理單圖、多圖、長影片與持續多任務微調時，會面臨詞元預算爆炸、災難性遺忘與基礎語言能力退化。此外，同一個模型若要兼顧高階語意理解與高保真像素生成，表徵空間的抽象不變性與空間細節保留之間存在直接張力。</li>
+<li>直覺模型：可以把跨模態指令微調想像成幫一位只會讀文字的專家配上一副翻譯眼鏡：早期做法只是把整張照片濃縮成幾句話塞進對話框，細節常在轉述中失真。自回歸視覺預訓練與統一架構則改讓這位專家直接逐格臨摹像素塊與文字接龍，並在長影片中依畫面動態密度分配有限的筆記篇幅，避免對靜止畫面重複抄寫、對劇烈動作漏記細節。</li>
+<li>分階段閱讀路線：第一階段先讀 Li et al. (2024)（LLaVA-OneVision）與 Chern et al. (2024)（ANOLE），分別建立「單一模型統整單圖／多圖／影片跨場景遷移」與「原生離散詞元交錯生成」的兩種架構基準。第二階段讀 Fini et al. (2025)（AIMV2）與 Liu et al. (2025)（LLaVA-c），理解多模態自回歸視覺預訓練為何能勝過純對比式編碼器，以及持續視覺指令微調如何抑制任務衝突與基礎模型退化。第三階段讀 Tian et al. (2026)（InternVL-U）、An et al. (2026)（LLaVA-OneVision-2）與 Huang and Wang (2026)（MC-Lens），掌握解耦表徵搭配 MMDiT 的理解生成一體化設計、編碼串流詞元化，以及透過多模態 Jacobian 透鏡檢驗內部概念選擇性存取的可解釋性方法。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;對比視覺對齊與投影接頭 LLaVA 典範&quot;] --&gt; B[&quot;2024 Li et al. LLaVA-OneVision 跨場景遷移&quot;]
+  A --&gt; C[&quot;2024 Chern et al. ANOLE 原生離散交錯生成&quot;]
+  B --&gt; D[&quot;2025 Fini et al. AIMV2 多模態自回歸視覺預訓練&quot;]
+  B --&gt; E[&quot;2025 Liu et al. LLaVA-c 譜感知鞏固與持續微調&quot;]
+  C --&gt; F[&quot;2026 Tian et al. InternVL-U 解耦表徵與 MMDiT 生成頭&quot;]
+  D --&gt; G[&quot;2026 An et al. LLaVA-OneVision-2 串流壓縮與 3D RoPE&quot;]
+  E --&gt; H[&quot;2026 Huang 與 Wang MC-Lens 全局工作空間概念探測&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>多模態自回歸視覺預訓練 (Multimodal Autoregressive Visual Pre-training)</strong></p>
+<ul>
+<li>直覺理解：對比學習只要求模型分辨「這張圖配哪段文字」，模型常偷懶只記住顯著物體而忽略背景與空間關係；自回歸預訓練要求模型像預測下一個字一樣逐塊生成影像像素塊與文字詞元，迫使視覺編碼器保留完整局部幾何。</li>
+<li>機制或核心表達式：AIMV2（Fini et al., 2025）將大型視覺編碼器 <span class="math inline">E_v</span> 與多模態解碼器 <span class="math inline">D_\theta</span> 串接，對影像像素塊序列 <span class="math inline">x = (x_1, \dots, x_M)</span> 與文字詞元序列 <span class="math inline">t = (t_1, \dots, t_N)</span> 聯合最小化負對數似然 <span class="math inline">\mathcal{L}_{\mathrm{AR}} = -\sum_{i=1}^M \log p_\theta(x_i \mid x_{&lt;i}) - \sum_{j=1}^N \log p_\theta(t_j \mid x, t_{&lt;j})</span>。藉由生成式像素塊預測與文字接龍共同約束，AIMV2-3B 在凍結主幹條件下於 ImageNet-1k 達到 <span class="math inline">89.5\%</span> 準確率，並在定位與接地任務上穩定超越 CLIP 與 SigLIP 等對比編碼器。</li>
+<li>能做到什麼，代價是什麼：能為下游 VLM 提供同時具備語意抽象與空間定位能力的通用視覺特徵；代價是預訓練階段需要額外的多模態解碼器進行像素與文字聯合重建，訓練算力高於僅做雙塔特徵點積的對比式方法。</li>
+</ul>
+</li>
+<li>
+<p><strong>編碼串流詞元化與統一時空坐標 (Codec-Stream Tokenization and Shared 3D RoPE)</strong></p>
+<ul>
+<li>直覺理解：固定每秒抽取相同張數的影格，會在畫面靜止時浪費大量詞元、在鏡頭劇變時又漏掉動作；改用影片壓縮串流本身的位元消耗曲線當作事件偵測器，就能把有限的視覺詞元預算集中在真正有資訊變化的時空區域。</li>
+<li>機制或核心表達式：LLaVA-OneVision-2（An et al., 2026）在維持原生解析度的同時於 OneVision-Encoder 引入局部視窗注意力（Windowed Attention）控制計算量，並將壓縮影片視為連續位元成本串流：依位元成本動態劃分自適應時間群組（取代固定 GOP），再以運動殘差線索將顯著空間證據拼裝為緊湊視覺畫布。最後透過共享三維旋轉位置編碼（3D RoPE），將編碼畫布、取樣影格與靜態圖片共同映射至統一的 <span class="math inline">(t, h, w)</span> 時空坐標系。</li>
+<li>能做到什麼，代價是什麼：在固定詞元預算 <span class="math inline">B</span> 下顯著提升長影片壓縮穩定度與動態事件覆蓋率；代價是前處理與編碼管線需緊密耦合視訊編解碼器的位元成本與殘差訊號，並依賴大規模重標註影片語料（約 8M 影片與 4M 空間資料）支撐多尺度對齊。</li>
+</ul>
+</li>
+<li>
+<p><strong>解耦視覺表徵與推理引導生成頭 (Decoupled Visual Representations and CoT-Guided MMDiT)</strong></p>
+<ul>
+<li>直覺理解：「看懂圖」需要對光照與形變不敏感的語意特徵，「畫出圖」卻需要精確的紋理與筆畫坐標。與其強迫單一視覺編碼器同時滿足兩種互相衝突的幾何需求，不如讓語言主幹負責思考與規劃，再把精細視覺生成交給解耦的擴散生成頭。</li>
+<li>機制或核心表達式：相較於 ANOLE（Chern et al., 2024）直接基於 Chameleon 進行全離散自回歸交錯生成，InternVL-U（Tian et al., 2026）在 4B 參數量級上採用模組化與解耦視覺表徵設計：以 MLLM 維持跨模態語意理解，並以專門的 MMDiT（Multimodal Diffusion Transformer）生成頭負責影像合成與編輯。針對文字渲染與科學推理等高語意密度任務，系統在生成前引入思維鏈（CoT）推理合成資料，將抽象使用者意圖先展開為細粒度結構描述再條件化生成頭。</li>
+<li>能做到什麼，代價是什麼：緩和了統一多模態模型中語意理解與美學生成彼此拖累的權衡，讓 4B 規模即可同時執行理解、推理、生成與編輯；代價是系統包含獨立的視覺編解碼與擴散生成路徑，在推論調度上較純離散單流自回歸模型複雜。</li>
+</ul>
+</li>
+<li>
+<p><strong>持續視覺指令微調與全局工作空間探測 (Continual Instruction Tuning and GWT Probing)</strong></p>
+<ul>
+<li>直覺理解：每次教模型新視覺任務就從頭混洗所有舊資料重訓的成本過高，但直接序列微調又會讓模型背下特定指令格式而遺忘通用能力。譜感知整合控制權重更新方向以平衡任務衝突，而概念透鏡則用來檢查模型內部到底是真的在「用」視覺概念還是只做表面文字接龍。</li>
+<li>機制或核心表達式：LLaVA-c（Liu et al., 2025）在持續預訓練與微調階段結合兩項機制：以譜感知鞏固（spectral-aware consolidation）依據梯度或權重奇異譜平衡跨任務學習動態，並加入無監督詢問正則化（unsupervised inquiry regularization）防止對特定指令過擬合而侵蝕基礎模型能力。在內部機制檢驗方面，MC-Lens（Huang and Wang, 2026）借鏡全局工作空間理論（GWT），建構多模態 Jacobian 透鏡將視覺編碼器與語言解碼器的中間狀態投影至解碼器詞彙空間，並以多詞元讀出載體（readout carriers）進行反事實概念干預實驗。</li>
+<li>能做到什麼，代價是什麼：無需每次新增資料集就重頭再練多任務混合模型，且能把內部跨模態選擇性存取從單一詞元延伸到複合概念集合；代價是持續學習仍受限於任務順序敏感度，而 Jacobian 投影屬於一階線性近似，對深層非線性跨模態互動的涵蓋度有限。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何自回歸視覺預訓練能補上對比學習的空間盲區</strong>：CLIP 與 SigLIP 等對比式視覺語言編碼器在大規模圖文檢索上表現良好，為何在 Fini et al. (2025) 的評估中，具備相同或相近參數量的 AIMV2 卻在細粒度定位與多模態理解上勝過對比模型？兩者在訓練目標上導致了什麼表徵差異？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考切入點一：對比損失（InfoNCE）只需計算整張影像的全局摘要向量與整段文字向量的相似度，只要抓住「貓」或「草地」等高顯著語意就能把損失降到很低，容易丟棄局部位置與相對關係。思考切入點二：AIMV2 透過多模態解碼器自回歸預測原始影像像素塊與文字詞元，任何一個影像塊的局部紋理與幾何位置都直接參與梯度更新，迫使編碼器保留密集的空間結構資訊。</p>
+</details>
+<ol start="2">
+<li><strong>統一多模態模型中的離散單流與解耦擴散頭取捨</strong>：比較 ANOLE（Chern et al., 2024）與 InternVL-U（Tian et al., 2026）兩種統一多模態模型的設計哲學：若任務目標從「自由圖文交錯故事生成」切換成「精確科學圖表與文字渲染編輯」，哪一種架構更有優勢，又分別承擔什麼代價？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考切入點一：ANOLE 基於 Chameleon 將影像量化為離散碼本詞元並與文字共享單一自回歸 Transformer，優點是模態交錯極為自然、無需額外擴散頭，但離散 VQ 量化容易損失高頻筆畫與文字細節。思考切入點二：InternVL-U 採用解耦視覺表徵與專門的 MMDiT 生成頭，並搭配 CoT 推理先對高語意密度任務展開結構規劃，因此更適合精確文字渲染與科學推理編輯，代價則是架構需維護雙向編解碼模組與異質採樣流程。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>語意理解不變性與像素生成高保真度之間的表徵衝突</strong>：Tian et al. (2026) 與 Chern et al. (2024) 揭示了統一多模態模型的核心難題：視覺理解傾向丟棄無關像素擾動以提取高階抽象語意，視覺生成與編輯卻要求保留精細空間幾何與材質細節。目前雖有離散自回歸與解耦 MMDiT 兩種路線，但在極輕量級模型上如何用單一共享視覺表徵兼顧高難度科學推理與精確文字渲染，尚未形成標準答案。</li>
+<li><strong>多語系表徵中立性與文化脈絡感知的兩難</strong>：Manea and Libovický (2025) 針對 33 個多語系 VLM 與 23 個基準測試的分析指出，現行對比式多模態訓練強烈偏向「語言中立性」（讓不同語言在跨模態空間收斂至同一語意點），卻往往犧牲了對特定語言社群物件與習俗的「文化感知力」；且三分之二的評測基準仍依賴翻譯導向資料，難以真實衡量跨文化視覺接地能力。</li>
+<li><strong>高解析度長影片詞元壓縮與邊緣裝置即時推論落差</strong>：雖然 LLaVA-OneVision-2（An et al., 2026）透過編碼串流動態分組與視窗注意力緩解固定影格取樣的浪費，Shinde et al. (2025) 的綜述與 Wang et al. (2026) 的解碼方法調查顯示，多模態大模型在邊緣硬體上仍受限於視覺編碼器的記憶體頻寬與自回歸解碼延遲；如何在不重訓主幹的前提下結合推理時平行解碼與動態剪枝達成即時互動，仍是系統層面的持續難題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>感知表徵與具身動作生成及世界模型的直接耦合</strong>：本子方向的跨模態對齊、3D RoPE 時空編碼與解耦 MMDiT 生成架構，直接作為 <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a> 的感知骨幹，決定機器人策略能否將開放詞彙語意精確接地到三維操控動作與物理世界預測。</li>
+<li><strong>跨模態語意協作與演化通訊框架的橋接</strong>：當多模態模型需要將內部視覺概念透過離散詞彙空間（如 MC-Lens 讀出載體）與外部環境或其他模型對齊時，涉及的符號接地與語用約定問題可遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>。</li>
+<li><strong>多模態空間認知在遊戲尋路與語義互動中的應用</strong>：高解析度局部視窗注意力與跨視角圖文遷移能力，可直接輔助 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a> 與 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a> 中的多模態環境狀態評估與具語義約束關卡驗證。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-llava-onevision-easy-visual-task-transfer2024">1. LLaVA-OneVision: Easy Visual Task Transfer（2024）</h4>
+<ul>
+<li>作者與出處：Bo Li, Yuanhan Zhang, Dong Guo, Renrui Zhang, Feng Li · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有開源多模態大模型多針對單圖、多圖或影片其中單一情境分別設計，缺乏跨場景共用的視覺表徵與訓練配方。論文探討單一統一模型在三種視覺情境間同時推進效能邊界並實現能力遷移的可行性。</li>
+<li>關鍵做法：整合 LLaVA-NeXT 在資料、模型與視覺表徵上的經驗建構 LLaVA-OneVision 家族，使其成為第一個同時在單圖、多圖與影片基準上推高開源 LMM 表現的單一模型。實驗顯示系統能從大量影像任務自然遷移出強健的影片理解與跨場景湧現能力。</li>
+<li>跨領域啟發：建立現代開源 VLM 跨視覺情境統一訓練的標準基線，連結單圖指令微調與長時序多模態感知，並為後續 <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a> 提供通用視覺骨幹。</li>
+<li>連結：<a href="zotero://select/library/items/TXA8RJ43" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.03326" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-anole-an-open-autoregressive-native-large-multimodal-models-for-interleaved-image-text-generation2024">2. ANOLE: An Open, Autoregressive, Native Large Multimodal Models for Interleaved Image-Text Generation（2024）</h4>
+<ul>
+<li>作者與出處：Ethan Chern, Jiadi Su, Ma, Yan, Pengfei Liu · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有開源多模態模型多半依賴外接轉接頭將視覺編碼器對齊預訓練 LLM，只能做單模態文字輸出，或必須外掛獨立擴散模型來生圖。論文尋求原生支援圖文交錯自回歸生成的開源路徑。</li>
+<li>關鍵做法：以 Meta AI 的 Chameleon 為基礎提出 ANOLE，設計資料高效且參數高效的微調策略，使模型在不依賴外部擴散模型的情況下進行連貫的原生圖文交錯自回歸生成，並完整開源模型權重、訓練框架與指令微調資料。</li>
+<li>跨領域啟發：示範純離散詞元化與單一自回歸主幹在原生多模態生成上的可行性，成為對比解耦擴散頭架構的重要基準。</li>
+<li>連結：<a href="zotero://select/library/items/UUAWMKUI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.06135" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-multimodal-autoregressive-pre-training-of-large-vision-encoders2025">3. Multimodal Autoregressive Pre-training of Large Vision Encoders（2025）</h4>
+<ul>
+<li>作者與出處：Enrico Fini, Mustafa Shukor, Xiujun Li, Philipp Dufter, Michal Klein · <em>IEEE/CVF CVPR</em></li>
+<li>核心問題：CLIP、SigLIP 等對比式預訓練雖主導 VLM 視覺塔設計，但在細粒度定位與空間接地任務上常受限於全域對齊目標。論文檢驗純自回歸多模態預訓練能否作為更具擴展性的通用視覺編碼器替代方案。</li>
+<li>關鍵做法：提出 AIMV2 視覺編碼器家族，將視覺編碼器配對一個以自回歸方式同時生成原始影像像素塊與文字詞元的多模態解碼器。AIMV2-3B 在凍結主幹下於 ImageNet-1k 達到 89.5% 準確率，並在多項定位、接地與多模態理解評測中穩定超越 CLIP 與 SigLIP。</li>
+<li>跨領域啟發：揭示生成式像素塊預測與語言建模聯合目標對細粒度空間表徵的益處，動搖了對比學習在 VLM 視覺編碼端的主導地位。</li>
+<li>連結：<a href="zotero://select/library/items/7GRDX8HS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.14402" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-llava-c-continual-improved-visual-instruction-tuning2025">4. LLaVA-c: Continual Improved Visual Instruction Tuning（2025）</h4>
+<ul>
+<li>作者與出處：Wenzhuo Liu, Fei Zhu, Haiyang Guo, Longhui Wei, Cheng-Lin Liu · <em>arXiv</em></li>
+<li>核心問題：多任務視覺指令微調需要精細調整資料比例且在擴充新任務時容易產生災難性遺忘；而既有的持續學習方法常因過度擬合特定任務指令格式，導致模型原有的通用對話與基礎能力退化。</li>
+<li>關鍵做法：在 LLaVA-1.5 上提出 LLaVA-c，導入譜感知鞏固（spectral-aware consolidation）以平衡跨任務學習動態，並結合無監督詢問正則化（unsupervised inquiry regularization）抑制對單一指令的過擬合，在持續預訓練與微調基準上兼顧新任務與通用表現。</li>
+<li>跨領域啟發：從參數空間奇異譜與正則化角度處理多模態模型的持續演化問題，可與低秩微調及安全微調退化防禦方法相互參照。</li>
+<li>連結：<a href="zotero://select/library/items/REGPRT93" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.08666" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-internvl-u-democratizing-unified-multimodal-models-for-understanding-reasoning-generation-and-editing2026">5. InternVL-U: Democratizing Unified Multimodal Models for Understanding, Reasoning, Generation and Editing（2026）</h4>
+<ul>
+<li>作者與出處：Changyao Tian, Danni Yang, Guanzhou Chen, Erfei Cui, Zhaokai Wang · <em>arXiv</em></li>
+<li>核心問題：兼顧理解、推理、生成與編輯的統一多模態模型（UMM）長期面臨語意理解與生成保真度難以並存的權衡，且輕量模型在高語意密度的文字渲染與科學繪圖任務上表現受限。</li>
+<li>關鍵做法：提出 4B 參數的 InternVL-U，依循統一脈絡建模與解耦視覺表徵的模組化設計，將 MLLM 與專門的 MMDiT 視覺生成頭整合；並建立針對高語意密度任務的資料合成管線，利用思維鏈（CoT）推理對齊抽象使用者意圖與細粒度視覺生成細節。</li>
+<li>跨領域啟發：展示以推理為核心的資料合成結合解耦擴散頭如何在輕量參數規模下平衡理解與生成，與 <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a> 中的擴散 Transformer 主幹高度共振。</li>
+<li>連結：<a href="zotero://select/library/items/Q7USMDCD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.09877" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-llava-onevision-2-towards-next-generation-perceptual-intelligence2026">6. LLaVA-OneVision-2: Towards Next-Generation Perceptual Intelligence（2026）</h4>
+<ul>
+<li>作者與出處：Xiang An, Yin Xie, Feilong Tang, Yunyao Yan, Huajie Tan · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有影片 VLM 採用固定間隔影格取樣或固定 GOP 切分，容易在長影片有限詞元預算下對冗餘背景過度分配算力、對動態事件壓縮失真，且影像與影片之間缺乏一致的原生解析度時空編碼。</li>
+<li>關鍵做法：推出 LLaVA-OneVision-2，於 OneVision-Encoder 引入視窗注意力維持原生解析度計算效率，並以編碼串流詞元化依壓縮影片位元成本動態決定時間分組、以運動殘差挑選顯著空間區塊填入畫布，再透過共享 3D RoPE 統一畫布、影格與影像的時空坐標系，輔以約 8M 影片與 4M 空間資料訓練。</li>
+<li>跨領域啟發：把視訊壓縮底層的位元成本與運動殘差轉化為注意力詞元預算分配器，是系統工程視角與多模態位置幾何結合的代表案例。</li>
+<li>連結：<a href="zotero://select/library/items/XMU3T8D6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.25979" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-43-篇">G5｜本子方向全量文獻泛讀清單（共 43 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 43 篇文獻（含開放存取 PDF 18 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進12-篇">A. 奠基經典、專著與核心演進（12 篇）</h3>
+<ul>
+<li><strong>2023｜Image as a Foreign Language: BEIT Pretraining for Vision and Vision-Language Tasks</strong>，Wenhui Wang et al.（<em>2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>，577 引）：CVPR 高引用論文（BEiT-3）：把影像視為外語詞元，用統一的遮罩建模同時訓練單模態視覺與跨模態圖文理解的主幹。 <a href="zotero://select/library/items/Q5BEDQMC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/cvpr52729.2023.01838" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Language Features Matter: Effective Language Representations for Vision-Language Tasks</strong>，Andrea Burns et al.（<em>2019 IEEE/CVF International Conference on Computer Vision (ICCV)</em>，14 引）：Language Features Matter: Effective Language Representations for Vision-Language Tasks，Andrea Burns et al.（ICCV 論文：用實驗分析詞嵌入與語言編碼器的選擇如何影響視覺定位與圖文檢索的上限，14 引）。 <a href="zotero://select/library/items/8MJH5N48" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/iccv.2019.00757" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Toward Building General Foundation Models for Language, Vision, and Vision-Language Understanding Tasks</strong>，Xinsong Zhang et al.（<em>Findings of the Association for Computational Linguistics: EMNLP 2023</em>，13 引）：發表於 Findings of EMNLP 2023 的多模態基礎模型研究，探討如何建構能同時兼顧純語言、純視覺及跨模態視覺語言理解任務的通用型基礎模型架構。 <a href="zotero://select/library/items/KD7VKD5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.18653/v1/2023.findings-emnlp.40" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Accelerating Vision-Language Pretraining with Free Language Modeling</strong>，Teng Wang et al.（<em>2023 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>，9 引）：發表於 CVPR 2023，針對視覺語言預訓練的計算效率問題，探討利用自由語言建模（Free Language Modeling）機制加速跨模態預訓練流程（未附摘要）。 <a href="zotero://select/library/items/6BGKTBTH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/cvpr52729.2023.02218" rel="noopener">官方連結</a></li>
+<li><strong>2022｜TVLT: Textless Vision-Language Transformer</strong>，Zineng Tang et al.（<em>Advances in Neural Information Processing Systems 35</em>，4 引）：發表於 NeurIPS 2022 的多模態表徵學習研究，提出不依賴文字分詞器的無文字視覺語言 Transformer（TVLT），直接從原始視覺與音訊訊號學習跨模態聯合表徵。 <a href="zotero://select/library/items/M5DGRGP2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.52202/068431-0699" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Vision-Language Assisted Attribute Learning</strong>，Kongming Liang et al.（<em>2023 8th IEEE International Conference on Network Intelligence and Digital Content (IC-NIDC)</em>，1 引）：發表於 IEEE IC-NIDC 2023，研究利用視覺語言模型（VLM）輔助視覺屬性學習的方法（未附摘要）。 <a href="zotero://select/library/items/U36ABFP7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/ic-nidc59918.2023.10390701" rel="noopener">官方連結</a></li>
+<li><strong>2002｜Language, Vision and Music</strong>，Unknown Author（<em>Advances in Consciousness Research</em>，1 引）：收錄於 Advances in Consciousness Research 的跨模態認知論文集，探討語言、視覺與音樂三種認知模態在階層組織、遞迴性、自指、歧義性與系統性上的共通結構與多模態建模可能。 <a href="zotero://select/library/items/PMHBCSTR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1075/aicr.35" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Visual Instruction Tuning</strong>，Haotian Liu et al.（<em>arXiv</em>）：提出視覺指令微調與多模態模型 LLaVA，利用純文字 GPT-4 生成圖文指令資料並端對端訓練連接視覺編碼器與語言模型，在合成多模態指令集取得相對於 GPT-4 的 85.1% 評分。 <a href="zotero://select/library/items/9TGVR9HJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.08485" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Flamingo: a Visual Language Model for Few-Shot Learning</strong>，Jean-Baptiste Alayrac et al.（<em>arXiv</em>）：提出視覺語言模型家族 Flamingo，透過架構橋接預訓練視覺與語言模型以處理任意交錯的圖文與影片序列，經大規模網路語料訓練後在多種影像與影片任務展現上下文少樣本學習能力。 <a href="zotero://select/library/items/8R4XBZFR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2204.14198" rel="noopener">官方連結</a></li>
+<li><strong>2022｜AudioLM: a Language Modeling Approach to Audio Generation</strong>，Zalán Borsos et al.（<em>arXiv</em>）：提出結合雙重離散標記化方案的音訊生成架構 AudioLM，同時利用預訓練遮罩模型捕捉長期結構與神經音訊編解碼器維持合成品質，無需轉錄即可從原始波形生成連貫語音延續。 <a href="zotero://select/library/items/DNCI9E49" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2209.03143" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Robust Speech Recognition via Large-Scale Weak Supervision</strong>，Alec Radford et al.（<em>arXiv</em>）：以高達 68 萬小時的網路多語言與多任務弱監督音訊轉錄資料訓練語音辨識系統，模型在無微調的零樣本遷移下即具良好泛化表現，準確度與穩健性接近人類水準並開源模型與推論程式碼。 <a href="zotero://select/library/items/VA58HHH4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.04356" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Learning Transferable Visual Models From Natural Language Supervision</strong>，Alec Radford et al.（<em>arXiv</em>）：利用網際網路收集的 4 億筆影像與文本配對進行對比預訓練（預測圖片與說明文字的配對關係），使視覺模型得以透過自然語言描述在超過 30 項下游電腦視覺基準上實現零樣本遷移。 <a href="zotero://select/library/items/QS85J474" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.00020" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻31-篇">B. 2024–2026 近期推進與前沿文獻（31 篇）</h3>
+<ul>
+<li><strong>2024｜Vision-Language Models for Vision Tasks: A Survey</strong>，Jingyi Zhang et al.（<em>IEEE Transactions on Pattern Analysis and Machine Intelligence</em>，1054 引）：<em>IEEE TPAMI</em> 上引用上千的綜述：系統整理視覺語言預訓練範式、下游視覺檢測分割的遷移，以及知識蒸餾。 <a href="zotero://select/library/items/XHDQBH89" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tpami.2024.3369699" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Multitask Vision-Language Prompt Tuning</strong>，Sheng Shen et al.（<em>2024 IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)</em>，56 引）：Multitask Vision-Language Prompt Tuning，Sheng Shen et al.（WACV：探索跨任務共享知識的多工視覺語言提示微調，用很小的參數開銷適配多種下游視覺任務，56 引）。 <a href="zotero://select/library/items/XS9UB23X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/wacv57701.2024.00556" rel="noopener">官方連結</a></li>
+<li><strong>2024｜LLaVA-OneVision: Easy Visual Task Transfer</strong>，Bo Li et al.（<em>arXiv (Cornell University)</em>，45 引）：LLaVA-OneVision: Easy Visual Task Transfer，Bo Li et al.（首個在單一開源多模態模型內同時提升單圖、多圖與影片理解表現的代表作，並展現跨場景視覺任務的湧現遷移，45 引）。 <a href="zotero://select/library/items/TXA8RJ43" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.03326" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Survey on Efficient Vision-Language Models</strong>，Gaurav Shinde et al.（<em>Wiley Interdisciplinary Reviews Data Mining and Knowledge Discovery</em>，28 引）：A Survey on Efficient Vision-Language Models，Gaurav Shinde et al.（盤點面向邊緣與資源受限設備的 VLM 視覺 Token 壓縮、輕量投影架構、量化與蒸餾技術，28 引）。 <a href="zotero://select/library/items/6GDEXPT4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.09724" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Multimodal Autoregressive Pre-training of Large Vision Encoders</strong>，Enrico Fini et al.（<em>IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings - IEEE Computer Society Conference on Computer Vision and Pattern Recognition/Proceedings</em>，24 引）：Multimodal Autoregressive Pre-training of Large Vision Encoders，Enrico Fini et al.（CVPR <code>AIMv2</code>：把視覺編碼器配上多模態自迴歸解碼器，同步預測影像區塊與文字詞元，用很簡單的預訓練流程得到頂尖的通用視覺表徵，24 引）。 <a href="zotero://select/library/items/7GRDX8HS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.14402" rel="noopener">官方連結</a></li>
+<li><strong>2025｜DC-CLIP: Multilingual CLIP Compression via vision-language distillation and vision-language alignment</strong>，Wenbo Zhang et al.（<em>Pattern Recognition</em>，10 引）：發表於 Pattern Recognition，提出 DC-CLIP，透過視覺語言蒸餾與跨模態對齊方法壓縮多語言 CLIP 模型，對應 18B 視覺語言模型方向。 <a href="zotero://select/library/items/ZC5BBWMI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.patcog.2025.111547" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Learning Language Prompt for Vision-Language Tracking</strong>，Chengao Zong et al.（<em>IEEE Transactions on Circuits and Systems for Video Technology</em>，10 引）：發表於《IEEE Transactions on Circuits and Systems for Video Technology》（2025），研究透過學習語言提示詞（language prompt）來輔助視覺語言目標追蹤任務（未附摘要）。 <a href="zotero://select/library/items/NKEHCHFD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tcsvt.2025.3557053" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Debiasing vision-language models for vision tasks: a survey</strong>，Beier Zhu, Hanwang Zhang（<em>Frontiers of Computer Science</em>，9 引）：發表於 2025 年《Frontiers of Computer Science》的綜述論文，系統回顧在各類視覺下游任務中對視覺語言模型（VLM）進行去偏（debiasing）的方法與研究現況。 <a href="zotero://select/library/items/HQX3HRK2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s11704-024-40051-3" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Moshi: a speech-text foundation model for real-time dialogue</strong>，Alexandre Défossez et al.（<em>arXiv (Cornell University)</em>，9 引）：提出全雙工語音文本基礎模型Moshi，將口語對話直接建模為語音到語音生成，以解決傳統級聯系統延遲高、非語言情感資訊遺失與無法處理插話重疊的問題。 <a href="zotero://select/library/items/T3UHUHHJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.00037" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Vision language models in ophthalmology</strong>，Gilbert Lim, Kabilan Elangovan, Liyuan Jin（<em>Current Opinion in Ophthalmology</em>，8 引）：綜述視覺語言模型（VLM）在眼科的應用進展，涵蓋同時融合血管造影、光學同調斷層掃描、眼底攝影等影像與電子病歷自由文本的技術演進與臨床潛力。 <a href="zotero://select/library/items/M7R7CSC7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1097/icu.0000000000001089" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Towards Better Vision-Inspired Vision-Language Models</strong>，Yun-Hao Cao et al.（<em>2024 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)</em>，8 引）：發表於 CVPR 2024，聚焦視覺語言模型（VLM）的感知與對齊設計，探討以視覺機制啟發的改進方案來提升 VLM 表現（未附摘要）。 <a href="zotero://select/library/items/DESDCKQU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/cvpr52733.2024.01285" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Large Vision-Language Models</strong>，Unknown Author（<em>Advances in Computer Vision and Pattern Recognition</em>，2 引）：以專書的篇幅統整大型視覺語言模型的視覺編碼、跨模態投影對齊、指令微調、多模態強化學習後訓練與高維感知評測體系，並梳理從感知理解走向具身行動的演進脈絡。 <a href="zotero://select/library/items/FKD44IND" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-94969-2" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Data-Driven Vision-Language Models for Remote Sensing: A Survey</strong>，Yue Zhou et al.（<em>IEEE Geoscience and Remote Sensing Magazine, vol. 14, no. 5, pp. 232-267, Oct. 2026</em>，1 引）：從資料驅動（Data-Driven）的角度系統盤點遙測 VLM 的圖文對構建、合成指令生成、跨解析度對齊與參數高效適配策略，歸納垂直科學領域落地時最主要的資料工程原則。 <a href="zotero://select/library/items/DP4IT882" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31304" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Smart Vision-Language Reasoners</strong>，Denisa Olteanu Roberts, Lucas Roberts（<em>2025 IEEE International Conference on Data Mining Workshops (ICDMW)</em>，1 引）：發表於 ICDMW 2025，在視覺語言模型（VLM）的跨模態推理脈絡下，探討智能視覺語言推理器的架構與設計（未附摘要）。 <a href="zotero://select/library/items/ASS5NPPK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/icdmw69685.2025.00168" rel="noopener">官方連結</a></li>
+<li><strong>2024｜ANOLE: An Open, Autoregressive, Native Large Multimodal Models for Interleaved Image-Text Generation</strong>，Ethan Chern et al.（<em>arXiv (Cornell University)</em>，1 引）：基於 Meta AI 的 Chameleon 架構透過資料與參數高效微調建構開源原生自迴歸多模態大模型 Anole，無須外接擴散模型即可支援圖文交錯生成，並公開模型權重、訓練框架與指令微調資料。 <a href="zotero://select/library/items/UUAWMKUI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.06135" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Watermarking Vision-Language Models</strong>，Shan Wan et al.（<em>Proceedings of the 6th ACM International Conference on Multimedia in Asia</em>，1 引）：發表於 ACM MMAsia 2024，探討適用於視覺語言模型（VLM）的浮水印（watermarking）方法（未附摘要）。 <a href="zotero://select/library/items/FS432JGT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3696409.3700483" rel="noopener">官方連結</a></li>
+<li><strong>2026｜InternVL-U: Democratizing Unified Multimodal Models for Understanding, Reasoning, Generation and Editing</strong>，Changyao Tian et al.（<em>arXiv</em>）：InternVL-U: Democratizing Unified Multimodal Models for Understanding, Reasoning, Generation and Editing，Changyao Tian et al.（只用 4B 參數，結合解耦視覺表徵與統一上下文建模，緩解多模態模型在高層語意理解與精細影像生成編輯之間的固有取捨）。 <a href="zotero://select/library/items/Q7USMDCD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.09877" rel="noopener">官方連結</a></li>
+<li><strong>2026｜LLaVA-OneVision-2: Towards Next-Generation Perceptual Intelligence</strong>，Xiang An et al.（<em>arXiv (Cornell University)</em>）：LLaVA-OneVision-2: Towards Next-Generation Perceptual Intelligence，Xiang An et al.（引入原生解析度視窗注意力與編解碼位元流詞元化 Codec-Stream Tokenization，依視訊壓縮位元的動態自適應分配感知計算）。 <a href="zotero://select/library/items/XMU3T8D6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.25979" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Beyond Tokens: A Survey on Decoding Methods for Large Language and Vision-Language Models</strong>，Haoran Wang et al.（<em>arXiv</em>）：綜述大型語言模型與大型視覺語言模型的推論期解碼方法，系統梳理引導 token 選取、序列層級生成與並行解碼加速三大新興範式，並分析當前技術挑戰與未來應用方向。 <a href="zotero://select/library/items/5QRHQND8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.14797" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Thinking in Streams: Proactive Spatial Reasoning with Vision-Language Models</strong>，Junyoung Hong et al.（<em>arXiv</em>）：作者建構涵蓋物體、攝影機與場景三大類共九項任務的基準 ProSpace-Bench 與訓練集 ProSpace-Train，並提出 ProSpace-VLM。該模型從傳入影格因果估計顯式幾何編碼並注入 VLM 中間層，直接複用現有 KV 快取作為空間記憶，搭配空間詞元選擇以維持串流效率，在及時回應與正確棄權表現上均優於微調基線。 <a href="zotero://select/library/items/4A6C5I25" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25865" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Probing the &quot;Conscious&quot; Mind: Selective Access and Global Workspace in Vision-Language Models</strong>，Jiahao Huang, Jun Wang（<em>arXiv</em>）：提出多模態雅可比透鏡 <code>MC-Lens</code>（Multimodal Concept Lens），把視覺編碼器與語言解碼器的中間層狀態，統一投影到以解碼器詞彙表錨定的共享語意空間，並把讀出載體（Readout Carriers）從單一名稱詞元擴展為詞元集合，以支援精確的內部概念反事實干預。有四項實證發現：（1）可及性與選擇性提取：中間層同時編碼豐富的多模態概念，並隨任務查詢動態地選擇性提取；（2）下游因果參與：反事實干預證實，被提取的概念確實參與下游推理計算；（3）發育時序分離：作者提出兩項 J 空間指標，比傳統的隱藏態餘弦相似度更能清楚追蹤跨模態對齊的演化，並發現在受控訓練過程中，可靠的選擇性提取比原始概念可讀性更晚發育成熟；（4）不同 VLM 家族與參數量都呈現一致的查詢依賴選擇性與跨任務干預規律。 <a href="zotero://select/library/items/I5G72KGT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26590" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Vision-Language Navigation</strong>，Yen-Ling Kuo（<em>Encyclopedia of GIS</em>）：收錄於 2026 年《Encyclopedia of GIS》的詞條，介紹結合視覺感知與自然語言指令的「視覺語言導航（Vision-Language Navigation）」任務定義與跨模態研究範疇。 <a href="zotero://select/library/items/W5K36DX9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-23519-6_1665-1" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Exploring Vision-Language Models</strong>，Bharath Kumar Bolla, Kalpa Subbaiah, Sashi Kiran Kaata（<em>Large Language Model Recipes</em>）：選自 2026 年《Large Language Model Recipes》的章節，介紹視覺語言模型（VLM）的跨模態架構設計、指令微調流程以及多模態感知對齊實務應用。 <a href="zotero://select/library/items/UF8QD5B5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/979-8-8688-2607-8_14" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Foundation of vision-language models</strong>，Yingchao Zhang, Cheng Liu（<em>Computer Vision and AI in Structural Health Monitoring and Structural Engineering</em>）：收錄於結構健康監測與結構工程 AI 專書，介紹視覺語言模型（VLM）的基礎架構與跨模態對齊原理，對應 18B 視覺語言模型主題。 <a href="zotero://select/library/items/9GP9NXZ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-443-45022-8.00006-1" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Mitigating Vision-Text Order Bias in Vision-Language Models</strong>，Weilin Gan et al.（<em>2026 IEEE/CVF Conference on Computer Vision and Pattern Recognition- FINDINGS Track (CVPRF)</em>）：發表於 CVPR 2026 Findings，探討並緩解視覺語言模型（VLM）在處理視覺與文字輸入順序時出現的順序偏差問題（未附摘要）。 <a href="zotero://select/library/items/D23C935A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/cvprf71909.2026.00925" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Vision-Language Models</strong>，Aimei Yang（<em>AI-Powered Communication Research</em>）：收錄於《AI-Powered Communication Research》（2026）的章節，介紹視覺語言模型（VLM）的基礎架構與運作方式，並探討其在人工智慧驅動傳播研究中的應用。 <a href="zotero://select/library/items/2873XF4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781003680758-10" rel="noopener">官方連結</a></li>
+<li><strong>2025｜LLaVA-c: Continual Improved Visual Instruction Tuning</strong>，Wenzhuo Liu et al.（<em>arXiv</em>）：針對多任務視覺指令微調擴充困難與既有持續學習易使基礎模型退化的問題，在 LLaVA-1.5 上提出結合譜感知鞏固與無監督查詢機制的 LLaVA-c 方法，以在增量學習新任務時維持任務平衡與通用能力。 <a href="zotero://select/library/items/REGPRT93" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.08666" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Multilingual Vision-Language Models, A Survey</strong>，Andrei-Alexandru Manea, Jindřich Libovický（<em>arXiv</em>）：這篇綜述檢視 33 個多語言視覺語言模型與 23 項評測基準，分析對比學習偏好的跨語言中性表徵與文化感知能力之間的張力，並指出多數基準偏重翻譯語意一致而與訓練目標存在落差。 <a href="zotero://select/library/items/G5SBPWQ5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.22123" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Unified Generative Vision-Language Understanding</strong>，Jayden Carter, Arielle Goldstein, Jannat Roy（<em>MDPI AG</em>）：提出名為 GSEM 的生成式語意嵌入模型，捨棄預設類別架構並透過統一生成策略建立共享的語意與視覺嵌入空間，將語言表徵直接接地至視覺感知，在低資源與多語言物件語意預測基準上超越既有基線。 <a href="zotero://select/library/items/U4A7I6PD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.20944/preprints202411.2316.v1" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Generative vision-language summarization</strong>，Tiezheng Yu（<em>The Hong Kong University of Science and Technology Library</em>）：香港科技大學學位論文，研究生成式視覺語言摘要任務，探討如何對齊跨模態視覺與文字表徵並生成兼具資訊精確度與語意連貫性的多模態摘要。 <a href="zotero://select/library/items/UM24RTJ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.14711/thesis-991013248659103412" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Foundation Vision-Language models</strong>，Hugo Laurençon（<em>Agence Bibliographique de l'Enseignement Supérieur</em>）：博士論文系統探討將大型語言模型延伸至影像理解的基礎視覺語言模型（VLM），分析其在網頁截圖轉程式碼、自主網頁導航與文件摘要等應用，以及模型建構流程中的關鍵設計議題。 <a href="zotero://select/library/items/STFAAQUT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.70675/ec0311a0zb6a4z4249zb9fbz01bf51a02c7c" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-cad28a8a">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a><span class="rs">這個領域把看懂物理世界（多模態感知）和在世界中行動並承擔後果（序貫強化學習）合成一個閉環智能體。</span></li><li><a href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a></li><li><a href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a><span class="tag-plan">計劃</span><span class="rs">AI 與尋路（Millington 選章；Red Blob Games 的 A*）</span></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a><span class="tag-plan">計劃</span><span class="rs">選讀：程序生成（Shaker, Togelius, Nelson 選章；Togelius 等 2011）</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

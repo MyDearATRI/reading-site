@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>06D｜神經切線核NTK、平均場極限與損失地貌動力學 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-7291300c" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="06d神經切線核ntk平均場極限與損失地貌動力學">06D｜神經切線核NTK、平均場極限與損失地貌動力學</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a>
+同領域子方向：<a class="wl" href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a> · <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> · <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> 的理論核心，處理有限寬度神經網路在梯度下降下的表徵與損失地貌演化。主線從無限寬度的神經切線核（NTK）線性化與統計物理的動力學平均場理論（DMFT）出發，追蹤理論在交叉熵分類、穩定性邊緣（EoS）及關聯記憶動力學上的失效邊界與修正條件。</p>
+</aside>
+<ul>
+<li>核心問題：傳統學習理論將寬網路在梯度流下的訓練簡化為核迴歸，假設經驗 NTK 在整個訓練過程中固定不變。然而，有限寬度網路在實際學習率下會出現特徵學習與譜對齊，而無正則化的交叉熵分類訓練在時間趨近無限大時會使參數與經驗 NTK 發散，令靜態核近似與單純的靜態平均場平衡分析失去效力。</li>
+<li>直覺模型：無限寬網路如同在極平緩的碗底用極小步伐移動，各方向曲率幾乎不變，只靠初始地形就決定終點；有限寬度與大步長則像沿著陡峭峽谷邊緣折返下山，每一步的反彈都會把步伐重新對齊峽谷走向。動力學平均場理論則把高維耦合神經元的集體拉扯，濃縮成單一神經元在有色雜訊與自我記憶回授下的隨機軌跡。</li>
+<li>分階段閱讀路線：建議分三階段閱讀：先讀 Vollhardt et al. (2011) 與 Liu et al. (2025)，前者建立動力學平均場理論的自洽方程基礎，後者檢驗 NTK 與核迴歸等價定理在實務深度變化上的誤差；接著讀 Yu et al. (2025) 與 Jiang et al. (2025)，掌握交叉熵過擬合導致經驗 NTK 發散的證明，以及穩定性邊緣（EoS）中 NTK 特徵向量對齊目標的機制；最後讀 Plenk et al. (2026) 與 Callegaris 與 Kabashima (2026)，了解恢復分類惰性訓練的正則化條件，以及生成泛函 DMFT 在分塊相關聯想記憶上的最新推進。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;無限寬度極限與靜態 NTK 線性化&quot;] --&gt; B[&quot;交叉熵過擬合與有限寬參數發散&quot;]
+  A --&gt; C[&quot;實務等價性偏差檢驗&quot;]
+  B --&gt; D[&quot;參數正則化與非退化目標恢復惰性區間&quot;]
+  C --&gt; E[&quot;穩定性邊緣 EoS 下的 NTK 特徵向量對齊&quot;]
+  E --&gt; F[&quot;蒸餾 NTK 低有效秩降維計算&quot;]
+  G[&quot;統計物理晶格 DMFT 自洽方程&quot;] --&gt; H[&quot;生成泛函 DMFT 刻畫關聯記憶軌跡與鞍點&quot;]
+  E --&gt; H
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>神經切線核與惰性訓練線性化（Neural Tangent Kernel &amp; Lazy Training）</strong></p>
+<ul>
+<li>直覺理解：當網路寬度趨近無限大且參數移動極微小時，網路輸出對權重的泰勒展開只需保留一階線性項，整條訓練軌跡便由初始 Jacobian 內積構成的固定核矩陣決定。</li>
+<li>機制或核心表達式：設網路輸出為 <span class="math inline">f(x; \theta) \in \mathbb{R}^C</span>，經驗 NTK 定義為 <span class="math inline">\hat{\Theta}_t(x, x') = J_\theta f(x; \theta_t) J_\theta f(x'; \theta_t)^\top</span>。在梯度流 <span class="math inline">\dot{\theta}_t = -\nabla_\theta \mathcal{L}(\theta_t)</span> 下，訓練樣本輸出滿足 <span class="math inline">\dot{f}(X; \theta_t) = -\hat{\Theta}_t(X, X) \nabla_f \mathcal{L}</span>。當寬度趨近無限大且採 NTK 尺度化時，<span class="math inline">\hat{\Theta}_t</span> 趨近常數核 <span class="math inline">\Theta_\infty</span>；但在交叉熵損失下，若不加參數空間正則化且類別目標呈退化分佈，有限寬度網路的參數範數會隨時間趨近無窮，破壞 <span class="math inline">\hat{\Theta}_t</span> 的收斂性（Yu et al., 2025；Plenk et al., 2026）。</li>
+<li>能做到什麼，代價是什麼：能將非凸優化轉為凸核方法並給出精確收斂譜界，代價是抹除表徵學習能力，且實務上增加網路層數時，真實網路與對應 NTK 預測誤差變化並不一致（Liu et al., 2025）。</li>
+</ul>
+</li>
+<li>
+<p><strong>穩定性邊緣與 NTK 特徵向量對齊（Edge of Stability &amp; NTK Alignment）</strong></p>
+<ul>
+<li>直覺理解：採用較大步長訓練時，梯度下降不會停留在平滑單調下降區，而是衝向曲率臨界值並沿邊緣震盪，同時把 NTK 的主特徵向量轉向與訓練標籤一致的方向。</li>
+<li>機制或核心表達式：在穩定性邊緣（EoS）區間，損失函數 Hessian 最大特徵值與 NTK 最大特徵值均在 <span class="math inline">2/\eta</span> 附近震盪，其中 <span class="math inline">\eta</span> 為學習率。Jiang et al. (2025) 在雙層線性網路與多類架構中證明，較大的 <span class="math inline">\eta</span> 會驅動最終經驗 NTK 的領先特徵向量與整體核矩陣更貼近訓練目標 <span class="math inline">Y</span>。這類方向集中效應也與分類問題中各類別 NTK 矩陣具有低有效秩的結構相呼應，使 NTK 蒸餾與投影可壓縮計算成本（Mahowald et al., 2026）。</li>
+<li>能做到什麼，代價是什麼：解釋了大步長如何引發特徵學習與核結構演化，但目前嚴格解析證明仍局限於雙層線性網路等簡化模型，且大步長在數值上需承擔暫時性震盪。</li>
+</ul>
+</li>
+<li>
+<p><strong>生成泛函動力學平均場理論（Generating-Functional DMFT）</strong></p>
+<ul>
+<li>直覺理解：當系統有大量彼此耦合的單元時，DMFT 不直接追蹤全部變量，而是把其餘單元的交互作用化約成作用於單一代表單元上的隨機雜訊與歷史回授核，再要求統計量自洽。</li>
+<li>機制或核心表達式：在多體晶格或無序網路中，將聯立動力學寫入路徑積分生成泛函並對無序耦合取平均（Vollhardt et al., 2011），可導出等效單神經元隨機過程：局部場包含由過去狀態累積的自我回授項，以及由協方差 <span class="math inline">C(t, t')</span> 刻畫的交叉干擾雜訊。Callegaris 與 Kabashima (2026) 將此架構推廣至具固定大小相關方塊的聯想記憶網路，使有效雜訊協方差與自我回授係數直接依賴方塊協方差的特徵值，進而精確描繪再入式檢索（re-entrant retrieval）與分隔混合態和目標態的定常鞍點。</li>
+<li>能做到什麼，代價是什麼：不同於只看穩態的靜態複本法，DMFT 能追蹤非平衡軌跡與初值吸引域幾何，但需數值求解耦合的積分微分自洽方程，對有限尺度漲落的處理也受限於大極限假設。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>交叉熵損失下的 NTK 發散與惰性區間恢復條件</strong>：為何早期研究認為交叉熵分類損失會破壞 NTK 線性化，而在什麼數學條件下有限步長或無限寬分類網路仍能維持常數 NTK 近似？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考方向分為兩面。第一面見 Yu et al. (2025)：當多層 FCN 或 ResNet 的訓練樣本經驗 NTK 最小特徵值有正下界 <span class="math inline">c &gt; 0</span>，且使用無正則化的交叉熵損失訓練至時間趨近無限大時，為壓低損失必須讓 logits 趨向無窮大，進而迫使參數範數發散，導致有限寬經驗 NTK 無法一致收斂至 <span class="math inline">\Theta_\infty</span>。第二面見 Plenk et al. (2026)：若加入參數空間正則化限制權重增長，或在無正則化但目標為非退化分佈（即所有類別皆具嚴格正機率）時，logits 存在有限最優解，參數保持有界，從而恢復常數 NTK 與線性化模型解。</p>
+</details>
+<ol start="2">
+<li><strong>經驗 NTK 矩陣的計算降維憑藉何種結構</strong>：經驗 NTK 矩陣大小隨樣本數與類別數平方增長，直接對全量資料求 Jacobian 往往不可行。蒸餾神經切線核（DNTK）為何能將計算複雜度降低多達五個數量級而不明顯損失預測準確率？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>從核矩陣的譜結構切入（Mahowald et al., 2026）。各類別對應的 NTK 子矩陣本身具有低有效秩，且輸入資料所張成的神經切線空間可由經 NTK 調校的資料集蒸餾（dataset distillation）少數合成樣本加以誘導，僅此一步即可減少 20 至 100 倍 Jacobian 計算。接著再對蒸餾後的縮減 Jacobian 結合隨機投影方法，兩者相乘便能在保留主要特徵子空間的前提下大幅壓低計算量。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>無限寬核等價定理與深層有限網路實務行為的落差</strong>：雖然無限寬極限將神經網路對應到高斯過程核與 NTK，但 Liu et al. (2025) 指出，增加真實網路層數帶來的預測誤差變化與對應更新後的 NTK 核迴歸不相符，且不考慮網路訓練的傳統高斯過程核在誤差表現上反而與 NTK 相當接近。如何界定等價定理在有限寬與深層架構中的適用半徑，仍是理論與實作之間的主要缺口。</li>
+<li><strong>從單一平滑極限走向關聯記憶、拓撲與量子硬體的統一動力學</strong>：近期工作將 NTK 與 DMFT 推向極端設定，例如偏微分方程求解器的微分 NTK 正定性證明（Jin 與 Wu, 2026）、單純形複形上的拓撲譜偏差（Krishnagopal, 2026），以及具適應閾值的 Potts 網路與塊相關聯想記憶的 DMFT 相圖（Basu et al., 2026；Callegaris 與 Kabashima, 2026）。這些分散在線性化核譜、非線性鞍點與量子雜質求解器（Wolf et al., 2026）的技術，目前仍缺乏統一的多尺度動力學框架來串聯。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>生成泛函 DMFT 與相關模式相圖向高維相變遷移</strong>：Callegaris 與 Kabashima (2026) 處理分塊相關模式所引入的交互作用雜訊協方差與自我回授核方法，以及 Basu et al. (2026) 用有效驅動項劃分高跳躍、低跳躍與非跳躍相圖的分析框架，可直接遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a> 與 <a class="wl" href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a>，用來解析相關資料分佈下的訓練相變與鞍點滯留。</li>
+<li><strong>NTK 譜對齊與低有效秩分解向可解釋性特徵拆解遷移</strong>：EoS 下經驗 NTK 領先特徵向量朝目標對齊的動力學（Jiang et al., 2025），以及分類 NTK 具有低有效秩與拓撲 Hodge 分解（Krishnagopal, 2026）的性質，可遷移至 <a class="wl" href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a> 與 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a>，輔助區分訓練過程是由少數主導特徵方向驅動還是處於高維疊加狀態。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-dynamical-mean-field-theory2011">1. Dynamical Mean-Field Theory（2011）</h4>
+<ul>
+<li>作者與出處：D. Vollhardt, K. Byczuk, M. Kollar · <em>Springer series in solid-state sciences</em></li>
+<li>核心問題：強關聯晶格多體系統因粒子間交互作用無法直接解出精確動態與能譜，傳統微擾展開在中等至強耦合區間會失效。本文系統推導如何透過無限維度晶格極限建立非微擾的動力學平均場理論（DMFT）。</li>
+<li>關鍵做法：文章從多體哈密頓量出發，推導 DMFT 的自洽方程組，將晶格問題映射至與有效浴場耦合的單點雜質模型，並說明如何結合電子能帶結構計算探索關聯材料性質。</li>
+<li>跨領域啟發：建立整個子方向處理高維耦合系統時的 DMFT 數學語言與自洽框架，後續聯想記憶與神經動力學的生成泛函推導皆沿用這套邏輯。</li>
+<li>連結：<a href="zotero://select/library/items/P863HH6N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1109.4833" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-issues-with-neural-tangent-kernel-approach-to-neural-networks2025">2. Issues with Neural Tangent Kernel Approach to Neural Networks（2025）</h4>
+<ul>
+<li>作者與出處：Haoran Liu, Anthony Tai, David J. Crandall, Chunfeng Huang · <em>arXiv</em></li>
+<li>核心問題：NTK 文獻普遍主張訓練後神經網路與對應 NTK 核迴歸存在等價定理，但該等價性在實際有限寬、深層架構下的準確度缺乏嚴格數值檢驗。作者質疑這項定理在實務上是否成立。</li>
+<li>關鍵做法：重新檢視 NTK 推導並設計控制實驗，發現為神經網路增加一層與相應更新後的 NTK 並未造成一致的預測誤差變化；同時，未計入神經網路訓練的傳統高斯過程核表現卻與 NTK 核迴歸極為接近。</li>
+<li>跨領域啟發：作為研究 NTK 前的批判性基準，提醒學習者區分無限寬漸近定理與有限寬度真實網路訓練軌跡的落差。</li>
+<li>連結：<a href="zotero://select/library/items/RA9T2PRI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2501.10929" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-divergence-of-empirical-neural-tangent-kernel-in-classification-problems2025">3. Divergence of Empirical Neural Tangent Kernel in Classification Problems（2025）</h4>
+<ul>
+<li>作者與出處：Zixiong Yu, Songtao Tian, Guhan Chen · <em>arXiv</em></li>
+<li>核心問題：既有 NTK 理論主要集中於迴歸平方損失，分類任務採用的交叉熵損失涉及非線性輸出轉換，無限時間訓練下神經網路是否仍能被 NTK 核邏輯斯迴歸近似尚待釐清。本文證明兩者在過訓練極限下會分道揚鑣。</li>
+<li>關鍵做法：先證明多層 FCN 與 ResNet 的 NTK 具嚴格正定性，接著證明若訓練樣本經驗 NTK 最小特徵值有正下界，交叉熵損失將迫使網路參數在過訓練時發散；最終以反證法證明，只要網路寬度為有限值，經驗 NTK 便不會一致收斂至理論 NTK。</li>
+<li>跨領域啟發：明確畫出分類問題中惰性訓練近似的失效條件，是理解真實分類模型為何必然偏離靜態 NTK 的關鍵定理。</li>
+<li>連結：<a href="zotero://select/library/items/Z8KR9RCX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.11130" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-understanding-the-evolution-of-the-neural-tangent-kernel-at-the-edge-of-stability2025">4. Understanding the Evolution of the Neural Tangent Kernel at the Edge of Stability（2025）</h4>
+<ul>
+<li>作者與出處：Kaiqi Jiang, Jeremy Cohen, Yuanzhi Li · <em>arXiv</em></li>
+<li>核心問題：梯度下降在穩定性邊緣（EoS）區間會出現最大特徵值隨步長倒數震盪的現象，但 NTK 特徵向量在此階段如何隨訓練演化仍不清楚。本文探討較大學習率如何塑造經驗 NTK 的方向結構。</li>
+<li>關鍵做法：跨架構實驗顯示，較大的學習率會使最終經驗 NTK 的領先特徵向量及整體核矩陣與訓練目標產生更高的對齊度。作者並在雙層線性網路上給出此特徵向量對齊現象的理論分析。</li>
+<li>跨領域啟發：把損失地貌的曲率震盪現象與核函數對齊（kernel alignment）接上線，說明大步長如何引發有限網路的特徵學習。</li>
+<li>連結：<a href="zotero://select/library/items/GNB3MZ7Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.12837" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-the-neural-tangent-kernel-for-classification2026">5. The Neural Tangent Kernel for Classification（2026）</h4>
+<ul>
+<li>作者與出處：Jonathan Plenk, Sergio Calvo-Ordonez, Alvaro Cartea, Yarin Gal, Mark van der Wilk · <em>arXiv</em></li>
+<li>核心問題：針對分類任務交叉熵損失容易導致 logits 發散並破壞 NTK 常數性的難題，本文尋找讓寬網路在分類設定下仍能停留在惰性訓練區間的充分條件。目標是把線性化理論嚴格延伸至分類問題。</li>
+<li>關鍵做法：證明在交叉熵損失下，只要加入參數空間正則化，即可確保訓練期間 NTK 維持常數；若無正則化，當訓練目標是非退化的（所有類別皆有嚴格正機率）時，網路同樣會回到惰性訓練區間，並據此推導出以 NTK 表達的顯式線性化解。</li>
+<li>跨領域啟發：與 Yu et al. (2025) 構成互補閉環，完整回答分類問題在何時發散、何時收斂至 NTK 線性化。</li>
+<li>連結：<a href="zotero://select/library/items/SGBETFSV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.17606" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-dynamical-mean-field-theory-for-associative-memory-with-block-correlated-patterns2026">6. Dynamical mean-field theory for associative memory with block-correlated patterns（2026）</h4>
+<ul>
+<li>作者與出處：Andrea Callegaris, Yoshiyuki Kabashima · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：當聯想記憶網路儲存相關模式而非獨立模式時，單一記憶檢索會與對稱混合態競爭，靜態分析無法判定不同初值最終會落入哪一個狀態。本文需要建立能精確預測演化軌跡與吸引域邊界的動力學理論。</li>
+<li>關鍵做法：將生成泛函 DMFT 推廣至固定大小方塊內的相關二元模式，推導出受方塊協方差特徵值控制的交叉干擾雜訊協方差與自我回授係數；對非單調轉移函數的分層相關模式，成功重現隨負載上升出現的再入式檢索區間，並透過靈敏度分析定位分隔混合態與目標態的定常鞍點。</li>
+<li>跨領域啟發：示範生成泛函 DMFT 如何處理帶有結構相關性的高維非線性動力學，並可延伸至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a>。</li>
+<li>連結：<a href="zotero://select/library/items/XDSH8C3T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.40060" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-74-篇">G5｜本子方向全量文獻泛讀清單（共 74 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 74 篇文獻（含開放存取 PDF 73 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進49-篇">A. 奠基經典、專著與核心演進（49 篇）</h3>
+<ul>
+<li><strong>2011｜Dynamical Mean-Field Theory</strong>，D. Vollhardt, K. Byczuk, M. Kollar（<em>Springer series in solid-state sciences</em>，18 引）：Dynamical Mean-Field Theory，D. Vollhardt, K. Byczuk, M. Kollar（強關聯量子多體系統動態平均場論的經典導論，為現代無窮寬深度神經網路的特徵學習動力學提供主要數學工具，18 引）。 <a href="zotero://select/library/items/P863HH6N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1109.4833" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Graph Neural Tangent Kernel: Convergence on Large Graphs</strong>，Sanjukta Krishnagopal, Luana Ruiz（<em>arXiv</em>）：結合圖神經切線核 (GNTK) 與極限圖元 (graphon) 理論分析大規模圖上 GNN 的訓練動力學，定義 graphon 網路與 graphon NTK，並證明圖序列的 GNTK 及其譜隨圖規模增大收斂至對應極限物件。 <a href="zotero://select/library/items/FBWA7CVK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.10808" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Understanding Reconstruction Attacks with the Neural Tangent Kernel and Dataset Distillation</strong>，Noel Loo et al.（<em>arXiv</em>）：強化僅憑訓練後參數還原訓練資料的重建攻擊演算法並證明在無限寬極限下可完整恢復整個訓練集，透過兩層網路實證揭示攻擊成功率高度取決於網路動力學偏離凍結 NTK 極限的程度。 <a href="zotero://select/library/items/BF52C9TD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2302.01428" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Neural (Tangent Kernel) Collapse</strong>，Mariia Seleznova et al.（<em>Proceedings of the 37th Conference on Neural Information Processing Systems, 2023</em>）：連結神經切線核 NTK 與神經坍縮現象，在經驗 NTK 具類別區塊結構的假設下推導均方誤差訓練的分階段動力學並找出動態不變量，據此證明最後一層特徵會自發產生神經坍縮。 <a href="zotero://select/library/items/Q5NI3WR5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.16427" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Stochastic Marginal Likelihood Gradients using Neural Tangent Kernels</strong>，Alexander Immer et al.（<em>arXiv</em>）：利用函數空間形式的線性化 Laplace 近似與神經切線核推導邊際概似度的下界，使深度學習超參數的貝氏模型選擇能以隨機梯度最佳化進行，免除每次更新需遍歷全資料集的瓶頸。 <a href="zotero://select/library/items/MR7PWMK4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.03968" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Fast Graph Condensation with Structure-based Neural Tangent Kernel</strong>，Lin Wang et al.（<em>arXiv</em>）：為消除大規模圖資料集凝縮中雙層最佳化內迴圈反覆訓練圖神經網路的高昂成本，提出 GC-SNTK 框架，基於結構神經切線核將圖凝縮重構為核嶺迴歸任務以大幅加速資料凝縮。 <a href="zotero://select/library/items/6XRJGDUN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.11046" rel="noopener">官方連結</a></li>
+<li><strong>2023｜On the Neural Tangent Kernel of Equilibrium Models</strong>，Zhili Feng, J. Zico Kolter（<em>arXiv</em>）：研究「無限深度」權重共享架構深度平衡模型（DEQ）的神經切線核，證明不同於寬深齊趨無窮時核呈隨機性的全連接網路，DEQ 在溫和條件下仍維持確定性 NTK 且可透過求根法高效算出。 <a href="zotero://select/library/items/AZ2AM96S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.14062" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Expressibility-induced Concentration of Quantum Neural Tangent Kernels</strong>，Li-Wei Yu et al.（<em>arXiv</em>）：研究量子神經切線核模型的可訓練性與表達能力之關聯，嚴格證明在全域損失下無論全域或局部編碼的高表達力都會使核值指數集中趨近於零，而局部損失可部分緩解此現象。 <a href="zotero://select/library/items/DXV96BE4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2311.04965" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Rethinking Adversarial Training with Neural Tangent Kernel</strong>，Guanlin Li et al.（<em>arXiv</em>）：利用神經切線核（NTK）演化分析對抗訓練，揭露資料歸一化與批次歸一化無偏估計對訓練的影響，並依核動力學與核譜特徵設計省時對抗訓練法及處理災難性過擬合問題。 <a href="zotero://select/library/items/DXBU9MIR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.02236" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Neural Tangent Kernel Analysis of Deep Narrow Neural Networks</strong>，Jongmin Lee et al.（<em>Published in International Conference on Machine Learning, 2022</em>）：利用神經切線核（NTK）理論研究特定初始化下無限深度但窄寬度的多層感知器（MLP），給出該極限下的可訓練性保證，並將分析推廣至無限深卷積神經網路（CNN）。 <a href="zotero://select/library/items/E4H34CJT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2202.02981" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Analyzing Tree Architectures in Ensembles via Neural Tangent Kernel</strong>，Ryuichi Kanoh, Mahito Sugiyama（<em>arXiv</em>）：推導任意樹結構軟決策樹集成的神經切線核（NTK），發現在無窮多棵樹極限下僅各深度葉節點數決定訓練與泛化行為，且不對稱決策串列在深層極限下不會退化。 <a href="zotero://select/library/items/8RJ275E7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.12904" rel="noopener">官方連結</a></li>
+<li><strong>2022｜On the Generalization Power of the Overfitted Three-Layer Neural Tangent Kernel Model</strong>，Peizhong Ju, Xiaojun Lin, Ness B. Shroff（<em>arXiv</em>）：研究過擬合三層神經切線核（NTK）模型的泛化誤差上界，發現在可學習函數集上測試誤差隨接近輸出端的第二隱藏層神經元數下降更快，且無偏置三層 NTK 的可學習集不小於雙層模型。 <a href="zotero://select/library/items/H6GG7PK5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.02047" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Fast Finite Width Neural Tangent Kernel</strong>，Roman Novak, Jascha Sohl-Dickstein, Samuel S. Schoenholz（<em>arXiv</em>）：針對有限寬度神經網路的神經切線核（NTK）計算與記憶體開銷過大的問題，首次對有限寬度 NTK 進行深入的計算資源需求分析，並利用神經網路結構提出加速計算方法。 <a href="zotero://select/library/items/GXGS5IVG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.08720" rel="noopener">官方連結</a></li>
+<li><strong>2022｜A Fast, Well-Founded Approximation to the Empirical Neural Tangent Kernel</strong>，Mohamad Amin Mohamadi, Wonho Bae, Danica J. Sutherland（<em>Published at ICML 2023</em>）：針對 <span class="math inline">O</span> 類輸出分類器經驗神經切線核（eNTK）高達 <span class="math inline">O((NO)^2)</span> 記憶體與 <span class="math inline">O((NO)^3)</span> 計算量的問題，證明「logits 之和」近似對任何具寬最終讀出層的網路在初始化時收斂至真實 eNTK。 <a href="zotero://select/library/items/PESNWUFQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.12543" rel="noopener">官方連結</a></li>
+<li><strong>2022｜An Empirical Analysis of the Laplace and Neural Tangent Kernels</strong>，Ronaldas Paulius Lencevičius（<em>California State University's ScholarWorks, Summer (2022)</em>）：針對理論上在 <span class="math inline">\mathbb{S}^{d-1}</span> 共享相同再生核希爾伯特空間的 Laplace 核與神經切線核（NTK），透過精確核匹配、高斯過程後驗匹配及 <span class="math inline">\mathbb{R}^d</span> 迴歸實驗檢驗兩者在實務上的等價性。 <a href="zotero://select/library/items/QZUT3GR8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2208.03761" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Neural Tangent Kernel: A Survey</strong>，Eugene Golikov, Eduard Pokonechnyy, Vladimir Korviakov（<em>arXiv</em>）：綜述神經切線核（NTK）研究進展，涵蓋無窮寬度極限下訓練動力學與核方法的等價收斂理論、有限寬度修正項、實務應用場景，以及該理論方法目前的限制。 <a href="zotero://select/library/items/JD9GWMFV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2208.13614" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Evolution of Neural Tangent Kernels under Benign and Adversarial Training</strong>，Noel Loo et al.（<em>arXiv</em>）：突破無限寬度凍結神經切線核 (NTK) 的分析視角，探討有限寬度神經網路在良性訓練與對抗訓練 (AT) 過程中 NTK 的動態演化及前期特徵學習與後期惰性訓練階段的差異。 <a href="zotero://select/library/items/FJF5Q383" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.12030" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Neural tangent kernel analysis of PINN for advection-diffusion equation</strong>，M. H. Saadat et al.（<em>arXiv</em>）：運用神經切線核 (NTK) 理論系統剖析 PINN 求解線性對流擴散方程時的訓練動力學，闡明對流速度與擴散參數如何透過頻譜偏置導致高頻學習困難及收斂速率失衡。 <a href="zotero://select/library/items/NM2GARR9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.11716" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Meta-Learning with Neural Tangent Kernels</strong>，Yufan Zhou et al.（<em>arXiv</em>）：將模型無關元學習（MAML）推廣至元模型神經切線核（NTK）誘導的再生核希爾伯特空間（RKHS），提出兩種以快速自適應正則項取代雙層內迴圈迭代微調的新型函式空間元學習演算法。 <a href="zotero://select/library/items/EHEM3JNW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2102.03909" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Random Features for the Neural Tangent Kernel</strong>，Insu Han et al.（<em>arXiv</em>）：為全連接 ReLU 網路的神經切線核（NTK）設計高效隨機特徵映射，結合反餘弦核隨機特徵與草圖演算法實現對樣本數與輸入維度的線性時間複雜度，以更低特徵維度將 NTK 擴展至大規模資料集。 <a href="zotero://select/library/items/7U7TTFVM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.01351" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Theory of Neural Tangent Kernel Alignment and Its Influence on Training</strong>，Haozhe Shan, Blake Bordelon（<em>arXiv</em>）：理論分析神經切線核 NTK 在動態特徵學習期間向目標函數對齊的機制，透過深度線性與兩層 ReLU 網路模型揭示加速訓練與架構、數據結構的影響因素。 <a href="zotero://select/library/items/W8GRU3Z5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2105.14301" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Reverse Engineering the Neural Tangent Kernel</strong>，James B. Simon, Sajant Anand, Michael R. DeWeese（<em>arXiv</em>）：構造性證明任何半正定內積核皆可透過適當選擇激活函數實現為單隱藏層全連接網路的 NNGP 或 NTK，並數值驗證此核心逆向工程於架構設計的效用。 <a href="zotero://select/library/items/AUU73RZN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.03186" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Neural Tangent Kernel Maximum Mean Discrepancy</strong>，Xiuyuan Cheng, Yao Xie（<em>arXiv</em>）：連結神經切線核 NTK 與最大均值差異 MMD 提出線上兩樣本檢定統計量 NTK-MMD，降低記憶體與計算複雜度並建立型一誤差與檢定力理論界。 <a href="zotero://select/library/items/VN22AJQ8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.03227" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Neural Tangent Kernel Perspective of GANs</strong>，Jean-Yves Franceschi et al.（<em>39th International Conference on Machine Learning, International Machine Learning Society, Jul 2022, Baltimore, MD, United States. pp.6660-6704</em>）：針對既有 GAN 理論忽略判別器架構導致梯度定義不良的問題，於無限寬 NTK 極限下刻畫多種損失函數的訓練判別器與可微性，推進生成分佈收斂分析。 <a href="zotero://select/library/items/2IFWDMVG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.05566" rel="noopener">官方連結</a></li>
+<li><strong>2021｜DNN-Based Topology Optimisation: Spatial Invariance and Neural Tangent Kernel</strong>，Benjamin Dupuis, Arthur Jacot（<em>Advances in Neural Information Processing Systems, 34:27659-27669, 2021</em>）：在大寬度極限下證明以座標神經網路進行 SIMP 拓撲最佳化相當於不具平移不變性的 NTK 濾波器，並提出兩種輸入座標嵌入以恢復近似空間不變性。 <a href="zotero://select/library/items/9K5GN4PC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.05710" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Neural Tangent Kernel Perspective of Infinite Tree Ensembles</strong>，Ryuichi Kanoh, Mahito Sugiyama（<em>arXiv</em>）：為無窮多個可微軟決策樹組成的集成模型引入樹神經切線核 TNTK，從核方法理論證明其訓練全域收斂性、對稱樹等價結構以及核退化現象。 <a href="zotero://select/library/items/HWWS38UF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2109.04983" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Neural Tangent Kernel Empowered Federated Learning</strong>，Kai Yue et al.（<em>arXiv</em>）：將神經切線核 NTK 引入聯邦學習以克服客戶端資料統計異質性，令參與端上傳逐樣本 Jacobian 矩陣供伺服器建構經驗核矩陣並更新全域模型。 <a href="zotero://select/library/items/I4NPBWBQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.03681" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Representation Learning via Quantum Neural Tangent Kernels</strong>，Junyu Liu et al.（<em>PRX Quantum 3, 030323, 2022</em>）：為變分量子電路定義量子神經切線核 QNTK，推導惰性訓練與二階修正下的損失動力學方程，並為混合量子古典架構建立大寬度核極限理論。 <a href="zotero://select/library/items/V8G99WHN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.04225" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Neural Tangent Kernel of Matrix Product States: Convergence and Applications</strong>，Erdong Guo, David Draper（<em>arXiv</em>）：分析矩陣乘積態 MPS 在無窮鍵維度極限下的神經切線核 NTK，證明其收斂為正定常數矩陣以保證回歸與 Born 機訓練在函數空間收斂，無需額外資料集假設。 <a href="zotero://select/library/items/R95VQWVN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.14046" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Fast Graph Neural Tangent Kernel via Kronecker Sketching</strong>，Shunhua Jiang et al.（<em>arXiv</em>）：針對圖神經切線核 GNTK 在大規模圖資料上計算與記憶體耗費過高的瓶頸，引入 Kronecker 草圖降維技術加速核矩陣建構，提升圖核回歸的可擴展性。 <a href="zotero://select/library/items/5HJ7H3X7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.02446" rel="noopener">官方連結</a></li>
+<li><strong>2020｜A Generalized Neural Tangent Kernel Analysis for Two-layer Neural Networks</strong>，Zixiang Chen et al.（<em>arXiv</em>）：建立處理正則化與梯度雜訊的廣義神經切線核（NTK）分析，證明帶權重衰減的含噪梯度下降仍具類核行為並使訓練損失線性收斂至特定精度，同時導出雙層網路的新泛化誤差界。 <a href="zotero://select/library/items/CTDS34H7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.04026" rel="noopener">官方連結</a></li>
+<li><strong>2020｜On the Neural Tangent Kernel of Deep Networks with Orthogonal Initialization</strong>，Wei Huang, Weitao Du, Richard Yi Da Xu（<em>IJCAI 2021</em>）：透過神經切線核（NTK）分析正交初始化下超寬全連接網路（FCN）與卷積神經網路（CNN）的訓練動力學，證明當網路寬度趨於無窮時，正交權重初始化與高斯權重初始化誘導的 NTK 相等。 <a href="zotero://select/library/items/TCEN8J3R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2004.05867" rel="noopener">官方連結</a></li>
+<li><strong>2020｜The Recurrent Neural Tangent Kernel</strong>，Sina Alemohammad et al.（<em>arXiv</em>）：推導無限寬極限下循環神經網路對應的循環神經切線核（RNTK），刻畫不同初始化與非線性函數下對各時間步的加權行為及處理變長序列的能力，並在合成資料與 56 個真實資料集上驗證表現。 <a href="zotero://select/library/items/DS96MR6N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.10246" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Optimal Rates for Averaged Stochastic Gradient Descent under Neural Tangent Kernel Regime</strong>，Atsushi Nitanda, Taiji Suzuki（<em>arXiv</em>）：分析神經切線核（NTK）區間內過參數化雙層神經網路在迴歸問題上的平均隨機梯度下降（averaged SGD）收斂性，利用目標函數與 NTK 對應再生核 Hilbert 空間（RKHS）的複雜度性質，證明該演算法具備全域收斂保證並達到極小化極大最優收斂率。 <a href="zotero://select/library/items/7Z3ZK9EX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.12297" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Tensor Programs II: Neural Tangent Kernel for Any Architecture</strong>，Greg Yang（<em>arXiv</em>）：以張量程式（Tensor Programs）證明任意架構隨機初始化神經網路在無限寬極限下的神經切線核（NTK）收斂至可計算確定性極限，並提出 Simple GIA Check 判別梯度獨立假設何時成立。 <a href="zotero://select/library/items/55HRFEZF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.14548" rel="noopener">官方連結</a></li>
+<li><strong>2020｜A Revision of Neural Tangent Kernel-based Approaches for Neural Networks</strong>，Kyung-Su Kim, Aurélie C. Lozano, Eunho Yang（<em>arXiv</em>）：修正並推進過參數化神經網路的神經切線核（NTK）理論分析，推導反映資料複雜度之訓練收斂速度上界、基於資料相依複雜度指標（CMD）且不隨網路規模變化的泛化誤差界，以及等價於完整訓練網路的解析核函數。 <a href="zotero://select/library/items/KD8UKCW4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2007.00884" rel="noopener">官方連結</a></li>
+<li><strong>2020｜On the Similarity between the Laplace and Neural Tangent Kernels</strong>，Amnon Geifman et al.（<em>arXiv</em>）：證明全連接網路的 NTK 與標準 Laplace 核在超球面歸一化資料上具有相同的特徵函式與多項式衰減率的特徵值，其 RKHS 包含相同函式集合與平滑性，並在偏離超球面時透過實驗驗證歸一化後的差異不顯著。 <a href="zotero://select/library/items/D6IS43UR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2007.01580" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Bayesian Deep Ensembles via the Neural Tangent Kernel</strong>，Bobby He, Balaji Lakshminarayanan, Yee Whye Teh（<em>arXiv</em>）：在平方誤差損失訓練的深度集成各成員中加入可計算的隨機不可訓練函式，使集成在無限寬度 NTK 極限下對應高斯過程後驗預測分佈，並證明其預測較標準集成更保守。 <a href="zotero://select/library/items/9QN45ZQH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2007.05864" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Deep Neural Tangent Kernel and Laplace Kernel Have the Same RKHS</strong>，Lin Chen, Sheng Xu（<em>arXiv</em>）：證明深度神經切線核（NTK）與 Laplace 核限制在超球面 <span class="math inline">\mathbb{S}^{d-1}</span> 上時具有相同的再生核希爾伯特空間（RKHS），並證明較小冪次的指數冪核在 <span class="math inline">\mathbb{S}^{d-1}</span> 與 <span class="math inline">\mathbb{R}^d</span> 上對應更大的 RKHS。 <a href="zotero://select/library/items/6KRH7CGM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2009.10683" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Label-Aware Neural Tangent Kernel: Toward Better Generalization and Local Elasticity</strong>，Shuxiao Chen, Hangfeng He, Weijie J. Su（<em>arXiv</em>）：針對標準神經切線核（NTK）因標籤無關而與真實網路存在泛化落差的問題，運用 Hoeffding 分解疊加標籤無關與階層式標籤相依項建構標籤感知核，提升模型泛化力與局部彈性。 <a href="zotero://select/library/items/36UJXWBW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.11775" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Feature Learning in Infinite-Width Neural Networks</strong>，Greg Yang, Edward J. Hu（<em>arXiv</em>）：指出標準與 NTK 參數化在無限寬度極限下皆無法進行特徵學習，利用 Tensor Programs 推導可保留特徵學習的修正參數化極限公式，並在 Word2Vec 與 Omniglot MAML 任務超越 NTK 基準。 <a href="zotero://select/library/items/PH7E6XQJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2011.14522" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Analyzing Finite Neural Networks: Can We Trust Neural Tangent Kernel Theory?</strong>，Mariia Seleznova, Gitta Kutyniok（<em>Proceedings of Machine Learning Research vol 145:1-28, 2021 2nd Annual Conference on Mathematical and Scientific Machine Learning</em>）：實證檢驗有限寬度 ReLU 與 sigmoid 深度網路是否遵循 NTK 理論，發現這取決於隨機初始化與深度：梯度爆炸時核函式會在訓練中大幅變動而偏離 NTK，梯度消失時雖屬 NTK 區間卻難以訓練。 <a href="zotero://select/library/items/K8FDIUHF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2012.04477" rel="noopener">官方連結</a></li>
+<li><strong>2019｜On the Inductive Bias of Neural Tangent Kernels</strong>，Alberto Bietti, Julien Mairal（<em>arXiv</em>）：透過分析神經切線核（NTK）及其對應再生核希爾伯特空間（RKHS）來刻畫過參數化神經網路的歸納偏置，推導有限範數函數的光滑性、逼近性與穩定性（含摺積網路對影像形變的穩定性），並與同類架構的已知核函數比較。 <a href="zotero://select/library/items/732ISA7V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1905.12173" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Graph Neural Tangent Kernel: Fusing Graph Neural Networks with Graph Kernels</strong>，Simon S. Du et al.（<em>arXiv</em>）：提出融合圖神經網路（GNN）與圖核方法的圖神經切線核（GNTK），將多層非線性 GNN 提取高階圖結構特徵的表達能力轉化為圖核形式，藉此克服非凸訓練困難並提供理論保證。 <a href="zotero://select/library/items/5HN6MFHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1905.13192" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Finite Depth and Width Corrections to the Neural Tangent Kernel</strong>，Boris Hanin, Mihai Nica（<em>arXiv</em>）：推導隨機初始化 ReLU 網路在有限深寬下神經切線核（NTK）均值與變異數尺度律，證明其標準差與第一步 SGD 更新均值隨深寬比呈指數增長；深寬同趨無窮時 NTK 仍隨機演化並學習資料相依特徵。 <a href="zotero://select/library/items/6MAQKM9U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1909.05989" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Neural tangent kernels, transportation mappings, and universal approximation</strong>，Ziwei Ji, Matus Telgarsky, Ruicheng Xian（<em>arXiv</em>）：建立淺層神經切線核（NTK）在權重微觀偏移下的通用逼近速率，提出在初始與目標權重間對傳輸映射抽樣的逼近框架以解釋 NTK 尺度機制，並由傅立葉變換構造映射，證明約 <span class="math inline">1/\delta^{10d}</span> 個節點可達目標精度。 <a href="zotero://select/library/items/BX2RMA25" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.06956" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Enhanced Convolutional Neural Tangent Kernels</strong>，Zhiyuan Li et al.（<em>arXiv</em>）：針對無限寬卷積神經網路對應的卷積高斯過程核（CNN-GP）與卷積神經切線核（CNTK）在 CIFAR-10 上與有限寬 CNN 的精度差距，提出保留核函數精確可計算性的局部平均池化（Local Average Pooling, LAP）等改良機制以提升固定核方法的分類表現。 <a href="zotero://select/library/items/CEAFXEFS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1911.00809" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Benefits of Jointly Training Autoencoders: An Improved Neural Tangent Kernel Analysis</strong>，Thanh V. Nguyen, Raymond K. W. Wong, Chinmay Hegde（<em>arXiv</em>）：將過參數化神經網路的收斂與泛化分析延伸至非監督式學習，運用改良的神經切線核（NTK）方法，在少量資料假設下分析雙層過參數化 ReLU 自編碼器進行編碼器與解碼器聯合訓練時的梯度動力學與學習效益。 <a href="zotero://select/library/items/B6ISHTNZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1911.11983" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Neural Tangent Kernel: Convergence and Generalization in Neural Networks</strong>，Arthur Jacot, Franck Gabriel, Clément Hongler（<em>In Advances in neural information processing systems (pp. 8571-8580) 2018</em>）：證明神經網路在梯度下降訓練時，網路函數依循神經切線核（NTK）的核梯度在函數空間演化；於無窮寬度極限下 NTK 收斂為確定性常數核，使得神經網路訓練動力學與泛化特性得以在凸泛函空間中分析。 <a href="zotero://select/library/items/KM99ZDHP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1806.07572" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻25-篇">B. 2024–2026 近期推進與前沿文獻（25 篇）</h3>
+<ul>
+<li><strong>2026｜Efficient Analysis of the Distilled Neural Tangent Kernel</strong>，Jamie Mahowald et al.（<em>arXiv</em>）：發現類別 NTK 矩陣具低有效秩特性，提出結合 NTK 調校資料集蒸餾與投影的蒸餾神經切線核 (DNTK)，從資料維度縮減 20 至 100 倍 Jacobian 計算，使整體 NTK 計算複雜度最多降低五個數量級。 <a href="zotero://select/library/items/GNAG86QX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.11320" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Topological Neural Tangent Kernel</strong>，Sanjukta Krishnagopal（<em>arXiv</em>）：提出針對單純複形邊特徵訊息傳遞的無窮寬核函數 Topological Neural Tangent Kernel (TopoNTK)，融合下 Hodge（共享頂點）與上 Hodge（填充單純形）交互作用，使其能區辨圖核無法察覺的高階拓撲。 <a href="zotero://select/library/items/MP5FPDP3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.01110" rel="noopener">官方連結</a></li>
+<li><strong>2026｜The Neural Tangent Kernel for Classification</strong>，Jonathan Plenk et al.（<em>arXiv</em>）：將寬神經網路的 NTK 理論從迴歸擴展至交叉熵等分類損失，證明參數空間正則化可在訓練期間維持 NTK 近似恆定，而無正則化時只要目標類別為非退化分布同樣能恢復惰性線性化區間。 <a href="zotero://select/library/items/SGBETFSV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.17606" rel="noopener">官方連結</a></li>
+<li><strong>2026｜The Differential Neural Tangent Kernel and Its Positivity</strong>，Bangti Jin, Longjun Wu（<em>arXiv</em>）：提出微分神經切線核 (DNTK) 理論框架，透過 NTK 視角分析求解線性偏微分方程的物理資訊神經網路 (PINN)，針對 RePU 及光滑非多項式等廣泛激發函數，證明無窮寬淺層與深層神經網路在所有線性微分算子下 DNTK 的正定性。 <a href="zotero://select/library/items/5PMP38FG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.10200" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Dynamical Mean-Field Theory for Real Materials using Variational Quantum Compressed Time Evolution on a Quantum Computer</strong>，Stefan Wolf et al.（<em>arXiv (Cornell University)</em>）：結合密度泛函理論與動力學平均場理論（DMFT）在 IBM Heron 量子處理器上透過變分壓縮時間演化與誤差緩解求取 <span class="math inline">\mathrm{CaCuO}_2</span> 的態密度，並檢驗現有 NISQ 硬體精度對完整自洽疊代的限制。 <a href="zotero://select/library/items/BHCF8M9U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.28231" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Fit-error corrected auxiliary master equation approach for low-temperature nonequilibrium dynamical mean-field theory</strong>，Sebastian Alois Fuchs, Enrico Arrigoni, Tommaso Maria Mazzocchi（<em>arXiv (Cornell University)</em>）：針對非平衡態動力學平均場理論（DMFT）中輔助主方程法（AMEA）於低溫銳利 Fermi 邊界處因雜化函數擬合誤差導致高估溫度的缺陷，透過近似求解器估計物理與輔助自能比值進行精準誤差修正。 <a href="zotero://select/library/items/3XPNJA27" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.30846" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Quantum Evolution Kernel for Node-Attributed Graphs</strong>，Manuel Padovani, Alessandra Di Pierro, Claudia Daffara（<em>arXiv</em>）：擴展 PASQAL 量子演化核（QEK）並引入三能階量子態對節點屬性圖進行編碼，透過中性原子模擬器 Pulser 結合 Wasserstein 距離萃取關聯特徵，在數字辨識任務上優於基於 Jensen–Shannon 距離的基準。 <a href="zotero://select/library/items/658GMRW7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.36984" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Dynamical mean-field theory for associative memory with block-correlated patterns</strong>，Andrea Callegaris, Yoshiyuki Kabashima（<em>arXiv (Cornell University)</em>）：將聯想記憶的生成泛函動力學平均場理論（DMFT）由獨立模式推廣至固定大小區塊關聯二元模式，推導具自洽交互雜訊與依賴區塊特徵值的回饋方程，在非單調轉移函數下重現記憶檢索的再入現象。 <a href="zotero://select/library/items/XDSH8C3T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.40060" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Dynamical mean-field theory of latching Potts networks</strong>，Anindita Basu et al.（<em>arXiv</em>）：以動態平均場理論研究具 <span class="math inline">S</span> 個活躍狀態與慢速適應閾值的 Potts 聯想網路在廣延負載機制下的記憶自發轉移現象，分析連接矩陣中兩個凝聚記憶之間的跳躍動力學條件。 <a href="zotero://select/library/items/K8D7GD62" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.16999" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Issues with Neural Tangent Kernel Approach to Neural Networks</strong>，Haoran Liu et al.（<em>arXiv</em>）：重新檢視神經切線核（NTK）與核迴歸的等價定理並進行數值實驗，發現對神經網路增層與對應更新NTK並未產生一致的預測誤差變化，指出既有理論等價性在實務上的落差。 <a href="zotero://select/library/items/RA9T2PRI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2501.10929" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Uncertainty Quantification with the Empirical Neural Tangent Kernel</strong>，Joseph Wilson et al.（<em>arXiv</em>）：提出用於過參數化神經網路訓練後的不確定性量化方法，透過對線性化網路進行隨機梯度採樣來建構深度集成，以近似經驗神經切線核（NTK）高斯過程後驗分佈並大幅提升計算效率。 <a href="zotero://select/library/items/RWKWKP54" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.02870" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Divergence of Empirical Neural Tangent Kernel in Classification Problems</strong>，Zixiong Yu, Songtao Tian, Guhan Chen（<em>arXiv</em>）：證明在採用交叉熵損失的分類問題中，無論有限寬度多層全連接或殘差網路的寬度多大，在過度訓練（時間趨無窮）下經驗神經切線核（NTK）皆會隨網路參數發散而偏離靜態 NTK，無法以核邏輯迴歸近似。 <a href="zotero://select/library/items/Z8KR9RCX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.11130" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Model Reprogramming Demystified: A Neural Tangent Kernel Perspective</strong>，Ming-Yu Chung et al.（<em>arXiv</em>）：透過神經切線核（NTK）架構對模型重編程（Model Reprogramming）進行理論分析，證明其遷移成效取決於目標資料集上 NTK 矩陣的特徵值譜分布，以及來源預訓練模型本身的有效性。 <a href="zotero://select/library/items/D4UNIMNT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.00620" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Understanding the Evolution of the Neural Tangent Kernel at the Edge of Stability</strong>，Kaiqi Jiang, Jeremy Cohen, Yuanzhi Li（<em>arXiv</em>）：深入探討梯度下降處於穩定性邊緣（EoS）期間神經切線核（NTK）特徵向量的演化動力學，發現跨不同網路架構下較大的學習率皆會促使主導特徵向量與完整 NTK 矩陣更緊密對齊訓練目標。 <a href="zotero://select/library/items/GNB3MZ7Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.12837" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Eigenvalue distribution of the Neural Tangent Kernel in the quadratic scaling</strong>，Lucas Benigni, Elliot Paquette（<em>arXiv</em>）：計算雙層神經網路神經切線核（NTK）在二次尺度極限（<span class="math inline">n/(dp) \to \gamma_1</span> 且 <span class="math inline">p/d \to \gamma_2</span>）下的漸近特徵值分佈，證明其等同於 Marchenko–Pastur 分佈與特定確定性分佈的自由乘法卷積。 <a href="zotero://select/library/items/26C5BH24" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.20036" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Revisiting the Neural Tangent Kernel: the role of large width and depth</strong>，William St-Arnaud, Margarida Carvalho, Golnoosh Farnadi（<em>arXiv</em>）：重新檢視過參數化全連接網路在無限寬度與深度極限下的神經切線核 NTK 理論，分析「懶惰訓練」機制如何使核函數在訓練期維持不變，並於極限深度下導向與資料無關的閉式解特性。 <a href="zotero://select/library/items/M94BICKV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.07272" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Fast Generalized Neural Tangent Kernel Statistics via Trace Estimation</strong>，James Hazelden, Balaaji Reddy Nagireddy, Eric Shea-Brown（<em>arXiv</em>）：利用無矩陣乘法與單向自動微分的 Hutch++ 隨機跡估計方法，高效近似有限寬神經網路經驗狀態空間神經切線核 NTK 的跡、Frobenius 範數、有效秩與對齊度，並於高達 4.1 億參數 Transformer 上驗證。 <a href="zotero://select/library/items/FXZZCZKE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.10796" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Analyzing the Neural Tangent Kernel of Periodically Activated Coordinate Networks</strong>，Hemanth Saratchandran, Shin-Fang Chng, Simon Lucey（<em>arXiv</em>）：從有限寬度神經切線核（NTK）視角剖析週期性激活坐標網路為何優於 ReLU 網路，在僅需單一寬層的通用架構下推導最小核特徵值下界，證實週期激活函數具更佳的核態性狀與記憶能力。 <a href="zotero://select/library/items/G354V2Z3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.04783" rel="noopener">官方連結</a></li>
+<li><strong>2024｜The Positivity of the Neural Tangent Kernel</strong>，Luís Carvalho et al.（<em>arXiv</em>）：研究寬神經網路達到零訓練損失的記憶容量理論條件，藉由對多項式函數給出新穎刻畫，嚴格證明任意深度的前饋神經網路只要採用任何非多項式激活函數，其神經切線核（NTK）皆嚴格正定。 <a href="zotero://select/library/items/4HG8KXFI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.12928" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A generalized neural tangent kernel for surrogate gradient learning</strong>，Luke Eilers, Raoul-Martin Memmesheimer, Sven Goedeke（<em>Adv. Neural Inf. Process. Syst. 37 (2024) 9026-9085</em>）：為二值或脈衝神經網路等不可微激活函數的替代梯度學習（SGL）建立理論基礎，先揭示樸素 NTK 擴展於無限寬極限下的不適定問題，進而推導適用於分析 SGL 的替代梯度神經切線核。 <a href="zotero://select/library/items/AKUSKKQJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.15539" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Equivariant Neural Tangent Kernels</strong>，Philipp Misof, Pan Kessel, Jan E. Gerken（<em>arXiv</em>）：為群卷積等變神經網路推導等變神經切線核（NTK），並以此理論證明寬等變網路在所有訓練時刻（包含流形外輸入）的期望預測皆與經資料增強的非等變網路具有相同訓練動力學。 <a href="zotero://select/library/items/FA4PUZ56" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.06504" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Differential Privacy Mechanisms in Neural Tangent Kernel Regression</strong>，Jiuxiang Gu et al.（<em>arXiv</em>）：在神經切線核（NTK）回歸框架下分析差分隱私機制，推導同時涵蓋隱私保護強度與測試準確率的理論保證，並在 CIFAR-10 影像分類實驗上驗證隱私機制下仍能維持良好準確率。 <a href="zotero://select/library/items/CHZX4ZQS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.13621" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Epistemic Uncertainty and Observation Noise with the Neural Tangent Kernel</strong>，Sergio Calvo-Ordoñez, Konstantina Palla, Kamil Ciosek（<em>arXiv</em>）：將寬神經網路與神經切線核高斯過程的等價性推廣至含非零隨機觀測雜訊情境，並推導透過梯度下降訓練少數額外均方誤差預測器來估計認知不確定性後驗共變異數的實用演算法。 <a href="zotero://select/library/items/84FDVN67" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.03953" rel="noopener">官方連結</a></li>
+<li><strong>2024｜On the Impacts of the Random Initialization in the Neural Tangent Kernel Theory</strong>，Guhan Chen, Yicheng Li, Qian Lin（<em>arXiv</em>）：探討NTK理論中常被鏡像初始化架構忽略的常規隨機初始化（寬網路收斂至高斯過程<span class="math inline">f^{\mathrm{GP}}</span>）之影響，比較兩種設定對訓練動力學與泛化能力的差異。 <a href="zotero://select/library/items/C3JXK7AW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.05626" rel="noopener">官方連結</a></li>
+<li><strong>2024｜An Application of the Holonomic Gradient Method to the Neural Tangent Kernel</strong>，Akihiro Sakoda, Nobuki Takayama（<em>arXiv</em>）：應用基於微分算子環電腦代數演算法的完整梯度法（holonomic gradient method），為神經切線核（NTK）中滿足完整線性PDE系統之完整激活分佈提供對偶激活函數的數值求值方法。 <a href="zotero://select/library/items/P7MVAIIJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.23626" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-7291300c">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a><span class="rs">這個領域一方面追蹤深度神經網路在訓練時間軸上的非線性相變（雙重下降與頓悟 Grokking），另一方面用稀疏自編碼器（SAE）與因果特徵電路，把…</span></li><li><a href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a></li><li><a href="06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a></li><li><a href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

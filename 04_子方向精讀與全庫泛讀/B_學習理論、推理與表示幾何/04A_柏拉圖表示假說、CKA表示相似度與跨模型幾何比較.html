@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>04A｜柏拉圖表示假說、CKA表示相似度與跨模型幾何比較 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-6d6bb473" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="04a柏拉圖表示假說cka表示相似度與跨模型幾何比較">04A｜柏拉圖表示假說、CKA表示相似度與跨模型幾何比較</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">表示對齊與類比推理（柏拉圖表示假說、跨空間最優配對與關係映射）</a>
+同領域子方向：<a class="wl" href="04B_%E6%A8%A1%E5%9E%8B%E7%B8%AB%E5%90%88%E3%80%81%E7%9B%B8%E5%B0%8D%E8%A1%A8%E7%A4%BA%E8%88%87%E7%84%A1%E7%9B%A3%E7%9D%A3%E8%B7%A8%E7%A9%BA%E9%96%93%E5%B5%8C%E5%85%A5%E5%B0%8D%E9%BD%8A.html">模型縫合、相對表示與無監督跨空間嵌入對齊</a> · <a class="wl" href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a>
+跨領域關聯子方向：<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">表示對齊與類比推理（柏拉圖表示假說、跨空間最優配對與關係映射）</a>的理論與度量核心，研究不同架構、模態與訓練目標的神經網路在潛在空間中是否收斂至共同結構（柏拉圖表示假說，PRH），以及如何嚴格量化與比較跨模型表示幾何。它向上連結<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a>的演算法資訊距離，並為<a class="wl" href="04B_%E6%A8%A1%E5%9E%8B%E7%B8%AB%E5%90%88%E3%80%81%E7%9B%B8%E5%B0%8D%E8%A1%A8%E7%A4%BA%E8%88%87%E7%84%A1%E7%9B%A3%E7%9D%A3%E8%B7%A8%E7%A9%BA%E9%96%93%E5%B5%8C%E5%85%A5%E5%B0%8D%E9%BD%8A.html">模型縫合、相對表示與無監督跨空間嵌入對齊</a>與<a class="wl" href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a>提供可比性診斷準則。</p>
+</aside>
+<ul>
+<li>核心問題：不同神經網路的隱藏層維度、旋轉座標系與正則化偏置各異，使得直接以歐氏距離比較特徵向量毫無意義。然而現有對齊指標（如線性 CKA、SVCCA、RSA 或互斥 <span class="math inline">k</span>-近鄰 MKNN）各存在根本限制：KL 散度相近並不保證線性表示可辨識、全局 CKA 容易受異常值或基準線漂移主導（甚至在生成模型教師層選擇時與實際 FID 改善呈反相關），且聚合指標常將「空間尺度（局部或全局）」與「比較對象（關係拓撲或度量幾何）」混為一談。本子方向致力於分離訊號、偏置與雜訊，並建立具備可辨識性保證與尺度不變性的表示比較框架。</li>
+<li>直覺模型：比較兩個不同架構模型的內部表徵，就像比較兩張分別由不同語言寫成、且採用不同投影法繪製的世界地圖。若只量測經緯度數字是否相等，兩張圖看似完全無關；若只檢查每個城市最鄰近的幾個城鎮名單（局部拓撲），或是只看每對城市在距離排序上誰比較近（序數關係），就能在不對齊座標軸的前提下判斷兩者是否描繪了同一個地理世界，但即使兩張圖的地名鄰接關係一致，也不代表它們對海拔高度或氣候等物理量的編碼同樣精確。</li>
+<li>分階段閱讀路線：建議分三階段學習：第一階段先讀 Bennett 等人 (1998) 建立資訊距離的演算法轉換極限視角，再讀 Nielsen 等人 (2026) 釐清從輸出分佈接近推導到線性表示相似性的數學邊界（logit 距離 vs KL 散度）。第二階段讀 Bangachev, Bresler 與 Polyanskiy (2026) 掌握柏拉圖表示假說的訊號、偏置與雜訊三分框架，搭配 Soares 等人 (2026) 理解序數相似度（TSI/QSI）與互斥近鄰（MKNN）的等價性。第三階段讀 You 等人 (2026) 以 <span class="math inline">2\times 2</span> 框架區分關係結構與度量幾何，最後讀 Duraphe 等人 (2026) 在天文影像與光譜上的跨層實證，檢驗幾何對齊與物理可遷移性之間的落差。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;Bennett演算法資訊距離與不可比座標系&quot;] --&gt; B[&quot;CKA、SVCCA與TwoNN內在維度觀測&quot;]
+  A --&gt; C[&quot;Nielsen可辨識性與Logit距離上界&quot;]
+  B --&gt; D[&quot;柏拉圖表示假說PRH: 訊號-偏置-雜訊三分法&quot;]
+  D --&gt; E[&quot;序數相似度TSI/QSI與互斥k近鄰MKNN&quot;]
+  E --&gt; F[&quot;關係結構H0骨架與度量幾何分離&quot;]
+  B --&gt; G[&quot;生成對齊反轉與可恢復性缺口&quot;]
+  F --&gt; H[&quot;天文跨模態檢驗: 幾何一致不等於物理一致&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>中心化核對齊與特徵譜觀測（CKA, SVCCA, and TwoNN-ID）</strong></p>
+<ul>
+<li>直覺理解：先算出模型內部每對樣本的相似度矩陣並去掉均值偏置，再看兩個模型的相似度矩陣有多相像，藉此忽略旋轉與均勻縮放的影響。</li>
+<li>機制或核心表達式：給定兩組中心化格拉姆矩陣 <span class="math inline">K = H X X^\top H</span> 與 <span class="math inline">L = H Y Y^\top H</span>（其中 <span class="math inline">H = I_n - \frac{1}{n}\mathbf{1}\mathbf{1}^\top</span>），線性 CKA 透過 Hilbert–Schmidt 獨立性準則（HSIC）定義歸一化相似度：<span class="math inline">\mathrm{CKA}(K, L) = \frac{\mathrm{tr}(KL)}{\sqrt{\mathrm{tr}(K^2)\mathrm{tr}(L^2)}}</span>。Kapil 與 Upla (2026) 在 TGO-II 中同時追蹤 SVCCA、TwoNN 內在維度與 token 共變異數譜；而 Wang 等人 (2026) 定義教師層增量與學生未恢復份額「可恢復性缺口（recoverability gap）」，發現僅用 CKA 選層在視覺生成教師蒸餾中會反轉 FID 改善排序。</li>
+<li>能做到什麼，代價是什麼：對正交變換與各向同性縮放不變，易於計算；但對可逆線性變換不具不變性，容易受少數高變異數方向主導，且不必然反映跨層因果資訊增量。</li>
+</ul>
+</li>
+<li>
+<p><strong>Logit 距離與可辨識性表示界（Logit Distance and Identifiability Bounds）</strong></p>
+<ul>
+<li>直覺理解：兩個語言模型就算輸出機率分佈的 KL 散度很接近，內部特徵向量仍可能相差甚遠；改用對數機率（logit）的差異距離，才能真正把兩個模型的內部空間鎖定在一個可逆線性變換之內。</li>
+<li>機制或核心表達式：對於具備可辨識性結構的判別式或自回歸模型，若兩模型誘導完全相同的條件分佈，其內部表示在可逆線性變換 <span class="math inline">A</span> 下相等。Nielsen 等人 (2026) 進一步針對近似情況定義基於可辨識等價類的表示不相似性度量，證明該不相似性受限於模型間的 logit 距離。雖然當輸出機率遠離零時 KL 散度理論上可為 logit 距離提供上界，但該常數過寬而無法在實務中提供非平凡控制。</li>
+<li>能做到什麼，代價是什麼：為表示相似性提供了連結輸出函數空間與潛在特徵空間的嚴格幾何保證，解釋為何純 KL 蒸餾常無法對齊內部特徵；但該界仰賴對數機率有界性，在極端確定或長尾零機率區域較難收緊。</li>
+</ul>
+</li>
+<li>
+<p><strong>柏拉圖表示假說三分模型與序數結構（PRH Tripartite Model and Ordinal Structure）</strong></p>
+<ul>
+<li>直覺理解：不同模型之所以看起來像，是因為它們都線性編碼了物體與屬性的真實關係（訊號），但各自的架構偏置與有限樣本噪聲（低頻詞雜訊）會干擾對齊程度；若改用樣本間的相對排序或連通骨架來測量，更能濾除尺度漂移。</li>
+<li>機制或核心表達式：Bangachev, Bresler 與 Polyanskiy (2026) 將跨模型對齊拆解為訊號、偏置與雜訊：藉稀疏自編碼器（SAE）抽取的線性物件屬性特徵往往比稠密表示展現更強的跨模態對齊（印證線性表示假說 LRH 支撐 PRH），中心化與歸一化可部分消除架構偏置，而有限樣本雜訊與詞頻顯著相關。在度量設計上，Soares 等人 (2026) 提出三元組（TSI）與四元組序數相似度（QSI），並證明 TSI 與局部互斥近鄰（MKNN）在形式上等價；You 等人 (2026) 則提出 <span class="math inline">H_0</span> 骨架重疊作為 MKNN 的全局拓撲對應，在 <span class="math inline">2\times 2</span> 框架中分離「關係結構」與「度量幾何」。</li>
+<li>能做到什麼，代價是什麼：序數指標與 <span class="math inline">H_0</span> 骨架對異常值穩健、具備明確隨機基準且擺脫歐氏尺度依賴；但它們丟棄了精確距離比值資訊，無法直接驗證線性探針或物理量回歸是否可無損遷移。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何 KL 蒸餾逼近教師輸出機率仍可能無法對齊內部線性表示</strong>：根據 Nielsen 等人 (2026) 的可辨識性與近似界理論，為什麼兩個自回歸語言模型即使在條件分佈上的 KL 散度很小，其隱藏層表示仍可能無法以可逆線性變換近似對齊？要控制什麼量才能保證線性表示相似度？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考機率空間與 logit 空間之間的非線性指數映射（softmax）。在低機率區域，兩個模型在 logit 維度上可以有極大的幾何偏移，但經過 softmax 歸一化後對條件機率分佈的貢獻極微，使得 <span class="math inline">\mathrm{KL}(p \| q)</span> 依然很小。反之，要迫使隱藏層表示在可逆線性等價類下接近，必須直接約束兩者的 logit 差異距離（logit distance）；當機率沒有統一的下界遠離零時，KL 散度對 logit 距離的控制會失效，導致蒸餾後的學生模型雖能匹配輸出機率卻保有不同幾何。</p>
+</details>
+<ol start="2">
+<li><strong>「共享局部幾何」與「可遷移物理表徵」為何會在層級測試中分離</strong>：在 Duraphe 等人 (2026) 針對 36 個預訓練模型於天文光學、紅外影像與光譜數據的測試中，為何幾乎所有模型對都能找到顯著的局部近鄰對齊，但用幾何對齊度挑選的模型層在下游物理遷移（如紅移預測）卻表現出負 <span class="math inline">R^2</span>？這對柏拉圖表示假說有何限制意義？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>首先區分「樣本間相對鄰接關係」與「任務相關物理變量的線性可解碼子空間」。局部近鄰（MKNN）或關係結構只檢驗兩個模型是否把「外觀或類別相近的天體」放在彼此附近，這可能僅源於輸入數據本身的低階統計群聚或主成分結構，且有時在連續計算區塊的「變化量」上比輸出端更強。然而，紅移等精細物理量可能編碼在方差較小或非等距的特定方向上，一旦跨調查（survey）的觀測噪聲或波段特性改變，幾何形狀上對齊的層未必保留對物理量不變的線性編碼。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>概念對齊目標之間的不等價性與介入基準驗證缺失</strong>：Dhimoïla 等人 (2026) 將概念表示相似度沿「對齊對象（表示 vs 概念）」與「粒度（逐實例 vs 分佈級）」拆成四種性質，並藉由 InterVenchA 介入基準證明實務中常被假設等價的對齊目標其實互不蘊含：最佳化其中一項性質並不能可靠恢復其他性質。如何建立與下游因果介入一致的統一對齊目標，而非僅依賴靜態相關性分數，是當前急需解決的難題。</li>
+<li><strong>局部幾何分歧與多尺度對齊指標的取捨</strong>：Wu 與 Khosla (2026) 運用近鄰加權 RSA（NW-RSA）與反事實 RSA（CF-RSA）比較大型語言模型，發現不同模型在粗糙全局幾何上高度一致，但在局部近鄰結構與受語言擾動下的行為卻出現明顯分歧。同時，在視覺生成蒸餾中（Wang et al. 2026），高 CKA 相似度與實際生成品質（FID）反轉，顯示現有相似度分數尚未能準確反映計算層間的功能性增量與非線性資訊瓶頸。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>演算法資訊距離向壓縮偏置與表示長度理論遷移</strong>：Bennett 等人 (1998) 定義的不可約資訊轉換長度與熱力學可逆功理論，可遷移至<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a>，為跨模型表示的共同子結構壓縮率與泛化複雜度提供獨立於具體架構的度量基準。</li>
+<li><strong>序數相似度與關係骨架向跨空間對齊與類比結構映射遷移</strong>：本方向確立的中心化歸一化偏置消除、互斥 <span class="math inline">k</span>-近鄰（MKNN）與 <span class="math inline">H_0</span> 拓撲骨架比較方法，可直接作為目標函數或檢驗工具遷移至<a class="wl" href="04B_%E6%A8%A1%E5%9E%8B%E7%B8%AB%E5%90%88%E3%80%81%E7%9B%B8%E5%B0%8D%E8%A1%A8%E7%A4%BA%E8%88%87%E7%84%A1%E7%9B%A3%E7%9D%A3%E8%B7%A8%E7%A9%BA%E9%96%93%E5%B5%8C%E5%85%A5%E5%B0%8D%E9%BD%8A.html">模型縫合、相對表示與無監督跨空間嵌入對齊</a>的多模型共同宇宙建構，並為<a class="wl" href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a>及<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>提供跨架構類比對應的結構判據。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-information-distance1998">1. Information Distance（1998）</h4>
+<ul>
+<li>作者與出處：Charles H. Bennett, Péter Gács, Ming Li, Paul M. B. Vitányi, Wojciech H. Zurek · <em>IEEE Transactions on Information Theory</em></li>
+<li>核心問題：在沒有預設空間度量或共同特徵基底時，如何定義兩個任意數位物件或表示狀態之間的普適結構距離。本文從演算法資訊論與熱力學確立不可約距離的基礎。</li>
+<li>關鍵做法：作者將資訊距離定義為把物件 <span class="math inline">x</span> 轉換為 <span class="math inline">y</span>（以及反向轉換）所需的最短通用程式長度，並證明在可逆計算條件下，該最短轉換長度嚴格等價於轉換過程所需消耗的最小熱力學功。</li>
+<li>跨領域啟發：為<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">表示對齊與類比推理（柏拉圖表示假說、跨空間最優配對與關係映射）</a>與<a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a>提供無關座標系的資訊極限基準，用來評估兩模型表示之間可壓縮共享知識的上限。</li>
+<li>連結：<a href="zotero://select/library/items/XUDXH6I8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/9804010" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-logit-distance-bounds-representational-similarity2026">2. Logit Distance Bounds Representational Similarity（2026）</h4>
+<ul>
+<li>作者與出處：Beatrix M. G. Nielsen, Emanuele Marconato, Luigi Gresele, Andrea Dittadi, Simon Buchholz · <em>arXiv (2026)</em></li>
+<li>核心問題：理論上輸出條件分佈完全相同的自回歸模型其內部表示應在可逆線性變換下等價，但先前觀察發現 KL 散度接近的模型往往缺乏線性表示相似性。本文尋找真正能控制表示相似度的分佈距離。</li>
+<li>關鍵做法：作者提出基於模型對數機率（logit）差異的距離度量，並定義對應可辨識等價類的表示不相似性指標，證明 logit 距離能為線性表示不相似性提供嚴格上界；同時證明雖在機率有下界時 KL 散度可上界控制 logit 距離，該界在實務上過寬而失效。</li>
+<li>跨領域啟發：釐清輸出蒸餾與內部幾何對齊之間的函數空間斷裂，直接影響<a class="wl" href="04B_%E6%A8%A1%E5%9E%8B%E7%B8%AB%E5%90%88%E3%80%81%E7%9B%B8%E5%B0%8D%E8%A1%A8%E7%A4%BA%E8%88%87%E7%84%A1%E7%9B%A3%E7%9D%A3%E8%B7%A8%E7%A9%BA%E9%96%93%E5%B5%8C%E5%85%A5%E5%B0%8D%E9%BD%8A.html">模型縫合、相對表示與無監督跨空間嵌入對齊</a>中蒸餾與縫合損失函數的設計。</li>
+<li>連結：<a href="zotero://select/library/items/QZSRNTUH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.15438" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-representation-alignment-rests-on-linear-structure2026">3. Representation Alignment Rests on Linear Structure（2026）</h4>
+<ul>
+<li>作者與出處：Kiril Bangachev, Guy Bresler, Yury Polyanskiy · <em>arXiv (2026)</em></li>
+<li>核心問題：柏拉圖表示假說主張能力提升的模型會趨同於共享表示，但文獻缺乏將收斂成因、架構差異與樣本雜訊拆分的統計框架。本文提出三分統計框架來解釋跨模型與跨模態對齊的來源與限制。</li>
+<li>關鍵做法：作者將表示拆為訊號、偏置與雜訊三部分：透過稀疏自編碼器（SAE）抽取的線性物件屬性特徵比稠密向量具備更高的跨模態對齊，說明線性表示假說（LRH）支撐 PRH；驗證中心化與歸一化可一致減緩架構偏置；並發現語言模型中的對齊度與詞頻正相關，揭示數據稀缺導致表示雜訊。</li>
+<li>跨領域啟發：把單純的經驗趨同假說推進到可拆解的統計因果機制，並為<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>中的稀疏線性概念特徵對齊提供理論依據。</li>
+<li>連結：<a href="zotero://select/library/items/2NNS7RDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.28870" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-scalable-and-interpretable-representation-alignment-with-ordinal-similarity2026">4. Scalable and Interpretable Representation Alignment with Ordinal Similarity（2026）</h4>
+<ul>
+<li>作者與出處：Diogo Soares, Pankhil Gawade, Andrea Dittadi, Ewa Szczurek · <em>arXiv (2026)</em></li>
+<li>核心問題：傳統表示相似度指標因基準線漂移而缺乏跨任務可解釋性，對離群點敏感，且在大數據集上計算核矩陣成本過高。本文建構可擴展且具穩健性的序數相似度測量體系。</li>
+<li>關鍵做法：作者引入三元組相似度指數（TSI）與四元組相似度指數（QSI），透過量化樣本間相對距離排序的一致性來衡量對齊程度，在理論上證明其對異常值穩健、基準可解釋且計算高效，並建立 TSI 與互斥近鄰（Mutual Nearest Neighbors）局部鄰域對齊的嚴格形式等價性。</li>
+<li>跨領域啟發：用無尺度序數關係替代對偶內積矩陣，提供連接局部鄰域與大尺度表示比較的可微工程工具。</li>
+<li>連結：<a href="zotero://select/library/items/SEZUN3QV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.16379" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-what-converges-in-the-platonic-representation-hypothesis-structure-over-geometry2026">5. What Converges in the Platonic Representation Hypothesis? Structure over Geometry（2026）</h4>
+<ul>
+<li>作者與出處：Junwon You, Mihyun Jang, Sangwoo Mo, Jae-Hun Jung · <em>arXiv (2026)</em></li>
+<li>核心問題：近期研究傾向將柏拉圖表示假說收窄為局部鄰域共享，認為全局相似性在校正後便會消失，但這種比較混淆了「局部或全局尺度」與「關係結構或度量幾何」兩個正交維度。</li>
+<li>關鍵做法：作者設計控制變因的 <span class="math inline">2\times 2</span> 評估框架，分別在局部與全局尺度下量測「關係結構（哪些樣本相連）」與「度量幾何（具體距離與相關係數值）」，並提出 <span class="math inline">H_0</span> 骨架重疊作為互斥 <span class="math inline">k</span>-近鄰的全局拓撲對應物。視覺語言模型實驗顯示關係結構在局部與全局尺度皆呈現穩健趨同，而嚴格度量幾何則隨尺度變嚴而分化。</li>
+<li>跨領域啟發：精確定位現代多模態模型到底在幾何的哪一層次收斂，並與<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>的持續同調 <span class="math inline">H_0</span> 分析直接互補。</li>
+<li>連結：<a href="zotero://select/library/items/EH3XUMF8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.27252" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-shared-geometry-is-not-shared-physics-a-layerwise-test-of-the-platonic-representation-hypothesis-in-astronomy2026">6. Shared Geometry Is Not Shared Physics: A Layerwise Test of the Platonic Representation Hypothesis in Astronomy（2026）</h4>
+<ul>
+<li>作者與出處：Kshitij Duraphe, Aravind Kannappan, Dun Li Chan, Okiki Famutimi, Yaswant Sai Ejjagiri · <em>arXiv (2026)</em></li>
+<li>核心問題：即使兩個科學基礎模型在表示空間上展現高局部鄰域對齊，這是否意味著它們對物理性質的編碼可互相替換並支持跨模態物理遷移？本文在天文學多巡天數據上進行逐層反例檢驗。</li>
+<li>關鍵做法：作者分析 36 個預訓練模型在交叉配對的光學影像、紅外影像與光譜上的每一層表示（共 139 組比較），發現經過跨層搜尋後幾乎所有組別都能找到顯著的局部鄰域對齊，但對齊度並不隨網路深度單調遞增，且按幾何對齊挑選的模型層在跨影像遷移上全面輸給按標籤挑選的層，所有最終模型的紅移遷移更出現負 <span class="math inline">R^2</span>。</li>
+<li>跨領域啟發：為 PRH 與表示對齊研究畫出清晰的經驗邊界：幾何鄰域一致並不等同於科學物理變量的不變線性編碼。</li>
+<li>連結：<a href="zotero://select/library/items/VRH4C6I4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.04130" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-48-篇">G5｜本子方向全量文獻泛讀清單（共 48 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 48 篇文獻（含開放存取 PDF 48 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進16-篇">A. 奠基經典、專著與核心演進（16 篇）</h3>
+<ul>
+<li><strong>1998｜Information Distance</strong>，Charles H. Bennett et al.（<em>IEEE Transactions on Information Theory</em>，511 引）：用最短互轉程式長度定義普適認知距離，並證明它恰好等於可逆熱力學轉換的最小物理功。 <a href="zotero://select/library/items/XUDXH6I8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/9804010" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Tied-Augment: Controlling Representation Similarity Improves Data Augmentation</strong>，Emirhan Kurtulus et al.（<em>arXiv</em>）：針對資料增強常需大量訓練輪次才能見效的問題，提出 Tied-Augment 框架，在損失函數中加入控制影像畸變下表徵相似度的項目，以提升 RandAugment 與 mixup 等增強方法效果。 <a href="zotero://select/library/items/IHIUJJ5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.13520" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Enhance audio generation controllability through representation similarity regularization</strong>，Yangyang Shi et al.（<em>arXiv</em>）：在基於語言模型的音訊生成訓練中引入音訊與文本表徵相似度正則化，特別在無分類器引導（CFG）移除文本交叉注意力階段約束表徵一致，以提升生成可控性。 <a href="zotero://select/library/items/M4JDP8GM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.08773" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Getting aligned on representational alignment</strong>，Ilia Sucholutsky et al.（<em>arXiv</em>）：這篇綜述橫跨認知科學、神經科學與機器學習三大領域，系統梳理生物與人工智慧系統間表徵對齊的相似度量測指標、表徵對齊與行為一致性之關聯，以及主動修改並對齊系統表徵的方法。 <a href="zotero://select/library/items/G8NX4AJ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.13018" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Towards Measuring Representational Similarity of Large Language Models</strong>，Max Klabunde et al.（<em>arXiv</em>）：實測多款 7B 參數大語言模型的內部表示相似度，發現部分模型之間存在顯著結構差異，同時指出現有表示相似度指標在使用上的判讀陷阱與限制，提醒評估時需謹慎校驗。 <a href="zotero://select/library/items/SDANKPRS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.02730" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Deconfounded Representation Similarity for Comparison of Neural Networks</strong>，Tianyu Cui et al.（<em>arXiv</em>）：指出 RSA 與 CKA 等表徵相似度指標會受輸入資料族群結構干擾，提出基於共變量調整迴歸的去干擾修正法，在保留原有不變性的同時提升語意相似網路的辨別度。 <a href="zotero://select/library/items/M95AU8TS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2202.00095" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Feature Structure Distillation with Centered Kernel Alignment in BERT Transferring</strong>，Hee-Jun Jung et al.（<em>arXiv</em>）：在 BERT 知識蒸餾中區分特徵內、局部特徵間與全域特徵間三類表徵結構，基於中心核對齊（CKA）提出特徵結構蒸餾法並搭配聚類記憶增強機制，於 GLUE 九項任務進行實證分析。 <a href="zotero://select/library/items/VZ554HK5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2204.08922" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Understanding Robust Learning through the Lens of Representation Similarities</strong>，Christian Cianfarani et al.（<em>arXiv</em>）：跨三個視覺資料集運用表徵相似度指標對比對抗穩健訓練與標準訓練模型的逐層表徵差異，藉此診斷穩健網路在良性輸入效能退化、穩健性泛化不佳與過擬合加劇等現象的成因。 <a href="zotero://select/library/items/IRTJTU6D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.09868" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Curbing Task Interference using Representation Similarity-Guided Multi-Task Feature Sharing</strong>，Naresh Kumar Gurulingan, Elahe Arani, Bahram Zonooz（<em>arXiv</em>）：針對密集預測多任務學習共享編碼器與解碼器時容易引發任務干擾的問題，提出基於任務間表徵相似度的漸進式解碼器融合（PDF）方法，在不損及歸納偏置下改善泛化與穩健性。 <a href="zotero://select/library/items/9ZK32H53" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2208.09427" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Interpreting Bias in the Neural Networks: A Peek Into Representational Similarity</strong>，Gnyanesh Bangaru, Lalith Bharadwaj Baru, Kiran Chakravarthula（<em>arXiv</em>）：運用中心核對齊 (CKA) 分析卷積神經網路 (ResNet) 在含偏誤影像資料集上採用機率型與間隔型不同目標函數訓練時的內部表徵相似度與抗偏誤效能差異。 <a href="zotero://select/library/items/6HFEDBVH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.07774" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Grounding Representation Similarity with Statistical Testing</strong>，Frances Ding, Jean-Stanislas Denain, Jacob Steinhardt（<em>arXiv</em>）：建立統計檢定框架以校準 CCA 與 CKA 等神經表徵相似度指標，要求指標對影響探針準確率或 OOD 穩健性的變化敏感，同時對隨機初始化等無關變動具特異性。 <a href="zotero://select/library/items/BJD22SQ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2108.01661" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Gaussian RBF Centered Kernel Alignment (CKA) in the Large Bandwidth Limit</strong>，Sergio A. Alvarez（<em>IEEE TPAMI, vol. 45, issue 5, 01 May 2023, pages 6587-6593</em>）：證明採用高斯徑向基核的中心核對齊 CKA 在大頻寬極限下收斂至線性 CKA，並揭示特徵表徵幾何偏心率如何決定非線性行為的頻寬邊界。 <a href="zotero://select/library/items/6IBTJERW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.09305" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Representation Similarity Analysis for Efficient Task taxonomy &amp; Transfer Learning</strong>，Kshitij Dwivedi, Gemma Roig（<em>arXiv</em>）：借鑑表徵相似性分析（RSA），僅使用預訓練模型與少量樣本計算不同視覺任務間的表徵相關性分數以建立任務分類學，進而高效挑選遷移學習源模型而無需逐一微調驗證。 <a href="zotero://select/library/items/UHCZAAMA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1904.11740" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Similarity of Neural Network Representations Revisited</strong>，Simon Kornblith et al.（<em>arXiv</em>）：證明典型相關分析（CCA）及任何對可逆線性變換不變的統計量在表徵維度高於樣本數時皆無法有效度量相似性，遂提出等價於中心核對齊（CKA）的表徵相似性矩陣指標以可靠辨識跨模型層對應關係。 <a href="zotero://select/library/items/93G6NTQ2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1905.00414" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Insights on representational similarity in neural networks with canonical correlation</strong>，Ari S. Morcos, Maithra Raghu, Samy Bengio（<em>arXiv</em>）：在 SVCCA 基礎上提出投影加權典型相關分析（PWCCA）以區分表徵中的訊號與雜訊，比較多組 CNN 後發現能泛化的網路較死記樣本的網路收斂至更相似的表徵，且較寬網路的表徵收斂更一致。 <a href="zotero://select/library/items/92J4HJ2T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1806.05759" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Understanding Deep Image Representations by Inverting Them</strong>，Aravindh Mahendran, Andrea Vedaldi（<em>arXiv</em>）：提出由影像編碼重建原圖的通用表徵反演框架，在反演 HOG 與 SIFT 時優於既有方法，並用於反演卷積神經網路（CNN）影像表徵，顯示多個層級仍保留接近原圖精度的視覺資訊。 <a href="zotero://select/library/items/N7XZSX4U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1412.0035" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻32-篇">B. 2024–2026 近期推進與前沿文獻（32 篇）</h3>
+<ul>
+<li><strong>2026｜Boosting Latent Diffusion Models via Disentangled Representation Alignment</strong>，John Page et al.（<em>arXiv</em>）：指出訓練潛在擴散模型用的變分自編碼器若直接套用視覺基礎模型全局語意對齊容易引發細粒度屬性坍縮，強調 VAE 更須具備語意解耦表徵對齊能力以保留結構化細節並提升生成品質。 <a href="zotero://select/library/items/S5W4QTKG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.05823" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Logit Distance Bounds Representational Similarity</strong>，Beatrix M. G. Nielsen et al.（<em>arXiv</em>）：針對具可識別性的判別式與自回歸模型（KL 散度相近未必保證線性表示相似），定義基於模型可識別性類的表示相異度指標，並證明其上界可由輸出 logit 差異距離加以控制。 <a href="zotero://select/library/items/QZSRNTUH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.15438" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TORA: Topological Representation Alignment for 3D Shape Assembly</strong>，Nahyuk Lee et al.（<em>arXiv</em>）：針對三維形狀組裝流匹配缺乏跨零件互動引導的問題，提出拓撲表示對齊框架 TORA，結合記號級餘弦匹配與中心核對齊 (CKA) 損失從凍結 3D 編碼器蒸餾幾何與接觸導向的結構關係給流匹配骨幹。 <a href="zotero://select/library/items/7JQ67ET3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.04050" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Representation Alignment Rests on Linear Structure</strong>，Kiril Bangachev, Guy Bresler, Yury Polyanskiy（<em>arXiv</em>）：建立訊號、偏置與雜訊三分統計框架分析柏拉圖表徵假說，以 SAE 抽取線性物件屬性特徵佐證線性表徵假說為跨模態對齊基礎，並指出中心化與正規化可一致性改善不同架構間的表徵對齊。 <a href="zotero://select/library/items/2NNS7RDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.28870" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Improving Visual Representation Alignment Generation with GRPO</strong>，Shentong Mo, Sukmin Yun（<em>arXiv</em>）：針對擴散 Transformer 採用固定表徵對齊損失難以動態協調對齊強度與生成品質的問題，提出 VRPO 策略最佳化方法，以生成式表徵策略最佳化目標取代靜態外部監督損失。 <a href="zotero://select/library/items/S64ITCSN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.00583" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A Unifying Framework for Concept-Based Representational Similarity</strong>，Grégoire Dhimoïla et al.（<em>arXiv</em>）：沿對齊對象（表徵與概念）及層級（實例與分布）雙軸拆解出四種翻譯與概念一致性性質，以此統一釐清既有對齊目標的理論保證，並提出具人類感知校驗的干預式基準 InterVenchA。 <a href="zotero://select/library/items/T9JEPWST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.09653" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Scalable and Interpretable Representation Alignment with Ordinal Similarity</strong>，Diogo Soares et al.（<em>arXiv</em>）：提出基於序數關係一致性的表徵相似度框架，包含三元組 TSI 與四元組 QSI 指標，從理論上證明其具備可解釋性、離群值穩健性與高計算效率，並建立 TSI 與相互最近鄰局部鄰域對齊之間的正式等價性。 <a href="zotero://select/library/items/SEZUN3QV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.16379" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Mind the Heads: Topological Representation Alignment for Multimodal LLMs</strong>，Davide Caffagni et al.（<em>arXiv</em>）：基於柏拉圖表徵假說提出注意力頭級表徵對齊方法 HeRA，將多模態大型語言模型的對齊粒度從固定層級細化至個別注意力頭，並依循相互 <span class="math inline">K</span> 近鄰概念設計可微對比目標以保留跨模態表徵的局部鄰域拓撲結構。 <a href="zotero://select/library/items/5IEF35W5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.23885" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Transformer Geometry Observatory TGO-II: Representational Similarity Observatory</strong>，Kaustubh Kapil, Kishor P. Upla（<em>arXiv</em>）：提出表徵幾何分析框架 TGO-II，整合 CKA、SVCCA、雙近鄰內蘊維度 (TwoNN-ID) 與 token 協方差分析，系統性追蹤 ViT-Small/16 在監督訓練過程中內部表徵幾何的演化規律。 <a href="zotero://select/library/items/4RR4I23V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.02386" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Platonic Representation Hypothesis on World Models</strong>，Wenhow Li et al.（<em>arXiv</em>）：把柏拉圖表示假說推廣到動態環境建模，提出預測一致性假設（Predictive Consistency Assumption），證明共享的狀態轉移預測目標會形成演化選擇壓力，驅使異質世界模型收斂到同構的潛在表徵幾何。 <a href="zotero://select/library/items/UFR9V7N9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.23720" rel="noopener">官方連結</a></li>
+<li><strong>2026｜What Converges in the Platonic Representation Hypothesis? Structure over Geometry</strong>，Junwon You et al.（<em>arXiv (Cornell University)</em>）：建構 <span class="math inline">2\times 2</span> 對照框架將局部與全域尺度從「關係結構」與「度量幾何」中解耦，引入 <span class="math inline">H_0</span> 骨架重疊作為互近鄰的全域對應，藉此檢驗柏拉圖表示假說下真正收斂的結構或幾何成分。 <a href="zotero://select/library/items/EH3XUMF8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.27252" rel="noopener">官方連結</a></li>
+<li><strong>2026｜What Visual Generators Need from Teachers: Rethinking Representation Alignment</strong>，Yongcong Wang et al.（<em>arXiv</em>）：拆解擴散 Transformer 表徵對齊（REPA）的層級填充機制，發現學生模型自底向上逼近教師層特徵增量並於頂層停滯，提出從單一未對齊檢查點量測的可恢復性落差以決定對齊層與時機。 <a href="zotero://select/library/items/GTC3T29X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.34732" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Shared Geometry Is Not Shared Physics: A Layerwise Test of the Platonic Representation Hypothesis in Astronomy</strong>，Kshitij Duraphe et al.（<em>arXiv (Cornell University)</em>）：橫跨光學影像、紅外線與光譜，對 36 個預訓練模型做逐層分析。局部鄰域幾何對齊普遍存在，但不隨深度單調上升，而且幾何對齊的表徵未必有物理可互換性。這為柏拉圖表示假說劃出一條重要的科學邊界。 <a href="zotero://select/library/items/VRH4C6I4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.04130" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Scale, Drivers, and Limits of Representational Alignment Across Large Language Models</strong>，Jialin Wu, Meenakshi Khosla（<em>arXiv (Cornell University)</em>）：針對聚合表徵相似度指標容易掩蓋不同幾何尺度差異的問題，提出鄰域加權表徵相似度分析（NW-RSA）與反事實表徵相似度分析（CF-RSA），藉此統一檢驗大型語言模型間由局部至全域的對齊尺度與語言學驅動因子。 <a href="zotero://select/library/items/NG767V4W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.14476" rel="noopener">官方連結</a></li>
+<li><strong>2026｜RankAlign: Vision-Language Representation Alignment via Rank Transformation</strong>，Enzhe Zhao, Marco Fiorucci, Lamberto Ballan（<em>arXiv (Cornell University)</em>）：針對無配對視覺語言類別對齊受限於模態間相似度量尺差異的問題，提出秩轉換正規化策略 RankAlign，於置換匹配前將模態內相似核轉為序數關係表徵，使其對嚴格遞增相似度重參數化具不變性。 <a href="zotero://select/library/items/8M2BIMN6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31145" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A Spiking Neural Model of the Mental Lexicon: Representations, Similarity Structure, and Associative Retrieval in Perception and Production</strong>，Bernd J. Kröger（<em>arXiv</em>）：模型建立在神經工程框架（Neural Engineering Framework, NEF）與語意指標架構（Semantic Pointer Architecture, SPA）上，用 199,400 顆洩漏積分發放（LIF）脈衝神經元建構涵蓋 613 個詞彙條目的心智詞庫。概念表徵與音韻形式表徵由關係圖遞迴構造，獨立的詞元（Lemma）則當作中介的詞彙身分識別碼，把感知路徑（音韻 → 詞元 → 概念）與產生路徑（概念 → 詞元 → 音韻）兩個方向接起來。每條通道都結合贏者全拿（Winner-Take-All）競爭選擇與閾值傳遞聯想記憶。作者嚴格形式化了層內相似度結構、跨層聯想檢索與神經發放解碼判讀，在全部 613 詞庫競爭下驗證了雙向的精準詞彙提取，並開源完整的程式碼與模擬文件。 <a href="zotero://select/library/items/PK5572WU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.09402" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Where Does Alignment Emerge and What Does It Mean? A Closer Look at the Platonic Representation Hypothesis</strong>，Julia Herbst et al.（<em>arXiv (Cornell University)</em>）：檢驗柏拉圖表示假說在層與維度間的湧現位置，建立單模態與多模態基線以排除深度和寬度混淆，並證實只要圖說乾淨且資訊充足，較新語言模型仍延續能力與對齊提升趨勢。 <a href="zotero://select/library/items/KDVH55K9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.12869" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Same-State Pairs Make One JEPA Proof of the Platonic Representation Hypothesis Vacuous</strong>，Xin Li（<em>arXiv</em>）：檢視 JEPA 對柏拉圖表示假說的唯一性證明，指出在硬白化目標下同狀態正樣本使誘導世界核成為單位算子，當 <span class="math inline">k &lt; d_z-1</span> 時該證明依賴的譜隙前提無法滿足而使結論落空。 <a href="zotero://select/library/items/BT4NKKU4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.16182" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Understanding the Emergence of Multimodal Representation Alignment</strong>，Megan Tjandrasuwita et al.（<em>arXiv</em>）：針對獨立訓練的單模態模型隨規模成長而出現隱式跨模態對齊的現象進行實證探討，分析隱式對齊湧現的條件及其與下游任務表現的關聯，揭示兩者皆高度取決於特定資料分佈特徵。 <a href="zotero://select/library/items/GZWP9G84" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.16282" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Spectral Analysis of Representational Similarity with Limited Neurons</strong>，Hyunmo Kang, Abdulkadir Canatar, SueYeon Chung（<em>arXiv</em>）：運用隨機矩陣理論分析神經元同步紀錄數量受限對 CKA 與 CCA 表徵相似度估計的影響，證明有限採樣會因特徵向量離域化導致相似度被系統性低估，並揭示冪律譜下局域化特徵向量的尺度律。 <a href="zotero://select/library/items/DHX8N5E3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.19648" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Pre-trained Models Succeed in Medical Imaging with Representation Similarity Degradation</strong>，Wenqiang Zu et al.（<em>arXiv</em>）：研究預訓練模型遷移至領域差異顯著的醫學影像任務時其表徵相似度的演變軌跡，發現高表現模型仍能兼顧任務準確率與對原表徵的保留，並證實逐層相似度指標與表徵品質之間具線性關聯。 <a href="zotero://select/library/items/AWUK9RA4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.07958" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Representational Similarity via Interpretable Visual Concepts</strong>，Neehar Kondapaneni, Oisin Mac Aodha, Pietro Perona（<em>arXiv</em>）：針對傳統層級相似度指標僅輸出單一數值而缺乏語意解釋的局限，提出可解釋表徵相似度方法 RSVC，識別兩視覺模型間共享與各自獨有的視覺概念，藉以歸因模型決策差異並於多架構跨訓練方案完成驗證。 <a href="zotero://select/library/items/ZCZDTRSE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.15699" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Harnessing the Universal Geometry of Embeddings</strong>，Rishi Jha et al.（<em>arXiv</em>）：提出無須成對資料或編碼器的無監督文本嵌入空間翻譯方法，基於通用潛在語意結構將向量跨不同架構與參數規模模型高保真轉換，並指出攻擊者可藉此從未知嵌入向量反推出敏感文件屬性。 <a href="zotero://select/library/items/Q8KVDX7W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.12540" rel="noopener">官方連結</a></li>
+<li><strong>2025｜What matters for Representation Alignment: Global Information or Spatial Structure?</strong>，Jaskirat Singh et al.（<em>arXiv</em>）：橫跨 27 種視覺編碼器實證剖析表徵對齊 REPA 對擴散生成訓練的關鍵因素，意外發現真正決定生成品質的是區塊詞元間的空間相似性結構，而非編碼器的全局分類準確率。 <a href="zotero://select/library/items/2FG8C24W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.10794" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Rethinking Centered Kernel Alignment in Knowledge Distillation</strong>，Zikai Zhou et al.（<em>arXiv</em>）：從理論上重新檢視知識蒸餾中的中心核對齊（CKA），將 CKA 解耦為最大均值差異（MMD）的上界與常數項之和，藉此釐清其在縮減教師與學生模型表示差距中的機制並簡化蒸餾設計。 <a href="zotero://select/library/items/WZCASX2P" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.11824" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Correcting Biased Centered Kernel Alignment Measures in Biological and Artificial Neural Networks</strong>，Alex Murphy, Joel Zylberberg, Alona Fyshe（<em>arXiv</em>）：指出神經科學資料（如 THINGS 專案之 fMRI 與 MEG）處於低樣本高維度區間時，有偏 CKA 對隨機矩陣也會給出高相似度且受特徵樣本比影響，使不同維度表徵無法直接比較。 <a href="zotero://select/library/items/75PC6K55" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.01012" rel="noopener">官方連結</a></li>
+<li><strong>2024｜The Platonic Representation Hypothesis</strong>，Minyoung Huh et al.（<em>arXiv</em>）：提出柏拉圖表示假說，綜述多領域神經網路表徵趨同現象並論證視覺與語言模型隨規模擴大會在資料點距離度量上趨於一致，朝向共同的現實統計模型收斂，同時討論選擇壓力與反例。 <a href="zotero://select/library/items/E3J86N3T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.07987" rel="noopener">官方連結</a></li>
+<li><strong>2024｜ReSi: A Comprehensive Benchmark for Representational Similarity Measures</strong>，Max Klabunde et al.（<em>arXiv</em>）：建立首個全面評測神經網路表徵相似度量指標的基準 ReSi，整合 6 項設計測試、24 種相似度量、14 種神經網路架構以及涵蓋圖、語言與視覺領域的 7 個資料集，進行跨架構實證比較。 <a href="zotero://select/library/items/FEMJ5GBB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.00531" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Unsupervised Part Discovery via Dual Representation Alignment</strong>，Jiahao Xia et al.（<em>arXiv</em>）：為實現無監督物體部件表徵學習，針對同一影像施加不同幾何變換產生配對影像並提出 PartFormer 模組萃取多部件表徵，藉由雙向交換配對影像表徵來增強幾何變換不變性並提升部件發現能力。 <a href="zotero://select/library/items/29VXEXX6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.08108" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Topological Representational Similarity Analysis in Brains and Beyond</strong>，Baihan Lin（<em>arXiv</em>）：針對傳統表徵相似度分析（RSA）僅重幾何距離而忽略拓撲結構的限制，提出拓撲表徵相似度分析（tRSA），對表徵相異度施加非線性單調變換以兼顧局部拓撲與中尺度幾何，提升跨腦區與跨模型比對抗噪性。 <a href="zotero://select/library/items/Z9VB7Z79" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.11948" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Advancing Academic Knowledge Retrieval via LLM-enhanced Representation Similarity Fusion</strong>，Wei Dai, Peng Fu, Chunjing Gan（<em>arXiv</em>）：介紹獲KDD Cup 2024 AQA第二名的LLM-KnowSimFuser，微調LLM增強檢索模型並依表徵相似度矩陣進行加權融合，以提升學術知識檢索表現。 <a href="zotero://select/library/items/S8CDI9II" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.10455" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Objective drives the consistency of representational similarity across datasets</strong>，Laure Ciernik et al.（<em>arXiv</em>）：系統測量表徵相似度隨測試刺激集變化的情形，驗證柏拉圖表示假說是否受資料集混淆，發現訓練目標函數（如自監督學習）是決定跨資料集相似度一致性的關鍵。 <a href="zotero://select/library/items/4MFWJCWJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.05561" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-6d6bb473">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/04_%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E9%A1%9E%E6%AF%94.html">表示對齊與類比推理（柏拉圖表示假說、跨空間最優配對與關係映射）</a><span class="rs">這個領域研究兩件事：一是兩個智能系統的座標軸完全不同，甚至來自不同感官模態或不同學科體系，為什麼仍會收斂出同構的內部關係幾何；二是怎麼不靠人工平…</span></li><li><a href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a></li><li><a href="04B_%E6%A8%A1%E5%9E%8B%E7%B8%AB%E5%90%88%E3%80%81%E7%9B%B8%E5%B0%8D%E8%A1%A8%E7%A4%BA%E8%88%87%E7%84%A1%E7%9B%A3%E7%9D%A3%E8%B7%A8%E7%A9%BA%E9%96%93%E5%B5%8C%E5%85%A5%E5%B0%8D%E9%BD%8A.html">模型縫合、相對表示與無監督跨空間嵌入對齊</a></li><li><a href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

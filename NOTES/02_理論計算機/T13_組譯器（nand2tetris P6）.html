@@ -12,18 +12,18 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-9bd4df3d">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">理論計算機</a><a class="find" href="../../index.html#n=n-9bd4df3d">Find on board</a></header>
+<body class="doc" data-note="n-9bd4df3d" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 理論計算機</span>
 <article>
 
 <h1 id="t13組譯器nand2tetris-p6">T13｜組譯器（nand2tetris P6）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="T12_Python%20%E5%85%83%E7%B5%84%E3%80%81%E6%AA%94%E6%A1%88%E8%88%87%E9%A1%9E%E5%88%A5.html">T12 Python 元組、檔案與類別</a> ｜ 下一章：<a class="wl" href="T14_Petzold%E3%80%8ACode%E3%80%8B%E9%80%9A%E8%AE%80.html">T14 Petzold《Code》通讀</a>
 本線先備：<a class="wl" href="T11_CPU%20%E8%88%87%E9%9B%BB%E8%85%A6%EF%BC%88nand2tetris%20P5%EF%BC%89.html">T11 CPU 與電腦（nand2tetris P5）</a> · <a class="wl" href="T12_Python%20%E5%85%83%E7%B5%84%E3%80%81%E6%AA%94%E6%A1%88%E8%88%87%E9%A1%9E%E5%88%A5.html">T12 Python 元組、檔案與類別</a></p>
-</aside>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/02-tcs.md:125</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -59,10 +59,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">2</span></h3><ul><li><a href="T11_CPU%20%E8%88%87%E9%9B%BB%E8%85%A6%EF%BC%88nand2tetris%20P5%EF%BC%89.html">CPU 與電腦</a><span class="tag-plan">計劃</span><span class="rs">nand2tetris 第 5 章與 Project 5：CPU 與電腦</span></li><li><a href="T12_Python%20%E5%85%83%E7%B5%84%E3%80%81%E6%AA%94%E6%A1%88%E8%88%87%E9%A1%9E%E5%88%A5.html">Python 元組、檔案與類別</a><span class="tag-plan">計劃</span><span class="rs">Think Python 第 11–17 章：元組、檔案、類別、方法、繼承</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">1</span></h3><ul><li><a href="T49_%E8%99%9B%E6%93%AC%E6%A9%9F%E3%80%81%E7%B7%A8%E8%AD%AF%E5%99%A8%E8%88%87%E4%BD%9C%E6%A5%AD%E7%B3%BB%E7%B5%B1%EF%BC%88nand2tetris%207%E2%80%9312%EF%BC%89.html">虛擬機、編譯器與作業系統</a><span class="tag-plan">計劃</span><span class="rs">nand2tetris 第 7–12 章：虛擬機、編譯器、作業系統</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

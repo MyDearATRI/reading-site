@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>19C｜機器遺忘、微調安全退化與執行期安全護欄 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f3995cba" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="19c機器遺忘微調安全退化與執行期安全護欄">19C｜機器遺忘、微調安全退化與執行期安全護欄</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a>
+同領域子方向：<a class="wl" href="19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a> · <a class="wl" href="19B_%E8%B6%8A%E7%8D%84%E6%94%BB%E6%93%8A%E3%80%81%E8%87%AA%E5%8B%95%E5%8C%96%E7%B4%85%E9%9A%8A%E6%BC%94%E7%B7%B4%E8%88%87%E5%B0%8D%E6%8A%97%E5%BE%8C%E9%96%80%E6%8A%95%E6%AF%92.html">越獄攻擊、自動化紅隊演練與對抗後門投毒</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a> 的模型生命週期防禦端，承接 <a class="wl" href="19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a> 與 <a class="wl" href="19B_%E8%B6%8A%E7%8D%84%E6%94%BB%E6%93%8A%E3%80%81%E8%87%AA%E5%8B%95%E5%8C%96%E7%B4%85%E9%9A%8A%E6%BC%94%E7%B7%B4%E8%88%87%E5%B0%8D%E6%8A%97%E5%BE%8C%E9%96%80%E6%8A%95%E6%AF%92.html">越獄攻擊、自動化紅隊演練與對抗後門投毒</a> 所揭示的輸入層與微調層威脅，處理「對齊模型在下游微調後安全退化」以及「推論階段如何藉由內部表徵介入阻斷有害輸出」兩項問題。演進主線從輸入端拒絕訓練（refusal training）與事後輸出過濾，轉向解析微調造成的安全邊界鬆動，並發展至基於表徵工程（representation engineering）的執行期安全護欄與對抗評估。</p>
+</aside>
+<ul>
+<li>核心問題：現有安全對齊基礎設施多在推論階段對模型行為施加拒絕偏好，卻無法在開放權重微調或端點微調 API 條件下維持不變性：Qi 等人 (2023) 證明僅需少量對抗範例即可破除安全護欄，甚至使用無害的下游通用資料集進行微調也會連帶弱化模型的安全拒絕能力。另一方面，傳統拒絕訓練或針對特定攻擊模式的對抗訓練容易被未見過的越獄樣本繞過，而直接在模型隱藏狀態上設置「斷路器（circuit breakers）」雖可繞過表層詞彙策略，Schwinn 與 Geisler (2024) 顯示在輸入詞元嵌入空間進行無約束連續最佳化攻擊仍能取得極高的攻擊成功率。</li>
+<li>直覺模型：把已對齊語言模型想像成一座建有標準門禁檢查哨的大樓：拒絕訓練只是在正門張貼「禁止通行」標誌並訓練警衛辨識常見違禁話術，一旦租戶拿到內部裝修權限（下游微調），哪怕只是重新粉刷牆面（良性資料微調），都可能無意間拆掉門禁感測器；執行期斷路器則把感測器改裝在樓內關鍵輸電幹線（中間層表徵空間）上，只要偵測到通往危險行為的電流湧動便直接跳閘中斷輸出。</li>
+<li>分階段閱讀路線：第一步先讀 Qi 等人 (2023)，建立開放微調介面下「惡意少樣本越獄」與「良性資料微調附帶安全退化」兩類風險的實證現象與威脅模型。第二步讀 Zou 等人 (2024)，掌握如何以表徵工程取代單純拒絕訓練，在中間層表徵方向施加正交或反向引導以建構執行期斷路器，並延伸觀察其在多模態視覺劫持與智能體系統的適用範圍。第三步讀 Schwinn 與 Geisler (2024) 對斷路器進行嵌入空間連續攻擊的複檢報告，理解目前表徵層護欄與嚴格對抗魯棒性之間的差距；若需對照「斷路器」概念在系統安全工程的異構形式，可另檢視 Dağlı 等人 (2026) 與 Van Deyck 等人 (2026) 關於智慧合約與電力網格故障隔離的規劃設計。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;安全對齊模型與推論拒絕訓練&quot;] --&gt; B[&quot;開放微調介面與權重可塑性&quot;]
+  B --&gt; C[&quot;少樣本對抗微調與良性微調安全退化 Qi 2023&quot;]
+  A --&gt; D[&quot;表層拒絕與特定模式對抗訓練易被繞過&quot;]
+  D --&gt; E[&quot;表徵工程與執行期斷路器 Zou 2024&quot;]
+  E --&gt; F[&quot;文本、多模態劫持與智能體行為阻斷&quot;]
+  E --&gt; G[&quot;嵌入空間連續攻擊複檢 Schwinn and Geisler 2024&quot;]
+  C --&gt; H[&quot;微調期安全維持與機器遺忘需求&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>微調誘導安全退化 (Fine-Tuning Compromises Safety)</strong></p>
+<ul>
+<li>直覺理解：即使預訓練後已經過嚴格的安全對齊微調，只要允許使用者以梯度更新調整權重，少數幾筆刻意構造的範例就能快速覆寫拒絕邊界，甚至連完全無害的日常任務微調也會順帶拉偏安全行為。</li>
+<li>機制或核心表達式：給定已對齊模型參數 <span class="math inline">\theta_{\mathrm{aligned}}</span> 與下游微調資料集 <span class="math inline">\mathcal{D}_{\mathrm{ft}}</span>，在標準微調目標 <span class="math inline">\min_{\theta} \sum_{(x, y) \in \mathcal{D}_{\mathrm{ft}}} \ell(f_{\theta}(x), y)</span> 下，更新方向 <span class="math inline">\Delta \theta</span> 並未受到維持安全集合 <span class="math inline">\mathcal{D}_{\mathrm{safe}}</span> 拒絕邊界的約束。Qi 等人 (2023) 的紅隊實證顯示，在 GPT-3.5 Turbo 的微調 API 上僅使用 10 筆對抗設計樣本（成本低於 0.20 美元）即可消除安全護欄，且僅使用良性常用資料集微調同樣會在無惡意意圖下顯著提高有害指令的響應率。</li>
+<li>能做到什麼，代價是什麼：下游微調讓模型能適配特定領域語氣與格式，但只要缺乏對更新子空間的保護或安全正則項，客製化程度與原始對齊保持之間就會存在結構性衝突。</li>
+</ul>
+</li>
+<li>
+<p><strong>表徵工程斷路器 (Representation-Level Circuit Breakers)</strong></p>
+<ul>
+<li>直覺理解：與其教導模型在面對危險提問時「學著說拒絕的話」，不如直接在模型內部神經活動剛開始朝危險語意方向流動時就將該表徵向量打斷或導向無害狀態，使模型即使想配合攻擊也無法組織出有害輸出。</li>
+<li>機制或核心表達式：受表徵工程（representation engineering）啟發，Zou 等人 (2024) 在目標層 <span class="math inline">l</span> 擷取模型面對有害提示與無害提示的內部隱藏表徵 <span class="math inline">h^{(l)}_{\theta}(x)</span>。訓練目標同時包含兩項：在有害語境下將模型表徵與原本參考模型產生的有害表徵方向推離（使餘弦相似度或投影趨於正交或零），在良性語境下則透過 <span class="math inline">\|h^{(l)}_{\theta}(x) - h^{(l)}_{\theta_{\mathrm{ref}}}(x)\|_2^2</span> 保持原有表徵幾何不變，藉此在不犧牲一般效用的前提下直接中斷有害生成。</li>
+<li>能做到什麼，代價是什麼：相較於僅針對已知攻擊分布進行補丁式對抗訓練，斷路器直接作用於生成有害內容的共同內部表徵，能同時涵蓋文本模型、多模態語言模型（對抗影像劫持）與 AI 智能體系統，無需窮舉所有越獄提示變體；代價是若測試時出現未覆蓋的輸入擾動模式（特別是連續空間擾動），內部狀態仍可能繞過特定層的監控。</li>
+</ul>
+</li>
+<li>
+<p><strong>嵌入空間連續對抗攻擊評估 (Embedding-Space Continuous Attack Evaluation)</strong></p>
+<ul>
+<li>直覺理解：許多安全防禦在離散文字字詞層級的自動化紅隊測試中表現穩定，但若攻擊者不經分詞器限制而直接在詞元嵌入向量上做微小梯度微調，就能測出防禦是否真正具有強健的幾何邊界。</li>
+<li>機制或核心表達式：對於輸入序列經嵌入層映射後的連續向量 <span class="math inline">E \in \mathbb{R}^{L \times d}</span>，攻擊者尋找擾動 <span class="math inline">\delta</span>（或直接優化嵌入矩陣 <span class="math inline">E'</span>）以極大化目標有害前綴的對數似然 <span class="math inline">\max_{\delta} \log P_{\theta}(y_{\mathrm{harm}} \mid E + \delta)</span>。Schwinn 與 Geisler (2024) 對 Zou 等人 (2024) 的斷路器模型調整既有嵌入空間攻擊實作細節，在不進行額外超參數調優的情況下，將攻擊成功率（ASR）相較原始評估提升逾 80%，在無約束連續攻擊下達成 100% ASR。</li>
+<li>能做到什麼，代價是什麼：嵌入空間連續攻擊屬於白盒強威脅模型（需取得梯度與輸入嵌入介面），對僅開放純文字黑盒 API 的商業模型不直接等同於離散詞元越獄難度；但對開源權重模型與多模態連續輸入（如影像像素梯度）而言，它精確暴露了表徵護欄在連續鄰域內仍容易失守的事實。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>良性微調為何會意外削弱模型安全性</strong>：根據 Qi 等人 (2023) 的研究結果，除了刻意構造少數惡意樣本外，為什麼使用「完全無害的通用資料集」對已對齊模型進行微調，依然可能導致安全護欄退化？這對提供微調 API 的服務商有什麼系統設計啟示？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>安全對齊通常只集中在模型表層的拒絕條件反射或少數高曲率參數子空間，並未與下游指令跟隨能力解耦。當良性資料集要求模型更積極遵循格式或回應指令時，梯度下降會在缺乏安全錨點的情況下覆寫原本的拒絕邊界。這表示僅在推論輸入輸出端佈署過濾器不足以維護安全，服務商必須在微調管線內結合安全資料混入、更新約束或微調後再審核機制。</p>
+</details>
+<ol start="2">
+<li><strong>表徵斷路器與嵌入空間攻擊的評估邊界</strong>：Zou 等人 (2024) 提出斷路器在文本與多模態未見攻擊下維持高安全性，為何 Schwinn 與 Geisler (2024) 僅微調嵌入空間攻擊實作即可對同一類模型達到 100% 攻擊成功率？這兩組結論各自對應什麼威脅模型與評測陷阱？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>Zou 等人主要展示對離散文本越獄與特定多模態劫持的抗性，而 Schwinn 與 Geisler 採用的是無約束的連續詞元嵌入向量最佳化。由於連續嵌入空間的自由度遠大於離散詞表，未經嚴格對抗微調的斷路器表徵邊界在連續向量微擾下容易找到繞道進入有害流形的路徑。這提醒評估安全護欄時必須區分「黑盒離散提示威脅」與「白盒連續表徵／像素威脅」，不能因離散攻擊失敗就推論模型具備嚴格對抗魯棒性。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>機器遺忘與表徵斷路器的深層權重不可逆性</strong>：現有執行期護欄（如斷路器）主要在推論路徑上抑制或偏轉有害表徵，而非從權重中抹除相關危險知識的參數容量。面對開放權重下載與後續微調（Qi 等人，2023），如何在不損害通用推理能力的前提下達成對特定危險知識與微調恢復（re-learning）的抗性，目前尚未出現兼顧效用與不可逆性的標準方案。</li>
+<li><strong>離散越獄魯棒性與連續嵌入攻擊之間的評估落差</strong>：Schwinn 與 Geisler (2024) 證實針對嵌入空間進行修改即可讓斷路器模型的攻擊成功率相較原報告高出逾 80% 並達到 100%，指出多數非對抗訓練防禦容易高估自身在白盒連續擾動下的邊界厚度。如何在標準化評估框架中同時納入強連續優化攻擊、多模態輸入擾動與成本受控的機器遺忘驗證，仍是學界基準待補齊的缺口。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>表徵工程向工具智能體執行期授權的遷移</strong>：Zou 等人 (2024) 將斷路器延伸至 AI 智能體以中斷有害工具調用的設計，可與 <a class="wl" href="19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a> 的間接注入隔離機制互補：即使外部檢索內容成功在上下文誘發惡意規劃，執行期表徵監控仍可作為最後一道觸發中斷的系統防線。</li>
+<li><strong>自動化紅隊連續最佳化對越獄與後門檢驗的反饋</strong>：Schwinn 與 Geisler (2024) 揭示微調攻擊演算法實作細節對評測結論的決定性影響，該白盒評估紀律可直接回饋至 <a class="wl" href="19B_%E8%B6%8A%E7%8D%84%E6%94%BB%E6%93%8A%E3%80%81%E8%87%AA%E5%8B%95%E5%8C%96%E7%B4%85%E9%9A%8A%E6%BC%94%E7%B7%B4%E8%88%87%E5%B0%8D%E6%8A%97%E5%BE%8C%E9%96%80%E6%8A%95%E6%AF%92.html">越獄攻擊、自動化紅隊演練與對抗後門投毒</a> 的紅隊測試基準與後門觸發器檢索，並為 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a> 中的多智能體安全治理協議提供最壞情況攻擊邊界假設。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-fine-tuning-aligned-language-models-compromises-safety-even-when-users-do-not-intend-to2023">1. Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!（2023）</h4>
+<ul>
+<li>作者與出處：Xiangyu Qi, Yi Zeng, Tinghao Xie, Pin-Yu Chen, Ruoxi Jia · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有安全對齊機制主要在推論階段限制語言模型產出有害內容，但一旦開放下游使用者透過公開權重或雲端 API 進行客製化微調，模型原始的安全護欄便可能失效。論文系統性檢驗自訂微調對安全對齊造成的代價。</li>
+<li>關鍵做法：透過紅隊實驗在 OpenAI 微調 API 上對 GPT-3.5 Turbo 僅使用 10 筆對抗設計樣本進行微調（花費低於 0.20 美元），便使其安全護欄失效並幾乎回應所有有害指令；同時證實即便沒有惡意意圖，僅用常見的良性資料集微調也會在無意中削弱模型原有的安全拒絕表現。</li>
+<li>跨領域啟發：確立微調階段安全退化的基準威脅模型，解釋為何僅靠推論層過濾不足以防守可微調模型。</li>
+<li>連結：<a href="zotero://select/library/items/7PJZZSKM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.03693" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-improving-alignment-and-robustness-with-circuit-breakers2024">2. Improving Alignment and Robustness with Circuit Breakers（2024）</h4>
+<ul>
+<li>作者與出處：Andy Zou, Long Phan, Justin Wang, Derek Duenas, Maxwell Lin · <em>neural information processing systems</em></li>
+<li>核心問題：傳統拒絕訓練容易被新型越獄提示繞過，而針對特定攻擊修補的對抗訓練往往無法泛化至未見攻擊，且對多模態系統的影像劫持缺乏防護能力。作者尋求一種能直接阻斷有害輸出成因的通用防禦機制。</li>
+<li>關鍵做法：受表徵工程啟發，提出名為斷路器（circuit breakers）的控制方法，在模型生成有害輸出的過程中直接控制負責產生有害內容的內部表徵，而非僅在輸出層訓練拒絕語句。實驗表明該技術可在不犧牲模型效用的情況下抵禦未見過的強攻擊，並擴展至多模態影像劫持與 AI 智能體系統。</li>
+<li>跨領域啟發：將安全防禦從表層詞彙拒絕下推至隱藏層表徵空間控制，為 <a class="wl" href="19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a> 的智能體執行期保護提供表徵級參考。</li>
+<li>連結：<a href="zotero://select/library/items/HF92DR4I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.04313" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-revisiting-the-robust-alignment-of-circuit-breakers2024">3. Revisiting the Robust Alignment of Circuit Breakers（2024）</h4>
+<ul>
+<li>作者與出處：Leo Schwinn, Simon Geisler · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：過去十年間除對抗訓練外，多數聲稱能提升模型魯棒性的替代防禦在嚴格複檢下相繼失效。論文檢驗新提出的「斷路器」機制在輸入詞元嵌入空間面對無約束連續對抗攻擊時，其宣稱的魯棒性是否被高估。</li>
+<li>關鍵做法：針對既有嵌入空間攻擊實作進行數項簡單調整，在未做任何額外超參數搜尋的條件下對斷路器模型進行測試，結果取得 100% 的攻擊成功率（ASR），相較原始論文報告的評估數據高出逾 80 個百分點。</li>
+<li>跨領域啟發：提供安全防禦評估的必要反例與紅隊紀律，說明測試表徵層護欄時必須納入強連續最佳化攻擊。</li>
+<li>連結：<a href="zotero://select/library/items/E3J2D3K9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.15902" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-werracle-sub-cent-intra-block-ai-reflex-oracles-and-flash-loan-circuit-breakers-for-evm-smart-contracts2026">4. Werracle: Sub-Cent Intra-Block AI Reflex Oracles and Flash-Loan Circuit Breakers for EVM Smart Contracts（2026）</h4>
+<ul>
+<li>作者與出處：Volkan Dağlı, Zerrin Dağlı, Dağhan Dağlı · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：在以太坊虛擬機（EVM）上執行即時 AI 風控面臨記憶體與延遲限制，零知識機器學習（ZK-ML）需要 10 至 300 秒證明延遲與高額 Gas 成本，無法在單一區塊內即時阻斷原子化的閃電貸與 MEV 攻擊。此篇雖非大型語言模型對齊研究，但在子方向候選庫中以「鏈上反射斷路器」名稱收錄，對應執行期異常中斷機制。</li>
+<li>關鍵做法：提出名為 Werracle 的零儲存鏈上決策預言機，將整個模型壓縮進單一 32 位元組的 EVM 儲存槽（bytes32），並利用程序化 Mandelbrot 逃逸動力學（<span class="math inline">z_{n+1} = z_n^2 + c</span>）推導連續非線性決策超平面，以低於一美分的成本在單區塊內充當閃電貸攻擊斷路器。</li>
+<li>跨領域啟發：提供低延遲執行期斷路器的系統工程對照案例（注意本篇屬區塊鏈 DeFi 風控領域，非 LLM 安全對齊）。</li>
+<li>連結：<a href="zotero://select/library/items/7C6FVGW6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.30719" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-topology-optimization-for-dc-circuit-breaker-placement-in-hvdc-switching-stations2026">5. Topology Optimization for DC Circuit Breaker Placement in HVDC Switching Stations（2026）</h4>
+<ul>
+<li>作者與出處：Merijn Van Deyck, Tom Van Acker, Geraint Chaffey, Dirk Van Hertem · <em>arXiv</em></li>
+<li>核心問題：未來多端高壓直流電網（HVDC）發生直流故障時需仰賴直流斷路器（DCCB）防止大面積停電，傳統依賴預先定義保護策略的設計缺乏彈性。此篇屬於電力系統拓撲最佳化領域，因「Circuit Breaker」關鍵字重疊而進入本子方向語料。</li>
+<li>關鍵做法：建立混合整數線性規劃（MILP）模型來最佳化 HVDC 開關站內的直流斷路器配置拓撲，能在考量大量運行工況的條件下最小化高衝擊直流故障風險並計算最適斷路器數量。</li>
+<li>跨領域啟發：可作為工程領域「硬體故障隔離」術語源流的區辨參照，閱讀時應區分電力系統實體斷路器與神經網路表徵斷路器。</li>
+<li>連結：<a href="zotero://select/library/items/4NWUMQWR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.14286" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-6-篇">G5｜本子方向全量文獻泛讀清單（共 6 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 6 篇文獻（含開放存取 PDF 6 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進1-篇">A. 奠基經典、專著與核心演進（1 篇）</h3>
+<ul>
+<li><strong>2023｜Fine-tuning Aligned Language Models Compromises Safety, Even When Users Do Not Intend To!</strong>，Xiangyu Qi et al.（<em>arXiv (Cornell University)</em>，57 引）：微調脆弱性的實證：極少數惡意樣本就能拆掉護欄，連完全良性的下游微調也會意外侵蝕既有的安全對齊。 <a href="zotero://select/library/items/7PJZZSKM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.03693" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2024｜Improving Alignment and Robustness with Circuit Breakers</strong>，Andy Zou et al.（<em>neural information processing systems</em>，19 引）：借鏡表徵工程提出「斷路器（circuit breakers）」機制，直接調控產生有害輸出的內部表徵以中斷生成，讓純文字與多模態語言模型在維持實用性下抵禦未見過的強大對抗攻擊。 <a href="zotero://select/library/items/HF92DR4I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.04313" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Topology Optimization for DC Circuit Breaker Placement in HVDC Switching Stations</strong>，Merijn Van Deyck et al.（<em>arXiv</em>）：針對多端高壓直流電網的直流故障保護設計問題，將直流斷路器在開關站與能源樞紐的配置建模為混合整數線性規劃最佳化問題，使其能靈活考量大量運行工況並超越傳統預定義保護配置。 <a href="zotero://select/library/items/4NWUMQWR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.14286" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Werracle: Sub-Cent Intra-Block AI Reflex Oracles and Flash-Loan Circuit Breakers for EVM Smart Contracts</strong>，Volkan Dağlı, Zerrin Dağlı, Dağhan Dağlı（<em>arXiv (Cornell University)</em>）：針對鏈上智慧合約難以承受浮點權重儲存成本及 ZK-ML 證明延遲而無法即時防禦單區塊閃電貸攻擊的問題，設計僅佔用單一 32 位元組 EVM 儲存槽的零儲存鏈上 AI 決策神諭 Werracle。 <a href="zotero://select/library/items/7C6FVGW6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.30719" rel="noopener">官方連結</a></li>
+<li><strong>2026｜An Interline Multiport DC Circuit Breaker with Power Flow Controller</strong>，Maliha Ferdous et al.（<em>CIGRE Paris Session 2026</em>）：針對高壓多端直流電網故障電流無過零點與潮流被動受限的問題，探討結合潮流控制器功能的線間多埠直流斷路器設計，以因應換流站端故障電流清除與直流線路潮流調節需求。 <a href="zotero://select/library/items/M27KAZD7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.10980" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Revisiting the Robust Alignment of Circuit Breakers</strong>，Leo Schwinn, Simon Geisler（<em>arXiv (Cornell University)</em>）：重新檢驗大模型「斷路器」防禦機制的對抗強健性，指出僅須對無約束連續詞元嵌入空間攻擊作簡單調整即可對斷路器模型達成 100% 攻擊成功率，顯示其宣稱的抗攻擊能力被高估。 <a href="zotero://select/library/items/E3J2D3K9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.15902" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f3995cba">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a><span class="rs">自然語言計算從一開始就有一個根本問題：控制流與資料流混同（Instruction-Data Confusion）。</span></li><li><a href="19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a></li><li><a href="19B_%E8%B6%8A%E7%8D%84%E6%94%BB%E6%93%8A%E3%80%81%E8%87%AA%E5%8B%95%E5%8C%96%E7%B4%85%E9%9A%8A%E6%BC%94%E7%B7%B4%E8%88%87%E5%B0%8D%E6%8A%97%E5%BE%8C%E9%96%80%E6%8A%95%E6%AF%92.html">越獄攻擊、自動化紅隊演練與對抗後門投毒</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

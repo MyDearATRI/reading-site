@@ -13,17 +13,17 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-d7942c12">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a><a class="find" href="../../index.html#n=n-d7942c12">Find on board</a></header>
+<body class="doc" data-note="n-d7942c12" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
-<span class="kicker">領域分級精讀 · C_純數學、範疇論與邏輯基礎</span>
+<span class="kicker">領域分級精讀 · 純數學、範疇論與邏輯基礎</span>
 <article>
 
 <h1 id="30凝聚數學與合成微分幾何condensed-mathematics-synthetic-differential-geometry-tangent-categories">30｜凝聚數學與合成微分幾何（Condensed Mathematics, Synthetic Differential Geometry &amp; Tangent Categories）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a> ｜ L5 旗艦庫：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>
-相關領域：<a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> · <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> · <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> · <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a></p>
-</aside>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">每日跨領域精讀索引</a> ｜ L5 旗艦庫：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>
+相關領域：<a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a> · <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a> · <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">代數幾何與Hodge</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a> · <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a> · <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a></p>
+</details>
 <h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
 <aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
 <p>這個領域用兩條互補的路線重寫分析學與微積分的基礎。凝聚數學（Condensed Mathematics）用收斂序列這類探針上的層取代傳統的點集拓撲空間，讓無限維泛函分析與巴拿赫空間可以放進同調代數。合成微分幾何（SDG）與切範疇（Tangent Categories）則重新啟用萊布尼茲那種平方嚴格等於零的真實無窮小量 <span class="math inline">d^2=0</span>，讓微分、聯絡與曲率不必再靠 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 極限，變成線性與範疇代數的運算。</p>
@@ -43,7 +43,7 @@
 </ul>
 </li>
 <li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
-凝聚數學與液態向量空間（Liquid Vector Spaces）改寫了 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 的複解析／非阿基米德幾何。它的 Liquid Tensor Experiment 是 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> 裡用 Lean 定理證明器驗證當代前沿純數學的代表作。切範疇、噴流叢餘單子與內聚 <span class="math inline">\infty</span>-Topos 這一邊，一方面連到 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> 的微分線性邏輯與反向導數範疇（自動微分的基礎），另一方面為 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的非線性偏微分方程幾何（Diffieties）和量子規範場論提供嚴格的無窮維微積分基礎。</li>
+凝聚數學與液態向量空間（Liquid Vector Spaces）改寫了 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">代數幾何與Hodge</a> 的複解析／非阿基米德幾何。它的 Liquid Tensor Experiment 是 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a> 裡用 Lean 定理證明器驗證當代前沿純數學的代表作。切範疇、噴流叢餘單子與內聚 <span class="math inline">\infty</span>-Topos 這一邊，一方面連到 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a> 的微分線性邏輯與反向導數範疇（自動微分的基礎），另一方面為 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a> 的非線性偏微分方程幾何（Diffieties）和量子規範場論提供嚴格的無窮維微積分基礎。</li>
 </ul>
 <h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
 <pre class="mermaid">flowchart TD
@@ -91,7 +91,7 @@
 <li>
 <p><strong>切範疇：把取切叢提煉成精簡的泛代數算子（Tangent Categories）</strong></p>
 <ul>
-<li>直覺理解：如果不想改動底層邏輯（不放棄排中律，也不建構龐大的光滑 Topos），可以學 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a> 裡笛卡爾微分範疇的做法：把切叢函子 <span class="math inline">T: \mathcal{C} \to \mathcal{C}</span> 滿足的幾條代數性質直接抽出來當公理。Rosický 與 Cockett–Cruttwell 的切範疇（Tangent Category）就是這樣做的。光滑流形、代數幾何的仿射概形（對偶於交換環）、微分範疇的餘代數、機器學習裡的可微參數空間，都是切範疇的實例。</li>
+<li>直覺理解：如果不想改動底層邏輯（不放棄排中律，也不建構龐大的光滑 Topos），可以學 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a> 裡笛卡爾微分範疇的做法：把切叢函子 <span class="math inline">T: \mathcal{C} \to \mathcal{C}</span> 滿足的幾條代數性質直接抽出來當公理。Rosický 與 Cockett–Cruttwell 的切範疇（Tangent Category）就是這樣做的。光滑流形、代數幾何的仿射概形（對偶於交換環）、微分範疇的餘代數、機器學習裡的可微參數空間，都是切範疇的實例。</li>
 <li>機制或核心表達式：切範疇 <span class="math inline">(\mathcal{C}, T, p, 0, +, \ell, c)</span> 配備自函子 <span class="math inline">T: \mathcal{C} \to \mathcal{C}</span>、自然投射 <span class="math inline">p_M: TM \to M</span>（使每個纖維在拉回下成為交換么半群／阿貝爾群叢）、垂直提升 <span class="math inline">\ell_M: TM \to T^2 M</span> 與典範翻轉對合 <span class="math inline">c_M: T^2 M \xrightarrow{\sim} T^2 M</span>（對應二階偏導數交換律 <span class="math inline">\partial_x\partial_y = \partial_y\partial_x</span>）。只靠這組純代數公理，不用座標就能推導聯絡（Connections）、曲率、Bianchi 恆等式和 Cartan 立方微分形式演算（2026 Blohmann），也能做出一般線性群 <span class="math inline">\mathrm{GL}</span>，以及李群與李代數的對應（2026 Lanfranchi，本領域 🏆 L5 旗艦精讀）。</li>
 <li>能做到什麼，代價是什麼：這是最輕量、也最容易移植到工程上的公理化微分幾何介面，同時涵蓋光滑幾何、概形與自動微分。代價是它沒有假設空間局部同構於 <span class="math inline">\mathbb{R}^n</span>，所以像指數映射收斂性（把李代數積分回李群）這類全域分析的存在定理，需要另外加上微分方程完備性假設。</li>
 </ul>
@@ -111,9 +111,9 @@
 <aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
 <p></p>
 <ul>
-<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a>（為 AI 驗證而重構公理的思路）</strong>：Liquid Tensor Experiment 能在一年半內用 Lean 完成當代菲爾茲獎級數學的完整形式化，原因是凝聚數學本來就是為了去掉分析裡零碎的特例、改用乾淨的同調泛性質重寫分析學而設計的。這對 AI 輔助數學形式化有參考價值：與其讓 AI 直接處理充滿 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 補丁的傳統證明，不如先把底層定義重構成凝聚／切範疇式的良態代數介面。</li>
-<li><strong>遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>（噴流叢餘單子與物理守恆算子架構）</strong>：非線性 PDE 可以看成噴流叢 <span class="math inline">J^\infty E \to E</span> 上的子簇（Diffiety），延拓操作（Prolongation）自然構成一個範疇餘單子（Comonad）。要設計嚴格滿足高階微分相容性與局部對稱性的神經 PDE 算子，可以拿它當幾何不變的架構。</li>
-<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與高階自動微分（切範疇翻轉算子 <span class="math inline">c: T^2 M \to T^2 M</span>）</strong>：在流形上做二階最佳化（Hessian / 自然梯度 / 黎曼動量）時，常見的 bug 是搞混切叢的切叢 <span class="math inline">TTM</span> 裡兩個方向的水平與垂直分量。照切範疇的典範翻轉對合與聯絡公理來寫型別簽名，可以從源頭避免高階幾何自動微分的座標混淆。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a>（為 AI 驗證而重構公理的思路）</strong>：Liquid Tensor Experiment 能在一年半內用 Lean 完成當代菲爾茲獎級數學的完整形式化，原因是凝聚數學本來就是為了去掉分析裡零碎的特例、改用乾淨的同調泛性質重寫分析學而設計的。這對 AI 輔助數學形式化有參考價值：與其讓 AI 直接處理充滿 <span class="math inline">\varepsilon</span>-<span class="math inline">\delta</span> 補丁的傳統證明，不如先把底層定義重構成凝聚／切範疇式的良態代數介面。</li>
+<li><strong>遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a>（噴流叢餘單子與物理守恆算子架構）</strong>：非線性 PDE 可以看成噴流叢 <span class="math inline">J^\infty E \to E</span> 上的子簇（Diffiety），延拓操作（Prolongation）自然構成一個範疇餘單子（Comonad）。要設計嚴格滿足高階微分相容性與局部對稱性的神經 PDE 算子，可以拿它當幾何不變的架構。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a> 與高階自動微分（切範疇翻轉算子 <span class="math inline">c: T^2 M \to T^2 M</span>）</strong>：在流形上做二階最佳化（Hessian / 自然梯度 / 黎曼動量）時，常見的 bug 是搞混切叢的切叢 <span class="math inline">TTM</span> 裡兩個方向的水平與垂直分量。照切範疇的典範翻轉對合與聯絡公理來寫型別簽名，可以從源頭避免高階幾何自動微分的座標混淆。</li>
 </ul>
 </aside>
 <h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
@@ -136,21 +136,21 @@
 <tbody>
 <tr>
 <td style="text-align:center">1</td>
-<td><span class="wl-missing">30A_Clausen-Scholze凝聚數學、液態向量空間與解析疊</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a></td>
 <td style="text-align:center">77（OA 77）</td>
 <td style="text-align:center">經典 4 / 近期 73</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">2</td>
-<td><span class="wl-missing">30B_合成微分幾何、無窮小對象與切範疇公理化</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30B_%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95%E3%80%81%E7%84%A1%E7%AA%AE%E5%B0%8F%E5%B0%8D%E8%B1%A1%E8%88%87%E5%88%87%E7%AF%84%E7%96%87%E5%85%AC%E7%90%86%E5%8C%96.html">合成微分幾何、無窮小對象與切範疇公理化</a></td>
 <td style="text-align:center">75（OA 74）</td>
 <td style="text-align:center">經典 67 / 近期 8</td>
 <td>🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_17_2026_Lanfranchi_General_linear_groups_in_tangent_categories.html">L5_17</a></td>
 </tr>
 <tr>
 <td style="text-align:center">3</td>
-<td><span class="wl-missing">30C_內聚無窮Topos、微分上同調與高階規範場幾何</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a></td>
 <td style="text-align:center">15（OA 15）</td>
 <td style="text-align:center">經典 4 / 近期 11</td>
 <td>無</td>
@@ -158,8 +158,8 @@
 </tbody>
 </table>
 <ul>
-<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">橋接07_高階範疇、同倫類型論與凝聚合成幾何</a></li>
-<li>關聯學習章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">M56_層與拓撲斯</a> · <a class="wl" href="../../NOTES/06_%E9%9F%B3%E6%A8%82/MU-47_%E7%AF%84%E7%96%87%E8%88%87%20topos.html">MU-47_範疇與 topos</a></li>
+<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a></li>
+<li>關聯學習章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a> · <a class="wl" href="../../NOTES/06_%E9%9F%B3%E6%A8%82/MU-47_%E7%AF%84%E7%96%87%E8%88%87%20topos.html">範疇與 topos</a></li>
 </ul>
 <!-- SUBTOPIC_MAP_END -->
 <h3 id="a-必讀奠基論文與-l5-旗艦">A. 必讀奠基論文與 L5 旗艦</h3>
@@ -212,7 +212,7 @@
 <tr>
 <td>2026</td>
 <td><em>General linear groups in tangent categories</em>，Marcello Lanfranchi</td>
-<td>🏆 <strong>L5 深度審核完成</strong>（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>）：在抽象切範疇中內蘊構造一般線性群物件及其李代數交換子同構，為流形李群與仿射概形群提供統一的對稱框架。</td>
+<td>🏆 <strong>L5 深度審核完成</strong>（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>）：在抽象切範疇中內蘊構造一般線性群物件及其李代數交換子同構，為流形李群與仿射概形群提供統一的對稱框架。</td>
 <td>🏆 L5 旗艦精讀 <code>[OA PDF]</code></td>
 <td><a href="zotero://select/library/items/3EUVT3U8" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2611.17702" rel="noopener">原文連結</a></td>
 </tr>
@@ -222,11 +222,11 @@
 <details class="callout" data-kind="example"><summary>展開本領域的高引用代表作（5 篇經典樞紐）</summary>
 <p></p>
 <ul>
-<li><strong>2015｜Michael Shulman</strong>，<em>Brouwer's fixed-point theorem in real-cohesive homotopy type theory</em>（被引 71 次，<code>[OA PDF]</code>）：把公理化內聚性轉成模態同倫類型論，區分拓撲連續性與同倫路徑，並構造性地證明 Brouwer 不動點定理（連到 <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a>）。<a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1509.07584" rel="noopener">原文連結</a></li>
+<li><strong>2015｜Michael Shulman</strong>，<em>Brouwer's fixed-point theorem in real-cohesive homotopy type theory</em>（被引 71 次，<code>[OA PDF]</code>）：把公理化內聚性轉成模態同倫類型論，區分拓撲連續性與同倫路徑，並構造性地證明 Brouwer 不動點定理（連到 <a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a>）。<a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1509.07584" rel="noopener">原文連結</a></li>
 <li><strong>2014｜Mauro Porta, Tony Yue Yu</strong>，<em>Higher analytic stacks and GAGA theorems</em>（被引 49 次，<code>[OA PDF]</code>）：用 <span class="math inline">\infty</span>-範疇建立複解析與非阿基米德高階幾何疊的基礎，證明導出直像的 Grauert 定理與高階疊的 GAGA 定理。<a href="zotero://select/library/items/4JUAU7CT" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1412.5166" rel="noopener">原文連結</a></li>
 <li><strong>2014｜Urs Schreiber, Michael Shulman</strong>，<em>Quantum Gauge Field Theory in Cohesive Homotopy Type Theory</em>（被引 18 次，<code>[OA PDF]</code>）：一篇簡短的綜述，說明如何在內聚同倫類型論中形式化量子規範場論的核心結構，適合當作長篇專著的導讀。<a href="zotero://select/library/items/QQHDUPBC" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1408.0054" rel="noopener">原文連結</a></li>
 <li><strong>2019｜Clark Barwick, Peter Haine</strong>，<em>Pyknotic objects, I. Basic notions</em>（被引 12 次，<code>[OA PDF]</code>）：與 Clausen–Scholze 同期、獨立提出緊空間站點上的超層（Pyknotic Objects，希臘語意為「濃密／凝聚」），並用清楚的範例說明帶拓撲資訊的同倫代數。<a href="zotero://select/library/items/B3F6FHCW" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1904.09966" rel="noopener">原文連結</a></li>
-<li><strong>2019｜Robin Cockett, Jean-Simon Pacaud Lemay, Rory B. B. Lucyshyn-Wright</strong>，<em>Tangent Categories from the Coalgebras of Differential Categories</em>（<code>[OA PDF]</code>）：指出微分範疇（源自微分線性邏輯，見 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">39_線性邏輯與博弈語意學</a>）的 coEilenberg–Moore 餘代數範疇本身就是切範疇，並由此導出仿射概形（交換環的對偶範疇）上的切結構。<a href="zotero://select/library/items/HKXXS8NE" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1910.05617" rel="noopener">原文連結</a></li>
+<li><strong>2019｜Robin Cockett, Jean-Simon Pacaud Lemay, Rory B. B. Lucyshyn-Wright</strong>，<em>Tangent Categories from the Coalgebras of Differential Categories</em>（<code>[OA PDF]</code>）：指出微分範疇（源自微分線性邏輯，見 <a class="wl" href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a>）的 coEilenberg–Moore 餘代數範疇本身就是切範疇，並由此導出仿射概形（交換環的對偶範疇）上的切結構。<a href="zotero://select/library/items/HKXXS8NE" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/1910.05617" rel="noopener">原文連結</a></li>
 </ul>
 </details>
 <h3 id="c-最新論文每日-2-篇滾動更新">C. 最新論文（每日 2 篇滾動更新）</h3>
@@ -238,7 +238,7 @@
 <ul>
 <li>核心問題：許多幾何學家覺得凝聚數學與液態張量積很抽象，需要看到它用在最經典的複解析流形與複空間上時，能怎麼簡化傳統的多複變難題。</li>
 <li>關鍵做法：公開波恩與哥本哈根聯合課程的定稿講義。講義聚焦複解析幾何，用凝聚數學與液態上同調，從新的概念角度重建經典複幾何的核心定理（如凝聚層有限性、對偶與 GAGA）。</li>
-<li>跨領域啟發：從 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">13_代數幾何與Hodge</a> 進入凝聚數學時，這是最容易讀、幾何內容也最具體的入口。</li>
+<li>跨領域啟發：從 <a class="wl" href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">代數幾何與Hodge</a> 進入凝聚數學時，這是最容易讀、幾何內容也最具體的入口。</li>
 <li>連結：<a href="zotero://select/library/items/JASK9WGZ" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2605.11731" rel="noopener">原文連結</a></li>
 </ul>
 </li>
@@ -247,7 +247,7 @@
 <ul>
 <li>核心問題：把偏微分方程解空間（Diffieties）從古典 Fréchet 光滑流形嵌入合成微分幾何的 Cahiers 光滑 Topos，就能用上餘單子形式主義。但這個嵌入是否保持無限噴流叢的投射極限、會不會混進多餘的無窮小冪零成分，一直是沒有證明的隱含假設。</li>
 <li>關鍵做法：給出嚴格證明：光滑嵌入保持無限噴流叢的極限，而且合成噴流叢是約化的（Infinitesimally Reduced）。合成 PDE 與拉格朗日場論的泛函基礎因此有了依據。</li>
-<li>跨領域啟發：為高階物理場論與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> 的無窮維噴流幾何補上原本缺少的嚴格性。</li>
+<li>跨領域啟發：為高階物理場論與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a> 的無窮維噴流幾何補上原本缺少的嚴格性。</li>
 <li>連結：<a href="zotero://select/library/items/PNMF46EU" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2601.15862" rel="noopener">原文連結</a></li>
 </ul>
 </li>
@@ -262,11 +262,15 @@
 </ul>
 <!-- DAILY_UPDATES_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-d7942c12">在地圖上查看</a><div class="rg"><h3>相關<span class="n">15</span></h3><ul><li><a href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a><span class="rs">兩個物件「以哪一種方式同構」（見證路徑、路徑之間的變形，乃至無窮階相容性），在數學裡到處出現，傳統集合論卻把它抹平。</span></li><li><a href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a><span class="rs">同倫類型論（HoTT）把三樣東西合而為一：程式／資料型別、邏輯命題／證明、拓撲空間／連續路徑，影響遍及邏輯、計算機科學與幾何學。</span></li><li><a href="13_%E4%BB%A3%E6%95%B8%E5%B9%BE%E4%BD%95%E8%88%87Hodge.html">代數幾何與Hodge</a><span class="rs">代數幾何與 Hodge 理論研究的是，怎麼在離散的多項式代數、連續的複流形微積分和有限域上的算術數論這三個看似不相干的領域之間，建立像羅塞塔石碑…</span></li><li><a href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a><span class="rs">範疇論曾被調侃為「抽象廢話（Abstract Nonsense）」，應用範疇論把它變成一門研究各種系統如何互連、開放系統如何組合的學問（Scie…</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a><span class="rs">這個領域用神經網路的直覺啟發式搜尋和強化學習自我博弈，去處理指數爆炸的推理搜尋空間，再用形式化證明助手（Lean 4）與可微實值邏輯（LNN /…</span></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a><span class="rs">把深度學習從有限維固定像素網格上的向量擬合（R^n → R^m），推廣為無窮維函數空間之間的連續算子映射（G^dagger: A → U）。</span></li><li><a href="39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a><span class="rs">線性邏輯與博弈語意學把數理邏輯改寫成一套講資源、講互動的理論。Jean-Yves Girard 重新分析古典蘊含 A → B，把假設從可以免費無…</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a><span class="rs">這個領域不把神經網路當成在平坦歐氏空間裡硬擬合曲線的黑盒。它把對稱群、層論黏合（Sheaf）、拓撲不變量、最優傳輸黎曼幾何、無窮維算子與代數幾何…</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30B_%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95%E3%80%81%E7%84%A1%E7%AA%AE%E5%B0%8F%E5%B0%8D%E8%B1%A1%E8%88%87%E5%88%87%E7%AF%84%E7%96%87%E5%85%AC%E7%90%86%E5%8C%96.html">合成微分幾何、無窮小對象與切範疇公理化</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a><span class="tag-plan">計劃</span><span class="rs">Mac Lane &amp; Moerdijk，*Sheaves in Geometry and Logic* 第 I–IV、VI 章</span></li></ul><p class="more">另有 3 篇</p></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

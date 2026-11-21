@@ -13,17 +13,17 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-2a2f903e">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">B_學習理論、推理與表示幾何</a><a class="find" href="../../index.html#n=n-2a2f903e">Find on board</a></header>
+<body class="doc" data-note="n-2a2f903e" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
-<span class="kicker">領域分級精讀 · B_學習理論、推理與表示幾何</span>
+<span class="kicker">領域分級精讀 · 學習理論、推理與表示幾何</span>
 <article>
 
 <h1 id="06學習動力學與可解釋性雙重下降頓悟相變疊加態與稀疏自編碼器解剖學">06｜學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 B：學習理論、推理與表示幾何</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
-相關領域：<a class="wl" href="26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> ｜ <a class="wl" href="03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a></p>
-</aside>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 所屬星系：<code>星系 B：學習理論、推理與表示幾何</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">每日跨領域精讀索引</a>
+相關領域：<a class="wl" href="26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a> ｜ <a class="wl" href="03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a> ｜ <a class="wl" href="16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">Moiré 物理與複雜系統</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a> ｜ <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">高維機率與隨機矩陣</a></p>
+</details>
 <h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
 <aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
 <p>這個領域一方面追蹤深度神經網路在訓練時間軸上的非線性相變（雙重下降與頓悟 Grokking），另一方面用稀疏自編碼器（SAE）與因果特徵電路，把擠在神經元疊加態裡的數百萬個人類概念逐一拆出來、定位並加以操控。</p>
@@ -44,7 +44,7 @@
 </ul>
 </li>
 <li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
-它用實證方法把理論物理和 AI 安全接起來。在 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> 中，它借用動態平均場論（DMFT）與自組織臨界性（SOC）來刻畫梯度雪崩與維度相變。在 <a class="wl" href="26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">26_概念空間幾何與認知拓撲</a> 中，SAE 解出的特徵就是語意多胞形與概念晶體的組成單位。在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">19_AI安全攻防</a> 中，定位、導引、改進（Locate, Steer, Improve）管線讓研究者不必重訓模型，就能切除欺騙、偏見或幻覺迴路。</li>
+它用實證方法把理論物理和 AI 安全接起來。在 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">Moiré 物理與複雜系統</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">高維機率與隨機矩陣</a> 中，它借用動態平均場論（DMFT）與自組織臨界性（SOC）來刻畫梯度雪崩與維度相變。在 <a class="wl" href="26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a> 中，SAE 解出的特徵就是語意多胞形與概念晶體的組成單位。在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a> 中，定位、導引、改進（Locate, Steer, Improve）管線讓研究者不必重訓模型，就能切除欺騙、偏見或幻覺迴路。</li>
 </ul>
 <h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
 <pre class="mermaid">flowchart TD
@@ -104,13 +104,13 @@
 <aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
 <p></p>
 <ul>
-<li><strong>用 SAE 處理科學與醫療密集檢索（Dense Retrieval）的領域遷移退化</strong>：Bouchacourt &amp; Brison（2026，🏆 L5 已完成）提供了一個跨域範例。在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的 RAG 系統中，把通用檢索模型微調到單一醫院的資料集，內域檢索率會提高，卻常因為死背局部詞彙捷徑而失去跨院遷移能力。在檢索嵌入上套用 SAE，除了能看出一篇病歷為什麼被召回，還能找出並保留真正能跨臨床語料庫遷移的醫學概念特徵。</li>
-<li><strong>自組織臨界性（SOC）與梯度雪崩監測</strong>：把 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">22_moiré物理與複雜系統</a> 中的雪崩大小冪律分佈與有效維度 <span class="math inline">D</span>（Wang, 2026）搬到大型訓練監控上，就不需要外部驗證集。只觀察訓練期梯度協方差譜的臨界漲落，就有機會提前預測模型何時會出現能力湧現（Grokking）或訓練崩潰。</li>
+<li><strong>用 SAE 處理科學與醫療密集檢索（Dense Retrieval）的領域遷移退化</strong>：Bouchacourt &amp; Brison（2026，🏆 L5 已完成）提供了一個跨域範例。在 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a> 的 RAG 系統中，把通用檢索模型微調到單一醫院的資料集，內域檢索率會提高，卻常因為死背局部詞彙捷徑而失去跨院遷移能力。在檢索嵌入上套用 SAE，除了能看出一篇病歷為什麼被召回，還能找出並保留真正能跨臨床語料庫遷移的醫學概念特徵。</li>
+<li><strong>自組織臨界性（SOC）與梯度雪崩監測</strong>：把 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">Moiré 物理與複雜系統</a> 中的雪崩大小冪律分佈與有效維度 <span class="math inline">D</span>（Wang, 2026）搬到大型訓練監控上，就不需要外部驗證集。只觀察訓練期梯度協方差譜的臨界漲落，就有機會提前預測模型何時會出現能力湧現（Grokking）或訓練崩潰。</li>
 </ul>
 </aside>
 <h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
 <aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
-<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>。</p>
 </aside>
 <!-- SUBTOPIC_MAP_START -->
 <h3 id="0-本領域細分子方向與全量文獻精讀泛讀導航共-201-篇">0. 本領域細分子方向與全量文獻精讀／泛讀導航（共 201 篇）</h3>
@@ -128,28 +128,28 @@
 <tbody>
 <tr>
 <td style="text-align:center">1</td>
-<td><span class="wl-missing">06A_稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a></td>
 <td style="text-align:center">33（OA 33）</td>
 <td style="text-align:center">經典 3 / 近期 30</td>
 <td>🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_22_2026_Bouchacourt_Explanations_that_Transfer_Interpreting_Medical_Retrieval.html">L5_22</a></td>
 </tr>
 <tr>
 <td style="text-align:center">2</td>
-<td><span class="wl-missing">06B_機械可解釋性、歸納頭與內部演算法電路定位</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a></td>
 <td style="text-align:center">80（OA 79）</td>
 <td style="text-align:center">經典 4 / 近期 76</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">3</td>
-<td><span class="wl-missing">06C_頓悟Grokking、雙重下降與特徵學習相變</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06C_%E9%A0%93%E6%82%9FGrokking%E3%80%81%E9%9B%99%E9%87%8D%E4%B8%8B%E9%99%8D%E8%88%87%E7%89%B9%E5%BE%B5%E5%AD%B8%E7%BF%92%E7%9B%B8%E8%AE%8A.html">頓悟Grokking、雙重下降與特徵學習相變</a></td>
 <td style="text-align:center">14（OA 14）</td>
 <td style="text-align:center">經典 9 / 近期 5</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">4</td>
-<td><span class="wl-missing">06D_神經切線核NTK、平均場極限與損失地貌動力學</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a></td>
 <td style="text-align:center">74（OA 73）</td>
 <td style="text-align:center">經典 67 / 近期 7</td>
 <td>無</td>
@@ -157,7 +157,7 @@
 </tbody>
 </table>
 <ul>
-<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">橋接09_高維隨機矩陣、自旋玻璃OGP與學習動力學相變</a></li>
+<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a></li>
 </ul>
 <!-- SUBTOPIC_MAP_END -->
 <h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
@@ -275,11 +275,15 @@
 </ul>
 <!-- DAILY_UPDATES_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-2a2f903e">在地圖上查看</a><div class="rg"><h3>相關<span class="n">23</span></h3><ul><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a><span class="rs">這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 O(1)。</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a><span class="rs">這個領域的架構不走「先把一切切成離散詞元，再做 O(N^2) 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊…</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a><span class="rs">如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a><span class="rs">自然語言計算從一開始就有一個根本問題：控制流與資料流混同（Instruction-Data Confusion）。</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a><span class="rs">這個領域不把神經網路當成在平坦歐氏空間裡硬擬合曲線的黑盒。它把對稱群、層論黏合（Sheaf）、拓撲不變量、最優傳輸黎曼幾何、無窮維算子與代數幾何…</span></li><li><a href="26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a><span class="rs">在離散的邏輯符號和低階的神經脈衝之間，這個領域建立第三層描述語言，也就是幾何。</span></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/22_moir%C3%A9%E7%89%A9%E7%90%86%E8%88%87%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1.html">Moiré 物理與複雜系統</a><span class="rs">當微觀個體原本自由的獨立運動自由度（動能）被幾何干涉或競爭約束壓到趨近於零時，個體之間的交互作用、拓撲幾何與集體阻挫就會主導整個系統，湧現出單一…</span></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">高維機率與隨機矩陣</a><span class="rs">空間維度 d 與矩陣尺寸 N 大到數千乃至數十億時，我們在二、三維世界養成的幾何直覺不再成立，取而代之的是兩種確定性的規律。</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a><span class="rs">工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a></li></ul><p class="more">另有 11 篇</p></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

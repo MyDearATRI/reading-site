@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>18C｜具身視覺語言動作VLA與擴散Transformer多模態生成 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-a63521aa" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="18c具身視覺語言動作vla與擴散transformer多模態生成">18C｜具身視覺語言動作VLA與擴散Transformer多模態生成</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a>
+同領域子方向：<a class="wl" href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a> · <a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>
+課程章節：<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a> · <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a> 的具身執行與生成主幹交叉口，連接 <a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a> 的語意表徵與 <a class="wl" href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a> 的決策控制。演進主線從擴散 Transformer（DiT）建立潛空間生成擴展律出發，延伸至將語言視覺模型接上機器人動作詞元的 VLA 策略（OpenVLA）、檢索增強與風險受控測試期適應（R2-VLA），以及從純視覺生成邁向物理因果模擬的具身世界模型評測（WorldSimBench）。</p>
+</aside>
+<ul>
+<li>核心問題：傳統機器人視覺運動策略多針對單一任務從頭訓練，在跨場景與新指令下泛化能力受限；而直接把大型封閉 VLA 部署到現場時，面臨參數量龐大（如 55B）、難以微調以及測試期分布偏移下無法察覺自身失敗風險的問題。另一方面，傳統基於 U-Net 的擴散模型受限於卷積歸納偏置與規模擴展瓶頸，且近年大量影片生成模型雖能產出高畫質影格，卻常缺乏嚴格的物理因果一致性與可操控性驗證，導致視覺逼真度與實際具身控制可用性脫節。</li>
+<li>直覺模型：可以把現代具身 VLA 與擴散世界模型想像成一位同時具備「腦內物理沙盤」與「雙手操作反射」的學徒：DiT 就像把畫布切成規整方塊的積木式推演器，算力積木堆越多，畫面與狀態預測就越精細；VLA 則將眼睛看到的幾何形狀、聽到的語意指令與機械臂動作編碼成同一套動作辭典，並在沒把握時先比對過去示範案例的風險分數，超過警戒線就停手請老師傅介入示範並把經驗寫回記憶庫。</li>
+<li>分階段閱讀路線：第一階段先讀 Peebles and Xie (2022)（DiT）與 Kim et al. (2024)（OpenVLA），分別掌握潛空間擴散 Transformer 的架構與 Gflops 擴展規律，以及開源 7B VLA 如何融合雙視覺編碼器與語言骨幹輸出機器人動作。第二階段讀 Qin et al. (2024)（WorldSimBench），理解如何透過顯式感知評估與隱式操作評估檢驗影片生成模型是否真正具備世界模擬器能力。第三階段讀 2026 前沿論文 Huang et al. (2026) 與 Liu et al. (2026)（R2-VLA），深入高風險場域（手術影片）從條件生成向因果世界模型轉移的瓶頸，以及不更新權重下的不確定性校準與測試期風險控制。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;潛空間擴散 U-Net 與單任務機器人策略&quot;] --&gt; B[&quot;2022 Peebles 與 Xie DiT 潛塊 Transformer 與 Gflops 擴展律&quot;]
+  A --&gt; C[&quot;2024 Kim et al. OpenVLA 雙視覺編碼與 970k 示範微調&quot;]
+  B --&gt; D[&quot;2024 Qin et al. WorldSimBench 顯式感知與隱式操作評測&quot;]
+  D --&gt; E[&quot;2026 Huang et al. 條件影格生成轉向因果世界模型&quot;]
+  C --&gt; F[&quot;2026 Liu et al. R2-VLA 檢索增強與不確定性風險控制&quot;]
+  E --&gt; G[&quot;具身閉迴路模擬與高風險安全部署&quot;]
+  F --&gt; G
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>擴散 Transformer 與計算量擴展律 (Diffusion Transformers and Gflops Scaling)</strong></p>
+<ul>
+<li>直覺理解：過去潛空間擴散模型普遍採用卷積 U-Net 進行去噪，網路結構與下採樣尺度綁死；將 U-Net 換成直接處理潛空間影像塊的標準 Transformer 後，去噪網路便能像語言模型一樣透過增加深度、寬度或切細影像塊穩步提升生成品質。</li>
+<li>機制或核心表達式：DiT（Peebles and Xie, 2022）先由變分自編碼器將影像壓縮至潛空間張量，再切割為長度 <span class="math inline">N</span> 的潛塊序列 <span class="math inline">z_t \in \mathbb{R}^{N \times d}</span> 並加上位置編碼。網路透過多層 Transformer 區塊預測噪聲與協方差，最小化去噪目標 <span class="math inline">\mathcal{L}(\theta) = \mathbb{E}_{z_0, \epsilon, t}\left[\|\epsilon - \epsilon_\theta(z_t, t, c)\|_2^2\right]</span>，其中時間步 <span class="math inline">t</span> 與條件 <span class="math inline">c</span> 透過自適應層歸一化或交叉注意力注入。實證顯示無論增加層數／寬度或縮減 patch 尺寸以增加詞元數 <span class="math inline">N</span>，只要前向傳播計算量（Gflops）提升，FID 即單調下降，DiT-XL/2 在 ImageNet <span class="math inline">256\times 256</span> 上達到 <span class="math inline">2.27</span> FID。</li>
+<li>能做到什麼，代價是什麼：擺脫 U-Net 卷積歸納偏置並建立可預測的算力擴展曲線，成為多模態與影片世界模型的通用去噪骨幹；代價是自注意力計算量隨潛塊數 <span class="math inline">N</span> 呈 <span class="math inline">\mathcal{O}(N^2)</span> 成長，高解析度或長時序影片推論需搭配視窗化或詞元壓縮。</li>
+</ul>
+</li>
+<li>
+<p><strong>開源視覺語言動作架構與雙塔特徵融合 (OpenVLA and Dual-Encoder Action Tokenization)</strong></p>
+<ul>
+<li>直覺理解：要讓語言模型真正操縱機械臂，光有看懂物體名稱的語意特徵不夠，還必須精確分辨物體邊緣位置與幾何姿態；因此將擅長局部幾何的自監督特徵與擅長語意對齊的圖文特徵並聯輸入語言模型，再把連續機械臂位移離散化為詞表末端的動作詞元。</li>
+<li>機制或核心表達式：OpenVLA（Kim et al., 2024）以 7B Llama 2 為語言骨幹，將每一筆視覺觀測 <span class="math inline">o_t</span> 同時通過預訓練 DINOv2（保留細粒度空間與物體幾何特徵）與 SigLIP（保留語意與語言接地特徵）兩個視覺編碼器並串接投影至詞元空間。訓練資料涵蓋 970k 筆真實世界機器人示範軌跡，連續控制動作 <span class="math inline">a_t \in \mathbb{R}^d</span> 經量化離散化映射為自回歸動作詞元並由交叉熵損失優化，使 7B 開源模型在多項通用操作基準的絕對任務成功率上超越 55B 封閉模型 RT-2-X 達 <span class="math inline">16.5\%</span>。</li>
+<li>能做到什麼，代價是什麼：以較小的 7B 參數規模提供可完整復現與高效微調的通用機器人策略基礎模型；代價是離散動作分箱會限制極高頻連續伺服控制的解析度，且跨本體（embodiment）與新環境仍需在測試期或少量示範下進行適應。</li>
+</ul>
+</li>
+<li>
+<p><strong>世界模擬器的雙軌評測與因果動力學轉移 (Dual Evaluation and Causal World Modeling)</strong></p>
+<ul>
+<li>直覺理解：一段影片看起來很逼真，不代表機器人照著這段影片想像的物理結果去抓東西就能抓到。要驗證生成模型算不算「世界模擬器」，不能只請人類評分畫面好不好看，還必須把模擬出來的畫面餵給下游操作任務看能不能成功完成動作。</li>
+<li>機制或核心表達式：WorldSimBench（Qin et al., 2024）將預測模型依能力分層並提出雙軌評測：顯式感知評估（Explicit Perceptual Evaluation）利用人類細粒度回饋資料集 HF-Embodied 檢驗視覺品質與物理合理性；隱式操作評估（Implicit Manipulative Evaluation）則在開放式具身環境、自動駕駛與機器人操作三類場域測試動作層級任務表現。Huang et al. (2026) 針對高風險手術影片生成進一步將範式劃分為無條件生成 <span class="math inline">p_\theta(x_{1:T})</span>、條件生成 <span class="math inline">p_\theta(x_{1:T} \mid c)</span> 與世界模型生成 <span class="math inline">p_\theta(x_{t+1:T} \mid x_{1:t}, a_{t:T-1})</span>，指出焦點正從影格外觀擬合轉向場景因果動力學建模。</li>
+<li>能做到什麼，代價是什麼：建立起連結視覺生成指標（如 FID／人類偏好）與閉迴路具身控制成效的評測標準；代價是隱式操作評測高度依賴特定模擬器與下游策略介面，且像素級擬真度與物理／臨床合理性之間仍存明顯落差。</li>
+</ul>
+</li>
+<li>
+<p><strong>檢索增強 VLA 的風險受控測試期適應 (Risk-Controlled Test-Time Adaptation, R2-VLA)</strong></p>
+<ul>
+<li>直覺理解：現場部署機器人時把相關操作示範直接塞進提示詞當參考，雖然不用重訓權重，模型有時卻會「看過但沒用好」導致任務失敗。給系統加上一個風險校準閥門，不確定性低時放手自主執行，高於門檻就主動停下求助專家並記住修正，就能用最少人力守住成功率底線。</li>
+<li>機制或核心表達式：R2-VLA（Liu et al., 2026）針對檢索增強 VLA 設計無需更新主幹參數的測試期適應機制：系統先根據當前觀測與指令檢索相關專家示範作為上下文，再由學習到的不確定性預測器 <span class="math inline">u_\phi</span> 估計該脈絡下預測動作的可靠度。透過任務層級的風險控制程序（risk-control procedure）校準不確定性閾值 <span class="math inline">\tau</span>，使系統僅在 <span class="math inline">u_\phi \le \tau</span> 時自主執行、否則請求專家協助，藉此滿足使用者指定的任務失敗風險上限要求，並持續將專家修正寫回檢索記憶庫。</li>
+<li>能做到什麼，代價是什麼：在不微調龐大 VLA 權重的情況下取得可控的任務成功率保證與持續記憶累積；代價是系統依賴不確定性預測器的校準分布覆蓋度，且需要專家在線上參與修正高風險樣本。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何 OpenVLA 同時融合 DINOv2 與 SigLIP 兩種視覺編碼器</strong>：在 OpenVLA（Kim et al., 2024）的架構設計中，既然 SigLIP 已經透過大規模圖文對比學習對齊了視覺與自然語言，為何還需要額外串接純自監督視覺編碼器 DINOv2 的特徵？這與 <a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a> 中談到的對比表徵限制有何關聯？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考切入點一：SigLIP 屬於圖文對比式模型，其表徵偏向高階物件類別與語意描述，對物體細部邊界、空間相對深度與幾何朝向往往不夠敏感。思考切入點二：DINOv2 透過影像層級自監督學習保留了密集的空間局部幾何與像素級結構對應；將兩者特徵融合後，VLA 才能在理解「把紅色馬克杯放進架子」的語言指令同時，準確輸出機械臂所需的精細三維抓取位移。</p>
+</details>
+<ol start="2">
+<li><strong>像素級生成指標低不代表適合作為具身世界模擬器</strong>：在 WorldSimBench（Qin et al., 2024）與手術影片生成綜述（Huang et al., 2026）中，為何研究者強調必須區分「條件影格生成」與「具身世界模型」，並同時使用顯式感知評估與隱式操作評估？如果一個擴散模型在畫面畫質上獲得高分，在隱式操作評估卻失敗，問題通常出在哪裡？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考切入點一：條件生成追求的是視覺紋理分布逼近真實資料（低 FID 或人類看起來流暢），並不強制系統遵守不可逆的物理接觸、碰撞邊界與動作因果反事實。思考切入點二：當模擬器無法準確反映動作 <span class="math inline">a_t</span> 對下一刻狀態 <span class="math inline">x_{t+1}</span> 的精確因果效應（例如物體穿模、夾爪接觸後物體未跟隨移動或出現幻覺形變），依賴該模擬器進行規劃或訓練的下游具身策略就會學到錯誤動力學而在隱式操作任務上失敗。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>像素級視覺保真度與物理及臨床因果合理性的落差</strong>：Huang et al. (2026) 與 Qin et al. (2024) 皆指出，現有基於擴散架構的影片生成模型在靜態外觀與短時序紋理上已具備高度逼真度，但在長時域物理一致、接觸動力學、高風險醫療場景的解剖結構因果演變以及可解釋可控性方面仍面臨瓶頸。如何將物理先驗與嚴格動作條件約束嵌入 DiT 生成過程，仍未有統一解法。</li>
+<li><strong>VLA 的閉迴路推論延遲、測試期分布偏移與安全邊界</strong>：OpenVLA（Kim et al., 2024）雖然透過 7B 規模提升了開源可得性與微調彈性，但自回歸生成高維機器人動作詞元在即時高頻控制上仍有延遲壓力；另一方面，如 R2-VLA（Liu et al., 2026）所示，即使在測試期檢索了正確的專家示範，VLA 仍可能無法有效利用上下文資訊而失效。如何在無專家即時待命的開放環境中維持統計風險保證與低延遲執行，是具身部署的核心難題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>離線決策策略與具身世界模型動力學的銜接</strong>：本子方向的具身世界模擬器與 VLA 動作生成架構，可與 <a class="wl" href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a> 中的離線強化學習保守約束、潛空間動力學規劃與策略最佳化結合，緩解純模仿學習在分布外累積誤差上的弱點。</li>
+<li><strong>高語意密度跨模態編碼對動作接地的支撐</strong>：<a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a> 中發展的編碼串流詞元化、共享 3D RoPE 與解耦 MMDiT 設計，可直接遷移至長時域機器人操作影片編碼與多視角動作條件化生成。</li>
+<li><strong>物理空間模擬與遊戲尋路及程序環境生成</strong>：世界模型對動作條件下環境演變的建模與雙軌評測邏輯，可應用於 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a> 的動態環境前瞻規劃與 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a> 的可控場景動態演化驗證。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-scalable-diffusion-models-with-transformers2022">1. Scalable Diffusion Models with Transformers（2022）</h4>
+<ul>
+<li>作者與出處：William Peebles, Saining Xie · <em>arXiv</em></li>
+<li>核心問題：傳統潛空間擴散模型普遍以卷積 U-Net 作為去噪骨幹，較難直接套用標準 Transformer 的規模擴展設計原則。論文探討以純 Transformer 取代 U-Net 處理潛空間影像塊的可行性與擴展規律。</li>
+<li>關鍵做法：提出擴散 Transformer（DiT），將潛空間表徵切割為 patch 序列並分析網路前向計算量（Gflops）與生成品質的關係。實驗證明透過加深加寬 Transformer 或增加輸入詞元數來提高 Gflops 可持續降低 FID，最大的 DiT-XL/2 在 ImageNet <span class="math inline">256\times 256</span> 上達到當時最佳的 2.27 FID，並在 <span class="math inline">512\times 512</span> 上超越既有擴散模型。</li>
+<li>跨領域啟發：確立現代高畫質影像與影片世界模型（包含多模態生成頭與視訊模擬器）的標準主幹架構，連結視覺生成與語言模型的擴展律分析。</li>
+<li>連結：<a href="zotero://select/library/items/ZSXJJAVN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.09748" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-openvla-an-open-source-vision-language-action-model2024">2. OpenVLA: An Open-Source Vision-Language-Action Model（2024）</h4>
+<ul>
+<li>作者與出處：Moo Jin Kim, Karl Pertsch, Siddharth Karamcheti, Ted Xiao, Ashwin Balakrishna et al. · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有具備跨任務泛化潛力的視覺語言動作模型（如 55B RT-2-X）多為閉源且缺乏針對新機器人任務的高效微調方法，限制社群研究與實際部署。</li>
+<li>關鍵做法：基於 Llama 2 語言模型與融合 DINOv2 和 SigLIP 預訓練特徵的視覺編碼器，在 970k 筆多樣化真實機器人示範資料上訓練出 7B 參數的開源模型 OpenVLA。儘管參數量明顯更小，OpenVLA 在通用操作任務的絕對成功率上仍超越封閉的 RT-2-X（55B）達 16.5%。</li>
+<li>跨領域啟發：提供具身 VLA 領域最核心的開源基線與雙視覺特徵融合範式，將 <a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a> 的語意能力直接落實到真實機器人控制。</li>
+<li>連結：<a href="zotero://select/library/items/C5TUT48E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.09246" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-worldsimbench-towards-video-generation-models-as-world-simulators2024">3. WorldSimBench: Towards Video Generation Models as World Simulators（2024）</h4>
+<ul>
+<li>作者與出處：Yiran Qin, Zhelun Shi, Jiwen Yu, Xijun Wang, Enshen Zhou et al. · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：影片預測與生成模型迅速發展，但領域內缺乏依內在特性分類的階層架構，且既有基準難以從具身互動的真實角度評量高階世界模擬器的實際效用。</li>
+<li>關鍵做法：將預測模型功能分層並提出雙軌評測框架 WorldSimBench，涵蓋基於細粒度人類回饋資料集 HF-Embodied 的顯式感知評估，以及橫跨開放式具身環境、自動駕駛與機器人操作的動作層級隱式操作評估。</li>
+<li>跨領域啟發：迫使世界模型研究從單純比拚視覺畫質轉向檢驗動作因果一致性，為後續 <a class="wl" href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a> 與具身策略評估提供對照框架。</li>
+<li>連結：<a href="zotero://select/library/items/DFJGW7MC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.18072" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-surgical-video-generation-from-diffusion-to-world-models-a-survey2026">4. Surgical Video Generation From Diffusion to World Models: A Survey（2026）</h4>
+<ul>
+<li>作者與出處：Fuxiang Huang, Chenxu Zhang, Liang Han, Lei Zhang · <em>arXiv</em></li>
+<li>核心問題：臨床手術影片受限於隱私法規、取得成本與類別不平衡，生成模型雖成為資料擴增與手術機器人策略學習的重要途徑，但 2024–2026 年文獻迅速成長卻缺乏清晰的概念分類與定量對照框架。</li>
+<li>關鍵做法：將手術影片生成文獻系統劃分為無條件生成、條件生成與世界模型生成三大類，剖析任務定義從「合成視覺合理影格」轉向「建模手術場景因果動力學」的範式轉移，並歸納像素保真度與臨床合理性之間在泛化、物理真實感、可控性與可解釋性上的四大瓶頸。</li>
+<li>跨領域啟發：以高風險醫療機器人場景為切面，具體呈現擴散生成向因果世界模型演化時的物理約束與安全驗證挑戰。</li>
+<li>連結：<a href="zotero://select/library/items/9KQBFVCF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.26214" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-risk-controlled-test-time-adaptation-for-vision-language-action-models2026">5. Risk-Controlled Test-Time Adaptation for Vision-Language-Action Models（2026）</h4>
+<ul>
+<li>作者與出處：Zixuan Liu, Hashem Haghbayan, Zizhan Zheng, Siavash Khajavi · <em>arXiv</em></li>
+<li>核心問題：檢索增強 VLA 雖能在不更新模型參數下利用專家示範進行測試期適應，但即使檢索到相關示範，VLA 仍可能無法有效吸收上下文資訊而導致操作失敗。</li>
+<li>關鍵做法：提出風險受控檢索增強框架 R2-VLA，訓練不確定性預測器以估計給定檢索示範下的動作預測風險，並透過任務層級風險控制程序校準不確定性閾值以決定自主執行或請求專家協助，同時將專家修正持續回寫檢索記憶庫。</li>
+<li>跨領域啟發：把統計風險控制與人類介入機制引入具身 VLA 測試期適應，為多模態機器人系統提供不重訓主幹下的可靠性保證途徑。</li>
+<li>連結：<a href="zotero://select/library/items/JE2SP6UA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26438" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-6-篇">G5｜本子方向全量文獻泛讀清單（共 6 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 6 篇文獻（含開放存取 PDF 6 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進1-篇">A. 奠基經典、專著與核心演進（1 篇）</h3>
+<ul>
+<li><strong>2022｜Scalable Diffusion Models with Transformers</strong>，William Peebles, Saining Xie（<em>arXiv</em>）：提出擴散 Transformer (DiT)，以作用於潛在影像區塊的 Transformer 取代潛在擴散模型中常用的 U-Net 骨幹，驗證模型隨計算量 Gflops 提升而穩定降低 FID，DiT-XL/2 於 ImageNet 256×256 達到 FID 2.27。 <a href="zotero://select/library/items/ZSXJJAVN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.09748" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2024｜OpenVLA: An Open-Source Vision-Language-Action Model</strong>，Moo Jin Kim et al.（<em>arXiv (Cornell University)</em>，61 引）：開源具身智能的重要論文：融合 DINOv2 與 SigLIP 雙視覺表徵，在百萬級機器人軌跡上預訓練 7B VLA，帶起微調通用視覺語言控制策略的做法。 <a href="zotero://select/library/items/C5TUT48E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.09246" rel="noopener">官方連結</a></li>
+<li><strong>2024｜WorldSimBench: Towards Video Generation Models as World Simulators</strong>，Yiran Qin et al.（<em>arXiv (Cornell University)</em>，3 引）：建立預測模型功能分級與雙重評測框架WorldSimBench，透過顯式感知評估與具身任務隱式操控評估，在三類具身場景檢驗影片生成模型作為世界模擬器的能力。 <a href="zotero://select/library/items/DFJGW7MC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.18072" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Surgical Video Generation From Diffusion to World Models: A Survey</strong>，Fuxiang Huang et al.（<em>arXiv</em>）：Surgical Video Generation From Diffusion to World Models: A Survey，Fuxiang Huang et al.（從醫療隱私與臨床數據稀缺的問題出發，描繪從醫療擴散視訊生成走向可互動手術模擬與機器人策略訓練用世界模型的演進路線）。 <a href="zotero://select/library/items/9KQBFVCF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.26214" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TacInno: Teaching Vision-Language-Action Models the Contact Dynamics Beyond Vision and Action</strong>，Weile Li et al.（<em>arXiv</em>）：TacInno 抽離出視覺與動作無法解釋的殘餘接觸動態（稱為「觸覺創新」tactile innovation），且僅在訓練期作為監督目標：以條件式分詞器將未來觸覺變化壓縮為離散碼，訓練 TacInno-VLA 政策網路預測該離散碼，部署推論時無需任何額外觸覺模組。在六項模擬與四項真實接觸密集操作任務上分別取得 87.5% 與 70.5% 平均成功率，較最強視觸覺基線高出 10.7 與 9.0 個百分點。 <a href="zotero://select/library/items/D9PQWSQB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26405" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Risk-Controlled Test-Time Adaptation for Vision-Language-Action Models</strong>，Zixuan Liu et al.（<em>arXiv</em>）：提出風險受控測試期適應框架 <code>R2-VLA</code>（Risk-Controlled Retrieval-Augmented VLA），讓機器人知道自己什麼時候沒把握，並在這時求助：（1）訓練一個以當前狀態與檢索示範為條件的動作不確定性預測器，動態決定自主執行還是請專家介入；（2）引入任務級風險控制校準程序（Task-level Risk Control），嚴格校準不確定性門檻，在滿足使用者指定的任務失敗風險上限的前提下，把專家介入次數降到最少；（3）把專家的即時修正持續寫回檢索記憶庫，保留統計風險保證，同時讓後續的自主適應越來越強。在 3 種 VLA 骨幹與 4 套 LIBERO 機器人操作基準上，<code>R2-VLA</code> 把平均任務成功率提高 9.2–11.2 個百分點，並用更少的專家求助次數穩定達到目標成功率。 <a href="zotero://select/library/items/JE2SP6UA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26438" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-a63521aa">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a><span class="rs">這個領域把看懂物理世界（多模態感知）和在世界中行動並承擔後果（序貫強化學習）合成一個閉環智能體。</span></li><li><a href="18A_%E5%BC%B7%E5%8C%96%E5%AD%B8%E7%BF%92%E7%AD%96%E7%95%A5%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E9%9B%A2%E7%B7%9ARL%E8%88%87%E4%B8%96%E7%95%8C%E6%A8%A1%E5%9E%8B.html">強化學習策略最佳化、離線RL與世界模型</a></li><li><a href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a><span class="tag-plan">計劃</span><span class="rs">AI 與尋路（Millington 選章；Red Blob Games 的 A*）</span></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a><span class="tag-plan">計劃</span><span class="rs">選讀：程序生成（Shaker, Togelius, Nelson 選章；Togelius 等 2011）</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

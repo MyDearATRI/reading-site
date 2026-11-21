@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>35B｜Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-4f636361" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 統計物理、複雜系統與PDE算子</span>
+<article>
+
+<h1 id="35blévy飛行連續時間隨機漫步與反常擴散分數階fokker-planck">35B｜Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a>
+同領域子方向：<a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> · <a class="wl" href="35C_%E9%9D%9E%E5%B1%80%E5%9F%9F%E5%90%91%E9%87%8F%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81%E8%BF%91%E5%A0%B4%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%88%86%E6%95%B8%E9%9A%8E%E7%89%A9%E7%90%86%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90.html">非局域向量微積分、近場動力學與分數階物理神經算子</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>
+課程章節：<a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a> 的隨機過程與統計物理分支，承接 <a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> 的空間非局域算子與 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 的半鞅及跳躍過程基礎，建立空間長距離跳躍（Lévy 飛行）與時間重尾等待（連續時間隨機漫步 CTRW）對應的介觀動力學方程。演進主線從分數階 Langevin 與分數階 Fokker–Planck 方程的尺度分析出發，走向分佈階擴散與速度空間分數階模型，並延伸至單軌跡機器學習反演、圖上 Mittag-Leffler 熱半群疊加以及隨機從屬時鐘幾何配準。</p>
+</aside>
+<ul>
+<li>核心問題：經典布朗運動與標準 Fick 擴散假設粒子跳躍步長具備有限二階矩、等待時間具備有限一階矩，從而在大尺度極限下給出線性增長的均方位移 <span class="math inline">\langle x^2(t) \rangle \propto t</span> 與無記憶的馬可夫局部擴散方程。然而在非完全哈密頓混沌、玻璃態紊亂介質、電漿體湍流與細胞運輸中，粒子常同時出現沒有特徵時間尺度的長等待滯留（發散一階矩，誘發非馬可夫記憶與次擴散）或無窮方差的空間長跳躍（Lévy 飛行，誘發超擴散與非高斯冪律尾），導致標準局部二階擴散方程與基於單一指數冪律的縮放律雙雙失效。</li>
+<li>直覺模型：標準擴散好比一個節拍均勻的醉漢在巷弄裡每次只跨一小步；連續時間隨機漫步的次擴散則是這個醉漢經常在街角呆坐極長時間才動一步，使整體移動進度比時間開根號還慢，且現在的行為取決於他已經等了多久（時間非馬可夫記憶）。相對地，Lévy 飛行則是醉漢偶爾會直接搭上長途列車飛躍整個城區，其軌跡由少數跨度極大的跳躍與局部小步叢集交錯組成，因此不能再用狹窄的鐘形高斯分佈描述他的位置。</li>
+<li>分階段閱讀路線：第一階段先讀 Bucur and Valdinoci (2016) 專著與 Kobelev and Romanov (1999)（可搭配 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a> 與 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 複習跳躍過程基礎），建立 Lévy 跳躍擴散、分數階白雜訊驅動 Langevin 方程與冪律均方位移的對應關係。第二階段閱讀 Sokolov and Chechkin (2005)、Anderson, Kim, and Moradi (2014) 與 Seckler and Metzler (2024)（可延伸參考 Nec and Nepomnyashchy (2008) 與 Cai et al. (2024)），理解當擴散缺乏單一尺度指數時的分佈階廣義擴散方程、速度空間分數階 Fokker–Planck 的 Tsallis 熵轉變，以及利用貝氏深度學習不確定性進行異質軌跡變點偵測。第三階段研讀 2026 年前沿論文 Deniskin and Estrada (2026)、Ould Haye and Philippe (2026) 與 Wu et al. (2026)，掌握圖上次擴散的熱半群凸疊加表示、不規則更新時間觀測的長記憶 Lévy 過程極限定理，以及 Gamma 隨機時鐘驅動的非剛性點雲配準方法。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;1999 Kobelev 與 Romanov 分數階 Langevin 與混沌擴散&quot;] --&gt; B[&quot;2005 Sokolov 與 Chechkin 分佈階廣義擴散方程&quot;]
+  A --&gt; C[&quot;2014 Anderson 等人 速度空間分數階 Fokker-Planck&quot;]
+  A --&gt; D[&quot;2016 Bucur 與 Valdinoci Lévy 跳躍非局域擴散專著&quot;]
+  B --&gt; E[&quot;2008 Nec 與 Nepomnyashchy 反常反應擴散 Turing 不穩定性&quot;]
+  B --&gt; F[&quot;2024 Seckler 與 Metzler 貝氏深度學習軌跡變點偵測&quot;]
+  D --&gt; G[&quot;2026 Deniskin 與 Estrada 圖上次擴散 Mittag-Leffler 半群疊加&quot;]
+  D --&gt; H[&quot;2026 Ould Haye 與 Philippe 及 Wu 等人 隨機時鐘 Lévy 過程應用&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>連續時間隨機漫步與時間–空間分數階擴散方程 (CTRW and Space–Time Fractional Diffusion)</strong></p>
+<ul>
+<li>直覺理解：在連續時間隨機漫步模型中，粒子每一步的等待時間與跳躍距離都是隨機的。當等待時間分佈呈重尾冪律時，方程在時間軸上出現帶記憶的分數階導數；當跳躍步長呈穩定 Lévy 分佈時，空間軸上出現非局域分數階拉普拉斯算子。</li>
+<li>機制或核心表達式：設連續時間隨機漫步（CTRW）的等待時間密度滿足 <span class="math inline">\psi(t) \sim t^{-1-\beta}</span>（<span class="math inline">0 &lt; \beta &lt; 1</span>，一階矩發散）且空間跳躍密度滿足 <span class="math inline">\lambda(x) \sim |x|^{-1-\alpha}</span>（<span class="math inline">0 &lt; \alpha \le 2</span>），在長時間與大空間縮放極限下（以適當的廣義分數階 Fick 定律表述，見 Chang et al., 2005），機率密度 <span class="math inline">P(x,t)</span> 滿足時間–空間分數階擴散方程 <span class="math inline">{}_0^C D_t^\beta P(x,t) = K_{\beta,\alpha} \nabla_x^\alpha P(x,t)</span>。在邊界與微觀動力學對應上，Kobelev and Romanov (1999) 展示由白雜訊分數階導數驅動的分數階 Langevin 方程能導出非整數冪次的時間均方位移，對應不完全哈密頓混沌系統。針對缺乏單一冪律縮放的多尺度反常擴散，Sokolov and Chechkin (2005) 探討將單一分數階導數推廣為對階數積分權重的分佈階（distributed-order）擴散方程，並分析分數階算子置於 Fick 定律不同位置對解的長短時行為的影響；在反應擴散系統中，Nec and Nepomnyashchy (2008) 進一步揭示不同物種具備不同反常擴散指數時短波增長率呈波數冪律與解耦時間尺度的 Turing 不穩定性。</li>
+<li>能做到什麼，代價是什麼：分數階與分佈階擴散方程能簡潔刻畫冪律弛豫與非高斯分佈，但在有限區域與外場耦合時（尤其同時有時間記憶與空間躍遷），分離變數法或數值積分必須處理隨歷史累積的記憶核與全域空間耦合，計算量隨模擬總步數呈超線性增長。</li>
+</ul>
+</li>
+<li>
+<p><strong>分數階 Fokker–Planck 模型與速度空間反常輸運 (Fractional Fokker–Planck and Velocity-Space Dynamics)</strong></p>
+<ul>
+<li>直覺理解：當反常擴散發生在外加位勢或電漿湍流場中時，不能僅靠自由擴散描述粒子分佈；必須在相空間或速度空間引入分數階微分算子，追蹤機率密度如何在確定性漂移與長程跳躍之間取得非平衡穩態。</li>
+<li>機制或核心表達式：Anderson, Kim, and Moradi (2014) 建立帶有分數階速度導數的分數階 Fokker–Planck 模型來研究反常擴散，透過數值求解不同分數階指數下的分佈函數，直接觀察平衡態分佈從高斯分佈過渡到重尾 Lévy 分佈的連續轉變，並利用 Tsallis 統計力學中的廣義期望測度與廣義熵評估其統計性質，發現當分數階數減小並進入次擴散區域時，廣義熵與期望之比單調上升，反映系統呈現自組織行為。在觀測反演層面，當單一實驗軌跡可能在不同擴散模式間切換時，Cai et al. (2024) 系統比較傳統特徵與深度表徵方法，而 Seckler and Metzler (2024) 結合貝氏深度學習從四類理論反常擴散模型生成的單條軌跡中逐點估計擴散指數與預測不確定性，並利用不確定性在模式轉折處的顯著反應進行變點偵測。</li>
+<li>能做到什麼，代價是什麼：速度空間分數階 Fokker–Planck 算子能直接與電漿體及非廣延 Tsallis 熱力學建立定量聯繫，但數值求解通常依賴特定邊界截斷與譜離散近似；單軌跡深度學習反演雖能突破短軌跡統計樣本不足的限制，仍受限於訓練時所假設的理論擴散模型族覆蓋範圍。</li>
+</ul>
+</li>
+<li>
+<p><strong>從屬隨機時鐘、半群疊加與不規則更新觀測 (Subordination, Semigroup Superposition, and Renewal Clocks)</strong></p>
+<ul>
+<li>直覺理解：時間分數階次擴散與長記憶 Lévy 過程不必總是直接硬解非局域記憶積分：透過將標準馬可夫過程的物理時間替換為隨機變化的「操作時間」（從屬過程），可以把複雜的記憶動力學轉寫成許多標準擴散過程在不同時間尺度上的加權平均。</li>
+<li>機制或核心表達式：在圖結構上，Deniskin and Estrada (2026) 證明時間分數階圖次擴散是由壓縮操作時間的隨機時鐘（從屬過程）產生的記憶驅動過程，該機制產生長尾等待時間並打破馬可夫性，同時嚴格保持線性與質量守恆；具體而言，基於 Mittag-Leffler 函數的圖動力學存在精確的凸且保質量表示，可寫為標準熱半群在不同重縮放時間下的疊加，從而揭示與頂點度數相關的等待時間、代數弛豫以及源點與鄰居間的早期不對稱性。在隨機過程統計推斷與幾何應用方面，Ould Haye and Philippe (2026) 針對在隨機更新時間（renewal times）進行不規則觀測的長記憶 Lévy 驅動移動平均過程，於有限均值與無窮均值更新取樣下分別建立標準化部分和的漸近分佈極限；Wu et al. (2026) 在 LevyMatch 中則利用 Gamma 隨機時鐘驅動朝向目標匹配矩陣的布朗參考橋更新，並透過將較大 Gamma 時間增量前置（front-loaded）的策略提升低重疊非剛性點雲配準的召回率與內點率。</li>
+<li>能做到什麼，代價是什麼：從屬隨機時鐘與半群疊加提供清晰的機率與幾何直覺，並容許用標準熱核或布朗橋組合出非馬可夫與重尾跳躍行為，但當空間跳躍與外力場或時間等待出現強耦合（非分離空間–時間過程）時，單純的獨立隨機時鐘變換便不再精確適用。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>時間分數階圖次擴散為何能同時打破馬可夫性又寫成馬可夫熱半群的凸疊加</strong>：單個標準圖熱半群 <span class="math inline">e^{-tL}</span> 是無記憶的馬可夫過程，而時間分數階圖擴散因為具有長尾等待時間而打破了馬可夫性。根據 Deniskin and Estrada (2026)，為何這種非馬可夫 Mittag-Leffler 圖動力學仍能精確表示為標準熱半群的凸疊加？這會誘發哪些標準熱擴散沒有的圖上輸運偏差？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>透過隨機時鐘變換（從屬過程），時間分數階動力學等價於讓標準圖擴散沿著隨機壓縮的操作時間 <span class="math inline">\tau</span> 演化，物理時間 <span class="math inline">t</span> 對應的操作時間分佈給出非負且總和為 <span class="math inline">1</span> 的混合權重，因此 Mittag-Leffler 半群是不同縮放時間標準熱半群的精確凸組合，天然保留線性與質量守恆，但混合後不再滿足半群指數律從而失去馬可夫性。這種多尺度時間疊加在圖上會誘發異質的頂點記憶效應、代數（而非指數）弛豫、與頂點度數相關的等待時間，以及源點和鄰居在早期的非對稱輸運並使粒子更傾向流向高度數區域。</p>
+</details>
+<ol start="2">
+<li><strong>為何單一指數分數階擴散方程不足以處理所有反常擴散資料，以及不確定性如何協助變點偵測</strong>：當粒子運動同時受多個時間尺度影響或在不同環境區域間切換時，標準單指數公式 <span class="math inline">{}_0^C D_t^\beta P = K \nabla^\alpha P</span> 會有何限制？Sokolov and Chechkin (2005) 的方程推廣與 Seckler and Metzler (2024) 的單軌跡分析方法分別從建模與推斷兩端如何處理這個問題？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>若動力學缺少單一冪律縮放特性，單指數分數階方程無法反映尺度演變，因此 Sokolov and Chechkin (2005) 引入對微分階數進行積分加權的分佈階（distributed-order）擴散方程，並區分分數階算子在 Fick 定律中所處位置對解的性質的影響。若運動模式沿單條軌跡隨時間突變，Seckler and Metzler (2024) 利用貝氏深度學習逐點估計反常擴散指數與預測不確定性，發現在不同擴散模式切換的變點附近預測不確定性會出現特徵性峰值，從而作為軌跡分段依據。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>空間–時間耦合與非線性異質軌跡中的分數階 Fokker–Planck 辨識度</strong>：在實際生物分子與紊亂介質實驗中，軌跡往往混合了時間記憶、非均勻空間阻礙與模式切換（Seckler &amp; Metzler, 2024; Cai et al., 2024）。不同的微觀機制（如分佈階記憶核、分數階速度場耦合與分數階布朗運動）在有限長度單軌跡統計上可能呈現相近的均方位移冪律指數，如何結合貝氏不確定性與嚴格模型檢定避免推斷歧義（如 Ould Haye &amp; Philippe, 2026 在無窮均值更新觀測下遭遇的無窮方差重縮放問題），仍待更完備的統計推論理論。</li>
+<li><strong>分數階與 Lévy 隨機時鐘驅動在幾何計算與圖學習中的收斂邊界</strong>：Deniskin and Estrada (2026) 揭示時間分數階圖擴散因高度數偏好與早期不對稱性而能在局部探測全域最短路徑，Wu et al. (2026) 亦實證前置 Gamma 隨機時鐘的 Lévy 更新策略（LevyMatch）無需重訓即可顯著提升非剛性點雲配準表現。然而為何重尾時間調度（如前置大步長 Gamma 增量）在非凸幾何配準與圖表徵任務上優於均勻時間步長，尚缺乏與連續時間極限及最優傳輸收斂速率連結的嚴格數學定理。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>與空間分數階變分及反射半群的統一耦合</strong>：本子方向的對稱 Lévy 跳躍生成元與長尾等待從屬構造，與 <a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> 中有界區域上的反射分數階半群（Bogdan &amp; Kunze, 2024）及圖分數階算子（Estrada, 2021）正好形成時間軸與空間軸的對偶，兩者結合即可完整描述受限容器內的時空反常輸運。</li>
+<li><strong>隨機時鐘與神經算子及分數階生成採樣的橋接</strong>：從屬過程將非馬可夫動態展開為多尺度熱半群疊加（Deniskin &amp; Estrada, 2026），以及透過 Gamma 隨機時鐘與布朗參考橋進行迭代狀態轉移（Wu et al., 2026），其時間重參數化與非局部演化核構造可直接遷移至 <a class="wl" href="35C_%E9%9D%9E%E5%B1%80%E5%9F%9F%E5%90%91%E9%87%8F%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81%E8%BF%91%E5%A0%B4%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%88%86%E6%95%B8%E9%9A%8E%E7%89%A9%E7%90%86%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90.html">非局域向量微積分、近場動力學與分數階物理神經算子</a> 與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 中，用於設計多尺度記憶神經算子與重尾擴散傳輸模型。</li>
+<li><strong>隨機微積分與更新過程取樣的無窮均值極限技巧</strong>：Ould Haye and Philippe (2026) 處理不規則更新時間觀測下長記憶 Lévy 移動平均過程部分和極限的機率方法，與 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a> 及 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 中的隨機時間變換、穩定極限定理與更新過程分析密切相關，可作為處理非等距觀測金融或物理時間序列的標準推導工具。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-fractional-langevin-equation-to-describe-anomalous-diffusion1999">1. Fractional Langevin equation to describe anomalous diffusion（1999）</h4>
+<ul>
+<li>作者與出處：V. Kobelev, E. Romanov · <em>Progress of Theoretical Physics Supplement</em></li>
+<li>核心問題：傳統 Langevin 方程受限於普通白雜訊與整數階時間導數，只能產生線性成長的均方位移，無法從微觀隨機力學直接導出實驗觀察到的反常冪律擴散與不完全哈密頓混沌行為。</li>
+<li>關鍵做法：考察由白雜訊分數階導數作為加性隨機力驅動的 Langevin 方程，並推廣至含分數階時間微分算子的一般形式；解析推導出非整數冪律時間增長的均方位移，視速度與座標耦合類型產生標準或分數階長時間擴散，並系統分析其與分數階 Fokker–Planck 方程的關聯。</li>
+<li>跨領域啟發：建立微觀分數階隨機力學與介觀分數階 Fokker–Planck 方程之間的經典橋樑，可直接對應 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 中的隨機微分方程推廣。</li>
+<li>連結：<a href="zotero://select/library/items/DGB96R24" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/chao-dyn/9908001" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-nonlocal-diffusion-and-applications2016">2. Nonlocal Diffusion and Applications（2016）</h4>
+<ul>
+<li>作者與出處：Claudia Bucur, Enrico Valdinoci · <em>Lecture Notes of the Unione Matematica Italiana (Springer / arXiv)</em></li>
+<li>核心問題：由 Lévy 跳躍過程驅動的非局域擴散與極小曲面現象橫跨機率論與幾何偏微分方程，需要一套系統化的講義串聯隨機跳躍直覺與非局域相變分析。</li>
+<li>關鍵做法：以專著形式推導由穩定 Lévy 跳躍過程引出的非局域擴散方程，闡述長距離跳躍微觀機率論述如何收斂至分數階算子極限，並深入討論分數階極小曲面與非局域 Allen–Cahn 相變模型。</li>
+<li>跨領域啟發：提供從微觀 Lévy 跳躍模型跨入 <a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> 幾何變分分析的標準教學橋樑。</li>
+<li>連結：<a href="zotero://select/library/items/JGNUVBVH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1504.08292" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-anomalous-diffusion-and-generalized-diffusion-equations2005">3. ANOMALOUS DIFFUSION AND GENERALIZED DIFFUSION EQUATIONS（2005）</h4>
+<ul>
+<li>作者與出處：I. M. Sokolov, A. V. Chechkin · <em>Fluctuation and Noise Letters</em></li>
+<li>核心問題：單一指數的時間或空間分數階擴散方程只能刻畫位移按單純時間冪次縮放的過程，但在缺乏單一尺度縮放律的多尺度反常擴散中需要更廣義的微分結構，且算子相對 Fick 定律的擺放位置會實質影響解的行為。</li>
+<li>關鍵做法：系統分類並比較分數階算子以不同方式結合或取代 Fick 定律整數階導數的廣義擴散方程形式，並建立跨越多種時間縮放行為的分佈階（distributed-order）擴散方程，分析特殊情形下解的長短時漸近性質。</li>
+<li>跨領域啟發：釐清廣義 Fick 定律與分佈階擴散算子的物理約束，為設計多尺度記憶神經算子與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 提供理論原型。</li>
+<li>連結：<a href="zotero://select/library/items/66SEHUP5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/s0219477505002653" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-a-fractional-fokker-planck-model-for-anomalous-diffusion2014">4. A Fractional Fokker-Planck Model for Anomalous Diffusion（2014）</h4>
+<ul>
+<li>作者與出處：Johan Anderson, Eun-jin Kim, Sara Moradi · <em>Physics of Plasmas</em></li>
+<li>核心問題：在電漿體等強非線性系統中，反常輸運不僅發生在座標空間，也受速度空間中的非局域記憶與長跳躍支配，傳統速度擴散模型難以同時呈現高斯至 Lévy 態的相變與相應熱力學熵行為。</li>
+<li>關鍵做法：建構含分數階速度導數的分數階 Fokker–Planck 模型，對不同分數階度數進行數值求解以捕捉分佈函數從高斯態轉向重尾 Lévy 態的過渡，並以 Tsallis 統計力學的廣義期望測度與廣義熵分析其統計特性，觀察到兩者比值隨分數階數下降進入次擴散區而升高，顯示系統的自組織傾向。</li>
+<li>跨領域啟發：將分數階 Fokker–Planck 動力學與非廣延 Tsallis 熵結合，展現分數階參數對系統統計結構與自組織相態的控制作用。</li>
+<li>連結：<a href="zotero://select/library/items/WFA2IWGZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1401.4351" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-change-point-detection-in-anomalous-diffusion-trajectories-utilising-machine-learning-based-uncertainty-estimates2024">5. Change-point detection in anomalous-diffusion trajectories utilising machine-learning-based uncertainty estimates（2024）</h4>
+<ul>
+<li>作者與出處：Henrik Seckler, Ralf Metzler · <em>Journal of Physics Photonics</em></li>
+<li>核心問題：細胞、分子或動物移動軌跡常在行進過程中切換擴散模式，傳統統計檢定在變化幅度細微或軌跡較短時難以精確切分異質軌跡中的變點（change-points）。</li>
+<li>關鍵做法：將貝氏深度學習應用於由四種反常擴散理論模型生成的單條軌跡，在獲得不遜於單一模式基準之逐點反常擴散指數估計的同時，輸出經校準的預測不確定性，並利用不確定性在擴散模式轉折點處的特異變化進行高精度變點偵測。</li>
+<li>跨領域啟發：示範如何把機率校準的機器學習不確定性整合進反常擴散逆問題，可配合機器學習軌跡分析綜述共同建立實驗數據解讀流程。</li>
+<li>連結：<a href="zotero://select/library/items/FFMVBHXM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.14206" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-fractional-diffusion-on-graphs-superposition-of-laplacian-semigroups-and-memory2026">6. Fractional Diffusion on Graphs: Superposition of Laplacian Semigroups and Memory（2026）</h4>
+<ul>
+<li>作者與出處：Nikita Deniskin, Ernesto Estrada · <em>Fractal and Fractional</em></li>
+<li>核心問題：時間分數階擴散方程雖常被用來建模圖上的次擴散現象，但這種分數階演化對圖拓撲與動力學行為帶來的具體結構性後果長期尚未釐清。</li>
+<li>關鍵做法：證明圖上時間分數階次擴散是由壓縮操作時間的隨機時間變換產生的記憶過程（產生長尾等待時間並打破馬可夫性但保留線性與質量守恆），進而證得 Mittag-Leffler 圖動力學可精確表為不同重縮放時間下經典熱半群的凸保質量疊加，由此推導出代數弛豫、度數相關等待時間、早期源點鄰居不對稱性以及偏向高度數區並能局部發現全域最短路徑的次擴散圖幾何。</li>
+<li>跨領域啟發：把非馬可夫時間分數階圖擴散精確分解為標準熱半群疊加，與 <a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> 的圖拉普拉斯非局域特性直接互補。</li>
+<li>連結：<a href="zotero://select/library/items/6Q8QSS4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.14977" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-55-篇">G5｜本子方向全量文獻泛讀清單（共 55 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 55 篇文獻（含開放存取 PDF 11 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進47-篇">A. 奠基經典、專著與核心演進（47 篇）</h3>
+<ul>
+<li><strong>2016｜Nonlocal Diffusion and Applications</strong>，Claudia Bucur, Enrico Valdinoci（<em>Lecture Notes of the Unione Matematica Italiana (Springer / arXiv)</em>，584 引）：物理直覺很強的開源專著：用隨機跳躍漫步推導非局域擴散方程，也涵蓋分數階極小曲面、非局域相變與生物覓食模型。 <a href="zotero://select/library/items/JGNUVBVH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1504.08292" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Thermodynamics of Anomalous Diffusion</strong>，Damián H. Zanette, Pablo A. Alemany（<em>Physical Review Letters</em>，251 引）：刊於《Physical Review Letters》（1995），探討反常擴散過程背後的熱力學性質與統計物理架構，屬反常擴散與分數階動力學之早期物理文獻（未附摘要）。 <a href="zotero://select/library/items/S8DAXJWD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physrevlett.75.366" rel="noopener">官方連結</a></li>
+<li><strong>1999｜On strong anomalous diffusion</strong>，P. Castiglione et al.（<em>Physica D: Nonlinear Phenomena</em>，209 引）：提出強反常擴散（Strong Anomalous Diffusion）的概念，指出高階位移矩呈現非線性的多標度指數譜，單一標度的自相似假設不再適用。 <a href="zotero://select/library/items/3MBU3M5Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0167-2789(99)00031-7" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Anomalous Diffusion at Liquid Surfaces</strong>，Oleg V. Bychuk, Ben O'Shaughnessy（<em>Physical Review Letters</em>，194 引）：說明分子在液體界面會經由體相脫附再吸附的長程跳躍機制，湧現表面 Lévy 超擴散，是這類現象的物理原型。 <a href="zotero://select/library/items/M52WA8B7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physrevlett.74.1795" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Fractional Diffusion Equations and Anomalous Diffusion</strong>，Luiz Roberto Evangelista, Ervin Kaminski Lenzi（<em>Cambridge University Press</em>，137 引）：一本現代專書，系統涵蓋連續時間隨機漫步、時間／空間分數階擴散方程，以及複雜介面阻抗的應用。 <a href="zotero://select/library/items/MP2R6CHP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/9781316534649" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Anomalous Diffusion in Fractal Globules</strong>，M. V. Tamm et al.（<em>Physical Review Letters</em>，104 引）：解析細胞核染色質碎形小球這種無纏結高分子構型中的次擴散動力學，把高分子物理和生命基因體的三維空間組織連起來。 <a href="zotero://select/library/items/HARG2XG4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physrevlett.114.178102" rel="noopener">官方連結</a></li>
+<li><strong>1999｜Fractional Langevin equation to describe anomalous diffusion</strong>，V. Kobelev, E. Romanov（<em>Progress of Theoretical Physics Supplement</em>，89 引）：研究以白雜訊分數階導數作為隨機力或引入分數階時間微分的 Langevin 方程，指出其導致均方位移呈現非整數冪次律的反常擴散，並分析其與分數階 Fokker–Planck 方程的關聯。 <a href="zotero://select/library/items/DGB96R24" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/chao-dyn/9908001" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Modeling Anomalous Diffusion</strong>，Weihua Deng et al.（<em>WORLD SCIENTIFIC</em>，44 引）：由 World Scientific（2020）出版的學術專著，系統介紹反常擴散過程、連續時間隨機漫步與分數階 Fokker–Planck 方程的數學建模方法（未附摘要）。 <a href="zotero://select/library/items/NMXHJHAE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/11630" rel="noopener">官方連結</a></li>
+<li><strong>2005｜Anomalous diffusion and fractional advection-diffusion equation</strong>，Chang Fu-Xuan, Chen Jin, Huang Wei（<em>Acta Physica Sinica</em>，43 引）：引入具時空關聯的非局域方法推導時間與空間分數階對流擴散方程及廣義分數階 Fick 定律，求得其解為分數階 Lévy 機率密度分佈且均方位移呈時間的非線性函數。 <a href="zotero://select/library/items/GBMEAP86" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7498/aps.54.1113" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Anomalous diffusion in ferrofluids</strong>，Alenka Mertelj, Luka Cmok, Martin Čopič（<em>Physical Review E</em>，40 引）：刊於《Physical Review E》（2009），研究磁流體（ferrofluids）系統中粒子或漲落所展現的反常擴散現象及其物理行為（未附摘要）。 <a href="zotero://select/library/items/FZDBTQW3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physreve.79.041402" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Anomalous diffusion and semimartingales</strong>，A. Weron, M. Magdziarz（<em>EPL (Europhysics Letters)</em>，40 引）：發表於 EPL 的隨機過程理論論文，從半鞅（semimartingale）與隨機時間變換的數學角度分析反常擴散動力學，探討次擴散與超擴散過程和隨機微分方程架構的關聯。 <a href="zotero://select/library/items/5G4AC4QV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1209/0295-5075/86/60010" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Microscopic dynamics underlying anomalous diffusion</strong>，G. Kaniadakis, G. Lapenta（<em>Physical Review E</em>，38 引）：刊於《Physical Review E》（2000），在反常擴散與連續時間隨機漫步的研究脈絡下，從微觀動力學機制出發推導並解析造成反常擴散行為的底層動力學過程（未附摘要）。 <a href="zotero://select/library/items/Z6DCQ42I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physreve.62.3246" rel="noopener">官方連結</a></li>
+<li><strong>2007｜Anomalous diffusion in silo drainage</strong>，R. Arévalo, A. Garcimartín, D. Maza（<em>The European Physical Journal E</em>，35 引）：刊於《The European Physical Journal E》（2007），在反常擴散與非線性隨機動力學脈絡下，研究料倉排料（silo drainage）顆粒流過程中的反常擴散現象（未附摘要）。 <a href="zotero://select/library/items/VU6RRHIJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1140/epje/i2006-10174-1" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Fractal model of anomalous diffusion</strong>，Lech Gmachowski（<em>European Biophysics Journal</em>，32 引）：發表於 2015 年《European Biophysics Journal》的論文，探討用於描述生物物理系統中反常擴散（anomalous diffusion）傳輸過程的碎形幾何數學模型。 <a href="zotero://select/library/items/NQM6TXJ6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s00249-015-1054-5" rel="noopener">官方連結</a></li>
+<li><strong>2001｜Anomalous two-state model for anomalous diffusion</strong>，A. I. Shushin（<em>Physical Review E</em>，31 引）：刊於《Physical Review E》（2001），提出並分析一個異常雙態模型，用以刻畫反常擴散與非高斯隨機輸運背後的態轉換動力學機制（未附摘要）。 <a href="zotero://select/library/items/4DPC7XC9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physreve.64.051108" rel="noopener">官方連結</a></li>
+<li><strong>2014｜A Fractional Fokker-Planck Model for Anomalous Diffusion</strong>，Johan Anderson, Eun-jin Kim, Sara Moradi（<em>Physics of Plasmas 21, 122109 (2014)</em>，28 引）：以含分數階速度導數的 Fokker–Planck 方程數值模擬反常擴散，觀察分布函數隨分數階指數變化由高斯分布過渡至 Lévy 分布，並以 Tsallis 統計力學的廣義熵與期望值分析統計性質，發現兩者比值隨分數階指數降低並趨近次擴散區間而上升。 <a href="zotero://select/library/items/WFA2IWGZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1401.4351" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Anomalous Diffusion in Molecular Communication</strong>，Trang Ngoc Cao et al.（<em>IEEE Communications Letters</em>，27 引）：發表於《IEEE Communications Letters》（2015），在反常擴散與非局域隨機輸運的理論脈絡下，探討分子通訊系統中的反常擴散通道與傳播特性（未附摘要）。 <a href="zotero://select/library/items/5IK3E23W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lcomm.2015.2464217" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Fractals without anomalous diffusion</strong>，Raffaella Burioni, Davide Cassi（<em>Physical Review E</em>，24 引）：刊於《Physical Review E》（1994），分析碎形結構上的擴散過程，探討在具碎形幾何特徵的系統中如何出現不伴隨反常擴散的正常擴散行為（未附摘要）。 <a href="zotero://select/library/items/5VTAWBI8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physreve.49.r1785" rel="noopener">官方連結</a></li>
+<li><strong>1988｜Anomalous diffusion and anomalous stretching in vortical flows</strong>，Rubén A Pasmanter（<em>Fluid Dynamics Research</em>，24 引）：發表於 Fluid Dynamics Research，探討渦流場（vortical flows）中的反常擴散與反常拉伸現象，對應 35B 非局域與反常擴散動力學主題。 <a href="zotero://select/library/items/RPTNCF2H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/0169-5983(88)90085-8" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Anomalous diffusion in QCD matter</strong>，Paul Caucal, Yacine Mehtar-Tani（<em>Physical Review D</em>，19 引）：刊於《Physical Review D》（2022），從反常擴散與非局域隨機漫步的動力學視角，研究量子色動力學（QCD）介質中的反常擴散現象與輸運特性（未附摘要）。 <a href="zotero://select/library/items/G59G5QF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physrevd.106.l051501" rel="noopener">官方連結</a></li>
+<li><strong>2002｜Multidimensional symmetric anomalous diffusion</strong>，Vladimir V. Uchaikin（<em>Chemical Physics</em>，19 引）：發表於 Chemical Physics，探討高維空間中對稱反常擴散（multidimensional symmetric anomalous diffusion）的隨機過程與分數階動力學方程式描述，對應 35B 主題。 <a href="zotero://select/library/items/I4GSKKVQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0301-0104(02)00676-6" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Anomalous diffusion in zeolites</strong>，Pan Huang et al.（<em>Chemical Engineering Science</em>，16 引）：發表於 Chemical Engineering Science，探討沸石（zeolites）多孔介質中的反常擴散現象與非局域物質傳輸行為，對應分數階微積分與反常擴散主題。 <a href="zotero://select/library/items/R37NFZZ6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ces.2021.116995" rel="noopener">官方連結</a></li>
+<li><strong>2008｜Turing instability of anomalous reaction–anomalous diffusion systems</strong>，Y. NEC, A. A. NEPOMNYASHCHY（<em>European Journal of Applied Mathematics</em>，11 引）：建立擴散項與反應項皆含不同階數分數階導數的活化劑與抑制劑模型線性穩定理論，證明短波極限下增長率呈波數冪律，並在等指數情形給出反常臨界擴散係數比的精確公式。 <a href="zotero://select/library/items/E6V6FSEE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/s0956792508007389" rel="noopener">官方連結</a></li>
+<li><strong>2021｜The Anomalous Diffusion challenge: objective comparison of methods to decode anomalous diffusion</strong>，Gorka Muñoz-Gil et al.（<em>Emerging Topics in Artificial Intelligence (ETAI) 2021</em>，9 引）：發表於 ETAI 2021，圍繞「反常擴散挑戰賽」（Anomalous Diffusion challenge），對各種解析反常擴散軌跡與動力學參數的方法進行客觀比較評估（未附摘要）。 <a href="zotero://select/library/items/PWE6JS94" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1117/12.2595716" rel="noopener">官方連結</a></li>
+<li><strong>2006｜Generalized diffusion equation for anisotropic anomalous diffusion</strong>，S. Sellers, J. A. Barker（<em>Physical Review E</em>，9 引）：刊於《Physical Review E》（2006），推導並分析廣義擴散方程，用以描述各向異性介質中的反常擴散與非局域輸運現象（未附摘要）。 <a href="zotero://select/library/items/IJQKQ2A6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physreve.74.061103" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Models for Anomalous Diffusion</strong>，G. Zumofen, J. Klafter, A. Blumen（<em>Disorder Effects on Relaxational Processes</em>，9 引）：Zumofen、Klafter 與 Blumen 於 1994 年無序弛豫過程專書發表的章節，綜述用來刻畫無序介質弛豫過程的反常擴散隨機漫步與動力學模型。 <a href="zotero://select/library/items/W3DCQ59J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-642-78576-4_8" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Anomalous diffusion on percolating clusters</strong>，Štefan Barta（<em>Physica A: Statistical Mechanics and its Applications</em>，9 引）：發表於 Physica A，探討滲流簇（percolating clusters）幾何結構上的反常擴散行為與傳輸特徵，對應 35B 反常擴散與隨機漫步子方向。 <a href="zotero://select/library/items/DCPSUR8H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/0378-4371(94)90150-3" rel="noopener">官方連結</a></li>
+<li><strong>1959｜Anomalous diffusion in polymers</strong>，J. G. Downes（<em>Journal of Polymer Science</em>，9 引）：發表於 1959 年《Journal of Polymer Science》的早期研究，探討高分子聚合物材料中偏離傳統擴散定律的反常擴散（anomalous diffusion）物理傳輸現象。 <a href="zotero://select/library/items/JEQ2GHJE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/pol.1959.1203613046" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Diffusion tensor MRI phantom exhibits anomalous diffusion</strong>，Allen Q. Ye et al.（<em>2014 36th Annual International Conference of the IEEE Engineering in Medicine and Biology Society</em>，7 引）：發表於 IEEE EMBC 2014，觀測並探討擴散張量磁振造影（DTI）假體中呈現的非經典反常擴散現象（未附摘要）。 <a href="zotero://select/library/items/VDVNIF8A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/embc.2014.6943698" rel="noopener">官方連結</a></li>
+<li><strong>2001｜Anomalous diffusion and phase relaxation</strong>，Peter Talkner（<em>Physical Review E</em>，6 引）：刊於《Physical Review E》（2001），研究隨機過程中的反常擴散行為與相位弛豫（phase relaxation）動力學之間的關聯與數學描述（未附摘要）。 <a href="zotero://select/library/items/7U43S3AC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1103/physreve.64.061101" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Anomalous diffusion in velocity space</strong>，S.A. Trigger（<em>Physics Letters A</em>，4 引）：發表於 Physics Letters A，探討速度空間（velocity space）中的反常擴散行為與動力學描述，對應 35B 反常擴散與隨機動力學主題。 <a href="zotero://select/library/items/BUS3CGK8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.physleta.2009.10.082" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Fractional Anomalous Diffusion</strong>，Luiz Roberto Evangelista, Ervin Kaminski Lenzi（<em>PoliTO Springer Series</em>，2 引）：選自 2023 年《PoliTO Springer Series》的專書章節，探討以分數階微積分與非局域算子刻畫反常擴散（fractional anomalous diffusion）過程的數學模型。 <a href="zotero://select/library/items/B3KCH87M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-18150-4_5" rel="noopener">官方連結</a></li>
+<li><strong>2005｜ANOMALOUS DIFFUSION AND GENERALIZED DIFFUSION EQUATIONS</strong>，I. M. SOKOLOV, A. V. CHECHKIN（<em>Fluctuation and Noise Letters</em>，2 引）：比較分數階導數算子在 Fick 擴散方程中不同位置所對應的反常擴散形式，並針對缺乏單一冪律標度的複雜過程，探討分佈階（distributed-order）廣義擴散方程的解性質。 <a href="zotero://select/library/items/66SEHUP5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/s0219477505002653" rel="noopener">官方連結</a></li>
+<li><strong>1993｜Anomalous Diffusion in Disordered Clusters</strong>，Hisao Nakanishi（<em>On Clusters and Clustering</em>，1 引）：收錄於文集 On Clusters and Clustering，討論無序簇（disordered clusters）結構中的反常擴散機制與非局域傳輸特徵，對應分數階微積分與反常擴散子方向。 <a href="zotero://select/library/items/R9J6ZCH7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-444-89022-1.50036-5" rel="noopener">官方連結</a></li>
+<li><strong>1973｜Anomalous diffusion-controlled evaporation</strong>，Grove C. Nooney（<em>Journal of the Chemical Society, Faraday Transactions 2</em>，1 引）：發表於 Journal of the Chemical Society, Faraday Transactions 2，探討由反常擴散（anomalous diffusion）機制主導的蒸發動力學傳輸與擴散過程，對應 35B 反常擴散子方向。 <a href="zotero://select/library/items/VUSB8SKE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1039/f29736900330" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Anomalous Diffusion: Fractional Brownian Motion vs. Fractional Ito Motion</strong>，Iddo Eliazar, Tal Kachman（<em>Journal of Physics A Mathematical and Theoretical</em>）：比較分數階布朗運動 FBM 與分數階伊藤運動 FIM 兩種反常擴散模型，指出兩者雖共享 Hurst 指數尺度特性，但 FIM 為非高斯且不具速度關聯的馬可夫鞅過程。 <a href="zotero://select/library/items/FP43P222" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.05127" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Anomalous Diffusion</strong>，Unknown Author（<em>Thinking Probabilistically</em>）：收錄於專書 Thinking Probabilistically 的專章「Anomalous Diffusion」，從機率模型視角介紹反常擴散現象與相關隨機過程刻畫，對應 35B 主題。 <a href="zotero://select/library/items/58BIF9R9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/9781108855259.008" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Transition from Classical Diffusion to Anomalous Diffusion</strong>，Ninghu Su（<em>Fractional Calculus for Hydrology, Soil Science and Geomechanics</em>）：收錄於水文、土壤科學與地質力學分數階微積分專書的章節，探討多孔介質中的傳輸現象如何從符合 Fick 定律的古典擴散過渡至需以分數階算子刻畫的反常擴散機制。 <a href="zotero://select/library/items/DAKQ52D5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9781351032421-4" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Classical and Anomalous Diffusion</strong>，Stanisław Sieniutycz（<em>Thermodynamic Approaches in Engineering Systems</em>）：收錄於專書 Thermodynamic Approaches in Engineering Systems，系統討論古典擴散與反常擴散現象及其在工程系統中的熱力學分析脈絡。 <a href="zotero://select/library/items/BQW8T3VG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-12-805462-8.00004-2" rel="noopener">官方連結</a></li>
+<li><strong>2012｜ANOMALOUS DIFFUSION AND RELAXATION</strong>，Unknown Author（<em>World Scientific Series in Contemporary Chemical Physics</em>）：收錄於《World Scientific Series in Contemporary Chemical Physics》（2012），論述反常擴散過程與非指數弛豫動力學的統計物理及分數階方程描述（未附摘要）。 <a href="zotero://select/library/items/4D8IPMKX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/9789814355674_0012" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Evidence of anomalous diffusion</strong>，Unknown Author（<em>The Physics of Foraging</em>）：收錄於專書 The Physics of Foraging，整理生物覓食移動軌跡中展現反常擴散（anomalous diffusion）與超擴散統計特徵的實證觀測證據與動力學脈絡。 <a href="zotero://select/library/items/K8PZH87M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9780511902680.007" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Anomalous Diffusion on Fractal Networks</strong>，Igor M. Sokolov（<em>Encyclopedia of Complexity and Systems Science</em>）：收錄於 2009 年《複雜性與系統科學百科全書》的詞條，介紹碎形網路（fractal networks）上的反常擴散現象、隨機漫步與非局域傳輸特性。 <a href="zotero://select/library/items/M3EMGBU6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-0-387-30440-3_21" rel="noopener">官方連結</a></li>
+<li><strong>2007｜From normal to anomalous diffusion</strong>，Unknown Author（<em>Advanced Series in Nonlinear Dynamics</em>）：收錄於《Advanced Series in Nonlinear Dynamics》（2007），探討隨機輸運與動力系統如何從經典正常擴散過渡至反常擴散的機制與理論（未附摘要）。 <a href="zotero://select/library/items/S3464NN4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/9789812771513_0006" rel="noopener">官方連結</a></li>
+<li><strong>2002｜Anomalous Behaviors in Fractional Fokker-Planck Equation</strong>，Kyungsik Kim, Y. S. Kong（<em>J. Korean Phys. Soc. 40, 979 (2002)</em>）：針對漂移力場具時間冪次相依性的分數階 Fokker–Planck 方程，解析計算追蹤粒子二階矩的長時漸近行為，依空間、時間與漂移標度指數 <span class="math inline">\xi</span> 區分正常擴散與超擴散。 <a href="zotero://select/library/items/TVJGZA67" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cond-mat/0207047" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Biased anomalous diffusion</strong>，Unknown Author（<em>Diffusion and Reactions in Fractals and Disordered Systems</em>）：收錄於分形與無序系統擴散反應專書，探討有偏反常擴散（Biased anomalous diffusion）在非均質與無序介質中的傳輸行為與隨機動力學特徵。 <a href="zotero://select/library/items/UQK3XPUI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9780511605826.012" rel="noopener">官方連結</a></li>
+<li><strong>1998｜Anomalous Diffusion in Membranes</strong>，R. Granek, S. Pierrat, A. G. Zilman（<em>MRS Proceedings</em>）：研究被動物理膜與含主動耗能泵浦之生物膜的膜起伏與橫向擴散動力學，指出被動膜因熱起伏呈 <span class="math inline">\langle r^2 \rangle \sim t^{2/3}</span> 的次擴散行為，而主動生物膜則在多個區間呈現指數高於線性的增強擴散。 <a href="zotero://select/library/items/XCCZFDEQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1557/proc-543-103" rel="noopener">官方連結</a></li>
+<li><strong>1974｜Anomalous Diffusion Through Membranes</strong>，Grove C. Nooney（<em>Lecture Notes in Biomathematics</em>）：Grove C. Nooney 於 1974 年發表於生物數學講義叢書的論文，探討生物物理脈絡下物質穿透薄膜（membranes）時的反常擴散動力學數學模型。 <a href="zotero://select/library/items/JZ8SCAGW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-642-45455-4_24" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻8-篇">B. 2024–2026 近期推進與前沿文獻（8 篇）</h3>
+<ul>
+<li><strong>2025｜Anomalous Diffusion by Fractal Homogenization</strong>，Scott Armstrong, Vlad Vicol（<em>Annals of PDE</em>，26 引）：偏微分方程領域的重要結果。用多尺度碎形均質化，嚴格建構出能讓被動純量湧現宏觀反常擴散的無散度速度場，在微觀局域 PDE 與宏觀湍流反常輸運之間建立嚴格的數學連結。 <a href="zotero://select/library/items/38U2A6JI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s40818-024-00189-6" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Machine Learning Analysis of Anomalous Diffusion</strong>，Wenjie Cai et al.（<em>European Physical Journal Plus, 2025, 140, 183</em>，10 引）：系統性綜述機器學習於反常擴散分析的應用，涵蓋單軌跡參數推論與軌跡分割方法、Anomalous Diffusion Challenge等基準平台，以及反常擴散的三類主要表徵學習策略。 <a href="zotero://select/library/items/QEPD2T3H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.01393" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Change-point detection in anomalous-diffusion trajectories utilising machine-learning-based uncertainty estimates</strong>，Henrik Seckler, Ralf Metzler（<em>Journal of Physics Photonics</em>，8 引）：應用貝氏深度學習對四類反常擴散模型生成的單條異質軌跡進行逐點擴散指數估計與不確定度校準，達成接近單模態的預測精度並實現變點偵測。 <a href="zotero://select/library/items/FFMVBHXM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.14206" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Fractional Diffusion on Graphs: Superposition of Laplacian Semigroups and Memory</strong>，Nikita Deniskin, Ernesto Estrada（<em>Fractal and Fractional</em>，1 引）：證明圖上的 Mittag-Leffler 分數階擴散動力學是由一種隨機時間變換驅動的，這種變換會壓縮操作時間、產生重尾等待時間。而且這個動力學精確等價於標準拉普拉斯半群在不同時間尺度上的凸保質疊加（Convex Superposition）。 <a href="zotero://select/library/items/6Q8QSS4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.14977" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Irregularly observed long-memory Levy-driven moving average processes</strong>，Mohamedou Ould Haye, Anne Philippe（<em>arXiv</em>）：分析 Lévy 驅動的長記憶連續時間移動平均過程，在隨機更新時間（含有限與無限均值間隔）不規則採樣下的部分和漸近極限定理。 <a href="zotero://select/library/items/JV6SQVU6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.00873" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Levy-Driven Correspondence Estimation for Registration</strong>，Qianliang Wu et al.（<em>arXiv</em>）：三維點雲重疊率很低或發生非剛性形變時，傳統的局部迭代匹配很容易陷入錯誤的局部對應，網路評估次數也有限。作者提出 LevyMatch，用重尾 Lévy 隨機跳躍結合布朗參考橋來精煉軟匹配矩陣，顯示非局域隨機跳躍過程能幫現代三維電腦視覺的幾何配準跳出這種困境。 <a href="zotero://select/library/items/T95AX66N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.32612" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Anomalous diffusion: Summary</strong>，K. Binder（<em>Lecture Notes in Physics</em>）：K. Binder 發表於《Lecture Notes in Physics》的總結章節，概述統計物理與非局域傳輸研究中反常擴散（anomalous diffusion）現象的核心模型與研究進展。 <a href="zotero://select/library/items/NH3SRQ6D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bfb0106857" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Anomalous Diffusion in Ecology</strong>，Mirko Lukovic（<em>University Goettingen Repository</em>）：哥廷根大學典藏庫收錄的學術論文，探討生態學系統中偏離經典布朗運動的反常擴散（anomalous diffusion）現象，並結合非局域隨機漫步或分數階擴散模型進行分析。 <a href="zotero://select/library/items/955BT8SQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.53846/goediss-4861" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-4f636361">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a><span class="rs">牛頓與萊布尼茲的微積分和布朗運動有兩個簡化假設：只看無窮小的鄰居（空間局域性），以及下一秒就忘記過去（馬可夫無記憶性）。</span></li><li><a href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a></li><li><a href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a><span class="tag-plan">計劃</span><span class="rs">Shreve，*Stochastic Calculus for Finance II*（布朗運動、Itô 積分、風險中性定價）</span></li><li><a href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a><span class="tag-plan">計劃</span><span class="rs">Shreve，*Stochastic Calculus for Finance I*（離散時間）</span></li><li><a href="35C_%E9%9D%9E%E5%B1%80%E5%9F%9F%E5%90%91%E9%87%8F%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81%E8%BF%91%E5%A0%B4%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%88%86%E6%95%B8%E9%9A%8E%E7%89%A9%E7%90%86%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90.html">非局域向量微積分、近場動力學與分數階物理神經算子</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

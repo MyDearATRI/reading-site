@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>24B｜模型卡、資料集譜系文檔與演算法透明度審計 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f18da1a5" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 腦認知、生命形態、哲學與社會演化</span>
+<article>
+
+<h1 id="24b模型卡資料集譜系文檔與演算法透明度審計">24B｜模型卡、資料集譜系文檔與演算法透明度審計</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a>
+同領域子方向：<a class="wl" href="24A_%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%8F%AF%E9%87%8D%E7%8F%BE%E6%80%A7%E3%80%81%E7%B5%B1%E8%A8%88%E6%AA%A2%E5%AE%9A%E5%8A%9B%E8%88%87%E6%B6%88%E8%9E%8D%E5%AF%A6%E9%A9%97%E6%96%B9%E6%B3%95%E8%AB%96.html">機器學習可重現性、統計檢定力與消融實驗方法論</a> · <a class="wl" href="24C_%E5%89%8D%E6%B2%BFAI%E9%A2%A8%E9%9A%AA%E6%B2%BB%E7%90%86%E3%80%81%E9%96%8B%E6%BA%90%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B%E6%AC%8A%E8%A1%A1%E8%88%87%E5%85%A8%E7%90%83%E7%9B%A3%E7%AE%A1%E6%94%BF%E7%AD%96.html">前沿AI風險治理、開源基礎模型權衡與全球監管政策</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>
+課程章節：<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD20_%E8%A9%A6%E7%8E%A9%E6%96%B9%E6%B3%95.html">試玩方法</a> · <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD45_%E4%BD%BF%E7%94%A8%E8%80%85%E7%A0%94%E7%A9%B6%E8%88%87%E9%81%99%E6%B8%AC.html">使用者研究與遙測</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向隸屬<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a>，上承<a class="wl" href="24A_%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%8F%AF%E9%87%8D%E7%8F%BE%E6%80%A7%E3%80%81%E7%B5%B1%E8%A8%88%E6%AA%A2%E5%AE%9A%E5%8A%9B%E8%88%87%E6%B6%88%E8%9E%8D%E5%AF%A6%E9%A9%97%E6%96%B9%E6%B3%95%E8%AB%96.html">機器學習可重現性、統計檢定力與消融實驗方法論</a>對實驗與統計效度的內部校驗，下接<a class="wl" href="24C_%E5%89%8D%E6%B2%BFAI%E9%A2%A8%E9%9A%AA%E6%B2%BB%E7%90%86%E3%80%81%E9%96%8B%E6%BA%90%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B%E6%AC%8A%E8%A1%A1%E8%88%87%E5%85%A8%E7%90%83%E7%9B%A3%E7%AE%A1%E6%94%BF%E7%AD%96.html">前沿AI風險治理、開源基礎模型權衡與全球監管政策</a>的制度與法規設計，專門處理模型與資料的譜系文檔化以及外部演算法審計方法。演進主線從早期靜態的模型卡與資料表單（如<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_24_2018_Mitchell_Model_Cards_for_Model_Reporting.html">Model Cards for Model Reporting</a>），逐步發展為機器可驗證的端到端資料譜系包、代理系統調度軌跡追蹤，以及針對跨文化價值偏誤、能力代表性落差與動態個人化互動的實證審計。</p>
+</aside>
+<ul>
+<li>核心問題：傳統模型發布多半只公布單一總體基準分數與簡短摘要，既未拆解跨族群、跨語言或對抗擾動下的效能崩落，也經常遺漏訓練資料來源、對齊譜系與評測時間點。面對開源權重基礎模型（OWFMs）與具工具調用能力的代理系統時，靜態文檔面臨三項結構失效：開源授權與可接受使用政策（AUP）缺乏對下游微調的約束力；代理式資料表抽取或評估可能跳過真實文件而靠編造通過輸出保真度檢查；個人化與多語言互動中的傷害無法在部署前的固定群組基準測試中被完整捕捉。</li>
+<li>直覺模型：模型卡與資料集譜系就像藥物包裝上的成分標示、適應症與臨床試驗分層不良反應表，目的不在宣稱藥效最高，而在於告訴下游醫師與病人「這顆藥在哪些族群沒測過、跟什麼共用會失效」。而演算法審計則是獨立藥檢局的抽查：除了核對說明書上的數字，還要實際檢查生產線有沒有跳過檢驗步驟（調度軌跡審計）、藥效數據是不是拿過期版本當最新成果（時間差審計），以及不同體質使用者長期服用後會出現哪些說明書沒寫的副作用（互動層審計）。</li>
+<li>分階段閱讀路線：建議分三階段學習：第一階段先讀 Mitchell et al. (2018)（可配合<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_24_2018_Mitchell_Model_Cards_for_Model_Reporting.html">Model Cards for Model Reporting</a>）建立模型卡的交叉分組評估與適用情境揭露框架，再讀 Imanov et al. (2026) 了解如何將模型卡、資料集說明書與資料譜系整合成可機讀驗證的臨床 NLP 發布包（亦可對照 de Bourcy et al., 2026 的 OpenAI Privacy Filter 實務模型卡範例）；第二階段研讀 Chae et al. (2026) 對 500 份 Hugging Face 模型卡的實證缺口分析，並讀 Ye 與 Lin (2026) 掌握代理式資料抽取中的調度層追蹤與靜默失效偵測；第三階段切入 2026 年多維度審計前沿，先讀 Gringras 與 Salahshoor (2026) 揭示學術評測中的前沿落差（Frontier Lag），再讀 Cha (2026) 論證為何個人化生成系統需要使用者中心的互動層審計（實務應用可延伸閱讀 Venkata, 2026 的跨文化價值審計與 Roy et al., 2026 的招募系統部署就緒審計）。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;交叉分組模型卡 Mitchell et al. 2018&quot;] --&gt; B[&quot;機讀譜系與合規包 TeMLM Imanov et al. 2026&quot;]
+  A --&gt; C[&quot;開源模型卡治理缺口500份實證 Chae et al. 2026&quot;]
+  C --&gt; D[&quot;模型卡加AUP加授權條款三層架構 Chae et al. 2026&quot;]
+  B --&gt; E[&quot;代理調度軌跡與靜默失效偵測 Ye and Lin 2026&quot;]
+  A --&gt; F[&quot;文獻評測前沿落差ECI審計 Gringras and Salahshoor 2026&quot;]
+  F --&gt; G[&quot;臨床對抗與跨文化語料脆弱性審計 Gabriel 2026&quot;]
+  G --&gt; H[&quot;互動層使用者中心動態審計 Cha 2026&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>交叉分層模型卡與端到端譜系契約（Intersectional Model Cards and Machine-Checkable Provenance）</strong></p>
+<ul>
+<li>直覺理解：把模型的平均分數拆開來看還不夠，必須交叉列舉人口學與環境條件下的表現差異，並把資料來源、隱私過濾邊界與合規檢查寫成可自動驗證的結構化檔案。</li>
+<li>機制或核心表達式：Mitchell et al. (2018) 定義模型卡必須同時揭露預期用途、訓練與評測資料細節，以及依文化、人口特徵或表現型分組與交叉分組（例如年齡 <span class="math inline">\times</span> 族裔、性別 <span class="math inline">\times</span> Fitzpatrick 膚色分型）計算的評估指標矩陣。Imanov et al. (2026) 在 TeMLM 框架下將此結構擴展為三個機讀綁定產物（TeMLM-Card、TeMLM-Datasheet、TeMLM-Provenance）與輕量一致性檢查清單，將資料集譜系（如 498,000 份合成臨床筆記與 774 萬個 PHI 實體標註）與模型表現（如 ProtactiniumBERT 的去識別化與 ICD-9 分類）封裝於單一發布契約中；實務工程上，de Bourcy et al. (2026) 在 OpenAI Privacy Filter 模型卡中亦以明確的操作點精確率–召回率權衡與 Viterbi 解碼限制，界定該模型僅作分層隱私工作流中的資料最小化元件，而非合規保證。</li>
+<li>能做到什麼，代價是什麼：機讀化與分層揭露大幅提升跨組織審計的可自動化程度；但合成驗證基準無法取代真實臨床或現場部署驗證，且模型發布後若經過下游微調，靜態初始模型卡的指標就會失效。</li>
+</ul>
+</li>
+<li>
+<p><strong>開源權重基礎模型的三層下游治理架構（Three-Layer Downstream Governance for OWFMs）</strong></p>
+<ul>
+<li>直覺理解：把開源模型的模型卡單獨交給下游開發者，就像只發說明書卻不附使用規範與可執行的授權契約；傳統開源軟體授權反而可能削弱安全限制的法律效力。</li>
+<li>機制或核心表達式：Chae et al. (2026) 分析 Hugging Face 上 500 份模型卡後指出，現有文件普遍缺少模型繼承譜系（model heritage）、對齊來源（alignment provenance）與實證行為邊界，使下游微調與重新分發出現安全斷層。為補齊缺口，作者提出三元互補架構，將透明度文件（Model Cards）、可接受使用政策（AUPs）與授權條款（Licenses）整合為連續約束鏈，並論證傳統開放原始碼授權（OSLs）因禁止限制使用領域而會削弱 AUP 的可執行性。</li>
+<li>能做到什麼，代價是什麼：整合 AUP 與專用授權能把模型卡從純勸導性文檔轉為具法律拘束力的下游護欄；代價是在開放生態系中對「開源」定義與再分發自由造成摩擦，且跨司法管轄區的執法成本較高。</li>
+</ul>
+</li>
+<li>
+<p><strong>輸出保真度之外的代理調度與互動層審計（Dispatch-Level Instrumentation and Interaction-Level Auditing）</strong></p>
+<ul>
+<li>直覺理解：如果一個審計或抽取模型根本沒打開來源文件，卻靠背誦編出剛好吻合標準答案的文字，只看最終輸出是否正確的指標會給它滿分；同樣地，只做靜態單輪測試也測不出個人化系統在長期互動中累積的傷害。</li>
+<li>機制或核心表達式：Ye 與 Lin (2026) 在代理式規格書抽取基準（37 項人工策展聲明）上發現，結構化輸出約束會靜默停用工具調用並使模型捏造來源文本，而傳統保真度（fidelity）指標卻將其判為成功。作者提出調度層插樁（dispatch-level instrumentation），紀錄每一次工具呼叫序列 <span class="math inline">d = (t_1, t_2, \dots, t_k)</span>，建構基於規則的失敗歸因分類器與雙規則靜默失效偵測器，僅檢查應呼叫之工具集合是否出現，在 207 次正常抽取上達成零誤報並找回全部 50 個植入故障。在應用互動端，Cha (2026) 則駁斥「傷害可於互動外預先指定、在群組內非多元定義、且視為靜態」三項假設，主張對個人化生成系統進行使用者中心的互動層動態審計；在權限合規端，Roy et al. (2026) 則設計將候選人證據、評估介面、權限控制與評估紀錄分離的審計架構，以檢驗操作與越權指令防禦能力。</li>
+<li>能做到什麼，代價是什麼：過程軌跡與互動層審計能揭露純結果指標看不見的系統性欺瞞、順序偏誤與邊界侵蝕；但全量記錄工具調度與多輪互動日誌會顯著增加儲存開銷與使用者隱私曝險（如邊緣化群體需承擔額外揭露勞動）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>輸出保真度檢查為何無法捕捉代理系統的靜默失效</strong>：某企業導入 LLM 代理自動抽取電子元件規格書（datasheet）並建立自動化驗收腳本：只要抽取數值與預存標準答案表一致即判定通過。請依 Ye 與 Lin (2026) 的實驗發現，說明該驗收機制存在什麼致命漏洞，以及如何不依賴抽取內容本身來修復審計流程。</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>應點出結構化輸出格式（如 JSON schema 約束）可能靜默抑制模型的工具調用行為，導致模型未讀取規格書卻憑先驗記憶或幻覺輸出「剛好符合」測試值的結果，造成輸出保真度分數虛高。修復方式是引入調度層插樁（dispatch-level instrumentation），記錄每次工具呼叫軌跡並執行規則檢查（確認指定檢索工具確被觸發），以獨立於輸出值的證據邊界攔截靜默失效。</p>
+</details>
+<ol start="2">
+<li><strong>學術評估的「前沿落差」與模型卡時間標記</strong>：一篇 2026 年發表的醫療或法律應用論文使用兩款開源模型測試後，在摘要總結「現有 AI 系統尚無法勝任此任務」，但全篇未註明 API 調用或權重下載日期。請依 Gringras 與 Salahshoor (2026) 的書目計量審計結果，說明這種報告方式如何扭曲研究結論與文獻累積。</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>可引用 Gringras 與 Salahshoor (2026) 對 18,574 篇論文的審計結果：論文評估的模型中位數已落後當時前沿模型 +10.45 ECI 且每年擴大 +4.07 ECI，但僅 18.4% 全文給出明確評估日期，卻有逾半數（貝氏校正後 52.5%）摘要將結論泛化為整個「AI」類別。這形成「發表引出落差（publication elicitation gap）」，使讀者誤把過時或次級模型的限制當成當前 AI 能力邊界，因此模型卡與實驗報告必須強制附帶模型確切版本與評估時間戳。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>個人化生成系統的動態傷害審計與隱私勞務不對稱</strong>：Cha (2026) 指出，當生成式 AI 隨使用者歷史持續適應個人偏好時，傷害會隨長期互動湧現且因人而異，使部署前的靜態群組基準失去預測力；但若要求系統透過更深層個人化來學習個別使用者的傷害定義，反而會把額外的標註勞動與隱私風險不對稱地轉嫁給邊緣化使用者（可對照 QueerInAI et al., 2026 提出的 4Cs 參與式社群審計如何把傷害追溯至問題定義與資料收集階段）。</li>
+<li><strong>跨文化價值預設、跨語言飄移與對抗脆弱性的基準缺口</strong>：近期多項跨領域審計顯示評估環境極度單一：Venkata (2026) 對比 10 國 7 種語言與世界價值觀調查後，發現主流模型在個人與家庭兩難上一致偏向西方個人主義（平均落差 +0.76，<span class="math inline">p &lt; 0.001</span>，奈及利亞達 +1.85），卻將日本刻板化為比調查數據更集體主義；Gabriel 與 Yusuf (2026) 則在低資源醫療情境證實極微小的影像擾動（<span class="math inline">\epsilon = 0.021</span>）使 DenseNet121 準確率由 89.3% 跌至 62.0%，且奈及利亞皮欽語與約魯巴語影響英語皆顯著壓低臨床 LLM 準確率，而高斯平滑與集成投票等標準防禦均無法恢復臨床安全。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>模型卡與調度審計證據向法律合規與風險治理輸送</strong>：本子方向的機讀模型卡譜系包（TeMLM）、三層開源治理鏈（Model Cards + AUP + License）與代理調度追蹤，可直接對應<a class="wl" href="24C_%E5%89%8D%E6%B2%BFAI%E9%A2%A8%E9%9A%AA%E6%B2%BB%E7%90%86%E3%80%81%E9%96%8B%E6%BA%90%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B%E6%AC%8A%E8%A1%A1%E8%88%87%E5%85%A8%E7%90%83%E7%9B%A3%E7%AE%A1%E6%94%BF%E7%AD%96.html">前沿AI風險治理、開源基礎模型權衡與全球監管政策</a>中歐盟 AI 法案的事前合規與上市後監測條文，並透過<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>強化科學文獻引用審計（如 Nguyen et al., 2026 對心理健康查詢引用集中度的多平台審計）與知識庫可信度。</li>
+<li><strong>遙測軌跡插樁與互動層審計向遊戲研究與可重現實驗遷移</strong>：Ye 與 Lin (2026) 的調度軌跡插樁與 Cha (2026) 的互動層審計範式，可與<a class="wl" href="24A_%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%8F%AF%E9%87%8D%E7%8F%BE%E6%80%A7%E3%80%81%E7%B5%B1%E8%A8%88%E6%AA%A2%E5%AE%9A%E5%8A%9B%E8%88%87%E6%B6%88%E8%9E%8D%E5%AF%A6%E9%A9%97%E6%96%B9%E6%B3%95%E8%AB%96.html">機器學習可重現性、統計檢定力與消融實驗方法論</a>的多源變異紀錄整合，並遷移至<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD20_%E8%A9%A6%E7%8E%A9%E6%96%B9%E6%B3%95.html">試玩方法</a>與<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD45_%E4%BD%BF%E7%94%A8%E8%80%85%E7%A0%94%E7%A9%B6%E8%88%87%E9%81%99%E6%B8%AC.html">使用者研究與遙測</a>，用來區分使用者在動態適應系統中出現的真實體驗傷害與表面數值正常（如勝率平衡但局部挫敗累積）的差異。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-model-cards-for-model-reporting2018">1. Model Cards for Model Reporting（2018）</h4>
+<ul>
+<li>作者與出處：Margaret Mitchell, Simone Wu, Andrew Zaldivar, Parker Barnes, Lucy Vasserman · <em>FAT</em> '19*</li>
+<li>核心問題：機器學習模型日益部署於執法、醫療、教育與招募等高影響場景，但模型發布時普遍缺乏對適用情境、評估細節與不同人群表現差異的標準化揭露。本文提出一套透明化模型報告文件架構。</li>
+<li>關鍵做法：提出「模型卡（Model Cards）」標準範本，要求隨訓練完成之模型一併發布簡明文件，詳述預期使用情境、評估程序細節，並提供跨文化、人口統計與表現型群組（如種族、地理位置、性別、Fitzpatrick 膚色分型）及其交叉分組（如年齡與種族）的基準測試結果。</li>
+<li>跨領域啟發：奠定演算法透明度文檔的基礎範式，本庫亦收錄其深度解析筆記<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_24_2018_Mitchell_Model_Cards_for_Model_Reporting.html">Model Cards for Model Reporting</a>，與資料集說明書共同構成譜系文檔核心。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_24_2018_Mitchell_Model_Cards_for_Model_Reporting.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/D3FB3RDJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1810.03993" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-transparency-first-medical-language-models-datasheets-model-cards-and-end-to-end-data-provenance-for-clinical-nlp2026">2. Transparency-First Medical Language Models: Datasheets, Model Cards, and End-to-End Data Provenance for Clinical NLP（2026）</h4>
+<ul>
+<li>作者與出處：Olaf Yunus Laitinen Imanov, Taner Yilmaz, Ayse Tuba Tugrul, Melike Nesrin Zaman, Ozkan Gunalp · <em>arXiv</em></li>
+<li>核心問題：臨床自然語言處理模型常把資料說明書、模型卡與資料來源記錄拆散管理，導致外部機構難以進行可重複的合規與安全審計。本文旨在將透明度產物統一為可機檢的發布套組。</li>
+<li>關鍵做法：提出 TeMLM 發布框架，把模型卡（TeMLM-Card）、資料說明書（TeMLM-Datasheet）、端到端譜系記錄（TeMLM-Provenance）與一致性檢查清單封裝為單一機讀套組。作者在含 498,000 份合成筆記與 774 萬筆 PHI 標註的 Technetium-I 資料集及 1 億參數模型 ProtactiniumBERT 上實證此流程，並明確限定合成基準僅供工具與流程驗證，部署前仍需真實臨床資料測試。</li>
+<li>跨領域啟發：示範如何把 Mitchell et al. (2018) 的敘述性模型卡升級為與資料譜系綁定、可程式自動校驗的領域合規契約。</li>
+<li>連結：<a href="zotero://select/library/items/V2SJ4VF5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.19191" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-position-current-model-cards-are-insufficient-for-downstream-governance-of-open-weight-foundation-models2026">3. Position: Current Model Cards Are Insufficient for Downstream Governance of Open-Weight Foundation Models（2026）</h4>
+<ul>
+<li>作者與出處：Sungwon Chae, Keonwoo Kim, Hoki Kim, Jaeyeon Ju, Sangchul Park · <em>arXiv</em></li>
+<li>核心問題：開源權重基礎模型（OWFMs）可被下游任意微調與再分發，現有模型卡框架未能充分向開發者與使用者揭露與安全相關的關鍵風險。本文檢驗當前開源生態模型卡的實際覆蓋率並提出制度補強。</li>
+<li>關鍵做法：實證分析 Hugging Face 上 500 份模型卡，揭露模型繼承譜系（model heritage）、對齊來源與實證行為邊界等安全關鍵資訊的系統性缺失。主張建立由模型卡、可接受使用政策（AUPs）與授權條款構成的三層互補治理結構，並指出標準開源軟體授權（OSLs）會削弱 AUP 在下游的法律可執行性。</li>
+<li>跨領域啟發：把透明度文件直接銜接至授權法制與下游控制權設計，成為連結本子方向與<a class="wl" href="24C_%E5%89%8D%E6%B2%BFAI%E9%A2%A8%E9%9A%AA%E6%B2%BB%E7%90%86%E3%80%81%E9%96%8B%E6%BA%90%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B%E6%AC%8A%E8%A1%A1%E8%88%87%E5%85%A8%E7%90%83%E7%9B%A3%E7%AE%A1%E6%94%BF%E7%AD%96.html">前沿AI風險治理、開源基礎模型權衡與全球監管政策</a>的關鍵論點。</li>
+<li>連結：<a href="zotero://select/library/items/T2MASDG4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.18086" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-fidelity-is-not-enough-dispatch-level-instrumentation-for-agentic-datasheet-extraction2026">4. Fidelity Is Not Enough: Dispatch-Level Instrumentation for Agentic Datasheet Extraction（2026）</h4>
+<ul>
+<li>作者與出處：Qing Ye, Meng-Hsuan Lin · <em>arXiv</em></li>
+<li>核心問題：代理式文件抽取系統通常以「輸出值是否吻合原文（fidelity）」作為驗收標準，但該指標無法發現模型其實跳過了檔案讀取工具而憑編造給出正確答案的欺瞞或故障。本文探討如何偵測這類代理管線中的靜默失效。</li>
+<li>關鍵做法：在橫跨四個元件共 37 項人工策展規格書抽取任務中記錄每次工具呼叫軌跡（dispatch record），揭露結構化輸出約束會靜默停用工具調用。作者依此建構規則式失敗歸因分類器與僅檢查工具調用紀錄（完全不看抽取數值）的雙規則靜默失效偵測器，在三個模型家族的 207 次正常抽取中達到零誤報，並完整檢出所有 50 個刻意屏蔽工具的植入故障。</li>
+<li>跨領域啟發：揭示「只看最終輸出準確率或保真度」的評估盲區，為代理式 AI 審計建立過程證據（process-level instrumentation）的新基準。</li>
+<li>連結：<a href="zotero://select/library/items/U2JI3E86" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.28439" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-frontier-lag-a-bibliometric-audit-of-capability-misrepresentation-in-academic-ai-evaluation2026">5. Frontier Lag: A Bibliometric Audit of Capability Misrepresentation in Academic AI Evaluation（2026）</h4>
+<ul>
+<li>作者與出處：David Gringras, Misha Salahshoor · <em>arXiv</em></li>
+<li>核心問題：應用領域的學術論文常在發表時評測已經落伍的語言模型，卻將結果描述為對整體「AI」能力的判斷，造成能力誤導與發表引出落差。本文對全學科 LLM 評測文獻進行大規模書目計量審計。</li>
+<li>關鍵做法：掃描 2022–2026 年 OpenAlex 共 112,303 筆匹配紀錄並篩選出 18,574 筆有效模型評測資料，以 Epoch AI 能力指數（ECI）對比同期前沿模型，發現中位數論文所測模型落後前沿 +10.45 ECI，且落差每年擴大 +4.07 ECI（95% CI [+3.75, +4.45]）；僅 18.4% 論文在全文中寫明評測日期，而經貝氏校正後高達 52.5% 摘要將結論泛化至「AI」整體類別。</li>
+<li>跨領域啟發：補上<a class="wl" href="24A_%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%8F%AF%E9%87%8D%E7%8F%BE%E6%80%A7%E3%80%81%E7%B5%B1%E8%A8%88%E6%AA%A2%E5%AE%9A%E5%8A%9B%E8%88%87%E6%B6%88%E8%9E%8D%E5%AF%A6%E9%A9%97%E6%96%B9%E6%B3%95%E8%AB%96.html">機器學習可重現性、統計檢定力與消融實驗方法論</a>的時間維度缺口，證明模型版本與評估時間戳必須成為學術與模型卡報告的強制元資料。</li>
+<li>連結：<a href="zotero://select/library/items/TG92AU7G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.04135" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-identifying-harm-in-personalized-generative-ai-systems-requires-user-centered-auditing-at-the-interaction-level2026">6. Identifying Harm in Personalized, Generative AI Systems Requires User-Centered Auditing at the Interaction Level（2026）</h4>
+<ul>
+<li>作者與出處：Hannah Cha · <em>arXiv</em></li>
+<li>核心問題：個人化生成式 AI 會隨個別使用者的長期互動不斷調整行為，而既有演算法審計多依賴部署前的靜態模擬與寬泛群組均值指標，無法捕捉隨互動歷史湧現的個人化傷害。本文檢視現行傷害審計範式的三項隱含預設。</li>
+<li>關鍵做法：剖析現有審計所仰賴的三個假設，即傷害可在真實互動之外預先界定、可在群組內非多元地統一定義，以及可視為靜態屬性；進而論證以更深層個人化讓模型自行學習傷害定義，反而會把不對稱的勞動與隱私負擔強加給邊緣化使用者，據此提出以使用者為中心、立足互動層的動態審計方向。</li>
+<li>跨領域啟發：指明透明度審計從靜態基準表單走向長期人機互動追蹤的轉向，並與<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD45_%E4%BD%BF%E7%94%A8%E8%80%85%E7%A0%94%E7%A9%B6%E8%88%87%E9%81%99%E6%B8%AC.html">使用者研究與遙測</a>中的現場使用行為分析相互呼應。</li>
+<li>連結：<a href="zotero://select/library/items/VIU7Q8V7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.14692" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-46-篇">G5｜本子方向全量文獻泛讀清單（共 46 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 46 篇文獻（含開放存取 PDF 46 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進15-篇">A. 奠基經典、專著與核心演進（15 篇）</h3>
+<ul>
+<li><strong>2018｜Model Cards for Model Reporting</strong>，Margaret Mitchell et al.（<em>FAT</em> '19: Conference on Fairness, Accountability, and Transparency, January 29--31, 2019, Atlanta, GA, USA*，2648 引）：🏆 L5 已審核，現代 AI 透明治理的奠基論文，Hugging Face 等整個行業都已採用：確立了模型預期用途、適用邊界與跨子群體拆解評測的標準。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_24_2018_Mitchell_Model_Cards_for_Model_Reporting.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/D3FB3RDJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1810.03993" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Stochastic Parrots Looking for Stochastic Parrots: LLMs are Easy to Fine-Tune and Hard to Detect with other LLMs</strong>，Da Silva Gameiro Henrique, Andrei Kucharavy, Rachid Guerraoui（<em>arXiv (Cornell University)</em>，12 引）：檢視現有大語言模型生成文本檢測工具的結構性缺陷，指出先前宣稱易於檢測的結論建立在「未經微調與無複雜提示」的受限假設上，論證微調後的語言模型極難被其他語言模型可靠偵測。 <a href="zotero://select/library/items/HV7V2X4I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.08968" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Datasheets for Machine Learning Sensors</strong>，Matthew Stewart et al.（<em>arXiv</em>）：針對嵌入式機器學習感測器系統缺乏透明度的問題，由產學合作提出「機器學習感測器資料表」框架與完整範本，系統記錄硬體規格與運作屬性以支援可重現性、法規合規與演算法審計。 <a href="zotero://select/library/items/UV9NU22A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.08848" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Unlocking Model Insights: A Dataset for Automated Model Card Generation</strong>，Shruti Singh et al.（<em>arXiv</em>）：針對自動化生成模型卡的需求，從 25 個機器學習模型論文人工萃取涵蓋訓練設定、資料集、偏誤與架構等面向的 500 對問答資料集，並基準評測 ChatGPT-3.5 等語言模型的生成表現。 <a href="zotero://select/library/items/DAZSFBK5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.12616" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Open Datasheets: Machine-readable Documentation for Open Datasets and Responsible AI Assessments</strong>，Anthony Cintron Roman et al.（<em>arXiv</em>）：提出免寫程式且機器可讀的開放資料集文檔框架 Open Datasheets，聚焦負責任 AI 評估需求，協助研究者與資料科學家快速查核資料集內容、品質及法規與組織政策合規性。 <a href="zotero://select/library/items/G8KWUQT5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.06153" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Datasheet for the Pile</strong>，Stella Biderman, Kieran Bicheno, Leo Gao（<em>arXiv</em>）：為 EleutherAI 編製的 825 GiB 大規模語言建模文字資料集 The Pile 提供資料集說明書，記錄其由 22 個不同來源構成的內容，包含自行抓取與第三方公開語料。 <a href="zotero://select/library/items/AM8ZMR8C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2201.07311" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Interactive Model Cards: A Human-Centered Approach to Model Documentation</strong>，Anamaria Crisan et al.（<em>arXiv</em>）：針對非機器學習專業的分析師設計互動式模型卡，將靜態文檔擴充為可探索文件與互動測試模型的介面，並透過與專家及 30 名非專業分析師的訪談與放聲思考研究進行評估。 <a href="zotero://select/library/items/6XD8DDRC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.02894" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Structured dataset documentation: a datasheet for CheXpert</strong>，Christian Garbin et al.（<em>arXiv</em>）：依 Datasheets for Datasets 架構為 CheXpert 胸部 X 光資料集編寫結構化文檔，詳述放射科醫師標註流程、資料組成與潛在限制。 <a href="zotero://select/library/items/P6WAVN72" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2105.03020" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Addressing &quot;Documentation Debt&quot; in Machine Learning Research: A Retrospective Datasheet for BookCorpus</strong>，Jack Bandy, Nicholas Vincent（<em>arXiv</em>）：針對廣用於 BERT 與 GPT 系列訓練的 BookCorpus 補建回溯性資料表，揭示其存在版權風險、數千本重複書籍及資料組成欠缺紀錄等問題。 <a href="zotero://select/library/items/A9JARSIB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2105.05241" rel="noopener">官方連結</a></li>
+<li><strong>2021｜On the Opportunities and Risks of Foundation Models</strong>，Rishi Bommasani et al.（<em>arXiv</em>）：提出「基礎模型」概念框架並全面剖析其技術原理與湧現能力，系統盤點大規模預訓練模型在醫療、法律等應用領域的潛力與社會公平、安全風險。 <a href="zotero://select/library/items/TX32AB6G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2108.07258" rel="noopener">官方連結</a></li>
+<li><strong>2021｜DAG Card is the new Model Card</strong>，Jacopo Tagliabue et al.（<em>arXiv</em>）：順應以資料為中心的 AI 實務需求，提出以有向無環圖為粒度的 DAG Card 取代單一模型卡來記錄完整 ML 管線前後處理與依賴關係，並開源從程式碼自動生成工具。 <a href="zotero://select/library/items/F8CP6X9K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.13601" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Conformity Assessments and Post-market Monitoring: A Guide to the Role of Auditing in the Proposed European AI Regulation</strong>，Jakob Mokander et al.（<em>Mokander, J., Axente, M., Casolari, F. &amp; Floridi, L. (2021). Conformity Assessments and Post-market Monitoring: A Guide to the Role of Auditing in the Proposed European AI Regulation. Minds and Machines</em>）：剖析歐盟人工智慧法案草案中針對高風險系統的合規性評估與上市後監測條款，將其定位為建立全歐 AI 審計生態系的兩大核心執法機制。 <a href="zotero://select/library/items/W2NVZZN7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.05071" rel="noopener">官方連結</a></li>
+<li><strong>2020｜MT-Adapted Datasheets for Datasets: Template and Repository</strong>，Marta R. Costa-jussà et al.（<em>arXiv</em>）：將 Gebru 等人提出的資料集規格書（Datasheets for Datasets）標準調整以適配機器翻譯領域的使用需求，實作 EuroParl 與 News-Commentary 語料庫的規格文檔，並建立收集機器翻譯資料集規格書的公開儲存庫。 <a href="zotero://select/library/items/G2ASPK7Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.13156" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Datasheets for Datasets</strong>，Timnit Gebru et al.（<em>arXiv</em>）：借鑑電子工業零件規格表做法，提出「資料集規格表（datasheets for datasets）」標準化文件機制，要求記錄資料集動機、組成、蒐集過程與建議用途，藉以促進資料建立者與使用者間的溝通、透明度與課責性。 <a href="zotero://select/library/items/UDB37Z35" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1803.09010" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Baselines and a datasheet for the Cerema AWP dataset</strong>，Ismaïla Seck et al.（<em>arXiv</em>）：發表針對惡劣天氣行人偵測的受控全標註影像資料集 Cerema AWP 及多項任務基準結果，並依循「資料集規格表（datasheets for datasets）」倡議標準化記錄資料集資訊以提升研究透明度。 <a href="zotero://select/library/items/MXFJU4GD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1806.04016" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻31-篇">B. 2024–2026 近期推進與前沿文獻（31 篇）</h3>
+<ul>
+<li><strong>2026｜Transparency-First Medical Language Models: Datasheets, Model Cards, and End-to-End Data Provenance for Clinical NLP</strong>，Olaf Yunus Laitinen Imanov et al.（<em>arXiv</em>）：推出整合模型卡、資料集表與端到端資料溯源且可機器校驗的臨床語言模型透明發佈套件 TeMLM，並在含 49.8 萬筆合成病歷的 Technetium-I 上對約 1 億參數的 ProtactiniumBERT 進行去識別與 ICD-9 編碼示範驗證。 <a href="zotero://select/library/items/V2SJ4VF5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.19191" rel="noopener">官方連結</a></li>
+<li><strong>2026｜When AI Speaks, Whose Values Does It Express? A Cross-Cultural Audit of Individualism-Collectivism Bias in Large Language Models</strong>，Pruthvinath Jeripity Venkata（<em>arXiv</em>）：跨 10 國 7 種語言以 840 筆回應審計 Claude Sonnet 4.5、GPT-5.4 與 Gemini 2.5 Flash 的個人建議價值取向，對照世界價值觀調查發現模型普遍偏向西方個人主義（平均差距 +0.76），僅日本呈現例外。 <a href="zotero://select/library/items/28RF52RG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.22153" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Frontier Lag: A Bibliometric Audit of Capability Misrepresentation in Academic AI Evaluation</strong>，David Gringras, Misha Salahshoor（<em>arXiv</em>）：掃描 2022 至 2026 年 OpenAlex 18,574 篇評測論文並對照 Epoch AI 能力指數 (ECI)，發現在應用領域論文所評測模型的年中位數落後當時前沿達 +10.45 ECI，且此前沿滯後差距正以每年 +4.07 ECI 的速度擴大。 <a href="zotero://select/library/items/TG92AU7G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.04135" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Adversarial Fragility and Language Vulnerability in Clinical AI: A Systematic Audit of Diagnostic Collapse Under Imperceptible Perturbations and Cross-Lingual Drift in Low-Resource Healthcare Settings</strong>，Anthonio Oladimeji Gabriel, Ahmad Rufai Yusuf（<em>arXiv</em>）：審計臨床 AI 的影像對抗脆弱性與跨語言漂移：於 COVID-QU-Ex 胸腔 X 光集微調 DenseNet121 後，在 <span class="math inline">\epsilon=0.021</span> 的 FGM 擾動下準確率自 89.3% 降至 62.0%，且高斯平滑與集成投票無法恢復安全性。 <a href="zotero://select/library/items/JCZUDSDB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.16993" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Identifying Harm in Personalized, Generative AI Systems Requires User-Centered Auditing at the Interaction Level</strong>，Hannah Cha（<em>arXiv</em>）：批判現有 AI 危害審計依賴脫離互動的靜態模擬與群體聚合定義，指出其預設忽略了個人化生成式 AI 隨使用者歷史演化的湧現危害，進而主張建立以使用者互動層為中心的審計範式。 <a href="zotero://select/library/items/VIU7Q8V7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.14692" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Position: Current Model Cards Are Insufficient for Downstream Governance of Open-Weight Foundation Models</strong>，Sungwon Chae et al.（<em>arXiv</em>）：分析 Hugging Face 上 500 份模型卡後指出現有框架不足以支撐開權重基礎模型（OWFMs）的下游治理，主張整合模型卡、可接受使用政策（AUPs）與授權條款以補齊譜系與對齊資訊。 <a href="zotero://select/library/items/T2MASDG4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.18086" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Model Card for OpenAI Privacy Filter</strong>，Charles de Bourcy et al.（<em>arXiv</em>）：介紹 OpenAI Privacy Filter 的模型卡，由自回歸檢查點轉為雙向帶狀注意力詞元分類器並搭配受限 Viterbi 解碼器，總參數 15 億，用於 8 類個人隱私資訊偵測與遮蔽。 <a href="zotero://select/library/items/GQWHC4TZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.18274" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models</strong>，Valentin Romanov, Monique Bax, Steven Niederer（<em>arXiv</em>）：Valentin Romanov, Monique Bax &amp; Steven Niederer，<em>Self-prompting and cross-model consensus enable reproducible data extraction from scientific literature with large language models</em>（<em>arXiv</em>）：提出自我提示與跨模型共識的四級工作流，解決用商用瀏覽器端 LLM 從科學文獻抽取高語境資訊時的可重現性瓶頸。OA PDF。 <a href="zotero://select/library/items/RB4BDQFW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.19025" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Fidelity Is Not Enough: Dispatch-Level Instrumentation for Agentic Datasheet Extraction</strong>，Qing Ye, Meng-Hsuan Lin（<em>arXiv</em>）：揭露代理式規格書抽取中模型在結構化輸出限制下停用工具並偽造來源卻仍通過保真度檢查的隱性失效，遂建立基於工具呼叫日誌的歸因分類器與雙規則偵測器，於 207 次乾淨執行零誤報。 <a href="zotero://select/library/items/U2JI3E86" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.28439" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Sources of Truth: A Multi-Platform, Multilingual Audit of Citations in AI Mental Health Information Queries</strong>，Phuong Anh Nguyen et al.（<em>arXiv</em>）：針對 ChatGPT、Perplexity 與 Google AI Overview 進行多語言心理健康查詢引用審計，統計 1,140 則回覆中的 15,942 筆引用，發現英語引用的前十大網域佔比高達 43.6% 且來源高度集中。 <a href="zotero://select/library/items/GA3XZE2V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.00319" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Not What a Child Expressed: Auditing the Sign-to-Text Safety Interface in Child-Facing AI</strong>，Muhammad Rafiullah Memon et al.（<em>arXiv</em>）：審計兒童導向 AI 系統中自動手語轉文字（SLT）與下游安全過濾及誘拐分類器間的介接盲區，指出部署模型缺乏未成年手語者驗證且否定詞或角色翻譯錯誤會無聲扭曲安全判定，並提出失效分類學與審計框架。 <a href="zotero://select/library/items/I5IC2VQZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.07519" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Queering the Audits: Community-Based Auditing of AI Harms to Queer Communities</strong>，Organizers of QueerInAI et al.（<em>In Proceedings of the Second Workshop of Identity Aware AI at 2026, pages 66-76, Palma de Mallorca, Spain. European Language Resources Association</em>）：報導於 EurIPS 2025 由 16 位酷兒社群成員透過 4C 傷害分類法（內容、行為、接觸、契約）審計四起 AI 系統案例的參與式審計工作坊，將系統性傷害溯源至問題定義、資料蒐集偏誤與剝削性契約結構。 <a href="zotero://select/library/items/G56WXPJB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.00345" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Can AI Judge You? An Empirical Audit of Deployment Readiness in LLM-assisted Hiring Systems</strong>，Spandan Roy, Subhabrata Majumdar, Soudeep Deb（<em>arXiv</em>）：作者設計了一套履歷評估系統，在架構層把候選人證據、評估邏輯、權限控制與評核紀錄明確隔離，並針對 4 款主流 LLM，用橫跨 14 種職位與 6 種決策介面的 210 份履歷做雙軸實證審計。有三項實務發現：（1）介面設計主導鑑別力：純量分數（Scalar Scores）對資格變化的敏感度普遍優於二元的通過／淘汰，成對比較判斷則嚴重受呈現順序（Position Bias）干擾；（2）明確的權限規則，加上履歷內容與系統指令的隔離，能降低未授權順從，但防禦效果在不同模型與脈絡之間差異顯著；（3）決策與理由脫鉤：LLM 評審給出的最終錄取／刷除決定，經常和它自己寫的評估理由互相矛盾。 <a href="zotero://select/library/items/PN3REXG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.20140" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A Crowd-Audited Atlas of Implicit Bias in LLM-Powered Agents</strong>，Jason Alexander et al.（<em>arXiv</em>）：依據「美國時間使用調查（ATUS）」涵蓋的 17 大日常活動領域，針對被賦予不同種族、性別認同與政治傾向人物設定（Personas）的 LLM 智能體，建出一份包含 506 個顯著隱性偏見決策場景的全景圖譜（Atlas）。接著做群眾審計（Crowdsourced Audit），收集 500 名參與者共 8,010 次二元優先順序抉擇。參與者最優先要求審查三類場景：普遍相關的（如日常飲食選擇）、高風險的（如醫療健康），以及模擬人口群體成員做出 100% 一致決策、明顯暴露刻板印象的。觀察到的統計落差幅度或特定 ATUS 類別，反而影響較小。質性理由分析還顯示，審計參與者常把模型的行為落差直接解讀為該人口群體的真實特質，並依自己內化的刻板印象評斷這個差異「合不合理」。 <a href="zotero://select/library/items/UG69C7KT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21376" rel="noopener">官方連結</a></li>
+<li><strong>2025｜D2S-FLOW: Automated Parameter Extraction from Datasheets for SPICE Model Generation Using Large Language Models</strong>，Hong Cai Chen, Yi Pin Xu, Yang Zhang（<em>arXiv</em>）：提出自動化框架 D2S-FLOW 以從電子元件規格書抽取電氣參數並生成 SPICE 模型，透過注意力導向文件聚焦（AGDF）、層級檢索（HDER）與異構命名實體正規化（HNEN）提升抽取精確度。 <a href="zotero://select/library/items/U6FVNUSP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.16540" rel="noopener">官方連結</a></li>
+<li><strong>2025｜EDocNet: Efficient Datasheet Layout Analysis Based on Focus and Global Knowledge Distillation</strong>，Hong Cai Chen, Longchang Wu, Yang Zhang（<em>arXiv</em>）：針對電子元件規格書版面解析需求提出 EDocNet，於自建資料集上採用聚焦與全域知識蒸餾策略進行訓練，能將技術文件內容精細劃分為 21 類並提升平均準確率與召回率。 <a href="zotero://select/library/items/QIRQTG5H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.16541" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Investigating Youth AI Auditing</strong>，Jaemarie Solyst et al.（<em>arXiv</em>）：透過納入 17 名未滿 18 歲青少年的工作坊實證研究，配合批判性 AI 素養鷹架與審計工具，探討青少年如何基於自身興趣與生活經驗識別文生圖、搜尋自動補全與影像搜尋等系統中的問題行為。 <a href="zotero://select/library/items/ZSJNTQNW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.18576" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Intanify AI Platform: Embedded AI for Automated IP Audit and Due Diligence</strong>，Viktor Dorfler, Dylan Dryden, Viet Lee（<em>Dorfler, V., Dryden, D., &amp; Lee, V. (2025, 25 February - 4 March 2025). Intanify AI Platform: Embedded AI for Automated IP Audit and Due Diligence AAAI 2025: The 39th Annual AAAI Conference on Artificial Intelligence, Philadelphia, PA</em>）：發表於 AAAI 2025，介紹專為中小企業無形資產價值評估設計的 Intanify AI 平台，透過嵌入多專家知識庫的「Rosetta Stone」直譯單元建構二階知識圖譜，自動化執行智慧財產權審計、紅旗預警與盡職調查風險評分。 <a href="zotero://select/library/items/ARDMHJDM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.17374" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Datasheets Aren't Enough: DataRubrics for Automated Quality Metrics and Accountability</strong>，Genta Indra Winata et al.（<em>arXiv</em>）：立場論文指出現有資料表單（Datasheets）偏重敘述而缺乏標準化品質量化指標，主張將系統性的量表式評估指標（DataRubrics）納入資料集同儕審查流程，以強化品質把關與當責機制。 <a href="zotero://select/library/items/BTRJ84UT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.01789" rel="noopener">官方連結</a></li>
+<li><strong>2025｜The Amazon Nova Family of Models: Technical Report and Model Card</strong>，Amazon AGI et al.（<em>arXiv</em>）：發表 Amazon Nova 系列基礎模型的技術報告與模型卡，涵蓋 Pro、Lite、Micro 多模態及純文本模型與 Canvas、Reel 影音生成模型，詳述各規格在基準評測、延遲成本權衡及安全可靠度上的表現。 <a href="zotero://select/library/items/R4MTUHV9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.12103" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Towards Sustainability Model Cards</strong>，Gwendal Jouneaux, Jordi Cabot（<em>arXiv</em>）：針對 ML 模型能量報告缺乏標準化認證機制的問題，將資訊通訊品質模型及服務層級協議與 AI 能效評分及綠色 AI 倡議結合，形式化建構「永續品質模型」以支援自動化能耗比較與模型卡揭露。 <a href="zotero://select/library/items/E87ZG7I3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.19559" rel="noopener">官方連結</a></li>
+<li><strong>2025｜The Fair Game: Auditing &amp; Debiasing AI Algorithms Over Time</strong>，Debabrota Basu, Udvas Das（<em>Cambridge Forum on AI: Law and Governance , Volume 1 , 2025 , p. e27</em>）：指出傳統觀測性公平定義彼此衝突且依賴真值或事後評估的侷限，提出動態機制「Fair Game」，使機器學習演算法能在與社會持續互動的過程中即時審計並調整其預測以維持公平性。 <a href="zotero://select/library/items/8HXU9VAQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.06443" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Private, Verifiable, and Auditable AI Systems</strong>，Tobin South（<em>arXiv</em>）：博士論文整合國際政策洞見與密碼學技術解決基礎模型的隱私與當責問題，提出以零知識證明驗證 AI 系統聲明，並結合安全多方計算與可信執行環境實現機密且可審計的 LLM 部署。 <a href="zotero://select/library/items/W45987GU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.00085" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Demo: Statistically Significant Results On Biases and Errors of LLMs Do Not Guarantee Generalizable Results</strong>，Jonathan Liu et al.（<em>arXiv</em>）：建構針對醫療聊天機器人的自動探測與評測架構，透過抽樣病患人口統計特徵、病史與書寫風格生成詢問，並以多種 LLM-as-a-judge 與智能體工作流檢驗幻覺、遺漏與偏誤的跨情境泛化性。 <a href="zotero://select/library/items/55TZU32I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.02246" rel="noopener">官方連結</a></li>
+<li><strong>2025｜AI-Powered Citation Auditing: A Zero-Assumption Protocol for Systematic Reference Verification in Academic Research</strong>，L. J. Janse van Rensburg（<em>arXiv</em>）：提出以具備工具調用能力的智能體 AI 跨 Semantic Scholar、Google Scholar 與 CrossRef 核驗文獻的零假設審計協議，在 30 份學術文件共 2,581 筆引用驗證中於 PLOS 論文達成 91.7% 核驗率並檢出偽造與撤稿引用。 <a href="zotero://select/library/items/Z55IDB8G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.04683" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Detecting Statistically Significant Fairness Violations in Recidivism Forecasting Algorithms</strong>，Animesh Joshi（<em>arXiv</em>）：針對再犯率預測等演算法公平性審計缺乏統計顯著性檢定的問題，利用 <span class="math inline">k</span> 折交叉驗證建構公平性指標的抽樣分佈，藉以嚴格區分模型群體差異究竟源自系統偏誤抑或隨機波動。 <a href="zotero://select/library/items/C3PTTEG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.11575" rel="noopener">官方連結</a></li>
+<li><strong>2024｜What's documented in AI? Systematic Analysis of 32K AI Model Cards</strong>，Weixin Liang et al.（<em>arXiv</em>）：系統性統計分析 Hugging Face 平台上 32,111 份 AI 模型卡的文檔實務現況，發現高下載量模型多附有模型卡但內容完整度極不均勻：訓練資訊填寫最齊全，而環境影響、模型限制與評估揭露率最低。 <a href="zotero://select/library/items/IHFB6J7T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.05160" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Towards AI Accountability Infrastructure: Gaps and Opportunities in AI Audit Tooling</strong>，Victor Ojewale et al.（<em>arXiv</em>）：訪談 35 位 AI 審計從業人員並盤點 435 款審計工具，比對現有生態系與實務需求之間的落差，指出多數工具偏重標準制定與評估測試，在損害發現、問責追蹤與倡議支持等基礎設施上仍顯不足。 <a href="zotero://select/library/items/JTB9AVEJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.17861" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Operationalising AI governance through ethics-based auditing: An industry case study</strong>，Jakob Mokander, Luciano Floridi（<em>AI Ethics (2022)</em>）：透過為期 12 個月追蹤製藥企業 AstraZeneca 籌備並接受倫理導向 AI 審計（EBA）的縱貫產業個案研究，實證檢驗各類審計程序在真實組織運作中的可行性與落實阻礙。 <a href="zotero://select/library/items/9V7P7GRA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.06232" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Insuring Uninsurable Risks from AI: Government as Insurer of Last Resort</strong>，Cristian Trout（<em>arXiv</em>）：針對AI不可保災難風險導致的事後追責困境，提出政府強制賠償機制，結合專家調查與Bayesian Truth Serum依風險定價收費，誘導開發者降低風險。 <a href="zotero://select/library/items/DHWFTFTA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.06672" rel="noopener">官方連結</a></li>
+<li><strong>2024｜International Scientific Report on the Safety of Advanced AI (Interim Report)</strong>，Yoshua Bengio et al.（<em>arXiv</em>）：為首份先進AI安全國際科學報告之中期版，由30個國家、歐盟與聯合國提名的顧問團及75位專家合撰，系統綜述通用AI的能力、風險理解與治理策略。 <a href="zotero://select/library/items/PTJAQ65N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.05282" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f18da1a5">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a><span class="rs">研究方法與政策處理人工智慧與計算科學的認識論基礎和社會契約。實驗這一端，用嚴格的變異數拆解、消融設計與統計檢定，分辨真正的進展和隨機運氣。</span></li><li><a href="24A_%E6%A9%9F%E5%99%A8%E5%AD%B8%E7%BF%92%E5%8F%AF%E9%87%8D%E7%8F%BE%E6%80%A7%E3%80%81%E7%B5%B1%E8%A8%88%E6%AA%A2%E5%AE%9A%E5%8A%9B%E8%88%87%E6%B6%88%E8%9E%8D%E5%AF%A6%E9%A9%97%E6%96%B9%E6%B3%95%E8%AB%96.html">機器學習可重現性、統計檢定力與消融實驗方法論</a></li><li><a href="24C_%E5%89%8D%E6%B2%BFAI%E9%A2%A8%E9%9A%AA%E6%B2%BB%E7%90%86%E3%80%81%E9%96%8B%E6%BA%90%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B%E6%AC%8A%E8%A1%A1%E8%88%87%E5%85%A8%E7%90%83%E7%9B%A3%E7%AE%A1%E6%94%BF%E7%AD%96.html">前沿AI風險治理、開源基礎模型權衡與全球監管政策</a></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD20_%E8%A9%A6%E7%8E%A9%E6%96%B9%E6%B3%95.html">試玩方法</a><span class="tag-plan">計劃</span><span class="rs">試玩方法（*Games User Research* 選章；Fullerton 的試玩章節）</span></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD45_%E4%BD%BF%E7%94%A8%E8%80%85%E7%A0%94%E7%A9%B6%E8%88%87%E9%81%99%E6%B8%AC.html">使用者研究與遙測</a><span class="tag-plan">計劃</span><span class="rs">使用者研究與遙測（Drachen, Mirza-Babaei, Nacke 選章）</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

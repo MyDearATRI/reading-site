@@ -12,21 +12,21 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-787aeb5c">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">經濟</a><a class="find" href="../../index.html#n=n-787aeb5c">Find on board</a></header>
+<body class="doc" data-note="n-787aeb5c" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 經濟</span>
 <article>
 
 <h1 id="e24計量入門ols-與因果">E24｜計量入門：OLS 與因果</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="E23_%E5%82%B5%E5%88%B8%E3%80%81%E5%AD%98%E7%BA%8C%E6%9C%9F%E9%96%93%E8%88%87%E6%95%88%E7%8E%87%E5%B8%82%E5%A0%B4.html">E23 債券、存續期間與效率市場</a> ｜ 下一章：<a class="wl" href="E25_%E6%BC%B8%E8%BF%91%E8%88%87%E8%BF%B4%E6%AD%B8%E8%A8%BA%E6%96%B7.html">E25 漸近與迴歸診斷</a>
 本線先備：<a class="wl" href="E04_%E5%B8%82%E5%A0%B4.html">E04 市場</a>
 別線先備：<a class="wl" href="../01_%E6%95%B8%E5%AD%B8/00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a>（細節見下方「路線上的計劃」）
 研究主脊：<a class="wl" href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A4_%E8%B3%87%E8%A8%8A%E6%8E%A8%E6%96%B7%E8%88%87%E5%9B%A0%E6%9E%9C.html">主脊4_資訊推斷與因果</a>
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">37_因果推論與反事實最優傳輸</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">因果推論與反事實最優傳輸</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/08-economics.md:140</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -62,10 +62,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">1</span></h3><ul><li><a href="E04_%E5%B8%82%E5%A0%B4.html">市場</a><span class="tag-plan">計劃</span><span class="rs">供給與需求、競爭均衡、剩餘、市場失靈。CORE Micro Unit 8、Unit 10</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">2</span></h3><ul><li><a href="E25_%E6%BC%B8%E8%BF%91%E8%88%87%E8%BF%B4%E6%AD%B8%E8%A8%BA%E6%96%B7.html">漸近與迴歸診斷</a><span class="tag-plan">計劃</span><span class="rs">第 5–9 章：漸近、進一步議題、虛擬變數、異質變異、設定與資料問題</span></li><li><a href="E28_S1%20%E7%B8%BD%E7%9B%B2%E6%B8%AC%E8%88%87%E5%9C%8B%E5%AF%8C%E8%AB%96.html">S1 總盲測與國富論</a><span class="tag-plan">計劃</span><span class="rs">S1 全部核心節點盲測；配讀 Smith，*The Wealth of Nations* 第一卷第 1–3 章</span></li></ul></div><div class="rg"><h3>相關<span class="n">2</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/37_%E5%9B%A0%E6%9E%9C%E6%8E%A8%E8%AB%96%E8%88%87%E5%8F%8D%E4%BA%8B%E5%AF%A6%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8.html">因果推論與反事實最優傳輸</a><span class="rs">經典 Wasserstein 距離的耦合可以偷看未來，也不管因果箭頭的方向。</span></li><li><a href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A4_%E8%B3%87%E8%A8%8A%E6%8E%A8%E6%96%B7%E8%88%87%E5%9B%A0%E6%9E%9C.html">主脊4_資訊推斷與因果</a><span class="rs">下面列出路線上與這條主脊相關的章節，依學習線分組。歸屬由路線檔的「主脊」標註與內容關鍵詞推定；寫正文時會再核對。</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

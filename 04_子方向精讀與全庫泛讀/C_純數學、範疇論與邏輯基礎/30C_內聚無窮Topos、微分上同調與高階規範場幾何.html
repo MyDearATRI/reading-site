@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>30C｜內聚無窮Topos、微分上同調與高階規範場幾何 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-5c5ac157" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="30c內聚無窮topos微分上同調與高階規範場幾何">30C｜內聚無窮Topos、微分上同調與高階規範場幾何</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a>
+同領域子方向：<a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> · <a class="wl" href="30B_%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95%E3%80%81%E7%84%A1%E7%AA%AE%E5%B0%8F%E5%B0%8D%E8%B1%A1%E8%88%87%E5%88%87%E7%AF%84%E7%96%87%E5%85%AC%E7%90%86%E5%8C%96.html">合成微分幾何、無窮小對象與切範疇公理化</a>
+跨領域關聯子方向：<a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> · <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> · <a class="wl" href="12B_%E7%AB%8B%E6%96%B9%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E8%A8%88%E7%AE%97%E6%80%A7%E5%96%AE%E5%83%B9%E8%88%87%E5%AE%9A%E5%90%91%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%AB%96.html">立方類型論、計算性單價與定向模態類型論</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a> · <a class="wl" href="../../NOTES/06_%E9%9F%B3%E6%A8%82/MU-47_%E7%AF%84%E7%96%87%E8%88%87%20topos.html">範疇與 topos</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a> 的高階同倫與模態幾何分支，與處理拓撲完備化的 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 及研究 1-範疇無窮小結構的 <a class="wl" href="30B_%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95%E3%80%81%E7%84%A1%E7%AA%AE%E5%B0%8F%E5%B0%8D%E8%B1%A1%E8%88%87%E5%88%87%E7%AF%84%E7%96%87%E5%85%AC%E7%90%86%E5%8C%96.html">合成微分幾何、無窮小對象與切範疇公理化</a> 互補。它透過在 <span class="math inline">(\infty,1)</span>-Topos 中公理化「凝聚性」（cohesion，即由形狀、離散化與餘離散化構成的伴隨模態），把光滑空間的拓撲路徑與高階規範場的微分上同調同時收編為合成結構，並與 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 的內部模態類型論（實內聚 HoTT、交換內聚）以及複幾何中的內聚模超聯絡（cohesive modules）相互呼應。</p>
+</aside>
+<ul>
+<li>核心問題：在傳統點集拓撲與經典同倫論中，「幾何連續性」與「代數拓撲同倫」常被混為一談：一旦對光滑流形或微分疊取底層奇異複形（shape），就無法再保留光滑結構與局部微分幾何資訊；反之，在普通同倫類型論（HoTT）的環境下，類型中的恆等路徑（identifications）只編碼同倫類型，難以區分空間點之間的連續拓撲鄰近性與抽象的離散結構。在物理與微分幾何上，高階規範場與微分上同調（如帶有聯絡的 gerbe、Chern–Simons 泛函與無全域自由消解的相干層示性流）亦需要同時追踪幾何光滑性與同倫膠合條件。</li>
+<li>直覺模型：普通同倫論把一塊光滑橡皮泥直接壓成只能辨識洞數與連通性的形狀；內聚無窮 Topos 則為每個空間同時配備三副濾鏡：形狀模態 <span class="math inline">\Pi</span>（或寫作 <span class="math inline">\int</span>）將空間的連續路徑壓縮成同倫型，離散模態 <span class="math inline">\flat</span> 把空間拆成孤立點的集合並遺忘連續黏合，餘離散模態 <span class="math inline">\sharp</span> 則把點之間的所有拓撲約束鬆開。由於這組濾鏡形成連環伴隨（<span class="math inline">\Pi \dashv \flat \dashv \sharp</span>），研究者不必在外部手動寫下複雜的局部座標圖冊與上鏈條件，只需在內在邏輯裡切換模態，就能從光滑空間自動讀出它的拓撲同倫不變量與微分聯絡。</li>
+<li>分階段閱讀路線：第一階段先讀 Schreiber (2013) 的專論導論與 Schreiber 與 Shulman (2014)，掌握內聚 <span class="math inline">(\infty,1)</span>-Topos 的伴隨公理、微分上同調與量子規範場論的合成公理框架。第二階段精讀 Shulman (2015) 與 Myers 與 Riley (2023)，理解如何用明晰變數（crisp variables）與實內聚 HoTT 分離拓撲路徑與同倫恆等式（並形式化證明 Brouwer 不動點定理），以及如何用「交換內聚」（commuting cohesions）同時處理單純結構與微分結構。第三階段閱讀 2024–2026 年前沿：理論與類型端可讀 Aberlé (2024) 以內聚模態詮釋參數性（parametricity），以及 Woo (2026) 在有限維 <span class="math inline">C^*</span>-代數函子 Topos 上構造帶量子模態的內聚 <span class="math inline">\infty</span>-Topos；幾何與解析疊應用端可讀 Rodríguez Camargo (2025) 關於解析疊核範疇中向量叢 gerbe 的 Cartier 對偶，並對照 Wei (2023, 2024) 與 Han (2024) 針對緊緻複流形上內聚模超聯絡形變與示性流、殘數流的研究。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;拓撲連續性與同倫路徑混同困境&quot;] --&gt; B[&quot;內聚無窮Topos與微分上同調 (Schreiber 2013)&quot;]
+  B --&gt; C[&quot;實內聚HoTT與明晰變數模態 (Shulman 2015, Schreiber-Shulman 2014)&quot;]
+  C --&gt; D[&quot;多結構交換內聚 (Myers-Riley 2023)&quot;]
+  C --&gt; E[&quot;內聚模態下的參數性語義 (Aberle 2024)&quot;]
+  B --&gt; F[&quot;量子模態與有限維C*代數內聚Topos (Woo 2026)&quot;]
+  B --&gt; G[&quot;解析疊Gerbe對偶與複流形內聚模超聯絡 (Rodriguez Camargo 2025, Wei 2024)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>內聚伴隨四元組與微分上同調（Cohesive Adjunctions and Differential Cohomology）</strong></p>
+<ul>
+<li>直覺理解：透過形狀、離散與餘離散三個伴隨模態並置，在純 <span class="math inline">(\infty,1)</span>-Topos 內部同步定義同倫不變量與攜帶聯絡的微分上同調。</li>
+<li>機制或核心表達式：在 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 與 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a> 的基礎上，Schreiber (2013) 沿襲 Lawvere 的公理化內聚概念，定義一個內聚 <span class="math inline">(\infty,1)</span>-Topos <span class="math inline">\mathbf{H}</span> 為帶有全忠實幾何態射 <span class="math inline">\Gamma: \mathbf{H} \to \infty\mathrm{Grpd}</span> 且具備伴隨串聯 <span class="math inline">\Pi \dashv \flat \dashv \Gamma \dashv \sharp</span>（在內部模態下常記為形狀 <span class="math inline">\Pi</span>、平坦 <span class="math inline">\flat</span> 與尖銳 <span class="math inline">\sharp</span>）的局部高階 Topos，其中 <span class="math inline">\Pi</span> 保持有限積並將區間或實數線壓縮為可縮對象。透過纖維序列 <span class="math inline">\flat\mathbf{B}^n U(1) \to \mathbf{B}^n U(1) \to \flat_{\mathrm{dR}} \mathbf{B}^{n+1} U(1)</span> 或類似微分上同調六角圖，高階主叢、<span class="math inline">n</span>-gerbe 及其規範聯絡自然出現為模態拉回。針對幾何疊層中的高階叢，Rodríguez Camargo (2025) 進一步在解析疊的核（kernels）範疇中證明了代數與解析向量叢 gerbe 的 Cartier 對偶，作為 Hopf 代數的反等價，並建立混和特徵 <span class="math inline">(0,p)</span> 下 Hodge–Tate 疊上的固態準相干層與 Simpson gerbe 上權重 <span class="math inline">1</span> 層之間的等價。</li>
+<li>能做到什麼，代價是什麼：內聚公理讓微分上同調、陳–Weil 理論與高階規範對稱性可在同一套無座標語言裡推導，不再為每種奇異疊重寫上同調理論；但這要求底層幾何站點同時滿足局部可縮性與極限保持條件，且不同空間結構（如單純與光滑）混用時單一內聚模態會不足。</li>
+</ul>
+</li>
+<li>
+<p><strong>內聚同倫類型論、明晰變數與交換內聚（Cohesive HoTT, Crisp Variables, and Commuting Cohesions）</strong></p>
+<ul>
+<li>直覺理解：在類型論的語境脈絡中分出「純離散明晰層」與「一般空間層」，使定理證明器既能講同倫恆等路徑，又能區分連續拓撲路徑。</li>
+<li>機制或核心表達式：Shulman (2015) 在 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 的框架下引入伴隨邏輯的「明晰變數」（crisp variables）規則，在語法上內化離散化 <span class="math inline">\flat</span> 與餘離散化 <span class="math inline">\sharp</span>（以及形狀 <span class="math inline">\Pi</span>），建立空間類型論（spatial type theory）與內聚類型論；配合實數線 <span class="math inline">\mathbb{R}</span> 作為形狀決定空間的「實內聚」（real-cohesion），使得連續性與同倫型正式解耦，進而純內在證明 Brouwer 不動點定理（Schreiber 與 Shulman 2014 亦據此描述量子規範場論公理）。為了讓同一類型同時攜帶兩種以上的空間結構（例如單純空間同時帶有單純與拓撲結構），Myers 與 Riley (2023) 提出具「交換焦點」（commuting focuses）的擴展理論，從任意好覆蓋（good cover）的 Čech 神經構造離散單純集合來計算微分疊的同倫型。另一方面，Aberlé (2024) 揭示依賴類型論中的參數性（parametricity）本質上具備與內聚相同的模態結構，並給出可計算詮釋且在 Agda 中實作測試。</li>
+<li>能做到什麼，代價是什麼：將模態語法放進依賴類型論後可直接在證明輔助器中執行合成拓撲證明；代價是上下文管理需引入多層語境（如明晰與普通假設的分離），而在多模態交換時（Myers 與 Riley 2023）必須細緻控制模態之間的分配律與計算規則。</li>
+</ul>
+</li>
+<li>
+<p><strong>量子模態內聚 Topos 與複流形內聚模超聯絡（Quantum Modality and Cohesive Modules on Complex Manifolds）</strong></p>
+<ul>
+<li>直覺理解：把內聚思想向外延伸至兩端：一端將非交換有限維 <span class="math inline">C^*</span>-代數納入內聚函子 Topos 來編碼量子模態，另一端以超聯絡把複流形上的相干層寫成全域微分幾何對象。</li>
+<li>機制或核心表達式：在量子拓撲端，Woo (2026) 構造函子 <span class="math inline">\infty</span>-Topos <span class="math inline">\mathbf{H}_{\mathbb{Q}} = \operatorname{Fun}(\mathbf{C}^*\mathbf{Alg}_{\mathrm{fd}}, \mathbf{H}_{\mathrm{sm}})</span>（底為光滑內聚 <span class="math inline">\infty</span>-Topos <span class="math inline">\mathbf{H}_{\mathrm{sm}}</span> 與有限維 <span class="math inline">C^*</span>-代數及保中心 <span class="math inline">*</span>-同態），將 <span class="math inline">(\Pi, \flat, \sharp)</span> 逐點提升，並以對中心函子的預複合定義滿足 Beck–Chevalley 相容性的冪等保持積餘單子「量子模態」<span class="math inline">Q^{\diamond} \dashv Q_{\bullet}</span>；該 Topos 具備 Day 卷積么半結構，且透過 Gelfand 對偶可刻畫其 <span class="math inline">Q^{\diamond}</span>-餘代數範疇。在複解析幾何的「內聚模」（cohesive modules，Block 定義的超聯絡構件）端，其提供複流形上相干層有界導出範疇的 dg 強化：Wei (2023) 發展緊緻複流形上內聚模的形變理論與 Kuranishi 障礙映射；Han (2024) 證明僅需超聯絡的 <span class="math inline">0</span> 次與 <span class="math inline">1</span> 次分量即可構造代表 Bott–Chern 與 de Rham 示性類乘積的偽亞純流（pseudomeromorphic currents）；Wei (2024) 進一步建立內聚模的殘數流、對偶原理及不依賴全域局部自由消解的推廣 Poincaré–Lelong 公式。</li>
+<li>能做到什麼，代價是什麼：兩類推廣分別把非交換算子代數的測量局域性與複幾何的奇異層消解納入統一微分框架；需注意名詞雖均稱「內聚」（cohesive），Woo (2026) 承襲 Lawvere–Schreiber 的伴隨 <span class="math inline">\infty</span>-Topos 路線，而 Block–Wei–Han 的內聚模則屬於複流形上的超聯絡 dg 範疇路線，兩者技術定義不同，不可混淆。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>實內聚同倫類型論如何分離「恆等路徑」與「連續拓撲路徑」</strong>：在普通 HoTT 中，圓周 <span class="math inline">S^1</span> 作為高階歸納類型（HIT）只具備基礎點與迴路構造子，並無拓撲空間意義下的開集或實數參數。Shulman (2015) 如何在實內聚類型論裡讓空間同時具有真實拓撲與同倫型，進而定義 Brouwer 不動點定理所需的「連續實函數」？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>在普通 HoTT 裡所有函數都自動尊重恆等路徑，這對應於離散空間之間的態射，無法區分連續與不連續實函數。Shulman 引入由明晰變數控制的離散模態 <span class="math inline">\flat</span> 與形狀模態 <span class="math inline">\Pi</span>，使類型內建「拓撲凝聚性」：兩點間的連續路徑是由拓撲實數線 <span class="math inline">\mathbb{R}</span> 映出的連續映射，而非原語恆等型 <span class="math inline">x = y</span>。在實內聚公理下，任意類型 <span class="math inline">X</span> 的形狀 <span class="math inline">\Pi(X)</span> 恰由從實數空間映入 <span class="math inline">X</span> 的連續映射決定，這把拓撲空間 <span class="math inline">D^n</span> 與 <span class="math inline">S^{n-1}</span> 轉換成對應的同倫球面與圓盤形狀，使經典同倫群論的無收縮定理（no-retraction）得以在形式系統內部完成證明。</p>
+</details>
+<ol start="2">
+<li><strong>量子模態 <span class="math inline">Q^{\diamond}</span> 與內聚結構 <span class="math inline">(\Pi, \flat, \sharp)</span> 之間為何需要 Beck–Chevalley 相容條件</strong>：Woo (2026) 在 <span class="math inline">\operatorname{Fun}(\mathbf{C}^*\mathbf{Alg}_{\mathrm{fd}}, \mathbf{H}_{\mathrm{sm}})</span> 中同時保留光滑內聚伴隨 <span class="math inline">(\Pi, \flat, \sharp)</span> 與量子餘單子 <span class="math inline">Q^{\diamond} \dashv Q_{\bullet}</span>。這兩組模態算子之間的 Beck–Chevalley 相容條件在幾何與物理操作上保證了什麼性質？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>內聚模態 <span class="math inline">(\Pi, \flat, \sharp)</span> 描述的是底空間 <span class="math inline">\mathbf{H}_{\mathrm{sm}}</span> 中的光滑性、離散點與形狀同倫，而量子模態 <span class="math inline">Q^{\diamond}</span> 是透過對有限維 <span class="math inline">C^*</span>-代數的中心函子預複合來抽取「經典可觀測量／交換部分」。若兩者不滿足 Beck–Chevalley 相容性，對一個場論組態先做光滑形狀壓縮（取 <span class="math inline">\Pi</span>）再提取經典子代數（作用 <span class="math inline">Q^{\diamond}</span>），結果將不同於先提取經典部分再壓縮形狀。Beck–Chevalley 條件確保幾何連續性模態與量子／經典模態可以協調交換，使 Gelfand 對偶下的經典底空間與光滑高階場空間一致對齊。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>多重交換內聚與無窮維微分疊的計算語義完整化</strong>：Shulman (2015) 的空間與內聚類型論以及 Myers 與 Riley (2023) 的交換內聚（commuting cohesions）已在邏輯與部分計算模型中展開，甚至與 Aberlé (2024) 的模態參數性匯流；然而對於結合多重交換焦點（例如同時涵蓋光滑、單純與等變結構）的高階歸納類型，其完全標準化的計算性單價（computational univalence）與證明輔助器實作（對接 <a class="wl" href="12B_%E7%AB%8B%E6%96%B9%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E8%A8%88%E7%AE%97%E6%80%A7%E5%96%AE%E5%83%B9%E8%88%87%E5%AE%9A%E5%90%91%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%AB%96.html">立方類型論、計算性單價與定向模態類型論</a>）仍在發展中。</li>
+<li><strong>內聚無窮 Topos、量子模態與解析疊的統一橋接</strong>：Woo (2026) 以有限維 <span class="math inline">C^*</span>-代數為指標建立量子模態內聚 <span class="math inline">\infty</span>-Topos，尚未涵蓋無窮維算子代數與非緊緻量子規範場；同時，Rodríguez Camargo (2025) 在 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 的解析疊架構中建立向量叢 gerbe 的 Cartier 對偶，而 Wei (2023, 2024) 與 Han (2024) 則以超聯絡內聚模處理複流形相干層。如何將凝聚解析疊、超聯絡內聚模與內聚 <span class="math inline">(\infty,1)</span>-Topos 的微分上同調收攏到同一個計算層論中，尚無完整定論。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>明晰變數、伴隨模態與立方／定向類型論</strong>：內聚類型論以「明晰變數」語境區分離散層與連續層（Shulman 2015），這種上下文模態語法與 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 的構造原理及 <a class="wl" href="12B_%E7%AB%8B%E6%96%B9%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E8%A8%88%E7%AE%97%E6%80%A7%E5%96%AE%E5%83%B9%E8%88%87%E5%AE%9A%E5%90%91%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%AB%96.html">立方類型論、計算性單價與定向模態類型論</a> 中的定向模態類型系統高度互通，可共用模態上下文管理與 Agda 形式化原型（Aberlé 2024）。</li>
+<li><strong>內聚與凝聚幾何在無窮 Topos 層級的結構對照</strong>：從 <a class="wl" href="../../NOTES/06_%E9%9F%B3%E6%A8%82/MU-47_%E7%AF%84%E7%96%87%E8%88%87%20topos.html">範疇與 topos</a> 的幾何態射伴隨出發，本子方向的內聚四元伴隨與 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 的極端不連通層論構成兩種刻畫拓撲空間的 <span class="math inline">(\infty,1)</span>-Topos 策略（見 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a>），兩者在光滑與解析疊上同調上的交叉運用集中在 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-differential-cohomology-in-a-cohesive-infinity-topos2013">1. Differential cohomology in a cohesive infinity-topos（2013）</h4>
+<ul>
+<li>作者與出處：Urs Schreiber · <em>arXiv (1310.7930)</em></li>
+<li>核心問題：微分上同調與高階規範場（如 gerbe 與高階主叢聯絡）在傳統流形架構下缺乏純粹的同倫與無座標合成表述。</li>
+<li>關鍵做法：專論在具備 <span class="math inline">(\Pi \dashv \flat \dashv \Gamma \dashv \sharp)</span> 伴隨結構的內聚 <span class="math inline">(\infty,1)</span>-Topos 中，以合成方式系統建構微分幾何、高階規範場與一般化微分上同調理論。</li>
+<li>跨領域啟發：確立內聚 <span class="math inline">(\infty,1)</span>-Topos 的標準公理與應用藍圖，直接銜接 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 的高階層論。</li>
+<li>連結：<a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1310.7930" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-brouwers-fixed-point-theorem-in-real-cohesive-homotopy-type-theory2015">2. Brouwer's fixed-point theorem in real-cohesive homotopy type theory（2015）</h4>
+<ul>
+<li>作者與出處：Michael Shulman · <em>Mathematical Structures in Computer Science</em></li>
+<li>核心問題：標準同倫類型論（HoTT）的恆等路徑無法分辨連續拓撲結構與純粹同倫等價，阻礙在類型論內部直接表達經典拓撲定理。</li>
+<li>關鍵做法：作者結合 HoTT 與公理化內聚，提出以「明晰變數」（crisp variables）為核心的伴隨邏輯規則來內部刻畫離散化與餘離散化模態，建立空間類型論與實內聚類型論，並據此形式化證明 Brouwer 不動點定理。</li>
+<li>跨領域啟發：為 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 引入內建拓撲空間構造的模態類型系統，是實作形式化內聚幾何的核心文獻。</li>
+<li>連結：<a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1509.07584" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-commuting-cohesions2023">3. Commuting Cohesions（2023）</h4>
+<ul>
+<li>作者與出處：David Jaz Myers, Mitchell Riley · <em>arXiv (2301.13780)</em></li>
+<li>核心問題：Shulman 的空間類型論假設所有類型僅攜帶單一空間內聚結構，難以表現如單純空間這類同時具有拓撲與單純雙重空間結構的數學對象。</li>
+<li>關鍵做法：作者提出具備「交換焦點」（commuting focuses）的擴展空間類型論，使同一類型能同時承載單純、微分與等變等多種相容的內聚結構，並據此證明任意微分疊的同倫型可由好覆蓋 Čech 神經導出的離散單純集算出。</li>
+<li>跨領域啟發：建立多重模態並存的類型語法，為 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a> 中的疊層與單純模型提供通用工具。</li>
+<li>連結：<a href="zotero://select/library/items/BSK424N5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.13780" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-parametricity-via-cohesion2024">4. Parametricity via Cohesion（2024）</h4>
+<ul>
+<li>作者與出處：C. B. Aberlé · <em>ENTICS Vol. 4 (MFPS XL)</em></li>
+<li>核心問題：依賴類型論的內部化參數性常受困於高維相干條件的複雜度，且與模態及幾何結構之間的統一語義長期分散。</li>
+<li>關鍵做法：論文揭示參數性內含與範疇論「內聚」直接相連的模態本質，建構模態參數性的一般範疇語義與具計算詮釋的依賴類型論公理，並在 Agda 中實作驗證。</li>
+<li>跨領域啟發：將內聚模態從純幾何拓展至程式語言與類型論的參數性推理，與 <a class="wl" href="12B_%E7%AB%8B%E6%96%B9%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E8%A8%88%E7%AE%97%E6%80%A7%E5%96%AE%E5%83%B9%E8%88%87%E5%AE%9A%E5%90%91%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%AB%96.html">立方類型論、計算性單價與定向模態類型論</a> 形成交會。</li>
+<li>連結：<a href="zotero://select/library/items/QPIB3DXP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.03825" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-cartier-duality-for-gerbes-of-vector-bundles2025">5. Cartier duality for gerbes of vector bundles（2025）</h4>
+<ul>
+<li>作者與出處：Juan Esteban Rodríguez Camargo · <em>arXiv (2512.24967)</em></li>
+<li>核心問題：在凝聚解析疊與混合特徵 <span class="math inline">p</span>-進 Hodge 理論的架構下，向量叢的 gerbe 及其上的權重層之間缺少統一的對偶定理。</li>
+<li>關鍵做法：作者在解析疊核（kernels）範疇中證明代數與解析向量叢 gerbe 的 Cartier 對偶（呈現為 Hopf 代數的反等價），並推論混合特徵 <span class="math inline">(0,p)</span> 下光滑剛性簇的 Hodge–Tate 疊上固態準相干層等價於 Simpson gerbe 上的權重 <span class="math inline">1</span> 層。</li>
+<li>跨領域啟發：直接串聯高階 gerbe 對偶與 <a class="wl" href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a> 的固態解析疊幾何。</li>
+<li>連結：<a href="zotero://select/library/items/2IR3JZ83" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.24967" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-a-cohesive--topos-with-a-quantum-modality-from-finite-dimensional--algebras2026">6. A Cohesive <span class="math inline">\infty</span>-Topos with a Quantum Modality from Finite-Dimensional <span class="math inline">C^{*}</span>-Algebras（2026）</h4>
+<ul>
+<li>作者與出處：Joey Woo · <em>arXiv (2606.02269)</em></li>
+<li>核心問題：經典內聚 <span class="math inline">\infty</span>-Topos 描述連續與光滑幾何，但尚未直接內建區分量子非交換觀測與經典交換中心的內在模態結構。</li>
+<li>關鍵做法：作者構造從有限維 <span class="math inline">C^*</span>-代數映入光滑內聚 <span class="math inline">\infty</span>-Topos <span class="math inline">\mathbf{H}_{\mathrm{sm}}</span> 的函子 <span class="math inline">\infty</span>-Topos <span class="math inline">\mathbf{H}_{\mathbb{Q}}</span>，逐點提升 <span class="math inline">(\Pi, \flat, \sharp)</span> 並由中心函子預複合引入滿足 Beck–Chevalley 條件的量子模態 <span class="math inline">Q^{\diamond} \dashv Q_{\bullet}</span>，配合 Day 卷積證明 <span class="math inline">Q^{\diamond}</span> 為強么半餘單子並透過 Gelfand 對偶刻畫其餘代數。</li>
+<li>跨領域啟發：示範如何把非交換算子代數的對偶結構編碼為與內聚幾何相容的模態算子，擴展內聚高階幾何在量子場論的適用邊界。</li>
+<li>連結：<a href="zotero://select/library/items/ZRTU7E6G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.02269" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-15-篇">G5｜本子方向全量文獻泛讀清單（共 15 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 15 篇文獻（含開放存取 PDF 15 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進10-篇">A. 奠基經典、專著與核心演進（10 篇）</h3>
+<ul>
+<li><strong>2013｜Differential cohomology in a cohesive infinity-topos</strong>，Urs Schreiber（<em>arXiv / Mathematical Physics &amp; Higher Topos Theory</em>，83 引）：在內聚 <span class="math inline">(\infty,1)</span>-Topos 內以合成方式重構微分幾何、高階規範場與微分上同調，顯示高階範疇可以當作理論物理的基礎語言。 <a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1310.7930" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Brouwer's fixed-point theorem in real-cohesive homotopy type theory</strong>，Michael Shulman（<em>Mathematical Structures in Computer Science</em>，71 引）：用伴隨模態與清脆變數（Crisp Variables）區分連續拓撲路徑與抽象同倫相等，在純類型論中構造性證明 Brouwer 不動點定理。 <a href="zotero://select/library/items/RQANFC4S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1509.07584" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Quantum Gauge Field Theory in Cohesive Homotopy Type Theory</strong>，Urs Schreiber, Michael Shulman（<em>EPTCS 158, 2014, pp. 109-126</em>，18 引）：一篇簡短的綜述，說明如何在內聚同倫類型論中形式化量子規範場論的核心結構，適合當作長篇專著的導讀。 <a href="zotero://select/library/items/QQHDUPBC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1408.0054" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Commuting Cohesions</strong>，David Jaz Myers, Mitchell Riley（<em>arXiv</em>）：在 Shulman 空間類型論基礎上提出具「可交換焦點」的擴展，使單一類型得以同時承載多種互不干擾的空間內聚結構（如兼備拓撲與單純結構的單純空間），實現合成微分與等變內聚的統一描述。 <a href="zotero://select/library/items/BSK424N5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.13780" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Deformations of cohesive modules on compact complex manifolds</strong>，Zhaoting Wei（<em>arXiv</em>）：針對緊緻複流形上藉由超聯絡給出凝聚層有界導出範疇 dg-增強的內聚模，建立其變形理論、Kuranishi 映射與變形障礙理論，將全純向量叢與凝聚層的經典變形理論予以推廣並舉出無障礙實例。 <a href="zotero://select/library/items/CM2H6KAJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2308.01266" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Orbifolds as microlinear types in synthetic differential cohesive homotopy type theory</strong>，David Jaz Myers（<em>arXiv</em>）：針對集合論下軌形（orbifold）點內稟對稱性與點態映射難以直接定義的問題，在合成微分內聚同倫類型論中將軌形定義為任兩點間等價類型具特定性質的微線性類型。 <a href="zotero://select/library/items/NP4VCHXQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.15887" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Descent of dg cohesive modules for open covers on complex manifolds</strong>，Zhaoting Wei（<em>arXiv</em>）：研究複流形 <span class="math inline">X</span> 上由 Dolbeault dg-代數 <span class="math inline">\mathcal{A}(X)</span> 構造的凝聚模 dg-範疇 <span class="math inline">\mathcal{P}_{\mathcal{A}(X)}</span>，證明局部開子集對應的 dg-預層對 <span class="math inline">X</span> 的任意局部有限開覆蓋皆滿足下降性質，推廣既有雙開集覆蓋結果。 <a href="zotero://select/library/items/43ZHBKRS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1804.00993" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Classical field theory via Cohesive homotopy types</strong>，Urs Schreiber（<em>arXiv</em>）：2013 年巴塞隆納類型論、同倫論與單價基礎研討會擴展摘要，綜述如何在內聚同倫類型論（cohesive homotopy type theory）中以綜合（synthetic）公理化方式建構古典場論。 <a href="zotero://select/library/items/J8S8UDT2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1311.1172" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Milnor descent for cohesive dg-categories</strong>，Oren Ben-Bassat, Jonathan Block（<em>Journal of K-Theory 12 (2013) 433-459</em>）：將 Milnor 投射模黏合構造推廣至微分分次範疇（dg-categories），證明在一定條件下由彎曲微分分次代數到 dg-範疇的函子將笛卡兒圖映為同倫笛卡兒圖，並驗證複流形剖分上的下降性質。 <a href="zotero://select/library/items/QV8F6TAD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1201.6118" rel="noopener">官方連結</a></li>
+<li><strong>2008｜Coherent sheaves and cohesive sheaves</strong>，Laszlo Lempert（<em>arXiv</em>）：研究 <span class="math inline">\mathbb{C}^n</span> 開集 <span class="math inline">\Omega</span> 上 <span class="math inline">\mathcal{O}</span>-模的凝聚層（coherent sheaves）與內聚層（cohesive sheaves），證明取值於 Banach 空間的全純芽層具有平坦性，並據此建立凝聚層與內聚層及其衍生層類之間的雙向轉化關係。 <a href="zotero://select/library/items/UXEWIXGI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0808.1717" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2026｜A Cohesive <span class="math inline">\infty</span>-Topos with a Quantum Modality from Finite-Dimensional <span class="math inline">C^{*}</span>-Algebras</strong>，Joey Woo（<em>arXiv (Cornell University)</em>）：以光滑內聚 <span class="math inline">\infty</span>-topos <span class="math inline">\mathbf{H}_{\mathrm{sm}}</span> 為底構造函子 <span class="math inline">\infty</span>-topos <span class="math inline">\mathbf{H}_{\mathbb{Q}}</span>，透過有限維 <span class="math inline">C^*</span>-代數中心函子引出與內聚結構滿足 Beck–Chevalley 相容的量子模態，並配備 Day 卷積單子結構。 <a href="zotero://select/library/items/ZRTU7E6G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.02269" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Cartier duality for gerbes of vector bundles</strong>，Juan Esteban Rodríguez Camargo（<em>arXiv</em>）：在解析疊核範疇中建立代數與解析向量叢束（gerbes）的 Hopf 代數反等價 Cartier 對偶，進而證明混合特徵場上光滑剛性簇 Hodge–Tate 疊的固體準凝聚層等價於 Bhatt–Zhang Simpson 束上的權 1 層。 <a href="zotero://select/library/items/2IR3JZ83" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.24967" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Parametricity via Cohesion</strong>，C. B. Aberlé（<em>Electronic Notes in Theoretical Informatics and Computer Science, Volume 4 - Proceedings of MFPS XL (December 11, 2024) entics:14710</em>）：針對依賴類型論中內化參數性（parametricity）常受困於高維相干條件複雜性的問題，揭示參數性本質上與範疇論「內聚性（cohesion）」密切相關的模態特徵，進而提出模態參數性的統一範疇語意與公理框架。 <a href="zotero://select/library/items/QPIB3DXP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.03825" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Characteristic Currents on Cohesive Modules</strong>，Zhaobo Tom Han（<em>arXiv</em>）：將代表凝聚層陳類乘積的偽亞純流（pseudomeromorphic currents）構造推廣至一般 de Rham 特徵類及 Block 所定義的凝聚模（cohesive modules），並證明在 Bott–Chern 上同調中僅須利用超聯絡的 0 次與 1 次分量即可構造。 <a href="zotero://select/library/items/I5JSNF48" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.09439" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Residue currents of cohesive modules and the generalized Poincaré-Lelong formula on complex manifolds</strong>，Zhaoting Wei（<em>arXiv</em>）：在複流形上建立cohesive modules的殘數流理論，證明其對偶原理與比較公式，並推導適用於無全域局部自由分解之凝聚層的廣義Poincaré-Lelong公式。 <a href="zotero://select/library/items/VZH4CPQM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.17362" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-5c5ac157">在地圖上查看</a><div class="rg"><h3>相關<span class="n">8</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a><span class="rs">這個領域用兩條互補的路線重寫分析學與微積分的基礎。凝聚數學（Condensed Mathematics）用收斂序列這類探針上的層取代傳統的點集拓…</span></li><li><a href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a></li><li><a href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a></li><li><a href="12B_%E7%AB%8B%E6%96%B9%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E8%A8%88%E7%AE%97%E6%80%A7%E5%96%AE%E5%83%B9%E8%88%87%E5%AE%9A%E5%90%91%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%AB%96.html">立方類型論、計算性單價與定向模態類型論</a></li><li><a href="30A_Clausen-Scholze%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E3%80%81%E6%B6%B2%E6%85%8B%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E8%A7%A3%E6%9E%90%E7%96%8A.html">Clausen-Scholze凝聚數學、液態向量空間與解析疊</a></li><li><a href="30B_%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95%E3%80%81%E7%84%A1%E7%AA%AE%E5%B0%8F%E5%B0%8D%E8%B1%A1%E8%88%87%E5%88%87%E7%AF%84%E7%96%87%E5%85%AC%E7%90%86%E5%8C%96.html">合成微分幾何、無窮小對象與切範疇公理化</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a><span class="tag-plan">計劃</span><span class="rs">Mac Lane &amp; Moerdijk，*Sheaves in Geometry and Logic* 第 I–IV、VI 章</span></li><li><a href="../../NOTES/06_%E9%9F%B3%E6%A8%82/MU-47_%E7%AF%84%E7%96%87%E8%88%87%20topos.html">範疇與 topos</a><span class="tag-plan">計劃</span><span class="rs">範疇與 topos。Mazzola *The Topos of Music* 選讀（第 2 版第 I 冊）；Popoff, Andreatta,…</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

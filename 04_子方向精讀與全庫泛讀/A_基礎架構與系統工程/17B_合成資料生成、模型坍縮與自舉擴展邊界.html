@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>17B｜合成資料生成、模型坍縮與自舉擴展邊界 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-c599d4bf" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="17b合成資料生成模型坍縮與自舉擴展邊界">17B｜合成資料生成、模型坍縮與自舉擴展邊界</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a>
+同領域子方向：<a class="wl" href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a> · <a class="wl" href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a> 的資料再生與擴展端，研究如何以語言模型合成「教科書級」高品質語料來訓練更小或更強的後繼模型，以及在多輪自舉（Bootstrapping）與迴圈自訓練下何時會發生模型坍縮（Model Collapse）。演進主線從以 GPT-3.5 合成程式與常識教科書訓練 1.3B 規模的 phi 系列模型，走向系統性拆解合成資料的品質、多樣性與複雜度張力，並界定合成循環不致退化的統計邊界。</p>
+</aside>
+<ul>
+<li>核心問題：真實網路語料雖然龐大，卻混雜大量低資訊密度文本與推理跳躍，使得參數量十億級別的小型模型難以從中有效習得程式設計或常識推理能力；相反地，若過度依賴既有大型模型生成合成語料並反覆用於訓練下一代模型，有限樣本取樣誤差與模型近似誤差會逐代累積。具體而言，當模型分布反覆作為下一輪訓練資料來源時，低機率長尾事件會逐步消失且整體變異數收縮，同時合成管線內部的品質與多樣性互斥也會限制模型的分布外泛化能力。</li>
+<li>直覺模型：用合成教科書訓練小模型，就像請一位熟練的教師把散亂的網路論壇問答重新編寫成結構清晰的例題與詳解，讓學生在有限課時內快速掌握解題脈絡。但如果下一代教師只讀上一代教師寫的講義、不再接觸真實世界的新問題與第一手實驗數據，講義裡的冷門案例與細微例外就會一代代被改寫成單一模板，最後整個體系只剩重複的標準答案。</li>
+<li>分階段閱讀路線：本子方向現有收錄文獻涵蓋至 2024 年。第一步先讀 Gunasekar et al. (2023) 的 phi-1 技術報告，了解如何結合網路精選教科書資料與 GPT-3.5 合成教材及練習題，讓 1.3B 模型在程式基準上突破常規規模限制。第二步讀 Li et al. (2023) 的 phi-1.5 與 Kamalov et al. (2024)，觀察教科書式合成資料如何從程式碼遷移到自然語言常識與數學推理，並對照合成資料在傳統特徵選擇任務中的用法。第三步精讀 Havrilla et al. (2024) 的綜述框架，掌握品質、多樣性與複雜度三個維度如何分別主導分布內與分布外泛化，再延伸至遞迴自訓練下的模型坍縮理論分析。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;高品質網路篩選（Textbooks Web Data）&quot;] --&gt; B[&quot;合成教科書與練習題生成（Gunasekar 2023）&quot;]
+  B --&gt; C[&quot;小模型程式與常識推理湧現（Li 2023）&quot;]
+  C --&gt; D[&quot;品質、多樣性與複雜度分解（Havrilla 2024）&quot;]
+  D --&gt; E[&quot;分布內專精 vs 分布外泛化權衡&quot;]
+  D --&gt; F[&quot;多輪自舉取樣與尾部截斷&quot;]
+  F --&gt; G[&quot;真實資料錨定對抗模型坍縮&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>教科書級合成資料與小模型縮放（Textbook-Quality Synthetic Data）</strong></p>
+<ul>
+<li>直覺理解：與其讓十億級模型吞下數兆個參差不齊的網頁詞元，不如把算力投入生成結構完整、步驟明確的教材與練習題，提高每個詞元攜帶的推理教學訊號。</li>
+<li>機制或核心表達式：在 Gunasekar et al. (2023) 的 phi-1 管線中，訓練語料由篩選後約 <span class="math inline">6\text{B}</span> 詞元的教科書品質網頁程式碼與 GPT-3.5 生成的約 <span class="math inline">1\text{B}</span> 詞元合成教科書及練習題組成。後續 Li et al. (2023) 在 phi-1.5 將此範式擴展至自然語言常識推理，以可控多樣性的合成段落覆蓋概念講解與分步推導，使 1.3B 參數模型在有限訓練預算下展現接近 5 倍參數量模型的推理與語境學習行為。</li>
+<li>能做到什麼，代價是什麼：此方法能大幅壓縮達到特定程式或基礎推理能力所需的模型參數量與訓練時間（phi-1 僅以 8 張 A100 訓練 4 天即在 HumanEval 達 50.6%）。代價是合成語料的知識邊界與風格偏誤高度受限於教師模型（如 GPT-3.5），且若缺乏多樣性約束，容易在長尾事實知識與開放域穩健性上落後於大規模真實語料預訓練模型。</li>
+</ul>
+</li>
+<li>
+<p><strong>合成資料的品質、多樣性與複雜度權衡（Quality–Diversity–Complexity Trade-offs）</strong></p>
+<ul>
+<li>直覺理解：合成資料並非越乾淨、越難就越好：過度追求單一標準答案的純度會讓模型失去應對陌生問題的彈性，而沒有品質過濾的複雜問題又只會注入錯誤推理鏈。</li>
+<li>機制或核心表達式：Havrilla et al. (2024) 提出以三個正交維度刻畫合成資料生成演算法：品質 <span class="math inline">Q</span>（事實正確性與步驟連貫性）、多樣性 <span class="math inline">D</span>（主題、句法與解法覆蓋度）與複雜度 <span class="math inline">C</span>（推理深度與問題難度）。其實證分類顯示，<span class="math inline">Q</span> 主要驅動分布內（In-Distribution）泛化，<span class="math inline">D</span> 是維持分布外（Out-of-Distribution）泛化的必要條件，而 <span class="math inline">C</span> 同時有益於兩者；當採樣溫度降低或拒絕採樣過於嚴苛時，會出現顯著的品質與多樣性互斥（<span class="math inline">Q</span> 上升伴隨 <span class="math inline">D</span> 急劇下降）。</li>
+<li>能做到什麼，代價是什麼：依 <span class="math inline">Q</span>、<span class="math inline">D</span>、<span class="math inline">C</span> 診斷生成管線能精準定位瓶頸（例如過度去噪或單一教師採樣導致的分布外退化），但三個維度之間往往無法同時極大化，需要針對目標任務設定拒絕採樣、提示多樣化與難度課程的比例。</li>
+</ul>
+</li>
+<li>
+<p><strong>遞迴自訓練中的模型坍縮與混合錨定邊界（Model Collapse &amp; Real-Data Anchoring）</strong></p>
+<ul>
+<li>直覺理解：如果每一代模型都只從上一代模型的有限生成樣本中重新學習，少見但真實存在的語言模式與極端案例會因為隨機取樣漏掉而被永久遺忘，分布越收越窄。</li>
+<li>機制或核心表達式：考慮世代遞迴過程：第 <span class="math inline">t</span> 代模型擬合分布 <span class="math inline">p_{\theta_t}</span>，生成有限樣本集 <span class="math inline">D_t \sim p_{\theta_t}</span> 後，下一代依極大似然估計更新參數 <span class="math inline">\theta_{t+1} = \arg\max_\theta \sum_{x \in D_t} \log p_\theta(x)</span>。在純合成替換（無真實資料補充）下，每次有限取樣的蒙地卡羅誤差與函數近似誤差累積，會使高斯或離散分布的估計變異數隨世代遞減並發生支撐集收縮（尾部機率 <span class="math inline">\to 0</span>）。若改採混合分布 <span class="math inline">p_{\text{mix}, t} = \alpha p_{\text{real}} + (1 - \alpha) p_{\theta_t}</span>（其中真實資料比例 <span class="math inline">\alpha &gt; 0</span>）進行累積訓練而非完全覆蓋，則真實樣本的支撐集能為估計方差提供下界，防止分布坍縮至退化點。</li>
+<li>能做到什麼，代價是什麼：保留真實語料比例 <span class="math inline">\alpha</span> 並累積跨代資料可有效抑制早期與晚期模型坍縮，然而隨著網路上由 AI 生成的文本比例上升，未經標記的混合語料可能使實際有效 <span class="math inline">\alpha</span> 低於設計預期，增加維持純淨真實資料集的治理成本。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>品質過濾與分布外泛化的張力</strong>：依據 Havrilla et al. (2024) 對品質、多樣性與複雜度的分析，為什麼在合成資料管線中使用高門檻的自動過濾器或低採樣溫度，雖然能提升基準測試的分布內準確率，卻常常導致模型在分布外任務上表現退化？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考高門檻篩選與低溫採樣對生成分布支撐集的影響。這些操作在提高平均品質 <span class="math inline">Q</span> 的同時，會將低頻解法、罕見詞彙搭配與非典型題型裁剪掉，導致多樣性 <span class="math inline">D</span> 萎縮。當測試分布偏離標準模板時，模型缺乏覆蓋邊緣模式的訓練訊號，便會出現分布外泛化失效。</p>
+</details>
+<ol start="2">
+<li><strong>phi-1 與 phi-1.5 的能力湧現條件與邊界</strong>：在 phi-1（Gunasekar et al., 2023）的實驗中，350M 參數的 phi-1-small 採用與 phi-1 相同的合成教科書管線也能在 HumanEval 達到 45%，而 phi-1-base 在微調編程練習集前與微調後展現出明顯的能力落差。這說明合成練習題微調階段在訓練動力學中扮演什麼角色？如果只依賴單一教師模型生成所有教材，會留下什麼結構性盲點？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>從預訓練與練習題微調的分工切入：教科書資料建立語法與演算法概念先驗，而練習題微調則將知識組織為可執行的輸入輸出問題求解映射，從而在小模型上激發類似大模型的湧現特性。若單一教師模型存在特定推理盲區或偏好固定寫法，學生模型在蒸餾過程中不僅會繼承該誤差上界，還可能因資料分布單一而喪失真實語料的背景知識廣度。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>無真實標籤場域下的合成資料自我驗證極限</strong>：在程式碼或初等數學領域，合成問題能透過執行單元測試或符號計算器驗證正確性（品質 <span class="math inline">Q</span> 有客觀保證），這也是 phi-1 成功的重要前提。然而在開放式常識推理、長程規劃與跨領域科學分析中，缺乏確定性驗證器；如何避免教師模型的幻覺經由合成迴圈放大，同時又不靠昂貴人工標註壓縮多樣性 <span class="math inline">D</span>，仍是自舉擴展的核心難題。</li>
+<li><strong>網路污染環境中真實資料比例的不可觀測性</strong>：理論上透過維持足夠比例的真實人類語料並累積歷史資料集即可避免模型坍縮，但當公開網頁抓取語料本身已混入大量既有語言模型生成的文章時，資料策展者難以區分某筆文本究竟屬於真實分布 <span class="math inline">p_{\text{real}}</span> 還是過去世代的合成分布 <span class="math inline">p_{\theta_t}</span>。這種真實來源的不可觀測性，使混合比例 <span class="math inline">\alpha</span> 的理論保證在實際預訓練中面臨失效風險。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>品質與多樣性權衡向預訓練資料篩選管線的遷移</strong>：Havrilla et al. (2024) 區分品質 <span class="math inline">Q</span>（主導分布內表現）與多樣性 <span class="math inline">D</span>（主導分布外泛化）的框架，可直接遷移至 <a class="wl" href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a> 的分類器過濾閾值設定與去重強度設計，用來診斷過度激進的品質分類器為何有時會傷害多樣性與長尾知識。</li>
+<li><strong>合成自舉與評測污染、生態系穩健性的結構連結</strong>：合成資料與真實資料混合分布的邊界問題，直接對應 <a class="wl" href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a> 中對基準來源純淨度的追蹤需求；而在多個模型反覆讀取彼此生成輸出時造成的分布收斂與偏誤放大，則可映射至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a> 中的多智能體信念回饋迴路分析。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-textbooks-are-all-you-need2023">1. Textbooks Are All You Need（2023）</h4>
+<ul>
+<li>作者與出處：Suriya Gunasekar, Yi Zhang, Jyoti Aneja, Caio César Teodoro Mendes, Allie Del Giorno · <em>arXiv (2023)</em></li>
+<li>核心問題：傳統大型語言模型仰賴海量通用網頁語料與上百億參數來獲得程式設計能力，算力門檻極高。作者探討是否能透過極高資訊密度的教科書品質語料，讓十億參數級小模型取得具競爭力的程式生成表現。</li>
+<li>關鍵做法：作者訓練了 1.3B 參數的 Transformer 模型 phi-1，使用精選的 6B 詞元網頁教科書品質資料，加上 GPT-3.5 合成的 1B 詞元程式教科書與練習題，在 8 張 A100 上僅訓練 4 天即於 HumanEval 達到 50.6%、MBPP 達到 55.5% 的 pass@1 準確率。同等管線訓練的 350M 模型 phi-1-small 亦可在 HumanEval 達到 45%。</li>
+<li>跨領域啟發：證明資料品質密度能部分替代參數量與詞元規模，為 <a class="wl" href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a> 的教育性文本篩選與合成擴增建立實證起點。</li>
+<li>連結：<a href="zotero://select/library/items/5E5A2AH9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.11644" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-textbooks-are-all-you-need-ii-phi-15-technical-report2023">2. Textbooks Are All You Need II: phi-1.5 technical report（2023）</h4>
+<ul>
+<li>作者與出處：Yuanzhi Li, Sébastien Bubeck, Ronen Eldan, Allie Del Giorno, Suriya Gunasekar · <em>arXiv (2023)</em></li>
+<li>核心問題：phi-1 驗證了合成教科書在程式領域的有效性，但該路線能否遷移到規則較鬆散的自然語言常識推理與多步驟問題求解仍待檢驗。</li>
+<li>關鍵做法：作者沿用教科書式合成資料策略，針對自然語言常識推理生成高訊號密度語料並訓練出 1.3B 參數模型 phi-1.5。該模型在自然語言任務上達到接近 5 倍大模型的表現，在基礎數學與編程上超越多數非前沿大型模型，並展現逐步思考與初步語境學習等大模型特徵。</li>
+<li>跨領域啟發：展示合成教材能將推理能力蒸餾進小模型，但同時引發「模型是否同時繼承並放大了教師模型偏誤」的檢驗需求，銜接至品質與多樣性分析。</li>
+<li>連結：<a href="zotero://select/library/items/9BQ89XMB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.05463" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-surveying-the-effects-of-quality-diversity-and-complexity-in-synthetic-data-from-large-language-models2024">3. Surveying the Effects of Quality, Diversity, and Complexity in Synthetic Data From Large Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Alex Havrilla, Andrew Dai, Laura O'Mahony, Koen Oostermeijer, Vera Zisler · <em>arXiv (2024)</em></li>
+<li>核心問題：既有合成資料生成演算法缺乏受控的直接比較標準，研究者難以釐清效能提升究竟來自哪個管線元件，以及擴展瓶頸出現在何處。</li>
+<li>關鍵做法：作者提出從品質（Quality）、多樣性（Diversity）與複雜度（Complexity）三個維度評估合成資料與生成演算法。分析發現品質決定分布內泛化、多樣性決定分布外泛化、複雜度同時助益兩者，並指出訓練資料中普遍存在品質與多樣性的互斥權衡，藉此系統分類各類合成管線元件的作用。</li>
+<li>跨領域啟發：提供了拆解任何合成資料系統的三維座標系，可與 <a class="wl" href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a> 的混合律框架結合使用。</li>
+<li>連結：<a href="zotero://select/library/items/VT7WADTE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.02980" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-synthetic-data-for-feature-selection2024">4. Synthetic Data for Feature Selection（2024）</h4>
+<ul>
+<li>作者與出處：Firuz Kamalov, Rohan Mitra, Hana Sulieman · <em>Lecture Notes in Networks and Systems (2024)</em></li>
+<li>核心問題：在傳統機器學習與統計建模中，樣本數量不足或類別分布失衡常使特徵選擇（Feature Selection）演算法的排序與穩定性下降，需要探討以合成樣本輔助特徵篩選的可行性。</li>
+<li>關鍵做法：本文發表於網路與系統講義集，探討將合成資料生成方法應用於特徵選擇任務（註：本篇在本地索引庫收錄之元資料未附帶摘要全文，具體實驗參數與演算法細節須於 Zotero 原文檢視）。</li>
+<li>跨領域啟發：作為結構化表格與傳統特徵工程中運用合成資料的對照參考，提醒合成樣本設計需考量對下游變數重要度排序的保真度。</li>
+<li>連結：<a href="zotero://select/library/items/R6W5M6HH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-97-3289-0_24" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-5-篇">G5｜本子方向全量文獻泛讀清單（共 5 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 5 篇文獻（含開放存取 PDF 4 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進3-篇">A. 奠基經典、專著與核心演進（3 篇）</h3>
+<ul>
+<li><strong>2023｜Textbooks Are All You Need</strong>，Suriya Gunasekar et al.（<em>arXiv (Cornell University)</em>，138 引）：<code>phi-1</code> 的論文：證明按教科書品質篩選資料、再加上合成練習題，能讓 1.3B 的小模型只用 8 張 A100 訓練 4 天，就在 HumanEval 上突破 50.6%。 <a href="zotero://select/library/items/5E5A2AH9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.11644" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Fragmentation in the phi^3 Theory and the LPHD Hypothesis</strong>，Karoly Urmossy, Jan Rak（<em>International Journal of Modern Physics A</em>，1 引）：在六維時空 <span class="math inline">\phi^3</span> 理論中求得領先階 DGLAP 演化方程式的解析解，指出局部部分子強子對偶（LPHD）假說於此模型並不成立，需結合統計強子化模型描述碰撞噴注中的強子分佈。 <a href="zotero://select/library/items/FZDPIETV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1511.02353" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Textbooks Are All You Need II: phi-1.5 technical report</strong>，Yuanzhi Li et al.（<em>arXiv</em>）：延續以 LLM 生成教科書級合成資料訓練小型模型的路線，專注於常識推理訓練出 13 億參數的 phi-1.5 模型，在自然語言任務表現比肩五倍參數量模型，並於基礎數學與程式題超越多數非前沿模型。 <a href="zotero://select/library/items/9BQ89XMB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.05463" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻2-篇">B. 2024–2026 近期推進與前沿文獻（2 篇）</h3>
+<ul>
+<li><strong>2024｜Surveying the Effects of Quality, Diversity, and Complexity in Synthetic Data From Large Language Models</strong>，Alex Havrilla et al.（<em>arXiv</em>）：系統性評估LLM合成資料的品質、多樣性與複雜度對下游模型能力的影響，發現品質主導分佈內泛化、多樣性主導分佈外泛化，複雜度對兩者皆有益，並剖析品質與多樣性權衡。 <a href="zotero://select/library/items/VT7WADTE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.02980" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Synthetic Data for Feature Selection</strong>，Firuz Kamalov, Rohan Mitra, Hana Sulieman（<em>Lecture Notes in Networks and Systems</em>）：發表於 2024 年網路與系統講義叢書的論文，探討在機器學習特徵選擇（feature selection）任務中引入合成資料（synthetic data）的應用方法與影響。 <a href="zotero://select/library/items/R6W5M6HH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-97-3289-0_24" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-c599d4bf">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a><span class="rs">如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。</span></li><li><a href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a></li><li><a href="17C_%E5%8B%95%E6%85%8B%E5%9F%BA%E6%BA%96%E8%A9%95%E6%B8%AC%E3%80%81%E8%B3%87%E6%96%99%E6%B1%A1%E6%9F%93%E6%AA%A2%E6%B8%AC%E8%88%87LLM%E8%A3%81%E5%88%A4%E5%81%8F%E8%AA%A4.html">動態基準評測、資料污染檢測與LLM裁判偏誤</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -12,19 +12,19 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-04bec115">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">理論計算機</a><a class="find" href="../../index.html#n=n-04bec115">Find on board</a></header>
+<body class="doc" data-note="n-04bec115" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 理論計算機</span>
 <article>
 
 <h1 id="t44lean-4-函數式程式設計">T44｜Lean 4 函數式程式設計</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="T43_%E4%B8%80%E9%9A%8E%E9%82%8F%E8%BC%AF%E8%88%87%E5%AE%8C%E5%82%99%E6%80%A7%E5%AE%9A%E7%90%86.html">T43 一階邏輯與完備性定理</a> ｜ 下一章：<a class="wl" href="T45_%E9%A0%85%E6%94%B9%E5%AF%AB%EF%BC%9A%E6%AD%B8%E7%B4%84%E7%B3%BB%E7%B5%B1%E8%88%87%E7%B5%82%E6%AD%A2%E6%80%A7.html">T45 項改寫：歸約系統與終止性</a>
 本線先備：<a class="wl" href="T19_%E5%87%BD%E5%BC%8F%E6%8A%BD%E8%B1%A1%E8%88%87%E9%AB%98%E9%9A%8E%E5%87%BD%E5%BC%8F.html">T19 函式抽象與高階函式</a>
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/02-tcs.md:174</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -57,10 +57,14 @@
 <h3 id="未來探索提示">未來探索提示</h3>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">1</span></h3><ul><li><a href="T19_%E5%87%BD%E5%BC%8F%E6%8A%BD%E8%B1%A1%E8%88%87%E9%AB%98%E9%9A%8E%E5%87%BD%E5%BC%8F.html">函式抽象與高階函式</a><span class="tag-plan">計劃</span><span class="rs">Composing Programs 第 1 章：函式抽象、高階函式、遞迴</span></li></ul></div><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a><span class="rs">這個領域用神經網路的直覺啟發式搜尋和強化學習自我博弈，去處理指數爆炸的推理搜尋空間，再用形式化證明助手（Lean 4）與可微實值邏輯（LNN /…</span></li><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a><span class="rs">同倫類型論（HoTT）把三樣東西合而為一：程式／資料型別、邏輯命題／證明、拓撲空間／連續路徑，影響遍及邏輯、計算機科學與幾何學。</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05A_%E4%BA%92%E5%8B%95%E5%BC%8F%E5%AE%9A%E7%90%86%E8%AD%89%E6%98%8E%E5%99%A8Lean%E3%80%81Isabelle%E8%88%87Coq%E7%A5%9E%E7%B6%93%E5%B0%8E%E8%88%AA.html">互動式定理證明器Lean、Isabelle與Coq神經導航</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

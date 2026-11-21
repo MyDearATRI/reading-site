@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>42F｜神經符號知識圖譜推理與可驗證約束訓練 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-c4d2a357" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="42f神經符號知識圖譜推理與可驗證約束訓練">42F｜神經符號知識圖譜推理與可驗證約束訓練</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a>
+同領域子方向：<a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> · <a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a> · <a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> · <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a> · <a class="wl" href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a>
+跨領域關聯子方向：<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05C_%E9%81%8E%E7%A8%8B%E7%8D%8E%E5%8B%B5%E6%A8%A1%E5%9E%8BPRM%E3%80%81%E6%80%9D%E7%B6%AD%E9%8F%88%E8%88%87%E6%B8%AC%E8%A9%A6%E6%99%82%E6%93%B4%E5%B1%95%E6%90%9C%E5%B0%8B.html">過程獎勵模型PRM、思維鏈與測試時擴展搜尋</a> · <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31C_%E8%AA%8D%E8%AD%98%E8%A6%8F%E5%8A%83%E3%80%81%E5%A4%9A%E4%B8%BB%E9%AB%94%E5%BF%83%E6%99%BA%E7%90%86%E8%AB%96%E8%88%87%E8%87%AA%E5%9B%9E%E6%AD%B8%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">認識規劃、多主體心智理論與自回歸信念修正</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a> 面向知識圖譜建構、多主體決策與可驗證工程稽核的應用與語意匯流節點，承接 <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a> 的區間邏輯與 <a class="wl" href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a> 的可微規則接地，並透過 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a> 及 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31C_%E8%AA%8D%E8%AD%98%E8%A6%8F%E5%8A%83%E3%80%81%E5%A4%9A%E4%B8%BB%E9%AB%94%E5%BF%83%E6%99%BA%E7%90%86%E8%AB%96%E8%88%87%E8%87%AA%E5%9B%9E%E6%AD%B8%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">認識規劃、多主體心智理論與自回歸信念修正</a> 互通。主線探討如何將外部知識圖譜與領域規範轉寫為可微一階約束，在訓練期間同時保證知識補全、反事實公平性、異常溯因診斷與跨語意域（經典、模糊、機率）的範疇統一。</p>
+</aside>
+<ul>
+<li>核心問題：純統計深度學習在醫療決策、太空軌道防禦、工程規範稽核與反事實公平等高風險場域中，缺乏對先驗物理或臨床規則的顯式遵循，容易在資料不足或部分可觀測條件下產生違反常識且無法稽核的輸出；同時，傳統知識圖譜補全與符號推理在面對非結構化圖文輸入或高雜訊感測訊號時難以直接提取初始三元組，而不同神經符號框架各自獨立定義的經典、模糊與機率語意也阻礙了知識庫的跨系統遷移。本子方向要解決如何從多模態資料自動建構並補全知識圖譜，並以統一形式語意進行可驗證約束訓練與違反診斷。</li>
+<li>直覺模型：可以把這個架構想成帶有法規圖譜與品質稽核功能的工程審查系統：前端感知模型先從影像、文本或遙測波形中辨認實體與初步關係，填入草擬的知識圖譜；接著邏輯層依據臨床指南、反事實公平準則或物理幾何公差，檢查整張圖譜與預測輸出是否自洽。一旦某項指標或飛機規格紀錄與物理約束衝突，系統不僅算出違規分數，還能透過溯因鎖定遭改動或異常的欄位、給出最小幅度修正方案，並在影像證據缺席時主動拒絕斷言。</li>
+<li>分階段閱讀路線：建議分三階段閱讀：先讀 Hitzler et al. (2022) 建立神經符號知識表示與學習的分類藍圖，再讀 Mao et al. (2019) 理解如何結合神經關係抽取與可微 ILP 從圖像與文本自舉生成知識圖譜；第二階段精讀 Kimura et al. (2021) 與 Subramanian et al. (2024)，掌握如何將 ConceptNet 外部知識圖譜接入 LNN 策略，以及結合圖模型信念傳播的機率邏輯神經網路（PLNN）；最後讀 De Santis et al. (2026)、Schellhorn 與 Mossakowski (2026) 以及 Basciano et al. (2026)，追蹤雙公理弱錨定醫療圖譜推理、單子範疇統一語意（NeSyCat）與工程規範溯因稽核（NeSySpec）的前沿實作。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;圖文原始觀測與外部KG\n非結構化輸入與知識庫孤島&quot;] --&gt; B[&quot;神經抽取與dILP補全 (2019)\n自舉生成稠密知識圖譜&quot;]
+    A --&gt; C[&quot;知識圖譜接入LNN (2021)\nConceptNet事實轉化為邏輯策略&quot;]
+    C --&gt; D[&quot;機率邏輯神經網路 PLNN (2024)\n雙向區間推論結合信念傳播&quot;]
+    B --&gt; E[&quot;領域指南轉FOL公理 (2026)\n弱錨定雙公理與反事實公平約束&quot;]
+    E --&gt; F[&quot;可微溯因稽核 NeSySpec (2026)\n違規診斷、最小修正與證據缺席拒答&quot;]
+    E --&gt; G[&quot;單子範疇語意 NeSyCat (2026)\nGiry單子統一經典、模糊與機率語意&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>神經符號知識圖譜自舉與補全（KG Bootstrapping &amp; Differentiable Completion）</strong></p>
+<ul>
+<li>直覺理解：從自然影像或文章段落建立知識圖譜時，單靠感知模型只能辨識直接看得到的顯性關係，很多隱含的多跳關聯仍舊缺失。混合做法先讓神經網路抽出基礎關係三元組，再交給可微邏輯歸納模組把圖譜其餘邊補齊。</li>
+<li>機制或核心表達式：給定原始輸入 <span class="math inline">x</span>（文字段落或自然影像），神經關係抽取器先將實體對應為節點集合 <span class="math inline">V</span> 並預測初始關係分佈 <span class="math inline">P_{\text{rel}}(r \mid e_i, e_j, x) \in [0, 1]</span> 作為基礎原子真值 <span class="math inline">a^{(0)}</span>。隨後可微 ILP 推論模組依學習到的規則權重 <span class="math inline">\theta_r</span> 執行迭代前向鏈補全，從基礎事實推導高階複合關係（例如從 Wikidata 或 Visual Genome 抽取的複合路徑），並將知識圖譜補全的誤差回傳微調前端關係抽取器。</li>
+<li>能做到什麼，代價是什麼：能夠不依賴預先寫好的完整圖譜就從零建立並推理出稠密知識圖譜，在多跳推理表現上優於純神經基線；但補全規則的搜尋受限於最大推論步數與謂詞模板空間，當實體規模龐大時仍需對候選子圖進行取樣裁剪。</li>
+</ul>
+</li>
+<li>
+<p><strong>可驗證約束訓練、弱錨定與溯因稽核（Verifiable Constraints, Weak Anchoring &amp; Abductive Auditing）</strong></p>
+<ul>
+<li>直覺理解：在高風險系統裡，邏輯約束不只用來當作正規化懲罰項，還可以反過來回答「哪條規定被打破、哪個欄位出錯、怎麼改動幅度最小」。弱錨定雙公理設計讓模型既尊重知識圖譜先驗，又能依個別患者或工程機隊資料微調容差。</li>
+<li>機制或核心表達式：在規範稽核架構（如 NeSySpec）中，領域物理關係被編碼為帶有可學習容差參數 <span class="math inline">\tau_k</span> 的可微漸層謂詞 <span class="math inline">P_k(z; \tau_k) \in [0, 1]</span>，透過訓練目標最大化聯合公理滿足度 <span class="math inline">\sum_k w_k \log P_k(z; \tau_k)</span>。推論與稽核階段利用相同滿足度進行反向溯因（abduction）：給定觀測紀錄 <span class="math inline">z</span>，尋找違反公理 <span class="math inline">k^*</span> 與最小修正量 <span class="math inline">\Delta z^* = \arg\min_{\Delta z} \|\Delta z\|_1</span> 使得約束恢復成立，並在缺乏影像或感測證據時輸出拒答（abstention）。在醫療情境（De Santis et al., 2026）則透過雙公理架構搭配弱錨定正則項 <span class="math inline">\lambda \|\theta_{\text{adapt}} - \theta_{\text{prior}}\|^2</span> 允許上下文自適應；在公平性任務（Heilmann et al., 2026）則直接以 LTN 強制反事實樣本對滿足條件等價公理。</li>
+<li>能做到什麼，代價是什麼：提供概念級、規則級與個體級的三層可解釋性，以及可稽核的違規定位與最小變更修復建議；然而容差參數學習依賴具代表性的真實紀錄母體，且在聯邦通訊等極端資源受限環境（如低軌立方衛星星座）需搭配輕量時空可分離編碼器與軌道內符號聯邦聚合才可部署。</li>
+</ul>
+</li>
+<li>
+<p><strong>機率邏輯神經網路與單子範疇統一語意（PLNN &amp; Monadic Categorical Semantics）</strong></p>
+<ul>
+<li>直覺理解：現實決策常伴隨部分可觀測與隨機不確定性，同時不同神經符號工具各自使用經典、模糊或機率邏輯，彼此規則無法直接共用。PLNN 將機率圖模型的信念傳播接進 LNN 的上下界推論，而 NeSyCat 用函數式編程的「單子（monad）」把三種語意收斂到同一個數學介面。</li>
+<li>機制或核心表達式：在 PLNN（Subramanian et al., 2024）中，LNN 的雙向區間推論 <span class="math inline">[L_i, U_i]</span> 與機率圖模型的信念傳播（belief propagation）耦合，在部分可觀測多主體環境下同時維護事件規則結構與後驗狀態分佈。在 NeSyCat（Schellhorn &amp; Mossakowski, 2026）中，統一語法 ULLER 的三種語意（經典、模糊與機率）被證明皆為某個單子 <span class="math inline">T</span> 上 Kleisli 範疇的實例，例如將 Giry 機率單子 <span class="math inline">\mathcal{G}</span> 延伸至一般可測空間，即可在任意（含無窮）定義域上為 LTN 提供嚴謹的廣義量化語意。</li>
+<li>能做到什麼，代價是什麼：解決了多主體部分可觀測下的規則不確定性推論，並連接不同神經符號語言之間的模組化語意轉換（提供 Python 與 Haskell 實作參考）；缺點是單子轉換與無窮域機率測度的數值逼近在具體工程系統上仍需進一步與張量批處理效能對齊。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>雙公理弱錨定機制在臨床知識圖譜中的作用</strong>：De Santis et al. (2026) 在即時敗血症死亡率預測中，先由醫學知識圖譜與規則探勘自動抽取臨床指南為一階邏輯約束，為何仍需設計「具弱錨定（weak anchoring）的雙公理架構」而非直接將臨床規則設為硬性固定約束？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考通用臨床指南與加護病房個別患者群體分佈之間的差異：通用規則來自文獻或歷史群體統計，直接作為硬性約束會忽略醫院設備誤差或特定亞群的生理基線偏移。弱錨定雙公理同時保留一組貼近知識圖譜的先驗公理與一組可隨資料微調的適應公理，透過適度的錨定懲罰項防止語意完全漂移，同時維持概念、規則與患者三個層級的可解釋性。</p>
+</details>
+<ol start="2">
+<li><strong>從單純違規偵測到溯因修復與拒答</strong>：對比 Onchiş et al. (2022) 的網路入侵偵測 LTN 分類器與 Basciano et al. (2026) 的 NeSySpec 工程規範稽核框架，為何單純最大化知識庫可滿足度無法滿足工程稽核的需求？NeSySpec 如何利用相同的可微謂詞滿足度完成溯因定位與拒答？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>分類任務只需輸出正常或異常的二元判定，但工程稽核還須指明「違反哪一條物理規則、哪一個欄位遭到竄改以及如何用最小改動修正」。NeSySpec 將物理關係編碼為從真實機隊紀錄學習容差的可微漸層謂詞，當某條公理滿足度低落時，沿梯度或約束滿足結構反向追蹤違規來源（溯因）、求解滿足約束的最小欄位擾動，並在影像證據未覆蓋對應構件時顯式輸出拒答而非強行猜測。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>聯邦邊緣算力限制與反事實因果模型依賴的權衡</strong>：在低軌立方衛星（Yang et al., 2026）或穿戴式醫療裝置等資源受限場域，LTN 約束層必須配合極度壓縮的感知編碼器與軌道內符號聯邦聚合才能在 SWaP-C 預算內運作；另一方面，雖然 Heilmann et al. (2026) 展示了模型無關的反事實公平 LTN 約束，系統的公平性保證仍受限於上游反事實生成管線對潛在因果結構的覆蓋品質。</li>
+<li><strong>跨語意理論統一與多模態工程規模化落差</strong>：如 Nawaz et al. (2025) 綜述與 Schellhorn &amp; Mossakowski (2026) 的理論工作所揭示的，雖然 NeSyCat 透過單子範疇將 ULLER 的經典、模糊與機率語意統一，並擴展至無窮域廣義量化，但該統一語意在超大規模多模態基礎模型與即時高頻感測串流中的高效編譯與可擴展推理仍在早期探索階段。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>可微約束稽核與過程驗證向定理證明與推理搜尋遷移</strong>：NeSySpec 透過可微公理滿足度執行違規診斷、溯因定位與證據缺席拒答的管線結構，可遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05C_%E9%81%8E%E7%A8%8B%E7%8D%8E%E5%8B%B5%E6%A8%A1%E5%9E%8BPRM%E3%80%81%E6%80%9D%E7%B6%AD%E9%8F%88%E8%88%87%E6%B8%AC%E8%A9%A6%E6%99%82%E6%93%B4%E5%B1%95%E6%90%9C%E5%B0%8B.html">過程獎勵模型PRM、思維鏈與測試時擴展搜尋</a> 的中間推理步驟驗證，並透過 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> 銜接動態知識修正與形式化規範檢查。</li>
+<li><strong>機率邏輯信念更新與訊號博弈向多主體認識規劃遷移</strong>：PLNN 將 LNN 雙向推論結合機率圖模型信念傳播的架構（Subramanian et al., 2024），以及神經符號因果推理與訊號博弈廣義納許均衡的結合（Thomas &amp; Saad, 2023），與 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31C_%E8%AA%8D%E8%AD%98%E8%A6%8F%E5%8A%83%E3%80%81%E5%A4%9A%E4%B8%BB%E9%AB%94%E5%BF%83%E6%99%BA%E7%90%86%E8%AB%96%E8%88%87%E8%87%AA%E5%9B%9E%E6%AD%B8%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">認識規劃、多主體心智理論與自回歸信念修正</a> 中的多主體部分可觀測信念更新問題具有共同的數學結構；而 NeSyCat 對連續時間或機率測度單子的處理，亦可對照 <a class="wl" href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a> 的語意設計。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-neuro-symbolic-approaches-in-artificial-intelligence2022">1. Neuro-symbolic approaches in artificial intelligence（2022）</h4>
+<ul>
+<li>作者與出處：Pascal Hitzler et al. · <em>National Science Review</em></li>
+<li>核心問題：隨著深度學習興起，神經符號研究雖迅速成長卻分散於知識表示、邏輯嵌入與混合推理等不同子領域。本文旨在為學習者與研究者提供統一的領域地圖與關鍵文獻指針。</li>
+<li>關鍵做法：系統回顧聯結主義學習與符號知識表示推理（KRR）的歷史脈絡與結合路徑，將主要研究方向歸納為邏輯張量表達、規則學習、神經定理證明與知識圖譜混合推理。</li>
+<li>跨領域啟發：提供閱讀本子方向與 <a class="wl" href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a> 前的全局座標，並作為 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> 的起點。</li>
+<li>連結：<a href="zotero://select/library/items/S67JFVAF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/nsr/nwac035" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-bootstrapping-knowledge-graphs-from-images-and-text2019">2. Bootstrapping Knowledge Graphs From Images and Text（2019）</h4>
+<ul>
+<li>作者與出處：Jiayuan Mao et al. · <em>Frontiers in Neurorobotics</em></li>
+<li>核心問題：從自然影像或文章段落建構知識圖譜通常包含從輸入抽取基礎關係與透過推理補全圖譜兩階段，純神經方法在推理稠密知識圖譜時表現不足。本文探討如何將兩階段整合為從零建構知識圖譜的統一框架。</li>
+<li>關鍵做法：以神經關係抽取器從文本或影像解析初始實體關係，再串接可微歸納邏輯程式設計（dILP）模組迭代補全缺失邊，並在 Wikidata 與 Visual Genome 的關係抽取基準上驗證其稠密圖譜推理優勢。</li>
+<li>跨領域啟發：建立多模態觀測與符號知識圖譜之間的接口範例，直接呼應 <a class="wl" href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a> 的 dILP 技術。</li>
+<li>連結：<a href="zotero://select/library/items/9A5224IV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnbot.2019.00093" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-neuro-symbolic-reinforcement-learning-with-first-order-logic2021">3. Neuro-Symbolic Reinforcement Learning with First-Order Logic（2021）</h4>
+<ul>
+<li>作者與出處：Daiki Kimura et al. · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：深度強化學習在文字遊戲等組合空間中往往需要大量試錯才能收斂，且學得的策略缺乏直接可解釋性。本文探討如何將外部知識圖譜與邏輯神經網路引入強化學習策略訓練。</li>
+<li>關鍵做法：從文本觀測與外部詞義知識圖譜 ConceptNet 中抽取一階邏輯事實，並利用 Logical Neural Networks（LNN）的可微邏輯運算子訓練具符號可解釋性的策略，在 TextWorld 基準上取得顯著快於既有神經符號方法的收斂速度。</li>
+<li>跨領域啟發：示範外部常識知識圖譜如何直接轉化為 <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a> 的可微策略規則，並為後續 PLNN（Subramanian et al., 2024）鋪路。</li>
+<li>連結：<a href="zotero://select/library/items/T5UQZZ7R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.10963" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-neuro-symbolic-artificial-intelligence-for-real-time-sepsis-mortality-prediction2026">4. Neuro-symbolic artificial intelligence for real-time sepsis mortality prediction（2026）</h4>
+<ul>
+<li>作者與出處：Fabrizio De Santis et al. · <em>Engineering Applications of Artificial Intelligence</em></li>
+<li>核心問題：加護病房敗血症死亡率預測需要高度可解釋與可信任的臨床決策支援，黑箱機器學習無法滿足醫療合規與安全部署要求。本文探討如何將臨床醫學知識自動轉化為可適應的邏輯約束模型。</li>
+<li>關鍵做法：建構自動化管線從醫學知識圖譜與規則探勘生成一階邏輯約束，在 LTN 中採用具弱錨定的雙公理架構與三層級可解釋性設計（概念、規則、患者層級），並於 19,328 名真實臨床敗血症患者資料上驗證。</li>
+<li>跨領域啟發：展現知識圖譜規則探勘與弱錨定約束訓練在大型真實醫療資料集的落地形態，適合對照 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a> 的醫療可解釋案例。</li>
+<li>連結：<a href="zotero://select/library/items/Q39NNEEQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.engappai.2026.114920" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-nesycat-a-monad-based-categorical-semantics-of-the-neurosymbolic-uller-framework2026">5. NeSyCat: A Monad-Based Categorical Semantics of the Neurosymbolic ULLER Framework（2026）</h4>
+<ul>
+<li>作者與出處：Daniel Romero Schellhorn, Till Mossakowski · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：統一學習與推理語言 ULLER 原先為相同的一階邏輯語法配備了三套相互獨立的經典、模糊與機率語意規則，缺乏共通的形式轉換機制。本文目標是以單一數學框架統一這三種語意。</li>
+<li>關鍵做法：提出 NeSyCat 範疇語意框架，利用函數式編程中表達副作用的單子（monad）結構重構經典、模糊與機率語意，並藉由將 Giry 單子延伸至機率空間，實現 Logic Tensor Networks 在任意（含無窮）定義域上的廣義量化。</li>
+<li>跨領域啟發：為實值模糊邏輯與機率推論建立嚴謹的範疇論橋樑，可與 <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31C_%E8%AA%8D%E8%AD%98%E8%A6%8F%E5%8A%83%E3%80%81%E5%A4%9A%E4%B8%BB%E9%AB%94%E5%BF%83%E6%99%BA%E7%90%86%E8%AB%96%E8%88%87%E8%87%AA%E5%9B%9E%E6%AD%B8%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">認識規劃、多主體心智理論與自回歸信念修正</a> 的機率信念空間形式化對讀。</li>
+<li>連結：<a href="zotero://select/library/items/5MQQZ79F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.24612" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-nesyspec-neuro-symbolic-technical-intelligence-for-auditing-engineering-specifications-with-an-application-to-aircraft2026">6. NeSySpec: Neuro-Symbolic Technical Intelligence for Auditing Engineering Specifications with an Application to Aircraft（2026）</h4>
+<ul>
+<li>作者與出處：Pier Mattia Basciano et al. · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：工程系統規格稽核人員需要明確知道受檢規格遵守或違反哪些物理約束、哪個欄位遭竄改以及如何最小幅度修正，既有分類模型難以同時完成診斷與證據綁定。本文設計整合式工程規範神經符號稽核框架。</li>
+<li>關鍵做法：以 LTN 實作 NeSySpec，從真實機隊紀錄學習物理約束漸層謂詞的容差，利用同一套滿足度指標完成違規診斷、溯因定位竄改欄位、提出最小變更修正與證據缺席拒答，並在 107 種機型（含 16 種未見測試機型）的圖文與合成錯誤資料上驗證。</li>
+<li>跨領域啟發：展示可驗證約束訓練如何由被動正則化升級為主動溯因稽核管線，並可遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05C_%E9%81%8E%E7%A8%8B%E7%8D%8E%E5%8B%B5%E6%A8%A1%E5%9E%8BPRM%E3%80%81%E6%80%9D%E7%B6%AD%E9%8F%88%E8%88%87%E6%B8%AC%E8%A9%A6%E6%99%82%E6%93%B4%E5%B1%95%E6%90%9C%E5%B0%8B.html">過程獎勵模型PRM、思維鏈與測試時擴展搜尋</a> 的步驟檢驗。</li>
+<li>連結：<a href="zotero://select/library/items/AUMV95BQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.35403" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-30-篇">G5｜本子方向全量文獻泛讀清單（共 30 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 30 篇文獻（含開放存取 PDF 12 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進10-篇">A. 奠基經典、專著與核心演進（10 篇）</h3>
+<ul>
+<li><strong>2022｜Neuro-symbolic approaches in artificial intelligence</strong>，Pascal Hitzler et al.（<em>National Science Review</em>，267 引）：《國家科學評論》上的神經符號 AI 全景綜述：系統整理邏輯張量、可微規則與雙系統融合架構的分類和開放挑戰。 <a href="zotero://select/library/items/S67JFVAF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/nsr/nwac035" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Neuro-Symbolic Causal Reasoning Meets Signaling Game for Emergent Semantic Communications</strong>，Christo Kurisummoottil Thomas, Walid Saad（<em>IEEE Transactions on Wireless Communications</em>，74 引）：結合神經符號因果推理與 Lewis 訊號賽局來設計湧現語意通訊系統，在極低的資料傳輸量下達成主體間的認識對齊。 <a href="zotero://select/library/items/HEBAFI22" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.12040" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Towards bridging the neuro-symbolic gap: deep deductive reasoners</strong>，Monireh Ebrahimi et al.（<em>Applied Intelligence</em>，55 引）：發表於 2021 年《Applied Intelligence》的論文，探討結合深度學習與符號演繹的深度演繹推理器（deep deductive reasoners），以縮減神經網路與符號推理的落差。 <a href="zotero://select/library/items/H5AP7JZ8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10489-020-02165-6" rel="noopener">官方連結</a></li>
+<li><strong>2022｜A Neuro-Symbolic Classifier with Optimized Satisfiability for Monitoring Security Alerts in Network Traffic</strong>，Darian M. Onchiş, Codruta Istin, Eduard Hogea（<em>Applied Sciences</em>，24 引）：提出基於邏輯張量網路（LTN）的最佳化可滿足性神經符號分類器用於網路流量安全監測，結合神經網路自經驗學習的能力與符號邏輯推理的可解釋性，同時區分與解釋正常連線及潛在攻擊警示。 <a href="zotero://select/library/items/8E8ET7CM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/app122211502" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Input coding for neuro-electronic hybrid systems</strong>，Jude Baby George et al.（<em>Biosystems</em>，17 引）：發表於 Biosystems，探討神經電子混合系統（neuro-electronic hybrid systems）中的輸入編碼設計與神經介面表徵問題，對應邏輯神經網路相關方向。 <a href="zotero://select/library/items/AC2JSE4I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.biosystems.2014.08.002" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Neuro-Symbolic Reinforcement Learning with First-Order Logic</strong>，Daiki Kimura et al.（<em>arXiv (Cornell University)</em>，16 引）：將邏輯神經網路 LNN 導入文字冒險強化學習，由文本觀測與 ConceptNet 抽取一階邏輯事實並以可微邏輯算子訓練可解釋策略，在 TextWorld 上顯著加速收斂。 <a href="zotero://select/library/items/T5UQZZ7R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.10963" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Bootstrapping Knowledge Graphs From Images and Text</strong>，Jiayuan Mao et al.（<em>Frontiers in Neurorobotics</em>，12 引）：針對從文字與自然圖像自底向上建構結構化知識圖譜（KG）的任務，提出結合類神經關係抽取器與可微歸納邏輯程式設計（ILP）模型的混合框架，交替進行初始關係萃取與符號推理補全。 <a href="zotero://select/library/items/9A5224IV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnbot.2019.00093" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Combining Rules and Embeddings via Neuro-Symbolic AI for Knowledge Base Completion</strong>，Prithviraj Sen et al.（<em>arXiv (Cornell University)</em>，8 引）：針對規則式知識庫補全中關係路徑頻率不均的問題，提出結合規則學習與圖嵌入的神經符號方法，分別以關係混合與路徑混合機制提升推論表現。 <a href="zotero://select/library/items/Q8XQ9DIV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2109.09566" rel="noopener">官方連結</a></li>
+<li><strong>1996｜A novel system for coloured object recognition</strong>，Y.S. Wang, Brian J Griffiths, Bruce A. Wilkie（<em>Computers in Industry</em>，8 引）：發表於 Computers in Industry，探討用於工業環境彩色物體辨識的視覺系統架構與分類識別設計，收入於 42F 相關應用檢索書目中。 <a href="zotero://select/library/items/N7KCREUU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0166-3615(96)00065-6" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Continual Reasoning: Non-Monotonic Reasoning in Neurosymbolic AI using Continual Learning</strong>，Sofoklis Kyriakopoulos, Artur d’Avila Garcez（<em>arXiv (Cornell University)</em>，2 引）：將非單調常識推理（結論可隨新資訊引入而撤回）導入神經符號 AI，透過結合課程學習與持續學習機制來訓練邏輯張量網路 (LTN)，提升其在非單調推理任務上的準確度。 <a href="zotero://select/library/items/ANF5DGB6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.02171" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻20-篇">B. 2024–2026 近期推進與前沿文獻（20 篇）</h3>
+<ul>
+<li><strong>2025｜A review of neuro-symbolic AI integrating reasoning and learning for advanced cognitive systems</strong>，Uzma Nawaz, Mufti Anees-ur-Rahaman, Zubair Saeed（<em>Intelligent Systems with Applications</em>，138 引）：A review of neuro-symbolic AI integrating reasoning and learning for advanced cognitive systems，Uzma Nawaz, Mufti Anees-ur-Rahaman, Zubair Saeed（近期高引用的神經符號認知系統綜述，聚焦學習適應性與形式化可解釋推理的工程整合，138 引）。 <a href="zotero://select/library/items/F3NAXRZS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.iswa.2025.200541" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Explainable Diagnosis Prediction through Neuro-Symbolic Integration</strong>，Qiuhao Lu et al.（<em>Europe PMC (PubMed Central)</em>，43 引）：採用邏輯神經網路（LNN）結合領域知識規則與可學習權重及閾值，建構具臨床可解釋性的診斷預測模型，其準確率（最高80.52%）與AUROC優於邏輯迴歸、SVM與隨機森林。 <a href="zotero://select/library/items/W7PTU5XX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.01855" rel="noopener">官方連結</a></li>
+<li><strong>2026｜FedLTN-CubeSat: Neuro-Symbolic Federated Learning for Intrusion Detection in LEO CubeSat Constellations</strong>，Gang Yang et al.（<em>Mathematics</em>，17 引）：提出聯邦神經符號框架 FedLTN-CubeSat，把邏輯張量網路（Logic Tensor Networks）的一階邏輯規則轉成實值、可微的滿意度目標，並在星間聯邦聚合時一起更新神經感知與符號防護規則。 <a href="zotero://select/library/items/353ESJB5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/math14061047" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Neuro-Symbolic Approach to Multi-Agent RL for Interpretability and Probabilistic Decision Making</strong>，Subramanian, Chitra et al.（<em>arXiv (Cornell University)</em>，10 引）：針對深度多智能體強化學習缺乏可解釋性與樣本效率低的問題，提出事件驅動合作架構並採用邏輯神經網路（LNN）及其機率擴展作為函數逼近器，在部分可觀測與不確定環境中訓練可解釋的規則策略。 <a href="zotero://select/library/items/MME27USK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.13440" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Boosting zero-shot learning through neuro-symbolic integration</strong>，Francesco Manigrasso, Fabrizio Lamberti, Lia Morra（<em>Pattern Recognition</em>，8 引）：提出模糊邏輯原型網路 FLPN 來提升零樣本學習效能，將分類表述為視覺語意空間中的原型匹配，並利用 LTN 將一階邏輯公理接地為可微運算子以計算神經符號損失。 <a href="zotero://select/library/items/3JGKCUSN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.patcog.2025.111869" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A physically constrained proxy framework considering a process-aware gating mechanism for urban flood simulation</strong>，Qiang LIU et al.（<em>Water Research</em>，6 引）：發表於 Water Research，提出考量過程感知門控機制的物理約束代理建模框架，用於都市淹水過程的快速模擬與約束訓練，對應 42F 主題。 <a href="zotero://select/library/items/J7AJW7VM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.watres.2026.125663" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Neuro-symbolic artificial intelligence for real-time sepsis mortality prediction</strong>，Fabrizio De Santis, Gyunam Park, Francesco Zanichelli（<em>Engineering Applications of Artificial Intelligence</em>，4 引）：Neuro-symbolic artificial intelligence for real-time sepsis mortality prediction，Fabrizio De Santis, Gyunam Park, Francesco Zanichelli（面向 ICU 重症臨床決策支援，用神經符號邏輯規則處理黑盒預警在生命關鍵場景中不可解釋的風險）。 <a href="zotero://select/library/items/Q39NNEEQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.engappai.2026.114920" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A Neurosymbolic Approach to Counterfactual Fairness</strong>，Xenia Heilmann et al.（<em>Neurosymbolic Artificial Intelligence</em>，4 引）：A Neurosymbolic Approach to Counterfactual Fairness，Xenia Heilmann et al.（把反事實公平性（Counterfactual Fairness）形式化為邏輯張量網路內部的符號約束，從架構層面保證決策公平）。 <a href="zotero://select/library/items/X43PSHU5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/29498732261443184" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Physics-inspired dynamic boosting framework for capturing water and mud inrush evolution in tunnel fault fracture zones</strong>，Guorong Han et al.（<em>Tunnelling and Underground Space Technology</em>，3 引）：發表於 Tunnelling and Underground Space Technology，提出物理啟發的動態集成推進框架，用於捕捉隧道斷層破碎帶突水突泥的演化過程。 <a href="zotero://select/library/items/BWVQIBVP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.tust.2025.106973" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Graph Neural Networks in Neural-Symbolic Computing</strong>，Bikram Pratim Bhuyan et al.（<em>Studies in computational intelligence</em>，2 引）：選自 2024 年《Studies in Computational Intelligence》的章節，探討圖神經網路（GNN）在神經符號計算與知識圖譜約束推理中的結合方式與應用範疇。 <a href="zotero://select/library/items/ZBX7DR88" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-97-8171-3_13" rel="noopener">官方連結</a></li>
+<li><strong>2026｜NeSyCat: A Monad-Based Categorical Semantics of the Neurosymbolic ULLER Framework</strong>，Daniel Romero Schellhorn, Till Mossakowski（<em>arXiv (Cornell University)</em>，1 引）：證明神經符號語言 ULLER 原本彼此獨立的古典、模糊與機率三種語意皆可統一於基於單子 (monad) 的範疇語意框架，進而支援模組化語意擴充，並示範以 Giry 單子將邏輯張量網路推廣至無窮域。 <a href="zotero://select/library/items/5MQQZ79F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.24612" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Neurosymbolic AI in Computer Vision: Toward More Interpretable, Efficient, Generalized, and Logical Visual Understanding Systems</strong>，Alessandro Sebastian Russo, Lia Morra, Fabrizio Lamberti（<em>IT Professional</em>，1 引）：介紹神經符號人工智慧（NeSy）在影像分類、物件偵測、場景理解與動作辨識等電腦視覺任務的應用，並探討如邏輯張量網路（LTN）等框架如何提升可解釋性、魯棒性與邏輯推理能力。 <a href="zotero://select/library/items/PVQHZSJW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/mitp.2025.3627196" rel="noopener">官方連結</a></li>
+<li><strong>2026｜NeSySpec: Neuro-Symbolic Technical Intelligence for Auditing Engineering Specifications with an Application to Aircraft</strong>，Pier Mattia Basciano et al.（<em>arXiv (Cornell University)</em>）：基於邏輯張量網路建構工程規格神經符號審計框架 NeSySpec，將物理約束編碼為具習得容許度的分級謂詞，於單一管線完成違規診斷、溯因定位異常欄位、給出最小修改建議並於 107 種機型驗證。 <a href="zotero://select/library/items/AUMV95BQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.35403" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Neuro-symbolic and Logic-Augmented Approaches for Scientific Machine Learning</strong>，Bikram Pratim Bhuyan et al.（<em>Springer eBooks</em>）：發表於 2026 年 Springer 電子書的章節，探討將神經符號方法與邏輯約束增強機制應用於科學機器學習（Scientific Machine Learning）的架構與研究範疇。 <a href="zotero://select/library/items/JWCMVT39" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-95-7856-6_10" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Explainable Neuro-Symbolic Architectures for Robust and Adaptive Intelligence in Complex Real-World Scenarios</strong>，Vishal Tiwari, Vinay Keswani（<em>National Academy Science Letters</em>）：發表於 2026 年《National Academy Science Letters》的論文，探討面向複雜真實場景之強健與適應性智慧的可解釋神經符號架構（neuro-symbolic architectures）。 <a href="zotero://select/library/items/BNTWUDS5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s40009-026-02278-5" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Multimodal Diagnosis Prediction Through Neuro-Symbolic Integration</strong>，Sanjan Kumar, Kaviya K（<em>International Research Journal on Advanced Engineering and Management (IRJAEM)</em>）：針對阿茲海默症及輕度認知障礙早期診斷缺乏可解釋性與多模態整合的問題，探討結合 MRI 影像、臨床與基因資料的神經符號架構，以提升疾病細粒度分期與臨床可解釋性。 <a href="zotero://select/library/items/X6MKU8PC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.47392/irjaem.2026.0062" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Edge Neuro-Symbolic AI Framework for Privacy-Preserving Real-Time Health Analytics in Consumer Wearable Devices</strong>，Si-Yeong Kim, D. Saravanan, Geetha Anbazhagan（<em>IEEE Transactions on Consumer Electronics</em>）：為消費級穿戴式裝置設計邊緣神經符號即時健康分析框架，整合聯邦學習與符號推理，並嵌入客製化同態加密計算層，在資源受限裝置上兼顧隱私保護與推理可解釋性。 <a href="zotero://select/library/items/P8HZQFSJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tce.2025.3646489" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Symbolically Guided XAI for Predictive Maintenance of motor Using LTNs</strong>，Nunna Harshitha et al.（<em>SSRN Electronic Journal</em>）：發表於 SSRN 的工業預兆維護預印本，應用邏輯張量網路（LTN）將符號領域規則引入馬達故障預測模型，以提供具規則引導的可解釋人工智慧（XAI）診斷依據。 <a href="zotero://select/library/items/7R7P5NZ2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.5794962" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Is Neuro-Symbolic AI the Closest Step Toward Human-Like Intelligence?</strong>，Ankana Ghosh（<em>INTERANTIONAL JOURNAL OF SCIENTIFIC RESEARCH IN ENGINEERING AND MANAGEMENT</em>）：探討結合深度學習資料驅動感知與符號系統結構化推理的神經符號人工智慧（NSAI），分析該融合架構在突破純神經網路推理、可解釋性與泛化限制上的潛力與侷限。 <a href="zotero://select/library/items/2U9WIRP5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.55041/ijsrem53703" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Towards Artificial General Intelligence</strong>，Bikram Pratim Bhuyan et al.（<em>Studies in computational intelligence</em>）：選自 2024 年《Studies in Computational Intelligence》的章節，從神經符號計算與可驗證邏輯約束視角探討邁向通用人工智慧（AGI）的理論方向與技術架構。 <a href="zotero://select/library/items/ASAJ7Q3B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-97-8171-3_18" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-c4d2a357">在地圖上查看</a><div class="rg"><h3>相關<span class="n">6</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a><span class="rs">這個領域收的是當代 AI 裡兩支都簡稱 LNN 的學派。兩者著力的層面不同，但都不走龐大黑盒模型的路。</span></li><li><a href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a></li><li><a href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a></li><li><a href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31C_%E8%AA%8D%E8%AD%98%E8%A6%8F%E5%8A%83%E3%80%81%E5%A4%9A%E4%B8%BB%E9%AB%94%E5%BF%83%E6%99%BA%E7%90%86%E8%AB%96%E8%88%87%E8%87%AA%E5%9B%9E%E6%AD%B8%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">認識規劃、多主體心智理論與自回歸信念修正</a></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05C_%E9%81%8E%E7%A8%8B%E7%8D%8E%E5%8B%B5%E6%A8%A1%E5%9E%8BPRM%E3%80%81%E6%80%9D%E7%B6%AD%E9%8F%88%E8%88%87%E6%B8%AC%E8%A9%A6%E6%99%82%E6%93%B4%E5%B1%95%E6%90%9C%E5%B0%8B.html">過程獎勵模型PRM、思維鏈與測試時擴展搜尋</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

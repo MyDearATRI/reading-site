@@ -12,18 +12,18 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-e6a3bc3e">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">數學</a><a class="find" href="../../index.html#n=n-e6a3bc3e">Find on board</a></header>
+<body class="doc" data-note="n-e6a3bc3e" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 數學</span>
 <article>
 
 <h1 id="m20離散機率與期望">M20｜離散機率與期望</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="M19_%E5%90%91%E9%87%8F%E7%A9%BA%E9%96%93%E8%88%87%E7%B7%9A%E6%80%A7%E6%98%A0%E5%B0%84.html">M19 向量空間與線性映射</a> ｜ 下一章：<a class="wl" href="M21_%E9%81%9E%E8%BF%B4%E9%97%9C%E4%BF%82%E7%9A%84%E8%A7%A3%E6%B3%95.html">M21 遞迴關係的解法</a>
 本線先備：<a class="wl" href="M11_%E8%A8%88%E6%95%B8%EF%BC%9A%E9%B4%BF%E7%B1%A0%E3%80%81%E4%BA%8C%E9%A0%85%E5%BC%8F%E3%80%81%E5%AE%B9%E6%96%A5.html">M11 計數：鴿籠、二項式、容斥</a> · <a class="wl" href="M06_%E5%96%AE%E8%AE%8A%E6%95%B8%E5%BE%AE%E7%A9%8D%E5%88%86%E4%BA%8C.html">M06 單變數微積分二</a></p>
-</aside>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/01-math.md:161</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -59,10 +59,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">2</span></h3><ul><li><a href="M11_%E8%A8%88%E6%95%B8%EF%BC%9A%E9%B4%BF%E7%B1%A0%E3%80%81%E4%BA%8C%E9%A0%85%E5%BC%8F%E3%80%81%E5%AE%B9%E6%96%A5.html">計數：鴿籠、二項式、容斥</a><span class="tag-plan">計劃</span><span class="rs">計數：鴿籠原理、二項式係數、容斥（MCS 計數各章）</span></li><li><a href="M06_%E5%96%AE%E8%AE%8A%E6%95%B8%E5%BE%AE%E7%A9%8D%E5%88%86%E4%BA%8C.html">單變數微積分二</a><span class="tag-plan">計劃</span><span class="rs">單變數微積分二：積分與微積分基本定理（Strang 第 5 章、Spivak 第 13–14 章）</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">2</span></h3><ul><li><a href="M24_%E9%80%A3%E7%BA%8C%E9%9A%A8%E6%A9%9F%E8%AE%8A%E6%95%B8%E3%80%81%E5%8B%95%E5%B7%AE%E3%80%81%E8%81%AF%E5%90%88%E5%88%86%E4%BD%88.html">連續隨機變數、動差、聯合分佈</a><span class="tag-plan">計劃</span><span class="rs">Blitzstein &amp; Hwang 第 5–7 章：連續隨機變數、動差、聯合分佈</span></li><li><a href="M40_%E7%AC%AC%E4%B8%80%E5%B9%B4%E7%B8%BD%E7%9B%B2%E6%B8%AC%E8%88%87%E6%94%B6%E5%B0%BE%E7%B7%A9%E8%A1%9D.html">第一年總盲測與收尾緩衝</a><span class="tag-plan">計劃</span><span class="rs">第一年總盲測與收尾緩衝：M13–M39 的核心節點不看筆記重建；未過的補到 L3</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

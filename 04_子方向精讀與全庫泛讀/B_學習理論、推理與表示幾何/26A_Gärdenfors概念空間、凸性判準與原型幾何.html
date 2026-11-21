@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>26A｜Gärdenfors概念空間、凸性判準與原型幾何 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-07d70749" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="26agärdenfors概念空間凸性判準與原型幾何">26A｜Gärdenfors概念空間、凸性判準與原型幾何</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a>
+同領域子方向：<a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a> · <a class="wl" href="26C_%E7%A5%9E%E7%B6%93%E8%A1%A8%E5%BE%B5%E5%B9%BE%E4%BD%95%E3%80%81%E8%AA%8D%E7%9F%A5%E6%B5%81%E5%BD%A2%E6%9B%B2%E7%8E%87%E8%88%87%E6%8B%93%E6%92%B2%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90.html">神經表徵幾何、認知流形曲率與拓撲資料分析</a>
+跨領域關聯子方向：<a class="wl" href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21C_%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%A5%E6%B3%95%E5%BD%A2%E5%BC%8F%E9%9A%8E%E5%B1%A4%E3%80%81%E7%B5%84%E5%90%88%E6%B3%9B%E5%8C%96%E6%B8%AC%E8%A9%A6%E8%88%87%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%AA%9E%E6%84%8F%E5%BA%AB.html">語言模型句法形式階層、組合泛化測試與形式化語意庫</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a> 的認知與數學公理基礎層，旨在符號邏輯與亞符號類神經表徵之間建立可解釋的中介幾何層。演進主線從 Gärdenfors 的品質維度、凸性判準與 Voronoi 原型鑲嵌出發，發展至極坐標凸性、對數凹模糊範疇、打破度規對稱性的量子幾何模型，以及從大語言模型與人腦表徵中抽取出原型坐標與時間軌跡概念。</p>
+</aside>
+<ul>
+<li>核心問題：純符號表徵缺乏連續相似度與自然泛化能力，而深度神經網路的高維潛空間雖具表徵力卻常缺少可解釋的認知座標軸。此外，經典歐氏度規模型假設距離對稱且滿足三角不等式，無法解釋人類相似性判斷中的順序與顯著性不對稱違例，也較難直接表達模糊概念的組合閉包與隨時間展開的動態策略。</li>
+<li>直覺模型：可以把概念空間想像成一間依照「色相、明度、飽和度」或「甜度、酸度」排列的立體色彩與味覺展廳。每個概念的典型代表就像展廳裡的幾座燈塔（原型），空間中每一點依距離歸屬最近的燈塔，自然劃出邊界平滑的凸區域（Voronoi 房間）；如果把房間當成模糊濃霧，對數凹性保證霧氣從核心向外單調淡出而不會分裂成兩團不連通的雲。</li>
+<li>分階段閱讀路線：第一階段先讀 Gärdenfors (2000) 與 Chater and Brown (2008)，建立品質維度、凸性判準、Voronoi 鑲嵌以及認知科學簡潔性與尺度不變性原則的基礎。第二階段閱讀 Zwarts and Gärdenfors (2015)、Tull (2021) 與 Epping et al. (2023)，掌握極坐標對空間介詞凸性的還原、模糊概念的對數凹馬可夫範疇語意，以及量子幾何如何處理非對稱相似性判斷。第三階段讀 2025–2026 年前沿論文 Kumar, Chatterjee, and Schockaert (2025)、Zada et al. (2025)、Fel et al. (2025) 與 Banaee and Lowry (2026)（亦可選讀 Kasubuchi and Fukiya (2026)），深入原型嵌入抽取、跨語言人腦與大模型共軛空間、Minkowski 與字典幾何，以及軌跡式動態抽象概念建模。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;2000 Gärdenfors 品質維度、凸性與 Voronoi 原型&quot;] --&gt; B[&quot;2015 Zwarts 與 Gärdenfors 空間介詞與極坐標凸性&quot;]
+  A --&gt; C[&quot;2021 Tull 對數凹模糊概念與馬可夫範疇&quot;]
+  A --&gt; D[&quot;2023 Epping et al. 量子幾何與非對稱相似性&quot;]
+  A --&gt; E[&quot;2025 Kumar et al. 原型嵌入抽取與 Zada et al. 跨語言腦機對齊&quot;]
+  E --&gt; F[&quot;2025 Fel et al. 視覺字典與非正交概念幾何&quot;]
+  B --&gt; G[&quot;2026 Banaee 與 Lowry 時序軌跡概念與 Kasubuchi 相位層級&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>品質維度、凸性判準與 Voronoi 原型幾何 (Quality Dimensions, Convexity, and Voronoi Tessellation)</strong></p>
+<ul>
+<li>直覺理解：自然性質在對的座標系裡不能「中間斷裂」：如果兩個物體都屬於紅色或甜味區間，兩者中間的混色或混味也應該落在該區域內；而一組概念原型自然用「最近鄰歸屬」把空間切分成凸多胞形。</li>
+<li>機制或核心表達式：一個概念空間由可分離或整合的品質維度乘積 <span class="math inline">S = D_1 \times \dots \times D_k</span> 並賦予度規 <span class="math inline">d</span> 構成（整合維度常採歐氏 <span class="math inline">L_2</span> 度規，可分離維度常採曼哈頓 <span class="math inline">L_1</span> 或一般 Minkowski 度規）。Gärdenfors (2000) 提出自然性質對應 <span class="math inline">S</span> 中的凸子集 <span class="math inline">C</span>（即對任意 <span class="math inline">x, y \in C</span> 與 <span class="math inline">\lambda \in [0, 1]</span>，測地插值 <span class="math inline">(1-\lambda)x + \lambda y \in C</span>）；給定原型點集 <span class="math inline">\{p_1, \dots, p_m\}</span>，歐氏 Voronoi 單元 <span class="math inline">V_i = \{x \in S : d(x, p_i) \le d(x, p_j), \forall j\}</span> 必為由超平面圍成的凸多胞形。Zwarts and Gärdenfors (2015) 進一步指出凸性依賴座標系選擇：空間位置與方向介詞在笛卡兒座標 <span class="math inline">(x, y)</span> 下常呈環狀或扇形非凸，轉換為極坐標 <span class="math inline">(r, \theta)</span> 後即可在領域內普遍滿足凸性。</li>
+<li>能做到什麼，代價是什麼：凸性與 Voronoi 鑲嵌把原型理論、分類邊界與少樣本內插推論統一於簡潔的幾何結構；代價是「凸性是否成立」強烈取決於是否選對生理或認知對應的座標參數化（如極坐標或非線性流形座標），且純靜態區域無法直接表徵依賴時序的策略概念（Banaee and Lowry, 2026）。</li>
+</ul>
+</li>
+<li>
+<p><strong>模糊概念的對數凹函式與馬可夫範疇語意 (Log-Concave Fuzzy Concepts and Markov Categories)</strong></p>
+<ul>
+<li>直覺理解：為了讓概念邊界可以漸層模糊，同時在「且」的複合或條件推理下依然保持單峰且不分裂，隸屬度函數的對數必須是凹函數（像高斯鐘形曲線那樣）。</li>
+<li>機制或核心表達式：在明確子集推廣為模糊隸屬函數 <span class="math inline">\mu : X \to [0, 1]</span> 時，Tull (2021) 證明對數凹函數（log-concave functions，滿足對所有 <span class="math inline">x, y \in X</span> 與 <span class="math inline">\lambda \in [0, 1]</span> 有 <span class="math inline">\mu(\lambda x + (1-\lambda)y) \ge \mu(x)^\lambda \mu(y)^{1-\lambda}</span>）是同時滿足 Gärdenfors 凸性判準（所有上水平集 <span class="math inline">\{x : \mu(x) \ge \alpha\}</span> 皆為凸集）且在張量積、複合、邊緣化與正規化下保持封閉的最一般函數類。由此可構造以凸空間為物件、以對數凹機率通道為態射的對稱單子範疇與馬可夫範疇（Markov category），支援帶雜訊輸入的模糊概念推理。</li>
+<li>能做到什麼，代價是什麼：在數學上兼顧模糊度、組合性與機率更新封閉性，替連接連續空間與形式語意提供嚴謹代數介面；然而對數凹性明確排除多峰（multimodal）概念分布，面對同形異義或多原型複合類時需拆解為多個子概念的離散混合。</li>
+</ul>
+</li>
+<li>
+<p><strong>非對稱相似性判斷與量子幾何投影 (Quantum Geometric Models for Asymmetric Similarity)</strong></p>
+<ul>
+<li>直覺理解：人類判斷「A 像 B」與「B 像 A」的程度常常不一樣（例如小眾色塊像基準色，但基準色不那麼像小眾色）。如果把概念看成希爾伯特空間裡的子空間而非點，先投影到子空間 A 再投影到 B 的機率自然會受順序影響。</li>
+<li>機制或核心表達式：傳統多維尺度分析（MDS）受限於度規公理中的對稱性 <span class="math inline">d(x, y) = d(y, x)</span> 與三角不等式，難以擬合 Tversky 所揭示的不對稱相似性違例。Epping et al. (2023) 針對時間分離的色塊相似性評分實驗，將量子幾何模型擴展為可擬合資料的參數架構：認知狀態表徵為希爾伯特空間 <span class="math inline">\mathcal{H}</span> 中的狀態向量 <span class="math inline">|\psi\rangle</span>，兩概念對應非對易的正交投影算子 <span class="math inline">P_A, P_B</span>，依順序判斷「由 A 到 B」的轉移機率 <span class="math inline">\Pr(A \to B) = \| P_B P_A |\psi\rangle \|^2</span> 在 <span class="math inline">P_A P_B \neq P_B P_A</span> 時自然產生可量測的不對稱性。Kasubuchi and Fukiya (2026) 則在語義層級建構複數振幅與規範協變相位模型，以語義波長代理概念尺度。</li>
+<li>能做到什麼，代價是什麼：無須人為外加不對稱偏置項即可從幾何算子非交換性內生出順序效應與不對稱相似性；代價是參數自由度與投影子空間維度較歐氏點模型更難從稀疏行為資料中唯一辨識。</li>
+</ul>
+</li>
+<li>
+<p><strong>神經表徵對齊、原型嵌入抽取與軌跡概念 (Neural Grounding, Prototype Extraction, and Trajectory Concepts)</strong></p>
+<ul>
+<li>直覺理解：大語言模型與視覺模型的內部向量已經隱含了豐富的感官與語義結構，透過「極端原型描述」作為探針或追蹤決策在品質空間中的移動軌跡，就能把黑盒嵌入轉譯成可理解的概念座標。</li>
+<li>機制或核心表達式：為了將概念空間落地於現代深度表徵，Bechberger and Kühnberger (2017) 探索以 InfoGAN 無監督學習潛在品質維度；Kumar, Chatterjee, and Schockaert (2025) 則以特定感知特徵的原型描述（如「非常甜的食物」）計算 LLM 嵌入並微調對齊至概念空間維度。在跨語言與神經科學層面，Zada et al. (2025) 利用逐體素（voxelwise）編碼模型發現不同語言訓練的 LM 中間層與聽取英、中、法語故事的人腦 fMRI 活動收斂於共享概念空間。在動態維度上，Banaee and Lowry (2026) 以西洋棋策略（攻擊、棄子）為例，把抽象策略建模為可解釋品質維度空間中的區域與棋局有向軌跡，並支援雙視角（dual-perspective）狀態解讀。</li>
+<li>能做到什麼，代價是什麼：原型探針與跨模態腦機編碼大幅降低了手工標註概念維度的成本，並將理論擴展到目標導向的時序決策；但從高維稀疏自編碼器（SAE）提取的字典（Fel et al., 2025）往往呈現部分稠密且偏離最大正交 Grassmannian 框架的結構，顯示模型內部原語與人類乾淨正交品質維度之間仍存在幾何落差。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為什麼極坐標能挽救空間介詞的凸性判準，以及這對維度設計的啟示</strong>：在 Gärdenfors 的理論中，自然性質對應概念空間裡的凸區域；但若直接在二維笛卡兒平面 <span class="math inline">(x, y)</span> 中繪製英語空間介詞（如圍繞地標的區域或偏向某方向的錐形扇區），許多區域卻顯然不是凸集。請結合 Zwarts and Gärdenfors (2015) 的做法說明這個表觀反例如何解決，以及這反映出凸性判準與空間幾何之間的什麼依賴關係？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考凸性是「仿射／測地結構」的性質，而非純集合拓撲性質。在空間位置與方向介詞中，人類認知天然以參考地標為原點，區分「徑向距離 <span class="math inline">r</span>」與「方位角 <span class="math inline">\theta</span>」兩條心理品質維度。Zwarts and Gärdenfors (2015) 證明改以極坐標 <span class="math inline">(r, \theta)</span> 表徵時，距離區間與角度區間的乘積即構成（局部或極坐標意義下的）凸區域。這說明凸性判準必須與認知系統實際採用的品質維度參數化配對，不能任意在未經轉換的物理座標下檢驗。</p>
+</details>
+<ol start="2">
+<li><strong>對數凹隸屬函數為何比任意凸上水平集函數更適合模糊概念推理</strong>：假設我們要求一個模糊概念 <span class="math inline">\mu : X \to [0, 1]</span> 滿足「所有 <span class="math inline">\alpha</span>-截集 <span class="math inline">\{x : \mu(x) \ge \alpha\}</span> 都是凸集」（即擬凹函數, quasiconcave）。為何 Sean Tull (2021) 仍選擇收緊條件至「對數凹函數」（log-concave），擬凹函數在組合推理中會遇到什麼缺陷？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>擬凹性確實能保證單一概念的每個信心門檻切面都是凸的，但擬凹函數在兩項關鍵運算下並不封閉：兩個擬凹函數相乘（對應邏輯合取「且」或獨立特徵結合）未必仍是擬凹函數，更不保證沿某一維度積分邊緣化（marginalization）後維持凸性結構。相對地，對數凹性等效於 <span class="math inline">\log \mu</span> 為凹函數，因為凹函數對正係數相加與高維積分（Prékopa–Leindler 定理精神）皆保持封閉，使模糊概念能構成良定義的對稱單子範疇與馬可夫範疇。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>概念空間正交理想與深度表徵稠密干涉的幾何張力</strong>：經典概念空間常假設少數彼此正交或低維可分離的品質維度，並透過 Voronoi 劃分與對數凹單峰分布運作。然而 Fel et al. (2025) 運用 32,000 單元的稀疏自編碼器解析 DINOv2 表徵時發現，實際學習到的概念字典在幾何上呈現部分稠密性，並逐步演化出較高相干度、偏離最大正交 Grassmannian 框架的結構，甚至包含在目標物以外區域全域觸發的否定型（&quot;Elsewhere&quot;）概念。如何將這類非正交、帶否定與多義疊加的神經字典嚴格對齊至可解釋的凸概念空間，仍是表示幾何的核心難題。</li>
+<li><strong>低頻語義尺度、時序軌跡與量子投影模型的可辨識性</strong>：近期工作分別從不同數學方向拓展了靜態凸區域的邊界：Epping et al. (2023) 以希爾伯特空間非對易投影解釋色覺相似性不對稱，Banaee and Lowry (2026) 以品質空間軌跡建模西洋棋策略，Kasubuchi and Fukiya (2026) 則以複數振幅與語義波長對齊層級與篇章方向（在合成資料集達到 0.852 的層級相關係數）。當真實認知任務同時涉及不對稱相似性、階層包含與長期目標演變時，究竟應在單一量子或規範協變流形上統一，還是作為分段凸空間上的隨機過程處理，目前缺乏跨實證基準的統一判別實驗。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>從低維原型幾何到高維神經網路線性子空間與多胞形</strong>：本子方向的凸多胞形 Voronoi 劃分、Minkowski 度規與 SAE 非正交字典觀察（Fel et al., 2025；Kumar et al., 2025），直接向上銜接 <a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a> 與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>，用來檢驗大語言模型激活空間中的概念方向與多胞形邊界是否繼承了認知凸性。</li>
+<li><strong>腦機共享流形曲率與跨語言同調分析</strong>：Zada et al. (2025) 揭示不同語言模型中間層與人腦 fMRI 反應收斂於共享概念空間，且神經表徵的距離與曲率結構可進一步利用 <a class="wl" href="26C_%E7%A5%9E%E7%B6%93%E8%A1%A8%E5%BE%B5%E5%B9%BE%E4%BD%95%E3%80%81%E8%AA%8D%E7%9F%A5%E6%B5%81%E5%BD%A2%E6%9B%B2%E7%8E%87%E8%88%87%E6%8B%93%E6%92%B2%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90.html">神經表徵幾何、認知流形曲率與拓撲資料分析</a> 中的持續同調與流形幾何工具，量測凸性在不同表徵層之間的變形與保存程度。</li>
+<li><strong>概念空間對齊與類比結構映射及組合語意</strong>：品質維度的座標變換（Zwarts and Gärdenfors, 2015）、對數凹範疇組合律（Tull, 2021）以及複數振幅語義尺度（Kasubuchi and Fukiya, 2026），為 <a class="wl" href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a> 的跨域幾何映射以及 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21C_%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%A5%E6%B3%95%E5%BD%A2%E5%BC%8F%E9%9A%8E%E5%B1%A4%E3%80%81%E7%B5%84%E5%90%88%E6%B3%9B%E5%8C%96%E6%B8%AC%E8%A9%A6%E8%88%87%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%AA%9E%E6%84%8F%E5%BA%AB.html">語言模型句法形式階層、組合泛化測試與形式化語意庫</a> 的修飾語組合語意提供了連續幾何與單子範疇模型。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-conceptual-spaces-the-geometry-of-thought2000">1. Conceptual Spaces: The Geometry of Thought（2000）</h4>
+<ul>
+<li>作者與出處：Peter Gärdenfors · <em>MIT Press</em></li>
+<li>核心問題：符號主義人工智慧擅長邏輯推理卻缺乏自然相似度與接地能力，連結主義網路擅長統計學習卻缺少可解釋的概念邊界，認知科學需要一座連結兩者的形式化中介表徵層。</li>
+<li>關鍵做法：提出「概念空間」架構，將基本感知與認知特徵建模為品質維度（quality dimensions），主張自然性質對應品質空間中的凸區域，而由多個領域性質組合而成的概念則透過原型點誘導的 Voronoi 鑲嵌來劃分分類邊界。</li>
+<li>跨領域啟發：建立整個 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a> 的基礎幾何公理，也為後續大模型表徵可解釋性與 <a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a> 提供參照基準。</li>
+<li>連結：<a href="zotero://select/library/items/W4VEHHRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7551/mitpress/2076.001.0001" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-locative-and-directional-prepositions-in-conceptual-spaces-the-role-of-polar-convexity2015">2. Locative and Directional Prepositions in Conceptual Spaces: The Role of Polar Convexity（2015）</h4>
+<ul>
+<li>作者與出處：Joost Zwarts, Peter Gärdenfors · <em>Journal of Logic Language and Information</em></li>
+<li>核心問題：許多自然語言空間位置與方向介詞（如環繞或方位區域）在標準笛卡兒直角座標下並不是凸集，對概念空間的「凸性假設」構成直接表面反例。</li>
+<li>關鍵做法：改用極坐標系統（徑向距離與方位角）重新參數化純空間位置介詞與方向介詞的語義區域，證明在極坐標品質維度下凸性依然普遍成立，進而驗證凸性假設在自然語言空間語義中的適用性。</li>
+<li>跨領域啟發：揭示座標表示選擇與凸性之間的核心耦合，對分析神經網路潛空間如何編碼空間與關係語言（連結 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21C_%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%A5%E6%B3%95%E5%BD%A2%E5%BC%8F%E9%9A%8E%E5%B1%A4%E3%80%81%E7%B5%84%E5%90%88%E6%B3%9B%E5%8C%96%E6%B8%AC%E8%A9%A6%E8%88%87%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%AA%9E%E6%84%8F%E5%BA%AB.html">語言模型句法形式階層、組合泛化測試與形式化語意庫</a>）具直接啟發。</li>
+<li>連結：<a href="zotero://select/library/items/QSJRG8QE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10849-015-9224-5" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-a-categorical-semantics-of-fuzzy-concepts-in-conceptual-spaces2021">3. A Categorical Semantics of Fuzzy Concepts in Conceptual Spaces（2021）</h4>
+<ul>
+<li>作者與出處：Sean Tull · <em>EPTCS 372</em></li>
+<li>核心問題：經典概念空間以明確幾何集合定義性質，但在處理邊界模糊的自然概念、組合修飾以及帶雜訊輸入下的機率推理時，缺乏兼具代數組合性與凸性保持的形式語意。</li>
+<li>關鍵做法：構建對稱單子範疇來建模概念空間中的模糊概念與模糊推理，證明對數凹函數（log-concave functions）是同時滿足 Gärdenfors 凸性判準與良態組合性的最一般選擇，並進一步推廣為凸空間之間的對數凹機率通道範疇，形成一種新的馬可夫範疇。</li>
+<li>跨領域啟發：將認知幾何與範疇論機率語意（Markov categories）接軌，使連續凸空間上的概念複合具備嚴格的結構化推論規則。</li>
+<li>連結：<a href="zotero://select/library/items/6WTKUN5E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.05985" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-a-quantum-geometric-framework-for-modeling-color-similarity-judgments2023">4. A Quantum Geometric Framework for Modeling Color Similarity Judgments（2023）</h4>
+<ul>
+<li>作者與出處：Gunnar Paul Epping, Elizabeth L. Fisher, Ariel Zeleznikow-Johnston, Emmanuel M. Pothos, Naotsugu Tsuchiya · <em>Cognitive Science</em></li>
+<li>核心問題：人類相似性判斷常違反對稱性與三角不等式等度規公理，傳統多維尺度分析等點距離幾何模型在缺乏額外顯著性參數時難以刻畫純感知刺激間的不對稱判斷。</li>
+<li>關鍵做法：設計三項時間分離色塊相似性評分實驗，實證辨識出多處對稱性違例，並將 Pothos 等人的量子幾何相似性模型推廣為可對實驗資料進行擬合的一般化計算架構，透過非對易量子投影順序解釋相似性不對稱。</li>
+<li>跨領域啟發：為概念空間突破歐氏對稱距離限制提供實證驅動的希爾伯特空間幾何方案，可對照 <a class="wl" href="26C_%E7%A5%9E%E7%B6%93%E8%A1%A8%E5%BE%B5%E5%B9%BE%E4%BD%95%E3%80%81%E8%AA%8D%E7%9F%A5%E6%B5%81%E5%BD%A2%E6%9B%B2%E7%8E%87%E8%88%87%E6%8B%93%E6%92%B2%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90.html">神經表徵幾何、認知流形曲率與拓撲資料分析</a> 中的非歐流形表徵。</li>
+<li>連結：<a href="zotero://select/library/items/SWBX56VQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1111/cogs.13231" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-extracting-conceptual-spaces-from-llms-using-prototype-embeddings2025">5. Extracting Conceptual Spaces from LLMs Using Prototype Embeddings（2025）</h4>
+<ul>
+<li>作者與出處：Nitesh Kumar, Usashi Chatterjee, Steven Schockaert · <em>arXiv</em></li>
+<li>核心問題：認知概念空間雖具高度可解釋性，但傳統上極難從資料自動學得；大型語言模型內部似乎捕捉了豐富感知特徵，卻缺乏將其轉化為顯式品質維度的實用方法。</li>
+<li>關鍵做法：提出原型嵌入策略，透過為目標特徵（如甜度）撰寫對應原型描述（如「非常甜的食物」）來編碼概念維度，並微調大型語言模型使其原型嵌入與目標概念空間維度幾何對齊，實證顯示該抽取方法成效顯著。</li>
+<li>跨領域啟發：搭建起 Gärdenfors 認知維度與現代 LLM 嵌入空間之間的操作橋樑，可直接用於檢驗 <a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a> 中的特徵線性度。</li>
+<li>連結：<a href="zotero://select/library/items/H3WHAV9W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.19269" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-abstract-concept-modelling-in-conceptual-spaces-a-study-on-chess-strategies2026">6. Abstract Concept Modelling in Conceptual Spaces: A Study on Chess Strategies（2026）</h4>
+<ul>
+<li>作者與出處：Hadi Banaee, Stephanie Lowry · <em>arXiv</em></li>
+<li>核心問題：既有概念空間理論主要處理靜態感知性質，對於在時間中逐步展開、具有目標導向的抽象策略概念（如攻擊或棄子）缺乏相應的幾何表徵方法。</li>
+<li>關鍵做法：以西洋棋策略為驗證場域，在可解釋品質維度上將策略定義為幾何區域，把整局棋局實例化為穿越空間的時序軌跡；透過軌跡朝向特定區域的移動方向辨識策略意圖，同時支援對同一局勢進行雙視角建模，其軌跡模式與專家棋評一致。</li>
+<li>跨領域啟發：將靜態凸空間延伸為動態軌跡概念空間，為序列決策可解釋性與跨時間類比推理（<a class="wl" href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a>）提供幾何載體。</li>
+<li>連結：<a href="zotero://select/library/items/GV4SI4M8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.21771" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-38-篇">G5｜本子方向全量文獻泛讀清單（共 38 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 38 篇文獻（含開放存取 PDF 33 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進28-篇">A. 奠基經典、專著與核心演進（28 篇）</h3>
+<ul>
+<li><strong>2000｜Conceptual Spaces: The Geometry of Thought</strong>，Peter Gärdenfors（<em>MIT Press</em>，1141 引）：在符號邏輯與神經網路之間提出第三層，即幾何概念空間，用性質維度上的凸區域與 Voronoi 分割解釋詞義習得與概念組合。 <a href="zotero://select/library/items/W4VEHHRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7551/mitpress/2076.001.0001" rel="noopener">官方連結</a></li>
+<li><strong>2008｜From Universal Laws of Cognition to Specific Cognitive Models</strong>，Nick Chater A, Gordon D. A. Brown（<em>Cognitive Science</em>，62 引）：探討認知科學能否像物理學一樣建立普適的定量定律，並把 Shepard 概念空間指數泛化律和資訊尺度不變性連起來。 <a href="zotero://select/library/items/ERXBCJ4I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1080/03640210701801941" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Locative and Directional Prepositions in Conceptual Spaces: The Role of Polar Convexity</strong>，Joost Zwarts, Peter Gärdenfors（<em>Journal of Logic Language and Information</em>，31 引）：Locative and Directional Prepositions in Conceptual Spaces: The Role of Polar Convexity，Joost Zwarts, Peter Gärdenfors（證明空間方位與方向介詞在極座標系下仍普遍滿足極凸性，支持概念空間凸性公設在語言學上的解釋力，31 引）。 <a href="zotero://select/library/items/QSJRG8QE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10849-015-9224-5" rel="noopener">官方連結</a></li>
+<li><strong>2023｜A Quantum Geometric Framework for Modeling Color Similarity Judgments</strong>，Gunnar Paul Epping et al.（<em>Cognitive Science</em>，21 引）：A Quantum Geometric Framework for Modeling Color Similarity Judgments，Gunnar Paul Epping et al.（用希爾伯特空間量子子空間投影，處理 Tversky 不對稱色彩相似性違反經典度量公理的難題，21 引）。 <a href="zotero://select/library/items/SWBX56VQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1111/cogs.13231" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Semantic Communication with Conceptual Spaces</strong>，Dylan Wheeler, Erin E. Tripp, Balasubramaniam Natarajan（<em>IEEE Communications Letters</em>，17 引）：Semantic Communication with Conceptual Spaces，Dylan Wheeler, Erin E. Tripp, Balasubramaniam Natarajan（把 Gärdenfors 概念空間引入通訊工程，讓通訊系統從 Shannon 第一層的技術位元走向語意層的保真傳輸，17 引）。 <a href="zotero://select/library/items/KTI4HZXW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.01629" rel="noopener">官方連結</a></li>
+<li><strong>2016｜A case against convexity in conceptual spaces</strong>，José V. Hernández‐Conde（<em>Synthese</em>，16 引）：A case against convexity in conceptual spaces，José V. Hernández-Conde（<em>Synthese</em> 上的哲學反方論證：系統檢視凸性作為自然概念充要條件的反例與邊界限制，想了解這套理論受到的質疑就該讀，16 引）。 <a href="zotero://select/library/items/K8I2H629" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s11229-016-1123-z" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Categorical Semantics of Fuzzy Concepts in Conceptual Spaces</strong>，Sean Tull（<em>EPTCS 372, 2022, pp. 306-322</em>，3 引）：在 Gärdenfors 概念空間框架下，以滿足對數凹性的函數建構模糊概念之對稱么半範疇語意，並推廣至對數凹機率通道構成的 Markov 範疇以處理含噪推論。 <a href="zotero://select/library/items/6WTKUN5E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.05985" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Towards Grounding Conceptual Spaces in Neural Representations</strong>，Lucas Bechberger, Kai-Uwe Kühnberger（<em>arXiv (Cornell University)</em>，2 引）：為橋接符號幾何表徵與亞符號神經表徵，提出利用從無標籤資料無監督訓練的 InfoGAN 所學得之潛在空間，將 Gärdenfors 概念空間的幾何維度具體落地至深度神經網路表徵。 <a href="zotero://select/library/items/HRFUJPHA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.04825" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Quantum aspects of high dimensional formal representation of conceptual spaces</strong>，M S Ishwarya, Aswani Kumar Cherukuri（<em>arXiv (Cornell University)</em>，1 引）：針對人類認知常違反古典機率而使 Gärdenfors 概念空間傳統形式化難以完整刻劃的問題，分析認知建模從形式化概念空間向高維量子理論架構過渡的關聯結構，試圖為人類認知過程提供更系統的模型。 <a href="zotero://select/library/items/R26ECKUW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1806.11338" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Cabbage Sweeter than Cake? Analysing the Potential of Large Language Models for Learning Conceptual Spaces</strong>，Usashi Chatterjee, Amit Gajbhiye, Steven Schockaert（<em>arXiv</em>）：檢驗大型語言模型學習 Gärdenfors 概念空間中感知品質維度的潛力，發現在學習類人概念幾何特徵時，經微調的 BERT 系列模型表現可追平甚至超越體積大得多的 GPT-3 模型。 <a href="zotero://select/library/items/U6RECG7N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.05481" rel="noopener">官方連結</a></li>
+<li><strong>2023｜From Conceptual Spaces to Quantum Concepts: Formalising and Learning Structured Conceptual Models</strong>，Sean Tull et al.（<em>arXiv</em>）：將 Gärdenfors 概念空間的凸空間與領域分解結構進行範疇論推廣並以弦圖形式化，給出古典與量子兩種實例，實證系統可從簡單圖像自動學習形狀、顏色、大小與位置等概念表示。 <a href="zotero://select/library/items/GXA7SPXU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.08585" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Navigating Conceptual Space; A new take on Artificial General Intelligence</strong>，Per R. Leikanger（<em>Electronic ISSN 1611-3349 Lecture Notes in Computer Science 2021</em>）：結合 Tolman 認知地圖與概念空間幾何表徵理論，將推理視為概念空間中的有目的導航，並採用 neoRL 檢驗在高維歐氏空間中實現自主認知導航的通用性。 <a href="zotero://select/library/items/CU8VX6HQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2202.09646" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Domains, Concepts, and Conceptual Spaces</strong>，Wilhelm Geuder, Matthias Weisgerber（<em>Routledge eBooks</em>）：以 Gärdenfors 概念空間理論探討多模態概念與單一概念域之間的幾何性質差異，分析相似性如何同時作為幾何距離的推論結果與概念分類的基礎，並界定跨領域屬性的關聯結構。 <a href="zotero://select/library/items/KX9T4RAE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781315782362-91" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Formalized Conceptual Spaces with a Geometric Representation of Correlations</strong>，Lucas Bechberger, Kai-Uwe Kühnberger（<em>arXiv</em>）：指出 Gärdenfors 概念空間中凸性假設的限制，改以模糊星形集合（fuzzy star-shaped sets）給出參數化形式化定義，擴展跨領域相關性的幾何表示與概念運算及關係度量，並輔以玩具範例說明。 <a href="zotero://select/library/items/A7IHRBQE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1801.03929" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Formal Ways for Measuring Relations between Concepts in Conceptual Spaces</strong>，Lucas Bechberger, Kai-Uwe Kühnberger（<em>arXiv</em>）：延續概念空間的數學形式化架構，為衡量高維空間中概念間關係建立定量數學定義，形式化給出概念大小、子集度、蘊涵關係、相似度與居間性（betweenness）的計算方法以擴充概念空間表示能力。 <a href="zotero://select/library/items/TVQNWQC2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1804.02393" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Learning Conceptual Space Representations of Interrelated Concepts</strong>，Zied Bouraoui, Steven Schockaert（<em>arXiv</em>）：針對實例稀少時難以從文本嵌入可靠學習高斯概念區域的問題，提出貝氏模型從概念間關聯的背景知識建構資訊先驗來學習概念空間表徵，並在知識庫補全任務中顯著提升預測準確率。 <a href="zotero://select/library/items/QQBQ3TAD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1805.01276" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Lattice based Conceptual Spaces to Explore Cognitive Functionalities for Prosthetic Arm</strong>，M S Ishwarya, Aswani Kumar Cherukuri（<em>arXiv</em>）：將上肢義肢視為獨立認知系統，應用 Gärdenfors 概念空間理論建構義肢系統的概念空間並表示為概念格，透過概念格遍歷實現泛化（相似性）與特化（差異性）等認知功能操作。 <a href="zotero://select/library/items/6KWQXH2A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1807.01953" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Quantum Inspired High Dimensional Conceptual Space as KID Model for Elderly Assistance</strong>，Ishwarya M S, Aswani Kumar Ch（<em>arXiv</em>）：針對智慧居家高齡者日常活動辨識與健康監測，結合概念空間幾何與拓撲形式概念分析（FCA），建構以 Hilbert 空間表徵概念的量子啟發高維概念空間作為知識-資訊-資料（KID）認知模型。 <a href="zotero://select/library/items/C835ZRX7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.07603" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Conceptual Spaces for Cognitive Architectures: A Lingua Franca for Different Levels of Representation</strong>，Antonio Lieto, Antonio Chella, Marcello Frixione（<em>arXiv</em>）：探討 Gärdenfors 概念空間在符號型、連結主義與混合型認知架構中的角色，主張以概念空間作為中介表示層，銜接不同知識表徵層級與推理機制。 <a href="zotero://select/library/items/DZC26DR8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1701.00464" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Interacting Conceptual Spaces I : Grammatical Composition of Concepts</strong>，Joe Bolt et al.（<em>arXiv</em>）：引入凸關係範疇（category of convex relations）將範疇組合語意學推廣至認知概念空間模型，為名詞、形容詞與動詞建構凸幾何表徵並給出複合詞組語意的文法組合規則。 <a href="zotero://select/library/items/FZANF7F3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1703.08314" rel="noopener">官方連結</a></li>
+<li><strong>2017｜A Thorough Formalization of Conceptual Spaces</strong>，Lucas Bechberger, Kai-Uwe Kühnberger（<em>arXiv</em>）：針對傳統概念空間嚴格凸性假設的限制，提出基於模糊星狀集（fuzzy star-shaped sets）的完整數學形式化，納入跨領域維度相關性表徵並定義高效的交集、聯集與子空間投影運算以支援學習與推理。 <a href="zotero://select/library/items/ZH2UJ3A2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.06366" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Measuring Relations Between Concepts In Conceptual Spaces</strong>，Lucas Bechberger, Kai-Uwe Kühnberger（<em>arXiv</em>）：延伸其具跨領域維度關聯的概念空間數學形式化框架，為概念大小（size）、子集包含度、蘊含關係、相似度與介於性（betweenness）給出可量化的數學定義以刻畫概念間幾何關係。 <a href="zotero://select/library/items/P4J39KJG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1707.02292" rel="noopener">官方連結</a></li>
+<li><strong>2017｜A Comprehensive Implementation of Conceptual Spaces</strong>，Lucas Bechberger, Kai-Uwe Kühnberger（<em>arXiv</em>）：依據團隊先前建立的模糊星狀集概念空間形式化理論，實作支援跨領域相關性表徵及多種幾何概念運算（包含概念合併、相交、子空間投影等操作）的完整計算軟體系統。 <a href="zotero://select/library/items/NPZGS6NQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1707.05165" rel="noopener">官方連結</a></li>
+<li><strong>2017｜The Size of a Hyperball in a Conceptual Space</strong>，Lucas Bechberger（<em>arXiv</em>）：針對 Gärdenfors 概念空間中「領域內採歐氏度量、跨領域採曼哈頓度量」的組合距離結構，推導出概念空間中超球體體積大小的精確解析計算公式，用於量化具最小相似度門檻的概念覆蓋範圍。 <a href="zotero://select/library/items/7FTMJA4Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1708.05263" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Emerging Dimension Weights in a Conceptual Spaces Model of Concept Combination</strong>，Martha Lewis, Jonathan Lawry（<em>arXiv</em>）：在概念空間模型中建立合取概念組合的加權求和語意框架，透過多代理人語言演化模擬展示共享維度權重如何湧現，並分析概念採納速率對權重變異與收斂時間的影響。 <a href="zotero://select/library/items/F94JEHSE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1601.06763" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Interacting Conceptual Spaces</strong>，Josef Bolt et al.（<em>EPTCS 221, 2016, pp. 11-19</em>）：將範疇組合語意學應用於概念空間認知模型，引入凸關係（convex relations）範疇以保留概念凸性結構，並示範如何由基本空間組合建構形容詞與動詞等複合語意類型的概念空間。 <a href="zotero://select/library/items/MJ9TC32Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1608.01402" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Words, Concepts, and the Geometry of Analogy</strong>，Stephen McGregor, Matthew Purver, Geraint Wiggins（<em>EPTCS 221, 2016, pp. 39-48</em>）：從幾何概念空間視角探討詞彙、概念與類比推理的關係，檢視靜態分佈語意模型的限制，並提出從高維詞義空間動態投影低維子空間的機制，以實現線上、脈絡化的類比問題求解。 <a href="zotero://select/library/items/FR6SW2Q8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1608.01403" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Independence Concepts for Convex Sets of Probabilities</strong>，Luis M. de Campos, Serafin Moral（<em>arXiv</em>）：比較機率凸集合（imprecise probabilities）上「無關性」與「因子分解」兩種獨立性概念，說明兩者在經典機率論等價但在凸集合中不再等價，並探討如何從邊際凸集合建構全域聯合集合。 <a href="zotero://select/library/items/HB42S8FM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1302.4940" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻10-篇">B. 2024–2026 近期推進與前沿文獻（10 篇）</h3>
+<ul>
+<li><strong>2026｜Abstract Concept Modelling in Conceptual Spaces: A Study on Chess Strategies</strong>，Hadi Banaee, Stephanie Lowry（<em>arXiv</em>）：提出具時間展開特性的概念空間框架，將西洋棋攻擊或犧牲等策略表示為品質維度上的幾何區域，把棋局建模為指向區域的軌跡並支援雙視角詮釋，軌跡模式與專家評論相符。 <a href="zotero://select/library/items/GV4SI4M8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.21771" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Muse: Representation Geometry of Muon Beyond Normalized Momentum</strong>，Da Chang et al.（<em>arXiv</em>）：研究極映射正交化前的參數矩陣表徵幾何，提出跨原生、近方形、瘦長與向量表徵共享動量規則的 Muse 最佳化器家族，分析短邊維度對奇異通道數與非凸收斂常數之影響。 <a href="zotero://select/library/items/UMJ9PH7I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.14536" rel="noopener">官方連結</a></li>
+<li><strong>2026｜QuantumPhaseNet: A Gauge-Covariant Geometric and Quantum-Spectral Theory of Semantic Concept Hierarchies with Prototype Validation of a Classical Quantum-Inspired Model</strong>，Kiyotaka Kasubuchi, Kazuo Fukiya（<em>arXiv</em>）：提出具規範共變性與量子譜結構的 Transformer 表徵擴展 QuantumPhaseNet，以複振幅與相位率定義語意波長並證得局部規範不變性與么正性，合成實驗的階層相關性達 0.852。 <a href="zotero://select/library/items/9M4BSK5U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.15820" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Brains and language models converge on a shared conceptual space across different languages</strong>，Zaid Zada et al.（<em>arXiv</em>）：結合跨語言大型語言模型與英、中、法語母語者的自然故事 fMRI 腦造影，探討不同語言是否收斂至共享概念空間，發現異語言模型於中間層形成相似嵌入並透過體素編碼模型跨語言預測腦活動。 <a href="zotero://select/library/items/46ZUAHA3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.20489" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Extracting Conceptual Spaces from LLMs Using Prototype Embeddings</strong>，Nitesh Kumar, Usashi Chatterjee, Steven Schockaert（<em>arXiv</em>）：針對從大型語言模型提取認知概念空間與底層感知特徵的難題，提出以原型描述嵌入來編碼特徵（如甜度對應極甜食物的描述），並微調模型以對齊這類感知表徵幾何。 <a href="zotero://select/library/items/H3WHAV9W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.19269" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Into the Rabbit Hull: From Task-Relevant Concepts in DINO to Minkowski Geometry</strong>，Thomas Fel et al.（<em>ICLR 2024</em>）：以 32,000 維稀疏自編碼器解析 DINOv2 表徵，揭示分類（「他處」否定概念）、分割（邊界子空間）與深度估計各自調用專化概念，並進一步以 Minkowski 幾何刻畫其概念空間結構。 <a href="zotero://select/library/items/H4QAXKMZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2510.08638" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Autoencoder-Based Domain Learning for Semantic Communication with Conceptual Spaces</strong>，Dylan Wheeler, Balasubramaniam Natarajan（<em>arXiv</em>）：針對基於 Gärdenfors 概念空間的語意通訊過去需仰賴人工設計幾何空間的限制，提出基於自動編碼器的領域學習方法，讓通訊系統自動建構顯式且具幾何結構的語意概念空間以傳遞意義。 <a href="zotero://select/library/items/HGQX8WDB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.16569" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Ranking Entities along Conceptual Space Dimensions with LLMs: An Analysis of Fine-Tuning Strategies</strong>，Nitesh Kumar, Usashi Chatterjee, Steven Schockaert（<em>arXiv</em>）：針對主觀與感知維度缺乏真實排序標註導致難以直接從大語言模型蒸餾概念空間的問題，採用較易取得的特徵進行微調訓練，並分析所得排序能力能否有效遷移至感知與主觀概念維度。 <a href="zotero://select/library/items/CG523JPH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.15337" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Semantic distance organizes social knowledge: Insights from semantic dementia and cross-modal conceptual space</strong>，Y. Ivette Colón et al.（<em>arXiv</em>）：透過三元組相似度判斷建構涵蓋年齡與性別維度的社會詞彙與圖像序數嵌入空間，並與語意型失智症患者的詞圖配對錯誤比較，顯示患者對性別資訊的保留較年齡更穩健。 <a href="zotero://select/library/items/RM737QAZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.15151" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Connecting Concept Convexity and Human-Machine Alignment in Deep Neural Networks</strong>，Teresa Dorszewski et al.（<em>arXiv</em>）：檢視預訓練與微調視覺 Transformer 潛在空間的概念凸性（convexity）與人類行為對齊度間的關係，發現兩者存在相關性：最佳化人機對齊通常提升凸性，但直接微調提高凸性對對齊度卻呈現不一致影響。 <a href="zotero://select/library/items/6USSC6SP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.06362" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-07d70749">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a><span class="rs">在離散的邏輯符號和低階的神經脈衝之間，這個領域建立第三層描述語言，也就是幾何。</span></li><li><a href="04C_%E7%B5%90%E6%A7%8B%E6%98%A0%E5%B0%84%E9%A1%9E%E6%AF%94%E6%8E%A8%E7%90%86%E3%80%81%E4%B8%8A%E4%B8%8B%E6%96%87%E5%AD%B8%E7%BF%92%E8%88%87%E5%85%83%E8%A1%A8%E7%A4%BA%E9%81%B7%E7%A7%BB.html">結構映射類比推理、上下文學習與元表示遷移</a></li><li><a href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a></li><li><a href="26C_%E7%A5%9E%E7%B6%93%E8%A1%A8%E5%BE%B5%E5%B9%BE%E4%BD%95%E3%80%81%E8%AA%8D%E7%9F%A5%E6%B5%81%E5%BD%A2%E6%9B%B2%E7%8E%87%E8%88%87%E6%8B%93%E6%92%B2%E8%B3%87%E6%96%99%E5%88%86%E6%9E%90.html">神經表徵幾何、認知流形曲率與拓撲資料分析</a></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21C_%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%A5%E6%B3%95%E5%BD%A2%E5%BC%8F%E9%9A%8E%E5%B1%A4%E3%80%81%E7%B5%84%E5%90%88%E6%B3%9B%E5%8C%96%E6%B8%AC%E8%A9%A6%E8%88%87%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%AA%9E%E6%84%8F%E5%BA%AB.html">語言模型句法形式階層、組合泛化測試與形式化語意庫</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

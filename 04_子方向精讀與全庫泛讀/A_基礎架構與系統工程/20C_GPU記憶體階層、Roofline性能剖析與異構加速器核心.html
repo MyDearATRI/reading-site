@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>20C｜GPU記憶體階層、Roofline性能剖析與異構加速器核心 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-d630327f" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="20cgpu記憶體階層roofline性能剖析與異構加速器核心">20C｜GPU記憶體階層、Roofline性能剖析與異構加速器核心</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>
+同領域子方向：<a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> · <a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> 的底層架構與核心執行基礎，向下直面單顆加速器內部的暫存器、SRAM、HBM 與跨節點／主機記憶體階層限制，向上決定 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> 與 <a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a> 的真實算力利用率。演進主線從提出運算與頻寬雙上界的 Roofline 視覺性能模型（Williams 等人，2009），推進至以線性規劃協調 GPU/CPU/磁碟卸載與低位元壓縮的單卡大模型引擎（FlexGen、DeepSpeed Inference），再發展到貼合 GPU 硬體階層的三層簡潔核心抽象（ThunderKittens）以及資源受限裝置上的協同推測解碼與混合架構 Roofline 剖析。</p>
+</aside>
+<ul>
+<li>核心問題：AI 模型運算規模與現代加速器的物理階層之間存在雙重落差。第一，高階運算核心的浮點吞吐遠高於 HBM、PCIe 主機記憶體與磁碟頻寬，許多張量運算或客製 GPU 核心即使算力需求不大，實測性能卻長期卡在資料搬運上限（Williams 等人，2009；Röhrig-Zöllner 等人，2021），且手工撰寫能協調 warp 矩陣指令、非同步記憶體載入與區塊排程的高效核心極難維護（Spector 等人，2024）。第二，在單張 16 GB 消費級或邊緣 GPU 上部署數百億參數模型或雙模型推測解碼時，顯存容量不足以容納完整權重與快取，而天真的主機交換（swapping）會因頻寬過低導致推論延遲失效（Sheng 等人，2023；Niu 等人，2024；Patel，2026）。</li>
+<li>直覺模型：可以把 GPU 記憶體階層比喻成一間分工嚴格的餐廳廚房：計算單元是切菜飛快的主廚，on-chip 共享記憶體是隨手可拿的工作檯，HBM 顯存是廚房內的冷藏櫃，而 CPU 主記憶體與 SSD 則是門外的儲藏室與遠端倉庫。Roofline 模型就像一張標出「主廚刀速上限」與「取料走廊寬度上限」的產能上限圖：只要一道菜每取一次食材只切一兩刀（低算術強度），出菜速度就永遠卡在走廊走路時間，再快的刀法也沒用；ThunderKittens 則是把工作檯規格統一成 16x16 標準餐盤並讓助手在切菜時提前非同步去冷藏櫃備料，而 FlexGen 則透過數學規劃算出食材該堆在冷藏櫃還是門外倉庫才不至於來回空跑。</li>
+<li>分階段閱讀路線：第一步先讀 Williams 等人 (2009)（Roofline 模型）與 Röhrig-Zöllner 等人 (2021)（高階 SVD 的 Roofline 分析），建立算術強度與記憶體頻寬受限（memory-bound）及計算受限（compute-bound）的基礎判別工具。第二步精讀 Aminabadi 等人 (2022)（DeepSpeed Inference）、Sheng 等人 (2023)（FlexGen）與 Spector 等人 (2024)（ThunderKittens），掌握多卡與異構儲存卸載的系統解法、線性規劃張量配置以及對應 warp/block/grid 三層階層的 GPU 核心寫法。第三步閱讀 Niu 等人 (2024)（RTiL）與 Patel (2026) 關於記憶體受限消費級 GPU 上的推測解碼與量化實證，並可延伸參考 Zhou (2026) 與 Ma 等人 (2026) 將 Roofline 框架擴展至 Arm CPU 與記憶體內運算（CIM）架構的最新題目。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;Roofline 視覺性能模型 Williams 2009&quot;] --&gt; B[&quot;演算法通訊下界與讀兩次極限 Röhrig-Zöllner 2021&quot;]
+  A --&gt; C[&quot;多卡與異構記憶體系統 DeepSpeed Inference 2022&quot;]
+  C --&gt; D[&quot;GPU-CPU-磁碟線性規劃卸載與 4 位元壓縮 FlexGen 2023&quot;]
+  A --&gt; E[&quot;三層 GPU 核心抽象與非同步重疊 ThunderKittens 2024&quot;]
+  D --&gt; F[&quot;主機卸載與小模型協同驗證 RTiL 2024&quot;]
+  F --&gt; G[&quot;消費級 GPU 量化推測解碼 Patel 2026&quot;]
+  A --&gt; H[&quot;Arm CPU 與 CIM 擴展 Roofline 剖析 2026&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>Roofline 性能模型與算術強度脊點 (Roofline Performance Model and Operational Intensity)</strong></p>
+<ul>
+<li>直覺理解：每個程式在特定硬體上的理論最快速度只受兩個天花板夾擊：不是算力峰值（算太慢），就是記憶體頻寬乘以每搬運一位元組能做的運算次數（搬太慢）；看懂這個拐點就能決定該最佳化演算法重用率還是壓低搬運量。</li>
+<li>機制或核心表達式：Williams 等人 (2009) 提出以雙對數座標呈現的 Roofline 模型：設硬體峰值浮點運算率為 <span class="math inline">P_{\mathrm{peak}}</span>（FLOP/s），主記憶體頻寬為 <span class="math inline">B_{\mathrm{mem}}</span>（Byte/s），程式的算術強度（operational intensity）定義為每存取一位元組記憶體所執行的浮點運算數 <span class="math inline">I = \frac{\text{FLOPs}}{\text{Bytes}}</span>。則實際可達性能 <span class="math inline">P</span> 受限於 <span class="math inline">P \le \min(P_{\mathrm{peak}}, B_{\mathrm{mem}} \cdot I)</span>，兩條線段交會於硬體脊點 <span class="math inline">I^* = P_{\mathrm{peak}} / B_{\mathrm{mem}}</span>。在矩陣與張量分解實務中，Röhrig-Zöllner 等人 (2021) 利用簡易 Roofline 模型證明，當目標張量秩（rank）夠小時，張量列車奇異值分解（TT-SVD）的性能受限於資料搬移，在合理假設下的理論最小執行時間約為讀取全部資料兩次的耗時，並據此實作接近最佳下界的分散式秩保留 TSQR 步驟。</li>
+<li>能做到什麼，代價是什麼：Roofline 以極少硬體參數提供直觀且可跨多核、GPU、CPU 與異質架構比較的性能上限診斷；代價是基礎版本假設完全重疊與連續串流存取，實務上還需疊加網路互連、快取未命中或運算元啟動延遲等次級天花板才足以指導細部核心調校。</li>
+</ul>
+</li>
+<li>
+<p><strong>GPU/CPU/磁碟異構記憶體卸載與線性規劃排程 (Heterogeneous Memory Offloading and LP Scheduling)</strong></p>
+<ul>
+<li>直覺理解：當模型大到單張 GPU 裝不下時，不一定要硬買多張伺服器卡；只要把不同層的權重、激活與 KV 快取按運算順序有規劃地放在 GPU、主機記憶體與硬碟之間輪轉並做低位元壓縮，就能用單卡跑出高吞吐批次推論。</li>
+<li>機制或核心表達式：針對延遲較不敏感但追求高批次吞吐的離線／批次生成場景，FlexGen（Sheng 等人，2023）聚合 GPU 顯存、CPU 主記憶體與磁碟三層資源，將「張量在各層級的儲存位置與存取排程型樣」形式化為線性規劃（LP）問題進行自動搜尋，並進一步將模型權重與注意力快取壓縮至 4 位元（4-bit）以放大可行批次空間，成功在單張 16 GB GPU 上執行 OPT-175B 並取得高吞吐表現。對於多卡或稀疏 MoE 架構，DeepSpeed Inference（Aminabadi 等人，2022）則協同配置不同記憶體與儲存層級以同時因應低延遲或高吞吐目標。</li>
+<li>能做到什麼，代價是什麼：透過線性規劃與 4 位元量化突破單卡顯存容量限制，在有限硬體大幅提升批次總吞吐；代價是跨 PCIe 與磁碟搬移權重會大幅拉高單一請求的端到端延遲，因此主要適用於延遲不敏感的批次處理而非即時互動服務。</li>
+</ul>
+</li>
+<li>
+<p><strong>三層級 GPU 核心抽象：Warp 磚塊、區塊重疊與網格排程 (ThunderKittens Three-Level Kernel Abstractions)</strong></p>
+<ul>
+<li>直覺理解：手寫高效能 CUDA 核心之所以困難，往往不是數學複雜，而是要同時對齊硬體張量核心尺寸與多層非同步排程；透過把核心程式統一成標準 16x16 小矩陣磚塊搭配預製的跨 warp 重疊樣板，就能用接近 PyTorch 的直覺寫出逼近理論峰值的底層核心。</li>
+<li>機制或核心表達式：針對 AI 架構映射至 GPU 硬體與線形注意力等算子實測低於理論上限的問題，ThunderKittens（Spector 等人，2024）將設計抽象直接對齊 GPU 硬體三層結構：(1) 在 warp 層級，定義 <span class="math inline">16 \times 16</span> 矩陣磚塊（matrix tiles）為基本資料結構，並提供類 PyTorch 語法的平行磚塊運算原語；(2) 在執行緒塊（thread-block）層級，提供跨平行 warps 重疊執行非同步操作（如載入與計算重疊）的標準樣板；(3) 在網格（grid）層級，提供輔助機制以隱藏區塊啟動、拆卸（tear-down）與記憶體存取延遲。</li>
+<li>能做到什麼，代價是什麼：大幅降低開發與維護高速 AI 核心的工程門檻，同時逼近手寫最佳化核心的硬體上限；代價是核心資料流需能貼合固定大小的 16x16 磚塊幾何，對極度不規則稀疏存取或單向標量邏輯的適用性較弱。</li>
+</ul>
+</li>
+<li>
+<p><strong>記憶體受限裝置的量化推測解碼與 CPU–GPU 協同驗證 (Memory-Efficient Speculative and Collaborative Inference)</strong></p>
+<ul>
+<li>直覺理解：在 16 GB 筆電或工作站顯卡上同時載入大目標模型與小草稿模型往往會直接爆顯存；透過把草稿與驗證任務分攤到 CPU 或結合模型量化與記憶體管理，既能享受到推測解碼的平行驗證加速，又不會把顯存塞滿。</li>
+<li>機制或核心表達式：為解決本地記憶體受限裝置進行主機交換過慢的問題，RTiL（Niu 等人，2024）採用協同推論架構：由輕量級 LLM 生成候選詞元再交給較強大的目標模型驗證品質，並將部分推論負載分派至 CPU 與最佳化資料搬運路徑，在不損失輸出品質下顯著縮短推論時間。進一步針對消費級 GPU 上的標準推測解碼（需同時常駐草稿與目標模型），Patel (2026) 整合模型量化與記憶體管理策略，使 LLaMA-7B 的推測解碼在 16 GB NVIDIA RTX A4000 上僅消耗 12.0 GB 顯存，取得 76.3% 平均接受率、2.31 倍詞元生成吞吐加速與 56.8% 延遲降低。</li>
+<li>能做到什麼，代價是什麼：讓推測解碼與協同驗證能在 16 GB 級消費或邊緣顯卡上實際落地，兼顧本地隱私與即時反應速度；代價是量子化誤差若壓低草稿與目標模型輸出分佈的一致性，接受率下降會直接削弱推測加速比。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>利用 Roofline 模型診斷算子瓶頸與指導演算法設計</strong>：假設某張加速器的峰值算力為 <span class="math inline">P_{\mathrm{peak}} = 100</span> TFLOP/s，記憶體頻寬為 <span class="math inline">B_{\mathrm{mem}} = 2</span> TB/s。若某個張量運算核目前的算術強度只有 <span class="math inline">I = 10</span> FLOP/Byte，請問該算子的硬體脊點 <span class="math inline">I^*</span> 與理論上限性能各是多少？此時單純將計算單元的時脈再提升一倍，實際速度會有變化嗎？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>硬體脊點為 <span class="math inline">I^* = P_{\mathrm{peak}} / B_{\mathrm{mem}} = 100 \times 10^{12} / (2 \times 10^{12}) = 50</span> FLOP/Byte。因為目前程式的算術強度 <span class="math inline">I = 10 &lt; I^*</span>，屬於記憶體頻寬受限區間，理論最大效能僅為 <span class="math inline">B_{\mathrm{mem}} \cdot I = 2 \times 10^{12} \times 10 = 20</span> TFLOP/s（僅達峰值算力兩成）。因此只提升算力峰值 <span class="math inline">P_{\mathrm{peak}}</span> 對實際執行速度完全沒有幫助，必須透過核心融合（kernel fusion）、SRAM 分塊重用或低位元量化減少資料搬運量，把算術強度推向脊點右側。</p>
+</details>
+<ol start="2">
+<li><strong>FlexGen 離線卸載策略與 RTiL 本地即時協同的場景分工</strong>：FlexGen（Sheng 等人，2023）與 RTiL（Niu 等人，2024）都處理「模型無法完整放入單卡 GPU 顯存」的問題，為何 FlexGen 適合靠線性規劃把權重卸載到磁碟，而 RTiL 卻必須避免傳統的慢速資料交換（swapping）並改用輕量模型協同與 CPU 分工？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>關鍵在於兩者的延遲目標與批次假設不同。FlexGen 針對延遲不敏感的批次生成工作負載，透過極大化批次大小讓每一次從 CPU 或磁碟搬入層權重的 I/O 成本能被數百上千個序列攤提，換取高總吞吐量。相反地，RTiL 面向本地裝置上的即時單請求推論，每次生成只有單一或極少請求，無法靠大批量攤平 PCIe/主記憶體來回交換的延遲，因此必須藉助輕量草稿生成、批次化驗證與 CPU 協同運算來縮減單請求端到端時間。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>非 GPU 異質架構（Arm CPU 與 CIM）的統一 Roofline 剖析標準</strong>：隨著邊緣與新型硬體興起，Zhou (2026) 與 Ma 等人 (2026) 近期相繼將 Roofline 分析擴展至 Arm CPU 混合量化與記憶體內運算（Compute-in-Memory, CIM）評估。然而傳統僅包含單一 <span class="math inline">P_{\mathrm{peak}}</span> 與 <span class="math inline">B_{\mathrm{mem}}</span> 的雙段折線難以精確刻畫 CIM 陣列內類比／數位轉換開銷、混合精度指令吞吐切換與多級快取協同，建立能跨 GPU、CPU 與 CIM 公平預測實際延遲的擴展 Roofline 模型仍在發展中。</li>
+<li><strong>高階抽象核心框架對動態稀疏與極端低位元算子的覆蓋度</strong>：ThunderKittens（Spector 等人，2024）以 <span class="math inline">16 \times 16</span> 矩陣磚塊與 warp 樣板成功簡化了稠密與線性注意力核心的撰寫，但當上層演算法走向非結構化權重剪枝、不規則分塊稀疏 KV 選擇或 4 位元以下混合反量化融合時，如何在不退回繁瑣手工 PTX／匯編的前提下讓磚塊級抽象直接產生高頻寬利用率的核心，仍是系統編譯與核心語言設計的開放挑戰。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>Roofline 頻寬受限模型對推論服務分頁與快取選擇的指導</strong>：本子方向的算術強度分析與 <span class="math inline">16 \times 16</span> 磚塊非同步重疊技術，可直接移植至 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> 中執行分頁 KV 讀取與 GQA 群組區塊選擇（如 CompactAttention）的底層注意力核心，精確評估解碼批次與量化壓縮帶來的頻寬收益。</li>
+<li><strong>單卡讀取下界思維向分散式集合通訊排程的遷移</strong>：Röhrig-Zöllner 等人 (2021) 從 Roofline 出發為 TT-SVD 推導「最少讀取資料兩次」的演算法下界並實作分散式平行 TSQR，這種先建立資料搬運理論下界再反推通訊壓縮演算法的方法論，可直接遷移至 <a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a> 中的梯度歸約與跨節點激活檢查點設計。</li>
+<li><strong>硬體友善狀態空間算子與連續時間模型的磚塊核心實作</strong>：ThunderKittens（Spector 等人，2024）明確指出線性注意力等非標準算子往往因難以映射至 GPU 記憶體階層而未達理論峰值；該套三層磚塊與非同步重疊抽象正適合用於加速 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 中的線性遞迴掃描與狀態空間捲積核。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-roofline-an-insightful-visual-performance-model-for-floating-point-programs-and-multicore-architectures2009">1. Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures（2009）</h4>
+<ul>
+<li>作者與出處：Samuel Williams, Andrew S. Waterman, David A. Patterson · <em>Lawrence Berkeley National Laboratory</em></li>
+<li>核心問題：隨著多核處理器與加速器日益複雜，程式設計師與架構師缺乏一個既直觀又能同時結合計算峰值與記憶體頻寬限制的性能評估模型，難以判斷程式效能受限的真實來源。</li>
+<li>關鍵做法：提出 Roofline 視覺性能模型，以浮點運算對記憶體位元組比例（算術強度）為橫軸、可達浮點性能為縱軸，結合硬體峰值算力與記憶體頻寬上限描繪出直觀的效能天花板，協助開發者系統性判斷平行軟體應往增強資料局部性或改善平行計算推進。</li>
+<li>跨領域啟發：建立整個系統性能分析的通用坐標系，所有量化、核心融合與硬體設計皆可在此平面上檢驗是否逼近真實上界。</li>
+<li>連結：<a href="zotero://select/library/items/WMN3PKZ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2172/1407078" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-deepspeed-inference-enabling-efficient-inference-of-transformer-models-at-unprecedented-scale2022">2. DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale（2022）</h4>
+<ul>
+<li>作者與出處：Reza Yazdani Aminabadi, Samyam Rajbhandari, Minjia Zhang, Ammar Ahmad Awan, Cheng Li · <em>International Conference for High Performance Computing, Networking, Storage and Analysis (SC)</em></li>
+<li>核心問題：Transformer 模型規模跨越千億參數且涵蓋混合專家（MoE）等稀疏變體，部署環境又橫跨單卡、多卡與多級異構記憶體儲存系統，同時須兼顧延遲關鍵或吞吐導向目標，導致通用高效推論系統極難設計。</li>
+<li>關鍵做法：提出 DeepSpeed Inference 全面性推論系統方案，整合針對稠密與稀疏 Transformer 的多卡低延遲／高吞吐執行機制，並協調跨不同記憶體與儲存層級的資源調度以支撐超大規模模型推論。</li>
+<li>跨領域啟發：銜接分散式大模型權重切分（<a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a>）與異構儲存層級卸載架構的早期系統典範。</li>
+<li>連結：<a href="zotero://select/library/items/ANQ42NVM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2207.00032" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-flexgen-high-throughput-generative-inference-of-large-language-models-with-a-single-gpu2023">3. FlexGen: High-Throughput Generative Inference of Large Language Models with a Single GPU（2023）</h4>
+<ul>
+<li>作者與出處：Ying Sheng, Lianmin Zheng, Binhang Yuan, Zhuohan Li, Max Ryabinin · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：大型語言模型極高的算力與顯存需求通常迫使部署者使用多張高階伺服器加速器，但在對延遲較不敏感的批次處理應用中，亟需探索如何在單張 16 GB 等級的有限 GPU 上完成超高吞吐推論。</li>
+<li>關鍵做法：提出 FlexGen 高吞吐生成引擎，聚合 GPU、CPU 與磁碟三層記憶體與計算資源，透過求解線性規劃（LP）問題搜尋最佳張量儲存與存取排程型樣，並將權重與注意力快取壓縮至 4 位元而幾乎不損準確率，在單張 16 GB GPU 上運行 OPT-175B 並取得相較既有卸載系統顯著更高的吞吐量。</li>
+<li>跨領域啟發：展示利用數學最佳化管理三級異構記憶體階層的威力，與 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> 的低延遲線上服務形成鮮明取捨對比。</li>
+<li>連結：<a href="zotero://select/library/items/VXQGK7C7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.06865" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-thunderkittens-simple-fast-and-adorable-ai-kernels2024">4. ThunderKittens: Simple, Fast, and Adorable AI Kernels（2024）</h4>
+<ul>
+<li>作者與出處：Benjamin F. Spector, Simran Arora, Aaryan Singhal, Daniel Y. Fu, Christopher Ré · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：將新型 AI 架構映射至複雜 GPU 硬體已成領域瓶頸，即便在線性注意力等成熟算子上，手寫客製核心仍常無法達到理論性能門檻，且各代硬體特性歧異使核心極難撰寫與維護。</li>
+<li>關鍵做法：提出 ThunderKittens 核心開發框架，以精簡的三層抽象精確對應 GPU 階層：warp 層提供 <span class="math inline">16 \times 16</span> 矩陣磚塊資料結構與類 PyTorch 平行磚塊運算、執行緒塊層提供跨平行 warps 重疊非同步操作的樣板、網格層提供隱藏啟動拆卸與記憶體成本的支援。</li>
+<li>跨領域啟發：為各類注意力變體與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 的狀態空間算子提供可維護的高性能底層核心範式。</li>
+<li>連結：<a href="zotero://select/library/items/7RKCJQTC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.20399" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-rtil-real-time-inference-of-large-language-models-on-memory-constrained-gpu-devices2024">5. RTiL: Real-Time Inference of Large Language Models on Memory-Constrained GPU Devices（2024）</h4>
+<ul>
+<li>作者與出處：Juxin Niu, Wei Zhang, Chun Jason Xue, Nan Guan · <em>IEEE International Conference on Embedded and Real-Time Computing Systems and Applications (RTCSA)</em></li>
+<li>核心問題：在本地機器部署大模型能提供即時反應、隱私保護與穩定性，但本地 GPU 顯存通常裝不下完整模型；若僅靠 GPU 與主記憶體間的慢速資料交換執行，推論延遲將高到難以實用。</li>
+<li>關鍵做法：提出系統化解決方案 RTiL，採取由輕量 LLM 生成輸出詞元並交由強大 LLM 驗證品質的協同推論架構，同時將部分推論負載分派至 CPU 並最佳化資料搬移，在維持與單獨使用大型模型相同輸出品質下顯著加速本地推論。</li>
+<li>跨領域啟發：將推測驗證思想與異構 CPU–GPU 負載切分結合，展示記憶體受限本地硬體上的即時推論系統設計。</li>
+<li>連結：<a href="zotero://select/library/items/K76VJKX6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/rtcsa62462.2024.00013" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-memory-efficient-speculative-decoding-for-large-language-model-inference-on-commodity-gpus2026">6. Memory-Efficient Speculative Decoding for Large Language Model Inference on Commodity GPUs（2026）</h4>
+<ul>
+<li>作者與出處：Tejas Patel · <em>IEEE International Conference on Communication Systems and Network Technologies (CSNT)</em></li>
+<li>核心問題：推測解碼能靠小草稿模型平行預測並由目標模型驗證來加速生成，但傳統實作要求同時將草稿與目標模型載入記憶體，經常超出消費級 GPU 的有限顯存容量。</li>
+<li>關鍵做法：提出整合模型量化與最佳化記憶體管理的低顯存推測解碼框架，在配備 16 GB 顯存的 NVIDIA RTX A4000 上僅使用 12.0 GB 記憶體執行 LLaMA-7B 推論，保持輸出品質並達到 76.3% 平均接受率、2.31 倍詞元生成吞吐加速以及 56.8% 延遲縮減。</li>
+<li>跨領域啟發：實證證明量化壓縮與推測驗證在 16 GB 邊緣與消費級顯卡上的正交相乘效益。</li>
+<li>連結：<a href="zotero://select/library/items/S78FQUR3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/csnt69054.2026.11502509" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-10-篇">G5｜本子方向全量文獻泛讀清單（共 10 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 10 篇文獻（含開放存取 PDF 4 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進4-篇">A. 奠基經典、專著與核心演進（4 篇）</h3>
+<ul>
+<li><strong>2022｜DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale</strong>，Reza Yazdani Aminabadi et al.（<em>2012 International Conference for High Performance Computing, Networking, Storage and Analysis</em>，296 引）：DeepSpeed Inference: Enabling Efficient Inference of Transformer Models at Unprecedented Scale，Reza Yazdani Aminabadi et al.（SC 論文：針對稠密百億模型與稀疏 MoE，系統化整合深度算子核融合、多 GPU 張量並行與異質記憶體卸載，296 引）。 <a href="zotero://select/library/items/ANQ42NVM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2207.00032" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Roofline: An Insightful Visual Performance Model for Floating-Point Programs and Multicore Architectures</strong>，Samuel Williams, Andrew S. Waterman, David A. Patterson（<em>Lawrence Berkeley National Laboratory</em>，110 引）：計算機體系結構的經典論文：用一張圖，以算術強度、記憶體頻寬屋簷與峰值算力屋頂說明硬體效能瓶頸在哪裡。 <a href="zotero://select/library/items/WMN3PKZ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2172/1407078" rel="noopener">官方連結</a></li>
+<li><strong>2023｜FlexGen: High-Throughput Generative Inference of Large Language Models with a Single GPU</strong>，Ying Sheng et al.（<em>arXiv (Cornell University)</em>，86 引）：FlexGen: High-Throughput Generative Inference of Large Language Models with a Single GPU，Ying Sheng et al.（面向對延遲不敏感的批次生成任務，用線性規劃協同調度 GPU、CPU 記憶體與磁碟三級儲存，並搭配 4-bit 壓縮，在單張消費級卡上達到很高的吞吐量，86 引）。 <a href="zotero://select/library/items/VXQGK7C7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.06865" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Performance of high-order SVD approximation: reading the data twice is enough</strong>，Melven Röhrig-Zöllner, Jonas Thies, Achim Basermann（<em>elib (German Aerospace Center)</em>）：針對高階張量列奇異值分解（TT-SVD）進行效能分析，指出小秩設定下的高瘦矩陣分解受限於記憶體頻寬，據 Roofline 模型推論最小執行時間僅需讀取資料兩次並實作分散式平行演算法。 <a href="zotero://select/library/items/4VB2X9G8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻6-篇">B. 2024–2026 近期推進與前沿文獻（6 篇）</h3>
+<ul>
+<li><strong>2026｜Roofline-Guided Mixed Quantization and Kernel Co-Optimization for Efficient Large Language Model Inference on Arm CPUs</strong>，Quan Zhou（<em>Unknown</em>，4 引）：用硬體 Roofline 效能模型做精確的定量導引，聯合最佳化混合精度量化配置（Mixed Quantization）與底層 Arm SIMD／矩陣核心算子排程，讓推論吞吐量貼近硬體的理論上限。 <a href="zotero://select/library/items/M64GSMDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/dipca70202.2026.11565905" rel="noopener">官方連結</a></li>
+<li><strong>2024｜RTiL: Real-Time Inference of Large Language Models on Memory-Constrained GPU Devices</strong>，Juxin Niu et al.（<em>IEEE International Conference on Embedded and Real-Time Computing Systems and Applications (RTCSA)</em>，2 引）：針對受限 GPU 記憶體執行本地大模型推論時主記憶體換頁過慢的問題，提出協作推論系統 RTiL，由輕量模型生成詞元並交由大型模型驗證品質以實現即時推論。 <a href="zotero://select/library/items/K76VJKX6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/rtcsa62462.2024.00013" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A CIM-Aware Roofline Framework for Evaluating Compute-in-Memory Adaptation in Large Language Model Inference</strong>，Liqiu Ma, Jingdi Liu, Xiaotao Li（<em>International Conference on Computer Communication and Artificial Intelligence (CCAI)</em>）：A CIM-Aware Roofline Framework for Evaluating Compute-in-Memory Adaptation in Large Language Model Inference，Liqiu Ma, Jingdi Liu, Xiaotao Li（把經典 Roofline 框架擴展到存算一體 Compute-in-Memory 新型硬體，定量評估大模型各階段算子映射到 CIM 陣列的實際收益與瓶頸）。 <a href="zotero://select/library/items/UC7244C6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/ccai69603.2026.11642022" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Memory-Efficient Speculative Decoding for Large Language Model Inference on Commodity GPUs</strong>，Tejas Patel（<em>IEEE International Conference on Communication Systems and Network Technologies (CSNT)</em>）：Memory-Efficient Speculative Decoding for Large Language Model Inference on Commodity GPUs，Tejas Patel（推測解碼必須同時載入草稿模型與目標模型，容易撐爆消費級單卡的顯存。本文在有限的顯存預算下做到多 Token 平行驗證加速）。 <a href="zotero://select/library/items/S78FQUR3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/csnt69054.2026.11502509" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Distributed and Multi-GPU Training Strategies</strong>，Ramchandra S Mangrulkar, Pallavi Vijay Chavan（<em>GPU-Accelerated Deep Learning</em>）：選自 2025 年《GPU-Accelerated Deep Learning》的章節，介紹在 GPU 加速運算環境下執行深度學習的分散式與多 GPU 並行訓練策略及記憶體配置。 <a href="zotero://select/library/items/JQCDA2MZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/979-8-8688-2083-0_5" rel="noopener">官方連結</a></li>
+<li><strong>2024｜ThunderKittens: Simple, Fast, and Adorable AI Kernels</strong>，Benjamin F. Spector et al.（<em>arXiv (Cornell University)</em>）：提出簡潔高效的GPU AI核心開發框架ThunderKittens（TK），以映射至GPU記憶體階層的抽象（如warp級16x16矩陣塊與thread-block級重疊模板）簡化高效能核心編寫。 <a href="zotero://select/library/items/7RKCJQTC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.20399" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-d630327f">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a></li><li><a href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

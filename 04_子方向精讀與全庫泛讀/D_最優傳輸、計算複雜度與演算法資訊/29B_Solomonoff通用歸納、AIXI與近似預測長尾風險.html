@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>29B｜Solomonoff通用歸納、AIXI與近似預測長尾風險 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-9ad70a6c" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 最優傳輸、計算複雜度與演算法資訊</span>
+<article>
+
+<h1 id="29bsolomonoff通用歸納aixi與近似預測長尾風險">29B｜Solomonoff通用歸納、AIXI與近似預測長尾風險</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">演算法資訊理論與索羅門諾夫歸納</a>
+同領域子方向：<a class="wl" href="29A_Kolmogorov%E8%A4%87%E9%9B%9C%E5%BA%A6%E3%80%81%E4%B8%8D%E5%8F%AF%E8%A8%88%E7%AE%97%E6%80%A7%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E9%9A%A8%E6%A9%9F%E6%80%A7.html">Kolmogorov複雜度、不可計算性與演算法隨機性</a> · <a class="wl" href="29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a>
+跨領域關聯子方向：<a class="wl" href="41A_%E4%BA%8C%E6%AC%A1%E6%8C%87%E6%B4%BEQAP%E3%80%81%E5%9C%96%E5%8C%B9%E9%85%8D%E8%88%87Gromov-Wasserstein%E8%A8%88%E7%AE%97%E7%A1%AC%E5%BA%A6.html">二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</a> · <a class="wl" href="OTD_Gromov-Wasserstein%E8%88%87%E7%95%B0%E6%A7%8B%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%9C%96%E8%AD%9C%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%B0%8D%E9%BD%8A.html">Gromov-Wasserstein與異構概念及圖譜無監督對齊</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A505_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E8%AB%96%E3%80%81%E5%A3%93%E7%B8%AE%E9%A0%90%E6%B8%AC%E8%88%87%E5%85%83%E8%A4%87%E9%9B%9C%E5%BA%A6.html">演算法資訊論、壓縮預測與元複雜度</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M39_%E7%86%B5%E3%80%81%E8%B3%87%E6%96%99%E5%A3%93%E7%B8%AE%E3%80%81%E9%80%9A%E9%81%93%E5%AE%B9%E9%87%8F.html">熵、資料壓縮、通道容量</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M61_%E8%B3%87%E8%A8%8A%E8%AB%96%EF%BC%88Cover%20%26%20Thomas%EF%BC%89.html">資訊論</a> · <a class="wl" href="../../NOTES/02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/T24_%E9%81%9E%E8%BF%B4%E5%AE%9A%E7%90%86%E8%88%87%20Kolmogorov%20%E8%A4%87%E9%9B%9C%E5%BA%A6.html">遞迴定理與 Kolmogorov 複雜度</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">演算法資訊理論與索羅門諾夫歸納</a> 的序列預測與決策核心，將 <a class="wl" href="29A_Kolmogorov%E8%A4%87%E9%9B%9C%E5%BA%A6%E3%80%81%E4%B8%8D%E5%8F%AF%E8%A8%88%E7%AE%97%E6%80%A7%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E9%9A%A8%E6%A9%9F%E6%80%A7.html">Kolmogorov複雜度、不可計算性與演算法隨機性</a> 的靜態描述長度轉化為對所有可計算環境的通用貝氏混合預測（Solomonoff 歸納）以及通用強化學習代理 AIXI。研究主線涵蓋通用半測度的累積誤差保證與不可計算性限制、大型語言模型作為近似通用預測器的 KL 穩健性與長尾風險、奇異學習理論漸近分析，以及嵌入式代理的反射神諭與幾何核近似。</p>
+</aside>
+<ul>
+<li>核心問題：傳統參數貝氏預測依賴預設模型族，當真實資料生成過程落在模型族之外時會殘留漸近偏差；而經典理論假設代理與環境嚴格二分，難以處理自我指涉與跨資料集外推。Solomonoff 通用半測度雖能以環境複雜度為界控管累積誤差，卻受限於不可計算性（面臨 Putnam 對角線論證障礙）、嵌入式環境中的動作感知聯合分布失效，以及在對數損失近似 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho) \le \eta</span> 下稀少長尾環境的誤差控制問題。</li>
+<li>直覺模型：可以把 Solomonoff 歸納想成一位同時執行所有可能電腦模擬器的賭客，最初依程式長度賦予「越短越可信」的權重，每觀察到一個新位元就淘汰與觀測不符的程式並重新歸一化下注。實際系統的難題在於你無法無限運行所有程式，代理本身的動作還會反過來改寫觀測來源，且當我們用有限神經網路去近似這組無限混合下注時，對極罕見規則的預測穩健性會成為關鍵瓶頸。</li>
+<li>分階段閱讀路線：第一階段先讀 Sterkenburg (2026) 與 Hutter (2012)，掌握 Solomonoff 通用預測的兩個可計算性公設為何在 Putnam 對角線論證下無法同時滿足，以及 AIXI 通用智慧模型的理論框架與近似實作。第二階段精讀 Wyeth 與 Hutter (2025) 與 Young (2026)，理解 AIXI 在嵌入式環境的失效形式，以及透過 de Finetti 定理將資料集條件化納入的層級 Solomonoff 歸納（HSI）。第三階段進入 2026 年前沿：先讀 Troiani 與 Murfet (2026) 建立通用半測度與奇異積分自由能的橋樑，再讀 Bauwens 與 Kuznetsov (2026) 的選定位置誤差平方收斂與 Li 與 Teng (2026) 的近似通用預測器穩健性邊界，並視興趣選讀 Kusum (2026) 與 Hamzi 與 Hütter (2026)。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;單體前綴複雜度K(x)&quot;] --&gt; B[&quot;Solomonoff通用半測度M與對角線障礙 (Sterkenburg 2026)&quot;]
+  B --&gt; C[&quot;AIXI通用決策與嵌入式失效 (Hutter 2012, Wyeth-Hutter 2025)&quot;]
+  B --&gt; D[&quot;層級de Finetti條件化HSI (Young 2026)&quot;]
+  B --&gt; E[&quot;奇異學習理論與自由能漸近 (Troiani-Murfet 2026)&quot;]
+  B --&gt; F[&quot;選定位置平方誤差與反射神諭 (Bauwens-Kuznetsov 2026, Kusum 2026)&quot;]
+  C --&gt; G[&quot;KL近似穩健性與GW核近似 (Li-Teng 2026, Hamzi-Huetter 2026)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>通用半測度與選定位置預測誤差（Universal Semimeasure and Selected-Bit Prediction Error）</strong></p>
+<ul>
+<li>直覺理解：以程式長度為指數權重加總所有輸出相容前綴的程式機率，只要真實序列可計算，單步預測錯誤的總和就會被該序列的最短程式長度鎖死，但若只盯著局部抽取的位置看，線形誤差總和卻可能發散。</li>
+<li>機制或核心表達式：令 <span class="math inline">M(z) = \sum_{p: U(p) \sqsupseteq z} 2^{-|p|}</span> 為通用半測度，給定前綴 <span class="math inline">\omega_{&lt;n}</span>，次位元預測誤差定義為 <span class="math inline">e_\omega(n) = 1 - \frac{M(\omega_{&lt;n}\omega_n)}{M(\omega_{&lt;n}0) + M(\omega_{&lt;n}1)}</span>。若無限序列 <span class="math inline">\omega</span> 具長度至多 <span class="math inline">k</span> 的自定界描述，則 <span class="math inline">\sum_n e_\omega(n) \le k \ln 2 + O(1)</span>。然而針對僅限制在可計算樣式位置（例如重複位元）的預測，Bauwens 與 Kuznetsov (2026) 證明雖然誤差極限趨近零，線形和 <span class="math inline">\sum e_\omega(n)</span> 在某些可計算樣式上可無界發散，但平方和 <span class="math inline">\sum (e_\omega(n))^2</span> 仍保持有界。</li>
+<li>能做到什麼，代價是什麼：通用半測度對所有可計算環境無需先驗調參即可收斂，代價是 <span class="math inline">M</span> 僅為下半可計算，且如 Sterkenburg (2026) 整理 Putnam 對角線論證所示，沒有任何完全可計算預測器能對所有可計算規則維持一致成功。</li>
+</ul>
+</li>
+<li>
+<p><strong>奇異積分自由能、層級外推與近似穩健性（Singular Integrals, Hierarchical Conditioning, and Approximate Robustness）</strong></p>
+<ul>
+<li>直覺理解：看似純離散的程式求和 <span class="math inline">M(X^n)</span>，重新排列後其實內含了連續參數空間上的黎曼和，使得深度模型常見的奇異學習幾何與資料集條件化自然浮現，同時能精確刻畫有限近似預測器與理想 <span class="math inline">\xi</span> 的誤差落差。</li>
+<li>機制或核心表達式：Troiani 與 Murfet (2026) 證明對任意可計算貝氏模型，存在單調圖靈機使其誘導半測度與貝氏證據 <span class="math inline">Z_n</span> 相差一個均勻常數因子；在滿足渡邊（Watanabe）自由能漸近假設時，獨立同分布樣本滿足 <span class="math inline">-\log M(X^n) \le n L_n(w_0) + \lambda \log n - (m-1)\log\log n + O_p(1)</span>，由學習係數 <span class="math inline">\lambda</span> 與重數 <span class="math inline">m</span> 這些代數幾何不變量主導。針對從訓練集外推的需求，Young (2026) 藉助 de Finetti 定理構造超先驗下的層級歸納 HSI 並證明其等價於 Solomonoff 歸納。在實務近似上，Li 與 Teng (2026) 分析滿足 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho) \le \eta</span> 的學習預測器 <span class="math inline">\rho</span>，給出累積預期平方誤差的緊緻上界，同時對比精確混合 <span class="math inline">\xi</span> 在單一環境 <span class="math inline">\mu</span> 上的 <span class="math inline">O(\log(1/w_\mu))</span> 誤差以檢視長尾環境下的最壞情況代價。</li>
+<li>能做到什麼，代價是什麼：這條路線把抽象的 <span class="math inline">M</span> 連結到元學習對數損失最小化與實數學習係數 <span class="math inline">\lambda</span>，但實際學得的 <span class="math inline">\rho</span> 僅能確保對高先驗權重區域的 KL 接近，在權重極小的長尾環境中仍存在最壞情況近似風險。</li>
+</ul>
+</li>
+<li>
+<p><strong>AIXI 嵌入式失效、反射神諭與範疇原生核近似（AIXI Embeddedness Failures, Reflective Oracles, and Category-Native Kernels）</strong></p>
+<ul>
+<li>直覺理解：當智慧體不再站在環境外面按按鈕，而是與環境共享同一套可計算物理載體時，標準決策理論會遇到自我預測悖論；此時可透過反射神諭或指定幾何範疇內的核嵌入來建構穩定的可計算投影。</li>
+<li>機制或核心表達式：AIXI 結合 Solomonoff 先驗與序列貝氏決策以最大化期望回報（Hutter 2012），但當代理同時包含在環境之內時，Wyeth 與 Hutter (2025) 形式化證明將動作與感知聯合歷史視為抽自通用分布的變體仍會出現多種嵌入性失效。為容納自我指涉假設，Kusum (2026) 採用反射神諭（reflective oracles），使從預測器自身條件機率出發可計算的假設（如次位元機率的可計算區間限制）仍留在假設類中，並建立加權無偏性與校準性質。在可計算近似架構上，Hamzi 與 Hütter (2026) 提出先宣告數學範疇再選用原生比較泛函的做法，於度量測度分支中將經驗 Solomonoff 空間、Gromov–Wasserstein（GW）距離、<a class="wl" href="29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">MDL</a> 複雜度控制與距離轉核（distance-to-kernel）結合為正半定預測器。</li>
+<li>能做到什麼，代價是什麼：反射神諭擴展了對不完整與自指模型的學習能力，但神諭本身不具普通可計算性；範疇原生近似則以明確的投影資訊損失換取正半定核預測器的穩定性與驗證不等式。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>選定位置誤差總和與平方誤差總和的收斂差異</strong>：若無限二元序列 <span class="math inline">\omega</span> 本身不是完全可計算，而是僅在某個可計算子序列位置（如特定樣式）上具有固定規律，為何 Bauwens 與 Kuznetsov (2026) 發現線形預測誤差和 <span class="math inline">\sum e_\omega(n)</span> 可以發散，但平方和 <span class="math inline">\sum (e_\omega(n))^2</span> 卻必定有界？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>當只有被選定的稀疏或樣式位置受到可計算規律約束、其餘位置允許不可預測噪聲時，非樣式位置的雜訊會在局部階段性稀釋通用半測度對該樣式規則的後驗權重，或導致連續出現微小的機率偏移。由於單步線形誤差 <span class="math inline">e_\omega(n)</span> 的一階衰減速度可以慢於調和級數（例如類似 <span class="math inline">1/k</span> 的等級），累加起來便可能發散；但因為誤差在樣式位置上的極限仍為零且每次累積的 KL 散度資訊增益與誤差平方呈二次關係（Pinsker 不等式類型控制），平方項 <span class="math inline">\sum (e_\omega(n))^2</span> 仍會受限於描述該選定樣式的位元數而收斂。</p>
+</details>
+<ol start="2">
+<li><strong>奇異學習係數 <span class="math inline">\lambda</span> 為何會出現在通用半測度 <span class="math inline">M(X^n)</span> 的漸近展開中</strong>：Solomonoff 分佈 <span class="math inline">M(X^n)</span> 原本是對離散二元程式加權求和的結構，Troiani 與 Murfet (2026) 如何證明其對數負機率會出現源自連續代數幾何的學習係數 <span class="math inline">\lambda \log n</span>？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>關鍵在於任何可計算統計模型的參數空間都可用越來越多位元的二進位網格離散逼近，而每個網格點連同其近似精度都能編碼成單調圖靈機上的一段自定界程式。將所有精度層級與網格點依程式長度 <span class="math inline">2^{-\ell}</span> 加總後，離散求和會重組為逼近該模型貝氏邊際似然積分（證據 <span class="math inline">Z_n</span>）的黎曼和。當參數空間在真實分佈附近具有奇點（非正則統計模型）時，該積分的漸近行為由渡邊（Watanabe）的奇異學習理論決定，進而將複數解析幾何中的實對數典範閾值 <span class="math inline">\lambda</span> 帶入 <span class="math inline">-\log M(X^n)</span> 的漸近上界。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>KL 近似預測器在極小先驗權重環境下的長尾風險界限</strong>：Li 與 Teng (2026) 證明只要學習預測器 <span class="math inline">\rho</span> 與理想貝氏混合 <span class="math inline">\xi</span> 滿足 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho) \le \eta</span>，就能維持有界的累積預期平方預測誤差；但在真實環境 <span class="math inline">\mu</span> 具有極小先驗權重 <span class="math inline">w_\mu</span> 的情況下，相較於精確混合 <span class="math inline">\xi</span> 的 <span class="math inline">O(\log(1/w_\mu))</span> 誤差，如何避免最壞情況近似誤差在長尾分佈上急劇放大，仍是理解大型語言模型分佈外泛化限制的核心問題。</li>
+<li><strong>可實現的嵌入式代理架構與資源受限反射神諭</strong>：Wyeth 與 Hutter (2025) 已形式化指出將動作與感知聯合歷史交由通用分佈處理時 AIXI 仍存在的嵌入性失效，而 Kusum (2026) 的反射神諭雖能解決自指涉假設的學習與校準問題，卻依賴非標準可計算神諭。如何設計同時兼顧 <a class="wl" href="29A_Kolmogorov%E8%A4%87%E9%9B%9C%E5%BA%A6%E3%80%81%E4%B8%8D%E5%8F%AF%E8%A8%88%E7%AE%97%E6%80%A7%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E9%9A%A8%E6%A9%9F%E6%80%A7.html">Kolmogorov複雜度、不可計算性與演算法隨機性</a> 資源上界與嵌入式自洽性的可實作代理理論，仍未有定論。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>Gromov–Wasserstein 距離與經驗 Solomonoff 核統一</strong>：Hamzi 與 Hütter (2026) 在範疇原生 Solomonoff 近似中將經驗壓縮空間與 Gromov–Wasserstein 距離結合以建構正半定預測器，該關係失真幾何可與 <a class="wl" href="41A_%E4%BA%8C%E6%AC%A1%E6%8C%87%E6%B4%BEQAP%E3%80%81%E5%9C%96%E5%8C%B9%E9%85%8D%E8%88%87Gromov-Wasserstein%E8%A8%88%E7%AE%97%E7%A1%AC%E5%BA%A6.html">二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</a> 的計算複雜度分析及 <a class="wl" href="OTD_Gromov-Wasserstein%E8%88%87%E7%95%B0%E6%A7%8B%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%9C%96%E8%AD%9C%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%B0%8D%E9%BD%8A.html">Gromov-Wasserstein與異構概念及圖譜無監督對齊</a> 的跨空間對齊技術相互遷移。</li>
+<li><strong>非平衡演算法熱力學與壓縮即預測原則</strong>：Ebtekar 與 Hutter (2023) 的粗粒化演算法熵以及 Baez 與 Stay (2010) 的演算法溫度、壓力框架，將程式長度的 Boltzmann 權重對應至物理微觀態，能直接與 <a class="wl" href="29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a> 的最小描述長度變分自由能原則對接。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-solomonoff-induction2026">1. Solomonoff induction（2026）</h4>
+<ul>
+<li>作者與出處：Tom F. Sterkenburg · <em>arXiv (2603.20274)</em></li>
+<li>核心問題：需要釐清 Solomonoff 通用歸納背後的計算公設基礎，以及它在哲學與機器學習方法論上究竟能證成什麼、不能證成什麼。</li>
+<li>關鍵做法：論文將 Solomonoff 歸納表述為滿足兩項合理可計算性條件的嘗試，透過 Putnam 對角線論證的推廣證明兩者無法兼得，並檢討其作為奧卡姆剃刀基礎與機器學習理論理想的實際邊界。</li>
+<li>跨領域啟發：為 <a class="wl" href="29A_Kolmogorov%E8%A4%87%E9%9B%9C%E5%BA%A6%E3%80%81%E4%B8%8D%E5%8F%AF%E8%A8%88%E7%AE%97%E6%80%A7%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E9%9A%A8%E6%A9%9F%E6%80%A7.html">Kolmogorov複雜度、不可計算性與演算法隨機性</a> 的不可計算性與泛化理論之間劃出清晰的哲學與數學分界線。</li>
+<li>連結：<a href="zotero://select/library/items/F5SZBFVJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.20274" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-one-decade-of-universal-artificial-intelligence2012">2. One Decade of Universal Artificial Intelligence（2012）</h4>
+<ul>
+<li>作者與出處：Marcus Hutter · <em>Theoretical Foundations of Artificial General Intelligence</em></li>
+<li>核心問題：如何將序列預測的 Solomonoff 歸納結合序列決策論，建構不預設領域知識的通用強化學習智慧體模型與理性度量。</li>
+<li>關鍵做法：綜述整理 AIXI 代理的數學定義與完備性性質、Legg 提出的非人類中心通用智慧度量，以及 Veness et al. (2011) 以蒙地卡羅樹搜尋與脈絡樹加權（CTW）進行可計算近似的實驗進展。</li>
+<li>跨領域啟發：確立通用智慧代理的基準藍圖，供後續檢驗 Wyeth 與 Hutter (2025) 嵌入式失效與 <a class="wl" href="29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a> 近似設計對照。</li>
+<li>連結：<a href="zotero://select/library/items/TZW5JF38" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1202.6153" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-formalizing-embeddedness-failures-in-universal-artificial-intelligence2025">3. Formalizing Embeddedness Failures in Universal Artificial Intelligence（2025）</h4>
+<ul>
+<li>作者與出處：Cole Wyeth, Marcus Hutter · <em>arXiv (2505.17882)</em></li>
+<li>核心問題：傳統 AIXI 假設代理與環境雙向分離，在現實中代理本身嵌入於環境之內，需要嚴格證明這些嵌入式失效模式確實發生在通用智慧框架中。</li>
+<li>關鍵做法：作者針對將動作與感知聯合歷史視為抽自通用分佈的 AIXI 變體進行形式化分析，逐一證明文獻中指出的各類嵌入式失效模式確實成立，並評估既有修正方案的進展。</li>
+<li>跨領域啟發：與 Kusum (2026) 的反射神諭方法形成對照，說明為何自指涉代理需要超越標準通用圖靈機的可計算架構。</li>
+<li>連結：<a href="zotero://select/library/items/U3IM2VCN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.17882" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-solomonoff-induction-and-singular-integrals2026">4. Solomonoff Induction and Singular Integrals（2026）</h4>
+<ul>
+<li>作者與出處：Will Troiani, Daniel Murfet · <em>arXiv (2609.01666)</em></li>
+<li>核心問題：離散程式加權的 Solomonoff 分佈 <span class="math inline">M</span> 與連續參數空間上的奇異貝氏證據積分之間長期缺乏精確的定量連結。</li>
+<li>關鍵做法：作者重新組織定義 <span class="math inline">M</span> 的可數求和以包絡任意可計算統計模型證據 <span class="math inline">Z_n</span> 的黎曼和，為每個可計算模型構造僅差均勻常數因子的單調圖靈機，進而匯入渡邊奇異學習理論的自由能漸近公式。</li>
+<li>跨領域啟發：將離散演算法資訊理論直接連接至神經網路損失地景的代數幾何不變量（實對數典範閾值 <span class="math inline">\lambda</span>）。</li>
+<li>連結：<a href="zotero://select/library/items/C35TTN6U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01666" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-approximate-solomonoff-induction-on-the-robustness-of-learned-universal-predictors2026">5. Approximate Solomonoff Induction: On the Robustness of Learned Universal Predictors（2026）</h4>
+<ul>
+<li>作者與出處：Qian Li, Shang-Hua Teng · <em>arXiv (2610.29289)</em></li>
+<li>核心問題：在透過最小化對數損失逼近貝氏混合 <span class="math inline">\xi</span> 的架構下，實際訓練只能得到近似預測器 <span class="math inline">\rho</span>，其預測效能對近似誤差是否穩健仍待精確刻畫。</li>
+<li>關鍵做法：針對滿足 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho) \le \eta</span> 的任意預測器 <span class="math inline">\rho</span>，論文給出最壞情況下累積預期平方預測誤差的緊緻上界，並分析相對於理想先驗 <span class="math inline">w_\mu</span> 誤差 <span class="math inline">O(\log(1/w_\mu))</span> 的穩健條件。</li>
+<li>跨領域啟發：為 <a class="wl" href="29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a> 中以大型語言模型進行通用壓縮與跨領域泛化提供誤差邊界工具。</li>
+<li>連結：<a href="zotero://select/library/items/ZUS3RWIH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29289" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-solomonoff-induction-of-selected-bits-and-online-classification2026">6. Solomonoff induction of selected bits and online classification（2026）</h4>
+<ul>
+<li>作者與出處：Bruno Bauwens, German Kuznetsov · <em>arXiv (2610.18632)</em></li>
+<li>核心問題：當序列只有由可計算樣式選出的部分位元具備規律時，已知這些位置的預測誤差極限為零，但是否仍保有全域可計算序列的有限誤差總和尚不清楚。</li>
+<li>關鍵做法：作者構造具體反例證明部分可計算樣式位置上的誤差線形和 <span class="math inline">\sum e_\omega(n)</span> 可以無界發散，同時嚴格證明其平方誤差和 <span class="math inline">\sum (e_\omega(n))^2</span> 依然維持有界。</li>
+<li>跨領域啟發：揭示在噪聲背景中提取部分可計算結構時，一階損失與二階（平方／KL）損失在線上學習保證上的本質差異。</li>
+<li>連結：<a href="zotero://select/library/items/HDF48ZPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.18632" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-30-篇">G5｜本子方向全量文獻泛讀清單（共 30 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 30 篇文獻（含開放存取 PDF 29 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進20-篇">A. 奠基經典、專著與核心演進（20 篇）</h3>
+<ul>
+<li><strong>2012｜One Decade of Universal Artificial Intelligence</strong>，Marcus Hutter（<em>In Theoretical Foundations of Artificial General Intelligence, Vol.4 (2012) pages 67--88</em>，34 引）：總結 AIXI 通用人工智慧理論十年來的成果，說明 Solomonoff 歸納用於序列決策博弈時的完備性與計算極限。 <a href="zotero://select/library/items/TZW5JF38" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1202.6153" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Algorithmic Thermodynamics</strong>，John C. Baez, Mike Stay（<em>Computability of the Physical, Mathematical Structures in Computer Science 22 (2012), 771--787</em>，27 引）：將通用無前綴圖靈機的停機程式集視為微觀態，對數執行時間、程式長度與輸出視為類似能量、體積與粒子數的可觀測量，透過最大熵 Gibbs 系綜建立演算法資訊理論的熱力學對應並定義演算法溫度等共軛量。 <a href="zotero://select/library/items/Z3BSBBKF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1010.2067" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Foundations of algorithmic thermodynamics</strong>，Aram Ebtekar, Marcus Hutter（<em>Physical review. E</em>，5 引）：以不依賴先驗機率系綜與巨觀變數的 Gács 粗粒化演算法熵為基礎，針對具馬可夫粗粒化的保測動力系統證明多項漲落不等式，給出 Jarzynski 等式、Landauer 原理與熱力學第二定律的演算法版本。 <a href="zotero://select/library/items/ZQBJNQAN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2308.06927" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Algorithmic Information Forecastability</strong>，Glauco Amigo et al.（<em>arXiv</em>）：以演算法資訊論為基礎提出僅取決於資料本身的「可預測性」量度，針對時間序列與標註資料預測劃分出神諭可預測（精確無誤）、精確可預測（誤差有界）與機率可預測三類並舉例闡明。 <a href="zotero://select/library/items/MTVPKEQW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.10752" rel="noopener">官方連結</a></li>
+<li><strong>2023｜A Circuit Complexity Formulation of Algorithmic Information Theory</strong>，Cole Wyeth, Carl Sturtivant（<em>arXiv</em>）：受 Solomonoff 歸納啟發提出以布林電路複雜度取代通用圖靈機的先驗分佈，擺脫語言選擇依賴與停機問題限制，在與邏輯閘數成正比的時間內計算輸出，用於從部分資訊學習布林函數。 <a href="zotero://select/library/items/3RXTINTX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.14087" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Simplicity bias, algorithmic probability, and the random logistic map</strong>，Boumediene Hamzi, Kamaludin Dingle（<em>arXiv</em>）：從演算法機率與演算法資訊理論出發，探討帶有加性雜訊的隨機邏輯斯諦映射中的簡單性偏置現象，發現在特定系統參數與雜訊條件下，輸出分佈仍顯著偏好具簡單規律的圖樣。 <a href="zotero://select/library/items/N7AJGWC5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.00593" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Low complexity, low probability patterns and consequences for algorithmic probability applications</strong>，Mohamed Alaskandarani, Kamaludin Dingle（<em>arXiv</em>）：針對演算法機率僅提供模式機率上界的限制，透過有限狀態轉換器等映射案例研究實務中常見的「低複雜度但低機率」輸出模式，分析其對演算法機率預測效力的影響。 <a href="zotero://select/library/items/7KD5NPKQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2207.12251" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Multiclass classification utilising an estimated algorithmic probability prior</strong>，Kamaludin Dingle, Pau Batlle, Houman Owhadi（<em>arXiv</em>）：以 RNA 序列至二級結構形狀映射的多分類任務為例，探索演算法資訊論在監督學習的應用，直接由形狀複雜度估計類別的演算法機率並作為高斯過程學習的先驗分佈。 <a href="zotero://select/library/items/IKT99UQM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.07426" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Deep Denoising Neural Network Assisted Compressive Channel Estimation for mmWave Intelligent Reflecting Surfaces</strong>，Shicong Liu et al.（<em>arXiv</em>）：針對毫米波大規模 MIMO 智慧反射面（IRS）的高維級聯通道估計，設計具少數接收鏈的混合被動／主動 IRS 架構並依序啟動少量單元採樣，再以深度去噪神經網路輔助壓縮感知重建完整通道矩陣，降低訓練開銷。 <a href="zotero://select/library/items/DHIIVG2P" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.02201" rel="noopener">官方連結</a></li>
+<li><strong>2020｜The computational inevitability of life: self-replication under resource-bounded nested algorithmic probability</strong>，Aritra Sarkar（<em>arXiv</em>）：基於演算法資訊理論論證：在有限時間、記憶體與描述長度約束下套用通用歸納偏置，自我複製程式（quines）將作為巢狀演算法機率的穩定不動點與吸引子必然湧現。 <a href="zotero://select/library/items/89U67PD2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.09646" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Algorithmic Probability-guided Supervised Machine Learning on Non-differentiable Spaces</strong>，Santiago Hernández-Orozco et al.（<em>arXiv</em>）：以演算法複雜度參數化監督式學習損失函數，分析離散演算法空間幾何，展示無須可微性即可在非光滑空間學習，於小規模實驗以較少資料取得與深度學習相近表現及更高隨機攻擊耐受度。 <a href="zotero://select/library/items/ZQG3VQMF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.02758" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Training-free Measures Based on Algorithmic Probability Identify High Nucleosome Occupancy in DNA Sequences</strong>，Hector Zenil, Peter Minary（<em>arXiv</em>）：將基於演算法機率與演算法複雜度的免訓練度量應用於 DNA 序列分析，揭示體內與體外核小體佔位預測差異，並證明其複雜度指標在高佔位結合位點預測上可補充甚至優於標準 Kaplan 模型。 <a href="zotero://select/library/items/NM546RGP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1708.01751" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Coding-theorem Like Behaviour and Emergence of the Universal Distribution from Resource-bounded Algorithmic Probability</strong>，Hector Zenil et al.（<em>International Journal of Parallel, Emergent and Distributed Systems, DOI: 10.1080/17445760.2018.1448932</em>）：檢驗演算法機率（AP）與通用分佈在 Chomsky 層級的圖靈次通用計算模型中之湧現速度、收斂性與類似編碼定理的行為，並提出基於資源有界計算的演算法機率與複雜度度量以支援數值近似。 <a href="zotero://select/library/items/NAIPDGUG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1711.01711" rel="noopener">官方連結</a></li>
+<li><strong>2015｜A Computable Measure of Algorithmic Probability by Finite Approximations with an Application to Integer Sequences</strong>，Fernando Soler-Toscano, Hector Zenil（<em>arXiv</em>）：由小型圖靈機輸出分佈定義演算法機率測度 <span class="math inline">m</span> 及其可計算有限近似 <span class="math inline">m_k</span>，作為無損壓縮之外估計 Kolmogorov–Chaitin 複雜度的方法，證明兩者與 Levin 通用分佈的性質比較及近似誤差估計，並應用於整數數列。 <a href="zotero://select/library/items/VBNH26EG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1504.06240" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Solomonoff Induction Violates Nicod's Criterion</strong>，Jan Leike, Marcus Hutter（<em>arXiv</em>）：證明 Solomonoff 歸納違反 Nicod 判準（觀測到黑烏鴉可能降低「烏鴉皆黑」假設 <span class="math inline">H</span> 的信念）：沿任意相容於 <span class="math inline">H</span> 的可計算無窮序列，未正規化先驗下信念無窮多次下降而正規化先驗下僅有限次下降，作者據此主張應棄用 Nicod 判準。 <a href="zotero://select/library/items/9IUNA7A2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1507.04121" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Diverse Consequences of Algorithmic Probability</strong>，Eray Özkural（<em>arXiv</em>）：探討演算法機率在人工智慧、複雜性哲學與技術社會中的應用，論證 Solomonoff 歸納推理為人工智慧建立了公理化科學基礎，並連結至漸進式機器學習問題。 <a href="zotero://select/library/items/VETI9MUS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1107.2788" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Entropy Measures vs. Algorithmic Information</strong>，Andreia Teixeira et al.（<em>arXiv</em>）：檢驗演算法熵與 Rényi 熵、Tsallis 熵的關係，證明期望演算法熵僅在階數 <span class="math inline">\alpha=1</span>（即 Shannon 熵）時與之相差常數；另對累積分佈可在 <span class="math inline">t(n)</span> 時間計算者給出時間有界版本。 <a href="zotero://select/library/items/QE7XDN3B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/0901.2903" rel="noopener">官方連結</a></li>
+<li><strong>2006｜Stationary Algorithmic Probability</strong>，Markus Mueller（<em>Theoretical Computer Science 411 pp. 113-130 (2010)</em>）：試圖透過構造通用計算機隨機互相模擬的馬可夫過程，尋找與參考機無關的演算法機率平穩分佈，然而最終證明所有計算機集合上並不存在平穩分佈，該進路無法消除機器相依性。 <a href="zotero://select/library/items/Q3HMMTSC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cs/0608095" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Towards a Universal Theory of Artificial Intelligence based on Algorithmic Probability and Sequential Decision Theory</strong>，Marcus Hutter（<em>Lecture Notes in Artificial Intelligence (LNAI 2167), Proc. 12th Eurpean Conf. on Machine Learning, ECML (2001) 226--238</em>）：結合演算法機率下的 Solomonoff 通用歸納與序列決策理論提出通用人工智慧模型 AIXI，並為克服其不可計算性而構造具時空界限的可計算變體 <span class="math inline">\text{AIXI}^{tl}</span>（計算時間為 <span class="math inline">t \times 2^l</span>）。 <a href="zotero://select/library/items/XVEG2352" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cs/0012011" rel="noopener">官方連結</a></li>
+<li><strong>1999｜New Error Bounds for Solomonoff Prediction</strong>，Marcus Hutter（<em>J. Computer and System Science 62:4 (2001) 653-667</em>）：證明在未知分佈二元序列預測中，可計算分佈下若知情預測錯誤有限則 Solomonoff 預測錯誤亦有限，並證得確定性 Solomonoff 預測與任何機率或確定性策略相比僅差可加平方根項而達最優。 <a href="zotero://select/library/items/IF68TBGB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cs/9912008" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻10-篇">B. 2024–2026 近期推進與前沿文獻（10 篇）</h3>
+<ul>
+<li><strong>2026｜Solomonoff induction</strong>，Tom F. Sterkenburg（<em>arXiv</em>）：本章從可計算性理論視角系統檢視 Solomonoff 通用歸納預測框架，利用 Putnam 對角線論證的推廣證明同時滿足兩項可計算性期許的通用預測器不存在，並批判性評估其與奧坎剃刀及機器學習理論的關聯。 <a href="zotero://select/library/items/F5SZBFVJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.20274" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Hierarchical Solomonoff Induction: An Unbounded Machine Learning Model</strong>，Nathan Young（<em>arXiv</em>）：應用 de Finetti 定理為 Solomonoff 歸納建構可對已觀測訓練集條件化的階層 Solomonoff 歸納 (HSI)，證明其等價於原歸納且過剩誤差受生成元在超先驗的複雜度界定。 <a href="zotero://select/library/items/H5MPWW58" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.01005" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Solomonoff Induction and Singular Integrals</strong>，Will Troiani, Daniel Murfet（<em>arXiv</em>）：證明適當重組後的 Solomonoff 分布 <span class="math inline">M</span> 級數包含逼近任意可計算統計模型貝氏證據 <span class="math inline">Z_n</span> 的 Riemann 和，藉此構造能以一致常數因子匹配 <span class="math inline">Z_n</span> 的單調圖靈機，將通用歸納連結至奇異學習理論的奇異積分。 <a href="zotero://select/library/items/C35TTN6U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.01666" rel="noopener">官方連結</a></li>
+<li><strong>2026｜What Can Language Models Inherit from Solomonoff Induction? Limits, Attainable Properties, and What Served Conditionals Reveal</strong>，Luan Ozelim, Abicumaran Uthamacumaran, Hector Zenil（<em>arXiv</em>）：應用演算法資訊理論與貝氏一致性定理，證明一致逼近對任何可計算模型皆不成立，趨近僅能逐環境成立，且有限評估、對語料的完全擬合與漸近準則皆無法認證此趨勢。透過預測器版本的 Kraft 不等式說明所有模型具有相同的預測成功總預算，差異在於預算配置與全質量貝氏混合能否觸及前沿；同時盤點語言模型在脈絡內學習作為攤銷貝氏推論、脈絡視窗內性質與線上服務條件機率上可繼承的性質與報告規範。 <a href="zotero://select/library/items/ACBVRQ5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.14007" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Solomonoff induction of selected bits and online classification</strong>，Bruno Bauwens, German Kuznetsov（<em>arXiv</em>）：Lattimore、Hutter 與 Gavane 曾證明，受可計算模式固定的位元誤差極限為零（<span class="math inline">\lim_n e_\omega(2n)=0</span>）。本文給出更細的收斂階層。（1）構造反例，證明對某些可計算模式，選定位元上的一階誤差總和 <span class="math inline">\sum e_\omega(n)</span> 可以發散無界。（2）但平方誤差總和 <span class="math inline">\sum (e_\omega(n))^2</span> 一定受限於該模式程式長度的指數上界。（3）如果這些位元由一個可計算分類函數 <span class="math inline">f: \{0,1\}^* \to \{0,1\}</span> 決定，且其執行時間受任意固定的可計算時間界約束（對應線上分類 Online Classification），收斂會快得多：平方誤差總和 <span class="math inline">\sum (e_\omega(n))^2</span> 只受限於程式長度的多項式上界。 <a href="zotero://select/library/items/HDF48ZPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.18632" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Approximate Solomonoff Induction: On the Robustness of Learned Universal Predictors</strong>，Qian Li, Shang-Hua Teng（<em>arXiv</em>）：作者對近似通用預測器的誤差給出兩個方向的精確刻畫。（1）任何滿足 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho) \le \eta</span> 的近似預測器 <span class="math inline">\rho</span> 仍有有界的累積期望平方預測誤差。但在單一特定環境 <span class="math inline">\mu</span> 中，理想貝氏混合器 <span class="math inline">\xi</span> 的誤差只有 <span class="math inline">O(\log(1/w_\mu))</span>，近似預測器 <span class="math inline">\rho</span> 相對於 <span class="math inline">\xi</span> 的超額誤差卻是緊緻的 <span class="math inline">\Theta(\eta / w_\mu)</span>。也就是說，在先驗機率 <span class="math inline">w_\mu</span> 極小的罕見（長尾／複雜）環境中，微小的近似誤差會被大幅放大。（2）相對地，若依先驗 <span class="math inline">w</span> 對所有環境取平均，超額預測誤差只有 <span class="math inline">O(\eta)</span>。（3）作者進一步建立從訓練先驗 <span class="math inline">w</span> 轉移到受控測試先驗 <span class="math inline">w'</span> 的分佈偏移定理（在平均保證與最壞保證之間插值），並推廣到 <span class="math inline">D_{\mathrm{KL}}(\xi \| \rho)</span> 可能無界的有限樣本神經網路／Transformer 學習場景。 <a href="zotero://select/library/items/ZUS3RWIH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29289" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Solomonoff Induction with Reflective Oracles</strong>，Damini Kusum（<em>arXiv</em>）：研究結合反射神諭（reflective oracles）的反射式 Solomonoff 歸納，證明該最優預測器能在可計算區間機率限制等不完備模型類別中有效學習，並滿足加權無偏性與校準性。 <a href="zotero://select/library/items/CET6HNVZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.14454" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Category-Native Solomonoff Approximation: From Algorithmic Geometry to Kernels, Operators, and Induction</strong>，Boumediene Hamzi, Marcus Hütter（<em>Entropy</em>）：提出範疇原生 Solomonoff 近似研究架構，在度量測度空間分支中結合經驗壓縮空間、Gromov–Wasserstein 關聯失真、最小描述長度（MDL）與距離核函數嵌入建立正半定預測器，並證明留出驗證神諭不等式與核一致性。 <a href="zotero://select/library/items/85SBG37J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/e28091005" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Formalizing Embeddedness Failures in Universal Artificial Intelligence</strong>，Cole Wyeth, Marcus Hutter（<em>arXiv</em>）：形式化探討通用人工智慧中 AIXI 強化學習智能體作為嵌入式主體的失效模式，在從通用分佈抽取聯合行動與感知歷史的 AIXI 變體下證明該等失效成立，並評估既有改進理論的進展。 <a href="zotero://select/library/items/U3IM2VCN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.17882" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Transformers As Approximations of Solomonoff Induction</strong>，Nathan Young, Michael Witbrock（<em>Lecture notes in computer science</em>）：提出並檢驗「Transformer 模型比現有其他序列預測方法更接近通用最佳序列預測演算法 Solomonoff 歸納」之假說，系統評估正反證據並提出兼顧實證現象的替代理論假說與研究方向。 <a href="zotero://select/library/items/6CAM35EH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.12065" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-9ad70a6c">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/29_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E7%90%86%E8%AB%96%E8%88%87%E7%B4%A2%E7%BE%85%E9%96%80%E8%AB%BE%E5%A4%AB%E6%AD%B8%E7%B4%8D.html">演算法資訊理論與索羅門諾夫歸納</a><span class="rs">演算法資訊理論用「生成單一物件的最短電腦程式長度」來定義絕對的結構與隨機性。</span></li><li><a href="29A_Kolmogorov%E8%A4%87%E9%9B%9C%E5%BA%A6%E3%80%81%E4%B8%8D%E5%8F%AF%E8%A8%88%E7%AE%97%E6%80%A7%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E9%9A%A8%E6%A9%9F%E6%80%A7.html">Kolmogorov複雜度、不可計算性與演算法隨機性</a></li><li><a href="29C_%E6%9C%80%E5%B0%8F%E6%8F%8F%E8%BF%B0%E9%95%B7%E5%BA%A6MDL%E3%80%81%E6%AD%A3%E8%A6%8F%E5%8C%96%E5%A3%93%E7%B8%AE%E8%B7%9D%E9%9B%A2%E8%88%87%E5%A3%93%E7%B8%AE%E5%8D%B3%E9%A0%90%E6%B8%AC%E5%81%8F%E7%BD%AE.html">最小描述長度MDL、正規化壓縮距離與壓縮即預測偏置</a></li><li><a href="41A_%E4%BA%8C%E6%AC%A1%E6%8C%87%E6%B4%BEQAP%E3%80%81%E5%9C%96%E5%8C%B9%E9%85%8D%E8%88%87Gromov-Wasserstein%E8%A8%88%E7%AE%97%E7%A1%AC%E5%BA%A6.html">二次指派QAP、圖匹配與Gromov-Wasserstein計算硬度</a></li><li><a href="OTD_Gromov-Wasserstein%E8%88%87%E7%95%B0%E6%A7%8B%E6%A6%82%E5%BF%B5%E5%8F%8A%E5%9C%96%E8%AD%9C%E7%84%A1%E7%9B%A3%E7%9D%A3%E5%B0%8D%E9%BD%8A.html">Gromov-Wasserstein與異構概念及圖譜無監督對齊</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

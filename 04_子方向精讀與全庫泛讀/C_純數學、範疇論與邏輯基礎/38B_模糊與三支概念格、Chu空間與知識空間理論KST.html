@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>38B｜模糊與三支概念格、Chu空間與知識空間理論KST · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-bb03f78d" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="38b模糊與三支概念格chu空間與知識空間理論kst">38B｜模糊與三支概念格、Chu空間與知識空間理論KST</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a>
+同領域子方向：<a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> · <a class="wl" href="38C_%E6%9C%AC%E9%AB%94%E8%AA%9E%E6%84%8F%E5%B0%8D%E9%BD%8A%E3%80%81%E5%81%8F%E5%BA%8F%E7%9B%92%E5%B5%8C%E5%85%A5Box%20Embeddings%E8%88%87%E7%A5%9E%E7%B6%93%E6%A6%82%E5%BF%B5%E9%9A%8E%E5%B1%A4.html">本體語意對齊、偏序盒嵌入Box Embeddings與神經概念階層</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向承接 <a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> 的經典二元概念格，向外拓展至多值模糊、粗糙上下近似與三支決策概念格，同時透過 Chu 空間與領域理論（Domain Theory）把形式概念連結至資訊系統與知識空間理論（KST）。主線探討當觀測關係帶有不確定性、不可定義集合或非對稱正負證據時，概念格如何推廣為仍具嚴謹序結構的組合與代數模型。</p>
+</aside>
+<ul>
+<li>核心問題：在經典二元形式背景中，許多現實對象集合無法被任何精確概念所定義（稱為不可定義概念，non-definable concepts），且單純要求「全部共有屬性」的嚴格合取無法容納部分程度（模糊／多伴隨）、同時考量「擁有與缺乏」雙向證據（三支概念），或是處理教育測評中大規模組合狀態的適應性推斷；同時，不同學科對資訊狀態、概念與知識狀態各自獨立發展，缺乏共同的範疇與組合公理橋樑。</li>
+<li>直覺模型：如果經典概念格像是用非黑即白的印章把事物蓋成整齊方塊，粗糙與三支概念格則允許畫出「必定屬於」、「可能屬於」與「明確不屬於」三道邊界來包夾難以精確切齊的對象群。而 Chu 空間與知識空間則進一步把這張矩陣看成測驗與狀態的雙向對話：透過觀察學生答對哪些題目，在龐大卻受前驅依賴約束的知識狀態網格裡逐步縮小候選範圍。</li>
+<li>分階段閱讀路線：第一步先讀 Zhang（2003）與 Doignon 及 Falmagne（2015），前者建立形式概念分析、Chu 空間與 Scott 資訊系統狀態空間的精確對應，後者透過兩條基本組合公理構築知識空間與學習空間理論（KST）核心；第二步讀 Yao（Rough Computing 章節）、Xiao 等人（2017）與 Sitthisak 等人（2013），比較粗糙集上下近似與格論近似算子的結構差異，並觀察 KST 如何與能力評估模型（COMBA）整合為適應性測驗系統；第三步讀 Montero-Ramírez 等人（2026），了解形式概念分析如何與資訊瓶頸及流形幾何結合，應用於多任務深度音訊表徵的階層可解釋性分析。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;經典布林形式概念分析 FCA&quot;] --&gt; B[&quot;Chu 空間與 Scott 領域理論狀態對應&quot;]
+  A --&gt; C[&quot;粗糙集分析與上下近似算子&quot;]
+  C --&gt; D[&quot;三支概念分析與模糊／多伴隨格&quot;]
+  B --&gt; E[&quot;知識空間理論 KST 與學習空間公理&quot;]
+  E --&gt; F[&quot;能力模型整合與適應性測驗評估&quot;]
+  C --&gt; G[&quot;格論與集合論近似概念格比較&quot;]
+  A --&gt; H[&quot;資訊瓶頸與多任務深度階層可解釋性&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>Chu 空間、Scott 資訊系統與關聯規則對應（Chu Spaces, Domains, and FCA）</strong></p>
+<ul>
+<li>直覺理解：把一個對象與屬性的表格換個視角，看作系統狀態與基本命題之間的滿足關係矩陣：矩陣裡的一組最大相容矩形，在計算機科學的領域理論裡正好就是系統的一個合法計算狀態，而屬性之間的涵義關係就是關聯規則。</li>
+<li>機制或核心表達式：在有限 Chu 空間 <span class="math inline">\mathcal{C} = (A, r, X)</span>（對象集 <span class="math inline">A</span>、屬性集 <span class="math inline">X</span> 與評估映射 <span class="math inline">r: A \times X \to K</span>）上，Zhang（2003）證明 Scott 資訊系統（Scott's information systems）中的「狀態（states）」精確對應於有限 Chu 空間中的形式概念（formal concepts），而資訊系統的蘊含關係（entailment relation）則精確對應形式概念分析中的關聯規則（association rules）。更一般地，透過在雙值或剩餘格真值集 <span class="math inline">L</span> 上定義多伴隨對與模糊 Galois 連接，或引入同時刻畫肯定算子與否定算子的三支（three-way）概念對，可將概念格推展至多值語意與雙極證據表示。</li>
+<li>能做到什麼，代價是什麼：此對應將形式概念分析、範疇論 Chu 空間與程式語意領域理論三支體系互通，使序理論工具可直接用於資訊狀態建模；然而當評估值域由二值擴展到連續剩餘格或雙向三支算子時，概念格的節點數量與格結構複雜度會顯著增加。</li>
+</ul>
+</li>
+<li>
+<p><strong>粗糙概念格與不可定義集合的上下近似（Rough and Approximable Concept Lattices）</strong></p>
+<ul>
+<li>直覺理解：當一群對象找不到一組恰好把它們圈起來的精確特徵時，我們不強求精確定義，而是用「最緊的內側核心概念（下近似）」與「最小的外側包圍概念（上近似）」把它夾在中間。</li>
+<li>機制或核心表達式：結合粗糙集分析（RSA）與形式概念分析時，給定對象集上的等價關係 <span class="math inline">R</span> 或對象導向／屬性導向概念算子，對任意無法由單一形式概念表示的目標對象子集 <span class="math inline">X \subseteq G</span>，可構造一對下近似 <span class="math inline">\underline{\mathrm{apr}}(X)</span> 與上近似 <span class="math inline">\overline{\mathrm{apr}}(X)</span>（Rana 與 Roy 2015；Yao）。Xiao 等人（2017）系統比較了分別基於對象導向概念、屬性導向概念、可近似概念（approximable concepts）與弱可近似概念所構造的近似算子，區分「基於格論算子（lattice-theoretic operators）」的定義與「基於集合論算子（set-theoretic operators）」的修正定義，解決前者在部分性質上的結構缺陷。</li>
+<li>能做到什麼，代價是什麼：粗糙近似讓概念格在面對不可定義概念與不完備資料時仍保有嚴格的上下邊界推論能力，並可進一步延伸為三支決策（接受、拒絕、延遲）；代價是必須同時維護格序結構與等價類／鄰域粒度參數，並存在格論近似與集合論近似兩種不同代數行為的選型取捨。</li>
+</ul>
+</li>
+<li>
+<p><strong>知識空間與學習空間組合理論（Knowledge Spaces and Learning Spaces）</strong></p>
+<ul>
+<li>直覺理解：衡量學生掌握了什麼知識不該只看一個總分，而應該畫出該領域所有「邏輯上合理可達的題目集合」所構成的狀態網路；每次作答都像在這個網路裡排除不可能的分支，快速鎖定學生當前的知識邊界並推薦下一步要學的內容。</li>
+<li>機制或核心表達式：在知識空間理論（KST）中，設領域由問題項目集 <span class="math inline">Q</span> 組成，合法的知識狀態（knowledge state）子集構成知識結構 <span class="math inline">\mathcal{K} \subseteq 2^Q</span>。若 <span class="math inline">\mathcal{K}</span> 對任意並集封閉且包含 <span class="math inline">\emptyset</span> 與 <span class="math inline">Q</span>，即為知識空間；Doignon 與 Falmagne（2015）指出其特例學習空間（learning space）僅由兩條核心組合公理刻畫：可及性（每個非空狀態都能從更少一題的狀態逐題習得，learning smoothness）與在並集運算下維持對齊的一致性（learning consistency）。為解決學習空間隨 <span class="math inline">|Q|</span> 呈組合爆炸的儲存與搜尋困難，實務上常透過前置條件關係（surmise systems）或結合能力模型（如 Sitthisak 等人 2013 的 ComKoS）對龐大組合結構進行壓縮摘要並驅動適應性評量。</li>
+<li>能做到什麼，代價是什麼：相較於單一數值分數（如傳統標準化測驗），KST 能給出具高度診斷力的狀態描述與適應性出題路徑；但其組合結構規模隨題庫增長極快，需仰賴精簡公理摘要或與項目反應理論（IRT）、能力框架結合來控制計算負擔。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>學習空間兩條基本公理與知識狀態逐步習得的關聯</strong>：在 Doignon 與 Falmagne（2015）的學習空間（Learning Space）定義中，為何除了知識空間對並集封閉之外，還需要要求從任意非空知識狀態都能透過一次新增或移除單一項目逐步抵達（learning smoothness / accessibility）？這對適應性學習路徑有何數學意義？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>由學習過程的良基偏序（well-gradedness）切入：若知識結構僅對並集封閉，兩個相鄰知識狀態之間可能存在必須「同時跨越好幾個題目才能從一個狀態跳到另一個狀態」的斷層。加入逐步可及性公理後，任何學習狀態 <span class="math inline">K \in \mathcal{K}</span> 都至少存在一條從空集 <span class="math inline">\emptyset</span> 到 <span class="math inline">K</span>、每次只精準增加單一概念或題目的極大鏈（gradation），使得系統能為任一學生建構漸進式學習步驟而不出現無解的跳躍瓶頸。</p>
+</details>
+<ol start="2">
+<li><strong>格論近似算子與集合論近似算子在概念格中的差異</strong>：參考 Xiao 等人（2017）對粗糙概念格與可近似概念格的分析，當我們試圖用現有形式概念去逼近一個不可定義對象集 <span class="math inline">X</span> 時，直接使用概念格上的交並格論算子與回到原集合空間構造集合論近似算子，為何會產生不同的上下近似邊界？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考「概念外延的單調交集／聯集」與「原始等價類覆蓋」之間的差別：概念格中兩個形式概念的並（join）在對象外延上通常大於兩者外延的純集合聯集（因為需要閉包 <span class="math inline">(\cdot)''</span> 補齊共享同組屬性的其他對象）。因此僅依賴格論算子構建上近似時，閉包擴張可能引入多餘對象或破壞預期的集合論近似公理（如冪等性或緊緻邊界）；改以集合論算子構造下上近似則能補救這類代數缺口，但也使近似結果不再必然對應原格中的單一形式概念。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>大規模知識空間與多值三支概念格的組合壓縮問題</strong>：無論是 Doignon 與 Falmagne（2015）指出的大型學習空間組合結構摘要難題，抑或是模糊多伴隨格與三支概念格（同時處理正負雙向導出算子）在現實屬性增長時的概念數膨脹，如何在不遺失關鍵蘊含結構與前驅依賴（surmise relation）的前提下設計高效率壓縮表示與增量更新演算法，仍是理論落地的主要障礙。</li>
+<li><strong>離散概念空間與深度多任務表徵幾何的橋接深度</strong>：近期工作開始嘗試把形式概念分析與資訊瓶頸、流形幾何共同用於解析深度模型內部表徵（例如 Montero-Ramírez 等人 2026 分析多任務音訊事件與聲學場景的階層條件依賴），但這類分析目前多停留於事後可解釋性診斷，如何將 KST 的學習順序公理或三支概念的保留邊界直接轉化為深度架構的歸納偏置（inductive bias），尚缺乏系統性的理論成果。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>Chu 空間雙向態射與神經偏序盒嵌入的語意對齊</strong>：本子方向由 Zhang（2003）建立的 Chu 空間與 Scott 資訊系統狀態對應，以及粗糙／三支概念格處理不確定外延上下界的思維，可直接遷移至 <a class="wl" href="38C_%E6%9C%AC%E9%AB%94%E8%AA%9E%E6%84%8F%E5%B0%8D%E9%BD%8A%E3%80%81%E5%81%8F%E5%BA%8F%E7%9B%92%E5%B5%8C%E5%85%A5Box%20Embeddings%E8%88%87%E7%A5%9E%E7%B6%93%E6%A6%82%E5%BF%B5%E9%9A%8E%E5%B1%A4.html">本體語意對齊、偏序盒嵌入Box Embeddings與神經概念階層</a>，用來詮釋連續空間中「體積包含即概念蘊含」的幾何嵌入為何必須保持與離散概念格相容的偏序結構。</li>
+<li><strong>形式概念雙集與幾何拓撲概念多胞形表示</strong>：本子方向將 <a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> 的布林形式概念擴展至粗糙上下近似與多任務階層分析（Montero-Ramírez 等人 2026），其結合資訊瓶頸與流形幾何的階層評估框架，可進一步遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>，作為高維神經網路概念多胞形拓撲結構的離散驗證基準。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-chu-spaces-concept-lattices-and-domains2003">1. Chu Spaces, Concept Lattices, and Domains（2003）</h4>
+<ul>
+<li>作者與出處：Guo‐Qiang Zhang · <em>Electronic Notes in Theoretical Computer Science</em></li>
+<li>核心問題：形式概念分析（FCA）、Chu 空間與程式語意學中的領域理論（Domain Theory）長期使用不同術語各自發展，缺乏一個能讓概念格演算法、資訊狀態與邏輯蘊含直接互通的統一數學視角。</li>
+<li>關鍵做法：對三個領域給出統一重構，證明在所有有限 Chu 空間上，Scott 資訊系統中的「狀態（states）」精確對應 FCA 中的形式概念，而資訊系統的蘊含關係則精確對應資料探勘中的關聯規則。</li>
+<li>跨領域啟發：建立離散概念格通往計算機領域理論與知識空間狀態模型的嚴格範疇橋樑。</li>
+<li>連結：<a href="zotero://select/library/items/QXT3EK2B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s1571-0661(03)50016-0" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-rough-set-analysis-and-formal-concept-analysis2026">2. Rough Set Analysis and Formal Concept Analysis（2026）</h4>
+<ul>
+<li>作者與出處：Yiyu Yao · <em>Rough Computing</em></li>
+<li>核心問題：粗糙集分析（RSA）與形式概念分析（FCA）同為智能資料分析的重要符號架構，分別處理不可分辨等價類近似與概念閉包階層，學界需要明確釐清兩者的算子異同與可結合之處。</li>
+<li>關鍵做法：系統回顧並比較 RSA 與 FCA 的基本算子結構，在統一數學框架下整理兩者相互轉換與結合的既有模型並給出新結果，釐清對象與屬性近似和概念對偶之間的結構關係。</li>
+<li>跨領域啟發：作為理解粗糙概念格與後續三支概念分析（three-way FCA）的核心文獻基礎。</li>
+<li>連結：<a href="zotero://select/library/items/M67A8TFC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4018/978-1-59904-552-8.ch004" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-the-approximations-in-rough-concept-lattice-and-approximable-concept-lattice2017">3. The approximations in rough concept lattice and approximable concept lattice（2017）</h4>
+<ul>
+<li>作者與出處：Qimei Xiao, Guangming Lang, Wenjun Liu, Mingjie Cai · <em>Journal of Intelligent &amp; Fuzzy Systems</em></li>
+<li>核心問題：在形式背景中以對象導向、屬性導向或可近似概念建構任意對象集的下上近似時，既有基於格論算子的近似定義存在結構缺陷，需找出更準確的替代構造。</li>
+<li>關鍵做法：分析並比較透過對象導向概念、屬性導向概念、可近似概念與弱可近似概念所建構的下近似與上近似性質，針對格論近似算子的兩項缺失提出基於集合論算子的新近似定義。</li>
+<li>跨領域啟發：展現當離散格論與粗糙集邊界在實務資料中出現衝突時，如何透過集合論算子修正近似性質。</li>
+<li>連結：<a href="zotero://select/library/items/W793M8XC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3233/jifs-16318" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-knowledge-spaces-and-learning-spaces2015">4. Knowledge Spaces and Learning Spaces（2015）</h4>
+<ul>
+<li>作者與出處：Jean-Paul Doignon, Jean-Claude Falmagne · <em>arXiv</em></li>
+<li>核心問題：傳統測驗僅輸出單一粗略數值分數，既無法精準定位學生掌握了哪些知識狀態，也難以自動給出個人化學習建議；同時實務上的學習空間作為龐大組合結構往往極難有效管理。</li>
+<li>關鍵做法：以兩條基本組合公理系統性闡述知識空間理論（KST）與特例學習空間理論的核心結果，說明如何基於先前提問作答進行適應性狀態評估，並概述為大型組合學習空間建立精簡摘要的方法。</li>
+<li>跨領域啟發：奠定 KST 與組合知識狀態空間的數學核心，並可與 <a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> 中的偏序及蘊含系統對照閱讀。</li>
+<li>連結：<a href="zotero://select/library/items/A5P65H6B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1511.06757" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-adaptive-learning-using-an-integration-of-competence-model-with-knowledge-space-theory2013">5. Adaptive Learning Using an Integration of Competence Model with Knowledge Space Theory（2013）</h4>
+<ul>
+<li>作者與出處：Onjira Sitthisak, Lester H. Gilbert, Dietrich Albert · <em>IIAI International Congress on Advanced Applied Informatics (IIAI-AAI)</em></li>
+<li>核心問題：電腦輔助適應性評量同時需要結構化的答題選項空間與具針對性的即時回饋，單靠知識空間理論（KST）或能力基礎評估（COMBA）各自只能解決其中一側。</li>
+<li>關鍵做法：提出整合 KST 問題結構與 COMBA 所需能力模型的 ComKoS 框架，並將其與 IMS QTI 標準實作於 Moodle 適應性測驗系統中，以改善評量的適應性、互通性與可重複使用性。</li>
+<li>跨領域啟發：示範純組合知識空間公理如何落地為具備可執行能力回饋機制的實際教育評量系統。</li>
+<li>連結：<a href="zotero://select/library/items/NJNWG9CW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/iiai-aai.2013.15" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-hierarchical-interpretable-multitask-audio-representation-learning-an-analysis-of-event-scene-relationships-through-the-information-bottleneck2026">6. Hierarchical Interpretable Multitask Audio Representation Learning: An Analysis of Event-Scene Relationships through the Information Bottleneck（2026）</h4>
+<ul>
+<li>作者與出處：Claudia Montero-Ramírez, Alba Martínez-Serrano, Carmen Peláez-Moreno · <em>arXiv</em></li>
+<li>核心問題：傳統聯合音訊場景分類（ASC）與音訊標記（AT）多採用無約束的多頭架構，忽略了聲學事件與高階場景之間天然的階層依賴關係，也缺乏對多任務最佳化動態的結構解釋。</li>
+<li>關鍵做法：在 PaSST、PANNs 與 BEATs 三種骨幹上進行 66 次完整訓練，驗證由中層事件機率直接條件預測場景的階層架構能在特定損失權重下達成雙任務同步學習，並結合資訊瓶頸、流形幾何與形式概念分析（FCA）建立多視角可解釋性框架。</li>
+<li>跨領域啟發：展示 FCA 概念階層在 2026 年多任務深度學習表徵診斷中的新興角色，可直接連結 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>。</li>
+<li>連結：<a href="zotero://select/library/items/8CAXA5TU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.21520" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-26-篇">G5｜本子方向全量文獻泛讀清單（共 26 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 26 篇文獻（含開放存取 PDF 5 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進21-篇">A. 奠基經典、專著與核心演進（21 篇）</h3>
+<ul>
+<li><strong>2009｜Formal concept analysis via multi-adjoint concept lattices</strong>，Jesús Medina, Manuel Ojeda-Aciego, Jorge Ruiz-Calviño（<em>Fuzzy Sets and Systems</em>，201 引）：多伴隨模糊概念格的開創論文（被引 201 次），在一般完備格上結合多種伴隨蘊含算子，處理異質的不確定資料。 <a href="zotero://select/library/items/E5Q8KIMK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.fss.2008.05.004" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Three-Way Formal Concept Analysis</strong>，Jianjun Qi, Ling Wei, Yiyu Yao（<em>Lecture Notes in Computer Science</em>，107 引）：把姚一豫的三支決策與 FCA 結合（被引 107 次），讓概念同時記錄共同的正屬性與共同排斥的負屬性。 <a href="zotero://select/library/items/CPXVB4EM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-11740-9_67" rel="noopener">官方連結</a></li>
+<li><strong>2001｜Discovering Knowledge from Fuzzy Concept Lattice</strong>，Sadok Ben Yahia, Ali Jaoua（<em>Studies in Fuzziness and Soft Computing</em>，65 引）：早期的奠基之作，從模糊概念格中高效挖掘模糊關聯規則與最小非冗餘蘊含集。 <a href="zotero://select/library/items/AUFFEFQR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-7908-1825-3_7" rel="noopener">官方連結</a></li>
+<li><strong>2003｜Chu Spaces, Concept Lattices, and Domains</strong>，Guo‐Qiang Zhang（<em>Electronic Notes in Theoretical Computer Science</em>，52 引）：連起理論電腦科學的三個支柱：嚴格證明有限 Chu 空間、FCA 形式概念與 Scott 資訊系統狀態之間的精確對應。 <a href="zotero://select/library/items/QXT3EK2B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s1571-0661(03)50016-0" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Assessment of skills and adaptive learning for parametric exercises combining knowledge spaces and item response theory</strong>，Pedro J. Muñoz‐Merino, Ruth González Novillo, Carlos Delgado Kloos（<em>Applied Soft Computing</em>，22 引）：發表於 Applied Soft Computing，結合知識空間理論（KST）與試題反應理論，探討參數化習題的技能評估與適性學習建模，對應 38B 主題。 <a href="zotero://select/library/items/RKBI5MAC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.asoc.2018.03.045" rel="noopener">官方連結</a></li>
+<li><strong>2007｜A Topologist’s View of Chu Spaces</strong>，Eraldo Giuli, Walter Tholen（<em>Applied Categorical Structures</em>，19 引）：發表於 2007 年《應用範疇結構》期刊的論文，從一般拓撲學與範疇論視角探討形式概念分析相關 Chu 空間（Chu spaces）的態射結構與拓撲性質。 <a href="zotero://select/library/items/D77G7Z4C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s10485-007-9111-6" rel="noopener">官方連結</a></li>
+<li><strong>2015｜The three-way object oriented concept lattice and the three-way property oriented concept lattice</strong>，Ling Wei, Ting Qian（<em>2015 International Conference on Machine Learning and Cybernetics (ICMLC)</em>，16 引）：發表於 ICMLC 2015，在三支概念格（three-way concept lattice）的理論架構下，定義並探討物件導向與屬性導向三支概念格的性質（未附摘要）。 <a href="zotero://select/library/items/8C6H6K4N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/icmlc.2015.7340665" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Complex Fuzzy Concept Lattice</strong>，Prem Kumar Singh（<em>Neural Processing Letters</em>，15 引）：發表於 2019 年《Neural Processing Letters》的論文，探討將複模糊集（complex fuzzy sets）引入形式概念分析所建構的複模糊概念格理論與運算性質。 <a href="zotero://select/library/items/NEZ3T78T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s11063-018-9884-7" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Adaptive Learning Using an Integration of Competence Model with Knowledge Space Theory</strong>，Onjira Sitthisak, Lester H. Gilbert, Dietrich Albert（<em>IIAI International Congress on Advanced Applied Informatics (IIAI-AAI)</em>，10 引）：將知識空間理論（KST）的選項建模與能力本位評量（COMBA）的回饋機制整合為 ComKoS 模型，以解決電腦輔助適應性學習中的作答選項設計與即時回饋問題，並規劃結合 IMS QTI 於 Moodle 平台實作。 <a href="zotero://select/library/items/NJNWG9CW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/iiai-aai.2013.15" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Three–Way Bipolar Neutrosophic Concept Lattice</strong>，Prem Kumar Singh（<em>Studies in Fuzziness and Soft Computing</em>，6 引）：選自 2019 年模糊與軟計算研究叢書的章節，探討結合三支決策（three-way）與雙極中智邏輯（bipolar neutrosophic）的形式概念格數學構造。 <a href="zotero://select/library/items/52S6U8N5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-00045-5_16" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Formal concept analysis in intuitionistic fuzzy formal context</strong>，Lei Zhou（<em>2010 Seventh International Conference on Fuzzy Systems and Knowledge Discovery</em>，5 引）：發表於 FSKD 2010，將經典形式概念分析（FCA）推廣至直覺模糊形式背景（intuitionistic fuzzy formal context），探討其概念構造與格結構性質（未附摘要）。 <a href="zotero://select/library/items/HZ4VI5BE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/fskd.2010.5569658" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Fuzzy Formal Concept Analysis</strong>，Abner Brito et al.（<em>Communications in Computer and Information Science</em>，4 引）：發表於 2018 年《Communications in Computer and Information Science》的論文，探討將模糊集合理論結合形式概念分析的模糊形式概念分析模型與性質。 <a href="zotero://select/library/items/EDTJXCDR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-95312-0_17" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Unifying fuzzy concept lattice construction methods</strong>，Stefania Boffa et al.（<em>2016 IEEE International Conference on Fuzzy Systems (FUZZ-IEEE)</em>，4 引）：發表於 FUZZ-IEEE 2016，針對既有的多種模糊概念格建構方法進行系統性歸納與統一形式化（未附摘要）。 <a href="zotero://select/library/items/77UV6I9W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/fuzz-ieee.2016.7737689" rel="noopener">官方連結</a></li>
+<li><strong>2017｜The approximations in rough concept lattice and approximable concept lattice</strong>，Qimei Xiao et al.（<em>Journal of Intelligent &amp; Fuzzy Systems</em>，1 引）：在形式背景中研究物件集合分別透過面向物件、面向屬性、可逼近與弱可逼近概念建構的上下近似算子，分析既有格論近似算子的兩項缺陷，並進一步提出基於集合論算子的近似定義。 <a href="zotero://select/library/items/W793M8XC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3233/jifs-16318" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Fuzzy Concept Lattice for Ontology Learning and Concept Classification</strong>，K. Selvi, R. M. Suresh（<em>Indian Journal of Science and Technology</em>，1 引）：探討將模糊集合理論結合至形式概念分析以建構模糊概念格（Fuzzy Concept Lattice），並應用於領域本體論學習與不確定性概念分類任務。 <a href="zotero://select/library/items/FWIKCBNF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.17485/ijst/2016/v9i28/95135" rel="noopener">官方連結</a></li>
+<li><strong>2011｜On equivalence of fuzzy concept lattice</strong>，Lei Zhou（<em>2011 Eighth International Conference on Fuzzy Systems and Knowledge Discovery (FSKD)</em>，1 引）：發表於 FSKD 2011，在模糊形式概念分析框架下，探討模糊概念格之間的等價性判別條件與代數性質（未附摘要）。 <a href="zotero://select/library/items/7PN9J6IS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/fskd.2011.6019862" rel="noopener">官方連結</a></li>
+<li><strong>2009｜AFS Formal Concept and AFS Fuzzy Formal Concept Analysis</strong>，Xiaodong Liu, Witold Pedrycz（<em>Studies in Fuzziness and Soft Computing</em>，1 引）：選自 2009 年《Studies in Fuzziness and Soft Computing》的章節，探討基於公理化模糊集（AFS）理論的形式概念與模糊形式概念分析建構方法。 <a href="zotero://select/library/items/BDA438ZV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-642-00402-5_8" rel="noopener">官方連結</a></li>
+<li><strong>2019｜m–Polar Fuzzy Concept Lattice</strong>，Muhammad Akram（<em>Studies in Fuzziness and Soft Computing</em>）：選自 2019 年模糊與軟計算研究叢書的章節，探討將 <span class="math inline">m</span>-極模糊集（<span class="math inline">m</span>-polar fuzzy sets）引入形式概念分析所建構的概念格理論與結構性質。 <a href="zotero://select/library/items/WNETNKQP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-03751-2_6" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Knowledge Spaces and Learning Spaces</strong>，Jean-Paul Doignon, Jean-Claude Falmagne（<em>arXiv</em>）：綜述知識空間理論與學習空間理論的組合數學核心與兩條基本公理，說明其如何捨棄單一數值評分，建立依據學生既往答題表現進行適性知識評估與學習路徑建議的形式架構。 <a href="zotero://select/library/items/A5P65H6B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1511.06757" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Concept Lattice: A rough set approach</strong>，Dipankar Rana, Sankar Kumar Roy（<em>Malaya Journal of Matematik</em>）：針對形式概念分析中部分實務問題無法以精確形式概念界定的限制，利用等價關係將粗糙集（rough set）理論融入概念格建構流程，提出粗糙概念格模型並建立相關性質結果。 <a href="zotero://select/library/items/N66NHNTK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.26637/mjm301/002" rel="noopener">官方連結</a></li>
+<li><strong>2007｜Fuzzy Concept Lattice Based Classifier</strong>，Wen Zhou et al.（<em>Fourth International Conference on Fuzzy Systems and Knowledge Discovery (FSKD 2007)</em>）：發表於 FSKD 2007，基於模糊形式概念分析與模糊概念格結構，設計並探討對應的分類器建構方法（未附摘要）。 <a href="zotero://select/library/items/FVZGZH84" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/fskd.2007.322" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2026｜Signal2Symbol: Neuro-Symbolic Temporal Reasoning for Explainable Physiological Time-Series Anomaly Detection</strong>，Naser Mansour, Sidahmed Benabderrahmane, Ameer Rahwan（<em>arXiv</em>）：作者提出神經符號框架 Signal2Symbol，先以 VQ-VAE 碼本或 SAX 將訊號轉為符號序列，建構 bigram 強化的視窗交易並以極小稀有項集（Minimal Rare Itemset）計算異常分數。系統再將異常視窗合併為區間，利用 Allen 區間代數描述升級鏈、偽影重疊與跨通道同步等複合關係，最後以形式概念分析（FCA）建構稀有時間概念格，把局部偵測壓縮成可解釋的異常家族；作者並在 MIT-BIH Arrhythmia、PTB-XL 與 Bonn EEG 資料集上驗證方法，同時測試加成雜訊與基線飄移下的強健性。 <a href="zotero://select/library/items/W8RB6SV8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.26820" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Relevance Is Not Sufficiency: What Actually Closes the Evidence Gap in Long-Term Memory QA</strong>，Yufeng Li et al.（<em>arXiv</em>）：作者借鏡法學證據論中相關性與充分性的區分，將記憶檢索重新定義為建構充分記憶集合，並引入盲測 LLM 判斷與 Gold Hit、Turn Hit 作為證據覆蓋指標。所提出的 Budgeted Flat Reconstruction（BFR）先以 Formal Concept Analysis for Memory Selection（FCA-MS）把問題拆解為資訊需求並選出緊湊覆蓋子集，再透過深層文本檢索或實體與會話視角反覆補齊未見記錄；在 LongMemEval-S 上，BFR 將評判準確率從 72.4% 提升至 82.2%，Turn Hit 達 91.4%，並在 LoCoMo 與 LongMemEval-S 上優於近期的同庫代理記憶系統改編方案。 <a href="zotero://select/library/items/RMD8AHWX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.09348" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Hierarchical Interpretable Multitask Audio Representation Learning: An Analysis of Event-Scene Relationships through the Information Bottleneck</strong>，Claudia Montero-Ramírez, Alba Martínez-Serrano, Carmen Peláez-Moreno（<em>arXiv</em>）：作者系統探討階層式順序條件化架構，也就是直接由中間層的聲音事件機率序列條件化預測場景類別。他們在 <code>PaSST</code>、<code>PANNs</code> 與 <code>BEATs</code> 三個音訊骨幹、損失權重 <span class="math inline">\beta \in [0.0, 1.0]</span> 上完成 66 次完整的大規模訓練基準測試，發現 <span class="math inline">\beta \in [0.6, 0.9]</span> 區間可以消除先易後難的偏向，讓兩個任務同步協同收斂。作者另外建立了三個視角的可解釋性分析框架，結合資訊瓶頸（Information Bottleneck）、流形幾何，以及建構在 TF-IDF 事件表徵上的形式概念分析（Formal Concept Analysis, FCA）概念格。分析嚴格證實，階層式條件化會系統性地產生更低的條件熵、更高的互資訊與更好的潛在聚類分離度（更高 Silhouette 分數），得到語意忠實的概念格中介空間。 <a href="zotero://select/library/items/8CAXA5TU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.21520" rel="noopener">官方連結</a></li>
+<li><strong>2025｜The Connections Between the Approximate Three-Way Concept Lattice and the Three-Way Approximate Concept Lattice</strong>，Mei-Zheng Li, Lei-Jun Li, Ju-Sheng Mi（<em>Lecture Notes in Computer Science</em>）：釐清粗糙集近似算子與三支概念格構造以不同先後順序複合時的代數關係與轉換條件。 <a href="zotero://select/library/items/5FA46RB7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-92744-7_27" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Rough Set Analysis and Formal Concept Analysis</strong>，Yiyu Yao（<em>Rough Computing</em>）：回顧粗糙集分析（RSA）與形式概念分析（FCA）兩種智慧資料分析理論的比較與結合研究，並提出新的整合結果，在統一框架下探討兩者於資料分析上的互補關係。 <a href="zotero://select/library/items/M67A8TFC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4018/978-1-59904-552-8.ch004" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-bb03f78d">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a><span class="rs">形式概念分析（FCA）與格論替人和機器的概念（Concept）給出一個零參數的代數定義。</span></li><li><a href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a></li><li><a href="38C_%E6%9C%AC%E9%AB%94%E8%AA%9E%E6%84%8F%E5%B0%8D%E9%BD%8A%E3%80%81%E5%81%8F%E5%BA%8F%E7%9B%92%E5%B5%8C%E5%85%A5Box%20Embeddings%E8%88%87%E7%A5%9E%E7%B6%93%E6%A6%82%E5%BF%B5%E9%9A%8E%E5%B1%A4.html">本體語意對齊、偏序盒嵌入Box Embeddings與神經概念階層</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

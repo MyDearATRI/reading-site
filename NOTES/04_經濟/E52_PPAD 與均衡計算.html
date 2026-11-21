@@ -12,21 +12,21 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-da2a52f0">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">經濟</a><a class="find" href="../../index.html#n=n-da2a52f0">Find on board</a></header>
+<body class="doc" data-note="n-da2a52f0" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 經濟</span>
 <article>
 
 <h1 id="e52ppad-與均衡計算">E52｜PPAD 與均衡計算</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="E51_%E5%8B%95%E6%85%8B%E8%B3%87%E7%94%A2%E5%AE%9A%E5%83%B9%E7%90%86%E8%AB%96.html">E51 動態資產定價理論</a> ｜ 下一章：<a class="wl" href="E53_Nash%20%E5%9D%87%E8%A1%A1%E7%9A%84%20PPAD%20%E5%AE%8C%E5%85%A8%E6%80%A7.html">E53 Nash 均衡的 PPAD 完全性</a>
 本線先備：<a class="wl" href="E07_Nash%20%E5%9D%87%E8%A1%A1.html">E07 Nash 均衡</a> · <a class="wl" href="E08_%E6%B7%B7%E5%90%88%E3%80%81%E7%9B%B8%E9%97%9C%E8%88%87%E6%BC%94%E5%8C%96%E5%9D%87%E8%A1%A1.html">E08 混合、相關與演化均衡</a>
 別線先備：<a class="wl" href="../02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a>（細節見下方「路線上的計劃」）
 研究主脊：<a class="wl" href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A1_%E8%A8%88%E7%AE%97%E7%9A%84%E6%A5%B5%E9%99%90.html">主脊1_計算的極限</a>
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">41_最優傳輸與P_neq_NP計算複雜度</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">最優傳輸與 P ≠ NP 計算複雜度</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/08-economics.md:184</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -63,10 +63,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">2</span></h3><ul><li><a href="E07_Nash%20%E5%9D%87%E8%A1%A1.html">Nash 均衡</a><span class="tag-plan">計劃</span><span class="rs">Osborne &amp; Rubinstein 第 2 章 Nash 均衡；配讀 Nash 1950</span></li><li><a href="E08_%E6%B7%B7%E5%90%88%E3%80%81%E7%9B%B8%E9%97%9C%E8%88%87%E6%BC%94%E5%8C%96%E5%9D%87%E8%A1%A1.html">混合、相關與演化均衡</a><span class="tag-plan">計劃</span><span class="rs">第 3 章 混合、相關與演化均衡（3.1–3.2 為核心）</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">2</span></h3><ul><li><a href="E53_Nash%20%E5%9D%87%E8%A1%A1%E7%9A%84%20PPAD%20%E5%AE%8C%E5%85%A8%E6%80%A7.html">Nash 均衡的 PPAD 完全性</a><span class="tag-plan">計劃</span><span class="rs">Daskalakis, Goldberg, Papadimitriou 2009；Chen, Deng, Teng 2009</span></li><li><a href="E-S3A_%E5%9D%87%E8%A1%A1%E8%88%87%E5%B8%82%E5%A0%B4%E7%9A%84%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">均衡與市場的計算複雜度</a><span class="tag-plan">計劃</span><span class="rs">S3 候選方向，題目到時由學習者選。路線檔註記：主脊 1</span></li></ul></div><div class="rg"><h3>相關<span class="n">2</span></h3><ul><li><a href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A1_%E8%A8%88%E7%AE%97%E7%9A%84%E6%A5%B5%E9%99%90.html">主脊1_計算的極限</a><span class="rs">下面列出路線上與這條主脊相關的章節，依學習線分組。歸屬由路線檔的「主脊」標註與內容關鍵詞推定；寫正文時會再核對。</span></li><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E8%88%87P_neq_NP%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6.html">最優傳輸與 P ≠ NP 計算複雜度</a><span class="rs">最優傳輸不是一整塊多項式時間可解的問題，它正好落在 P 與 NP-Hard 的分界上。</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

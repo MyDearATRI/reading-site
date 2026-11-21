@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>17C｜動態基準評測、資料污染檢測與LLM裁判偏誤 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-756dab70" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="17c動態基準評測資料污染檢測與llm裁判偏誤">17C｜動態基準評測、資料污染檢測與LLM裁判偏誤</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a>
+同領域子方向：<a class="wl" href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a> · <a class="wl" href="17B_%E5%90%88%E6%88%90%E8%B3%87%E6%96%99%E7%94%9F%E6%88%90%E3%80%81%E6%A8%A1%E5%9E%8B%E5%9D%8D%E7%B8%AE%E8%88%87%E8%87%AA%E8%88%89%E6%93%B4%E5%B1%95%E9%82%8A%E7%95%8C.html">合成資料生成、模型坍縮與自舉擴展邊界</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a> 的下游驗證端，解決大型語言模型能力量測中的兩項核心失真：一是測試集滲入預訓練或後訓練語料導致的基準污染（Benchmark Contamination / Benchleaking），二是人工標註成本高昂下以 LLM 擔任裁判（LLM-as-a-Judge）所引入的偏好與能力上限偏誤。演進主線從靜態公開基準與無控制黑箱成員推斷，走向即時更新的客觀真值基準（LiveBench）、專測裁判正確性的對抗基準（JudgeBench），以及區分污染機制、控制干擾變因的統計與表徵探針審計。</p>
+</aside>
+<ul>
+<li>核心問題：在排行榜只揭露模型名稱與分數的情況下，模型真實的泛化能力與對測試題的記憶在觀測上幾乎等價。傳統的 <span class="math inline">n</span>-gram 重疊檢查需要存取私有訓練語料；黑箱成員推斷攻擊（MIA）在最新強推理模型上的 AUC-ROC 僅約 <span class="math inline">0.5</span>，接近隨機猜測；而直接對殘差流激活做線性探針又會因表面可解碼性隨網路深度自然上升而產生極高的偽陽性。同時，當基準評測依賴群眾外包偏好或 LLM 裁判時，裁判自身在困難邏輯與數學題上的判斷失效，以及後訓練甚至預訓練階段日益嚴重的測試洩漏，正讓既有靜態基準快速失去區分度。</li>
+<li>直覺模型：傳統靜態基準就像一套多年不換題目的全國統一考卷：只要題庫曾被補習班收集進教材，考滿分的學生未必真的懂微積分，可能只是背下了題號與答案選項。要改寫考評公信力，必須一方面改採每月從最新學術論文與競賽即時出題、且由確定性程式批改的動態考卷，另一方面像反作弊鑑識一樣，從考生的答題反應與內部神經表徵中分離出「題目剛好很簡單」與「題目事前看過」兩種訊號。</li>
+<li>分階段閱讀路線：第一步先讀 Gao et al. (2020) 的 The Pile 作為大型多領域語料與基準測試早期設計的基礎參照，再精讀 White et al. (2024) 的 LiveBench 與 Tan et al. (2024) 的 JudgeBench，掌握動態防污染出題與檢驗 LLM 裁判客觀正確性的基準設計原則。第二步深入 2026 年的污染審計與機制辨析：先讀 Angulo et al. (2026) 依「被擊敗的緩解措施」建構的五類污染分類法與揭露協議，對照 Qin et al. (2026) 關於預訓練與後訓練階段 benchleaking 惡化的實證報告。第三步讀方法論與實驗審計前沿：Janicki et al. (2026) 對黑箱 MIA 失效（AUC-ROC 約 0.5）的系統對比、Braun (2026) 針對殘差流探針偽陽性的 Excess Separability 控制協議，以及 Nananukul &amp; Kejriwal (2026) 在醫療推理基準上的題型與遮蔽測試。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;靜態公開基準與訓練測試重疊（Gao 2020）&quot;] --&gt; B[&quot;污染分類與緩解協議（Angulo 2026）&quot;]
+  A --&gt; C[&quot;動態真值評測：LiveBench（White 2024）&quot;]
+  A --&gt; D[&quot;LLM 裁判驗證：JudgeBench（Tan 2024）&quot;]
+  B --&gt; E[&quot;黑箱 MIA 檢驗與失效邊界（Janicki 2026）&quot;]
+  B --&gt; F[&quot;殘差流 Excess Separability 探針（Braun 2026）&quot;]
+  B --&gt; G[&quot;預訓練與後訓練 Benchleaking 實證（Qin 2026）&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>污染分類學與動態客觀基準（Mitigation-Indexed Taxonomy &amp; Dynamic Ground-Truth Benchmarks）</strong></p>
+<ul>
+<li>直覺理解：把測試題鎖進私有庫只能防住直接抄題，卻防不住改寫題目、過時資料洩漏或在評測過程中才被模型學走的隱性污染；解方是按「哪道防線被繞過」來分類風險，並改用持續更新且能自動比對標準答案的題庫。</li>
+<li>機制或核心表達式：Angulo et al. (2026) 依被突破的防禦機制將污染分為五類：直接污染（Direct）、衍生污染（Derivative）、時間污染（Temporal）、分布污染（Distributional）以及在單次評測執行期間才取得的獲得性污染（Acquired），並以四欄位 JSON Schema 強制記錄評測時的狀態（允許填寫 &quot;unknown&quot;）。在基準實作端，White et al. (2024) 的 LiveBench 從近期數學競賽、arXiv 論文、新聞與資料集高頻更新高難度題目，並強制所有任務（數學、程式、推理、指令遵循、資料分析）以客觀真值自動評分，排除 LLM 裁判與群眾偏誤。</li>
+<li>能做到什麼，代價是什麼：動態客觀基準與揭露協議能切斷直接記憶與裁判偏好偏誤，但高頻更新題庫與維護確定性自動評分器需要持續的人力與領域專家投入，且難以直接覆蓋缺乏單一標準答案的開放式寫作或價值判斷任務。</li>
+</ul>
+</li>
+<li>
+<p><strong>黑箱成員推斷失效與干擾控制殘差流探針（Black-Box MIA Limits &amp; Excess Separability Probing）</strong></p>
+<ul>
+<li>直覺理解：從模型外部看，一個推理能力強的模型與一個看過題庫的模型都會對測試題給出高機率或正確回答，因此黑箱偵測幾乎分不出來；即便進到模型內部讀取隱藏層線性探針，若沒扣掉「模型越深越容易辨識表面特徵」的背景趨勢，還是會把清白的模型誤判成作弊。</li>
+<li>機制或核心表達式：Janicki et al. (2026) 在統一資料集上評估多種前沿黑箱成員推斷攻擊（MIA）與提出的 Familiarity Ranking，發現所有方法在現代 LLM 上的受試者工作特徵曲線下面積 <span class="math inline">\text{AUC-ROC} \approx 0.5</span>，且較強推理模型會同時拉高真陽性率（TPR）與偽陽性率（FPR）。針對白箱內部探針，Braun (2026) 指出在平直深度基準線下對照會讓真虛無假設拒絕率高達 <span class="math inline">0.72</span>，且若報告絕對水準而非形狀，FPR 會隨對照集大小在 <span class="math inline">0.03</span> 至 <span class="math inline">0.99</span> 間劇烈波動；因此改採在線性探針深度剖面上計算對照基準校正後的零和對比量（Excess Separability），以相同難度水準的安慰劑基準（level-matched placebo baseline）重新中心化，配合參考集與嫌疑集 <span class="math inline">2:1</span> 的樣本比例及標籤置換檢定（label-permutation null）。</li>
+<li>能做到什麼，代價是什麼：干擾控制後的深度剖面協議大幅壓低了探針的偽陽性誤報，代價是必須擁有模型內部激活權限（白箱條件）與兩倍於嫌疑集的配對安慰劑參考集，且校正項本身引入的變異數可能高於虛無分布，壓縮了小樣本污染下的統計檢定力。</li>
+</ul>
+</li>
+<li>
+<p><strong>LLM 裁判客觀性檢驗與選項遮蔽診斷（Judge Correctness Evaluation &amp; Choice-Withheld Diagnostics）</strong></p>
+<ul>
+<li>直覺理解：用一個大模型去改另一個大模型的考卷時，如果兩者都只看答案寫得流暢像樣，遇到高難度邏輯與數學題就會互相掩護；同理，醫療選擇題若沒把選項遮起來測驗，模型很可能只是記住了題幹與選項的共現關聯。</li>
+<li>機制或核心表達式：Tan et al. (2024) 的 JudgeBench 將高難度知識、推理、數學與程式基準轉換為具客觀對錯標籤的成對回應（response pairs），以此量化提示式裁判、微調裁判與多智能體裁判辨別「客觀正確性」而非「表面人類偏好」的能力。針對領域記憶診斷，Nananukul &amp; Kejriwal (2026) 在 MedQA-USMLE、MedMCQA、PubMedQA 與 MedBullets 等 3,076 題上設計三種對照格式：標準多選、遮蔽選項開放作答（choices withheld），以及僅由選項反推被隱藏題幹（question reconstruction from choices alone），藉此分離臨床推理能力與多選題庫記憶。</li>
+<li>能做到什麼，代價是什麼：成對客觀正確性基準與多格式遮蔽測試能有效揭露裁判偏誤與選擇題記憶捷徑，但建構具明確對錯標籤的難題回應對依賴強大的上游問題源，且遮蔽選項後開放答案的語意對齊評分難度顯著高於單純比對選項字母。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為什麼強推理模型會同時推高黑箱 MIA 的 TPR 與 FPR</strong>：Janicki et al. (2026) 的實驗顯示，在現代大型語言模型上黑箱成員推斷攻擊（MIA）的 AUC-ROC 接近 0.5，且能力更強的模型往往同時表現出更高的真陽性率（TPR）與偽陽性率（FPR）。請從泛化能力與似然分布的角度解釋為何會出現此現象。</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考黑箱 MIA 依賴的核心假設：模型對見過的訓練樣本（成員）給出的負對數似然或熟悉度顯著低於未見過樣本（非成員）。然而當模型推理與泛化能力增強時，即便對於從未見過的同分布高品質測試文本，模型也能以極高置信度與流暢度預測其下一個詞元，使非成員樣本的統計量全面向成員區間移動，進而同時拉高 TPR 與 FPR 並令 AUC-ROC 趨近於 0.5。</p>
+</details>
+<ol start="2">
+<li><strong>殘差流線性探針的偽陽性來源與安慰劑校正設計</strong>：在 Braun (2026) 對殘差流線性探針的研究中，為何「表面可解碼性隨層數深度自然上升」會導致在平直深度基準線下有 0.72 的機率錯誤拒絕真虛無假設？Excess Separability 協議為什麼堅持報告深度剖面的零和對比「形狀」而非絕對水準？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>隨著網路層數加深，語意與表面特徵在殘差流中本來就會變得更容易被線性分類器區分，因此嫌疑集與對照集的可分性都會隨深度上升；若直接拿這條上升曲線去跟零斜率的平直假設比對，就會把正常的表徵幾何演化誤認成污染訊號。此外，絕對可分性水準受分析者選取的控制集規模影響極大（導致 FPR 在 0.03 至 0.99 之間變動），改用等水準安慰劑重新中心化並檢驗零和深度剖面形狀才能消除對照集大小與深度的干擾。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>從後訓練蔓延至預訓練基礎模型的 Benchleaking 不可逆性</strong>：Qin et al. (2026) 記錄了污染問題的急劇惡化：在後訓練階段，智能體在 23% 的嘗試中直接吐出從未給予的隱藏測試要求，甚至在任務條件改為與之矛盾時仍照常執行；在預訓練基礎模型層面，少樣本續寫測試顯示部分基礎模型能直接默寫出輸入中未出現的完整題目、選項與解答（例如 ERNIE-5.5-Flash-Base 洩漏了 96% 的 HumanEval 題目與參考實作）。如何區分無意抓取的 benchleaking 與針對公開評測特化的 benchmaxxing，目前仍缺乏能在模型發布後獨立執行的低方差偵測工具。</li>
+<li><strong>評測期間獲得性污染（Acquired Contamination）的生態系治理難題</strong>：Angulo et al. (2026) 指出，除了傳統訓練期洩漏，第五類污染是在評測執行當下才產生的（例如模型透過聯網檢索、對話快取回流或長時記憶寫入取得基準答案）。由於此類污染屬於單次評測運行的屬性而非靜態基準本身的屬性，單靠發佈私密測試集無法防堵，必須依賴評測執行環境的強制隔離與每次分數發佈時同步附帶的稽核中繼資料。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>污染偵測與混合比例審計在資料工程中的雙向合流</strong>：本子方向的干擾控制探針與多格式遮蔽測試，可直接與 <a class="wl" href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a> 中的子串去重及 LLMSurgeon 逆問題混合診斷互補：前者從下游測試端檢驗特定基準是否洩漏，後者從生成分布逆推上游語料領域構成。</li>
+<li><strong>高可信評測協議與多智能體裁判機制向科學知識治理的遷移</strong>：JudgeBench（Tan et al., 2024）檢驗裁判能否在困難任務上擺脫表面偏好而對齊客觀正確性，以及 Angulo et al. (2026) 強制允許填寫 &quot;unknown&quot; 的防污染揭露標準，可直接遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a> 中多智能體同儕審查、科學聲明驗證與不確定性誠實標記的設計。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-livebench-a-challenging-contamination-limited-llm-benchmark2024">1. LiveBench: A Challenging, Contamination-Limited LLM Benchmark（2024）</h4>
+<ul>
+<li>作者與出處：Colin White, Samuel W. Dooley, Manley Roberts, Arka Pal, Ben Feuer · <em>arXiv (2024)</em></li>
+<li>核心問題：靜態基準極易因訓練集污染而迅速失效，而依賴人類群眾外包或 LLM 裁判來擴充動態評測又會引入顯著偏誤，且在困難問題上失去準確度。</li>
+<li>關鍵做法：作者提出 LiveBench，具備三項設計原則：高頻從近期數學競賽、arXiv 論文、新聞與資料集更新題目；完全依據客觀真值自動評分以排除裁判偏誤；覆蓋數學、程式、推理、語言、指令遵循與資料分析等高難度任務，建立防污染的動態評測基準。</li>
+<li>跨領域啟發：示範了如何用動態更新與客觀真值替換靜態多選題，是理解現代基準防污染工程設計的首選起點。</li>
+<li>連結：<a href="zotero://select/library/items/86JM9AS2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.19314" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-judgebench-a-benchmark-for-evaluating-llm-based-judges2024">2. JudgeBench: A Benchmark for Evaluating LLM-based Judges（2024）</h4>
+<ul>
+<li>作者與出處：Sijun Tan, Siyuan Zhuang, Kyle Montgomery, William Y. Tang, Alejandro Cuadron · <em>arXiv (2024)</em></li>
+<li>核心問題：LLM 裁判已被廣泛用於自動化評估與模型對齊，但既有的裁判基準多只衡量與人類偏好的吻合度，無法檢驗在複雜推理、數學與程式任務上當人類偏好與客觀對錯分歧時裁判是否可靠。</li>
+<li>關鍵做法：作者建構評估框架與 JudgeBench 基準，將高難度資料集轉化為標籤反映客觀正確性的挑戰性回應對，涵蓋知識、推理、數學與程式四大領域，並系統評測提示式、微調式與多智能體裁判的判別能力。</li>
+<li>跨領域啟發：把評估焦點從表面偏好吻合度拉回邏輯與事實正確性，其裁判失效分析亦有助於對照強化學習獎勵模型中的獎勵駭客（reward hacking）問題。</li>
+<li>連結：<a href="zotero://select/library/items/NQPCR4MK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.12784" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-detecting-data-contamination-in-large-language-models2026">3. Detecting Data Contamination in Large Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Juliusz Janicki, Savvas Chamezopoulos, Evangelos Kanoulas, Georgios Tsatsaronis · <em>arXiv (2026)</em></li>
+<li>核心問題：黑箱成員推斷攻擊（MIA）常被用來偵測受版權保護或基準測試文件是否進入 LLM 訓練集，但各方法需大量資料操作且缺乏統一測試基準，在前沿模型上的真實有效性並不明確。</li>
+<li>關鍵做法：作者在統一資料集與黑箱假設下系統比較現有先進 MIA 方法並提出 Familiarity Ranking。結果顯示所有方法在多款現代 LLM 上的 AUC-ROC 均接近 0.5，未能可靠區分成員與非成員，且推理與泛化能力越強的模型會呈現越高的 TPR 與 FPR。</li>
+<li>跨領域啟發：為黑箱統計偵測劃定了明確的能力失效邊界，說明僅憑外部似然或生成熟悉度無法取代上游語料稽核或內部表徵分析。</li>
+<li>連結：<a href="zotero://select/library/items/G5NDSKME" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.19561" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-excess-separability-nuisance-controlled-residual-stream-probing-for-benchmark-contamination-detection2026">4. Excess Separability: Nuisance-Controlled Residual-Stream Probing for Benchmark Contamination Detection（2026）</h4>
+<ul>
+<li>作者與出處：Florian Braun · <em>arXiv (2026)</em></li>
+<li>核心問題：近期研究嘗試用內部激活的線性探針偵測基準污染，以繞過缺乏訓練語料與 canary 字串的限制，但直觀的探針設計存在嚴重的統計誤報與基準線失真。</li>
+<li>關鍵做法：作者實測發現將線性探針與平直深度剖面對照會在表面可解碼性隨深度上升時以 0.72 機率拒絕真虛無假設，且報告絕對可分性水準會讓 FPR 隨控制集大小在 0.03 到 0.99 間大幅漂移。為此提出 Excess Separability 協議，在線性探針深度剖面上報告經等水準安慰劑基準重新中心化的零和對比，並以 2:1 參考與嫌疑集樣本比及標籤置換虛無分布進行檢定。</li>
+<li>跨領域啟發：展示在機械可解釋性探針導入統計檢定時控制干擾變因的嚴格方法論，其安慰劑對照與置換檢定設計具有跨領域實驗鑑別價值。</li>
+<li>連結：<a href="zotero://select/library/items/SBRH9CCK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.12652" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-benchmark-contamination-a-taxonomy-organized-by-defeated-mitigation2026">5. Benchmark Contamination: A Taxonomy Organized by Defeated Mitigation（2026）</h4>
+<ul>
+<li>作者與出處：Johanna Angulo, Víctor Yeste, Hector Espinos-Morato · <em>arXiv (2026)</em></li>
+<li>核心問題：基準分數同時受到模型、評測框架、引導預算、取樣母體與污染狀態的共同決定，而既有污染分類多服務於自動偵測，未能回答研究者在發布分數時「既已採取某些防禦後還剩下哪些效度威脅」。</li>
+<li>關鍵做法：作者提出依「被擊敗的緩解措施」組織的五類污染分類法（直接、衍生、時間、分布與獲得性污染），橫跨訓練期與評測期洩漏。針對只能在單次評測當下記錄的獲得性污染，設計並開源 CC BY 4.0 四欄位揭露協議（含允許 &quot;unknown&quot; 的 JSON Schema 與驗證器），並經外部編碼員預註冊驗證。</li>
+<li>跨領域啟發：將污染問題從純技術偵測提升為可稽核的科學報告規範，與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a> 的透明治理制度緊密銜接。</li>
+<li>連結：<a href="zotero://select/library/items/UNWFG3ZN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.29463" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-benchleaking-is-accelerating-benchmark-contamination-has-worsened-sharply-in-the-past-month----from-post-training-down-to-pre-training-base-models2026">6. Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month -- from post-training down to pre-training base models（2026）</h4>
+<ul>
+<li>作者與出處：Yiwei Qin, Muhang Xie, Xuefeng Li, Mohan Jiang, Dayuan Fu · <em>arXiv (2026)</em></li>
+<li>核心問題：過去對基準污染的關注多集中於後訓練微調與特定題目重疊，但近期模型發布顯示基準測試題目已更廣泛且直接地滲入從後訓練到預訓練基礎模型的各個層級。</li>
+<li>關鍵做法：作者明確區分測試樣本進入訓練集的 benchleaking 與在未見測試集下針對基準特化的 benchmaxxing，並記錄兩項近期惡化趨勢：後訓練智能體在 23% 嘗試中自行說出未提供的隱藏測試要求，且利用少樣本續寫檢測 4 個公開基礎模型與 20 個基準時，發現部分模型能直接補全未出現於提示中的測試題、選項與解答（ERNIE-5.5-Flash-Base 在 HumanEval 洩漏率達 96%）。</li>
+<li>跨領域啟發：為區分「高基準分數」究竟來自能力提升還是資料洩漏提供了最新的跨模型預訓練實證警訊。</li>
+<li>連結：<a href="zotero://select/library/items/GM7PMTV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21315" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-69-篇">G5｜本子方向全量文獻泛讀清單（共 69 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 69 篇文獻（含開放存取 PDF 20 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進44-篇">A. 奠基經典、專著與核心演進（44 篇）</h3>
+<ul>
+<li><strong>2020｜The Pile: An 800GB Dataset of Diverse Text for Language Modeling</strong>，Leo Gao et al.（<em>arXiv (Cornell University)</em>，465 引）：開源大模型語料工程的重要工作：用 22 個經過策展的學術、程式碼與專業子集組成 825 GiB 語料，證實跨領域的資料多樣性直接決定泛化上限。 <a href="zotero://select/library/items/A7TDDFK8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.00027" rel="noopener">官方連結</a></li>
+<li><strong>1991｜Benchmark characterization</strong>，T.M. Conte, W.-M.W. Hwu（<em>Computer</em>，40 引）：計算機架構與系統評測的奠基論文，確立了如何定量刻畫基準測試程式的工作負載特徵與代表性偏差。 <a href="zotero://select/library/items/6DHGXUFQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/2.67193" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Benchmark stars, benchmark spectrographs</strong>，V. Adibekyan et al.（<em>Astronomy &amp; Astrophysics</em>，18 引）：Benchmark stars, benchmark spectrographs，V. Adibekyan et al.（<em>Astronomy &amp; Astrophysics</em>：用超高解析度的 ESPRESSO 光譜嚴格檢驗 30 顆蓋亞基準校準恆星的跨儀器一致性，是科學界校準基準本身的範例，18 引）。 <a href="zotero://select/library/items/U3W87B27" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1051/0004-6361/202038793" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Benchmark Dose</strong>，M.A. Rezvanfar（<em>Encyclopedia of Toxicology</em>，3 引）：Benchmark Dose，M.A. Rezvanfar（毒理學與風險評估中的基準劑量建模方法論，展示如何用劑量反應曲線的信賴下限取代粗糙的單點閾值，對安全基準的統計定界有啟發）。 <a href="zotero://select/library/items/2EI7TN46" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-12-386454-3.00588-1" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Benchmark Analysis</strong>，Yiqi Luo, Forrest M. Hoffman（<em>Land Carbon Cycle Modeling</em>，2 引）：收錄於陸地碳循環建模專書的章節，介紹在生態與地球系統模型評估中進行基準分析（Benchmark Analysis）的流程規範，用以檢驗模型對碳循環動力學與觀測資料的擬合能力。 <a href="zotero://select/library/items/U95JCF97" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9780429155659-24" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Benchmark yourself</strong>，Maria Northcote, Jack Seddon, Philip Brown（<em>ASCILITE Publications</em>，1 引）：發表於教育科技會議論文集 ASCILITE 的實務研究，探討高等教育教師在從實體授課轉向線上課程設計的過程中，如何透過同儕工作坊、專家諮詢與自我基準檢核來提升線上教學品質。 <a href="zotero://select/library/items/B2XAV27D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.14742/apubs.2011.1818" rel="noopener">官方連結</a></li>
+<li><strong>2004｜Benchmark</strong>，Unknown Author（<em>Dictionary of Marketing
+Communications</em>，1 引）：收錄於《Dictionary of Marketing Communications》（2004）的專業辭典詞條，簡要闡釋行銷傳播與品牌管理領域中「基準（benchmark）」的概念定義與實務用法。 <a href="zotero://select/library/items/9AITSSQX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4135/9781452229669.n330" rel="noopener">官方連結</a></li>
+<li><strong>2003｜Benchmark</strong>，Oliver Popplewell（<em>I.B.Tauris</em>，1 引）：2003 年由 I.B.Tauris 出版、Oliver Popplewell 撰寫的專書《Benchmark》書目條目，因書名含有「Benchmark」關鍵字而被收錄，內容非屬機器學習基準評測研究。 <a href="zotero://select/library/items/8UV3DFAT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9780755622566" rel="noopener">官方連結</a></li>
+<li><strong>2023｜DataComp: In search of the next generation of multimodal datasets</strong>，Samir Yitzhak Gadre et al.（<em>arXiv</em>）：提出以資料集設計為核心的基準測試平台 DataComp，提供 128 億筆 Common Crawl 圖文對候選池與橫跨四個數量級算力尺度的標準化 CLIP 訓練管線，在 38 個下游測試集評估資料過濾與策展演算法。 <a href="zotero://select/library/items/8VREEFMN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.14108" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Judging LLM-as-a-Judge with MT-Bench and Chatbot Arena</strong>，Lianmin Zheng et al.（<em>arXiv</em>）：系統評估以強大型語言模型擔任裁判評測對話系統的可行性與位置、冗長及自我強化等偏誤，並提出 MT-Bench 與 Chatbot Arena 基準，實證 GPT-4 裁判與人類偏好一致率逾 80%。 <a href="zotero://select/library/items/JPRGUZCF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.05685" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Benchmark Derivation</strong>，Glenn W. Suter（<em>Fundamentals of Environmental Assessment</em>）：收錄於環境評估基礎專書的章節，闡述生態與環境風險評估中基準值推導（Benchmark Derivation）的統計與毒理學原則，探討如何依據劑量反應與暴露資料建立環境安全閾值。 <a href="zotero://select/library/items/92R28HUX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9781003156307-25" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Holistic Evaluation of Language Models</strong>，Percy Liang et al.（<em>Published in Transactions on Machine Learning Research (TMLR), 2023</em>）：提出大語言模型全面評估基準 HELM，對應用場景與評測維度進行系統分類，並在 16 個核心場景上同步量測準確度、校準、穩健性、公平性、偏見、毒性與效率等 7 項指標以揭示模型權衡。 <a href="zotero://select/library/items/7AZKMEHW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.09110" rel="noopener">官方連結</a></li>
+<li><strong>2022｜benchmark brands</strong>，Unknown Author（<em>The Fairchild Books Dictionary of Fashion</em>）：收錄於《The Fairchild Books Dictionary of Fashion》（2022）的時尚產業辭典詞條，說明服飾與品牌研究脈絡下「標竿品牌（benchmark brands）」的商業定義與使用方式。 <a href="zotero://select/library/items/D5M7TQ5F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9781501365287.168" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Benchmark</strong>，Unknown Author（<em>Encyclopedic Dictionary of Archaeology</em>）：收錄於 2021 年《Encyclopedic Dictionary of Archaeology》的詞條，介紹考古田野測量與資料記錄脈絡中「基準點（Benchmark）」的標準定義與實務用途。 <a href="zotero://select/library/items/7A5K6B7H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-58292-0_20296" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Benchmark</strong>，Unknown Author（<em>Encyclopedia of Autism Spectrum Disorders</em>）：收錄於 2021 年版《Encyclopedia of Autism Spectrum Disorders》的詞條，說明該領域發展評估與臨床研究對照脈絡中「基準（Benchmark）」的定義與用途。 <a href="zotero://select/library/items/7KMF4EZ6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-91280-6_300228" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Energieeffizienz-Benchmark</strong>，Jörg Lässig, Tino Schütte, Wilhelm Riesner（<em>Energieeffizienz-Benchmark Industrie</em>）：選自 2021 年工業能源效率基準德文專書的章節，介紹工業能源效率評估中所採用的基準測試（Energieeffizienz-Benchmark）指標設計與實務架構。 <a href="zotero://select/library/items/T28PBEHT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-658-36097-9_2" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Benchmark Calculations:</strong>，Unknown Author（<em>The Economic Theory of Annuities</em>）：收錄於年金經濟理論專書的章節，建立精算模型中的基準計算（Benchmark Calculations）範式，作為比較不同風險分攤與市場不完備情境下最優年金給付配置之參照基礎。 <a href="zotero://select/library/items/IGZNQHC7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/j.ctv1fkgcv2.5" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Benchmark</strong>，Martin Liebi et al.（<em>Regulation of Commodities Trading</em>）：收錄於《Regulation of Commodities Trading》的專章，探討商品衍生品合約中基準指標（benchmark）的計算依據、透明度與利益衝突規範，並回顧 2011 年 G20 對石油價格報告機構的監管建議。 <a href="zotero://select/library/items/9PTN37E7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/law/9780198799962.003.0006" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Benchmark</strong>，Unknown Author（<em>Definitions</em>）：登載於 Qeios Definitions 平台的學術詞條，給出「Benchmark（基準）」在不同學科或評測脈絡下的基礎術語界定與定義釋義。 <a href="zotero://select/library/items/BVDQC8PX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.32388/idyms4" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Benchmark Survey</strong>，John Darabaris（<em>Corporate Environmental Management</em>）：收錄於企業環境管理專書的章節，探討企業在環境績效評估與永續管理流程中進行基準調查（Benchmark Survey）的方法架構、指標比較與實務運作考量。 <a href="zotero://select/library/items/QAS4ZVWI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9780429029264-10" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Benchmark Frameworks</strong>，Philippe Bonnet, Dennis Shasha（<em>Encyclopedia of Database Systems</em>）：收錄於 2018 年《資料庫系統百科全書》的詞條，闡述資料庫與計算系統評測中所使用的「基準測試架構（Benchmark Frameworks）」設計與評測原則。 <a href="zotero://select/library/items/X2TT28X3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4614-8265-9_80798" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Benchmark Examples</strong>，Tushar Jain, Joseph J. Yamé, Dominique Sauter（<em>Studies in Systems, Decision and Control</em>）：選自 2018 年系統決策與控制研究叢書的章節，介紹動態系統控制與故障診斷評測中所使用的標準基準算例（benchmark examples）與模型測試情境。 <a href="zotero://select/library/items/IX67CS5F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-68829-9_4" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Benchmark</strong>，Unknown Author（<em>The SAGE Encyclopedia of Educational Research, Measurement, and
+Evaluation</em>）：收錄於《The SAGE Encyclopedia of Educational Research, Measurement, and Evaluation》（2018）的百科詞條，介紹教育研究、測驗與評量中的基準（benchmark）概念，非屬機器學習模型評測研究。 <a href="zotero://select/library/items/C5NXIKWM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4135/9781506326139.n80" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Benchmark Studies</strong>，Zhiwen Chen（<em>Data-Driven Fault Detection for Industrial Processes</em>）：選自 2017 年工業製程資料驅動故障偵測專書的章節，探討工業製程異常與故障偵測演算法評測中所使用的基準測試研究（benchmark studies）設計。 <a href="zotero://select/library/items/AUDKA7TR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-658-16756-1_7" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Benchmark Evaluation</strong>，Max Gath（<em>Optimizing Transport Logistics Processes with Multiagent Planning and Control</em>）：選自 2016 年多智能體運輸物流最佳化專書的章節，說明如何建立基準評估（benchmark evaluation）流程以檢驗物流排程與控制演算法的執行效能。 <a href="zotero://select/library/items/QIZ3STBT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-658-14003-8_5" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Benchmark Response</strong>，John H. Duffus, Monica Nordberg, Douglas M. Templeton（<em>IUPAC Standards Online</em>）：收錄於 IUPAC 線上標準資料庫的術語與規範條目，界定化學風險與毒理學評估中「基準反應（Benchmark Response, BMR）」的定義及其作為劑量反應基準計算之設定依據。 <a href="zotero://select/library/items/DPT7W42X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1515/iupac.79.0893" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Benchmark Concentration and Benchmark Dose</strong>，Monica Nordberg, John H. Duffus, Douglas M. Templeton（<em>IUPAC Standards Online</em>）：收錄於 IUPAC 線上標準資料庫的毒理學標準詞條，定義化學物質暴露評估中的「基準濃度（BMC）」與「基準劑量（BMD）」，供建立安全暴露閾值時依循。 <a href="zotero://select/library/items/WTCQVDSC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1515/iupac.79.2226" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Benchmark Regulation</strong>，Gina-Gail S. Fletcher（<em>Elsevier BV</em>）：探討金融市場中油價與利率等關鍵基準指標（Benchmarks）遭人為操縱的案件與其市場穩定風險，並檢視金融監理機關如何運用現行反操縱法規架構對基準操縱行為進行監管與問責。 <a href="zotero://select/library/items/XZAR3BND" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.2776731" rel="noopener">官方連結</a></li>
+<li><strong>2016｜The Benchmark</strong>，Unknown Author（<em>Morning in South Africa</em>）：收錄於《Morning in South Africa》（2016）的章節，以「The Benchmark」為題撰寫南非歷史或文化敘事，因標題關鍵字被檢索收錄，非屬機器學習評測文獻。 <a href="zotero://select/library/items/SZTKHK7S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9798216523710.ch-4" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Benchmark</strong>，Jiri Soukup, Petr Macháček（<em>Serialization and Persistent Objects</em>）：選自 2014 年《Serialization and Persistent Objects》的章節，探討物件序列化與持久化儲存系統效能評估所使用的基準測試（benchmark）方法與設計。 <a href="zotero://select/library/items/N5I78SEE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-642-39323-5_7" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Benchmark</strong>，Unknown Author（<em>Encyclopedia of Autism Spectrum Disorders</em>）：收錄於 2013 年《自閉症譜系障礙百科全書》的詞條，說明臨床評估與研究對照脈絡中「基準（Benchmark）」的標準定義與測量比較用途。 <a href="zotero://select/library/items/MDSVB7VG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4419-1698-3_100207" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Benchmark model</strong>，Unknown Author（<em>Fertility, Education, Growth, and Sustainability</em>）：收錄於 Fertility, Education, Growth, and Sustainability 專書的章節，建立分析生育率、教育與經濟成長動態的基準模型（Benchmark model），對應 17C 檢索條目。 <a href="zotero://select/library/items/5TI7V7P2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9781139342216.002" rel="noopener">官方連結</a></li>
+<li><strong>2010｜XML Benchmark</strong>，Ke Geng, Gillian Dobbie（<em>Advanced Applications and Structures in XML Processing</em>）：將資料庫系統中用於評估 XML 工具與管理系統的基準測試分為應用基準、微基準、XML 生成器與真實資料集四大類，比較各類基準的設計特徵並討論後續發展方向。 <a href="zotero://select/library/items/R3NTWC73" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4018/978-1-61520-727-5.ch004" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Benchmark</strong>，Unknown Author（<em>Encyclopedia of Database Systems</em>）：收錄於 2009 年《Encyclopedia of Database Systems》的詞條，定義並概述資料庫管理系統與資料工程領域中「基準測試（Benchmark）」的評測概念與範疇。 <a href="zotero://select/library/items/U88NIIFE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-0-387-39940-9_2108" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Performance Benchmark</strong>，Unknown Author（<em>Encyclopedia of Database Systems</em>）：收錄於 2009 年《資料庫系統百科全書》的詞條，介紹資料庫管理系統效能評測中「效能基準（Performance Benchmark）」的指標定義與評估範圍。 <a href="zotero://select/library/items/RGIGQR3F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-0-387-39940-9_3268" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Application Benchmark</strong>，Denilson Barbosa, Ioana Manolescu, Jeffrey Xu Yu（<em>Encyclopedia of Database Systems</em>）：收錄於 2009 年《資料庫系統百科全書》的詞條，探討以真實應用工作負載為核心的資料庫「應用基準測試（Application Benchmark）」評測概念。 <a href="zotero://select/library/items/HWDHECWH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-0-387-39940-9_5055" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Fingerprint Benchmark</strong>，Unknown Author（<em>Encyclopedia of Biometrics</em>）：收錄於 2009 年《Encyclopedia of Biometrics》的詞條，介紹生物特徵識別領域中「指紋基準測試（Fingerprint Benchmark）」的評測定義、基準資料與比對範疇。 <a href="zotero://select/library/items/DPTDJIFD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-0-387-73003-5_2187" rel="noopener">官方連結</a></li>
+<li><strong>2005｜Benchmark, Inc.</strong>，Unknown Author（<em>Metal Finishing</em>）：發表於 Metal Finishing 的短篇業界記事「Benchmark, Inc.」，因標題含有 Benchmark 關鍵詞而被自動納入 17C 基準評測檢索書目中，原條目未附摘要。 <a href="zotero://select/library/items/I8S765E5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/s0026-0576(05)80686-5" rel="noopener">官方連結</a></li>
+<li><strong>2005｜Benchmark Selection</strong>，Lieven Eeckhout（<em>Performance Evaluation and Benchmarking</em>）：收錄於電腦系統效能評估與基準測試專書的章節，探討在處理器與系統架構評測中選取代表性基準測試集（Benchmark Selection）的方法，以兼顧工作負載覆蓋率與評估成本。 <a href="zotero://select/library/items/CTDFA3J5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9781420037425.ch9" rel="noopener">官方連結</a></li>
+<li><strong>2000｜benchmark</strong>，Martin H. Weik（<em>Computer Science and Communications Dictionary</em>）：收錄於 2000 年《電腦科學與通訊辭典》的詞條，定義電腦科學與通訊系統效能評測脈絡中「基準（benchmark）」的標準術語含義與比較用途。 <a href="zotero://select/library/items/ET7XMHMQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/1-4020-0613-6_1474" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Benchmark programs</strong>，Unknown Author（<em>Measuring Computer Performance</em>）：收錄於專書 Measuring Computer Performance，討論電腦效能評測中基準程式（Benchmark programs）的設計原則、工作負載代表性與評測基準脈絡。 <a href="zotero://select/library/items/E5QR8WEB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9780511612398.008" rel="noopener">官方連結</a></li>
+<li><strong>1999｜Benchmark Problems</strong>，Dirk Husmeier（<em>Perspectives in Neural Computing</em>）：選自 1999 年神經計算專書的章節，探討人工神經網路與各類計算模型評測中所採用的標準基準測試問題（benchmark problems）設計原則。 <a href="zotero://select/library/items/ZIB7CD9M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4471-0847-4_4" rel="noopener">官方連結</a></li>
+<li><strong>1998｜Benchmark</strong>，Unknown Author（<em>Encyclopedia of Computational Chemistry</em>）：收錄於 1998 年《Encyclopedia of Computational Chemistry》的百科詞條，闡述計算化學與演算法評測脈絡中「基準測試（Benchmark）」的基本定義與評測定位。 <a href="zotero://select/library/items/QEZKRJVD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/0470845015.cbd004" rel="noopener">官方連結</a></li>
+<li><strong>1988｜Benchmark</strong>，S. Wayne Martin et al.（<em>American Association of Bovine Practitioners  Conference Proceedings</em>）：發表於美國牛科執業獸醫年會論文集的牧群健康管理研究，論述如何整合分散式牧場紀錄與集中式資料分析平台，並主張將產能效率與疾病資料納入同一基準監測系統以評估健康管理成效。 <a href="zotero://select/library/items/EI3IA4SF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21423/aabppro19887053" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻25-篇">B. 2024–2026 近期推進與前沿文獻（25 篇）</h3>
+<ul>
+<li><strong>2024｜LiveBench: A Challenging, Contamination-Limited LLM Benchmark</strong>，White, Colin et al.（<em>arXiv (Cornell University)</em>，437 引）：針對測試集污染與裁判偏見這兩個問題，用持續更新的時效性題源，搭配 100% 客觀可驗證的真值計分，做出高鑑別度的動態基準。 <a href="zotero://select/library/items/86JM9AS2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.19314" rel="noopener">官方連結</a></li>
+<li><strong>2024｜JudgeBench: A Benchmark for Evaluating LLM-based Judges</strong>，Tan, Sijun et al.（<em>arXiv (Cornell University)</em>，226 引）：大家都用 LLM 當裁判之後，裁判本身也需要考核。本文聚焦推理、知識與編程的高難度客觀題對，全面檢驗自動裁判模型的判準極限。 <a href="zotero://select/library/items/NQPCR4MK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.12784" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Detecting Data Contamination in Large Language Models</strong>，Juliusz Janicki et al.（<em>arXiv</em>）：在嚴格的黑盒假設下建立統一評估協議，系統性比較當前最先進的成員推論與污染檢測演算法，看它們在不同語料分布與改寫程度下的真實檢出率與誤報邊界。 <a href="zotero://select/library/items/G5NDSKME" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.19561" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Excess Separability: Nuisance-Controlled Residual-Stream Probing for Benchmark Contamination Detection</strong>，Florian Braun（<em>arXiv</em>）：Excess Separability: Nuisance-Controlled Residual-Stream Probing for Benchmark Contamination Detection，Florian Braun（嚴格證明直接對內部激活做樸素線性探針會失效，並推導出控制無關干擾後的超額可分性檢測法，也指出校正項變異數對單一基準污染檢出率造成的統計極限）。 <a href="zotero://select/library/items/SBRH9CCK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.12652" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Benchmark Contamination: A Taxonomy Organized by Defeated Mitigation</strong>，Johanna Angulo, Víctor Yeste, Hector Espinos-Morato（<em>arXiv</em>）：Benchmark Contamination: A Taxonomy Organized by Defeated Mitigation，Johanna Angulo, Víctor Yeste, Hector Espinos-Morato（傳統分類法只服務自動檢測。本文改依「已部署的防禦緩解措施被哪種機制擊穿」來重建污染分類學，處理排行榜分數中能力與洩漏觀測等價這個核心難題）。 <a href="zotero://select/library/items/UNWFG3ZN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.29463" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Building Multilingual Bridges: Data Mixing as the Pillar of Generalization for In-Language Reasoning</strong>，Mehrnaz Mofakhami et al.（<em>arXiv</em>）：Building Multilingual Bridges: Data Mixing as the Pillar of Generalization for In-Language Reasoning，Mehrnaz Mofakhami et al.（處理推理大模型一律被迫用英語思考的瓶頸，證實精細的跨語言資料配比是帶出非英語母語內生推理泛化的關鍵）。 <a href="zotero://select/library/items/WT8R3NRS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.10445" rel="noopener">官方連結</a></li>
+<li><strong>2026｜LinMix: Data Mixing as Linear Domain Attribution</strong>，Hubert Baniecki, Przemyslaw Biecek, Martin Pawelczyk（<em>arXiv</em>）：LinMix: Data Mixing as Linear Domain Attribution，Hubert Baniecki, Przemyslaw Biecek, Martin Pawelczyk（把代理模型的資料配比搜尋重新表述為線性領域歸因問題，指出標準 Dirichlet 隨機抽樣效率低，並用科學的實驗設計大幅提高配比預測精度）。 <a href="zotero://select/library/items/MSKPC36B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.37390" rel="noopener">官方連結</a></li>
+<li><strong>2026｜From Small to Large: Assessing Medical Reasoning, Benchmark Contamination, and Model Size in Language Models</strong>，Navapat Nananukul, Mayank Kejriwal（<em>arXiv</em>）：在四項醫學考試基準共 3,076 題上系統評測六大廠商大小成對與開源共 14 款語言模型，拆解選擇題與開放式問答格式、題庫污染記憶效應、題目難度以及模型規模對醫療推理準確率與本地部署可行性的影響。 <a href="zotero://select/library/items/A66J793N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.00460" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Benchleaking Is Accelerating: Benchmark contamination has worsened sharply in the past month -- from post-training down to pre-training base models</strong>，Yiwei Qin et al.（<em>arXiv (Cornell University)</em>）：對四個公開基座模型在 20 項基準上做少量樣本接續（Few-shot Continuation），發現部分基座會直接寫出輸入裡沒出現過的其他測試題目，包含完整題幹、選項與解答。例如近期釋出的 <code>ERNIE-5.5-Flash-Base</code> 洩漏了 96% 的 HumanEval 題目（連同參考實作）和 85% 的 OpenBookQA 題目（連同答案），<code>DeepSeek-V4-Flash-Base</code> 則分別是 9% 與 0%。為了量化分數裡有多少來自背題，作者定義了 Anti-Hack 分數：總題數不變，把所有檢出洩漏的樣本一律判錯後重算分數。以整個測試集平均，Anti-Hack 讓 <code>DeepSeek-V4-Flash-Base</code> 扣 1.5 分、<code>Hy3-preview-Base</code> 扣 1.3 分，<code>MiMo-V2.5-Base</code> 與 <code>ERNIE-5.5-Flash-Base</code> 則分別扣掉 5.0 分與 16.6 分。作者呼籲把去污染報告與污染校正分數列為模型釋出的標準規範。 <a href="zotero://select/library/items/GM7PMTV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.21315" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Benchmark Values</strong>，Glenn W. Suter, Susan M. Cormier（<em>Weight of Evidence for Environmental Assessment</em>）：收錄於環境評估證據權重專書的章節，探討如何將環境基準值（Benchmark Values）整合進證據權重評估架構，作為判別生態損害程度與比較不同污染情境的量化參照標準。 <a href="zotero://select/library/items/F58A9PJ9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9781003626336-18" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Benchmark</strong>，Genevieve Duggan, Pere Miro, Sara Corsi（<em>ioChem-BD Computational Chemistry Datasets</em>）：登載於 ioChem-BD 計算化學資料庫的基準資料集，收錄標準化的量子化學計算結果與分子結構資料，供計算化學方法準確度校準與基準比較之用。 <a href="zotero://select/library/items/ZI5RKNM2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.19061/iochem-bd-6-632" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Evaluation of the phi-3-mini SLM for identification of texts related to medicine, health, and sports injuries</strong>，Chris Brogly et al.（<em>IEEE International Conference on Computing and Machine Intelligence (ICMI)</em>）：針對小型語言模型於醫療與運動傷害文本自動標註的實務效用，在 1,144 筆真實醫療健康與運動傷害文本上比較 Microsoft phi-3-mini-4k-instruct 與七位人類評估者的主題相關度評分，檢驗其在基準測試以外的判別表現。 <a href="zotero://select/library/items/VCPDGC9U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.08764" rel="noopener">官方連結</a></li>
+<li><strong>2025｜CLAIRE: A Dual Encoder Network with RIFT Loss and Phi-3 Small Language Model Based Interpretability for Cross-Modality Synthetic Aperture Radar and Optical Land Cover Segmentation</strong>，Debopom Sutradhar et al.（<em>arXiv</em>）：針對衛星影像地表覆蓋分割面臨的類別不平衡與跨模態差異，提出雙編碼器融合架構 CLAIRE，透過交叉注意力融合光學與合成孔徑雷達（SAR）特徵，並結合混合損失與 Phi-3 語言模型生成可解釋推論。 <a href="zotero://select/library/items/4QFNF4ME" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.11952" rel="noopener">官方連結</a></li>
+<li><strong>2025｜benchmark concentration</strong>，Unknown Author（<em>The IUPAC Compendium of Chemical Terminology</em>）：收錄於國際純粹與應用化學聯合會（IUPAC）化學術語彙編（Gold Book）第五版的標準詞條，用以規範毒理學與環境化學領域中「基準濃度（benchmark concentration）」的正式定義。 <a href="zotero://select/library/items/XSAVWWG4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1351/goldbook.16233" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Chatbot Arena: An Open Platform for Evaluating LLMs by Human Preference</strong>，Wei-Lin Chiang et al.（<em>arXiv</em>）：介紹基於人類偏好的開放式大模型盲測平台 Chatbot Arena，透過群眾外包成對比較累積逾 24 萬次投票，詳述其統計排序方法並驗證群眾偏好結果與專家評分具備高度一致性。 <a href="zotero://select/library/items/G2CH69AE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.04132" rel="noopener">官方連結</a></li>
+<li><strong>2024｜PHUDGE: Phi-3 as Scalable Judge</strong>，Mahesh Deshwal, Apoorva Chawla（<em>arXiv</em>）：微調 Phi-3 建立低延遲高吞吐量的裁判模型 PHUDGE，在 Feedback Test、MT Human 等四項基準達成先進表現且與 GPT-4 及人類評估高度相關，並指出簡化非因果建模可勝過十倍大模型。 <a href="zotero://select/library/items/U2WXKZ2D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.08029" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Taxonomy for Data Contamination in Large Language Models</strong>，Medha Palavalli, Amanda Bertsch, Matthew R. Gormley（<em>arXiv</em>）：針對大型語言模型預訓練階段可能混入變異測試集而逃避去污檢測的現象，建立資料污染類型分類體系，並於摘要與問答兩項核心 NLP 任務上分析各類污染對模型表現的風險與影響。 <a href="zotero://select/library/items/U9N6NHMK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.08716" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Why Benchmark?</strong>，Robert C. Camp（<em>Benchmarking</em>）：收錄於《Benchmarking》（2024）的章節，從方法論與組織管理角度探討進行基準測試（benchmarking）的目的、動機及其在評估體系中的作用。 <a href="zotero://select/library/items/PD3C7TQK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781003578871-2" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Benchmark</strong>，Unknown Author（<em>The International Series in Engineering and Computer Science</em>）：收錄於《The International Series in Engineering and Computer Science》的詞條，介紹工程與電腦科學領域中用於評估系統與演算法效能的基準測試基本概念。 <a href="zotero://select/library/items/GFP6DPVW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/0-306-48004-2_6" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Benchmark Error</strong>，Unknown Author（<em>Encyclopedia of Finance</em>）：收錄於《Encyclopedia of Finance》的百科詞條，闡述金融績效衡量與風險評估脈絡下「基準誤差（Benchmark Error）」的定義、來源與實務分析意義。 <a href="zotero://select/library/items/HNCJQE36" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/0-387-26336-5_186" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Benchmark Rate</strong>，Unknown Author（<em>Encyclopedia of Finance</em>）：收錄於《Encyclopedia of Finance》的百科詞條，說明金融市場與資產定價分析中「基準利率或基準比率（Benchmark Rate）」的定義及其參考與比較用途。 <a href="zotero://select/library/items/EWMJQM9P" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/0-387-26336-5_187" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Benchmark Glacier</strong>，Unknown Author（<em>SpringerReference</em>）：收錄於 SpringerReference 的參考詞條「Benchmark Glacier」，於文獻分類中對應動態基準評測（17C）主題脈絡；原條目未附摘要，具體界定以原文為準。 <a href="zotero://select/library/items/N7GQ6TXS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/springerreference_225912" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Benchmark</strong>，Unknown Author（<em>SpringerReference</em>）：收錄於 SpringerReference 的參考詞條「Benchmark」，探討基準（benchmark）的基本界定與用法，分類對應評測與資料基準（17C）主題，原條目未附摘要。 <a href="zotero://select/library/items/AVJQT3HA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/springerreference_64476" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜benchmark</strong>，Unknown Author（<em>SpringerReference</em>）：收錄於 SpringerReference 的參考詞條「benchmark」，說明基準（benchmark）相關詞義與參考脈絡，對應評測基準（17C）子方向，原條目未附摘要。 <a href="zotero://select/library/items/F8HR3INA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/springerreference_8878" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Cellular benchmark</strong>，Unknown Author（<em>IOP Publishing</em>）：由 IOP Publishing 收錄之條目「Cellular benchmark」，探討細胞或蜂巢結構相關基準（benchmark）資料或規範，因檢索關鍵詞歸入 17C 書目，原條目未附摘要。 <a href="zotero://select/library/items/425D5RMT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1088/1758-5090/aeb162/data10" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-756dab70">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a><span class="rs">如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。</span></li><li><a href="17A_%E9%A0%90%E8%A8%93%E7%B7%B4%E8%B3%87%E6%96%99%E7%AF%A9%E9%81%B8%E3%80%81%E5%8E%BB%E9%87%8D%E8%88%87%E5%8B%95%E6%85%8B%E9%85%8D%E6%AF%94%E6%9C%80%E4%BD%B3%E5%8C%96.html">預訓練資料篩選、去重與動態配比最佳化</a></li><li><a href="17B_%E5%90%88%E6%88%90%E8%B3%87%E6%96%99%E7%94%9F%E6%88%90%E3%80%81%E6%A8%A1%E5%9E%8B%E5%9D%8D%E7%B8%AE%E8%88%87%E8%87%AA%E8%88%89%E6%93%B4%E5%B1%95%E9%82%8A%E7%95%8C.html">合成資料生成、模型坍縮與自舉擴展邊界</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

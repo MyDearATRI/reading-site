@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>15C｜雙向Lens與Optics、開放賽局與充實範疇組合學 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-b99af835" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="15c雙向lens與optics開放賽局與充實範疇組合學">15C｜雙向Lens與Optics、開放賽局與充實範疇組合學</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a>
+同領域子方向：<a class="wl" href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a> · <a class="wl" href="15B_Markov%E7%AF%84%E7%96%87%E3%80%81%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%87%BD%E5%AD%90%E8%88%87%E9%96%8B%E6%94%BE%E5%8B%95%E6%85%8B%E7%B3%BB%E7%B5%B1%E7%B6%B2%E8%B7%AF.html">Markov範疇、多項式函子與開放動態系統網路</a>
+跨領域關聯子方向：<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03C_%E8%B3%87%E8%A8%8A%E5%B9%BE%E4%BD%95%E3%80%81%E8%87%AA%E7%84%B6%E6%A2%AF%E5%BA%A6%E8%88%87%E7%B5%B1%E8%A8%88%E6%B5%81%E5%BD%A2%E7%B5%90%E6%A7%8B.html">資訊幾何、自然梯度與統計流形結構</a> · <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OTF_%E9%80%86%E5%90%91%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E6%A9%9F%E7%8E%87%E5%96%AE%E5%AD%90%E8%88%87%E7%AF%84%E7%96%87%E6%B8%AC%E5%BA%A6%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">逆向最優傳輸、機率單子與範疇測度組合語意</a> · <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M36_Aluffi%20%E7%AF%84%E7%96%87%E8%AA%9E%E8%A8%80%E3%80%81%E7%BE%A4%E3%80%81%E7%92%B0.html">Aluffi 範疇語言、群、環</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M48_%E5%9F%BA%E6%9C%AC%E7%AF%84%E7%96%87%E8%AB%96%EF%BC%88Leinster%EF%BC%89.html">基本範疇論</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M55_%E7%AF%84%E7%96%87%E8%AB%96%EF%BC%88Riehl%EF%BC%89.html">範疇論</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M64_%E6%95%B8%E5%AD%B8%E5%8E%9F%E5%85%B8%EF%BC%9AHilbert%E3%80%81G%C3%B6del%E3%80%81Grothendieck%E3%80%81Lawvere.html">數學原典：Hilbert、Gödel、Grothendieck、Lawvere</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向隸屬 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a>，緊接 <a class="wl" href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a> 的單向過程圖示與 <a class="wl" href="15B_Markov%E7%AF%84%E7%96%87%E3%80%81%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%87%BD%E5%AD%90%E8%88%87%E9%96%8B%E6%94%BE%E5%8B%95%E6%85%8B%E7%B3%BB%E7%B5%B1%E7%B6%B2%E8%B7%AF.html">Markov範疇、多項式函子與開放動態系統網路</a> 的隨機系統組合，專門處理資訊與效用必須正向傳遞、同時逆向回饋的雙向結構。主線從資料存取的 Lenses 與 Optics 出發，經由雙範疇開放賽局（Open Games）刻畫策略均衡與代理性（agency），再推進至單價充實範疇（univalent enriched categories）與把梯度訓練和力學同時納入函子語意的組合動力學。</p>
+</aside>
+<ul>
+<li>核心問題：傳統對稱么半範疇只能直接描述單向的資料流與過程接線，一旦系統需要同時向前輸出狀態、向後傳回效用評價、對偶變數或梯度（例如賽局中的反事實最佳反應與神經網路的反向傳播），單向態射便無法直接表達這種雙向耦合。此外，古典賽局論以全域定義 Nash 均衡而缺乏模組化組合律，而一般充實範疇（enriched categories）在型別論中則會出現本質滿射且全忠實函子未必構成等價的結構落差，需透過 Rezk 完備化與高階雙範疇加以解決。</li>
+<li>直覺模型：可以把每個子系統想像成雙向工廠的單一工作站：從左側接收原料並向右側送出半成品（正向傳遞），同時從右側接收品管回饋或市場價格訊號，再將調整要求向左側傳回（逆向傳遞）。Optics 與 Lenses 就是這類工作站的接線規約，而開放賽局則在每個工作站內放入決策者，使局部策略與外部傳入的狀態及傳出的評價達到不動點均衡。</li>
+<li>分階段閱讀路線：第一階段先讀 Boisseau (2020) 建立一般 Optics 的預層弦圖演算，並讀 Hedges (2017) 理解 Lenses 如何與開放賽局結合成對稱么半雙範疇。第二階段讀 Bolt、Hedges 與 Zahn (2019)、Capucci 等人 (2021) 以及 Capucci (2022)，掌握隨機不完備資訊、展開式賽局的代理性選擇算子，以及將 Nash 均衡化為內部動力學不動點的敘事性（diegetic）回饋。第三階段讀 van der Weide (2024/2026) 與 Spivak (2026)，分別補齊充實範疇的單價 Rezk 完備化與將梯度學習、Hamilton 力學統一於多項式餘代數的鏡像內化構造。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;單向對稱么半範疇與弦圖&quot;] --&gt; B[&quot;Lens 與共端 Optics 資料存取&quot;]
+  B --&gt; C[&quot;預層嵌入與一般 Optics 弦圖 (Boisseau 2020)&quot;]
+  B --&gt; D[&quot;開放賽局雙範疇與策略變換 (Hedges 2017)&quot;]
+  D --&gt; E[&quot;貝氏與展開式賽局代理性演算 (2019–2021)&quot;]
+  E --&gt; F[&quot;敘事性回饋與 Nash 不動點 (Capucci 2022)&quot;]
+  B --&gt; G[&quot;鏡像內化與動力學函子語意 (Spivak 2026)&quot;]
+  A --&gt; H[&quot;單價充實範疇與 Rezk 完備化 (van der Weide 2024/2026)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>雙向 Optics 與預層弦圖嵌入（Bidirectional Optics &amp; Presheaf String Diagrams）</strong></p>
+<ul>
+<li>直覺理解：Lens 是把一個複合結構拆成讀取（get）與寫回（put）兩個半段並封裝私有中間狀態的雙向接頭；Optic 則將這種雙向接頭推廣到張量積以外的任意么半作用，使不同型別的資料通道可以像積木一樣組合。</li>
+<li>機制或核心表達式：給定具么半範疇 <span class="math inline">\mathcal{M}</span> 作用的範疇 <span class="math inline">\mathcal{C}</span>，從 <span class="math inline">(A, A')</span> 到 <span class="math inline">(B, B')</span> 的 Optic 定義為餘端（coend）<span class="math inline">\operatorname{Optic}_{\mathcal{M}}((A, A'), (B, B')) = \int^{M \in \mathcal{M}} \mathcal{C}(A, M \cdot B) \times \mathcal{C}(M \cdot B', A')</span>，其中商空間認同的殘差物件 <span class="math inline">M</span> 封裝了只在前向與後向之間傳遞的內部記憶。當 <span class="math inline">\mathcal{M} = \mathcal{C}</span> 以笛卡兒積作用時即退化為傳統 Lens。Boisseau (2020) 指出直接針對 Lens 的弦圖無法推廣到任意 Optic，遂將 Optics 嵌入其預層範疇（presheaf category），使任意 Optics 都能在預層結構中具備嚴格的弦圖演算與效應（effectful）擴充。</li>
+<li>能做到什麼，代價是什麼：此設計統一了 Lens、Prism 與效應雙向轉換的組合律並允許圖示推導；代價是預層嵌入引入較高層次的函子表述，對有限資源下的具體實作需透過 Yoneda 化簡才能回到簡潔的資料型別。</li>
+</ul>
+</li>
+<li>
+<p><strong>開放賽局、代理性與敘事性回饋（Open Games, Agency &amp; Diegetic Feedback）</strong></p>
+<ul>
+<li>直覺理解：開放賽局把多方博弈拆成可接線的局部賽局模組：每個模組從環境接收目前狀態、向外輸出動作，並接收後續世界傳回的效用函數來檢驗自身策略是否為最佳反應。</li>
+<li>機制或核心表達式：Hedges (2017) 建構了一個對稱么半雙範疇（symmetric monoidal double category），其中水平 1-胞腔為開放賽局，垂直 1-態射為 Lenses，2-胞腔為保持最佳反應（best-response）的策略剖面映射，垂直範疇中的態與積分別對應 Nash 或子博弈完美均衡與外部選擇算子。Capucci 等人 (2021) 引入玩家代理性（agency）與選擇算子將展開式賽局納入其中；Capucci (2022) 進一步移除外加的均衡謂詞，透過賽局場域的函子構造讓玩家形成子系統，並證明其不動點行為（fixpoint behaviours）即為 Nash 均衡，形式上與反向傳播同構。</li>
+<li>能做到什麼，代價是什麼：雙範疇與敘事性回饋讓大型動態博弈和隨機不完備資訊賽局（Bolt 等人 2019）具備嚴謹的組合語意，無需每次重寫全域收益矩陣；但當多個子系統存在相互耦合的非合作不動點時，收斂判定與多均衡選擇仍依賴具體策略空間的幾何性質。</li>
+</ul>
+</li>
+<li>
+<p><strong>單價充實範疇與鏡像內化（Univalent Enriched Categories &amp; Lens Internalization）</strong></p>
+<ul>
+<li>直覺理解：當態射集本身帶有距離、機率或同倫型別結構時（充實範疇），需要單價公理來保證等價物件可互換；而鏡像內化則能把外層的雙向 Lens 接線壓縮回系統內部的動態演化規則。</li>
+<li>機制或核心表達式：van der Weide (2024/2026) 研究單價充實範疇（univalent enriched categories），證明所有本質滿射（essentially surjective）且全忠實的函子皆為等價，並給出所有充實範疇的 Rezk 完備化構造，進而應用於建構單價充實 Kleisli 範疇。另一方面，Spivak (2026) 針對對稱么半閉範疇 <span class="math inline">\mathcal{C}</span> 證明鏡像內化定理，構造出鬆弛對稱么半函子 <span class="math inline">\operatorname{Lens}(\mathcal{C}) \to \mathcal{C}</span>，並將平滑自適應配置操元 <span class="math inline">\mathbf{Arr}</span> 透過 <span class="math inline">\Phi_{\text{phase}}</span>（儲存位置與動量）與 <span class="math inline">\Phi_{\text{conf}}</span>（僅儲存位置）映至多項式餘代數 2-範疇 <span class="math inline">\mathbf{PC}</span>，其中 <span class="math inline">\Phi_{\text{conf}}</span> 在參數化函數上恰好給出梯度下降與作為 Lens 逆向傳遞的反向傳播。</li>
+<li>能做到什麼，代價是什麼：單價 Rezk 完備化為高階與充實語意提供了機器可驗證的型別論基礎（連結 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a>），鏡像內化則以單一範疇架構同時涵蓋優化與力學；其代價是需要依賴對稱么半閉範疇與同倫型別論等較重的代數基礎設施。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>預層弦圖與餘端殘差物件的必要性</strong>：為何早期直接為 Lenses 設計的弦圖演算無法推廣至一般 Optics，而 Boisseau (2020) 必須透過嵌入預層範疇來解決？在此結構中，餘端變數 <span class="math inline">M</span> 在組合時扮演什麼角色？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考 Lens 的笛卡兒積與一般 Optic 的么半作用 <span class="math inline">\mathcal{M}</span> 之差異：在 Lens 中資料複製與丟棄（comonoid 結構）免費存在，但一般 Optic（如 Prism 或效應 Optic）並不允許隨意複製或丟棄訊號。Boisseau 透過將 Optics 嵌入預層範疇，利用預層範疇自然具備的餘限與張量結構賦予所有 Optics 合法的弦圖推導規則；餘端 <span class="math inline">\int^M</span> 則確保沿著接線傳遞的私有狀態 <span class="math inline">M</span> 只受外部態射觀測，符合交換律的等價類。</p>
+</details>
+<ol start="2">
+<li><strong>敘事性賽局回饋與參數化梯度下降的差異</strong>：Capucci (2022) 的敘事性（diegetic）回饋與 Spivak (2026) 中 <span class="math inline">\Phi_{\text{conf}}</span> 誘導的梯度下降都把反向過程表示為 Lens 的逆向傳遞。兩者在數學解概念（solution concept）上有何本質差異？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>先對照兩者背後的更新機制：在 Spivak (2026) 的學習配置中，各參數共享單一全域實值勢能（損失函數），<span class="math inline">\Phi_{\text{conf}}</span> 透過反向傳遞計算該純量勢能的梯度並沿負梯度更新單一演化軌跡。而在 Capucci (2022) 的非合作開放賽局中，每個玩家子系統根據自身局部收益與對手策略的反事實檢驗調整反應，整體的穩定解不是單一目標函數的極小值，而是多個相互耦合子系統在賽局場域上的聯立不動點（即 Nash 均衡）。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>非合作不動點與梯度動力學的統一收斂條件</strong>：Capucci (2022) 與 Spivak (2026) 分別指出非合作開放賽局與參數化梯度學習共用極為相似的雙向 Lens 接線與反向傳遞架構，但非合作賽局的解是耦合不動點而非單一純量勢能的梯度流。如何在具備 <a class="wl" href="15B_Markov%E7%AF%84%E7%96%87%E3%80%81%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%87%BD%E5%AD%90%E8%88%87%E9%96%8B%E6%94%BE%E5%8B%95%E6%85%8B%E7%B3%BB%E7%B5%B1%E7%B6%B2%E8%B7%AF.html">Markov範疇、多項式函子與開放動態系統網路</a> 精神的開放動力系統語意下，給出可組合的收斂準則或 Lyapunov 條件，仍待系統化刻畫。</li>
+<li><strong>充實賽局語意的單價完備化與可計算性</strong>：van der Weide (2024/2026) 建立了充實範疇與其 Kleisli 範疇的單價 Rezk 完備化，同時 Bolt 等人 (2019) 將機率單子引入開放賽局以處理隨機與不完備資訊。將測度與機率充實結構結合單價型別論，並落實到可執行的賽局編譯器中同時維持演算規則簡潔，依然是 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a> 面向應用時的主要挑戰。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>多項式餘代數動力學與開放網路系統</strong>：Spivak (2026) 透過鏡像內化將雙向參數學習映入多項式餘代數 2-範疇 <span class="math inline">\mathbf{PC}</span> 的技法，可直接遷移至 <a class="wl" href="15B_Markov%E7%AF%84%E7%96%87%E3%80%81%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%87%BD%E5%AD%90%E8%88%87%E9%96%8B%E6%94%BE%E5%8B%95%E6%85%8B%E7%B3%BB%E7%B5%B1%E7%B6%B2%E8%B7%AF.html">Markov範疇、多項式函子與開放動態系統網路</a>，用於分析連續與離散混合的多智能體回饋控制迴路。</li>
+<li><strong>單價充實 Kleisli 範疇與機率測度組合語意</strong>：van der Weide (2024/2026) 的充實 Rezk 完備化與 Bolt 等人 (2019) 的貝氏開放賽局結合時，可為 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OTF_%E9%80%86%E5%90%91%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E6%A9%9F%E7%8E%87%E5%96%AE%E5%AD%90%E8%88%87%E7%AF%84%E7%96%87%E6%B8%AC%E5%BA%A6%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">逆向最優傳輸、機率單子與範疇測度組合語意</a> 及 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 提供嚴格保持同倫等價的隨機轉換語意；此外雙向逆向傳遞在連續流形上的對偶性亦呼應 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03C_%E8%B3%87%E8%A8%8A%E5%B9%BE%E4%BD%95%E3%80%81%E8%87%AA%E7%84%B6%E6%A2%AF%E5%BA%A6%E8%88%87%E7%B5%B1%E8%A8%88%E6%B5%81%E5%BD%A2%E7%B5%90%E6%A7%8B.html">資訊幾何、自然梯度與統計流形結構</a> 中的自然梯度結構。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-string-diagrams-for-optics2020">1. String Diagrams for Optics（2020）</h4>
+<ul>
+<li>作者與出處：Guillaume Boisseau · <em>arXiv</em></li>
+<li>核心問題：既有針對 Lenses 的弦圖演算依賴特定笛卡兒結構，無法直接推廣到 Prism 等其他種類的 Optics。本文探討如何為一般 Optics 建立統一且嚴格的圖示推理系統。</li>
+<li>關鍵做法：作者將任意 Optics 嵌入其預層（presheaf）範疇中，利用預層範疇內稟的弦圖結構導出對所有 Optics 皆有效的圖示演算。文中進一步將此演算應用於標準 Lenses、擴充至帶有計算效應的 Lenses，並刻畫 Optics 定律在圖示中的表現形式。</li>
+<li>跨領域啟發：建立本子方向雙向資料存取的基礎圖示語言，並與 <a class="wl" href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a> 的對稱么半弦圖形成對比。</li>
+<li>連結：<a href="zotero://select/library/items/G2ZWV5W8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.11480" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-morphisms-of-open-games2017">2. Morphisms of open games（2017）</h4>
+<ul>
+<li>作者與出處：Jules Hedges · <em>arXiv</em></li>
+<li>核心問題：早期組合賽局論缺乏能保持最佳反應與均衡結構的賽局間態射定義。本文旨在建立開放賽局之間的態射理論與對應範疇架構。</li>
+<li>關鍵做法：作者利用電腦科學中的 Lenses 與開放賽局的對應，構造了一個對稱么半雙範疇：水平 1-胞腔為開放賽局，垂直 1-態射為 Lenses，2-胞腔為保持最佳反應與 Nash 均衡的賽局態射。垂直範疇中的態與積分別刻畫均衡解概念（含 Nash 與子博弈完美均衡）與外部選擇算子，並以市場進入賽局示範。</li>
+<li>跨領域啟發：為組合賽局建立雙範疇骨幹，展示雙向 Lenses 如何成為經濟學策略交互的嚴謹語法。</li>
+<li>連結：<a href="zotero://select/library/items/AN52FNGR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1711.07059" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-bayesian-open-games2019">3. Bayesian open games（2019）</h4>
+<ul>
+<li>作者與出處：Joe Bolt, Jules Hedges, Philipp Zahn · <em>Compositionality</em></li>
+<li>核心問題：Ghani 等人 (2018) 在對稱么半範疇中引入的基礎開放賽局架構，無法同時表達隨機環境、玩家隨機策略以及對所參與賽局的不完備資訊。這限制了該框架在標準經濟模型中的適用性。</li>
+<li>關鍵做法：作者透過對開放賽局進行機率化與貝氏擴充，在統一的組合框架內同時納入隨機環境轉移、混合策略選擇以及不完備資訊下的貝氏推理，使開放賽局得以處理典型不完備資訊經濟賽局。</li>
+<li>跨領域啟發：將開放賽局銜接至機率單子與隨機性，可直接對照 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OTF_%E9%80%86%E5%90%91%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E6%A9%9F%E7%8E%87%E5%96%AE%E5%AD%90%E8%88%87%E7%AF%84%E7%96%87%E6%B8%AC%E5%BA%A6%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">逆向最優傳輸、機率單子與範疇測度組合語意</a> 的測度組合結構。</li>
+<li>連結：<a href="zotero://select/library/items/5SPP4XAC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.03656" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-diegetic-representation-of-feedback-in-open-games2022">4. Diegetic Representation of Feedback in Open Games（2022）</h4>
+<ul>
+<li>作者與出處：Matteo Capucci · <em>EPTCS 380</em></li>
+<li>核心問題：先前具代理性的開放賽局仍需依賴外加的均衡謂詞來篩選策略，未能把玩家反事實分析內化為系統動力學本身。本文致力於消除這類外在謂詞並揭示賽局回饋與機器學習的結構關係。</li>
+<li>關鍵做法：作者提出賽局場域（arena of games）的函子構造，使玩家在其中形成子系統，並證明其不動點行為恰好對應 Nash 均衡，從而以系統內部動力學（diegetically）表達回饋。該架構顯示賽局中的回饋傳播本質上與反向傳播同構，僅在不動點性質上體現非合作博弈的特有現象。</li>
+<li>跨領域啟發：連接開放賽局與可微學習的數學形式，說明雙向 Lens 如何在多智能體回饋與深度學習間共用同一範疇機制。</li>
+<li>連結：<a href="zotero://select/library/items/DXK9DFHW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.12338" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-univalent-enriched-categories-and-the-enriched-rezk-completion2024">5. Univalent Enriched Categories and the Enriched Rezk Completion（2024）</h4>
+<ul>
+<li>作者與出處：Niels van der Weide · <em>Logical Methods in Computer Science</em></li>
+<li>核心問題：充實範疇在同倫理論與程式語言語意中相當核心，但在單價基礎（univalent foundations）下若缺少單價性條件，等價函子與型別相等之間會存在落差。本文探討如何系統地將充實範疇完備化為單價結構。</li>
+<li>關鍵做法：作者定義並研究了單價充實範疇，證明其間所有本質滿射且全忠實的函子皆構成等價，並證實每個充實範疇都存在充實版本的 Rezk 完備化。進一步地，作者利用該完備化方法構造出單價充實 Kleisli 範疇。</li>
+<li>跨領域啟發：補全本子方向在單價型別論與充實範疇上的理論基礎，直接連結 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>。</li>
+<li>連結：<a href="zotero://select/library/items/5RENHGEC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.11752" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-compositional-dynamics-in-learning-and-mechanics2026">6. Compositional Dynamics in Learning and Mechanics（2026）</h4>
+<ul>
+<li>作者與出處：David I. Spivak · <em>arXiv</em></li>
+<li>核心問題：梯度學習演算法與古典 Hamilton 力學在傳統上屬於不同數學體系，缺乏單一的組合語意框架來同時推導兩者的時間演化。</li>
+<li>關鍵做法：作者定義以流形對為物件、平滑自適應配置（含參數空間、雙向 Lens 與實值勢能）為態射的操元 Arr，並證明核心技術定理「鏡像內化」：任一對稱么半閉範疇 C 皆誘導鬆弛對稱么半函子 Lens(C) -&gt; C。藉此構造映至多項式餘代數 2-範疇 PC 的兩個語意函子 Φ_phase（存位置與動量）與 Φ_conf（僅存位置），後者在參數化函數上恰好還原梯度下降與作為 Lens 逆向傳遞的反向傳播。</li>
+<li>跨領域啟發：展現 2026 年前沿如何把 Lens 與 <a class="wl" href="15B_Markov%E7%AF%84%E7%96%87%E3%80%81%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%87%BD%E5%AD%90%E8%88%87%E9%96%8B%E6%94%BE%E5%8B%95%E6%85%8B%E7%B3%BB%E7%B5%B1%E7%B6%B2%E8%B7%AF.html">Markov範疇、多項式函子與開放動態系統網路</a> 的多項式餘代數結合，將優化與物理系統統一於同一函子架構。</li>
+<li>連結：<a href="zotero://select/library/items/K7EIHC5G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.28984" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-8-篇">G5｜本子方向全量文獻泛讀清單（共 8 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 8 篇文獻（含開放存取 PDF 8 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進6-篇">A. 奠基經典、專著與核心演進（6 篇）</h3>
+<ul>
+<li><strong>2022｜Gromov-Wasserstein Distances between Enriched Categories</strong>，Facundo Mémoli, Zhengchao Wan（<em>arXiv / Applied Topology &amp; Category Theory</em>，281 引）：把 Lawvere 充實範疇（C11）與 Mémoli 的 Gromov-Wasserstein（A3）合流，討論一般充實範疇之間的 GW 距離與近似函子，為結構化概念體系的範疇平移提供嚴格度量。 <a href="zotero://select/library/items/7TJ7R8AM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.00496" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Translating Extensive Form Games to Open Games with Agency</strong>，Matteo Capucci et al.（<em>EPTCS 372, 2022, pp. 221-234</em>，8 引）：為開放賽局引入參與者主體性與選擇算子，證明其可表徵具完全與不完全資訊的展開型賽局，並擴充賽局算子的組合演算能力。 <a href="zotero://select/library/items/SWRFQGF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2105.06763" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Bayesian open games</strong>，Joe Bolt, Jules Hedges, Philipp Zahn（<em>Compositionality, Volume 5 (2023) (October 4, 2023) compositionality:13528</em>，7 引）：推廣 Ghani 等人將賽局建模為對稱么半範疇態射的組合賽局理論，提出貝氏開放賽局（Bayesian open games）框架，同時納入隨機環境、參與者的隨機策略選擇以及對所進行賽局的不完全資訊。 <a href="zotero://select/library/items/5SPP4XAC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.03656" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Diegetic Representation of Feedback in Open Games</strong>，Matteo Capucci（<em>EPTCS 380, 2023, pp. 145-158</em>，5 引）：改進具主體性的開放賽局框架，將納什均衡反事實分析內嵌於賽局動力學而省去均衡謂詞，概述賽局競技場的函子構造並證明選手不動點行為即納什均衡，將回饋傳播與反向傳播類比。 <a href="zotero://select/library/items/DXK9DFHW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.12338" rel="noopener">官方連結</a></li>
+<li><strong>2020｜String Diagrams for Optics</strong>，Guillaume Boisseau（<em>arXiv</em>）：將雙向資料存取結構 optics 嵌入自然具備弦圖結構的預層範疇（presheaf category），建立適用於一般 optics 的弦圖演算（涵蓋 lenses 與帶副作用的 effectful lenses），並在弦圖下刻畫 optics 公理。 <a href="zotero://select/library/items/G2ZWV5W8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.11480" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Morphisms of open games</strong>，Jules Hedges（<em>arXiv</em>）：結合計算機科學的 Lens 構造與組合賽局理論定義開放賽局態射，建構以開放賽局為水平 1-胞腔、Lens 為垂直 1-態射的對稱么半雙範疇，其中垂直態與積分別刻劃 Nash 與子賽局完美均衡及外部選擇算子。 <a href="zotero://select/library/items/AN52FNGR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1711.07059" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻2-篇">B. 2024–2026 近期推進與前沿文獻（2 篇）</h3>
+<ul>
+<li><strong>2026｜Compositional Dynamics in Learning and Mechanics</strong>，David I. Spivak（<em>arXiv</em>）：David Spivak 提出運算子語法 <code>Arr</code>（平滑自適應配置：由參數空間、雙向光滑透鏡 Lens 與實值位勢構成），並證明核心定理「透鏡內化（Lens Internalization）」。梯度學習與哈密頓力學由此統一成同一組合語法上的函子語意。 <a href="zotero://select/library/items/K7EIHC5G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.28984" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Univalent Enriched Categories and the Enriched Rezk Completion</strong>，Niels van der Weide（<em>Logical Methods in Computer Science, Volume 22, Issue 2 (June 2, 2026) lmcs:15947</em>）：在單價基礎下研究充實範疇，證明單價充實範疇間的本質滿射且全忠實函子即為等價，並證明任意充實範疇皆具備 Rezk 完備化，進而以此構造單價充實 Kleisli 範疇。 <a href="zotero://select/library/items/5RENHGEC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.11752" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-b99af835">在地圖上查看</a><div class="rg"><h3>相關<span class="n">6</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a><span class="rs">範疇論曾被調侃為「抽象廢話（Abstract Nonsense）」，應用範疇論把它變成一門研究各種系統如何互連、開放系統如何組合的學問（Scie…</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03C_%E8%B3%87%E8%A8%8A%E5%B9%BE%E4%BD%95%E3%80%81%E8%87%AA%E7%84%B6%E6%A2%AF%E5%BA%A6%E8%88%87%E7%B5%B1%E8%A8%88%E6%B5%81%E5%BD%A2%E7%B5%90%E6%A7%8B.html">資訊幾何、自然梯度與統計流形結構</a></li><li><a href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a></li><li><a href="15B_Markov%E7%AF%84%E7%96%87%E3%80%81%E5%A4%9A%E9%A0%85%E5%BC%8F%E5%87%BD%E5%AD%90%E8%88%87%E9%96%8B%E6%94%BE%E5%8B%95%E6%85%8B%E7%B3%BB%E7%B5%B1%E7%B6%B2%E8%B7%AF.html">Markov範疇、多項式函子與開放動態系統網路</a></li><li><a href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a></li><li><a href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/OTF_%E9%80%86%E5%90%91%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E6%A9%9F%E7%8E%87%E5%96%AE%E5%AD%90%E8%88%87%E7%AF%84%E7%96%87%E6%B8%AC%E5%BA%A6%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">逆向最優傳輸、機率單子與範疇測度組合語意</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

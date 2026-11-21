@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>20B｜大規模分散式並行訓練、管線排程與集合通訊 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-4b72fa80" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="20b大規模分散式並行訓練管線排程與集合通訊">20B｜大規模分散式並行訓練、管線排程與集合通訊</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>
+同領域子方向：<a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> · <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> 的多機多卡訓練與計算圖編排層，向下依賴 <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 的單卡記憶體階層與算子核心效率，向上為 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> 提供已訓練完成的大規模模型權重與並行拓撲設計經驗。演進主線從手工設計層內張量切分並以原生集體通訊實作的模型並行（Megatron-LM），推進至將算子內（intra-operator）與算子間（inter-operator）並行統一進兩層編譯搜尋空間的自動並行系統（Alpa），並進一步銜接資料、模型與系統三層級的資源效率協同最佳化。</p>
+</aside>
+<ul>
+<li>核心問題：當 Transformer 參數量擴展至數十億乃至上千億規模時，單張 GPU 的記憶體容量與算力無法獨立承載模型權重、梯度與最佳化器狀態。單純的資料並行要求每張卡複製完整模型參數，在層寬度或總參數超過單卡顯存時直接失效；若改由人工同時配置張量切分、管線階段切分與資料並行維度，不僅搜尋空間隨叢集拓撲與運算圖結構呈組合爆炸，各裝置間透過網路進行的集體通訊（如 All-Reduce）與管線階段負載不均所產生的空轉氣泡，也會使擴展效率（scaling efficiency）隨 GPU 數量增加而衰減。</li>
+<li>直覺模型：可以把分散式並行訓練比喻成大型汽車組裝廠的兩層分工。層內張量並行就像是好幾位技師站在同一座高速液壓機工作台旁（節點內高速 NVLink），聯手把同一塊大鋼板（單一矩陣乘法）各自沖壓一部份再立刻拼合；層間管線並行則像把車身焊接、噴漆與電裝拆成相鄰車間（節點間網路），讓多批半成品依序流過輸送帶。自動並行編譯器（如 Alpa）的工作，就是根據每道工序的重量與車間走廊寬度，自動算出哪些步驟該並肩協作、哪些步驟該拆成流水線，避免工作台或輸送帶長時間空等。</li>
+<li>分階段閱讀路線：第一步先讀 Shoeybi 等人 (2019)（Megatron-LM），掌握如何在不修改編譯器或函式庫的前提下，僅靠在原生 PyTorch 插入集體通訊原語完成 Transformer 層內張量模型並行，並理解其 512 顆 GPU 上的擴展效率數據。第二步閱讀 Zheng 等人 (2022)（Alpa），學習如何將分散式執行計畫抽象為算子間與算子內兩層結構，並透過編譯 pass 與執行期調度自動產生優於或持平人工調校的並行策略。第三步可閱讀 Zhou 等人 (2024) 的系統效率綜述，將資料層、模型層與系統層最佳化觀點與下游部署約束串聯；另須注意本子方向現有候選清單中亦混入了數篇非機器學習領域、因「distributed training」關鍵字重疊而收錄的文獻（如 van Dongen 等人 2011 與 Entin 等人 2010），可作為語料清理對照而不列入深度學習系統核心路線。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;單卡顯存與算力上限&quot;] --&gt; B[&quot;資料並行與模型複製瓶頸&quot;]
+  A --&gt; C[&quot;Megatron-LM 層內張量模型並行 Shoeybi 2019&quot;]
+  C --&gt; D[&quot;正交結合管線模型並行與原生集體通訊&quot;]
+  B --&gt; E[&quot;兩層級並行搜尋空間設計&quot;]
+  D --&gt; E
+  E --&gt; F[&quot;Alpa 算子內與算子間自動編譯與執行期調度 Zheng 2022&quot;]
+  F --&gt; G[&quot;資料、模型與系統多層效率協同 Zhou 2024&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>層內張量模型並行與通訊消去 (Intra-Layer Tensor Model Parallelism)</strong></p>
+<ul>
+<li>直覺理解：把 Transformer 層裡最大的矩陣乘法依行或列拆給多張 GPU 平行計算，而且刻意把第一層的列切分與第二層的行切分首尾相接，讓中間結果不必在卡間交換，每一整個子模組只做一次全域歸約同步。</li>
+<li>機制或核心表達式：依據 Megatron-LM（Shoeybi 等人，2019）的設計，對 MLP 區塊的第一個線性層權重 <span class="math inline">A</span> 進行列切分 <span class="math inline">A = [A_1, A_2]</span>，輸入 <span class="math inline">X</span> 經廣播後各卡獨立計算局部非線性激活 <span class="math inline">Y_i = \mathrm{GeLU}(X A_i)</span>；第二個線性層權重 <span class="math inline">B</span> 改採行切分 <span class="math inline">B = \begin{bmatrix} B_1 \\ B_2 \end{bmatrix}</span>，各卡算得 <span class="math inline">Z_i = Y_i B_i</span> 後僅需一次 <span class="math inline">\mathrm{AllReduce}(Z_1 + Z_2)</span> 即可得到完整輸出。多頭自注意力亦依注意力頭數拆分查詢、鍵、值與輸出投影矩陣。該方法無需改動編譯器即可在原生 PyTorch 實作，且與管線並行正交互補；實驗在 512 顆 GPU 上收斂 8.3B 參數模型，維持 15.1 PetaFLOPs 吞吐（相較 39 TeraFLOPs 單卡基線達 76% 擴展效率，為峰值算力 30%）。</li>
+<li>能做到什麼，代價是什麼：只須極少量的集體通訊插樁就能將極寬的 Transformer 層放進多張卡內，減少每層同步次數；代價是每組前向與反向傳播仍需在每個區塊執行高頻寬需求的 All-Reduce，因此實務上受限於具備高速節點內互連的 GPU 群組。</li>
+</ul>
+</li>
+<li>
+<p><strong>兩層級自動並行編譯：算子內與算子間 (Hierarchical Inter- and Intra-Operator Auto-Parallelism)</strong></p>
+<ul>
+<li>直覺理解：把龐雜的分散式切分決策拆成「同一群組卡內怎麼切單個算子」與「不同卡群組之間怎麼接管線」兩個層次，交由編譯器自動搜尋與組合，取代仰賴專家經驗的手工試錯。</li>
+<li>機制或核心表達式：Alpa（Zheng 等人，2022）將分散式深度學習的並行維度重新組織為兩層架構：底層為算子內並行（intra-operator parallelism），統一涵蓋資料並行與張量／算子切分，在局部高速裝置網格上求解計算與張量重分片（resharding）通訊成本；上層為算子間並行（inter-operator parallelism），負責將計算圖劃分為管線階段並指派至裝置子網格。Alpa 設計多道編譯 pass 在兩個層次自動推導最佳執行計畫，並以專屬執行期協調整體兩層並行排程。</li>
+<li>能做到什麼，代價是什麼：將原本各自孤立的資料、算子與管線並行統一於單一自動化框架，能在既有系統擅長的模型與複雜異構模型上取得持平或優於手工調校的執行計畫；代價是靜態圖分析與階層搜尋假設運算圖形狀與通訊拓撲可事先刻畫，對高度動態控制流或頻繁變動長度的架構需要額外重編譯或填充處理。</li>
+</ul>
+</li>
+<li>
+<p><strong>管線氣泡、通訊重疊與多層系統協同 (Pipeline Bubbles, Collective Communication, and Multi-Level Optimization)</strong></p>
+<ul>
+<li>直覺理解：多張卡接力跑流水線時，開頭預熱與結尾排空階段不可避免會出現部分裝置等待資料的空窗期；此外，訓練期的並行切分策略直接決定推論期的 KV 快取與記憶體布局難度。</li>
+<li>機制或核心表達式：在具 <span class="math inline">p</span> 個管線階段與 <span class="math inline">m</span> 個微批次的同步管線調度中，若每階段計算時間相等，管線起始填充與結尾排空的氣泡時間比例約為 <span class="math inline">\frac{p - 1}{m + p - 1}</span>，須藉由提高微批次數 <span class="math inline">m</span>（同時放大激活記憶體需求）或交叉調度來壓低空轉比例。結合 Zhou 等人 (2024) 提出的資料層、模型層與系統層三維最佳化分類架構，分散式系統在訓練與後續推論部署時均須在「算子通訊量」、「微批次激活暫存」與「序列二次複雜度／記憶體牆限制」之間進行全域聯立權衡。</li>
+<li>能做到什麼，代價是什麼：增加微批次數量可攤薄管線氣泡卻會使暫存激活值記憶體隨階段數與批次線性擴張，常須搭配激活重計算（activation checkpointing）以額外算力換取顯存空間，並依網路頻寬決定各並行軸的切分順序。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>Megatron-LM 中先列切分再行切分的通訊次數推導</strong>：在 Megatron-LM（Shoeybi 等人，2019）的兩層 MLP 張量並行設計中，為什麼必須讓第一個線性層 <span class="math inline">A</span> 採用列切分（column-parallel）、第二個線性層 <span class="math inline">B</span> 採用行切分（row-parallel），而不能反過來或兩層都採用行切分？這樣的設計在前向傳播將集體通訊減至幾次？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考 GeLU 非線性函數的作用方式。GeLU 是逐元素（element-wise）運算：若第一層權重按列切分成 <span class="math inline">[A_1, A_2]</span>，輸出結果天然分布在各自卡上的不同特徵維度切片 <span class="math inline">X A_1, X A_2</span>，因此每張卡可直接對自己的切片執行 <span class="math inline">\mathrm{GeLU}(X A_i)</span> 而不需與其他卡通訊。接著第二層按行切分 <span class="math inline">B</span>，正好與切分好的激活維度逐塊相乘得到各自的部分和 <span class="math inline">Y_i B_i</span>，最後只需在輸出端執行 1 次 All-Reduce 加總即可。若反過來第一層先行切分，各卡只有部分和而無法直接套用非線性函數，將被迫在兩層之間多插一次 All-Reduce。</p>
+</details>
+<ol start="2">
+<li><strong>Alpa 為何將並行空間劃分為算子內與算子間兩層</strong>：相比於手工指定固定比例的資料並行、張量並行與管線並行（俗稱 3D 並行），Alpa（Zheng 等人，2022）把搜尋空間拆成「算子內（intra-operator）」與「算子間（inter-operator）」兩層有何硬體拓撲與最佳化上的優勢？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>硬體叢集的通訊頻寬具有明顯階層性：同一台伺服器節點內的 NVLink 頻寬極高，而跨節點網路頻寬相對受限。算子內並行（同時涵蓋資料並行與張量切分）對單一算子的張量重分片與 All-Reduce 頻寬極為敏感，適合被封裝在節點內高速子網格中求解；算子間並行（管線並行）僅在階段邊界傳遞點對點激活張量，通訊量遠小於層內張量同步，適合跨低頻寬節點分配。兩層分治讓編譯器能自然貼合叢集階層頻寬，並納入任意非標準模型拓撲的切分組合。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>動態路由模型與不規則長序列對靜態編譯並行計畫的挑戰</strong>：Alpa（Zheng 等人，2022）這類基於靜態圖編譯 pass 推導兩層並行計畫的架構，假設運算圖形狀與算子計算量可提前估算。面對混合專家（MoE）動態 token 路由負載不均以及動輒數十萬至百萬詞元的不定長序列訓練時，如何在保留自動並行高利用率的前提下低開銷地應對動態通訊量與階段時間波動，仍是分散式訓練編譯器的主要課題。</li>
+<li><strong>節點間通訊頻寬落差下的大規模擴展極限</strong>：Megatron-LM 在 512 顆 GPU 上展現了 76% 的擴展效率，但當模型參數與叢集規模繼續跨越多個網路交換機層級時，集體通訊延遲與資料、模型、系統三層最佳化（Zhou 等人，2024）之間的交互耦合益發複雜。在晶片算力增長持續快於互連頻寬的硬體趨勢下，如何將通訊與計算做細粒度重疊並壓低跨節點同步等待，仍待軟硬體協同突破。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>管線調度與集合通訊在長脈絡推論服務中的延伸</strong>：訓練期累積的張量切分與跨階段管線排程經驗（Shoeybi 等人，2019；Zheng 等人，2022）直接構成 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a> 的分散式部署基礎，尤其在預填充與解碼分離系統各自選取異構並行計畫以及長脈絡虛擬管線並行排程上存在一脈相承的拓撲決策。</li>
+<li><strong>Roofline 與單卡記憶體階層對切分粒度的邊界約束</strong>：無論是 Megatron-LM 的矩陣切塊還是 Alpa 的算子內張量重分片成本估算，均受限於 <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 所刻畫的 HBM 頻寬與核函數啟動開銷；當單卡張量切片過小導致算術強度跌破硬體脊點（ridge point）時，過度切分反而會降低整體訓練吞吐。</li>
+<li><strong>連續時間動力系統與狀態空間架構的跨時間並行對比</strong>：分散式訓練針對標準注意力與深層堆疊主要沿層數與特徵維度做並行切分，而 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 中的線性狀態空間模型與連續時間動力系統則提供了沿時間軸進行平行前綴掃描（parallel scan）的另一種可擴展計算結構。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-megatron-lm-training-multi-billion-parameter-language-models-using-model-parallelism2019">1. Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism（2019）</h4>
+<ul>
+<li>作者與出處：Mohammad Shoeybi, Mostofa Patwary, Raul Puri, Patrick LeGresley, Jared Casper · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：大型語言模型參數量成長迅速，但單卡記憶體容量使數十億參數 Transformer 難以直接訓練。作者尋求一種不依賴新編譯器或大規模重寫底層函式庫的簡單高效模型並行方案。</li>
+<li>關鍵做法：提出層內張量模型並行技術，在原生 PyTorch 中插入少量集體通訊操作即可切分自注意力與 MLP 層，並可與管線並行正交結合。實驗在 512 顆 GPU 上成功訓練收斂達 83 億參數的模型，整體維持 15.1 PetaFLOPs 效能，相較維持 39 TeraFLOPs（峰值 30%）的強單卡基線達成 76% 擴展效率。</li>
+<li>跨領域啟發：確立現代大模型張量並行的標準切分原語與通訊模式，為後續所有 3D 並行與自動編譯框架的基礎積木。</li>
+<li>連結：<a href="zotero://select/library/items/F5ATPK9H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1909.08053" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-alpa-automating-inter--and-intra-operator-parallelism-for-distributed-deep-learning2022">2. Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning（2022）</h4>
+<ul>
+<li>作者與出處：Lianmin Zheng, Zhuohan Li, Hao Zhang, Yonghao Zhuang, Zhifeng Chen · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有模型並行訓練系統往往需要人工編寫切分計畫，或僅能在受限的並行設定空間內進行有限搜尋，難以擴展至結構複雜的深度學習模型與異構分散式計算叢集。</li>
+<li>關鍵做法：提出 Alpa 自動並行編譯與執行系統，將分散式並行空間抽象為算子間（inter-operator）與算子內（intra-operator）兩個階層，建構對應的編譯最佳化 pass 來分別自動推導計畫，並以統一執行期協調兩層並行執行。評估顯示 Alpa 自動產生的策略能持平甚至超越針對特定模型手工調校的系統。</li>
+<li>跨領域啟發：示範如何透過階層化抽象把手工分散式系統工程轉化為編譯器求解問題，對後續分散式推論規劃器（如 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a>）亦有直接影響。</li>
+<li>連結：<a href="zotero://select/library/items/RK4JVS4M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2201.12023" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-a-survey-on-efficient-inference-for-large-language-models2024">3. A Survey on Efficient Inference for Large Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Zixuan Zhou, Xuefei Ning, Ke Hong, Tianyu Fu, Jiaming Xu · <em>arXiv</em></li>
+<li>核心問題：大語言模型在訓練與部署中伴隨龐大的計算與記憶體需求，導致受限資源環境下的效率瓶頸；研究者需要系統性釐清模型規模、二次注意力複雜度與自回歸生成機制帶來的成本結構。</li>
+<li>關鍵做法：雖然主軸聚焦於高效 LLM 推論，文中建構了涵蓋資料層、模型層與系統層最佳化的完整分類架構，並透過代表性方法對照實驗提供量化洞見，分析如何從系統排程與模型結構層面緩解大規模模型帶來的硬體負擔。</li>
+<li>跨領域啟發：有助於從系統全局連結分散式模型設計與 <a class="wl" href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a>、<a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 的部署效能需求。</li>
+<li>連結：<a href="zotero://select/library/items/PHGQKQZE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.14294" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-distributed-versus-massed-training-efficiency-of-training-psychomotor-skills2011">4. Distributed versus Massed Training: Efficiency of Training Psychomotor Skills（2011）</h4>
+<ul>
+<li>作者與出處：Koen van Dongen, Peter Mitra, Marlies Schijven, Ivo Broeders · <em>Surgical Techniques Development</em></li>
+<li>核心問題：內視鏡手術虛擬實境模擬訓練面臨課程排程問題，須比較「分段間隔訓練（distributed training）」與「連續集中訓練（massed training）」對人員動作技能獲取與長期保留的影響。此篇屬醫學教育領域，因術語「Distributed Training」重疊而收錄於本子方向候選庫。</li>
+<li>關鍵做法：將四組各八名醫學生隨機分配至兩種分散式訓練組、集中訓練組與對照組，並於完訓當下及兩個月後施測，採用單因子變異數分析（ANOVA）檢定各排程對技能保留的顯著差異。</li>
+<li>跨領域啟發：屬跨領域關鍵字重疊條目（人類心理運動技能間隔訓練而非分散式 GPU 計算），可標記為語料分類校驗樣本。</li>
+<li>連結：<a href="zotero://select/library/items/TJH2TVHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4081/std.2011.e17" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-development-of-online-distributed-training2010">5. Development of Online Distributed Training（2010）</h4>
+<ul>
+<li>作者與出處：Eileen B. Entin, Jason Sidman, Lisa Neal · <em>Web-Based Education</em></li>
+<li>核心問題：異地分散的教師與學員在線上進行團隊協作訓練時，需平衡自主進度練習與群體同步互動，克服地理隔離對回饋與臨場感的阻礙。此篇屬遠距教育系統領域，因「Distributed Training」關鍵字重疊而進入本候選清單。</li>
+<li>關鍵做法：基於情境學習原則，在課程架構中交替編排非同步與同步訓練模組，使異地學員能兼得自我步調練習與即時團隊反思互動。</li>
+<li>跨領域啟發：純屬教育訓練領域詞彙重疊條目（人類遠距團隊協作而非機器學習分散式系統），建議於後續資料集整理時移出硬體系統子集合。</li>
+<li>連結：<a href="zotero://select/library/items/MXUZGGV3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4018/978-1-61520-963-7.ch034" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-29-篇">G5｜本子方向全量文獻泛讀清單（共 29 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 29 篇文獻（含開放存取 PDF 5 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進21-篇">A. 奠基經典、專著與核心演進（21 篇）</h3>
+<ul>
+<li><strong>2019｜Megatron-LM: Training Multi-Billion Parameter Language Models Using Model Parallelism</strong>，Mohammad Shoeybi et al.（<em>arXiv (Cornell University)</em>，858 引）：大模型分散式訓練的基礎：提出簡單高效的 Transformer 層內張量並行切分法，不用修改編譯器，就能把模型規模推到百億與千億級。 <a href="zotero://select/library/items/F5ATPK9H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1909.08053" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Alpa: Automating Inter- and Intra-Operator Parallelism for Distributed Deep Learning</strong>，Lianmin Zheng et al.（<em>arXiv (Cornell University)</em>，124 引）：自動並行編譯的重要論文：把資料、張量與管線並行統一放進算子內 ILP 加算子間 DP 的雙層最佳化空間，全自動生成分散式執行計畫。 <a href="zotero://select/library/items/RK4JVS4M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2201.12023" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Distributed Training of Large Language Models</strong>，Fanlong Zeng et al.（<em>2023 IEEE 29th International Conference on Parallel and Distributed Systems (ICPADS)</em>，26 引）：Distributed Training of Large Language Models，Fanlong Zeng et al.（IEEE ICPADS：整理大模型分散式訓練中資料並行、張量並行、管線並行與混合記憶體最佳化的各類技術，26 引）。 <a href="zotero://select/library/items/CC5NE9MB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/icpads60453.2023.00126" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Distributed Training of Graph Convolutional Networks</strong>，Simone Scardapane, Indro Spinelli, Paolo Di Lorenzo（<em>IEEE Transactions on Signal and Information Processing over Networks</em>，26 引）：Distributed Training of Graph Convolutional Networks，Simone Scardapane, Indro Spinelli, Paolo Di Lorenzo（探討不規則圖結構卷積網路在跨節點分散式訓練中的鄰域同步，以及無中心化的通訊削減策略，26 引）。 <a href="zotero://select/library/items/JABH2AQD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tsipn.2020.3046237" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Distributed Training Large-Scale Deep Architectures</strong>，Shang-Xuan Zou et al.（<em>Lecture Notes in Computer Science</em>，11 引）：發表於 2017 年《Lecture Notes in Computer Science》的論文，探討針對大規模深度神經網路架構進行分散式並行訓練（distributed training）的系統策略與擴展設計。 <a href="zotero://select/library/items/W23SKBJH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-69179-4_2" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Distributed Encoding and Updating for SAZD Coded Distributed Training</strong>，Mingjun Dai et al.（<em>IEEE Transactions on Parallel and Distributed Systems</em>，8 引）：發表於《IEEE Transactions on Parallel and Distributed Systems》（2023），研究面向 SAZD 編碼分散式訓練（coded distributed training）的分散式編碼與參數更新演算法（未附摘要）。 <a href="zotero://select/library/items/GBJSBFEK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tpds.2023.3276888" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Distributed versus Massed Training: Efficiency of Training Psychomotor Skills</strong>，Koen van Dongen et al.（<em>Surgical Techniques Development</em>，7 引）：比較分散式練習與集中式練習在虛擬實境內視鏡手術模擬器上訓練醫學生心理運動技能的成效，透過受試組與對照組在結訓後及兩個月後的測驗評估技能保留率。 <a href="zotero://select/library/items/TJH2TVHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4081/std.2011.e17" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Distributed training for Conditional Random Fields</strong>，Xiaojun Lin et al.（<em>Proceedings of the 6th International Conference on Natural Language Processing and Knowledge Engineering(NLPKE-2010)</em>，5 引）：發表於 NLPKE 2010，研究條件隨機場（Conditional Random Fields）模型的分散式並行訓練架構與通訊實作方法（未附摘要）。 <a href="zotero://select/library/items/7MNDKWJF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/nlpke.2010.5587803" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Symposium on Distributed Simulation for Military Training of Teams/Groups: A Case Study of Distributed Training and Training Performance</strong>，Daniel J. Dwyer, Randall L. Oser, Jennifer E. Fowlkes（<em>Proceedings of the Human Factors and Ergonomics Society Annual Meeting</em>，4 引）：報告首個分散式訓練網路實際應用於近距空中支援（CAS）任務的為期一週軍事演練案例，說明訓練績效量測的目標設計、評估工具開發、現場觀察結果以及分散式訓練效能評估的初步結論。 <a href="zotero://select/library/items/FDP67FS6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/154193129503902017" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Distributed training for accelerating metalearning algorithms</strong>，Shruti Kunde et al.（<em>Proceedings of the International Workshop on Big Data in Emergent Distributed Environments</em>，3 引）：發表於 2021 年大數據分散式環境研討會，研究利用分散式並行訓練架構來加速後設學習（meta-learning）演算法執行的系統方法（未附摘要）。 <a href="zotero://select/library/items/Z6T54QV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3460866.3461773" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Attitudinal Considerations in Distributed Training</strong>，C. Hack（<em>Learning without Boundaries</em>，2 引）：選自 1994 年專書《Learning without Boundaries》的章節，探討遠距與分散式教育訓練情境中的學習者態度與人因考量問題。 <a href="zotero://select/library/items/HZNCCGHX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4899-1199-5_11" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Distributed Training from Multi-sourced Data</strong>，Ibrahim Dahaoui, Mohamed Mosbah, Akka Zemmari（<em>Lecture Notes in Networks and Systems</em>，1 引）：發表於 2022 年《Lecture Notes in Networks and Systems》的論文，探討在多源異質資料分佈環境下進行大規模分散式並行訓練（distributed training）的方法。 <a href="zotero://select/library/items/X9BVKI6H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-99587-4_29" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Evaluating Data-Parallel Distributed Training Strategies</strong>，Ganesan Ponnuswami, Sriram Kailasam, Dileep Aroor Dinesh（<em>2022 14th International Conference on COMmunication Systems &amp; NETworkS (COMSNETS)</em>，1 引）：發表於 COMSNETS 2022，針對大規模分散式模型訓練中的資料並行策略進行效能評估與比較分析（未附摘要）。 <a href="zotero://select/library/items/DD9PUS6B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/comsnets53615.2022.9668349" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Symposium on Distributed Simulation for Military Training of Teams/Groups: The Challenge of Distributed Training</strong>，Franklin L. Moses（<em>Proceedings of the Human Factors and Ergonomics Society Annual Meeting</em>，1 引）：探討將分散式互動模擬（DIS）技術應用於跨地域軍事團隊協同訓練的工程架構與任務設計挑戰，並介紹這類分散式訓練網路的建置脈絡、輔助工具與初期成效評估研究方向。 <a href="zotero://select/library/items/IQSP3ZXK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/154193129503902015" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Beyond Distributed Training in the Cloud</strong>，Gauri Joshi（<em>Synthesis Lectures on Learning, Networks, and Algorithms</em>）：選自 2023 年《Synthesis Lectures on Learning, Networks, and Algorithms》的章節，探討超越傳統雲端中心架構的分散式機器學習訓練範式與系統設計。 <a href="zotero://select/library/items/76WF4WW4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-19067-4_9" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Distributed Training</strong>，Di Jiang, Chen Zhang, Yuanfeng Song（<em>Probabilistic Topic Models</em>）：選自 2023 年《Probabilistic Topic Models》的章節，探討機率主題模型在大規模資料下的分散式並行訓練（distributed training）架構與計算擴展方法。 <a href="zotero://select/library/items/3AKI3HEI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-99-2431-8_7" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Distributed Training in Access Control Model</strong>，Fangbo Cai et al.（<em>Lecture Notes in Electrical Engineering</em>）：發表於 2020 年電機工程講義叢書的論文，探討存取控制模型（access control model）在分散式訓練系統環境下的架構設計與安全應用方法。 <a href="zotero://select/library/items/7CBUU84X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-981-15-3250-4_116" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Distributed Team Training: Effective Feedback</strong>，Kevin B. Oden（<em>Proceedings of the Human Factors and Ergonomics Society Annual Meeting</em>）：研究地理分散軍事團隊訓練中事後檢討（AAR）的回饋形式，比較無 AAR、純電話會議 AAR 與結合視覺回饋的電話會議 AAR 三種條件，結果顯示附帶視覺回饋的遠距檢討表現最佳，純語音會議反遜於無 AAR。 <a href="zotero://select/library/items/VPCUDKFI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/154193121005402720" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Development of Online Distributed Training</strong>，Eileen B. Entin, Jason Sidman, Lisa Neal（<em>Web-Based Education</em>）：探討針對異地師生設計線上分散式團隊合作訓練課程的取捨與經驗，說明如何結合非同步與同步訓練模組，並透過情境式學習促進學員在實務應用中的互動與參與。 <a href="zotero://select/library/items/MXUZGGV3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4018/978-1-61520-963-7.ch034" rel="noopener">官方連結</a></li>
+<li><strong>2005｜Distributed Training Network Guard (DTNG)</strong>，Jonathan Beskin, Linda Schippler, Romil Sharma（<em>Defense Technical Information Center</em>）：美國國防技術資訊中心（DTIC）技術報告，介紹用於保護分散式模擬訓練網路通訊安全與跨網域資料交換控制的 Distributed Training Network Guard（DTNG）系統設計。 <a href="zotero://select/library/items/SQ4GJXR8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21236/ada430249" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Distributed and Dangerous Training Challenges</strong>，Franklin L. Moses（<em>Proceedings of the Human Factors and Ergonomics Society Annual Meeting</em>）：針對近距空中支援、滅火與救災等高風險且成本高昂的實地任務訓練，討論在分散式團隊環境中導入模擬器與虛擬演練系統以補充實裝操作的可行性與實務挑戰。 <a href="zotero://select/library/items/Q6Q6RRJ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/154193129403801507" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻8-篇">B. 2024–2026 近期推進與前沿文獻（8 篇）</h3>
+<ul>
+<li><strong>2024｜Understanding Communication Characteristics of Distributed Training</strong>，Wenxue Li et al.（<em>Proceedings of the 8th Asia-Pacific Workshop on Networking</em>，49 引）：Understanding Communication Characteristics of Distributed Training，Wenxue Li et al.（實測分析大規模分散式訓練叢集中集合通訊算子的流量突發性、拓撲競爭與網路瓶頸特徵，49 引）。 <a href="zotero://select/library/items/MVSPDCFA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3663408.3663409" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Distributed Training Optimization for DCU</strong>，Biaoyuan Chen et al.（<em>2024 5th International Conference on Information Science, Parallel and Distributed Systems (ISPDS)</em>，2 引）：發表於 ISPDS 2024，針對深度計算單元（DCU）異構加速器平台，探討大規模分散式模型訓練的效能最佳化策略（未附摘要）。 <a href="zotero://select/library/items/3M3AZJB2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/ispds62779.2024.10667546" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Communication Efficient Distributed Training with Distributed Lion</strong>，Bo Liu et al.（<em>Advances in Neural Information Processing Systems 37</em>，2 引）：發表於 NeurIPS 2024 的分散式訓練系統研究，探討將符號動量最佳化器 Lion 擴展至分散式設定，透過降低節點間梯度與狀態通訊開銷來提升大規模訓練的通訊效率。 <a href="zotero://select/library/items/9SVBNM8B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.52202/079017-0583" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Closing Performance Gap for Diffusion Language Models under Low Inference Budgets</strong>，Hao Wu et al.（<em>arXiv</em>）：作者提出免訓練框架 CaRR（Commitment-aware Refinement and Recovery），在不增加額外骨幹網路前向傳播次數的前提下，於現有遮罩／編輯排程內運作：詞元鎖定重遮罩（TCR）挑選原生純替換位置重新遮罩，於下一次排程編輯步利用更新後的上下文重新填充；提交鎖定恢復（SCR）則在最終回覆不符合任務輸出規格時，從精煉軌跡中回溯受支持候選結果。在程式碼生成與數學推理四種預算下的實驗顯示，在僅八分之一全排程預算時，CaRR 使六項指標平均準確率較原生 ME-DLM 提升 7.44 個百分點（其中 MBPP 與 MBPP+ 分別提升 11.37 與 10.05）。 <a href="zotero://select/library/items/2GKXAFCP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25763" rel="noopener">官方連結</a></li>
+<li><strong>2026｜One Schedule Does Not Fit All: Adaptive Inference Schedules for Diffusion Language Models</strong>，Rabimba Karanjai et al.（<em>arXiv</em>）：作者提出具顯式誤差保證的部署規則 Task-Calibrated Denoising Allocation（TCDA），利用成對校準資料與同步單邊自助法（bootstrap）邊界，在效用容忍度與退化護欄下認證候選排程（含早期前綴解碼、狀態複用延續、縮減時間網格與信心閾值解碼），並部署通過認證中最省計算的方案或退回全排程。在七個資料集與兩大模型家族上，TCDA 在 ELF-B 的 XSum 與 WMT14 分別認證出 3.4 倍與 2.0 倍去噪評估縮減，在 LLaDA-8B 的 WMT14 與 GSM8K 達 8.0 倍與 4.1 倍，且 500 次校準切分下的誤認證率在名目水準 5% 時低於 2%；軌跡測量亦顯示詞元何時鎖定（commit）比剩餘潛在離散化誤差更能指導排程選擇。 <a href="zotero://select/library/items/73V2EVFI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25895" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Distributed Training Networks</strong>，Haobo Ma et al.（<em>2025 16th International Conference on Reliability, Maintainability and Safety (ICRMS)</em>）：發表於 ICRMS 2025，在大規模分散式並行訓練系統的脈絡下，探討分散式訓練網路的架構與並行組織方式（未附摘要）。 <a href="zotero://select/library/items/7V8ARH67" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/icrms65480.2025.00036" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Survey on Efficient Inference for Large Language Models</strong>，Zixuan Zhou et al.（<em>arXiv</em>）：系統綜述大語言模型高效推論技術，首先剖析大模型參數量、二次注意力計算與自回歸解碼三大效能瓶頸，繼而依資料層級、模型層級與系統層級三維分類體系整理最佳化方案並進行對比實驗評估。 <a href="zotero://select/library/items/PHGQKQZE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.14294" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Towards communication-efficient distributed training systems</strong>，Xinchen Wan（<em>The Hong Kong University of Science and Technology Library</em>）：香港科技大學學位論文，探討大規模分散式機器學習訓練系統中的通訊瓶頸問題，研究集合通訊最佳化與低通訊開銷的分散式訓練排程設計。 <a href="zotero://select/library/items/B2T63I4J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.14711/thesis-991013401041503412" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-4b72fa80">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="20A_%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%8E%A8%E8%AB%96%E6%9C%8D%E5%8B%99%E3%80%81PagedAttention%E8%88%87%E9%A0%90%E5%A1%AB%E5%85%85%E8%A7%A3%E7%A2%BC%E5%88%86%E9%9B%A2.html">大模型推論服務、PagedAttention與預填充解碼分離</a></li><li><a href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

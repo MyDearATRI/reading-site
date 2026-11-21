@@ -13,17 +13,17 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-f273415f">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">C_純數學、範疇論與邏輯基礎</a><a class="find" href="../../index.html#n=n-f273415f">Find on board</a></header>
+<body class="doc" data-note="n-f273415f" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
-<span class="kicker">領域分級精讀 · C_純數學、範疇論與邏輯基礎</span>
+<span class="kicker">領域分級精讀 · 純數學、範疇論與邏輯基礎</span>
 <article>
 
 <h1 id="39線性邏輯與博弈語意學linear-logic-game-semantics-geometry-of-interaction-differential-categories">39｜線性邏輯與博弈語意學（Linear Logic, Game Semantics, Geometry of Interaction &amp; Differential Categories）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a> ｜ L5 旗艦庫：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>
-相關領域：<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> · <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">05_形式化與推理</a></p>
-</aside>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 所屬星系：<code>星系 C：純數學、範疇論與邏輯基礎</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">每日跨領域精讀索引</a> ｜ L5 旗艦庫：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>
+相關領域：<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a> · <a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a> · <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a> · <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a></p>
+</details>
 <h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
 <aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
 <p>線性邏輯與博弈語意學把數理邏輯改寫成一套講資源、講互動的理論。Jean-Yves Girard 重新分析古典蘊含 <span class="math inline">A \to B</span>，把假設從可以免費無限影印的永恆真理，改成用一次就消耗掉的資源（<span class="math inline">A \multimap B</span>）。在這個框架下，每個證明和電腦程式都可以看成系統（Player）與環境（Opponent）之間一來一往的博弈對局策略，也可以看成在網路中雙向彈跳的粒子流（互動幾何 GoI）。</p>
@@ -38,7 +38,7 @@
 </ul>
 </li>
 <li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
-這條脈絡對當代計算機科學與 AI 的影響很廣。它不允許複製的核心部分，是量子編譯器（如 2026 年 Chardonnet et al. 用 GoI 將量子 <span class="math inline">\lambda</span>-項編譯為量子線路）與安全併發協議（Session Types）的型別基礎。Ehrhard–Regnier 從線性邏輯指數模態 <span class="math inline">!A</span> 發展出微分線性邏輯（Differential Linear Logic），Cockett–Cruttwell 提出反向導數範疇（Reverse Derivative Categories）。這兩項工作從純證明論的切消規則推出了泰勒展開與深度學習反向傳播的自動微分，銜接 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>。在語言學這一側，非交換線性邏輯（Lambek 演算）是 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a> 範疇語法的核心機制。</li>
+這條脈絡對當代計算機科學與 AI 的影響很廣。它不允許複製的核心部分，是量子編譯器（如 2026 年 Chardonnet et al. 用 GoI 將量子 <span class="math inline">\lambda</span>-項編譯為量子線路）與安全併發協議（Session Types）的型別基礎。Ehrhard–Regnier 從線性邏輯指數模態 <span class="math inline">!A</span> 發展出微分線性邏輯（Differential Linear Logic），Cockett–Cruttwell 提出反向導數範疇（Reverse Derivative Categories）。這兩項工作從純證明論的切消規則推出了泰勒展開與深度學習反向傳播的自動微分，銜接 <a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a>。在語言學這一側，非交換線性邏輯（Lambek 演算）是 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a> 範疇語法的核心機制。</li>
 </ul>
 <h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
 <pre class="mermaid">flowchart TD
@@ -62,7 +62,7 @@
 </li>
 <li>機制或核心表達式：線性邏輯靠兩樣工具。一是指數模態 <span class="math inline">!A</span>，它是受控複製與丟棄的餘單子。二是對合線性否定 <span class="math inline">(-)^{\perp}</span>，滿足嚴格德摩根對偶 <span class="math inline">(A^{\perp})^{\perp} \equiv A</span>，<span class="math inline">(A \otimes B)^{\perp} \equiv A^{\perp} \parr B^{\perp}</span>，<span class="math inline">(A \binampersand B)^{\perp} \equiv A^{\perp} \oplus B^{\perp}</span>。Girard 由此給出線性拆解公式：
 <div class="math inline">A \longrightarrow B \;\equiv\; (!A) \multimap B</div>
-它的代數等價語意（如 <span class="math inline">\mathsf{MALL}</span> 對應的 Girard 代數，參見 2026 年 Aglianò–Nedeljković 的 🏆 L5 旗艦研究）構成帶對合對偶的剩餘格簇。範疇語意則是配備餘單子 <span class="math inline">!</span> 的 <em>-自治範疇（</em>-Autonomous Categories，見 <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">38_形式概念分析與格論</a> Chu 空間）。</li>
+它的代數等價語意（如 <span class="math inline">\mathsf{MALL}</span> 對應的 Girard 代數，參見 2026 年 Aglianò–Nedeljković 的 🏆 L5 旗艦研究）構成帶對合對偶的剩餘格簇。範疇語意則是配備餘單子 <span class="math inline">!</span> 的 <em>-自治範疇（</em>-Autonomous Categories，見 <a class="wl" href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a> Chu 空間）。</li>
 <li>能做到什麼，代價是什麼：時間空間複雜度（如輕量線性邏輯捕捉多項式時間 <span class="math inline">\mathsf{PTIME}</span>）、併發通道的死鎖自由性與量子不可複製性，都可以直接寫進邏輯型別。代價是手寫線性程式時，必須顯式管理每一份資源的分裂與釋放。</li>
 </ul>
 </li>
@@ -96,7 +96,7 @@
 <li>在反向導數範疇（RDC）中，反向導數算子給出 <span class="math inline">R[f]: A \times B \to A</span>（對應轉置雅可比拉回 <span class="math inline">R[f](x, \Delta y) = J_f(x)^T \Delta y</span>）。Cockett 等人嚴格證明：擁有反向導數，等價於擁有前向導數，再加上線性核心具備匕首自伴對偶（Dagger Linear Structure）。2026 年 Melliès–Olimpieri–Vaux Auclair 又給出微分線性邏輯同倫跨度模型（Homotopy Span Model）的顯式洗牌構造，把泰勒展開提升到同倫範疇層級。</li>
 </ul>
 </li>
-<li>能做到什麼，代價是什麼：這條路線把數理邏輯證明論、<a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">30_凝聚數學與合成微分幾何</a> 的切範疇、<a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> 的雙向透鏡與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 的梯度訓練連在一起。代價是在含高階條件分支與遞迴（非光滑點）的通用程式語言中，微分語意還得引入 Clarke 次微分或分佈廣義函數來擴展。</li>
+<li>能做到什麼，代價是什麼：這條路線把數理邏輯證明論、<a class="wl" href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a> 的切範疇、<a class="wl" href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a> 的雙向透鏡與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a> 的梯度訓練連在一起。代價是在含高階條件分支與遞迴（非光滑點）的通用程式語言中，微分語意還得引入 Clarke 次微分或分佈廣義函數來擴展。</li>
 </ul>
 </li>
 </ol>
@@ -106,7 +106,7 @@
 <p></p>
 <ol>
 <li><strong>超越固定因果序的高階量子計算邏輯（Quantum Switch &amp; Non-Causal Higher-Order）</strong>：傳統量子線路模型假設量子閘按固定的時間先後串聯，無法表達「量子開關」（Quantum Switch：由控制位元疊加態決定先執行閘 <span class="math inline">U</span> 還是先執行閘 <span class="math inline">V</span>）這類不定因果序的高階量子過程。先前物理界只能用過程矩陣（Process Matrices）做靜態描述，寫起來很笨重。2026 年 Lamiroy、Valiron 與 Vilmart 提出「直覺主義么正線性邏輯（Intuitionistic Unitary Linear Logic）」，率先用純證明論刻畫非因果高階量子計算。</li>
-<li><strong>微分線性邏輯與高階同倫論的融合（Homotopy Taylor Expansion）</strong>：過去線性邏輯的多重集關係模型（Relational Model）會把對稱置換壓扁成集合或計數重數，不同資源配對路徑之間的同倫見證就丟失了。2026 年 Melliès、Olimpieri 與 Vaux Auclair 用顯式洗牌構造建立了微分線性邏輯的「同倫跨度模型」。接下來的問題是，如何在 <span class="math inline">(\infty,1)</span>-範疇中完整建立非正交泰勒級數的收斂與切消不變性。這是 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a> 與證明論交界處最新的課題。</li>
+<li><strong>微分線性邏輯與高階同倫論的融合（Homotopy Taylor Expansion）</strong>：過去線性邏輯的多重集關係模型（Relational Model）會把對稱置換壓扁成集合或計數重數，不同資源配對路徑之間的同倫見證就丟失了。2026 年 Melliès、Olimpieri 與 Vaux Auclair 用顯式洗牌構造建立了微分線性邏輯的「同倫跨度模型」。接下來的問題是，如何在 <span class="math inline">(\infty,1)</span>-範疇中完整建立非正交泰勒級數的收斂與切消不變性。這是 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a> 與證明論交界處最新的課題。</li>
 <li><strong>推論主義哲學與博弈語意的合流，以及線性邏輯的泛代數深層結構</strong>：在哲學邏輯這一側，證明論語意學（Proof-theoretic Semantics / Brandom 推論主義：意義源於推論角色而非指稱真值）正透過 Hyland–Ong 博弈取得動態互動的基礎（2026 Waddington–Gheorghiu–Pym）。在代數邏輯這一側，乘法加法線性邏輯 <span class="math inline">\mathsf{MALL}</span> 對應的 Girard 代數子簇格結構（如 2026 年 Aglianò–Nedeljković 證明的原子性與極小單代數刻畫，本領域 🏆 L5 旗艦）還有大量高階子簇的分類問題沒有解決。</li>
 </ol>
 </aside>
@@ -114,9 +114,9 @@
 <aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
 <p></p>
 <ul>
-<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 與系統工程（用線性類型／Session Types 避免 Agent API 狀態錯亂與資源洩漏）</strong>：多個 Agent 調用外部付費 API、資料庫交易鎖或有狀態工具時，最常見的事故有兩種：重試導致重複扣款（違背禁止收縮），以及開啟連線後沒有關閉（違背禁止弱化）。用線性／仿射協定型別（Session Types）設計工具接口，就能在編譯期 100% 保證每個控制權柄恰好被轉移與終結一次。</li>
-<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 與量子／異質編譯（GoI 無中心流編譯思想）</strong>：要把含有複雜高階函數的宿主語言編譯到無堆疊硬體（FPGA、資料流晶片或量子處理器 QPU，如 2026 Chardonnet et al.）時，互動幾何（GoI）提供一套通用做法：在宿主端沿追蹤迴路先跑完所有古典控制路由，直接輸出扁平的純硬體資料流圖。</li>
-<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a>（程式泰勒展開與符號神經混合求導）</strong>：依微分線性邏輯的「Böhm 樹泰勒展開」，任何高階離散程式都可以展開成無窮多個無迴圈單次線性近似片段（Simple Terms）的形式和。要對離散演算法、圖重寫與符號推理程式做平滑梯度鬆弛時，這是一個有證明論依據的工具。</li>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a> 與系統工程（用線性類型／Session Types 避免 Agent API 狀態錯亂與資源洩漏）</strong>：多個 Agent 調用外部付費 API、資料庫交易鎖或有狀態工具時，最常見的事故有兩種：重試導致重複扣款（違背禁止收縮），以及開啟連線後沒有關閉（違背禁止弱化）。用線性／仿射協定型別（Session Types）設計工具接口，就能在編譯期 100% 保證每個控制權柄恰好被轉移與終結一次。</li>
+<li><strong>遷移至 <a class="wl" href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> 與量子／異質編譯（GoI 無中心流編譯思想）</strong>：要把含有複雜高階函數的宿主語言編譯到無堆疊硬體（FPGA、資料流晶片或量子處理器 QPU，如 2026 Chardonnet et al.）時，互動幾何（GoI）提供一套通用做法：在宿主端沿追蹤迴路先跑完所有古典控制路由，直接輸出扁平的純硬體資料流圖。</li>
+<li><strong>遷移至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a>（程式泰勒展開與符號神經混合求導）</strong>：依微分線性邏輯的「Böhm 樹泰勒展開」，任何高階離散程式都可以展開成無窮多個無迴圈單次線性近似片段（Simple Terms）的形式和。要對離散演算法、圖重寫與符號推理程式做平滑梯度鬆弛時，這是一個有證明論依據的工具。</li>
 </ul>
 </aside>
 <h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
@@ -139,21 +139,21 @@
 <tbody>
 <tr>
 <td style="text-align:center">1</td>
-<td><span class="wl-missing">39A_Girard線性邏輯、證明網Proof Nets與相空間代數語意</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a></td>
 <td style="text-align:center">47（OA 8）</td>
 <td style="text-align:center">經典 41 / 近期 6</td>
 <td>🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_08_2026_Aglian_Linear_Logic_via_algebra_I_Girard.html">L5_08</a></td>
 </tr>
 <tr>
 <td style="text-align:center">2</td>
-<td><span class="wl-missing">39B_博弈語意學、互動幾何GoI與Ludics對話證明</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a></td>
 <td style="text-align:center">50（OA 12）</td>
 <td style="text-align:center">經典 43 / 近期 7</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">3</td>
-<td><span class="wl-missing">39C_微分線性邏輯、定量分級模態類型與資源敏感演算</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39C_%E5%BE%AE%E5%88%86%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E5%AE%9A%E9%87%8F%E5%88%86%E7%B4%9A%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%88%87%E8%B3%87%E6%BA%90%E6%95%8F%E6%84%9F%E6%BC%94%E7%AE%97.html">微分線性邏輯、定量分級模態類型與資源敏感演算</a></td>
 <td style="text-align:center">7（OA 5）</td>
 <td style="text-align:center">經典 3 / 近期 4</td>
 <td>無</td>
@@ -161,7 +161,7 @@
 </tbody>
 </table>
 <ul>
-<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">橋接04_神經符號實值邏輯、自動形式化與信念修正</a></li>
+<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a></li>
 </ul>
 <!-- SUBTOPIC_MAP_END -->
 <h3 id="a-必讀奠基論文與-l5-旗艦">A. 必讀奠基論文與 L5 旗艦</h3>
@@ -214,7 +214,7 @@
 <tr>
 <td>2026</td>
 <td><em>Linear Logic via algebra I: Girard algebras</em>，Paolo Aglianò, Mitar Nedeljković</td>
-<td>🏆 <strong>L5 深度審核完成</strong>（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>）：系統建立乘法加法線性邏輯 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意「Girard 代數」，完整刻畫其子簇格底層的原子結構。</td>
+<td>🏆 <strong>L5 深度審核完成</strong>（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>）：系統建立乘法加法線性邏輯 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意「Girard 代數」，完整刻畫其子簇格底層的原子結構。</td>
 <td>🏆 L5 旗艦精讀 <code>[OA PDF]</code></td>
 <td><a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.16804" rel="noopener">原文連結</a></td>
 </tr>
@@ -271,7 +271,7 @@
 <ul>
 <li>核心問題：微分線性邏輯把程式與證明展開為泰勒級數，但在傳統關係模型中，資源交換的對稱同構被壓扁成計數重數。若想保留每次求導配對的具體雙射見證（走向同倫泰勒展開），就需要顯式可計算的範疇模型。</li>
 <li>關鍵做法：在小範疇的自然 Quillen 模型結構上，用顯式的「洗牌構造（Shuffle Construction）」直接建出微分線性邏輯的同倫跨度模型（Homotopy Span Model），把公式詮釋為同倫等價意義下的小範疇。</li>
-<li>跨領域啟發：把 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a>、<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">12_HoTT與類型論</a> 與微分線性邏輯的證明相關（Proof-relevant）微積分連起來。</li>
+<li>跨領域啟發：把 <a class="wl" href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a>、<a class="wl" href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a> 與微分線性邏輯的證明相關（Proof-relevant）微積分連起來。</li>
 <li>連結：<a href="zotero://select/library/items/5V5JPZT7" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.10789" rel="noopener">原文連結</a></li>
 </ul>
 </li>
@@ -280,16 +280,20 @@
 <ul>
 <li><strong>2026｜Paolo Aglianò, Mitar Nedeljković</strong>，<em>Linear Logic via algebra I: Girard algebras</em>（<em>arXiv:2610.16804</em>，🏆 <strong>L5 深度審核完成</strong> <code>[OA PDF]</code>）：建立 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意 Girard 代數簇，證明其子簇格具備原子性，且原子恰由常數生成的單代數決定。<a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2610.16804" rel="noopener">原文連結</a></li>
 <li><strong>2026｜Julien Lamiroy, Benoît Valiron, Renaud Vilmart</strong>，<em>Intuitionistic Unitary Linear Logic: A Proof-Theoretical Approach to Purely Quantum Higher-Order</em>（<em>arXiv:2609.02661</em>，<code>[OA PDF]</code>）：用純證明論建構直覺主義么正線性邏輯，首次不靠笨重的過程矩陣，就能組合式地刻畫「量子開關（Quantum Switch）」等非因果高階量子過程。<a href="zotero://select/library/items/2VN2DQCT" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2609.02661" rel="noopener">原文連結</a></li>
-<li><strong>2026｜Joaquim T. Waddington, Alexander V. Gheorghiu, David J. Pym</strong>，<em>Inferentialist Game Semantics (Extended Abstract)</em>（<em>arXiv:2607.13855</em>，<code>[OA PDF]</code>）：把 Hyland–Ong 博弈語意與證明論推論主義（Inferentialism）結合，用互動對局為非指稱的意義理論建立形式基礎（橋接 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">23_心靈與語言哲學</a>）。<a href="zotero://select/library/items/QRVQGJCH" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.13855" rel="noopener">原文連結</a></li>
+<li><strong>2026｜Joaquim T. Waddington, Alexander V. Gheorghiu, David J. Pym</strong>，<em>Inferentialist Game Semantics (Extended Abstract)</em>（<em>arXiv:2607.13855</em>，<code>[OA PDF]</code>）：把 Hyland–Ong 博弈語意與證明論推論主義（Inferentialism）結合，用互動對局為非指稱的意義理論建立形式基礎（橋接 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/23_%E5%BF%83%E9%9D%88%E8%88%87%E8%AA%9E%E8%A8%80%E5%93%B2%E5%AD%B8.html">心靈與語言哲學：整合資訊理論、全域工作空間、符號接地與人工意向性</a>）。<a href="zotero://select/library/items/QRVQGJCH" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.13855" rel="noopener">原文連結</a></li>
 <li><strong>2026｜Satoshi Kura, Hiroshi Unno</strong>，<em>Solving First-Order Fixed-Point Logics via a Least-to-Greatest Transformation Based on Game Semantics</em>（<em>arXiv:2607.10650</em>，<code>[OA PDF]</code>）：一階不動點邏輯中，有一種把終止性驗證（最小不動點 <span class="math inline">\mu</span>）化約為安全性驗證（最大不動點 <span class="math inline">\nu</span>）的轉換。本文為它建立嚴格的博弈語意詮釋與求解演算法。<a href="zotero://select/library/items/D4FUPTPW" class="zotero">📚 Zotero 開啟</a> · <a href="https://arxiv.org/abs/2607.10650" rel="noopener">原文連結</a></li>
 </ul>
 <!-- DAILY_UPDATES_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f273415f">在地圖上查看</a><div class="rg"><h3>相關<span class="n">15</span></h3><ul><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a><span class="rs">這個領域收的是當代 AI 裡兩支都簡稱 LNN 的學派。兩者著力的層面不同，但都不走龐大黑盒模型的路。</span></li><li><a href="12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a><span class="rs">同倫類型論（HoTT）把三樣東西合而為一：程式／資料型別、邏輯命題／證明、拓撲空間／連續路徑，影響遍及邏輯、計算機科學與幾何學。</span></li><li><a href="15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a><span class="rs">範疇論曾被調侃為「抽象廢話（Abstract Nonsense）」，應用範疇論把它變成一門研究各種系統如何互連、開放系統如何組合的學問（Scie…</span></li><li><a href="30_%E5%87%9D%E8%81%9A%E6%95%B8%E5%AD%B8%E8%88%87%E5%90%88%E6%88%90%E5%BE%AE%E5%88%86%E5%B9%BE%E4%BD%95.html">凝聚數學與合成微分幾何</a><span class="rs">這個領域用兩條互補的路線重寫分析學與微積分的基礎。凝聚數學（Condensed Mathematics）用收斂序列這類探針上的層取代傳統的點集拓…</span></li><li><a href="38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a><span class="rs">形式概念分析（FCA）與格論替人和機器的概念（Concept）給出一個零參數的代數定義。</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a><span class="rs">這個領域不把神經網路當成在平坦歐氏空間裡硬擬合曲線的黑盒。它把對稱群、層論黏合（Sheaf）、拓撲不變量、最優傳輸黎曼幾何、無窮維算子與代數幾何…</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a><span class="rs">形式語意與語言學研究兩件事：有限的詞彙怎麼靠嚴格的代數結構拼出無限多的精確意義（組合性），以及統計向量空間怎麼和邏輯真值、社會博弈語用（言外之意…</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05_%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E6%8E%A8%E7%90%86.html">形式化與推理</a><span class="rs">這個領域用神經網路的直覺啟發式搜尋和強化學習自我博弈，去處理指數爆炸的推理搜尋空間，再用形式化證明助手（Lean 4）與可微實值邏輯（LNN /…</span></li><li><a href="11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a><span class="rs">兩個物件「以哪一種方式同構」（見證路徑、路徑之間的變形，乃至無窮階相容性），在數學裡到處出現，傳統集合論卻把它抹平。</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a><span class="rs">工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。</span></li><li><a href="../A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a></li></ul><p class="more">另有 3 篇</p></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

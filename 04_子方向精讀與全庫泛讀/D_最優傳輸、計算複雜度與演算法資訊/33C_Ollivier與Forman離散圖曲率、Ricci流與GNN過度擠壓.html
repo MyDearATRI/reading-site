@@ -1,0 +1,205 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>33C｜Ollivier與Forman離散圖曲率、Ricci流與GNN過度擠壓 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-98d6900a" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 最優傳輸、計算複雜度與演算法資訊</span>
+<article>
+
+<h1 id="33collivier與forman離散圖曲率ricci流與gnn過度擠壓">33C｜Ollivier與Forman離散圖曲率、Ricci流與GNN過度擠壓</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">度量幾何與離散曲率</a>
+同領域子方向：<a class="wl" href="33A_Gromov-Hausdorff%E6%94%B6%E6%96%82%E3%80%81Alexandrov%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%85%89%E6%BB%91%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95.html">Gromov-Hausdorff收斂、Alexandrov空間與非光滑度量幾何</a> · <a class="wl" href="33B_Lott-Sturm-Villani%E5%90%88%E6%88%90Ricci%E6%9B%B2%E7%8E%87%E8%88%87CD%28K%2CN%29%E6%B8%AC%E5%BA%A6%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%96%93.html">Lott-Sturm-Villani合成Ricci曲率與CD(K,N)測度度量空間</a>
+跨領域關聯子方向：<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03C_%E8%B3%87%E8%A8%8A%E5%B9%BE%E4%BD%95%E3%80%81%E8%87%AA%E7%84%B6%E6%A2%AF%E5%BA%A6%E8%88%87%E7%B5%B1%E8%A8%88%E6%B5%81%E5%BD%A2%E7%B5%90%E6%A7%8B.html">資訊幾何、自然梯度與統計流形結構</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A501_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E7%9B%B8%E8%AE%8A%E8%88%87%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E9%82%8A%E7%95%8C.html">最優傳輸相變與計算複雜度邊界（全單模性、二次指派硬度與擴展複雜度）</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>
+課程章節：<a class="wl" href="../../NOTES/03_%E7%89%A9%E7%90%86/P45_%E6%99%82%E7%A9%BA%E5%B9%BE%E4%BD%95%E8%88%87%E5%BB%A3%E7%BE%A9%E7%9B%B8%E5%B0%8D%E8%AB%96%E5%9F%BA%E7%A4%8E.html">時空幾何與廣義相對論基礎</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E41_%E9%81%9E%E8%BF%B4%E7%B8%BD%E9%AB%94%E8%88%87%E5%8B%95%E6%85%8B%E8%A6%8F%E5%8A%83.html">遞迴總體與動態規劃</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">度量幾何與離散曲率</a> 面向離散圖論與網路機器學習的應用轉化層。相較於 <a class="wl" href="33B_Lott-Sturm-Villani%E5%90%88%E6%88%90Ricci%E6%9B%B2%E7%8E%87%E8%88%87CD%28K%2CN%29%E6%B8%AC%E5%BA%A6%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%96%93.html">Lott-Sturm-Villani合成Ricci曲率與CD(K,N)測度度量空間</a> 研究連續測度空間上的位移凸性，本方向將局部 1-Wasserstein 傳輸距離與組合 Bochner 恆等式落實到圖的邊與超邊上，形成 Ollivier–Ricci 與 Forman–Ricci 兩種離散曲率，並進一步推動社群偵測的離散 Ricci 流、圖神經網路（GNN）過度擠壓緩解以及複權重、超圖與因果集擴展。</p>
+</aside>
+<ul>
+<li>核心問題：離散圖缺乏切空間與測地線變分，因此傳統依賴二階偏導數的曲率概念無法直接計算，而純粹基於節點度數或譜聚類的低維潛在嵌入常在度數波動劇烈或接近可偵測相變閾值時失去社群結構資訊。同時，在 GNN 訊息傳遞中，跨社群的負曲率瓶頸邊會把呈指數成長的多跳鄰域資訊壓縮進固定維度向量，引發過度擠壓（over-squashing）；如何在計算成本可控的前提下偵測並透過曲率導引流形重連或擴散來克服這些幾何瓶頸，是本方向的核心問題。</li>
+<li>直覺模型：想像兩個相鄰城市各自派出一群快遞員把包裹平均送到自家鄰近街區。若兩座城市所在的地區像平坦網格或緊密社群（正曲率），兩群快遞員的配送範圍大量重疊，互相調度包裹的成本很低；若兩座城市只靠一座狹窄跨海大橋相連（負曲率瓶頸），兩邊快遞員幾乎各自向反方向分散，調度包裹必須全數穿過同一座橋，這個調度距離與橋長之間的落差，就是邊上的離散 Ricci 曲率。</li>
+<li>分階段閱讀路線：第一階段先讀 Gosztolai and Arnaudon (2021) 與 Wiesler (2026)，建立馬可夫隨機遊走與 1-Wasserstein 距離定義 Ollivier–Ricci 曲率的直覺，並理解動態曲率分布缺口如何標記瓶頸邊，以及 Bonnet–Myers、Lévy–Gromov 等流形定理與 Lin–Lu–Yau 曲率如何轉譯至有向圖與 GNN。第二階段讀 Jung et al. (2026) 與 Tian, Wiesler and Weber (2026)，掌握 <span class="math inline">\alpha</span>-Ricci 與 Lin–Lu–Yau 曲率的組合最優傳輸構造，以及利用磁拉普拉斯算子將曲率推廣至複權重與有向網路的理論工具。第三階段讀 2025–2026 前沿論文 Tian et al. (2025) 與 Fang and Ren (2026)，深入超圖 Ricci 流的長時間存在性證明與 HyperRCD 演算法，以及結合曲率調製擴散核的 Ricci-Diffusion 網路去噪方法。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;馬可夫擴散與 W1 距離&quot;] --&gt; B[&quot;Ollivier-Ricci 與 Lin-Lu-Yau 離散曲率&quot;]
+  B --&gt; C[&quot;Forman-Ricci 組合曲率與鄰接邊計算&quot;]
+  B --&gt; D[&quot;2021 Gosztolai-Arnaudon 動態曲率與瓶頸邊&quot;]
+  D --&gt; E[&quot;2026 Wiesler 有向圖曲率與 GNN 應用&quot;]
+  B --&gt; F[&quot;2026 Jung 等人 組合傳輸與 Tian 等人 複權重曲率&quot;]
+  D --&gt; G[&quot;2025 Tian 等人 超圖 Ricci 流 HyperRCD&quot;]
+  G --&gt; H[&quot;2026 Fang-Ren Ricci-Diffusion 幾何擴散去噪&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>Ollivier–Ricci 與 Lin–Lu–Yau 離散圖曲率 (Ollivier–Ricci and Lin–Lu–Yau Curvatures)</strong></p>
+<ul>
+<li>直覺理解：比較相鄰兩端點的局部機率分布之間的 1-Wasserstein 搬運距離相對於邊長的收縮比率；重疊鄰居越多、傳輸越省力，曲率越正。</li>
+<li>機制或核心表達式：給定圖 <span class="math inline">G=(V,E)</span> 與怠惰參數 <span class="math inline">\alpha \in [0,1)</span>，定義頂點 <span class="math inline">x</span> 的單步機率測度 <span class="math inline">\mu_x^\alpha = \alpha \delta_x + (1-\alpha)\nu_x</span>（其中 <span class="math inline">\nu_x</span> 通常為鄰域均勻分布或權重歸一化分布）。邊 <span class="math inline">(x,y)</span> 的 <span class="math inline">\alpha</span>-Ricci 曲率為 <span class="math inline">\kappa_\alpha(x,y) = 1 - \frac{W_1(\mu_x^\alpha, \mu_y^\alpha)}{d(x,y)}</span>，其中 <span class="math inline">W_1</span> 為圖最短路徑距離下的 Kantorovich–Rubinstein 1-Wasserstein 距離；Lin–Lu–Yau 曲率則取導數極限 <span class="math inline">\kappa_{\mathrm{LLY}}(x,y) = \lim_{\alpha \to 1^-} \frac{\kappa_\alpha(x,y)}{1-\alpha}</span>。Gosztolai and Arnaudon (2021) 以連續時間擴散核 <span class="math inline">p_t(x,\cdot)</span> 取代單步遊走，在特徵時間尺度揭示多尺度瓶頸；Jung et al. (2026) 在正則圖上構造顯式組合最優傳輸計畫給出 <span class="math inline">\alpha</span>-Ricci 與 <span class="math inline">\kappa_{\mathrm{LLY}}</span> 精確公式，並在非正則圖給出公共鄰域條件。</li>
+<li>能做到什麼，代價是什麼：能嚴格連結光滑黎曼流形的 Bonnet–Myers 與 Lévy–Gromov 界（Wiesler, 2026），且在凱萊圖上非負曲率能強制多項式增長群為殆阿貝爾群（Brena and Bruè, 2026）；代價是逐邊計算 <span class="math inline">W_1</span> 需解線性規劃或組合傳輸計畫，在大規模稠密圖上計算負荷高於純局部度數公式。</li>
+</ul>
+</li>
+<li>
+<p><strong>Forman–Ricci 曲率、幾何瓶頸與 GNN 過度擠壓 (Forman–Ricci Curvature and GNN Over-Squashing)</strong></p>
+<ul>
+<li>直覺理解：透過統計一條邊相鄰的三角形與高階胞腔數目減去端點度數懲罰項來衡量局部擴張度，無需解最優傳輸即可快速鎖定資訊傳遞的狹窄橋樑。</li>
+<li>機制或核心表達式：源自離散 Bochner 恆等式的 Forman–Ricci 曲率在加權胞腔複形上僅依賴邊權與鄰接幾何元素之關聯（如對無權圖含三角形擴張時，每條邊的曲率隨兩端點度數升高而下降，隨共享三角形數增加而回升），運算只需遍歷相鄰邊而無需構造節點機率分布與求解 <span class="math inline">W_1</span> 距離（Bhandari and Raha, 2026）。在訊息傳遞型圖神經網路中，當兩端點間缺乏共同鄰居或替代路徑形成強負曲率瓶頸邊時，長程依賴梯度與資訊流受限於局部擴散缺口（Gosztolai and Arnaudon, 2021；Wiesler, 2026），造成特徵混疊與過度擠壓。</li>
+<li>能做到什麼，代價是什麼：Forman–Ricci 具備線性鄰域遍歷的高計算效率，適合超大規模圖篩檢；但對局部三角形以外的高階循環與多尺度擴散動力學較不敏感，往往需要與動態 Ollivier–Ricci 曲率或邊拉普拉斯（Edge Laplacian）動力學（Bhandari and Raha, 2026）搭配使用。</li>
+</ul>
+</li>
+<li>
+<p><strong>離散 Ricci 流與高階／複權重推廣 (Discrete Ricci Flow and Higher-Order Extensions)</strong></p>
+<ul>
+<li>直覺理解：讓圖的邊權隨曲率演化，拉長負曲率的跨社群橋樑並縮緊正曲率的群內邊，使社群邊界自動浮現或讓擴散核避開噪聲捷徑。</li>
+<li>機制或核心表達式：離散 Ricci 流依照 <span class="math inline">\frac{\mathrm{d} w_{xy}}{\mathrm{d} t} = -\kappa(x,y) w_{xy}</span>（或其總邊長歸一化版本）迭代更新邊權：負曲率橋接邊權重隨時間放大、距離拉遠，正曲率簇內邊距離收縮。Fang and Ren (2026) 據此提出 Ricci-Diffusion，使相對邊曲率直接調製擴散核的局部傳輸並引導邊權更新至更正則幾何，在理論上證明曲率可區分一般相似性擴散核無法分離的圖結構。Tian et al. (2025) 將 Ricci 流直接定義在超圖的高階超邊上並證明長時間存在性（HyperRCD）；Tian, Wiesler and Weber (2026) 則透過磁拉普拉斯算子（magnetic Laplacian）將 Ollivier–Ricci 曲率推廣至複權重圖與有向圖。</li>
+<li>能做到什麼，代價是什麼：曲率引導的幾何重加權與超圖流大幅提升對拓撲噪聲與高階互動的穩健性；但每輪 Ricci 流疊代皆需重新評估全圖最短路徑與邊曲率，且如 Bhandari and Raha (2026) 所示，部分社群分割任務中可直接改以計算成本更低的邊拉普拉斯動力學作為替代近似。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>Forman–Ricci、Ollivier–Ricci 與 Edge Laplacian 的理論及算力權衡</strong>：在為大規模網路偵測瓶頸邊或執行社群分解時，為何 Bhandari and Raha (2026) 特別區分 Forman–Ricci、Ollivier–Ricci 與 Edge Laplacian 三種方案的計算成本與幾何感應能力？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>Forman–Ricci 僅透過遍歷每條邊的相鄰邊與胞腔組合關係計算 Bochner 離散項，不涉及全域最短路徑或機率分布比較；Ollivier–Ricci 則需要為相鄰節點建立局部隨機遊走分布並求解 <span class="math inline">W_1</span> 最優傳輸，計算代價高但能透過多尺度擴散（Gosztolai and Arnaudon, 2021）精準捕捉跨越長迴圈與可偵測相變閾值的瓶頸邊。Edge Laplacian 動力學則透過邊空間上的線性微分／譜流產生類似 Ricci 流的聚類效果，避開了逐邊求解 Wasserstein 距離的開銷。</p>
+</details>
+<ol start="2">
+<li><strong>非負 Ollivier–Ricci 曲率對群增長幾何的剛性約束</strong>：類比黎曼幾何中非負 Ricci 曲率與多項式體積增長的分類定理，Brena and Bruè (2026) 對具非負 Ollivier–Ricci 曲率的群凱萊圖證明了什麼結構結果？為何這顯示離散曲率捕捉了大尺度擬等距（quasi-isometry）幾何？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>Brena and Bruè (2026) 研究多項式增長群的凱萊圖，證明只要滿足非負 Ollivier–Ricci 曲率，該群必然是殆阿貝爾群（virtually abelian）；進一步應用於連通頂點傳遞的多項式增長圖時，其必然擬等距於某個歐氏格點 <span class="math inline">\mathbb{Z}^k</span>（<span class="math inline">k \in \mathbb{N}</span>）。這表明 Ollivier 的 <span class="math inline">W_1</span> 局部比較雖然定義在離散鄰域上，仍能像光滑 Ricci 曲率一樣控制大尺度的分裂與平坦格點剛性。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>動態離散曲率流的可擴展演算法與近似誤差控制</strong>：Ollivier–Ricci 流與 Fang and Ren (2026) 的 Ricci-Diffusion 雖能有效分離社群與消除網路噪聲，但在每一步更新邊權後皆須重新維護最短路徑矩陣與傳輸問題；相對地，Bhandari and Raha (2026) 展示 Edge Laplacian 動力學能以更低成本給出類似結果，Jung et al. (2026) 亦僅在特定正則／公共鄰域結構下取得解析公式。如何對大型動態加權圖設計帶理論誤差界的高速近似曲率流仍是工程與理論的共同瓶頸。</li>
+<li><strong>從離散組合曲率到光滑流形與因果時空的精確極限收斂</strong>：Çakmak et al. (2025) 檢驗球面、歐氏與雙曲平面正則三角剖分的離散 Bakry–Émery 曲率，發現其能感應環境空間形式曲率；同時 Barton, Borza and Röhrig (2026) 與 Braun and Li (2026) 分別在因果集和類空超曲面上以 1-Lorentz–Wasserstein 距離建構了對應 Raychaudhuri 方程的類時 Ollivier–Ricci 曲率。然而，對於一般非均勻採樣隨機幾何圖或高維胞腔複形，何時離散圖曲率能嚴格收斂至連續 <span class="math inline">\mathrm{CD}(K,N)</span> 或光滑 Ricci 張量尚未建立普遍充要條件。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>曲率導引擴散與幾何圖神經網路表達力</strong>：Gosztolai and Arnaudon (2021) 識別資訊傳播瓶頸的動態曲率缺口、Wiesler (2026) 對有向圖 GNN 的形式化推廣，以及 Fang and Ren (2026) 以曲率調製擴散核的 Ricci-Diffusion，可直接遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>，用於分析與緩解圖神經網路的過度擠壓與過平滑現象。</li>
+<li><strong>圖上 1-Wasserstein 局部傳輸與最優傳輸計算複雜度</strong>：Ollivier–Ricci 曲率本質上把圖幾何轉譯成邊兩端鄰域機率測度的 <span class="math inline">W_1</span> 傳輸計算，此局部對偶結構直接受 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A501_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E7%9B%B8%E8%AE%8A%E8%88%87%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E9%82%8A%E7%95%8C.html">最優傳輸相變與計算複雜度邊界（全單模性、二次指派硬度與擴展複雜度）</a> 中網路流與最優傳輸演算法複雜度下界的制約，同時與 <a class="wl" href="33B_Lott-Sturm-Villani%E5%90%88%E6%88%90Ricci%E6%9B%B2%E7%8E%87%E8%88%87CD%28K%2CN%29%E6%B8%AC%E5%BA%A6%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%96%93.html">Lott-Sturm-Villani合成Ricci曲率與CD(K,N)測度度量空間</a> 的全域 <span class="math inline">W_2</span> 位移凸性構成 <span class="math inline">W_1</span> 局部化對照。</li>
+<li><strong>類時 Ollivier 曲率、因果集與資訊幾何度量</strong>：Barton et al. (2026) 與 Braun and Li (2026) 透過因果鑽石與類空切片上的 <span class="math inline">\ell_1</span> Lorentz–Wasserstein 距離重建類時 Ricci 曲率，將本子方向與 <a class="wl" href="../../NOTES/03_%E7%89%A9%E7%90%86/P45_%E6%99%82%E7%A9%BA%E5%B9%BE%E4%BD%95%E8%88%87%E5%BB%A3%E7%BE%A9%E7%9B%B8%E5%B0%8D%E8%AB%96%E5%9F%BA%E7%A4%8E.html">時空幾何與廣義相對論基礎</a> 的離散量子重力（因果集）連結；而圖擴散核分布間的幾何距離亦與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03C_%E8%B3%87%E8%A8%8A%E5%B9%BE%E4%BD%95%E3%80%81%E8%87%AA%E7%84%B6%E6%A2%AF%E5%BA%A6%E8%88%87%E7%B5%B1%E8%A8%88%E6%B5%81%E5%BD%A2%E7%B5%90%E6%A7%8B.html">資訊幾何、自然梯度與統計流形結構</a> 中以散度衡量鄰域統計分布變化的思路相通。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-unfolding-the-multiscale-structure-of-networks-with-dynamical-ollivier-ricci-curvature2021">1. Unfolding the multiscale structure of networks with dynamical Ollivier-Ricci curvature（2021）</h4>
+<ul>
+<li>作者與出處：Adam Gosztolai, Alexis Arnaudon · <em>Nature Communications</em></li>
+<li>核心問題：低維潛在度量空間嵌入往往只適用特定網路類別，不匹配的幾何假設會造成結構資訊流失，且既有譜方法與節點聚類在節點度數劇烈波動或逼近可偵測相變閾值時容易失效。</li>
+<li>關鍵做法：以相鄰節點出發的兩個動態擴散過程之相似度定義動態邊曲率（dynamical Ollivier–Ricci curvature），證明曲率分布隨時間尺度演化出現的缺口對應限制資訊傳播的瓶頸邊，並基於偏離常曲率的幾何模組度實現多尺度社群偵測。</li>
+<li>跨領域啟發：建立以擴散時間尺度解讀網路瓶頸的幾何框架，直接為後續分析圖神經網路訊息傳遞過度擠壓提供量化工具。</li>
+<li>連結：<a href="zotero://select/library/items/HVJQZ9NE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.05847" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-ollivier-ricci-curvature-of-riemannian-manifolds-and-directed-graphs-with-applications-to-graph-neural-networks2026">2. Ollivier-Ricci Curvature of Riemannian Manifolds and Directed Graphs with Applications to Graph Neural Networks（2026）</h4>
+<ul>
+<li>作者與出處：Eleanor P Wiesler · <em>arXiv</em></li>
+<li>核心問題：Ollivier–Ricci 曲率的結果分散於黎曼幾何（Bonnet–Myers、Lévy–Gromov）、無向圖組合理論（Lin–Lu–Yau、Jost–Liu）與圖機器學習應用之間，缺乏貫通有向圖推廣的完整論述。</li>
+<li>關鍵做法：系統推導連接流形 Ollivier–Ricci 曲率與古典 Ricci 曲率的主要定理，轉入圖上的 Lin–Lu–Yau 擴展與 Jost–Liu 組合界，最後提出針對有向圖的理論推廣證明並展示其在網路科學與圖神經網路演算法中的應用。</li>
+<li>跨領域啟發：提供從光滑流形、無向圖一路銜接到有向圖神經網路的統一講義路線，方便與 <a class="wl" href="33B_Lott-Sturm-Villani%E5%90%88%E6%88%90Ricci%E6%9B%B2%E7%8E%87%E8%88%87CD%28K%2CN%29%E6%B8%AC%E5%BA%A6%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%96%93.html">Lott-Sturm-Villani合成Ricci曲率與CD(K,N)測度度量空間</a> 進行理論對讀。</li>
+<li>連結：<a href="zotero://select/library/items/TAT79FKJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.14211" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-a-combinatorial-approach-to--ricci-and-lin-lu-yau-ricci-curvatures-on-graphs2026">3. A combinatorial Approach to <span class="math inline">α</span>-Ricci and Lin-Lu-Yau Ricci curvatures on Graphs（2026）</h4>
+<ul>
+<li>作者與出處：Jaewoo Jung, Young Soo Kwon, Seungjae Lee, Jihye Park · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：計算一般簡單連通局部有限圖上的 <span class="math inline">\alpha</span>-Ricci 曲率與 Lin–Lu–Yau 曲率通常仰賴線性規劃數值求解 <span class="math inline">W_1</span> 距離，缺乏直接揭示組合結構的顯式傳輸構造。</li>
+<li>關鍵做法：在正則圖上引入實現 1-Wasserstein 距離的組合最優傳輸計畫，給出已知 <span class="math inline">\alpha</span>-Ricci 與 Lin–Lu–Yau 曲率公式的純組合證明；對非正則圖則刻畫出保證 Lin–Lu–Yau 曲率非負或為零的公共鄰域大小條件。</li>
+<li>跨領域啟發：把連續最優傳輸對偶還原為離散鄰域組合構造，降低精確計算局部圖曲率對數值求解器的依賴。</li>
+<li>連結：<a href="zotero://select/library/items/WWT9V5TC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.24261" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-olliviers-ricci-curvature-on-complex-weighted-graphs2026">4. Ollivier's Ricci Curvature on Complex-weighted Graphs（2026）</h4>
+<ul>
+<li>作者與出處：Yu Tian, Eleanor Wiesler, Melanie Weber · <em>arXiv</em></li>
+<li>核心問題：既有離散 Ricci 曲率多受限於具實數權重的無向網路，無法直接處理社群、生物、量子與訊號處理網路中普遍存在的方向性與複數權重關係。</li>
+<li>關鍵做法：將 Ollivier–Ricci 曲率原則性地推廣至複權重圖（把有向圖納入特例），建立其與磁拉普拉斯算子（magnetic Laplacian）的關聯以及基於局部迴圈結構的組合上下界，並發展曲率估計方法應用於有向網路社群偵測。</li>
+<li>跨領域啟發：結合磁拉普拉斯相位幾何與離散最優傳輸，將無向圖曲率分析擴張至含方向與相位資訊的複雜網路。</li>
+<li>連結：<a href="zotero://select/library/items/ZHA83FTM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.10132" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-community-detection-of-hypergraphs-by-ricci-flow2025">5. Community detection of hypergraphs by Ricci flow（2025）</h4>
+<ul>
+<li>作者與出處：Yulu Tian, Jicheng Ma, Yunyan Yang, Liang Zhao · <em>arXiv</em></li>
+<li>核心問題：傳統圖曲率與 Ricci 流僅刻畫兩兩節點之間的成對連結，在處理具高階多節點互動的超圖（hypergraphs）社群偵測時容易損失高階拓撲資訊。</li>
+<li>關鍵做法：直接在超圖高階互動上定義超圖 Ricci 流並證明該流的長時間存在性，進而建構基於曲率演化變形超邊權重的 HyperRCD 演算法，在合成與真實超圖上對拓撲擾動展現高度穩健性。</li>
+<li>跨領域啟發：示範 Ricci 流從二元邊推廣至高階單純複形與超邊權重動態演化的嚴格存在性路徑。</li>
+<li>連結：<a href="zotero://select/library/items/JZMEX8Q3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.12276" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-network-denoising-revisited-a-ricci-flow-inspired-graph-diffusion-method2026">6. Network Denoising Revisited: A Ricci-Flow-Inspired Graph Diffusion Method（2026）</h4>
+<ul>
+<li>作者與出處：Ye Fang, Chuan-Xian Ren · <em>arXiv</em></li>
+<li>核心問題：真實網路常受量測誤差與隨機性污染，而傳統基於相似性的圖擴散去噪方法忽略了圖的非歐氏幾何，無法辨識幾何異質性造成的資訊傳輸偏差。</li>
+<li>關鍵做法：提出受 Ricci 流啟發的曲率導引圖擴散方法 Ricci-Diffusion，利用相對邊曲率調製擴散核中的局部傳輸並引導邊權朝更正則的圖幾何演化，並從理論證明曲率可分離相似性擴散核無法區分的圖結構且在單步擴散引入一階幾何修正。</li>
+<li>跨領域啟發：把靜態邊曲率篩檢轉化為動態擴散核調製機制，直接對接 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a> 的幾何去噪與表徵穩定問題。</li>
+<li>連結：<a href="zotero://select/library/items/259KI99D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.16923" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-27-篇">G5｜本子方向全量文獻泛讀清單（共 27 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 27 篇文獻（含開放存取 PDF 27 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進11-篇">A. 奠基經典、專著與核心演進（11 篇）</h3>
+<ul>
+<li><strong>2021｜Unfolding the multiscale structure of networks with dynamical Ollivier-Ricci curvature</strong>，Adam Gosztolai, Alexis Arnaudon（<em>Nature Communications</em>，34 引）：把馬可夫擴散時間引入 Ollivier–Ricci 曲率（<em>Nature Communications</em>），不需要嵌入假設就能展開複雜網路的多尺度階層結構。 <a href="zotero://select/library/items/HVJQZ9NE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.05847" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Discrete Ollivier-Ricci curvature</strong>，Zohreh Fathi, Sajjad Lakzian（<em>arXiv</em>）：分析局部有限加權圖上針對一般馬可夫與非馬可夫隨機漫步的離散與連續時間 Ollivier–Ricci 曲率，給出存在性判準、Lipschitz 連續性、凹性與無極限公式等性質。 <a href="zotero://select/library/items/7DJFZ57I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.16837" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Ollivier curvature, betweenness centrality and average distance</strong>，Florentin Münch（<em>arXiv</em>）：提出以邊介數中心性加權的平均 Ollivier 曲率來給出平均圖距離的新上界，並證明等號恰好在已完成分類的反射圖（由雞尾酒派對圖、Johnson 圖、半立方體、Schläfli 與 Gosset 圖笛卡兒積組成）取到。 <a href="zotero://select/library/items/WCZ9XCZP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2209.15564" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Metrics of Positive Ricci Curvature on Simply-Connected Manifolds of Dimension <span class="math inline">6k</span></strong>，Philipp Reiser（<em>arXiv</em>）：透過標記二分圖描述特定 <span class="math inline">6k</span> 維單連通流形並建構其上的正 Ricci 曲率黎曼度量，從而獲得大量新的旋量 (spin) 與非旋量 (non-spin) 正 Ricci 曲率流形實例。 <a href="zotero://select/library/items/F7ZPCDWD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.15610" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Understanding over-squashing and bottlenecks on graphs via curvature</strong>，Jake Topping et al.（<em>ICLR 2022</em>）：證明具負平衡 Forman 或 Ollivier–Ricci 曲率的邊是圖神經網路產生資訊瓶頸與過度擠壓的原因，並提出隨機離散 Ricci 流演算法進行圖結構重連以緩解該現象。 <a href="zotero://select/library/items/ZJIBJBUD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.14522" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Ollivier Ricci-flow on weighted graphs</strong>，Shuliang Bai et al.（<em>arXiv</em>）：研究加權圖上 Ollivier–Lin–Lu–Yau 曲率的連續時間歸一化 Ricci 流方程，證明解的存在唯一性，並求解路徑圖且證明至少三個葉節點的星圖收斂至等權星圖。 <a href="zotero://select/library/items/TPI9JJKC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.01802" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Metric Curvatures and their Applications 2: Metric Ricci Curvature and Flow</strong>，Emil Saucan（<em>arXiv</em>）：綜述多面體曲面與高維流形上的度量 Ricci 曲率與 Ricci 流研究，比較基於 Wald 曲率與 Haantjes 測地曲率的離散化方法背後的數學動因，並提出基於圖版本 Forman Ricci 曲率的度量 Ricci 曲率定義。 <a href="zotero://select/library/items/MWVXW2E5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1902.03438" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Community Detection on Networks with Ricci Flow</strong>，Chien-Chun Ni et al.（<em>arXiv</em>）：將複雜網路視為幾何對象、社群劃分視為幾何分解，借鑑流形幾何分解思想在網路上引入離散曲率與離散 Ricci 流演算法以分離社群結構，並在具真實標籤的基準網路上驗證社群偵測效果。 <a href="zotero://select/library/items/8NZ7VE52" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1907.03993" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Ollivier-Ricci idleness functions of graphs</strong>，David Bourne et al.（<em>arXiv</em>）：將圖的 Ollivier-Ricci 曲率視為惰性參數（idleness）的函數，證明該函數為至多三段（正則圖至多兩段）的凹分段線性函數，且兩個正則圖笛卡兒積的惰性函數完全由各因子圖的惰性函數決定。 <a href="zotero://select/library/items/BR2V22HG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1704.04398" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Ollivier-Ricci curvature and the spectrum of the normalized graph Laplace operator</strong>，Frank Bauer, Jürgen Jost, Shiping Liu（<em>Math. Res. Lett. 19 (2012), no. 6, 1185-1205</em>）：利用 <span class="math inline">t</span> 步鄰域圖 <span class="math inline">G[t]</span> 的 Ollivier–Ricci 曲率下界 <span class="math inline">k[t]</span>，證明有限圖正規化 Laplace 算子非平凡特徵值滿足 <span class="math inline">1-(1-k[t])^{1/t} \le \lambda_i \le 1+(1-k[t])^{1/t}</span>，在非二分圖且 <span class="math inline">k \le 0</span> 時改進了原有的 Ollivier 譜估計。 <a href="zotero://select/library/items/2EEV4NHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1105.3803" rel="noopener">官方連結</a></li>
+<li><strong>2004｜A discrete curvature on a planar graph</strong>，M. Lorente（<em>arXiv</em>）：針對源自球面、歐氏或雙曲鑲嵌的平面圖，僅依組合性質定義離散曲率，並說明該圖嵌入緊緻二維流形後此離散曲率即對應於古典高斯曲率。 <a href="zotero://select/library/items/IAHWZXH2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/gr-qc/0412094" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻16-篇">B. 2024–2026 近期推進與前沿文獻（16 篇）</h3>
+<ul>
+<li><strong>2026｜On the size of planar graphs with positive Lin–Lu–Yau Ricci curvature</strong>，Linyuan Lu, Zhiyu Wang（<em>European Journal of Combinatorics</em>，6 引）：用離散最優傳輸曲率的局部條件，加上對平面圖歐拉結構的分析，嚴格推導出具正 Lin–Lu–Yau Ricci 曲率的平面圖的頂點規模上界與組合結構限制。 <a href="zotero://select/library/items/2VXFHMXX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.03716" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Ollivier-Ricci Curvature of Riemannian Manifolds and Directed Graphs with Applications to Graph Neural Networks</strong>，Eleanor P Wiesler（<em>arXiv</em>）：一篇完整的導讀論文，從流形極限定理、Lin–Lu–Yau 推廣，一路講到有向圖曲率與圖神經網路（GNN）結構瓶頸的應用。 <a href="zotero://select/library/items/TAT79FKJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.14211" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Ollivier-Ricci curvature for causal sets</strong>，Joe Barton, Samuël Borza, Jona Röhrig（<em>arXiv</em>）：利用 Lorentzian 最優傳輸在因果菱形上的漸近性質，為因果集構造沿極大鏈的 Ollivier-Ricci 曲率並證明時間類 Bonnet–Myers 定理，於 Minkowski、de Sitter 與 anti-de Sitter 泊松撒點數值實驗還原預期常曲率。 <a href="zotero://select/library/items/DT42NRMC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.04910" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A combinatorial Approach to <span class="math inline">α</span>-Ricci and Lin-Lu-Yau Ricci curvatures on Graphs</strong>，Jaewoo Jung et al.（<em>arXiv (Cornell University)</em>）：針對簡單連通局部有限圖上的 <span class="math inline">\alpha</span>-Ricci 曲率與 Lin–Lu–Yau Ricci 曲率，透過組合構作實現 1-Wasserstein 距離的最優傳輸計畫給出正則圖已知曲率公式的組合證明，並刻畫非正則圖曲率非負或為零的共同鄰域條件。 <a href="zotero://select/library/items/WWT9V5TC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.24261" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Idleness Functions for Ollivier-Ricci Curvature on Hypergraphs</strong>，Qing Xia（<em>arXiv</em>）：證明相鄰頂點間的怠惰函數 <span class="math inline">\alpha \mapsto \kappa_\alpha^{\mathcal{H}}(x,y)</span> 為分段仿射且至多有三段仿射區間，並透過質量平衡論證建立所有局部有限簡單超圖在 <span class="math inline">[1/2,1]</span> 上的線性性，進而獲得無須取極限的 Lin–Lu–Yau 曲率公式。此外證明 <span class="math inline">r</span>-均勻線性超圖的漫步精確等價於其 2-截面上的簡單隨機漫步，從而轉移圖情形的緊確端點區間結果。 <a href="zotero://select/library/items/8XFXDF9B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.01970" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Equivalence of Lin--Lu--Yau curvature and 1/2-Ollivier curvature on weighted graphs</strong>，Shiping Liu, Yunyan Yang（<em>arXiv</em>）：證明在任意加權圖上，只要怠惰參數滿足 <span class="math inline">p \ge 1/2</span>，Lin–Lu–Yau 曲率即與 <span class="math inline">p</span>-Ollivier 曲率僅差一個縮放常數，且 <span class="math inline">1/2</span> 為緊確閾值。這項等價性去除了定義中的極限運算，並直接給出加權圖 Lin–Lu–Yau 曲率流全域解存在性與唯一性的簡潔證明。 <a href="zotero://select/library/items/B7DRJEN4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.05939" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Ollivier's Ricci Curvature on Complex-weighted Graphs</strong>，Yu Tian, Eleanor Wiesler, Melanie Weber（<em>arXiv</em>）：作者提出 Ollivier–Ricci 曲率在複數權重圖上的原則性推廣，有向圖（Directed Graphs）是其中的特例。他們建立這套新曲率的幾項數學性質。（1）嚴格釐清它與磁拉普拉斯算子（Magnetic Laplacian）譜結構的關聯。（2）推導組合不等式，把曲率上下界連到局部鄰域的有向／相位環結構（Cycle Structure）。（3）開發高效率的曲率數值估計演算法，並在有向網路社群偵測（Community Detection）任務中實證它有明顯的區辨力。 <a href="zotero://select/library/items/ZHA83FTM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.10132" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Ollivier--Ricci Curvature on Groups of Polynomial Growth</strong>，Camillo Brena, Elia Bruè（<em>arXiv</em>）：在離散幾何群論中驗證合成曲率的剛性。本文證明，多項式增長群的 Cayley 圖只要有非負 Ollivier–Ricci 曲率，該群必然是殆阿貝爾群（Virtually Abelian），且連通頂點傳遞圖必擬等距於歐氏格 <span class="math inline">\mathbb{Z}^k</span>。 <a href="zotero://select/library/items/D2PJXD4J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.14232" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Network Denoising Revisited: A Ricci-Flow-Inspired Graph Diffusion Method</strong>，Ye Fang, Chuan-Xian Ren（<em>arXiv</em>）：針對真實網路的觀測雜訊與非歐異質幾何，提出受 Ricci 流啟發的圖擴散去噪框架，避免傳統相似度擴散把社群邊界抹平。 <a href="zotero://select/library/items/259KI99D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.16923" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Timelike Ollivier-Ricci curvature</strong>，Mathias Braun, Xue-Mei Li（<em>arXiv</em>）：運用 1-Lorentz–Wasserstein 距離 <span class="math inline">\ell_1</span> 比較小類空超曲面上的機率測度，在 Lorentz 幾何中建立餘維數為一的粗略 Ricci 曲率構造，並藉 Moser 型流在漸近極限下精確還原未來指向類時方向的 Ricci 曲率。 <a href="zotero://select/library/items/XZNZ6BAN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.18664" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Community Detection using the Edge Laplacian Dynamics vis-a-vis Ricci Flow</strong>，Pratibha Bhandari, Soumyendu Raha（<em>arXiv</em>）：傳統離散 Ricci 流每一步都要重算昂貴的邊 <span class="math inline">W_1</span> 最優傳輸。本文指出，結構更簡單、良定義的邊拉普拉斯動力學（Edge Laplacian Dynamics）能重現與 Ricci 流同等的流形分解特性，大幅加速複雜網路的社群偵測。 <a href="zotero://select/library/items/GEUXEP44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.38988" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Community detection of hypergraphs by Ricci flow</strong>，Yulu Tian et al.（<em>arXiv</em>）：定義直接作用於超圖高階交互作用的「超圖 Ricci 流」並證明其長時間存在性，據此開發依曲率演化調整超邊權重的社群偵測演算法 HyperRCD，在合成與真實超圖上展現出對拓撲擾動的強健性。 <a href="zotero://select/library/items/JZMEX8Q3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.12276" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Some Examples of Graphs Suggesting That the Discrete Curvature Does Sense the Smooth One</strong>，Gökçe Çakmak et al.（<em>arXiv</em>）：以球面、歐氏平面與雙曲平面上的正三角形密鋪圖為試驗對象，檢驗離散圖上的 Bakry–Émery 曲率能否感應並反映其所嵌入之光滑常曲率空間形式的幾何曲率。 <a href="zotero://select/library/items/EZUV4JR2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.00665" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Ollivier-Ricci curvature of regular graphs</strong>，Moritz Hehl（<em>arXiv</em>）：以圖參數與最優指派推導正則圖上 Lin–Lu–Yau 與 Ollivier–Ricci 曲率的顯式公式，刻畫圍長為 4 之極限邊並窮舉少於 15 個頂點的相關正則圖，同時證明雞尾酒會圖的 LLY 曲率恆為 1 的剛性定理。 <a href="zotero://select/library/items/7VQM8BR9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.08854" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Recovering Manifold Structure Using Ollivier-Ricci Curvature</strong>，Tristan Luca Saidi, Abigail Hickok, Andrew J. Blumberg（<em>arXiv</em>）：提出ORC-ManL演算法，利用外圍捷徑邊較負Ollivier-Ricci曲率與度量扭曲估計修剪最近鄰圖偽邊，提升流形學習、持續同調與單細胞RNA聚類效果。 <a href="zotero://select/library/items/9V7PH3QU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.01149" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Discrete Curvature Graph Information Bottleneck</strong>，Xingcheng Fu et al.（<em>arXiv</em>）：結合圖離散Ricci曲率幾何與資訊瓶頸理論，針對依賴經驗圖重連缺乏下游任務最優資訊傳輸視角的不足，提出離散曲率圖資訊瓶頸框架以最佳化圖訊息傳遞結構。 <a href="zotero://select/library/items/MXN4CRIT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.19993" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-98d6900a">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/33_%E5%BA%A6%E9%87%8F%E5%B9%BE%E4%BD%95%E8%88%87%E9%9B%A2%E6%95%A3%E6%9B%B2%E7%8E%87.html">度量幾何與離散曲率</a><span class="rs">度量幾何不需要光滑座標，也不需要二階微分。它只用兩點間的最短路徑距離，以及機率分佈沿最優傳輸搬運時鄰域的聚散或熵的凸性，就能在奇異流形、社交網路…</span></li><li><a href="33B_Lott-Sturm-Villani%E5%90%88%E6%88%90Ricci%E6%9B%B2%E7%8E%87%E8%88%87CD%28K%2CN%29%E6%B8%AC%E5%BA%A6%E5%BA%A6%E9%87%8F%E7%A9%BA%E9%96%93.html">Lott-Sturm-Villani合成Ricci曲率與CD(K,N)測度度量空間</a></li><li><a href="../../NOTES/03_%E7%89%A9%E7%90%86/P45_%E6%99%82%E7%A9%BA%E5%B9%BE%E4%BD%95%E8%88%87%E5%BB%A3%E7%BE%A9%E7%9B%B8%E5%B0%8D%E8%AB%96%E5%9F%BA%E7%A4%8E.html">時空幾何與廣義相對論基礎</a><span class="tag-plan">計劃</span><span class="rs">Carroll，*Spacetime and Geometry*，第 1–4 章（狹義相對論、流形、曲率、重力）</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03C_%E8%B3%87%E8%A8%8A%E5%B9%BE%E4%BD%95%E3%80%81%E8%87%AA%E7%84%B6%E6%A2%AF%E5%BA%A6%E8%88%87%E7%B5%B1%E8%A8%88%E6%B5%81%E5%BD%A2%E7%B5%90%E6%A7%8B.html">資訊幾何、自然梯度與統計流形結構</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

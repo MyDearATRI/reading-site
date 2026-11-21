@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>06C｜頓悟Grokking、雙重下降與特徵學習相變 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-c05e3722" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="06c頓悟grokking雙重下降與特徵學習相變">06C｜頓悟Grokking、雙重下降與特徵學習相變</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a>
+同領域子方向：<a class="wl" href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a> · <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> · <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a>
+跨領域關聯子方向：<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34C_%E5%BC%B5%E9%87%8F%E7%A8%8B%E5%BC%8FTensor%20Programs%E3%80%81%E9%87%8D%E5%B0%BE%E8%87%AA%E6%AD%A3%E5%89%87%E5%8C%96%E8%88%87%E6%B7%B1%E5%BA%A6%E7%B6%B2%E8%B7%AF%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E5%BE%8B.html">張量程式Tensor Programs、重尾自正則化與深度網路隨機矩陣律</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> 的訓練動力學與泛化相變核心，向上承接 <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a> 的惰性核與特徵學習極限，向下為 <a class="wl" href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a> 與 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 提供特徵與電路如何在訓練軌跡中湧現的時間維度解釋。演進主線從參數雙重下降曲線與算術頓悟（grokking）現象出發，進入傅立葉電路進展度量、電路競爭模型、雙速表徵讀出分解，以及 2026 年的譜動力學與子空間結晶相變理論。</p>
+</aside>
+<ul>
+<li>核心問題：古典統計學習理論的 U 型偏誤與變異權衡預測過度參數化插值模型必然過擬合，但現代神經網路在訓練損失歸零後仍能維持甚至在很久之後突發性獲得泛化能力；在回合式雙重下降與頓悟中，訓練損失平滑單調下降而測試準確率卻出現先升後降或延遲數萬步的陡升。單純依賴訓練損失與經驗風險無法預警何時會從死記硬背轉向結構化特徵學習。</li>
+<li>直覺模型：可以把網路訓練想像成解鎖兩個速率不同的學習者：記憶模組像背答案的學生，靠高維空間的大量參數在極短步數內把訓練集背熟，使訓練誤差迅速歸零；演算法與表徵模組則像在推導公式，需要權重衰減與殘差誤差在背景慢慢雕刻出正確的幾何結構。只要模型容量、資料量與正則化讓推導者最終壓過背誦者，測試分數就會在看似靜止的平台期後陡然躍升。</li>
+<li>分階段閱讀路線：建議分三階段閱讀：先讀 Belkin et al. (2019) 與 Power et al. (2022)，建立插值閾值雙重下降與小規模演算法資料集頓悟的經典現象定義；第二階段精讀 Nanda et al. (2023) 學習如何用機械可解釋性拆解模加法傅立葉電路並設計連續進展度量，接著讀 Huang et al. (2024) 理解記憶電路與泛化電路的競爭統一框架；最後讀 Pracher et al. (2026)、Chou et al. (2026) 與 Mehendale 與 Chopra (2026)，掌握權重衰減誘導惰性到豐富學習轉折的譜理論、表徵與讀出雙速分解，以及有效秩壓縮與子空間結晶的因果時序。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;偏誤與變異權衡失效\n過參數化插值模型仍可泛化&quot;] --&gt; B[&quot;雙重下降曲線\n跨過插值閾值後測試風險再降&quot;]
+    A --&gt; C[&quot;演算法頓悟 Grokking\n訓練過擬合後延遲泛化躍升&quot;]
+    C --&gt; D[&quot;機械進展度量\n模加法傅立葉圓環旋轉電路&quot;]
+    B --&gt; E[&quot;統一競爭視角\n記憶與泛化電路及表徵讀出雙速&quot;]
+    C --&gt; E
+    E --&gt; F[&quot;譜相變理論\n小NTK特徵方向殘差對抗權重衰減&quot;]
+    F --&gt; G[&quot;幾何秩序結晶\n充分子空間收縮與梯度雪崩臨界Crossing&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>雙重下降與記憶和泛化電路競爭（Double Descent &amp; Circuit Competition）</strong></p>
+<ul>
+<li>直覺理解：當模型參數規模剛好等於訓練樣本約束數（插值閾值）時，網路為了硬塞每個樣本與雜訊而產生劇烈震盪，測試誤差出現尖峰；超過該閾值後，額外自由度允許梯度下降挑選更平滑或結構更簡潔的解，測試誤差再次下降。若將記憶與泛化視為兩套互相競爭的子系統，參數規模與訓練步數上的異常轉折便來自兩者學習速率的消長。</li>
+<li>機制或核心表達式：Belkin et al. (2019) 將測試風險在模型容量 <span class="math inline">p</span> 與樣本數 <span class="math inline">n</span> 比值跨過插值閾值處的先降、尖峰再降整合為雙重下降曲線。在演算法與多任務場景中，Huang et al. (2024) 與 Davies et al. (2023) 將此現象形式化為記憶電路 <span class="math inline">C_{\text{mem}}</span> 與泛化電路 <span class="math inline">C_{\text{gen}}</span> 之間隨模型大小與資料量變化的競爭動態；Chou et al. (2026) 則在無任務依賴框架下將表徵學習與最終分類器讀出校準（readout calibration）分離，透過線性探針與表示幾何證明兩者相對速率的波動同時驅動了頓悟與回合式雙重下降。</li>
+<li>能做到什麼，代價是什麼：能把過往分散討論的參數雙重下降、回合雙重下降、頓悟與湧現能力收斂到統一的雙過程／雙電路動力學；但目前多數電路競爭解析仍偏重合成演算法任務，對自然語言預訓練的多概念交互仍需搭配探針驗證。</li>
+</ul>
+</li>
+<li>
+<p><strong>惰性到豐富學習轉折的譜理論（Spectral Theory of Lazy-to-Rich Transition）</strong></p>
+<ul>
+<li>直覺理解：網路一開始大多處於權重幾乎不動的惰性核（NTK）狀態，先快速把容易擬合的高能量方向配平，但在較難學的微小特徵方向上仍留有一點誤差殘差。配合 <span class="math inline">L_2</span> 權重衰減不斷壓縮無用權重，這些殘差誤差反過來推動神經切線核朝任務相關方向生長，直到特徵結構足以支撐泛化。</li>
+<li>機制或核心表達式：針對採用平方損失與 <span class="math inline">L_2</span> 權重衰減 <span class="math inline">\gamma</span> 訓練的齊次網路（homogeneous networks），Pracher et al. (2026) 證明記憶階段結束後仍有有限殘差存留，且較高比例集中於對應較小 NTK 特徵值的目標分量上。將殘差回饋至 NTK 演化的動力學方程並投影到任務相關譜方向後，可得一個由「殘差驅動的核成長」與「權重衰減」互相競爭的約化系統：頓悟時間尺度由學習率與權重衰減乘積 <span class="math inline">\eta \gamma</span> 控制，且當衰減接近某個臨界值（超過該值則任務對齊的 NTK 結構無法再維持泛化）時，特徵學習速率會呈對數型減緩。</li>
+<li>能做到什麼，代價是什麼：給出不依賴具體任務細節的定量時間尺度預測與臨界權重衰減門檻；但其嚴格推導假設齊次網路與平方損失，延伸至非齊次正規化層（LayerNorm）與交叉熵損失時仍需近似校正。</li>
+</ul>
+</li>
+<li>
+<p><strong>傅立葉進展度量、子空間結晶與維度相變（Progress Measures &amp; Subspace Crystallization）</strong></p>
+<ul>
+<li>直覺理解：測試準確率在頓悟前看似毫無動靜，但網路內部其實早已在連續調整表徵：先用離散三角旋轉拼出模運算電路，當泛化啟動後，權重矩陣才把多餘的維度壓縮掉，集中到少數主奇異方向上。</li>
+<li>機制或核心表達式：Nanda et al. (2023) 透過逆向工程證明模加法變換器將整數嵌入圓周旋轉並利用三角恆等式計算，據此定義的連續傅立葉進展度量可將訓練切分為記憶、電路形成與清理三階段。在幾何時序上，Mehendale 與 Chopra (2026) 研究均值場 MLP 與單層變換器發現：所有變換器在 250 步內完成記憶而頓悟起點（測試準確率達 95%）分布在 6,500 至 21,000 步之間，但權重有效秩（effective rank）最陡峭的下降一律發生在頓悟起點「之後」約 900 步；同時定義保留 99% 測試準確率的最少頂部奇異方向張成空間為「充分子空間（sufficient subspace）」，其維度隨輸出邊際增大而收縮。Wang (2026) 進一步對八種模型尺度進行梯度雪崩有限尺度縮放，顯示梯度場有效維度 <span class="math inline">D(t)</span> 在泛化起點由次擴散（<span class="math inline">D &lt; 1</span>）跨越至超擴散（<span class="math inline">D &gt; 1</span>），呈現自組織臨界性（SOC）。</li>
+<li>能做到什麼，代價是什麼：澄清了「秩壓縮驅動頓悟」與「秩壓縮跟隨頓悟發生」的因果先後，並提供跨架構可量測的幾何與臨界維度探針；然而充分子空間分析目前主要在模算術與受控網路上驗證。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>有效秩壓縮是頓悟的原因還是結果</strong>：過去研究常將頓悟歸因於權重矩陣有效秩（effective rank）下降所帶來的簡潔歸納偏置。Mehendale 與 Chopra (2026) 透過測量記憶步數、頓悟起點（測試準確率達 95%）與有效秩下降時點，得出什麼截然不同的因果時序結論？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>檢視三者的相對時間軸：儘管不同隨機種子與超參數下變換器都在 250 步內完成訓練集記憶，頓悟起點卻落在 6,500 至 21,000 步的寬廣區間；無論頓悟起點多晚，有效秩最陡峭的壓縮總是穩定出現在頓悟起點「之後」約 900 步，而非發生在記憶與泛化之間的平台期內。這表明秩壓縮主要是泛化電路成型、輸出邊際擴大後的隨附清理結果，而非觸發頓悟的單一前置原因。</p>
+</details>
+<ol start="2">
+<li><strong>權重衰減為何對頓悟既有加速作用又有臨界上限</strong>：在 Pracher et al. (2026) 的頓悟譜理論中，提高 <span class="math inline">L_2</span> 權重衰減強度 <span class="math inline">\gamma</span> 一方面會如何影響頓悟時間尺度，另一方面為何存在一個「臨界衰減（critical decay）」，一旦超過該值模型反而無法泛化？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>回到約化譜系統中「殘差驅動的 NTK 成長」與「權重衰減抑制」之間的競爭：在低衰減區間，頓悟時間尺度受學習率與權重衰減乘積 <span class="math inline">\eta\gamma</span> 控制，適度提高衰減可清除記憶分量並加速相對轉向特徵學習；但當 <span class="math inline">\gamma</span> 逼近臨界衰減時，衰減對權重範數的收縮力會壓過小 NTK 特徵值方向上的殘差驅動成長，使特徵學習呈現對數型減緩，若超越臨界點則任務對齊的 NTK 結構無法維持而導致泛化崩潰。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>內部清理機制與外在相變指標的因果排序分歧</strong>：Mehendale 與 Chopra (2026) 指出有效秩壓縮跟隨頓悟起點約 900 步後才急劇發生，而 Pracher et al. (2026) 則指出小 NTK 特徵值方向上的殘差已在記憶結束後持續推動核演化；Wang (2026) 又從梯度雪崩觀察到 <span class="math inline">D(t)</span> 在起點跨越臨界值 1。如何將權重譜演化、梯度場幾何與子空間結晶整合為單一因果順序，仍是理論統一的關鍵問題。</li>
+<li><strong>合成演算法任務之外的真實大模型頓悟判別</strong>：如 Chou et al. (2026) 所強調，既有頓悟理論多在模算術等高度對稱的合成任務上驗證，當任務切換到自然語言預訓練或非對稱現實表徵時，編碼器表徵學習與讀出校準的速度差異往往被多任務混合訊號掩蓋，目前仍缺乏跨架構普遍適用的實時相變預警指標。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>NTK 譜演化與自正則化隨機矩陣律的深度互連</strong>：Pracher et al. (2026) 的殘差回饋 NTK 譜動力學直接銜接 <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a> 的核演化邊界分析；同時，充分子空間奇異值收縮與梯度雪崩臨界指數 <span class="math inline">D(t)</span> 可遷移至 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34C_%E5%BC%B5%E9%87%8F%E7%A8%8B%E5%BC%8FTensor%20Programs%E3%80%81%E9%87%8D%E5%B0%BE%E8%87%AA%E6%AD%A3%E5%89%87%E5%8C%96%E8%88%87%E6%B7%B1%E5%BA%A6%E7%B6%B2%E8%B7%AF%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E5%BE%8B.html">張量程式Tensor Programs、重尾自正則化與深度網路隨機矩陣律</a> 及 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a>，以隨機矩陣重尾譜指標診斷訓練相態。</li>
+<li><strong>傅立葉進展度量與電路競爭向稀疏特徵電路遷移</strong>：Nanda et al. (2023) 將內部權重拆解為圓周傅立葉基底以定義連續進展度量的方法，與 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 的電路定位及 <a class="wl" href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a> 的動態字典追蹤直接互通，可用於在訓練檢查點之間量化稀疏特徵何時成型並取代記憶電路。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-reconciling-modern-machine-learning-practice-and-the-classical-biasvariance-trade-off2019">1. Reconciling modern machine-learning practice and the classical bias–variance trade-off（2019）</h4>
+<ul>
+<li>作者與出處：Mikhail Belkin et al. · <em>Proceedings of the National Academy of Sciences</em></li>
+<li>核心問題：古典統計學的 U 型偏誤與變異權衡無法解釋現代過參數化深度神經網路在訓練資料零誤差插值後仍維持優異測試表現的現象。本文旨在將古典極限與現代插值實務納入同一條性能曲線。</li>
+<li>關鍵做法：提出統一的「雙重下降（double-descent）」風險曲線，指出當模型容量跨過剛好能插值訓練集的閾值時，測試誤差會先上升至尖峰再隨過度參數化程度增加而持續下降，從而將古典 U 型曲線納入其左側區間。</li>
+<li>跨領域啟發：建立理解過參數化學習相變的起點，並直接銜接 <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a> 中過參數化插值解的隱式正則化理論。</li>
+<li>連結：<a href="zotero://select/library/items/PEN9CTFZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1812.11118" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-grokking-generalization-beyond-overfitting-on-small-algorithmic-datasets2022">2. Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets（2022）</h4>
+<ul>
+<li>作者與出處：Alethea Power et al. · <em>arXiv</em></li>
+<li>核心問題：過參數化網路在小型演算法資料集上出現嚴重的訓練過擬合後，通常被預期會停留在隨機猜測水準，但其泛化能力有時會在遠超過擬合點之後突然從零躍升至滿分。本文旨在系統刻畫此一延遲泛化現象。</li>
+<li>關鍵做法：在演算法生成的小型資料集上定義並實驗「頓悟（grokking）」動態，量測泛化延遲與資料集大小的關係，發現較小的訓練集需要呈急劇增長的最佳化步數才能觸發從記憶到泛化的躍遷。</li>
+<li>跨領域啟發：提供最小可控的演算法實驗場，使泛化相變與內部結構形成得以脫離大型語料雜訊而被精確測量。</li>
+<li>連結：<a href="zotero://select/library/items/Q7FQ78P9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2201.02177" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-progress-measures-for-grokking-via-mechanistic-interpretability2023">3. Progress measures for grokking via mechanistic interpretability（2023）</h4>
+<ul>
+<li>作者與出處：Neel Nanda et al. · <em>arXiv</em></li>
+<li>核心問題：湧現行為與頓悟在測試曲線外觀上看似不連續跳變，單看損失函數無法得知網路在漫長平台期內是否正在累積演算法結構。本文透過逆向工程尋找能反映內部進度的連續度量。</li>
+<li>關鍵做法：完整拆解模加法小型變換器的內部演算法，證實其透過離散傅立葉變換與三角恆等式將加法轉化為圓周旋轉，並經由激活、權重與傅立葉空間消融驗證後，定義出可將訓練劃分為記憶、電路形成與清理三階段的連續進展度量。</li>
+<li>跨領域啟發：把 <a class="wl" href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 的電路逆向工程方法直接引入訓練動力學研究，建立可解釋性與相變理論的實證橋樑。</li>
+<li>連結：<a href="zotero://select/library/items/V3D948UN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.05217" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-unified-view-of-grokking-double-descent-and-emergent-abilities-a-perspective-from-circuits-competition2024">4. Unified View of Grokking, Double Descent and Emergent Abilities: A Perspective from Circuits Competition（2024）</h4>
+<ul>
+<li>作者與出處：Yufei Huang et al. · <em>arXiv</em></li>
+<li>核心問題：頓悟、雙重下降與大語言模型的湧現能力長期被視為彼此獨立的奇異現象，缺乏共同的機制解釋。本文從內部電路競爭的視角提出統一框架。</li>
+<li>關鍵做法：聚焦記憶電路與泛化電路的資源競爭，依模型規模與訓練資料量的不同組合劃分出四種訓練動力學，對雙重下降提出兩項可驗證預測並於實驗中證實，且將該視角擴展至多任務學習中的演算法湧現。</li>
+<li>跨領域啟發：提供連結模型容量、資料規模與訓練步數三軸的統一模型，亦可與 Chou et al. (2026) 的表徵讀出雙速分解互為對照。</li>
+<li>連結：<a href="zotero://select/library/items/648P6PXA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.15175" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-a-spectral-theory-of-grokking-weight-decay-induces-feature-learning2026">5. A Spectral Theory of Grokking: Weight Decay induces Feature Learning（2026）</h4>
+<ul>
+<li>作者與出處：Lenz Pracher et al. · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：雖然實證上已知權重衰減與惰性到豐富（lazy-to-rich）學習轉折能誘發頓悟，但一直缺少能定量預測頓悟時間尺度與臨界條件的動力學理論。本文針對帶權重衰減的齊次網路建立譜理論。</li>
+<li>關鍵做法：證明齊次網路在平方損失與 <span class="math inline">L_2</span> 權重衰減下記憶階段後仍留有有限殘差（集中於較小 NTK 特徵值方向），將殘差回饋的 NTK 演化投影至任務相關譜方向得到核成長與衰減競爭的約化系統，推導出頓悟時間尺度受學習率與衰減乘積控制及臨界衰減附近的對數減緩現象。</li>
+<li>跨領域啟發：直接把 <a class="wl" href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a> 的核演化推導轉化為頓悟的定量預測工具，並與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a> 相呼應。</li>
+<li>連結：<a href="zotero://select/library/items/GC6R772H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.26679" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-subspace-crystallization-in-grokking-rank-compression-tracks-the-phase-transition2026">6. Subspace Crystallization in Grokking: Rank Compression Tracks the Phase Transition（2026）</h4>
+<ul>
+<li>作者與出處：Shlok Mehendale, Paras Chopra · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：頓悟常伴隨權重矩陣有效秩（effective rank）下降，但秩壓縮究竟是驅動頓悟的因，還是頓悟發生後的果，長期未有定論。本文針對模算術網路進行高解析時序檢驗。</li>
+<li>關鍵做法：比較均值場 MLP 與單層變換器在記憶完成（250 步內）與頓悟起點（6,500 至 21,000 步）之間的秩變化，證實有效秩最陡峭的下降始終滯後頓悟起點約 900 步，並提出「充分子空間（sufficient subspace）」概念刻畫隨邊際擴大而結晶收縮的核心奇異方向。</li>
+<li>跨領域啟發：釐清表徵壓縮與泛化相變的因果時序，並為從 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34C_%E5%BC%B5%E9%87%8F%E7%A8%8B%E5%BC%8FTensor%20Programs%E3%80%81%E9%87%8D%E5%B0%BE%E8%87%AA%E6%AD%A3%E5%89%87%E5%8C%96%E8%88%87%E6%B7%B1%E5%BA%A6%E7%B6%B2%E8%B7%AF%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E5%BE%8B.html">張量程式Tensor Programs、重尾自正則化與深度網路隨機矩陣律</a> 角度檢視權重奇異譜演化提供精密實證基準。</li>
+<li>連結：<a href="zotero://select/library/items/89DI6VZB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.35112" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-14-篇">G5｜本子方向全量文獻泛讀清單（共 14 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 14 篇文獻（含開放存取 PDF 14 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進8-篇">A. 奠基經典、專著與核心演進（8 篇）</h3>
+<ul>
+<li><strong>2019｜Reconciling modern machine-learning practice and the classical bias–variance trade-off</strong>，Mikhail Belkin et al.（<em>Proceedings of the National Academy of Sciences</em>，1594 引）：<em>PNAS</em> 論文：正式提出雙重下降（Double Descent）泛化曲線，解釋過參數化深度網路為什麼插值到零誤差仍能泛化得好。 <a href="zotero://select/library/items/PEN9CTFZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1812.11118" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Progress measures for grokking via mechanistic interpretability</strong>，Neel Nanda et al.（<em>arXiv</em>）：透過機械可解釋性完全逆向工程小 Transformer 在模加法頓悟現象中學得的演算法（以離散傅立葉變換與三角恆等式將加法轉為圓周旋轉），並藉激活與權重消融驗證連續進度度量。 <a href="zotero://select/library/items/V3D948UN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.05217" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Unifying Grokking and Double Descent</strong>，Xander Davies, Lauro Langosco, David Krueger（<em>arXiv</em>）：提出以「模式學習速率」作為統一框架，主張頓悟 (grokking) 與雙重下降源於相同的學習動力學機制，並將該分析從最佳化步數推廣至模型容量維度而首度展示模型維度的頓悟現象。 <a href="zotero://select/library/items/3CWMSNG6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.06173" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Grokking: Generalization Beyond Overfitting on Small Algorithmic Datasets</strong>，Alethea Power et al.（<em>arXiv</em>）：研究神經網路在小型演算法資料集上的泛化行為，發現在過擬合後持續優化會出現「頓悟」現象，使測試準確率從隨機水準升至完全泛化，且資料集越小所需優化步數越多。 <a href="zotero://select/library/items/Q7FQ78P9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2201.02177" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Grokking phase transitions in learning local rules with gradient descent</strong>，Bojan Žunkovič, Enej Ilievski（<em>arXiv</em>）：解析兩個可解規則學習頓悟模型，證明頓悟為相變並求出臨界指數與頓悟時間分佈解析解，再藉張量網路映射連結感知器理論，指出其源於教師局部性並於細胞自動機驗證。 <a href="zotero://select/library/items/GKFUE8SZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2210.15435" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Implicit Self-Regularization in Deep Neural Networks: Evidence from Random Matrix Theory and Implications for Learning</strong>，Charles H. Martin, Michael W. Mahoney（<em>Journal of Machine Learning Research (JMLR)</em>）：運用隨機矩陣理論中的 Marchenko–Pastur 分佈與冪律譜普適律建立重尾自正則化（HTSR）理論，用以診斷深度神經網路權重矩陣在訓練過程中的相變結構。 <a href="zotero://select/library/items/AJSXNP58" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1810.01075" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Multi-scale Feature Learning Dynamics: Insights for Double Descent</strong>，Mohammad Pezeshki et al.（<em>arXiv</em>）：藉統計物理工具在線性教師學生模型中剖析隨訓練輪次出現的雙重下降現象，揭示多尺度特徵在不同時間尺度下先後習得的動力學如何導致測試誤差二次下降。 <a href="zotero://select/library/items/4W48GZKJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.03215" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Deep Double Descent: Where Bigger Models and More Data Hurt</strong>，Preetum Nakkiran et al.（<em>arXiv</em>）：展示現代深度學習隨模型規模或訓練輪數（epochs）增加時測試表現先惡化後改善的雙重下降現象，定義「有效模型複雜度」統一刻畫兩者，並辨識出增加甚至四倍擴充訓練樣本反而損害測試表現的區間。 <a href="zotero://select/library/items/RGZDC9SN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.02292" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻6-篇">B. 2024–2026 近期推進與前沿文獻（6 篇）</h3>
+<ul>
+<li><strong>2026｜Grokking as Dimensional Phase Transition in Neural Networks</strong>，Ping Wang（<em>arXiv</em>）：跨八個模型尺度對梯度雪崩做有限尺寸標度，指出 Grokking 頓悟現象是跨越 <span class="math inline">D=1</span> 的自組織臨界維度相變。 <a href="zotero://select/library/items/9XV93PA9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.04655" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Two Speeds of Learning: A Representation-Readout Decomposition of Grokking and Double Descent</strong>，Chi-Ning Chou et al.（<em>arXiv</em>）：將深度網路學習動態分解為編碼器表徵學習與分類器讀出校準兩個競爭過程，結合表徵幾何、NTK 與線性探針建立不依賴特定任務的診斷框架，統一剖析頓悟與回合雙重下降的成因。 <a href="zotero://select/library/items/VSI4HS9G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.27078" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A Spectral Theory of Grokking: Weight Decay induces Feature Learning</strong>，Lenz Pracher et al.（<em>arXiv (Cornell University)</em>）：針對均勻網路於平方損失與 <span class="math inline">L_2</span> 權重衰減下的頓悟現象建立譜理論，證明記憶後殘差集中於小 NTK 特徵值方向並回饋驅動核心演化，與權重衰減競爭以決定延遲泛化時標。 <a href="zotero://select/library/items/GC6R772H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.26679" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Subspace Crystallization in Grokking: Rank Compression Tracks the Phase Transition</strong>，Shlok Mehendale, Paras Chopra（<em>arXiv (Cornell University)</em>）：在模算術任務上追蹤平均場 MLP 與單層 Transformer 的頓悟過程，發現權重有效秩壓縮總是發生在泛化頓悟起點之後約九百步（而非在記憶後立即發生或驅動頓悟），並刻劃其子空間結晶機制。 <a href="zotero://select/library/items/89DI6VZB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.35112" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Towards a Privacy-Preserving Reliability-Aware Entity Resolution for Attributed Graphs [Vision] (Technical Report)</strong>，Abdessamad Imine, Xiang Lian, Kambiz Ghazinour（<em>arXiv (Cornell University)</em>）：針對屬性圖實體解析中資料可靠度評估與隱私保護之間的內在張力，提出整合兩者的三層耦合研究願景框架，並梳理發佈兼具準確性與隱私保護之整合圖所面臨的開放問題。 <a href="zotero://select/library/items/DRKR8HTG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.10038" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Unified View of Grokking, Double Descent and Emergent Abilities: A Perspective from Circuits Competition</strong>，Yufei Huang et al.（<em>arXiv</em>）：從記憶電路與泛化電路的內部競爭視角出發，將頓悟（grokking）、雙重下降與湧現能力納入統一分析框架，依模型規模與訓練數據量劃分四種訓練動力學模式，並以實驗驗證雙重下降的兩項可檢驗預測。 <a href="zotero://select/library/items/648P6PXA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.15175" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-c05e3722">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a><span class="rs">這個領域一方面追蹤深度神經網路在訓練時間軸上的非線性相變（雙重下降與頓悟 Grokking），另一方面用稀疏自編碼器（SAE）與因果特徵電路，把…</span></li><li><a href="06A_%E7%A8%80%E7%96%8F%E8%87%AA%E7%B7%A8%E7%A2%BC%E5%99%A8SAE%E3%80%81%E7%96%8A%E5%8A%A0%E6%85%8B%E5%B9%BE%E4%BD%95%E8%88%87%E5%96%AE%E8%AA%9E%E6%84%8F%E7%89%B9%E5%BE%B5%E6%8B%86%E8%A7%A3.html">稀疏自編碼器SAE、疊加態幾何與單語意特徵拆解</a></li><li><a href="06D_%E7%A5%9E%E7%B6%93%E5%88%87%E7%B7%9A%E6%A0%B8NTK%E3%80%81%E5%B9%B3%E5%9D%87%E5%A0%B4%E6%A5%B5%E9%99%90%E8%88%87%E6%90%8D%E5%A4%B1%E5%9C%B0%E8%B2%8C%E5%8B%95%E5%8A%9B%E5%AD%B8.html">神經切線核NTK、平均場極限與損失地貌動力學</a></li><li><a href="06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34C_%E5%BC%B5%E9%87%8F%E7%A8%8B%E5%BC%8FTensor%20Programs%E3%80%81%E9%87%8D%E5%B0%BE%E8%87%AA%E6%AD%A3%E5%89%87%E5%8C%96%E8%88%87%E6%B7%B1%E5%BA%A6%E7%B6%B2%E8%B7%AF%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E5%BE%8B.html">張量程式Tensor Programs、重尾自正則化與深度網路隨機矩陣律</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

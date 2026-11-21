@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>16C｜非凸最佳化鞍點逃逸、隨機近似與流形收斂理論 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f0ef61f6" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="16c非凸最佳化鞍點逃逸隨機近似與流形收斂理論">16C｜非凸最佳化鞍點逃逸、隨機近似與流形收斂理論</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a>
+同領域子方向：<a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> · <a class="wl" href="16B_%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E5%8A%A0%E9%80%9F%E6%A2%AF%E5%BA%A6%E6%B3%95%E8%88%87Bregman%E9%8F%A1%E5%83%8F%E4%B8%8B%E9%99%8D.html">凸最佳化、加速梯度法與Bregman鏡像下降</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A505_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E8%AB%96%E3%80%81%E5%A3%93%E7%B8%AE%E9%A0%90%E6%B8%AC%E8%88%87%E5%85%83%E8%A4%87%E9%9B%9C%E5%BA%A6.html">演算法資訊論、壓縮預測與元複雜度</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M16_%E5%81%8F%E5%B0%8E%E6%95%B8%E3%80%81Hessian%20%E8%88%87%20Lagrange%20%E4%B9%98%E5%AD%90.html">偏導數、Hessian 與 Lagrange 乘子</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M63_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%EF%BC%9APAC%20%E8%88%87%20VC%20%E7%B6%AD.html">學習理論：PAC 與 VC 維</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E17_%E6%B6%88%E8%B2%BB%E8%80%85%E7%90%86%E8%AB%96%E8%88%87%20Slutsky%20%E6%96%B9%E7%A8%8B.html">消費者理論與 Slutsky 方程</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E33_MWG%20%E9%81%B8%E6%93%87%E3%80%81%E6%B6%88%E8%B2%BB%E8%80%85%E8%88%87%E7%94%9F%E7%94%A2.html">MWG 選擇、消費者與生產</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向隸屬 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a>，在 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 的統計風險目標與 <a class="wl" href="16B_%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E5%8A%A0%E9%80%9F%E6%A2%AF%E5%BA%A6%E6%B3%95%E8%88%87Bregman%E9%8F%A1%E5%83%8F%E4%B8%8B%E9%99%8D.html">凸最佳化、加速梯度法與Bregman鏡像下降</a> 的凸算法工具之上，專門研究非凸目標函數的優化動力學與全局地形幾何。研究主線涵蓋大規模隨機近似（SGD）收斂分析、鞍點逃逸與二階駐點條件、適應性變異數縮減，以及深度網路的譜條件數、模式連通性與差分隱私噪聲梯度動態。</p>
+</aside>
+<ul>
+<li>核心問題：在非凸高維模型（如深度神經網路與非對稱排序目標）中，尋找全域極小值一般屬於 NP 困難問題，且確定性一階方法可能長期滯留於梯度為零的鞍點，或因梯度爆炸、消失與病態譜結構而無法收斂。同時，大規模訓練依賴高變異數的隨機小批次梯度估計，而若加入差分隱私所需的持續高斯噪聲或非光滑分布魯棒約束（DRO），傳統凸優化的單調下降分析便不再適用。</li>
+<li>直覺模型：如果把凸優化比作在單一碗底尋找最低點，非凸優化則像在連綿山脊與馬鞍形山坳之間行走：山坳處坡度雖平（梯度為零），只要朝負曲率方向輕輕推一把（隨機噪聲或二階曲率），就能順勢滑下進入更低處的山谷。此外，深度網路的各個好山谷往往不是孤立坑洞，而是透過等高線低谷彼此相連成寬廣流形。</li>
+<li>分階段閱讀路線：第一階段先讀 Bottou、Curtis 與 Nocedal (2016) 建立大規模機器學習中隨機梯度（SG）演算法、噪聲縮減與二階曲率方法的核心理論，並搭配 Sun (2019) 全面認識深度學習優化的譜病態、壞局部極小值、模式連通性與無限寬分析。第二階段讀 Zhu 等人 (2022) 與 Fotopoulos、Popovich 與 Papadopoulos (2024)，掌握如何將非光滑 CVaR 與光滑 KL 分布魯棒目標轉化為具備非凸收斂保證的演算法，以及鞍點逃逸與稀疏壓縮視角。第三階段研讀 2025–2026 前沿：以 Zhang 等人 (2025) 學習非凸適應性變異數縮減框架 AVRG，並讀 Roth 與 Avella Medina (2026) 解析簡單單次 Noisy SGD 在 Rényi 差分隱私與母體強凸條件下如何達成極小極大最優估計率。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;一階隨機梯度與二階曲率基礎 (Bottou 等人 2016)&quot;] --&gt; B[&quot;隨機近似與變異數縮減框架 AVRG (2025)&quot;]
+  A --&gt; C[&quot;鞍點逃逸與二階駐點條件 (Fotopoulos 2024)&quot;]
+  C --&gt; D[&quot;深度網路譜病態、模式連通與無限寬流形 (Sun 2019)&quot;]
+  A --&gt; E[&quot;非光滑 CVaR 與 KL-DRO 非凸收斂 (Zhu 等人 2022)&quot;]
+  B --&gt; F[&quot;Rényi DP 下 Noisy SGD 極小極大最優率 (Roth 2026)&quot;]
+  D --&gt; G[&quot;高維地形相變與自旋玻璃視角&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>隨機近似與適應性變異數縮減（Stochastic Approximation &amp; Adaptive Variance Reduction）</strong></p>
+<ul>
+<li>直覺理解：每次只用一小批資料估算梯度能大幅降低單步成本，但雜訊會讓迭代在極小值附近來回抖動；適應性變異數縮減則在維持低計算成本的前提下，動態消除歷史梯度估計的隨機誤差。</li>
+<li>機制或核心表達式：依據 Bottou、Curtis 與 Nocedal (2016)，隨機梯度法更新 <span class="math inline">w_{t+1} = w_t - \eta_t g(w_t; \xi_t)</span>，其中無偏估計滿足變異數界 <span class="math inline">\mathbb{E}[\|g(w_t; \xi_t)\|_2^2] \le \sigma^2 + c\|\nabla F(w_t)\|_2^2</span>。在 <span class="math inline">L</span>-光滑非凸損失下，標準 SGD 找到 <span class="math inline">\varepsilon</span>-一階駐點（<span class="math inline">\mathbb{E}\|\nabla F(w)\|_2^2 \le \varepsilon^2</span>）的隨機梯度複雜度為 <span class="math inline">O(\varepsilon^{-4})</span>；Zhang 等人 (2025) 提出 Adaptive Variance Reduced Gradient (AVRG)，動態平衡變異數縮減與每步開銷，將各類適應性減方差方法統一並提升非凸收斂速率。在隱私限制下，Roth 與 Avella Medina (2026) 分析固定步長與常數批次的單次 Noisy SGD，於 Rényi DP 與母體強凸條件下證明其估計誤差匹配 Score Attack 極小極大下界。</li>
+<li>能做到什麼，代價是什麼：隨機近似可將每次迭代複雜度降至與資料總數無關；代價是標準 SGD 受 <span class="math inline">\sigma^2</span> 限制而收斂階數變慢，而變異數縮減與隱私噪聲機制則需權衡檢查點梯度儲存量與隱私預算消耗。</li>
+</ul>
+</li>
+<li>
+<p><strong>鞍點逃逸與二階駐點條件（Saddle-Point Escaping &amp; Second-Order Stationarity）</strong></p>
+<ul>
+<li>直覺理解：在數百萬維的參數空間裡，梯度為零的地方絕大多數不是山谷底部，而是至少沿著某個方向向下彎曲的馬鞍點；只要偵測或受到微擾跨過負曲率方向，優化就能繼續下降。</li>
+<li>機制或核心表達式：若僅滿足一階駐點 <span class="math inline">\|\nabla f(w)\|_2 \le \varepsilon</span>，迭代可能卡在嚴格鞍點（strict saddle）。對具 <span class="math inline">\rho</span>-Hessian Lipschitz 連續性的函數，二階 <span class="math inline">\varepsilon</span>-駐點進一步要求最小特徵值滿足 <span class="math inline">\lambda_{\min}(\nabla^2 f(w)) \ge -\sqrt{\rho \varepsilon}</span>。如 Fotopoulos 等人 (2024) 與 Bottou 等人 (2016) 所綜述，在梯度步中加入適度各向同性隨機擾動或利用二階曲率資訊，可使軌跡在多項式時間內沿負特徵向量逃離鞍點；在深度網路訓練中，Sun (2019) 指出恰當的初始化與正規化能先改善 Jacobian 與 Hessian 的譜分佈（<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M16_%E5%81%8F%E5%B0%8E%E6%95%B8%E3%80%81Hessian%20%E8%88%87%20Lagrange%20%E4%B9%98%E5%AD%90.html">偏導數、Hessian 與 Lagrange 乘子</a>），避免梯度爆炸或消失導致譜條件數惡化。</li>
+<li>能做到什麼，代價是什麼：從全局 NP 困難退而保證收斂至無負曲率的二階局部極小值，在多數結構化問題上足夠達到高精度；然而若遇到高度平坦的非嚴格退化鞍點（高階導數亦為零），一階微擾與二階曲率法仍可能失去逃逸保證。</li>
+</ul>
+</li>
+<li>
+<p><strong>全局地形幾何、模式連通性與分布魯棒非凸公式（Landscape Geometry, Mode Connectivity &amp; Non-Convex DRO）</strong></p>
+<ul>
+<li>直覺理解：深度網路找到的不同解之間並非被高山完全隔開，往往存在幾乎不增加損失的低谷路徑把它們連成一片；同時面對不均衡任務，也能把非凸極大化問題轉成有收斂保證的分布魯棒目標。</li>
+<li>機制或核心表達式：Sun (2019) 歸納深度網路的全局優化結構：包括在特定過參數化寬度下無壞局部極小值、不同局部極小解之間存在低損失連續路徑的模式連通性（mode connectivity）、彩票假說所揭示的稀疏子網路結構，以及無限寬極限下向核方法線性流形的退化。針對部分 AUC（pAUC）等非凸排序問題，Zhu 等人 (2022) 利用分布魯棒優化（DRO）定義每個正樣本的局部損失，提出基於 CVaR（非光滑但精確）與 KL 散度正則化（光滑但近似）的雙重公式，並證明單向與雙向 pAUC 算法在非凸設定下的收斂保證。</li>
+<li>能做到什麼，代價是什麼：利用流形連通性與 DRO 替代目標能有效處理類別不平衡與非光滑評估指標並維持收斂定理；但這些全局幾何性質高度依賴網路寬度、正則化強度與資料分佈構造，從理論過渡到任意有限寬架構仍有落差。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>一階駐點與嚴格鞍點條件的收斂判別</strong>：為何在非凸優化理論中，僅證明演算法收斂至 <span class="math inline">\|\nabla f(w)\|_2 \le \varepsilon</span> 往往不足以保證找到好的局部解？嚴格鞍點條件（strict saddle property）如何透過 Hessian 譜來補足這項保證？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>一階梯度為零只代表處於臨界點，可能包含局部極大值與高維鞍點。嚴格鞍點條件要求任何滿足 <span class="math inline">\|\nabla f(w)\|_2 \le \varepsilon_g</span> 且非局部極小值的點，其 Hessian 最小特徵值必滿足 <span class="math inline">\lambda_{\min}(\nabla^2 f(w)) \le -\gamma &lt; 0</span>；這保證該點附近必存在一個嚴格下降的二次曲率方向，使隨機擾動 SGD 或二階法能在有限步內脫離鞍點，最終僅停留在近似局部極小值附近。</p>
+</details>
+<ol start="2">
+<li><strong>CVaR 非光滑與 KL-DRO 光滑代理目標的取捨</strong>：在 Zhu 等人 (2022) 的部分 AUC（pAUC）非凸優化框架中，使用基於 CVaR 的 DRO 與基於 KL 散度正則化的 DRO 各在目標精確度與優化光滑性上帶來什麼不同後果？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>CVaR 對尾部前 <span class="math inline">k</span> 比例困難負樣本採取硬截斷加權，這使目標函數與原始 pAUC 定義完全等價（精確估計量），但截斷邊界會產生不可微的非光滑尖角，分析收斂需藉助次微分或弱凸工具；相對地，加入 KL 散度正則化會將硬截斷平滑化為指數 softmax 權重，獲得光滑可微（soft）的替代目標而更易套用標準非凸隨機梯度收斂證明，但代價是引入了依賴正則化溫度係數的近似偏差。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>有限寬度神經網路的模式連通與無壞極小值條件</strong>：Sun (2019) 總結了無限寬極限與高度過參數化下的全局無壞局部極小值及模式連通性，但在現實受限寬度、權重剪枝（Fotopoulos 等人 2024）或強正則條件下，壞局部極小值與斷裂的解空間流形何時會重新出現，仍與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a> 中的能量地貌相變問題緊密交織。</li>
+<li><strong>隱私噪聲、變異數縮減與非凸幾何的緊緻下界</strong>：Roth 與 Avella Medina (2026) 成功在母體強凸條件下證明單次 Noisy SGD 在 Rényi DP 下達極小極大最優（消除對數多餘項），而 Zhang 等人 (2025) 統一了非凸適應性變異數縮減；然而，若把 Rényi DP 的高機率極小極大下界推展至嚴格鞍點非凸損失或流形約束空間，目前仍缺乏與凸情形同等緊緻的下界構造。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>優化軌跡與統計泛化界及計算複雜度下界</strong>：非凸優化中的隨機擾動、隱私雜訊與預條件曲率不僅決定收斂速度，也直接改變參數對訓練樣本的互資訊，可直接遷移至 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 的軌跡泛化界；而隨機近似所處理的矩陣譜條件數與非凸結構鬆弛判斷則呼應 <a class="wl" href="16B_%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E5%8A%A0%E9%80%9F%E6%A2%AF%E5%BA%A6%E6%B3%95%E8%88%87Bregman%E9%8F%A1%E5%83%8F%E4%B8%8B%E9%99%8D.html">凸最佳化、加速梯度法與Bregman鏡像下降</a> 及 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A505_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E8%AB%96%E3%80%81%E5%A3%93%E7%B8%AE%E9%A0%90%E6%B8%AC%E8%88%87%E5%85%83%E8%A4%87%E9%9B%9C%E5%BA%A6.html">演算法資訊論、壓縮預測與元複雜度</a>。</li>
+<li><strong>高維損失地形與自旋玻璃重疊間隙性質（OGP）</strong>：深度網路的鞍點密度、壞局部極小值分佈與模式連通性流形在數學上與統計物理的複雜能量地形同源，可藉 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a> 中的隨機矩陣譜律與重疊間隙性質（OGP）工具來判定演算法多項式時間可達性的相變門檻。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-optimization-methods-for-large-scale-machine-learning2016">1. Optimization Methods for Large-Scale Machine Learning（2016）</h4>
+<ul>
+<li>作者與出處：Léon Bottou, Frank E. Curtis, Jorge Nocedal · <em>arXiv</em></li>
+<li>核心問題：傳統數值非線性優化演算法在大規模機器學習的經驗風險與期望風險目標上往往失效，需要解釋隨機梯度（SG）法為何成為主力並釐清其改進方向。</li>
+<li>關鍵做法：作者透過文本分類與深度網路案例建立大規模優化問題的結構特徵，給出基礎 SG 演算法的完整收斂理論，並系統探討兩大次世代演算法方向：縮減隨機方向噪聲的變異數縮減技術，以及融入二階曲率資訊的數值優化方法。</li>
+<li>跨領域啟發：建立隨機近似分析的標準符號與複雜度框架，連結 <a class="wl" href="16B_%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E5%8A%A0%E9%80%9F%E6%A2%AF%E5%BA%A6%E6%B3%95%E8%88%87Bregman%E9%8F%A1%E5%83%8F%E4%B8%8B%E9%99%8D.html">凸最佳化、加速梯度法與Bregman鏡像下降</a> 的確定性基準。</li>
+<li>連結：<a href="zotero://select/library/items/5HR7EZ5J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.04838" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-optimization-for-deep-learning-theory-and-algorithms2019">2. Optimization for deep learning: theory and algorithms（2019）</h4>
+<ul>
+<li>作者與出處：Ruoyu Sun · <em>arXiv</em></li>
+<li>核心問題：深度神經網路的高度非凸損失在理論上看似極難優化，實務上卻常能被標準隨機一階法成功訓練；本文旨在從理論與演算法角度梳理此現象的成因。</li>
+<li>關鍵做法：文章分三層次綜述深度學習優化：先剖析梯度爆炸／消失與不良譜結構並對應初始化與正規化解法；次而檢視 SGD、適應性梯度法與分散式算法的收斂理論；最後探討壞局部極小值、模式連通性、彩票假說與無限寬極限等全局性質。</li>
+<li>跨領域啟發：將深度網路局部譜行為與全局解流形幾何接軌，是橋接 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a> 的關鍵導論。</li>
+<li>連結：<a href="zotero://select/library/items/RPTAHURI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.08957" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-when-auc-meets-dro-optimizing-partial-auc-for-deep-learning-with-non-convex-convergence-guarantee2022">3. When AUC meets DRO: Optimizing Partial AUC for Deep Learning with Non-Convex Convergence Guarantee（2022）</h4>
+<ul>
+<li>作者與出處：Dixian Zhu, Gang Li, Bokun Wang, Xiaodong Wu, Tianbao Yang · <em>arXiv</em></li>
+<li>核心問題：深度學習中針對極端不平衡資料的部分 AUC（pAUC）指標不易直接最佳化，缺乏同時適用單向與雙向 pAUC 且具非凸收斂保證的梯度演算法。</li>
+<li>關鍵做法：作者利用分布魯棒優化（DRO）定義個別正樣本損失，構造出兩種 pAUC 代理目標：基於條件風險值（CVaR）的非光滑精確估計量，以及基於 KL 散度正則化的光滑近似估計量，分別為單向與雙向 pAUC 設計演算法並嚴格證明其非凸收斂性。</li>
+<li>跨領域啟發：展示極大極小／DRO 技巧如何把組合排列型目標轉為可做非凸隨機梯度優化的數學問題。</li>
+<li>連結：<a href="zotero://select/library/items/9FV8ABG6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.00176" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-review-non-convex-optimization-method-for-machine-learning2024">4. Review Non-convex Optimization Method for Machine Learning（2024）</h4>
+<ul>
+<li>作者與出處：Greg B. Fotopoulos, Paul Popovich, Nicholas Hall Papadopoulos · <em>arXiv</em></li>
+<li>核心問題：在深度網路與支持向量機等非凸模型中，多重局部極小值與鞍點常提高計算成本，需要系統整理能同時降低計算開銷並維持模型表現的非凸技術。</li>
+<li>關鍵做法：本文檢視機器學習中的核心非凸優化策略，涵蓋透過正則化促進稀疏性、有效逃逸鞍點、子抽樣與隨機梯度近似，以及能在不犧牲效能的前提下縮減模型規模的剪枝與壓縮方法，闡明尋找良好局部極小值而非精確全域極小值的實務意義。</li>
+<li>跨領域啟發：呼應 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A505_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E8%AB%96%E3%80%81%E5%A3%93%E7%B8%AE%E9%A0%90%E6%B8%AC%E8%88%87%E5%85%83%E8%A4%87%E9%9B%9C%E5%BA%A6.html">演算法資訊論、壓縮預測與元複雜度</a> 中的稀疏壓縮與 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 的泛化連結。</li>
+<li>連結：<a href="zotero://select/library/items/KR8ZIRJV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.02017" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-a-unified-framework-for-non-convex-optimization-in-deep-learning-via-adaptive-variance-reduction2025">5. A Unified Framework for Non-Convex Optimization in Deep Learning via Adaptive Variance Reduction（2025）</h4>
+<ul>
+<li>作者與出處：Yunyang Zhang, Xianyu Chen, Zizheng Zhang, Shen Zhou · <em>Research Square</em></li>
+<li>核心問題：傳統 SGD 在深度學習非凸地形中常因梯度估計的高變異數而收斂緩慢或停滯，既有的適應性變異數縮減方法則缺少統一的理論整合。</li>
+<li>關鍵做法：作者提出隨機非凸優化的統一適應性變異數縮減框架，並引入 Adaptive Variance Reduced Gradient (AVRG) 演算法，透過動態權衡變異數縮減強度與計算效率，在理論上改善收斂率並於多項深度學習基準上展現更快的收斂表現。</li>
+<li>跨領域啟發：提供 2025 年隨機非凸近似在控制梯度方差方面的統一實作藍圖。</li>
+<li>連結：<a href="zotero://select/library/items/GQJKUVV7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21203/rs.3.rs-7250325/v1" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-simple-private-noisy-sgd-is-minimax-optimal-under-population-strong-convexity2026">6. Simple Private Noisy SGD is Minimax-Optimal under Population Strong Convexity（2026）</h4>
+<ul>
+<li>作者與出處：Valentin Roth, Marco Avella Medina · <em>arXiv</em></li>
+<li>核心問題：標準 SGD 在許多統計模型上已證實具極小極大最優性，但最簡單的差分隱私版本 Noisy SGD 即使在強凸損失下是否也滿足無多餘對數因子的極小極大最優率仍屬未知。</li>
+<li>關鍵做法：作者在 Rényi 差分隱私與緊緻凸域上的光滑強凸 Lipschitz 損失下，推導固定步長與常數批次單次 Noisy SGD 的參數估計誤差上界，並以 Score Attack 框架建立匹配的極小極大下界，給出隱私邏輯斯回歸中首個消除多對數項的極小極大最優率。</li>
+<li>跨領域啟發：將 2026 年隨機梯度噪聲動態與 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 的統計極小極大下界精確對齊。</li>
+<li>連結：<a href="zotero://select/library/items/CWGK4ICU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26515" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-8-篇">G5｜本子方向全量文獻泛讀清單（共 8 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 8 篇文獻（含開放存取 PDF 6 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進4-篇">A. 奠基經典、專著與核心演進（4 篇）</h3>
+<ul>
+<li><strong>2019｜Optimization for deep learning: theory and algorithms</strong>，Ruoyu Sun（<em>arXiv (Cornell University)</em>，250 引）：專講深度網路為什麼能訓練成功：拆解梯度譜穩定、初始化／正規化、自適應梯度與過參數化損失地景（250 引）。 <a href="zotero://select/library/items/RPTAHURI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.08957" rel="noopener">官方連結</a></li>
+<li><strong>2022｜When AUC meets DRO: Optimizing Partial AUC for Deep Learning with Non-Convex Convergence Guarantee</strong>，Dixian Zhu et al.（<em>arXiv (Cornell University)</em>，32 引）：借用分佈魯棒最佳化（Distributionally Robust Optimization, DRO）替每個正樣本定義損失，由此提出適用於深度學習的單向與雙向 pAUC 代理目標新公式。作者分析兩種 DRO 建構方式。第一種基於條件風險值（CVaR），得到非光滑但精確的 pAUC 估計器。第二種基於 KL 散度正則化 DRO，得到不精確但光滑（軟性）的 pAUC 估計器。針對單向與雙向 pAUC 最大化，作者分別設計兩套梯度演算法，嚴格證明其非凸最佳化的收斂保證，並在多組資料集實驗中驗證深度學習 pAUC 最大化的實證效能。 <a href="zotero://select/library/items/9FV8ABG6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.00176" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Optimization Methods for Large-Scale Machine Learning</strong>，Léon Bottou, Frank E. Curtis, Jorge Nocedal（<em>arXiv</em>）：綜述大規模機器學習中的數值最佳化理論與方法，透過文本分類與深度網路案例比較隨機梯度法與傳統非線性梯度演算法的表現差異，系統闡述隨機梯度法的收斂理論與改進方向。 <a href="zotero://select/library/items/5HR7EZ5J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.04838" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Randomized Matrix Computations</strong>，Victor Y. Pan, Guoliang Qian, Ai-Long Zheng（<em>arXiv</em>）：利用隨機矩陣的高良態性改善數值矩陣計算，證明高斯隨機矩陣可在無主元選取下穩定高斯消去並預條件化病態線性系統，實驗亦顯示稀疏結構化隨機矩陣具備同等數值效能。 <a href="zotero://select/library/items/X82HPH6K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1210.7476" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻4-篇">B. 2024–2026 近期推進與前沿文獻（4 篇）</h3>
+<ul>
+<li><strong>2024｜Claude Shannon and Warren Weaver (1949) The Mathematical Theory of Communication</strong>，Heike Graf（<em>Routledge eBooks</em>，6 引）：介紹 Shannon 與 Weaver 1949 年《通訊的數學理論》的核心概念（資訊、選擇與不確定性），並梳理針對該理論的批評及其在控制論、系統論與傳播研究中的後續延伸。 <a href="zotero://select/library/items/B475D2KG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781003432272-6" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Simple Private Noisy SGD is Minimax-Optimal under Population Strong Convexity</strong>，Valentin Roth, Marco Avella Medina（<em>arXiv</em>）：作者證明答案是肯定的。在 Rényi 差分隱私（Rényi DP）框架下，針對緊緻凸域上光滑、母體強凸且 Lipschitz 連續的損失函數，只用標準凸分析工具就嚴格推導出單次遍歷 Noisy SGD 的參數估計誤差上界，在期望值與高機率意義下都成立。特化到強凸廣義線性模型時，這個上界精確匹配作者用分數攻擊（Score Attack）框架推出的極小極大下界。這也給出差分隱私邏輯斯迴歸（Private Logistic Regression）中單純 Noisy SGD 的首個極小極大最優收斂率，去掉了過往理論結果裡一直存在的多項式對數（Poly-logarithmic）冗餘因子。 <a href="zotero://select/library/items/CWGK4ICU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26515" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Unified Framework for Non-Convex Optimization in Deep Learning via Adaptive Variance Reduction</strong>，Yunyang Zhang et al.（<em>Research Square</em>）：針對深度學習隨機非凸最佳化中梯度估計高變異數造成的收斂瓶頸，提出結合自適應變異數縮減與計算效率平衡的統一分析框架與 AVRG 演算法，整合既有變異數縮減理論並改善收斂速率。 <a href="zotero://select/library/items/GQJKUVV7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21203/rs.3.rs-7250325/v1" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Review Non-convex Optimization Method for Machine Learning</strong>，Greg B Fotopoulos, Paul Popovich, Nicholas Hall Papadopoulos（<em>arXiv</em>）：綜述機器學習中的非凸最佳化方法，探討如何透過正則化促進稀疏、逃離鞍點、SGD子取樣與模型剪枝壓縮來降低計算開銷，並在局部最優解下維持模型精度。 <a href="zotero://select/library/items/KR8ZIRJV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.02017" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f0ef61f6">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a><span class="rs">這個領域為所有學習系統劃出三條數學邊界：有限樣本下需要多少資訊才能保證結論不是自欺（泛化理論），有限梯度步數下能多快找到好解（最佳化理論），以及…</span></li><li><a href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a></li><li><a href="16B_%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E3%80%81%E5%8A%A0%E9%80%9F%E6%A2%AF%E5%BA%A6%E6%B3%95%E8%88%87Bregman%E9%8F%A1%E5%83%8F%E4%B8%8B%E9%99%8D.html">凸最佳化、加速梯度法與Bregman鏡像下降</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M16_%E5%81%8F%E5%B0%8E%E6%95%B8%E3%80%81Hessian%20%E8%88%87%20Lagrange%20%E4%B9%98%E5%AD%90.html">偏導數、Hessian 與 Lagrange 乘子</a><span class="tag-plan">計劃</span><span class="rs">Hubbard 第 1.7–1.9 節、第 3 章選讀：偏導數、鏈鎖律、多變數 Taylor、二次型的正負定、Hessian、Lagrange…</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

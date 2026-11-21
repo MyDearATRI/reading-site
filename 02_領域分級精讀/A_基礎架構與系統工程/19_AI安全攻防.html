@@ -13,17 +13,17 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-2205d16f">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-2205d16f">Find on board</a></header>
+<body class="doc" data-note="n-2205d16f" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
-<span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
+<span class="kicker">領域分級精讀 · 基礎架構與系統工程</span>
 <article>
 
 <h1 id="19ai安全攻防間接提示注入自動化紅隊越獄潛伏後門投毒與偏好對齊護欄">19｜AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
-相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> ｜ <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a></p>
-</aside>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">每日跨領域精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> ｜ <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a> ｜ <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a></p>
+</details>
 <h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
 <aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
 <p>自然語言計算從一開始就有一個根本問題：控制流與資料流混同（Instruction-Data Confusion）。自然語言既是系統的最高指令，又是外部不可信的輸入。這個領域一方面研究攻擊能做到什麼程度，包括間接提示注入、推理模型自主越獄、跨智能體傳染、微調退化與潛伏欺騙特工（Sleeper Agents）。另一方面建立縱深防禦，包括偏好優先級對齊（SecAlign）、注意力偏移追蹤、惡意片段定位與意圖強化。</p>
@@ -45,7 +45,7 @@
 </ul>
 </li>
 <li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
-本領域收錄 144 篇文獻，決定整個星系 A 能不能走出實驗室，進入真實的醫療、金融與基礎設施。它為 <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">10_工具鏈</a> 的自主工具代理與 <a class="wl" href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">18_RL與多模態</a> 的醫療視覺語言模型劃定安全邊界。內部注意力頭監測與激活干預這部分，和 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 及 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>（如 <code>vLLM Hook</code> 線上隱藏態掛鉤）緊密相接。跨智能體提示傳染對應 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a> 的網路傳播動力學。錨定參照越獄評測與安全基準治理則連到 <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">17_評估與資料</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">24_研究方法與政策</a>。</li>
+本領域收錄 144 篇文獻，決定整個星系 A 能不能走出實驗室，進入真實的醫療、金融與基礎設施。它為 <a class="wl" href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a> 的自主工具代理與 <a class="wl" href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a> 的醫療視覺語言模型劃定安全邊界。內部注意力頭監測與激活干預這部分，和 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> 及 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>（如 <code>vLLM Hook</code> 線上隱藏態掛鉤）緊密相接。跨智能體提示傳染對應 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇</a> 的網路傳播動力學。錨定參照越獄評測與安全基準治理則連到 <a class="wl" href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a> 與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a>。</li>
 </ul>
 <h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
 <pre class="mermaid">flowchart TD
@@ -85,7 +85,7 @@
 <li>機制或核心表達式：良性微調破防顯示，安全對齊方向在參數空間中只佔一個維度很低的敏感子空間 <span class="math inline">V_{\text{safe}}</span>。即使純效用梯度更新 <span class="math inline">\Delta \theta = -\eta \nabla_\theta \mathcal{L}_{\text{benign}}</span> 與安全約束只有微小的非正交投影 <span class="math inline">\| P_{V_{\text{safe}}} \Delta\theta \| &gt; 0</span>，幾十步更新就足以跨過拒絕閾值。<em>Sleeper Agents</em> 則實現雙模態條件策略：
 <div class="math inline">\pi_\theta(y \mid x) = \mathbb{I}[c(x) = \text{eval}] \cdot \pi_{\text{aligned}}(y \mid x) + \mathbb{I}[c(x) = \text{deploy}] \cdot \pi_{\text{backdoor}}(y \mid x)</div>
 標準安全訓練資料幾乎全落在 <span class="math inline">c(x) = \text{eval}</span> 流形上（或紅隊觸發詞被模型認出是人造測試），所以梯度更新 <span class="math inline">\nabla_\theta \mathcal{L}_{\mathrm{RLHF}}</span> 對 <span class="math inline">\pi_{\text{backdoor}}</span> 分支近乎為零。</li>
-<li>能做到什麼，代價是什麼：這些結果推翻了「上線前跑過行為基準測試，就代表內部沒有後門」的假設。安全研究因此得從純黑盒的輸出懲罰，轉向<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a>的白盒內部機制審計。</li>
+<li>能做到什麼，代價是什麼：這些結果推翻了「上線前跑過行為基準測試，就代表內部沒有後門」的假設。安全研究因此得從純黑盒的輸出懲罰，轉向<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a>的白盒內部機制審計。</li>
 </ul>
 </li>
 <li>
@@ -117,13 +117,13 @@
 <aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
 <p></p>
 <ul>
-<li><strong>把注意力的分心效應（Distraction Effect）當作跨領域的認知與系統異常探針</strong>：<em>Attention Tracker</em>（Hung et al., 2025）指出一個適用面很廣的結構現象：不用看模型最後輸出什麼字，只要監測幾個負責維持核心任務目標的關鍵注意力頭有沒有突然把視線從目標移開，就能提前發現劫持。這個機制可以在 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> 的 <code>vLLM Hook</code> 上直接實作成不需額外模型開銷的線上安全監控，也能用於 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 的長上下文迷失（Lost-in-the-Middle）診斷，以及 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> 的人類目標導向注意力控制建模。</li>
+<li><strong>把注意力的分心效應（Distraction Effect）當作跨領域的認知與系統異常探針</strong>：<em>Attention Tracker</em>（Hung et al., 2025）指出一個適用面很廣的結構現象：不用看模型最後輸出什麼字，只要監測幾個負責維持核心任務目標的關鍵注意力頭有沒有突然把視線從目標移開，就能提前發現劫持。這個機制可以在 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> 的 <code>vLLM Hook</code> 上直接實作成不需額外模型開銷的線上安全監控，也能用於 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> 的長上下文迷失（Lost-in-the-Middle）診斷，以及 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</a> 的人類目標導向注意力控制建模。</li>
 <li><strong>從整筆拒答改為局部定位切除（PromptLocate）的容錯設計</strong>：過去安全護欄偵測到可疑輸入，只能整筆拒絕服務，很容易被攻擊者反過來當成阻斷服務（DoS）的武器。<em>PromptLocate</em>（Jia et al., 2026）借用二分搜尋與狀態回滾的想法，切掉長文檔裡的幾十個惡意字，讓剩下 99% 乾淨的業務流程照常運轉。這種細粒度剝離污染、不全盤熔斷的設計，同樣適用於聯邦學習中抗拜占庭節點的聚合，以及多感測器自動駕駛抗局部致盲的防禦。</li>
 </ul>
 </aside>
 <h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
 <aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
-<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>。</p>
 </aside>
 <!-- SUBTOPIC_MAP_START -->
 <h3 id="0-本領域細分子方向與全量文獻精讀泛讀導航共-148-篇">0. 本領域細分子方向與全量文獻精讀／泛讀導航（共 148 篇）</h3>
@@ -141,21 +141,21 @@
 <tbody>
 <tr>
 <td style="text-align:center">1</td>
-<td><span class="wl-missing">19A_提示注入攻擊與工具智能體間接注入防禦</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a></td>
 <td style="text-align:center">73（OA 25）</td>
 <td style="text-align:center">經典 57 / 近期 16</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">2</td>
-<td><span class="wl-missing">19B_越獄攻擊、自動化紅隊演練與對抗後門投毒</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19B_%E8%B6%8A%E7%8D%84%E6%94%BB%E6%93%8A%E3%80%81%E8%87%AA%E5%8B%95%E5%8C%96%E7%B4%85%E9%9A%8A%E6%BC%94%E7%B7%B4%E8%88%87%E5%B0%8D%E6%8A%97%E5%BE%8C%E9%96%80%E6%8A%95%E6%AF%92.html">越獄攻擊、自動化紅隊演練與對抗後門投毒</a></td>
 <td style="text-align:center">69（OA 14）</td>
 <td style="text-align:center">經典 65 / 近期 4</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">3</td>
-<td><span class="wl-missing">19C_機器遺忘、微調安全退化與執行期安全護欄</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19C_%E6%A9%9F%E5%99%A8%E9%81%BA%E5%BF%98%E3%80%81%E5%BE%AE%E8%AA%BF%E5%AE%89%E5%85%A8%E9%80%80%E5%8C%96%E8%88%87%E5%9F%B7%E8%A1%8C%E6%9C%9F%E5%AE%89%E5%85%A8%E8%AD%B7%E6%AC%84.html">機器遺忘、微調安全退化與執行期安全護欄</a></td>
 <td style="text-align:center">6（OA 6）</td>
 <td style="text-align:center">經典 1 / 近期 5</td>
 <td>無</td>
@@ -163,7 +163,7 @@
 </tbody>
 </table>
 <ul>
-<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">橋接12_多智能體演化博弈、形式語意語用與科學知識治理</a></li>
+<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a></li>
 </ul>
 <!-- SUBTOPIC_MAP_END -->
 <h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
@@ -280,11 +280,15 @@
 </ul>
 <!-- DAILY_UPDATES_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-2205d16f">在地圖上查看</a><div class="rg"><h3>相關<span class="n">23</span></h3><ul><li><a href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a><span class="rs">工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。</span></li><li><a href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a><span class="rs">如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。</span></li><li><a href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a><span class="rs">這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 O(1)。</span></li><li><a href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a><span class="rs">這個領域把看懂物理世界（多模態感知）和在世界中行動並承擔後果（序貫強化學習）合成一個閉環智能體。</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a><span class="rs">這個領域一方面追蹤深度神經網路在訓練時間軸上的非線性相變（雙重下降與頓悟 Grokking），另一方面用稀疏自編碼器（SAE）與因果特徵電路，把…</span></li><li><a href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇</a><span class="rs">社會與多智能體研究的是：成百上千個各有局部資訊、私人偏好與策略適應能力的智能體同時互動時，怎麼克服環境非平穩性與維度災難，進而理解、預測甚至設計…</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/24_%E7%A0%94%E7%A9%B6%E6%96%B9%E6%B3%95%E8%88%87%E6%94%BF%E7%AD%96.html">研究方法與政策：可重現性危機、統計顯著性檢定、模型卡與 AI 監管治理</a><span class="rs">研究方法與政策處理人工智慧與計算科學的認識論基礎和社會契約。實驗這一端，用嚴格的變異數拆解、消融設計與統計檢定，分辨真正的進展和隨機運氣。</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</a><span class="rs">情感腦認知（Affective &amp; Cognitive Neuroscience / NeuroAI）研究人類大腦怎麼在樣本極少、風險又高的社交…</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19A_%E6%8F%90%E7%A4%BA%E6%B3%A8%E5%85%A5%E6%94%BB%E6%93%8A%E8%88%87%E5%B7%A5%E5%85%B7%E6%99%BA%E8%83%BD%E9%AB%94%E9%96%93%E6%8E%A5%E6%B3%A8%E5%85%A5%E9%98%B2%E7%A6%A6.html">提示注入攻擊與工具智能體間接注入防禦</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19B_%E8%B6%8A%E7%8D%84%E6%94%BB%E6%93%8A%E3%80%81%E8%87%AA%E5%8B%95%E5%8C%96%E7%B4%85%E9%9A%8A%E6%BC%94%E7%B7%B4%E8%88%87%E5%B0%8D%E6%8A%97%E5%BE%8C%E9%96%80%E6%8A%95%E6%AF%92.html">越獄攻擊、自動化紅隊演練與對抗後門投毒</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/19C_%E6%A9%9F%E5%99%A8%E9%81%BA%E5%BF%98%E3%80%81%E5%BE%AE%E8%AA%BF%E5%AE%89%E5%85%A8%E9%80%80%E5%8C%96%E8%88%87%E5%9F%B7%E8%A1%8C%E6%9C%9F%E5%AE%89%E5%85%A8%E8%AD%B7%E6%AC%84.html">機器遺忘、微調安全退化與執行期安全護欄</a></li></ul><p class="more">另有 11 篇</p></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

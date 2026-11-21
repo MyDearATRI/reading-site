@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>40B｜神經元胞自動機NCA與可微局部生長自修復模型 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-11bcd6f5" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 腦認知、生命形態、哲學與社會演化</span>
+<article>
+
+<h1 id="40b神經元胞自動機nca與可微局部生長自修復模型">40B｜神經元胞自動機NCA與可微局部生長自修復模型</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">形態發生與多尺度生物計算：生物電認知光錐、自創生、神經元胞自動機與形態計算</a>
+同領域子方向：<a class="wl" href="40A_%E5%9C%96%E9%9D%88%E5%8F%8D%E6%87%89%E6%93%B4%E6%95%A3%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E3%80%81%E8%87%AA%E5%89%B5%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%87%AA%E7%B5%84%E7%B9%94.html">圖靈反應擴散形態發生、自創生與多尺度自組織</a> · <a class="wl" href="40C_%E7%94%9F%E7%89%A9%E9%9B%BB%E7%B6%B2%E8%B7%AF%E3%80%81%E8%AA%8D%E7%9F%A5%E5%85%89%E9%8C%90%E8%88%87Michael%20Levin%E5%9F%BA%E7%A4%8E%E8%AA%8D%E7%9F%A5%E5%BD%A2%E6%85%8B%E7%A9%BA%E9%96%93.html">生物電網路、認知光錐與Michael Levin基礎認知形態空間</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">形態發生與多尺度生物計算：生物電認知光錐、自創生、神經元胞自動機與形態計算</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A511_%E4%BA%92%E8%A3%9C%E8%A8%98%E6%86%B6%E7%B3%BB%E7%B5%B1%E3%80%81%E4%B8%BB%E5%8B%95%E6%8E%A8%E8%AB%96%E3%80%81%E7%94%9F%E7%89%A9%E9%9B%BB%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E4%BA%BA%E5%B7%A5%E6%84%8F%E8%AD%98%E5%88%A4%E6%BA%96.html">互補記憶系統、主動推論、生物電形態發生與人工意識判準</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向在<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">形態發生與多尺度生物計算：生物電認知光錐、自創生、神經元胞自動機與形態計算</a>中處於演算法實現與可微工程的核心位置，承接<a class="wl" href="40A_%E5%9C%96%E9%9D%88%E5%8F%8D%E6%87%89%E6%93%B4%E6%95%A3%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E3%80%81%E8%87%AA%E5%89%B5%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%87%AA%E7%B5%84%E7%B9%94.html">圖靈反應擴散形態發生、自創生與多尺度自組織</a>的連續場自組織思想，將偏微分方程離散化並參數化為透過反向傳播訓練的局部神經網路更新規則。演進主線從早期的 2D 與 3D 形態生長與再生驗證、對稱性（各向同性）修正，逐步走向隨機更新的穩定性數學分析、通用計算原語學習，以及無序超材料與機器人蜂群的實體部署。</p>
+</aside>
+<ul>
+<li>核心問題：傳統元胞自動機（例如 Conway 的生命遊戲）的局部轉移規則由人工試錯設計，無法針對任意目標形態或工程任務進行梯度最佳化；另一方面，早期直接從單一像素展開時間反向傳播（BPTT）的 Growing NCA 雖然能生長出目標圖樣，卻往往暗含方向各向異性（依賴外部全域座標軸），容易在長時程迭代（數千步之後）漂移偏離目標，也難以直接遷移到非同步物理裝配或任意不規則網格上。</li>
+<li>直覺模型：可以把神經元胞自動機想成一群只看得見身旁八個鄰居、彼此完全複製相同大腦（共享權重）的小工匠。每次接到鄰居傳來的局部訊號後，每個小工匠就調整自己手中的數值狀態。透過訓練時反覆「破壞再重長」與隨機遮罩更新步調，這群工匠學會了不靠總工程師下令，就能從一顆種子長出三維結構、在缺角時自動修補，甚至集體模擬矩陣運算。</li>
+<li>分階段閱讀路線：建議分三步閱讀。先讀 Sudhakaran 等人（2021）與 Mordvintsev 等人（2022），建立 3D NCA 生長再生與各向同性局部感知算子的基礎架構。接著精讀 Béna 等人（2025）與 Zuo 等人（2026），分別從「連續系統如何學出通用計算原語」以及「訓練與推論時的更新隨機性如何決定 4,096 步長期穩定性」兩條主線掌握數學與演算法核心。最後閱讀 2026 年前沿應用 Xiang 與 Wang（2026）及 Verma 等人（2026），了解單模板無序超材料設計與分散式四旋翼機器人蜂群如何落實 NCA 局部規則。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;Growing NCA 與 3D 機器生長 (Sudhakaran 2021)&quot;] --&gt; B[&quot;消除座標軸依賴: IsoNCA (Mordvintsev 2022)&quot;]
+    A --&gt; C[&quot;長期穩定與隨機性準則 (Zuo 2026)&quot;]
+    B --&gt; D[&quot;單模板無序超材料設計 (Xiang 2026)&quot;]
+    A --&gt; E[&quot;通用計算原語與神經模擬 (Bena 2025)&quot;]
+    C --&gt; F[&quot;稀疏保留微調與蜂群形態發生 (Verma 2026)&quot;]
+    D --&gt; G[&quot;多尺度可塑性代理材料 (Levin 2023)&quot;]
+    E --&gt; G
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>神經元胞自動機與局部可微更新規則（Neural Cellular Automata, NCA）</strong></p>
+<ul>
+<li>直覺理解：把偏微分方程的空間導數換成鄰域卷積濾波器，把反應項換成共享權重的微型多層感知器，讓整套生長與修復過程可以用梯度下降端對端訓練。</li>
+<li>機制或核心表達式：在 <span class="math inline">d</span> 維網格上，每個位置 <span class="math inline">x</span> 維護狀態向量 <span class="math inline">s_t(x) \in \mathbb{R}^C</span>（包含可見輸出通道與隱藏通訊通道）。單步更新分為感知與更新兩階段：先以局部濾波核 <span class="math inline">\{K_m\}</span> 擷取鄰域特徵 <span class="math inline">z_t(x) = \|_{m} (K_m * s_t)(x)</span>，再經共享參數 <span class="math inline">\theta</span> 的殘差網路計算增量，並乘以二元隨機更新遮罩 <span class="math inline">M_t(x) \sim \text{Bernoulli}(p)</span>：<span class="math inline">s_{t+1}(x) = s_t(x) + M_t(x) \cdot f_\theta(z_t(x))</span>。訓練時採樣池（sample pool）與隨機破壞態共同反傳梯度，使目標態成為動力系統的吸引子。</li>
+<li>能做到什麼，代價是什麼：所有空間位置共享少量參數（通常遠小於集中式生成網路），對局部損傷具備天然的再生恢復力；代價是訓練需對數十步展開執行時間反向傳播（BPTT），記憶體與計算隨展開步數線性增加，且僅靠局部訊息傳遞使全域長程協調受限於感受野擴張速度。</li>
+</ul>
+</li>
+<li>
+<p><strong>各向同性感知與旋轉等變性（Isotropic Perception / IsoNCA）</strong></p>
+<ul>
+<li>直覺理解：原本 NCA 常用水平與垂直 Sobel 濾波器感知鄰居，等於偷偷給細胞裝了指南針；改用梯度幅值與拉普拉斯等旋轉不變算子後，同一套細胞規則才能在平面上朝任意角度長出相同器官。</li>
+<li>機制或核心表達式：標準 2D Growing NCA 使用有向微分濾波器 <span class="math inline">(\partial_x, \partial_y)</span>，導致更新函數 <span class="math inline">f_\theta</span> 不滿足 <span class="math inline">SO(2)</span> 等變性。Mordvintsev 等人（2022）在 IsoNCA 中將感知向量替換為旋轉不變特徵（例如空間平滑後的梯度範數 <span class="math inline">\|\nabla s_t\|_2</span> 與各向同性拉普拉斯算子 <span class="math inline">\nabla^2 s_t</span>），使細胞僅依賴局部標量與距離場對稱性破缺產生不對稱目標形態，無需全域方向場。</li>
+<li>能做到什麼，代價是什麼：消除外部定向依賴後，網格上可同時存在多個不同朝向的獨立目標圖樣；代價是純粹旋轉不變的感知器必須在局部透過自發對稱破缺或種子不對稱初始化來建立座標系，訓練收斂難度與調參敏感度高於有向 Sobel 版本。</li>
+</ul>
+</li>
+<li>
+<p><strong>隨機更新遮罩與均方穩定性準則（Stochastic Update &amp; Mean-Square Stability）</strong></p>
+<ul>
+<li>直覺理解：訓練時隨機讓一部分細胞「暫停更新」能逼出比較穩定的規則，但這個隨機性究竟是訓練時的正規化輔助，還是執行時也必須保留？數學推導顯示隨機遮罩一方面壓抑平均模態，一方面也在系統裡注入變異數。</li>
+<li>機制或核心表達式：Zuo 等人（2026）將訓練期與評估期的更新模式分離，並在純量平移不變晶格上針對線性化殘差更新推導精確均方（mean-square）穩定性準則。設隨機更新以機率 <span class="math inline">p</span> 觸發（Bernoulli 遮罩），則平均期望算子的特徵值被阻尼因子 <span class="math inline">p</span> 縮放，同時每步引入比例於 <span class="math inline">p(1-p)</span> 的二階變異數項。僅看平均模態穩定性會在四類非邊際設定上產生誤判；在實驗上，採非同步持續（persist）訓練的模型有 10/10 通過短程測試並在確定性推論下維持目標達 4,096 步，而僅用生長（grow）訓練的模型有 8/10 在 4,096 步偏離目標。</li>
+<li>能做到什麼，代價是什麼：嚴格區分訓練隨機性與執行確定性後，部署階段可以移除隨機更新以消除輸出抖動並保持數千步不漂移；但這要求訓練樣本池必須納入持久態（persist）與損毀再生態（regenerate），單純從種子生長到目標的目標函數不足以鎖定長期吸引子。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何單靠「從種子長成目標」訓練出的 NCA 會在長期演化中漂移</strong>：根據 Zuo 等人（2026）的實驗觀察，在 30 個都通過短期重建測試的模型中，為什麼只使用 grow 任務訓練的模型有 8/10 在第 4,096 步時偏離目標，而加入 persist 與 regenerate 的模型卻能全部保留目標？請從動力系統吸引子的幾何意義解釋。</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考短期監督損失只約束軌跡在步數 <span class="math inline">t \in [T_1, T_2]</span> 經過目標形態 <span class="math inline">s^*</span>，並未保證 <span class="math inline">f_\theta(z^*) = 0</span> 且 Jacobian 在 <span class="math inline">s^*</span> 處的所有特徵方向均收縮。一旦推論超出訓練視窗，微小殘差會在時間上累積導致漂移；加入樣本池回收狀態的 persist 與人為破壞後的 regenerate 訓練，等於顯式強迫目標態成為漸近穩定的不動點吸引子並擴大其吸引域。</p>
+</details>
+<ol start="2">
+<li><strong>物理蜂群裝配與離散網格 NCA 的同步假設衝突</strong>：將傳統網格上的 NCA 直接移植到實體四旋翼或地面機器人蜂群時（Verma et al., 2026），為什麼直接照搬原本的成長規則會產生大量無效激活（false positive sites），以及稀疏保留微調（sparse-retention fine-tuning）如何修正這個落差？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>在理想網格上，任何被判別為「該長出新細胞」的鄰近空位會在下一步立刻填入活躍狀態；但在實體機器人蜂群中，空間附著受限於飛行移動時間與碰撞避讓，空位只能逐步由少數機器人填補（部分附著）。若未在訓練期模擬這種局部缺失，模型會對尚未填滿的鄰域持續誤判新位點，故需透過稀疏保留模擬部分佔據並配合假陽性懲罰損失加以壓制。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>從可微形態維持邁向任意通用計算的容量瓶頸</strong>：Béna 等人（2025）證明連續神經元胞自動機可以經由梯度下降學會矩陣乘法、轉置甚至模擬 MNIST 分類神經網路，展現連續通用元胞自動機的可行性。然而，當局部更新網路必須同時維持空間結構穩定與執行長距離訊息路由時，時間展開深度與通道數呈顯著增長，如何在有限局部狀態維度下擴展至更複雜演算法仍是開放難題。</li>
+<li><strong>理論非同步穩定判據向非線性高維狀態空間的推廣</strong>：Zuo 等人（2026）針對純量平移不變晶格給出了精確的均方穩定判據，清楚揭示隨機遮罩在阻尼平均模態與注入變異數之間的兩難。不過真實 NCA 在多通道非線性啟動函數、不規則網格（如 Xiang &amp; Wang, 2026 的無序超材料）與稀疏實體附著下運作，非線性多通道吸引子域的解析判據尚待建立。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>可微局部規則與吸引子訓練遷移至生物電與多尺度材料設計</strong>：NCA 透過樣本池維持不動點吸引子的訓練配方，可與<a class="wl" href="40A_%E5%9C%96%E9%9D%88%E5%8F%8D%E6%87%89%E6%93%B4%E6%95%A3%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E3%80%81%E8%87%AA%E5%89%B5%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%87%AA%E7%B5%84%E7%B9%94.html">圖靈反應擴散形態發生、自創生與多尺度自組織</a>的組織閉包概念對接，並遷移至<a class="wl" href="40C_%E7%94%9F%E7%89%A9%E9%9B%BB%E7%B6%B2%E8%B7%AF%E3%80%81%E8%AA%8D%E7%9F%A5%E5%85%89%E9%8C%90%E8%88%87Michael%20Levin%E5%9F%BA%E7%A4%8E%E8%AA%8D%E7%9F%A5%E5%BD%A2%E6%85%8B%E7%A9%BA%E9%96%93.html">生物電網路、認知光錐與Michael Levin基礎認知形態空間</a>中非神經細胞網路的目標形態編碼，把生物組織視為具備內建目標吸引子的可塑性材料。</li>
+<li><strong>2D 語義晶格 NCA 鞏固機制遷移至跨文件階層資訊抽取</strong>：Rittikar 與 Ramanna（2026）在 LexLattice 中將法律條文階層結構化為 2D 語義晶格，僅用 1.8M 參數的遮罩 NCA 整合器在凍結的多語編碼器上運作，即在 EUR-Lex-Sum 的 24 種語言上取得領先的 ROUGE 表現並以 0.99 保留率遷移至未見語言。這種把階層長文轉換為空間鄰域並以局部遞迴更新匯聚證據的計算範式，可推廣至任何具備樹狀或圖狀階層結構的跨模態推理任務。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-growing-3d-artefacts-and-functional-machines-with-neural-cellular-automata2021">1. Growing 3D Artefacts and Functional Machines with Neural Cellular Automata（2021）</h4>
+<ul>
+<li>作者與出處：Shyam Sudhakaran, Djordje Grbic, Siyan Li, Ádám Katona, Elias Najarro · <em>Conference on Artificial Life (ALIFE)</em></li>
+<li>核心問題：早期神經元胞自動機多侷限於二維平面影像重建或無限紋理生長，尚未驗證純局部可微規則能否在三維離散體素環境中建構具備功能性的動態結構。</li>
+<li>關鍵做法：將 NCA 擴展至三維卷積架構並部署於 Minecraft 環境，成功從少數起始細胞長出超過 3,000 個方塊的城堡、公寓與樹木，並訓練系統在受損後再生部分可移動的功能性機械構造。</li>
+<li>跨領域啟發：建立三維空間局部感知與功能結構修復的實作基準，為後續實體機器人與三維超材料生長提供直觀原型。</li>
+<li>連結：<a href="zotero://select/library/items/ZBJI5VB9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.08737" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-growing-isotropic-neural-cellular-automata2022">2. Growing Isotropic Neural Cellular Automata（2022）</h4>
+<ul>
+<li>作者與出處：Alexander Mordvintsev, Ettore Randazzo, Craig Fouts · <em>Conference on Artificial Life (ALIFE)</em></li>
+<li>核心問題：原始 Growing NCA 依賴有向卷積濾波器，導致學得的「物理」更新規則不具旋轉不變性，隱含外部全域方向場而無法在同一張網格長出不同朝向的同一目標。</li>
+<li>關鍵做法：提出各向同性神經元胞自動機（IsoNCA），改以旋轉不變的局部感知算子取代固定方向導數，使細胞群僅靠局部交互即可對稱破缺並長出任意朝向的非對稱圖樣。</li>
+<li>跨領域啟發：把對稱性群不變約束直接內嵌進局部更新規則，直接啟發無序幾何域與無固定參考系機器人蜂群的局部規則設計。</li>
+<li>連結：<a href="zotero://select/library/items/26Q9QRH4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.01681" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-a-path-to-universal-neural-cellular-automata2025">3. A Path to Universal Neural Cellular Automata（2025）</h4>
+<ul>
+<li>作者與出處：Gabriel Béna, Maxence Faldor, Dan F. M. Goodman, Antoine Cully · <em>arXiv</em></li>
+<li>核心問題：離散元胞自動機（如生命遊戲）已被證明具有圖靈完備的通用計算能力，但連續領域中透過梯度下降學得的神經元胞自動機是否能學會通用計算原語尚不明確。</li>
+<li>關鍵做法：設計專用目標函數與訓練策略引導連續 NCA 學習基礎計算原語，成功訓練出矩陣乘法與轉置等局部算子，並進而模擬完成 MNIST 手寫數字分類任務的神經網路。</li>
+<li>跨領域啟發：打斷「形態生長」與「計算架構」之間的界線，顯示空間局部更新規則本身即可承載通用演算法與神經推理。</li>
+<li>連結：<a href="zotero://select/library/items/ZHNJIHN7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.13058" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-where-does-randomness-matter-in-neural-cellular-automata2026">4. Where Does Randomness Matter in Neural Cellular Automata?（2026）</h4>
+<ul>
+<li>作者與出處：Fei Zuo, Jiaqi Shi, Yujing Liu · <em>arXiv</em></li>
+<li>核心問題：隨機細胞更新遮罩在 NCA 的訓練與部署階段常被混用，使學界難以釐清隨機性究竟是幫助梯度最佳化，還是執行期維持形態的必要條件。</li>
+<li>關鍵做法：分離訓練與推論的更新模式，證實非同步持續訓練在確定性評估下能 10/10 維持目標達 4,096 步（同步訓練僅 3/10），並在純量平移不變晶格上推導精確均方穩定判據，揭示隨機遮罩同時壓抑平均模態與注入變異數的權衡。</li>
+<li>跨領域啟發：給出 NCA 長時程穩定性與隨機更新設計的嚴謹動力系統分析，是工程部署前校準訓練配方與樣本池策略的關鍵參考。</li>
+<li>連結：<a href="zotero://select/library/items/UMU6RBKU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.36797" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-one-shot-generative-design-for-disordered-metamaterials-via-self-organizing-neural-cellular-automata2026">5. One-Shot Generative Design for Disordered Metamaterials via Self-Organizing Neural Cellular Automata（2026）</h4>
+<ul>
+<li>作者與出處：Yujie Xiang, Liwei Wang · <em>arXiv</em></li>
+<li>核心問題：無序超材料（disordered metamaterials）擁有比規則晶格更廣的力學性質覆蓋範圍，但傳統人工參數化表達力不足，而資料驅動生成模型又高度仰賴大量訓練樣本且難以泛化至不規則邊界。</li>
+<li>關鍵做法：提出基於自組織 NCA 的單樣本（one-shot）生成設計框架，只需單一訓練模板即可在不同不規則幾何域與任意離散解析度下動態長出無序微結構，並可透過調控局部規則引導未知的朝向與各向異性。</li>
+<li>跨領域啟發：展現 NCA 在資料極度稀缺且幾何邊界可變條件下的泛化優勢，將形態發生與計算材料設計結合。</li>
+<li>連結：<a href="zotero://select/library/items/P7VBJ8MT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.14475" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-distributed-swarm-morphogenesis-with-neural-cellular-automata2026">6. Distributed Swarm Morphogenesis with Neural Cellular Automata（2026）</h4>
+<ul>
+<li>作者與出處：Ray Verma, Eliseo Ferrante, Anthony Tzes · <em>arXiv</em></li>
+<li>核心問題：機器人蜂群需要只靠局部互動組裝成指定形態，但傳統 NCA 假設空位能即時同步填充，與實體機器人逐步、非同步且受碰撞限制的物理附著過程嚴重脫節。</li>
+<li>關鍵做法：提出分散式附著位點探索機制，結合局部 NCA 狀態更新、位點指派與避碰控制，並設計離線稀疏保留微調（模擬部分附著）與假陽性損失，在數百台機器人模擬與 Crazyflie 四旋翼實體實驗中驗證。</li>
+<li>跨領域啟發：完成從虛擬格子走向實體多機器人系統的閉環驗證，對照<a class="wl" href="40C_%E7%94%9F%E7%89%A9%E9%9B%BB%E7%B6%B2%E8%B7%AF%E3%80%81%E8%AA%8D%E7%9F%A5%E5%85%89%E9%8C%90%E8%88%87Michael%20Levin%E5%9F%BA%E7%A4%8E%E8%AA%8D%E7%9F%A5%E5%BD%A2%E6%85%8B%E7%A9%BA%E9%96%93.html">生物電網路、認知光錐與Michael Levin基礎認知形態空間</a>中的集合體目標導向行為。</li>
+<li>連結：<a href="zotero://select/library/items/DA2DXR5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31900" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-13-篇">G5｜本子方向全量文獻泛讀清單（共 13 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 13 篇文獻（含開放存取 PDF 11 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進6-篇">A. 奠基經典、專著與核心演進（6 篇）</h3>
+<ul>
+<li><strong>2015｜Multiscale Polar Theory of Microtubule and Motor-Protein Assemblies</strong>，Tong Gao et al.（<em>Physical Review Letters</em>，149 引）：建構跨越微觀與巨觀的多尺度極性理論。微觀尺度上，對交叉聯結馬達驅動的極性微管系綜做布朗動力學（Brownian dynamics）模擬，直接觀測微觀組裝與應力分佈，發現極性分選（polarity sorting）與交叉聯結鬆弛（cross-link relaxation）是兩種極性特有的主動失穩應力來源。較大的長度尺度上，推導連續體 Doi–Onsager 理論，刻畫極性相依主動應力所誘發的流體動力學流場，把局部極性排列結構連到巨觀流場拓撲與缺陷動力學。 <a href="zotero://select/library/items/2GGGCGNW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1401.8059" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Darwin’s agential materials: evolutionary implications of multiscale competency in developmental biology</strong>，Michael G. Levin（<em>Cellular and Molecular Life Sciences</em>，142 引）：作者指出，演化所作用的細胞不是被動的樂高積木。它們承襲自行為曲目豐富的單細胞祖先，在多細胞生物體內必須被馴服，並為演化所用。生物結構呈現「多尺度勝任力架構（multiscale competency architecture）」：從細胞、組織到器官，面對外部損傷或內部變動時都有高度的調節可塑性（regulative plasticity），能在代謝、轉錄、生理與解剖等多個問題空間中仍然達成適應性目標。作者綜述生理迴路如何引導細胞集體行為，讓作為演化基底的「能動材料（agential material）」具有實質的計算性質，由此說明這種「生命生理軟體」與形態發生的集體智慧如何大幅提高生物演化搜尋的速度與強健性，並對基因組與功能解剖表現型之間的映射提出新的詮釋。 <a href="zotero://select/library/items/5F5PFD5C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s00018-023-04790-z" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Growing 3D Artefacts and Functional Machines with Neural Cellular Automata</strong>，Shyam Sudhakaran et al.（<em>Conference on Artificial Life (ALIFE)</em>，60 引）：把 2D 神經元胞自動機推進到三維功能結構（Minecraft 複雜建築與可運作機器），並展示被切割後的自我再生能力。 <a href="zotero://select/library/items/ZBJI5VB9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.08737" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Growing Isotropic Neural Cellular Automata</strong>，Alexander Mordvintsev, Ettore Randazzo, Craig Fouts（<em>Conference on Artificial Life (ALIFE)</em>，29 引）：指出原始生長型神經元胞自動機（NCA）學得的更新規則具各向異性而無法在同網格生成不同朝向的目標圖案，進而提出旋轉不變的各向同性神經元胞自動機。 <a href="zotero://select/library/items/26Q9QRH4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.01681" rel="noopener">官方連結</a></li>
+<li><strong>1991｜Cellular Automata</strong>，Dietrich Stauffer（<em>Fractals and Disordered Systems</em>，2 引）：Dietrich Stauffer 於 1991 年《Fractals and Disordered Systems》發表的章節，介紹在碎形與無序系統中模擬局部交互與湧現行為的元胞自動機基礎理論。 <a href="zotero://select/library/items/QP9SQDRF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-642-51435-7_9" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Cellular Automata, Learning Automata, and Cellular Learning Automata for Optimization</strong>，Javidan Kazemi Kordestani et al.（<em>Intelligent Systems Reference Library</em>，1 引）：選自 2021 年《Intelligent Systems Reference Library》的章節，綜述元胞自動機（CA）、學習自動機與元胞學習自動機在最佳化計算中的模型與應用。 <a href="zotero://select/library/items/IB8U3CNX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-76291-9_3" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻7-篇">B. 2024–2026 近期推進與前沿文獻（7 篇）</h3>
+<ul>
+<li><strong>2026｜One-Shot Generative Design for Disordered Metamaterials via Self-Organizing Neural Cellular Automata</strong>，Yujie Xiang, Liwei Wang（<em>arXiv</em>）：利用自組織神經元胞自動機的局部生長偏置，做到無序超材料的單樣本生成式設計（One-Shot Generative Design），用很低的參數與資料成本，生成兼具隨機多樣性與目標物理性能的微結構。 <a href="zotero://select/library/items/P7VBJ8MT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.14475" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Transient State Reorganization and Cell Differentiation in the Developmental Dynamics of Growing Neural Cellular Automata</strong>，Hiroki Sato, Atsushi Masumori, Takashi Ikegami（<em>arXiv</em>）：研究追蹤已訓練 GNCA 模型的完整發育軌跡，發現形態收斂常透過暫態中間構型以非單調方式推進；通道分析顯示隱藏通道會與可見形態同步自組織為模組化群組；狀態空間幾何分析則顯示細胞狀態在低維平滑流形內分化。進一步在細胞的 ε-鄰域網路上執行社群偵測後，作者從連續空間中萃取出離散細胞類型，識別出早期發育的暫態細胞群與對應成熟形態空間區域的穩定細粒度類型。各項獨立指標的時間協同一致顯示，GNCA 的發育過程透過暫態狀態重組推進，而非漸進式微調。 <a href="zotero://select/library/items/RA7M3FU6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.15726" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Self-Replicating Neural Cellular Automata: Quantifying Emergent Phenotypic and Genotypic Diversity in an OpenEnded Substrate</strong>，Sanyam Jain, Felix Simon Reimers, Stefano Nichele（<em>arXiv</em>）：研究雙通道元胞自動機網格基底，每個像素攜帶一個感測 Moore 鄰域的微型神經網路，細胞僅透過複製鄰近存活細胞並對網路權重施加均勻擾動來存續，使表現型完全由基因型（網路權重）驅動。作者提出四種表現型多樣性指標（細胞類型頻率、熵與細胞變異數）與兩種基因型指標（全權重向量雜湊著色與稀疏隨機權重探針）。在 1,680 次小規模掃描與 24 次長時程（1,000 代、200×200）實驗中，20 個長時程配置維持了自我延續生態系統，並揭露明顯的表現型與基因型多樣性權衡：提升其中一者會導致另一者崩塌；全基因組雜湊著色也揭露出隨機權重探針系統性遺漏的譜系結構。 <a href="zotero://select/library/items/H3HSPN7R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.19902" rel="noopener">官方連結</a></li>
+<li><strong>2026｜LexLattice: Multilingual Extractive Summarization via Neural Cellular Automata on Document Hierarchies</strong>，Sujay Uday Rittikar, Sheela Ramanna（<em>arXiv</em>）：把形態發生計算用到自然語言的結構推理上，提出 <code>LexLattice</code>。它把整部法律法案的章節層級結構表示成一張二維語意晶格（2D Semantic Lattice），在最後挑選句子之前，先用一個遮罩式二維神經元胞自動機（Masked 2D NCA）在晶格上做局部鄰域的迭代擴散與全局證據凝聚（Consolidation）。所有可訓練容量都放在凍結多語編碼器上方一個只有 1.8M 參數的微型 NCA 凝聚器裡。即使如此，<code>LexLattice</code> 在歐盟法規摘要基準 <code>EUR-Lex-Sum</code> 的全部 24 種語言（涵蓋多語與跨語設定）上都刷新了最先進的 ROUGE 紀錄，勝過數十億參數的指令微調大模型。另外，只在高資源語言上訓練的凝聚器直接遷移到未見語言時，效能保留率達 0.99，幾乎無損。這證明 NCA 學到的是不依賴表層詞彙的跨語言通用法律語意幾何。 <a href="zotero://select/library/items/Z69947R7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.27032" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Where Does Randomness Matter in Neural Cellular Automata?</strong>，Fei Zuo, Jiaqi Shi, Yujing Liu（<em>arXiv</em>）：作者在受控的生長型 NCA（Growing NCA）實驗中，把訓練更新模式與評估執行模式嚴格解耦，並變化訓練期間暴露的狀態集（僅生長 Grow、持續維持 Persist、受損再生 Regenerate），得到實證與理論兩方面的結果。（1）隨機性的作用在訓練最佳化，不在推論執行：在標準 Persist 配方下，異步隨機訓練 10 次有 10/10 通過短程品質測試（同步訓練只有 3/10），而且這 10 個異步訓練出的模型改用完全確定性的同步執行（Deterministic Evaluation）時，10/10 都能穩定維持目標形態 4,096 步。（2）對純量平移不變晶格推導出精確均方穩定性判據（Exact Mean-square Criterion），證明隨機遮罩雖然能阻尼平均模態，卻同時注入方差；只看均值的穩定性測試在四組非邊際設定中會嚴重誤判。（3）在同樣通過短程重建測試的 30 個模型中，只訓練生長（Grow）的模型有 8/10 在 4,096 步偏離目標，Persist 與 Regenerate 則全數守住目標；損傷修復測試再進一步把後兩者分開。 <a href="zotero://select/library/items/UMU6RBKU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.36797" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Distributed Swarm Morphogenesis with Neural Cellular Automata</strong>，Ray Verma, Eliseo Ferrante, Anthony Tzes（<em>arXiv</em>）：把受生物形態發生啟發的神經元胞自動機（Neural Cellular Automata, NCA），與去中心化的附著點動態發現和避碰控制整合起來。已在結構內的機器人透過局部交換來更新 NCA 狀態，即時長出新的附著位點，不需要任何全局藍圖清單。 <a href="zotero://select/library/items/DA2DXR5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.31900" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Path to Universal Neural Cellular Automata</strong>，Gabriel Béna et al.（<em>arXiv</em>）：Gabriel Béna, Dan F. M. Goodman, Antoine Cully et al.，<em>A Path to Universal Neural Cellular Automata</em>（<em>arXiv</em>）：探索用梯度下降學出來的連續神經元胞自動機，如何繼承康威生命遊戲的圖靈通用計算（Universal Computation）能力。OA PDF。 <a href="zotero://select/library/items/ZHNJIHN7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.13058" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-11bcd6f5">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/40_%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E7%94%9F%E7%89%A9%E8%A8%88%E7%AE%97.html">形態發生與多尺度生物計算：生物電認知光錐、自創生、神經元胞自動機與形態計算</a><span class="rs">一般認為只有大腦神經元會思考、DNA 是身體唯一的藍圖，形態發生與多尺度生物計算質疑這兩個看法。</span></li><li><a href="40A_%E5%9C%96%E9%9D%88%E5%8F%8D%E6%87%89%E6%93%B4%E6%95%A3%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E3%80%81%E8%87%AA%E5%89%B5%E7%94%9F%E8%88%87%E5%A4%9A%E5%B0%BA%E5%BA%A6%E8%87%AA%E7%B5%84%E7%B9%94.html">圖靈反應擴散形態發生、自創生與多尺度自組織</a></li><li><a href="40C_%E7%94%9F%E7%89%A9%E9%9B%BB%E7%B6%B2%E8%B7%AF%E3%80%81%E8%AA%8D%E7%9F%A5%E5%85%89%E9%8C%90%E8%88%87Michael%20Levin%E5%9F%BA%E7%A4%8E%E8%AA%8D%E7%9F%A5%E5%BD%A2%E6%85%8B%E7%A9%BA%E9%96%93.html">生物電網路、認知光錐與Michael Levin基礎認知形態空間</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

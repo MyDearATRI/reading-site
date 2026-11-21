@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>42B｜神經迴路策略NCP、Liquid-S4與液態基礎模型 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-17ec63a8" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="42b神經迴路策略ncpliquid-s4與液態基礎模型">42B｜神經迴路策略NCP、Liquid-S4與液態基礎模型</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a>
+同領域子方向：<a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> · <a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> · <a class="wl" href="42D_%E5%AF%A6%E5%80%BC%E5%8A%A0%E6%AC%8A%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E5%85%A8%E5%90%91%E7%9C%9F%E5%80%BC%E5%8D%80%E9%96%93%E6%8E%A8%E7%90%86.html">實值加權邏輯神經網路與全向真值區間推理</a> · <a class="wl" href="42E_%E5%8F%AF%E5%BE%AE%E9%82%8F%E8%BC%AF%E5%BC%B5%E9%87%8F%E7%B6%B2%E8%B7%AF%E3%80%81%E6%AD%B8%E7%B4%8D%E9%82%8F%E8%BC%AF%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E8%88%87%E8%A6%8F%E5%89%87%E5%AD%B8%E7%BF%92.html">可微邏輯張量網路、歸納邏輯程式設計與規則學習</a> · <a class="wl" href="42F_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E7%9F%A5%E8%AD%98%E5%9C%96%E8%AD%9C%E6%8E%A8%E7%90%86%E8%88%87%E5%8F%AF%E9%A9%97%E8%AD%89%E7%B4%84%E6%9D%9F%E8%A8%93%E7%B7%B4.html">神經符號知識圖譜推理與可驗證約束訓練</a>
+跨領域關聯子方向：<a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> · <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> · <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向承接 <a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> 的單神經元與小規模連續動力學，探討如何透過結構化稀疏拓撲與狀態空間序列算子將液態模型推向可解釋控制與大規模基礎模型，在 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a> 中負責系統級架構擴展。主線沿著兩條軸線展開：一條是以神經迴路策略（NCP）將稀疏四層神經迴路用於緊湊、可逐神經元稽核的物理控制；另一條是透過線性化狀態空間映射（Liquid-S4）與硬體迴圈架構搜尋下的混合門控卷積骨幹（如 LFM2 與平行液態近似網路 PLAN），克服傳統液態網路循序計算瓶頸並對接 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 與 <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a>。</p>
+</aside>
+<ul>
+<li>核心問題：原生 LTC 與密集全連接循環網路面臨兩重結構限制：第一，密集連通的隱藏狀態使表徵高度糾纏，參數規模擴大後既難以進行神經元層級的決策稽核，也增加邊緣端記憶體與能耗負擔；第二，Transformer 具備高度平行化優勢卻受制於 <span class="math inline">O(N^2)</span> 注意力複雜度與自回歸推論時的 KV 快取膨脹，而連續時間液態常微分方程雖然參數精簡，其本質上的時間循序相依性（sequential dynamics）卻使長序列訓練與大規模調度任務面臨嚴重延遲瓶頸。本子方向所要解決的，就是如何在保留液態動態自適應與物理一致性的前提下，取得極致稀疏可解釋性與長序列、大參數規模的平行計算效率。</li>
+<li>直覺模型：可以把神經迴路策略（NCP）想像成線蟲的神經配線圖：它把所有神經元明確分工為感覺、中間、指令與運動四個稀疏連接的階層，每一條訊號路徑都像印刷電路板上的獨立走線一樣可被追蹤與檢查，而不像密集神經網路把所有資訊混成一團黑盒。當需要處理數萬 token 的長序列或大規模基礎模型時，這套連續動力學則被重新編譯成如 Liquid-S4 或 LFM2 的混合引擎：以可平行計算的門控短卷積與線性狀態空間作為主幹處理局部與動態狀態演化，只在少數關鍵層保留分組查詢注意力負責長程全域對齊，兼顧裝置端推論速度與語意精度。</li>
+<li>分階段閱讀路線：建議依三階段進行閱讀：第一階段先讀 Chiolerio (2020) 建立液態控制論（liquid cybernetics）與非馮諾依曼架構的宏觀動機，再讀 Tylkin et al. (2022) 掌握緊湊可視覺化神經迴路策略（NCP）的四層稀疏連線與無人機實機部署；第二階段讀 Patro &amp; Agneeswaran (2024) 理解結構化狀態空間模型（含 S4、Liquid-S4 與 Mamba）如何取代 <span class="math inline">O(N^2)</span> 注意力處理長序列，並搭配 Quach et al. (2024) 的 3D Gaussian Splatting 飛行導航遷移與 Banerjee et al. (2024) 的 CPS-LLM 實體動態估測器觀察控制與語言模型的介面設計；第三階段讀 2025–2026 前沿報告 Amini et al. (2025)（LFM2 技術報告）、Trinh et al. (2026)（Firebolt-VL 視覺語言調變）與 Kannan et al. (2026)（PLAN 平行液態近似網路），掌握液態基礎模型如何結合硬體在環架構搜尋、解耦蒸餾與平行離散化擴展至邊緣多模態與大規模組合排程。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;稀疏生物迴路與控制論動機 (Chiolerio 2020)&quot;] --&gt; B[&quot;NCP 四層稀疏拓撲與可稽核控制 (Tylkin 2022)&quot;]
+    B --&gt; C[&quot;邊緣節能與模擬到真實遷移 (Quach 2024, Ickin 2025)&quot;]
+    A --&gt; D[&quot;狀態空間線性化與 Liquid-S4 脈絡 (Patro 2024)&quot;]
+    D --&gt; E[&quot;混合門控短卷積與 GQA 骨幹 LFM2 (Amini 2025)&quot;]
+    E --&gt; F[&quot;跨模態 FiLM 與 SSM 調變 Firebolt-VL (Trinh 2026)&quot;]
+    D --&gt; G[&quot;循序動力學解耦與平行化 PLAN (Kannan 2026)&quot;]
+    B --&gt; H[&quot;LTC 物理參數估測銜接 LLM 規劃 (Banerjee 2024)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>神經迴路策略與結構化稀疏佈線（Neural Circuit Policies, NCP）</strong></p>
+<ul>
+<li>直覺理解：不讓神經網路的所有節點彼此全連接，而是依照生物神經系統的感覺、中間處理、指令與輸出分工建構極度稀疏的有向圖，使得極少數神經元就能完成控制任務並可逐顆檢查其作用。</li>
+<li>機制或核心表達式：NCP 由結構化稀疏拓撲與連通其上的連續時間電導單元（如 LTC 或 CfC）組成，將網路神經元劃分為感覺（sensory）、中間（inter）、指令（command）與運動（motor）階層，並在層間與層內套用固定稀疏度約束矩陣 <span class="math inline">\mathbf{M} \in \{0, 1\}^{N \times N}</span> 遮罩突觸連接權重，使有效突觸數遠低於密集循環層的 <span class="math inline">O(N^2)</span>。由於總神經元數與模型體積被高度壓縮（例如 Tylkin et al., 2022 僅需約 200 KB 記憶體即可於 Raspberry Pi Zero 上即時控制 DJI Tello 無人機），決策邊界與潛狀態軌跡可直接於神經元層級視覺化與質詢。</li>
+<li>能做到什麼，代價是什麼：在低維控制、感測時序與邊緣裝置（如基地台能耗估測、工業壓縮機聯邦學習與無人機避障）上，以極小參數量與超參數穩定性勝過傳統密集 LSTM；代價是手工或先驗拓撲稀疏度限制了高維語意或複雜非線性特徵萃取的容量上限，通常需前置 CNN、Conv2dLSTM 或視覺編碼器配合運作。</li>
+</ul>
+</li>
+<li>
+<p><strong>液態基礎模型與硬體在環混合骨幹（Liquid Foundation Models, LFM2）</strong></p>
+<ul>
+<li>直覺理解：在裝置端大語言模型與多模態系統中，全注意力層的計算隨序列長度呈平方成長且記憶體頻寬吃緊；透過在真實邊緣硬體延遲與記憶體約束下搜尋架構，以門控短卷積處理大部分局部序列混合，只保留少數分組查詢注意力（GQA）負責全域檢索。</li>
+<li>機制或核心表達式：以 Amini et al. (2025) 提出的 LFM2 系列（涵蓋 350M、700M、1.2B、2.6B 稠密模型與總參數 8.3B、活躍參數 1.5B 的 MoE 變體，支援 32K 上下文長度）為代表，透過硬體在環架構搜尋（hardware-in-the-loop architecture search）組合門控短卷積（gated short convolutions）與少量分組查詢注意力區塊（grouped query attention blocks）。訓練管線結合了避免支撐集不匹配（support mismatch）的調溫解耦 Top-K 知識蒸餾目標（tempered, decoupled Top-K knowledge distillation）、依難度排序的課程學習，以及監督微調、長度正規化偏好最佳化與模型合併三階段後訓練。</li>
+<li>能做到什麼，代價是什麼：相較同尺寸純 Transformer 模型，LFM2 在 CPU 上實現最高 2 倍的 prefill 與 decode 加速，同時於 10–12T tokens 預訓練後維持強勁推理表現（LFM2-2.6B 在 IFEval 達 79.56%、GSM8K 達 82.41%）；代價是混合骨幹需針對目標硬體進行架構搜尋與專屬蒸餾配方調校，且跨模態延伸（如 Firebolt-VL, Trinh et al., 2026）仍需額外設計 Token-Grid 相關模組與狀態空間 FiLM 調變以補償細粒度視覺定位。</li>
+</ul>
+</li>
+<li>
+<p><strong>平行液態近似與狀態空間離散化（Parallel Liquid Approximation &amp; Liquid-S4）</strong></p>
+<ul>
+<li>直覺理解：液態動力學的強項在於狀態轉移矩陣能隨輸入動態調整，但傳統循序積分讓訓練像單線排隊般緩慢；將狀態演化改寫為可平行掃描的離散更新並把全域上下文聚合分離出來，就能打破序列長度瓶頸。</li>
+<li>機制或核心表達式：在結構化狀態空間模型脈絡中（如 Patro &amp; Agneeswaran, 2024 所綜述之 S4、Liquid-S4 與 Mamba），線性或輸入相關的狀態空間方程 <span class="math inline">\dot{\mathbf{x}}(t) = \mathbf{A}(\mathbf{u})\mathbf{x}(t) + \mathbf{B}\mathbf{u}(t)</span> 可透過離散化轉換為卷積核或平行結合律掃描（parallel associative scan），將注意力機制的 <span class="math inline">O(N^2)</span> 複雜度降至線性尺度。在排程與圖表示學習等前沿任務中，Kannan et al. (2026) 的 PLAN 框架進一步將連續液態狀態動力學重新公式化為離散且可平行計算的更新步驟，並在結構上將「液態啟發的狀態演化」與「輕量級全域上下文聚合模組」解耦。</li>
+<li>能做到什麼，代價是什麼：消除純循序 ODE 的訓練與推論延遲瓶頸，使液態啟發架構得以擴展至大規模彈性零工車間排程（FJSP）與長序列基準；代價是將連續流離散平行化後，會捨棄任意變步長連續時間內插的原生精確度，並受限於線性或結構化近似對高階非線性狀態耦合的表達能力。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>NCP 稀疏可解釋性與神經元容量取捨</strong>：Tylkin et al. (2022) 與 Huang et al. (2024) 分別在無人機控制與心電圖 TinyML 任務中比較了 NCP 與傳統網路。為什麼 NCP 能僅用約 200 KB 記憶體實現可逐神經元稽核的飛行控制，但在處理原始高維感測訊號（如多導程心電圖或視訊影格）時常需搭配 CNN 或 Conv2dLSTM，甚至在部分測試上與 KAN 相比展現出特定限制？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>從結構分工思考：(1) NCP 的設計核心是控制策略層的極致稀疏四層拓撲（感覺－中間－指令－運動），神經元數量極少，使其突觸權重與狀態活動易於視覺化及在樹莓派等微控制器部署。(2) 然而少數液態神經元並不適合直接從原始像素或高頻波形抽取空間／局部時頻特徵，因此實作中通常以捲積或 Conv2dLSTM 前端完成特徵壓縮後再送入 NCP。(3) 相對地，Huang et al. (2024) 指出在邊緣生物訊號上結合可學習樣條激活函數的 KAN / CKAN 在單隱層 64 神經元下展現出比傳統 MLP 與部分 NCP 架構更高的彈性與準確率權衡。</p>
+</details>
+<ol start="2">
+<li><strong>LFM2 混合架構搜尋與解耦 Top-K 蒸餾的設計動機</strong>：在 Amini et al. (2025) 提出的 LFM2 骨幹中，為何不完全捨棄注意力機制，而是採用「門控短卷積搭配少量分組查詢注意力（GQA）」，並特別設計「調溫解耦 Top-K 知識蒸餾（tempered, decoupled Top-K knowledge distillation）」？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>由系統瓶頸與最佳化特性兩方面切入：(1) 純注意力模型的推論延遲與 KV 快取隨上下文長度（最高 32K）急劇膨脹，而純短卷積或純循環狀態空間在精確遠距複製與上下文檢索上容易損失精度；在硬體在環搜尋下保留少量 GQA 區塊可在幾乎不拖慢 CPU 延遲的前提下補齊全域檢索。(2) 知識蒸餾若只取教師模型的 Top-K logits 直接計算 KL 散度，截斷後的機率分佈與學生模型支撐集會產生支持集不匹配（support mismatch）問題；採用調溫與解耦 Top-K 目標能穩定小模型從大規模教師模型繼承分佈的梯度訊號。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>稀疏迴路拓撲的自動搜尋與泛化理論界限</strong>：儘管 NCP 與稀疏液態網路在控制（Chahine / Quach et al., 2024）與基地台能耗估測（İckin et al., 2025）中展現出對超參數變動的高韌性與參數精簡優勢，目前多數稀疏連線拓撲仍仰賴神經生物學啟發的啟發式結構或小規模試驗。如何針對特定動力學任務自動搜尋最佳稀疏連接圖，並建立拓撲稀疏度與分佈外因果泛化之間的嚴格樣本複雜度界限，仍缺乏統一理論。</li>
+<li><strong>液態連續時間語義與基礎模型平行縮放之間的張力</strong>：原生 LTC/CfC 的精髓在於輸入耦合的連續時間微分方程與非對稱衰減常數，但當模型擴展至數十億參數規模（如 LFM2）或大規模多模態與組合最佳化（如 Firebolt-VL、PLAN）時，為了硬體吞吐量與平行訓練效率，實作往往轉向離散門控短卷積、分組查詢注意力與結構化狀態空間掃描。如何保留液態模型的即時環境自適應與實體一致性（如 CPS-LLM 利用 LTC 估測物理動態係數），同時維持硬體友善的平行計算圖，是現階段的核心架構張力。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>與結構化狀態空間及線性循環骨幹的硬體導向混合設計</strong>：LFM2 的硬體在環架構搜尋與門控短卷積＋少數 GQA 混合比例，以及 PLAN（Kannan et al., 2026）將狀態演化與全域上下文解耦的模式，可直接遷移至 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 與 <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> 的長上下文邊緣推論骨幹設計。</li>
+<li><strong>與機械可解釋性及自動形式化安全規劃的雙向介面</strong>：NCP 在控制迴路中的逐神經元可視覺化與稽核特性（Tylkin et al., 2022），為 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 提供了動力系統層級的稀疏電路基準；同時，Banerjee et al. (2024) 的 CPS-LLM 以 LTC 辨識實體系統未觀測狀態係數並反饋給語言模型微調安全計畫，將連續物理動態估測銜接至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a> 與可信人機系統規劃。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-liquid-cybernetic-systems-the-fourthorder-cybernetics2020">1. Liquid Cybernetic Systems: The Fourth‐Order Cybernetics（2020）</h4>
+<ul>
+<li>作者與出處：Alessandro Chiolerio · <em>Advanced Intelligent Systems (2020)</em></li>
+<li>核心問題：傳統馮諾依曼計算架構在裝置整合、熱設計、資料吞吐量與能耗上面臨瓶頸，且缺乏系統性的控制論框架整合異質動態計算元件。</li>
+<li>關鍵做法：提出「液態控制論系統（Liquid Cybernetic Systems）」與第四階控制論概念，論述利用流體態、動態互連與無固定連接拓撲的液態狀態計算範式克服傳統硬體限制。</li>
+<li>跨領域啟發：建立液態計算在廣義控制論與物理計算材料層面的脈絡，可對照 <a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> 的實體儲層實作。</li>
+<li>連結：<a href="zotero://select/library/items/XWXBTVH2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/aisy.202000120" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-interpretable-autonomous-flight-via-compact-visualizable-neural-circuit-policies2022">2. Interpretable Autonomous Flight Via Compact Visualizable Neural Circuit Policies（2022）</h4>
+<ul>
+<li>作者與出處：Paul Tylkin, Tsun-Hsuan Johnson Wang, Kyle Palko, Ross E. Allen, Ho Chit Siu · <em>IEEE Robotics and Automation Letters (2022)</em></li>
+<li>核心問題：深度學習自主飛行控制器多為大型黑盒網路，無法在資源極受限的機載計算平台即時運行，也難以稽核決策原因。</li>
+<li>關鍵做法：以極少神經元構成的神經迴路策略（NCP）學習端到端目標到達與動態避障飛行，達成神經元層級的視覺化與決策質詢，並將 200 KB 記憶體大小的模型實機部署於 Raspberry Pi Zero 控制 DJI Tello 無人機。</li>
+<li>跨領域啟發：示範稀疏 NCP 的極致可稽核性與邊緣部署能力，是銜接 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a> 的控制電路代表作。</li>
+<li>連結：<a href="zotero://select/library/items/AEWDC983" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lra.2022.3146555" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-mamba-360-survey-of-state-space-models-as-transformer-alternative-for-long-sequence-modelling-methods-applications-and-challenges2024">3. Mamba-360: Survey of State Space Models as Transformer Alternative for Long Sequence Modelling: Methods, Applications, and Challenges（2024）</h4>
+<ul>
+<li>作者與出處：Badri N. Patro, Vijay Srinivas Agneeswaran · <em>arXiv (2024)</em></li>
+<li>核心問題：Transformer 在長序列建模上受限於 <span class="math inline">O(N^2)</span> 注意力複雜度與歸納偏置不足，而傳統 RNN 難以平行訓練長距依賴。</li>
+<li>關鍵做法：系統綜述從 S4、S4nd、HiPPO、Hyena、DSS、GSS、LRU 到 Liquid-S4 與 Mamba 等狀態空間模型替代方案的演進、數學結構與跨領域應用挑戰。</li>
+<li>跨領域啟發：將 Liquid-S4 放入 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 的完整系譜中定位，說明液態連續時間機制如何與結構化狀態空間匯流。</li>
+<li>連結：<a href="zotero://select/library/items/VIN6C2SB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.16112" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-cps-llm-large-language-model-based-safe-usage-plan-generator-for-human-in-the-loop-human-in-the-plant-cyber-physical-system2024">4. CPS-LLM: Large Language Model based Safe Usage Plan Generator for Human-in-the-Loop Human-in-the-Plant Cyber-Physical System（2024）</h4>
+<ul>
+<li>作者與出處：Ayan Banerjee, Aranyak Maity, Payal Kamboj, Sandeep Gupta · <em>arXiv (2024)</em></li>
+<li>核心問題：將大型語言模型用於人機在環（human-in-the-loop）資訊物理系統時，上下文提示產生的控制計畫常不符物理系統動態或危害使用者安全。</li>
+<li>關鍵做法：提出 CPS-LLM 框架，先以基於液態時間常數網路的物理動態係數估測器從含未觀測狀態變數的資料推導動力學模型係數，再將係數嵌入指令微調提示以確保 LLM 生成安全可執行的動作計畫。</li>
+<li>跨領域啟發：呈現液態時間常數物理辨識模組如何作為高層符號／語言規劃的安全物理接地層。</li>
+<li>連結：<a href="zotero://select/library/items/524MPFIP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.11458" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-lfm2-technical-report2025">5. LFM2 Technical Report（2025）</h4>
+<ul>
+<li>作者與出處：Alexander Amini, Anna Banaszak, Harold Benoit, Arthur Böök, Tarek Dakhran et al. · <em>arXiv (2025)</em></li>
+<li>核心問題：現有開源基礎模型在裝置端 CPU 上受制於延遲與記憶體頻寬限制，難以同時兼顧 32K 長上下文與強推理能力。</li>
+<li>關鍵做法：透過硬體在環架構搜尋設計 LFM2 家族（350M–2.6B 稠密與 8.3B/1.5B 活躍 MoE），以門控短卷積搭配少量 GQA 區塊使 CPU prefill 與 decode 最高提速 2 倍，並結合調溫解耦 Top-K 蒸餾、課程學習與三階段後訓練，在 10–12T tokens 上訓練後讓 LFM2-2.6B 取得 IFEval 79.56% 與 GSM8K 82.41%。</li>
+<li>跨領域啟發：代表液態基礎模型工程化前沿，為 <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> 提供硬體約束下的混合比例範例。</li>
+<li>連結：<a href="zotero://select/library/items/N92GJWRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.23404" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-plan-parallel-liquid-inspired-approximation-network-for-efficient-representation-learning-in-flexible-job-shop-scheduling2026">6. PLAN: Parallel Liquid-Inspired Approximation Network for Efficient Representation Learning in Flexible Job Shop Scheduling（2026）</h4>
+<ul>
+<li>作者與出處：Dhivya Dharshini Kannan, Wei Zhang, Jieyi Bi, Yingpeng Du, Tianjun Wei · <em>arXiv (2026)</em></li>
+<li>核心問題：彈性零工車間排程（FJSP）的深度強化學習方法高度仰賴注意力模型而面臨龐大參數量與高推論延遲；而傳統 LNN 因本質循序動態造成計算效率瓶頸。</li>
+<li>關鍵做法：提出平行液態啟發近似網路（PLAN），將連續液態狀態動力學重構為離散且可平行計算的更新形式，並將液態演化與輕量級全域上下文聚合模組在結構上解耦，作為可插拔骨幹處理複雜 FJSP 變體。</li>
+<li>跨領域啟發：展示 2026 年將液態狀態演化平行化的最新演算法設計，能與 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 的平行掃描思路互補。</li>
+<li>連結：<a href="zotero://select/library/items/2JT4WKWT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.03041" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-37-篇">G5｜本子方向全量文獻泛讀清單（共 37 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 37 篇文獻（含開放存取 PDF 15 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進11-篇">A. 奠基經典、專著與核心演進（11 篇）</h3>
+<ul>
+<li><strong>2004｜On the computational power of circuits of spiking neurons</strong>，Wolfgang Maass, Henry Markram（<em>Journal of Computer and System Sciences</em>，371 引）：液態機（LSM）計算能力的理論基礎：嚴格證明生物異質脈衝神經迴路不需要離散時脈，就有即時的萬能流映射能力。 <a href="zotero://select/library/items/J7A8KMUS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.jcss.2004.04.001" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Neural circuit policies-based temporal flexible soft-sensor modeling of subway PM2.5 with applications on indoor air quality management</strong>，Jorge Loy-Benitez et al.（<em>Building and Environment</em>，34 引）：發表於 Building and Environment，研究基於神經迴路策略（NCP）的時間彈性軟感測器模型，用於地鐵 PM2.5 預測與室內空氣品質管理。 <a href="zotero://select/library/items/NC8AR2PJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.buildenv.2021.108537" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Liquid Cybernetic Systems: The Fourth‐Order Cybernetics</strong>，Alessandro Chiolerio（<em>Advanced Intelligent Systems</em>，31 引）：提出控制論的四個層級並闡述第四級「液態控制論系統」範式，評析傳統馮紐曼架構在元件整合、散熱與資料吞吐上的限制以及液態控制論系統的對應優勢。 <a href="zotero://select/library/items/XWXBTVH2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1002/aisy.202000120" rel="noopener">官方連結</a></li>
+<li><strong>2002｜Deflection-Based Analysis Techniques for Jointed Concrete Pavement Systems</strong>，James A Crovetti（<em>Transportation Research Record Journal of the Transportation Research Board</em>，17 引）：基於密實液體地基模型（dense-liquid foundation model）提出接縫混凝土路面撓度分析技術，利用板中、板邊與板角撓度計算地基反應模數 k 值與支撐比，當比值低於 0.75 時可判定為不均勻支撐。 <a href="zotero://select/library/items/JVRGFRST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3141/1809-01" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Interpretable Autonomous Flight Via Compact Visualizable Neural Circuit Policies</strong>，Paul Tylkin et al.（<em>IEEE Robotics and Automation Letters</em>，15 引）：採用精簡神經元規模的神經迴路策略（NCP）訓練端到端無人機自主飛行控制器，使其決策具備神經元層級的可解釋性，並將僅 200 KB 的模型部署於 Raspberry Pi Zero 即時控制 DJI Tello 無人機。 <a href="zotero://select/library/items/AEWDC983" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lra.2022.3146555" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Application of a brain-inspired deep imitation learning algorithm in autonomous driving</strong>，Hasan Bayarov Ahmedov, Dewei Yi, Jie Sui（<em>Software Impacts</em>，12 引）：針對深度模仿學習在自動駕駛跨域場景泛化能力不足的問題，提出受人類大腦功能結構啟發的類腦深度模仿學習演算法，以提升系統於未知路況的泛化表現。 <a href="zotero://select/library/items/4FRPFNEJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.14654" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Neural Circuit Policies Imposing Visual Perceptual Autonomy</strong>，Waleed Razzaq, Hongwei Mo（<em>Neural Processing Letters</em>，8 引）：發表於 2023 年《Neural Processing Letters》的論文，探討將神經迴路策略（Neural Circuit Policies, NCP）應用於視覺感知自主控制任務的模型設計與實作。 <a href="zotero://select/library/items/FPKQIMAZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s11063-023-11194-4" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Bioinspired Encoder–Decoder Recurrent Neural Network with Attention for Hydroprocessing Unit Modeling</strong>，Shu‐Bo Yang, Jesús Moreira, Zukui Li（<em>Industrial &amp; Engineering Chemistry Research</em>，7 引）：將仿生神經迴路策略（NCP）整合至基於注意力的編碼器解碼器循環神經網路 A-ED-RNN，用於預測工業加氫處理單元的柴油與航空燃油產率，並以較 GRU 與 LSTM 更小的模型規模取得更佳預測表現。 <a href="zotero://select/library/items/MJBK6HJT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1021/acs.iecr.3c01953" rel="noopener">官方連結</a></li>
+<li><strong>1992｜The control of submerged arc welding using neural network interpretation of ultrasound</strong>，T.J. Harris, Raymond Stroud（<em>Elsevier eBooks</em>，4 引）：收錄於 Elsevier eBooks，探討利用神經網路判讀超音波訊號並用於潛弧焊過程控制的方法，對應 42B 連續神經控制應用脈絡。 <a href="zotero://select/library/items/KW36J24N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/b978-0-444-89488-5.50154-8" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Comparison of NCP with famous RNNs on specific datasets</strong>，Atabay Bashimov, Xu Cheng（<em>Zenodo (CERN European Organization for Nuclear Research)</em>，2 引）：在合成正弦波序列與機器人導航資料集上比較 Deep RNN、LSTM、GRU 與神經迴路策略（NCP），結果顯示 NCP 能以更少參數與較低訓練成本達到與 SimpleRNN 相近的表現。 <a href="zotero://select/library/items/665A79Q3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://zenodo.org/record/6569909" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Neural circuit policies enabling auditable autonomy</strong>，Mathias Lechner et al.（<em>Nature Machine Intelligence</em>）：提出受線蟲神經迴路啟發的稀疏四層液態時間常數神經迴路策略（NCP），僅以 19 個控制神經元實現端對端自駕控制，展現因果注意力聚焦與分佈外強健性。 <a href="zotero://select/library/items/V994J9SR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.11351" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻26-篇">B. 2024–2026 近期推進與前沿文獻（26 篇）</h3>
+<ul>
+<li><strong>2025｜LFM2 Technical Report</strong>，Alexander Amini et al.（<em>arXiv (Cornell University)</em>，103 引）：介紹專為邊緣裝置部署設計的液態基礎模型家族 LFM2（含 350M–2.6B 稠密模型與 8.3B MoE，32K 上下文），結合硬體在環架構搜尋的門控短卷積與分組查詢注意力，使 CPU 預填與解碼提速達兩倍。 <a href="zotero://select/library/items/N92GJWRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.23404" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Mamba-360: Survey of State Space Models as Transformer Alternative for Long Sequence Modelling: Methods, Applications, and Challenges</strong>，Badri N. Patro, Vijay Srinivas Agneeswaran（<em>arXiv (Cornell University)</em>，77 引）：綜述狀態空間模型（SSM）作為 Transformer（具 <span class="math inline">O(N^2)</span> 注意力複雜度）替代架構的方法與長序列建模進展，涵蓋自然語言、語音、時間序列、音樂與生物資訊等應用及挑戰。 <a href="zotero://select/library/items/VIN6C2SB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.16112" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Abnormality Detection in Time-Series Bio-Signals using Kolmogorov-Arnold Networks (KANs) Based Models for Resource-Constrained Devices</strong>，Zhaojing Huang et al.（<em>medRxiv</em>，22 引）：將 Kolmogorov–Arnold 網路（KAN）應用於資源受限設備的心電圖異常檢測，單隱藏層 64 神經元模型在 TNMG 與 CPSC 2018 資料集分別取得 0.95 與 0.84 的 AUROC，並結合 Conv2dLSTM 提出 CKAN 變體。 <a href="zotero://select/library/items/9SCJVF99" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1101/2024.06.04.24308428" rel="noopener">官方連結</a></li>
+<li><strong>2024｜CPS-LLM: Large Language Model based Safe Usage Plan Generator for Human-in-the-Loop Human-in-the-Plant Cyber-Physical System</strong>，Ayan Banerjee et al.（<em>arXiv (Cornell University)</em>，21 引）：針對人在迴路與人在系統中的網宇實體系統，提出經指令微調的 CPS-LLM 框架並納入液態時間常數神經網路等組件，將高層提示轉譯為符合物理系統動態且對人類使用者安全的控制計畫。 <a href="zotero://select/library/items/524MPFIP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.11458" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Time Series Forecasting for Energy Management: Neural Circuit Policies (NCPs) vs. Long Short-Term Memory (LSTM) Networks</strong>，Giulia Palma, Elna Sara Joy Chengalipunath, Antonio Rizzo（<em>Electronics</em>，16 引）：在結合 60 kWh 儲能模擬與食品冷藏企業真實用電產能數據的能源管理預測任務中，比較神經迴路策略（NCP）與 LSTM 的時序預測及充放電調度表現，結果顯示融入物理動態特性的 NCP 優於 LSTM。 <a href="zotero://select/library/items/NUMF7JHG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/electronics13183641" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Gaussian Splatting to Real World Flight Navigation Transfer with Liquid Networks</strong>，Alex Quach et al.（<em>arXiv (Cornell University)</em>，15 引）：結合 3D 高斯潑濺（Gaussian Splatting）渲染與四旋翼飛行動力學建置模擬器，並以液態神經網路訓練視覺導航模仿學習策略，提升無人機從模擬到真實世界遷移時對分佈偏移的強健性。 <a href="zotero://select/library/items/8BEN52CP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.15149" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Ultralow Power In-Sensor Neuronal Computing with Oscillatory Retinal Neurons for Frequency-Multiplexed, Parallel Machine Vision</strong>，Ragib Ahsan et al.（<em>ACS Nano</em>，13 引）：實作基於振盪視網膜神經元元件的超低功耗感測器內計算架構，將入射光訊號轉換為電壓振盪，並利用耦合振盪器的頻率偏移實現對輸入進行平行且頻分多工的非線性運算。 <a href="zotero://select/library/items/2QVNKRG7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1021/acsnano.4c09055" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Edge-Side Cellular Network Traffic Prediction Based on Trend Graph Characterization Network</strong>，Mingxiang Hao et al.（<em>IEEE Transactions on Network Science and Engineering</em>，10 引）：針對邊緣多基地台蜂巢網路流量的異質性與劇烈波動，提出趨勢圖表徵網路 TGCN，在趨勢提取器中結合序數模式轉移網路（OPTN）與圖注意力網路（GAT），搭配時序特徵提取完成流量預測。 <a href="zotero://select/library/items/REHZJ6XH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tnse.2024.3455784" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Autonomous Driving via Brain-Inspired Causality-Aware Contrastive Learning With Time–Frequency Prediction</strong>，Chengyu Wang et al.（<em>IEEE Internet of Things Journal</em>，7 引）：針對端到端自動駕駛強化學習的樣本效率低落問題，提出因果感知對比學習框架 BRYANT，將序列潛表徵、獎勵與動作訊號轉換至頻域，以同時捕捉時頻特徵與內在因果關聯。 <a href="zotero://select/library/items/9WQJW2SF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jiot.2025.3559407" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Federated Learning and Neural Circuit Policies: A Novel Framework for Anomaly Detection in Energy-Intensive Machinery</strong>，Giulia Palma, Giovanni Geraci, Antonio Rizzo（<em>Energies</em>，7 引）：針對高耗能機械設備（皮革鞣製壓縮機）的跨場域隱私保護預兆維護需求，將聯邦學習（FL）結合融入系統動力學約束的神經迴路策略（NCP），在異常偵測準確率與可解釋性上均超越傳統 LSTM 模型。 <a href="zotero://select/library/items/NJJ8S5RD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/en18040936" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Optical Flow Matters: an Empirical Comparative Study on Fusing Monocular Extracted Modalities for Better Steering</strong>，Fouad Makiyeh et al.（<em>arXiv (Cornell University)</em>，4 引）：實證研究如何融合單目攝影機提取的RGB影像、深度補全與光流資料以提升自駕車轉向預測，比較早期與混合融合策略在三類神經網路架構上的表現。 <a href="zotero://select/library/items/NSK7U5CW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.12716" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Neural Circuit Policies for Virtual Character Control</strong>，Waleed Razzaq, Kashif Raza（<em>Neural Processing Letters</em>，4 引）：針對深度強化學習在雜訊與次優條件下性能退化的問題，提出結合卷積神經網路與線蟲腦啟發之神經迴路策略（NCP）的混合架構，用於虛擬角色控制並學習環境動力學。 <a href="zotero://select/library/items/JJ6PU7IK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s11063-024-11640-x" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Firebolt-VL: Efficient Vision-Language Understanding with Cross-Modality Modulation</strong>，Quoc-Huy Trinh et al.（<em>arXiv (Cornell University)</em>，1 引）：為克服傳統視覺語言模型二次注意力複雜度與細粒度視覺定位不足，提出輕量模型 Firebolt-VL，以液態基礎模型 (LFM) 解碼器取代 Transformer 解碼器並設計 Token-Grid 關聯模組強化跨模態調變。 <a href="zotero://select/library/items/X9TJDNVT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.04579" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Towards Green AI-Native Networks: Evaluation of Neural Circuit Policy for Estimating Energy Consumption of Base Stations</strong>，Selim İckin et al.（<em>arXiv (Cornell University)</em>，1 引）：評估具高度稀疏結構的神經迴路策略（NCP）於基地台能耗估測任務的表現，相較於傳統 LSTM，著重檢驗稀疏架構在降低記憶體與計算能耗的同時對不同模型超參數變化的泛化穩定性。 <a href="zotero://select/library/items/JJRPK68X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.02781" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Neural Circuit Policy-Driven Spiking Neural Network: A Clustered and Lightweight Method for Wind Farm Condition Monitoring</strong>，Xinjian Bai et al.（<em>SSRN Electronic Journal</em>，1 引）：發表於 SSRN 的預印本論文，提出結合神經迴路策略（NCP）與脈衝神經網路（SNN）的叢集輕量級架構，探討其在風力發電場設備狀態監測上的應用。 <a href="zotero://select/library/items/UWWDUZE4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.5356458" rel="noopener">官方連結</a></li>
+<li><strong>2026｜PLAN: Parallel Liquid-Inspired Approximation Network for Efficient Representation Learning in Flexible Job Shop Scheduling</strong>，Dhivya Dharshini Kannan et al.（<em>arXiv</em>）：提出平行液態啟發近似網路 <code>PLAN</code>（Parallel Liquid-inspired Approximation Network），把連續的液態狀態演化改寫成離散化、可平行計算的形式，並在結構上把狀態演化與全局脈絡聚合解耦：輕量級液態更新負責核心的動態狀態表徵，精簡的脈絡聚合模組補上全局車間視野。<code>PLAN</code> 可以當作隨插即用的骨幹，搭配微型隨機模組處理隨機工時 FJSP，或直接取代多面向動態 FJSP 中笨重的異質圖 Transformer。在確定性、隨機性與多面向動態三個 FJSP 基準上都超越對應的 SOTA，平均最大完工時間（Makespan）分別縮短 1.2%、1.4% 與 2.3%（單一基準最多縮短 10.2%）。它只用基線 22% 到 47% 的參數，平均推論延遲分別降低 13.2%、31.7% 與 26.9%（最大規模實例的延遲最多降低 69.2%）。 <a href="zotero://select/library/items/2JT4WKWT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.03041" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Human-Centric Motion Planning in Crowded Spaces: A Structured Neural Circuit Approach with Social Interaction-Awareness</strong>，Tianyong Ao et al.（<em>International Journal of Social Robotics</em>）：發表於 2026 年《International Journal of Social Robotics》的論文，探討在擁擠環境下結合社會互動感知與結構化神經迴路（NCP）的以人為中心運動規劃方法。 <a href="zotero://select/library/items/58RDZZPC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s12369-026-01389-9" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Neural circuit policies for accurate prediction of interfacial tensions between liquid mixture of hydrocarbons and brine</strong>，Yan-Ling Yang, Belinda Kezia Purwanto, Pannuru Venkatesu（<em>The Journal of Chemical Thermodynamics</em>）：發表於 The Journal of Chemical Thermodynamics，探討利用神經迴路策略（Neural circuit policies, NCP）精確預測液態碳氫化合物混合物與鹽水間的界面張力。 <a href="zotero://select/library/items/UXCQN7H8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.jct.2026.107626" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Sparse neural circuit policies for underwater vehicle trajectory tracking in complex environments</strong>，Haoqian Huang et al.（<em>Ocean Engineering</em>）：發表於 Ocean Engineering，研究以稀疏神經迴路策略（Sparse NCP）實現複雜海洋環境下水下載具的軌跡追蹤控制，對應 42B 連續神經控制主題。 <a href="zotero://select/library/items/EC73ZJT4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.oceaneng.2026.129256" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Bio-inspired crowd navigation: Spatiotemporal graph and Neural Circuit Policy driven by DRL</strong>，Tianyong Ao et al.（<em>Pattern Recognition</em>）：發表於 Pattern Recognition，結合深度強化學習驅動的時空圖結構與神經迴路策略（NCP），研究仿生人群導航決策問題，對應 42B 連續神經控制主題。 <a href="zotero://select/library/items/KDXGZT78" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.patcog.2026.114008" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A CNN–NCP Based Hybrid Deep Learning Model for Speech-Driven Gender Classification</strong>，Sevda Olgun, Caner Balım, Nevzat Olgun（<em>Bitlis Eren Üniversitesi Fen Bilimleri Dergisi</em>）：結合 MFCC 與對數梅爾頻譜圖特徵，建構以一維卷積層提取聲學模式並串接神經迴路策略（NCP）的混合深度學習模型，並在土耳其語語音性別分類任務上比較其準確率與計算效率。 <a href="zotero://select/library/items/F89XN36E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.17798/bitlisfen.1803512" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Elapsed-Time Injection and Continuous-Time Neural Circuit Policies for Low-Quality Asynchronous Multi-View Sensor Fusion in Autonomous Driving</strong>，Sharon Christa, Riya Sharma（<em>SSRN Electronic Journal</em>）：發表於 SSRN 的自駕車感測融合預印本，針對非同步且品質較低的多視角感測器輸入，結合經過時間注入（elapsed-time injection）與連續時間神經迴路策略（NCP）進行狀態融合。 <a href="zotero://select/library/items/26EQ3ZHD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.7195183" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TOPO-2026: The Great Unlocking Universal Permanence Across All Architectures — The First Complete Solution to Catastrophic Forgetting at Scale</strong>，Frank Morales（<em>Zenodo (CERN European Organization for Nuclear Research)</em>）：提出名為 TOPO-2026 的持續學習框架以應對災難性遺忘問題，利用質數索引 {2,3,5,7,11,13} 的嵌入不變量與安全常數 <span class="math inline">\Lambda = 0.9785142874</span> 構造跨架構記憶保護機制，並在 11 種架構進行驗證。 <a href="zotero://select/library/items/MQ255M8C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5281/zenodo.22119885" rel="noopener">官方連結</a></li>
+<li><strong>2025｜MesoNet: A Fundamental Principle for Multi-Representation Learning in Complex Chemical Systems</strong>，Fan, Jinming, Qian, Chao, Zhou, Shaodong（<em>arXiv (Cornell University)</em>）：針對複雜化學系統的多分子性質預測，提出多表徵學習框架 MesoNet，以 Neural Circuit Policies 生成語境感知原子描述符，並透過跨分子內外訊息傳遞的交叉注意力機制捕捉動態組成關聯。 <a href="zotero://select/library/items/CMPPA7G4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.17810" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Non-Random Parameterized Networks for Cross-Scale Modeling of Compositional Interplay</strong>，Shaodong Zhou, Jinming Fan, Chao Qian（<em>Research Square</em>）：為跨尺度建模分子系統中從分子內鍵結到分子間作用力的組合交互作用，提出 MesoNet 架構，利用神經迴路策略（NCP）生成動態原子描述符（NRPs），再經階層跨尺度訊息傳遞整合多尺度物理互動。 <a href="zotero://select/library/items/WBD6E6IE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21203/rs.3.rs-6296481/v1" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Enhancing Neural Circuit Policies with Scale Free Architecture and Shortcut Links</strong>，Maliheh Ghomsheh, Ali Kamandi（<em>SSRN Electronic Journal</em>）：發表於 SSRN 的預印本論文，探討在神經迴路策略（NCP）架構中導入無尺度拓撲結構（scale-free architecture）與捷徑連結（shortcut links），以強化連續時間動態學習效能。 <a href="zotero://select/library/items/IVDMK6XQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.4994364" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-17ec63a8">在地圖上查看</a><div class="rg"><h3>相關<span class="n">9</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a><span class="rs">這個領域收的是當代 AI 裡兩支都簡稱 LNN 的學派。兩者著力的層面不同，但都不走龐大黑盒模型的路。</span></li><li><a href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a></li><li><a href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a></li><li><a href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a></li><li><a href="02E_%E8%84%88%E8%A1%9D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E7%A5%9E%E7%B6%93%E5%BD%A2%E6%85%8B%E4%BA%8B%E4%BB%B6%E8%A8%88%E7%AE%97.html">脈衝神經網路與神經形態事件計算</a></li><li><a href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06B_%E6%A9%9F%E6%A2%B0%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7%E3%80%81%E6%AD%B8%E7%B4%8D%E9%A0%AD%E8%88%87%E5%85%A7%E9%83%A8%E6%BC%94%E7%AE%97%E6%B3%95%E9%9B%BB%E8%B7%AF%E5%AE%9A%E4%BD%8D.html">機械可解釋性、歸納頭與內部演算法電路定位</a></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a></li><li><a href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

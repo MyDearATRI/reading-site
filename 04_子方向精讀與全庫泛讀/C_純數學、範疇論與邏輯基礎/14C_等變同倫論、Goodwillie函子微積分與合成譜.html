@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>14C｜等變同倫論、Goodwillie函子微積分與合成譜 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f2ee9060" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="14c等變同倫論goodwillie函子微積分與合成譜">14C｜等變同倫論、Goodwillie函子微積分與合成譜</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">代數拓撲</a>
+同領域子方向：<a class="wl" href="14A_%E8%AD%9C%E5%BA%8F%E5%88%97%E3%80%81Adams%E8%AD%9C%E5%BA%8F%E5%88%97%E8%88%87%E4%B8%8A%E5%90%8C%E8%AA%BF%E9%81%8B%E7%AE%97.html">譜序列、Adams譜序列與上同調運算</a> · <a class="wl" href="14B_%E7%A9%A9%E5%AE%9A%E5%90%8C%E5%80%AB%E8%AB%96%E3%80%81%E8%89%B2%E5%B1%A4%E5%90%8C%E5%80%AB%E8%AB%96%E8%88%87%E6%8B%93%E6%92%B2%E6%A8%A1%E5%BD%A2%E5%BC%8FTMF.html">穩定同倫論、色層同倫論與拓撲模形式TMF</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">代數拓撲</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M52_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2%EF%BC%9A%E5%9F%BA%E6%9C%AC%E7%BE%A4%E8%88%87%E5%90%8C%E8%AA%BF.html">代數拓撲：基本群與同調</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向在 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">代數拓撲</a> 中補足了 <a class="wl" href="14A_%E8%AD%9C%E5%BA%8F%E5%88%97%E3%80%81Adams%E8%AD%9C%E5%BA%8F%E5%88%97%E8%88%87%E4%B8%8A%E5%90%8C%E8%AA%BF%E9%81%8B%E7%AE%97.html">譜序列、Adams譜序列與上同調運算</a> 與 <a class="wl" href="14B_%E7%A9%A9%E5%AE%9A%E5%90%8C%E5%80%AB%E8%AB%96%E3%80%81%E8%89%B2%E5%B1%A4%E5%90%8C%E5%80%AB%E8%AB%96%E8%88%87%E6%8B%93%E6%92%B2%E6%A8%A1%E5%BD%A2%E5%BC%8FTMF.html">穩定同倫論、色層同倫論與拓撲模形式TMF</a> 之外的三套結構化分析工具：帶群作用的真等變穩定同倫論、函子的 Goodwillie 多項式展開，以及以參數 <span class="math inline">\tau</span> 編碼譜序列濾過的合成譜。演進主線從 <span class="math inline">G</span>-譜與函子泰勒塔的公理化，發展至以實動機同倫實現 <span class="math inline">C_2</span>-等變計算，並在近期透過合成譜與割圓擴張支援高階跡不變量與望遠鏡猜想的幾何化。</p>
+</aside>
+<ul>
+<li>核心問題：當空間帶有群對稱性或研究非線性函子時，僅取普通同倫商或單純停留在普通穩定同倫範疇中，會丟失緊緻子群上的幾何不動點與轉移（transfer）結構；在函子的同倫分析中，單純的線性穩定化也無法逼近高階交互作用。此外，傳統譜序列（如 Adams 與動機譜序列）將過濾與擴張問題拆散在外部代數頁中，難以在單一穩定 <span class="math inline">\infty</span>-範疇內直接追蹤 <span class="math inline">\tau</span>-撓率與乘法相干性。</li>
+<li>直覺模型：等變同倫論把單一的「空間」換成一組依子群格點索引的不動點訊號，並用轉移映射把它們雙向聯通。Goodwillie 函子微積分則像把一個黑箱非線性機器做泰勒展開，用多項式近似層層逼近它的輸出，每一層誤差都由對稱群作用的齊次導數掌控。合成譜更像在譜序列與真實譜之間插入一個可調旋鈕 <span class="math inline">\tau</span>：旋到 <span class="math inline">\tau=0</span> 時看見平坦的代數 <span class="math inline">E_2</span> 頁，把 <span class="math inline">\tau</span> 轉為可逆時就還原出完整的同倫論對象。</li>
+<li>分階段閱讀路線：第一步先讀 Gregory Arone 與 Michael Ching (2019) 的綜述建立 Goodwillie 函子微積分與泰勒塔的基本直覺，並搭配 Sven van Nigtevecht (2025) 的講義掌握濾過譜與合成譜的 <span class="math inline">\tau</span>-形式化語言；第二步精讀 Dieter Degrijse、Markus Hausmann、Wolfgang Lück、Irakli Patchkoria 與 Stefan Schwede (2019) 確立真等變正交 <span class="math inline">G</span>-譜模型，以及 Mark Behrens 與 Jay Shah (2019)（實動機 Betti 實現）與 Tyler Lawson (2024)（<span class="math inline">E</span>-合成譜的胞腔生成性質）；第三步閱讀 Benjamin Antieau 與 Noah Riggenbach (2024) 與 Douglas C. Ravenel (2026)，了解 <span class="math inline">p</span>-型割圓合成譜在 <span class="math inline">\mathrm{THH}</span> 動機濾過與譜割圓擴張中的前沿應用，並可延伸參考 Pedro Magalhães 與 Anna Sopena-Gilboy (2026) 的複幾何雙複形膨脹函子。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;群對稱與非線性同倫函子&quot;] --&gt; B[&quot;正交 G-譜與 Wirthmüller 同構&quot;]
+  B --&gt; C[&quot;實動機 Betti 實現與 C2-等變計算&quot;]
+  A --&gt; D[&quot;Goodwillie 多項式近似與泰勒塔&quot;]
+  D --&gt; E[&quot;導出代數幾何 Postnikov 逼近&quot;]
+  A --&gt; F[&quot;濾過譜與 E-合成譜 τ-變形&quot;]
+  F --&gt; G[&quot;割圓合成譜與高階割圓擴張&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>真等變正交 <span class="math inline">G</span>-譜與 Wirthmüller 同構（Genuine Proper Equivariant Spectra and Wirthmüller Isomorphism）</strong></p>
+<ul>
+<li>直覺理解：僅要求在底層群忘卻對稱後誘導等價（Borel 等變），會遺漏子群固定點處豐富的幾何訊號。真等變同倫論要求在每個緊緻子群的不動點上都檢測同倫群同構，因此不僅能用表示球懸置做 <span class="math inline">RO(G)</span>-分次，還自動附帶從子群往母群的轉移映射。</li>
+<li>機制或核心表達式：在 Degrijse–Hausmann–Lück–Patchkoria–Schwede (2019) 的真等變模型中，正交 <span class="math inline">G</span>-譜構成對稱么半穩定模型範疇，其弱等價定義為對所有緊緻子群 <span class="math inline">H \le G</span> 皆誘導等變穩定同倫群 <span class="math inline">\pi_*^H</span> 同構。緊緻子群誘導與餘誘導之間存在經由切空間表示 <span class="math inline">L = T_{eH}(G/H)</span> 扭轉的 Wirthmüller 同構 <span class="math inline">\operatorname{Ind}_H^G(X) \simeq \operatorname{Coind}_H^G(\Sigma^L X)</span>；對有限群在素數 <span class="math inline">2</span> 處，Patchkoria (2014) 證明穩定 Burnside 範疇與懸置結構足以剛性決定整個等變模型範疇。</li>
+<li>能做到什麼，代價是什麼：真等變結構完整保留了幾何不動點、轉移與 <span class="math inline">RO(G)</span>-分次上同調，但面對連續李群的非緊緻子群時必須限定在「真（proper）」胞腔與緊緻迷向子群上，且實務計算 <span class="math inline">C_2</span>-等變群時常需藉助 Behrens–Shah (2019) 的實動機 Betti 實現局部化來降低直接構造的難度。</li>
+</ul>
+</li>
+<li>
+<p><strong>Goodwillie 函子微積分與泰勒塔（Goodwillie Calculus and Taylor Towers）</strong></p>
+<ul>
+<li>直覺理解：就像把光滑函數拆成線性項、二次項與高階餘項一樣，Goodwillie 微積分將保留弱等價的同倫函子分解為一系列 <span class="math inline">n</span>-可切（<span class="math inline">n</span>-excisive）逼近。一階導數捕捉函子的穩定線性部分，而高階誤差層則由帶有對稱群作用的譜（Taylor 係數）來分類。</li>
+<li>機制或核心表達式：對同倫函子 <span class="math inline">F: \mathcal{C} \to \mathcal{D}</span>，存在普適的 <span class="math inline">n</span>-可切逼近 <span class="math inline">P_n F</span>（將強餘笛卡兒 <span class="math inline">(n+1)</span>-立方體映為笛卡兒立方體），形成泰勒塔 <span class="math inline">F \to \dots \to P_n F \to P_{n-1} F \to \dots \to P_0 F</span>。第 <span class="math inline">n</span> 個齊次層 <span class="math inline">D_n F = \mathrm{hofib}(P_n F \to P_{n-1} F)</span> 可在譜的穩定世界中表為 <span class="math inline">D_n F(X) \simeq (\partial_n F \wedge X^{\wedge n})_{h\Sigma_n}</span>，其中導數譜 <span class="math inline">\partial_n F</span> 帶有 <span class="math inline">\Sigma_n</span>-作用。Gauthier (2021) 亦揭示這與幾何 <span class="math inline">D^-</span>-層疊沿 Postnikov 塔的逼近 <span class="math inline">\mathbb{R}F(A) \cong \operatorname{holim}\mathbb{R}F(A_{\le n})</span> 具有平行結構。</li>
+<li>能做到什麼，代價是什麼：泰勒塔為高維流形嵌入空間、代數 <span class="math inline">K</span>-理論與環空間同倫型提供了系統性的逐階線性化手段，但收斂半徑（analyticity radius）取決於函子本身的連通性估計；一旦輸入空間超過解析半徑，泰勒塔可能不再收斂回原函子 <span class="math inline">F</span>。</li>
+</ul>
+</li>
+<li>
+<p><strong>合成譜、<span class="math inline">\tau</span>-形式化與割圓結構（Synthetic Spectra, Tau-Formalism, and Cyclotomic Extensions）</strong></p>
+<ul>
+<li>直覺理解：傳統上我們得先在代數世界算完譜序列的 <span class="math inline">E_2</span> 頁，再去處理無法直接看見的微分與隱蔽擴張。合成譜把整個譜序列放進一個雙分次穩定 <span class="math inline">\infty</span>-範疇中，利用乘法元素 <span class="math inline">\tau</span> 把「代數近似」與「真實同倫譜」統一成同一條形變線上的不同截面。</li>
+<li>機制或核心表達式：對連通環譜 <span class="math inline">E</span>，Pstrągowski 的 <span class="math inline">E</span>-合成譜範疇 <span class="math inline">\mathrm{Syn}_E</span> 由雙分次球 <span class="math inline">S^{i,j}</span> 生成，Lawson (2024) 證明它等價於某個濾過環譜上的模範疇。此範疇配備典型映射 <span class="math inline">\tau: S^{0,-1} \to S^{0,0}</span>：將 <span class="math inline">\tau</span> 反演（<span class="math inline">\tau^{-1}</span>）即還原底層穩定譜範疇，而取餘纖維 <span class="math inline">C\tau</span>（令 <span class="math inline">\tau=0</span>）則對應 <span class="math inline">E_*E</span>-餘模的導出範疇（即 Adams <span class="math inline">E_2</span> 頁）。進一步，Antieau–Riggenbach (2024) 定義 <span class="math inline">p</span>-型割圓合成譜範疇 <span class="math inline">\mathrm{CycSyn}</span>，證明 <span class="math inline">\mathrm{THH}(R;\mathbb{Z}_p)</span> 上的動機濾過自然構成其中的對象；Ravenel (2026) 則闡釋交換環譜的割圓擴張如何作為 <span class="math inline">p</span>-進數域分圓 Galois 擴張的譜類比，支援對望遠鏡猜想的解析。</li>
+<li>能做到什麼，代價是什麼：合成譜將繁瑣的譜序列收斂與微分問題統一為 <span class="math inline">\tau</span>-撓率與胞腔分解問題，且高度適配高階跡方法（THH/TC）的動機濾過；然而其雙分次結構需要精細的 Adams–Novikov 型權重追蹤，僅對滿足連通性或色層準合成（chromatically quasisyntomic）條件的環譜能發揮最佳威力。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>合成譜中反演 <span class="math inline">\tau</span> 與設定 <span class="math inline">\tau=0</span> 的雙重截面</strong>：在濾過譜與 <span class="math inline">E</span>-合成譜的 <span class="math inline">\tau</span>-形式化中，把 <span class="math inline">\tau</span> 反演與取餘纖維 <span class="math inline">C\tau</span>（相當於 <span class="math inline">\tau=0</span>）分別對應什麼數學對象？為什麼一個在底層同倫群上等價的對象，在合成譜中仍然可能帶有非平凡的 <span class="math inline">\tau</span>-撓率？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>把 <span class="math inline">\tau</span> 視為過濾程度為 <span class="math inline">-1</span> 的平移算子：反演 <span class="math inline">\tau</span> 抹除了所有過濾階段的區別，因此把濾過對象投射回普通的穩定同倫範疇 <span class="math inline">\mathrm{Sp}</span>。相對地，模去 <span class="math inline">\tau</span> 相當於只讀取每個過濾階段的關聯分次（associated graded），在 <span class="math inline">E</span>-合成譜中這恰對應於 <span class="math inline">E_*E</span>-餘模的代數範疇，也就是 Adams 譜序列的 <span class="math inline">E_2</span> 頁。若譜序列中出現非零的 <span class="math inline">d_r</span> 微分，在合成譜的同倫群裡就會表現為被 <span class="math inline">\tau^{r-1}</span> 消滅但本身非零的 <span class="math inline">\tau</span>-撓率元素，它在反演 <span class="math inline">\tau</span> 後消失，卻精確記錄了譜序列微分的長度。</p>
+</details>
+<ol start="2">
+<li><strong>真等變正交 <span class="math inline">G</span>-譜為何必須依賴所有緊緻子群測試等價</strong>：在 Degrijse 等人 (2019) 針對一般李群 <span class="math inline">G</span> 建立的真等變穩定同倫論中，為何弱等價只要求在「所有緊緻子群」上誘導 <span class="math inline">\pi_*^H</span> 同構，而非所有閉子群？這與胞腔生成元的選取有何關聯？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>若試圖將所有非緊緻閉子群（包含 <span class="math inline">G</span> 本身當 <span class="math inline">G</span> 非緊緻時）納入生成元，相關軌道空間 <span class="math inline">G/H</span> 的對偶性與有限性會崩潰，導致無法在誘導與餘誘導之間建立良定義的 Wirthmüller 同構，也無法維持緊緻生成（compactly generated）的三角張量結構。將胞腔限定於具緊緻迷向子群的軌道 <span class="math inline">G/H</span>，不僅確保切空間局部模型可控，更使每個真等變上同調論完全由「真 <span class="math inline">G</span>-同倫型」決定，從而涵蓋等變 <span class="math inline">K</span>-理論與群同調等重要幾何不變量。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>非交換合成幾何、高階割圓擴張與望遠鏡猜想的結構後效</strong>：Antieau 與 Riggenbach (2024) 透過 <span class="math inline">\mathrm{CycSyn}</span> 給出了連通色層準合成 <span class="math inline">\mathbf{E}_\infty</span>-環譜的合成上同調界限，而 Ravenel (2026) 則整理了 Burklund–Hahn–Levy–Schlank (BHLS) 利用割圓譜與高階割圓擴張解決望遠鏡猜想的核心機制。如何將這些方法進一步推廣到非連通環譜與高度 <span class="math inline">n \ge 2</span> 的精細計算，以及如何把雙複形的多重位勢弱等價（Magalhães &amp; Sopena-Gilboy, 2026）納入合成同倫框架，仍是活躍的研究課題。</li>
+<li><strong>等變 Goodwillie 微積分與非有限群表示的分裂問題</strong>：在有限群情形下，等變穩定同倫範疇具有高度剛性（如 Patchkoria, 2014），且局部化與分裂行為較為可控；然而當轉向連續緊緻李群（如 <span class="math inline">SO(2)</span>）或非緊緻李群的真等變同倫時，軌道範疇與函子泰勒塔上的導數構造大幅複雜化。如何系統分類一般李群作用下 Goodwillie 導數算子的等變結構，尚缺乏統一的完備理論。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>合成譜 <span class="math inline">\tau</span>-形變與譜序列及色層計算的直接接軌</strong>：本子方向由 Lawson (2024) 與 van Nigtevecht (2025) 發展的濾過與合成譜工具，可直接遷移至 <a class="wl" href="14A_%E8%AD%9C%E5%BA%8F%E5%88%97%E3%80%81Adams%E8%AD%9C%E5%BA%8F%E5%88%97%E8%88%87%E4%B8%8A%E5%90%8C%E8%AA%BF%E9%81%8B%E7%AE%97.html">譜序列、Adams譜序列與上同調運算</a> 處理高階微分計算，並支援 <a class="wl" href="14B_%E7%A9%A9%E5%AE%9A%E5%90%8C%E5%80%AB%E8%AB%96%E3%80%81%E8%89%B2%E5%B1%A4%E5%90%8C%E5%80%AB%E8%AB%96%E8%88%87%E6%8B%93%E6%92%B2%E6%A8%A1%E5%BD%A2%E5%BC%8FTMF.html">穩定同倫論、色層同倫論與拓撲模形式TMF</a> 中 <span class="math inline">\mathbb{S}/4</span> 結合性障礙與 <span class="math inline">\mathrm{TMF}</span> 模層疊的精細分析。</li>
+<li><strong>實動機實現與高階凝聚合成幾何</strong>：Behrens 與 Shah (2019) 透過 Betti 實現連接實動機與 <span class="math inline">C_2</span>-等變同倫的方法，以及 Gauthier (2021) 將 Goodwillie 泰勒塔對照至幾何 <span class="math inline">D^-</span>-層疊 Postnikov 逼近的架構，均可遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a> 作為幾何層疊與類型論合成模型的同倫論測試場。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-goodwillie-calculus2019">1. Goodwillie Calculus（2019）</h4>
+<ul>
+<li>作者與出處：Gregory Arone, Michael Ching · <em>arXiv</em></li>
+<li>核心問題：研究拓撲空間或譜之間非線性同倫函子的幾何行為時，缺乏類似微積分中多項式展開的系統性逼近工具。需要整理從 <span class="math inline">n</span>-可切逼近到高階導數算子的完整理論架構。</li>
+<li>關鍵做法：這份綜述系統介紹 Goodwillie 同倫函子微積分的理論與應用，包含 <span class="math inline">n</span>-可切逼近 <span class="math inline">P_n F</span>、泰勒塔的構造與收斂條件，以及齊次層 <span class="math inline">D_n F</span> 如何由帶對稱群作用的導數譜分類。</li>
+<li>跨領域啟發：函子泰勒展開的結構不僅適用於拓撲嵌入空間與代數 <span class="math inline">K</span>-理論，也直接對應到導出代數幾何中層疊的 Postnikov 逼近塔。</li>
+<li>連結：<a href="zotero://select/library/items/NJVS4CHD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1902.00803" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-an-introduction-to-filtered-and-synthetic-spectra2025">2. An introduction to filtered and synthetic spectra（2025）</h4>
+<ul>
+<li>作者與出處：Sven van Nigtevecht · <em>arXiv</em></li>
+<li>核心問題：譜序列中的計算常常把濾過資訊與底層穩定譜拆開處理，使微分與擴張問題難以在同一個範疇語言下操縱。學習者需要從濾過譜直觀過渡到現代合成譜的公理體系。</li>
+<li>關鍵做法：這份導論講義聚焦於濾過譜中所出現的 <span class="math inline">\tau</span>-形式化語言，系統闡述譜序列、濾過譜與合成譜之間的對應關係，說明如何將譜序列資料內化為穩定 <span class="math inline">\infty</span>-範疇中的結構。</li>
+<li>跨領域啟發：所建立的 <span class="math inline">\tau</span>-變形直覺可直接用來理解 <a class="wl" href="14A_%E8%AD%9C%E5%BA%8F%E5%88%97%E3%80%81Adams%E8%AD%9C%E5%BA%8F%E5%88%97%E8%88%87%E4%B8%8A%E5%90%8C%E8%AA%BF%E9%81%8B%E7%AE%97.html">譜序列、Adams譜序列與上同調運算</a> 的收斂行為，並銜接高階合成結構。</li>
+<li>連結：<a href="zotero://select/library/items/I288CKBC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.21127" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-proper-equivariant-stable-homotopy-theory2019">3. Proper equivariant stable homotopy theory（2019）</h4>
+<ul>
+<li>作者與出處：Dieter Degrijse, Markus Hausmann, Wolfgang Lück, Irakli Patchkoria, Stefan Schwede · <em>Memoirs of the AMS 288 (2023), No. 1432</em></li>
+<li>核心問題：對於一般的李群（未必緊緻），如何建立一套同時保留轉移映射、Wirthmüller 同構與 <span class="math inline">RO(G)</span>-分次結構的真等變穩定同倫論。</li>
+<li>關鍵做法：專著以正交 <span class="math inline">G</span>-譜作為真（proper）等變穩定同倫論的模型，弱等價定義為在所有緊緻子群上誘導 <span class="math inline">\pi_*</span>-同構，並構造具對稱么半結構的穩定模型範疇。所有對象皆由具緊緻迷向子群的等變胞腔建構，使關聯同倫範疇為緊緻生成的張量三角範疇。</li>
+<li>跨領域啟發：為連續群對稱性下的等變 <span class="math inline">K</span>-理論與上同調論提供了嚴格的穩定同倫基礎，可進一步對照實動機與等變 <span class="math inline">\mathrm{TMF}</span> 計算。</li>
+<li>連結：<a href="zotero://select/library/items/NG7EDCV2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1908.00779" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-c_2-equivariant-stable-homotopy-from-real-motivic-stable-homotopy2019">4. C_2-equivariant stable homotopy from real motivic stable homotopy（2019）</h4>
+<ul>
+<li>作者與出處：Mark Behrens, Jay Shah · <em>Ann. K-Th. 5 (2020) 411–464</em></li>
+<li>核心問題：直接計算 <span class="math inline">C_2</span>-等變穩定同倫群在素數 <span class="math inline">2</span> 處相當繁瑣，而實數域上的動機穩定同倫論具備豐富的代數幾何濾過結構。需要確立兩者在 <span class="math inline">p</span>-完備化下的確切局部化關係。</li>
+<li>關鍵做法：作者證明 Betti 實現函子將 <span class="math inline">C_2</span>-等變 <span class="math inline">p</span>-完備穩定同倫範疇呈現為 <span class="math inline">p</span>-完備胞腔實動機穩定同倫範疇的一個局部化，進而給出利用實動機同倫群來計算 <span class="math inline">C_2</span>-等變同倫群的系統方法。</li>
+<li>跨領域啟發：示範了如何透過動機幾何實現去化簡純拓撲的等變計算，與 <a class="wl" href="14B_%E7%A9%A9%E5%AE%9A%E5%90%8C%E5%80%AB%E8%AB%96%E3%80%81%E8%89%B2%E5%B1%A4%E5%90%8C%E5%80%AB%E8%AB%96%E8%88%87%E6%8B%93%E6%92%B2%E6%A8%A1%E5%BD%A2%E5%BC%8FTMF.html">穩定同倫論、色層同倫論與拓撲模形式TMF</a> 中的 <span class="math inline">C_2</span>-等變 <span class="math inline">\mathrm{TMF}</span> 互為補充。</li>
+<li>連結：<a href="zotero://select/library/items/9ZSNBFCU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1908.08378" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-synthetic-spectra-are-usually-cellular2024">5. Synthetic spectra are (usually) cellular（2024）</h4>
+<ul>
+<li>作者與出處：Tyler Lawson · <em>arXiv</em></li>
+<li>核心問題：Pstrągowski 的 <span class="math inline">E</span>-合成譜範疇 <span class="math inline">\mathrm{Syn}_E</span> 雖已成為分析 Adams–Novikov 譜序列的標準環境，但一直需要確認它是否能單純由雙分次球面生成並直接表為具體濾過環譜上的模。</li>
+<li>關鍵做法：作者證明只要 <span class="math inline">E</span> 是連通環譜，<span class="math inline">E</span>-合成譜範疇 <span class="math inline">\mathrm{Syn}_E</span> 即由雙分次球 <span class="math inline">S^{i,j}</span> 所生成（胞腔性）。由此直接推得該範疇等價於某個濾過環譜上的模範疇。</li>
+<li>跨領域啟發：將抽象的層與合成結構簡化為單一濾過環譜的模範疇，大幅降低了在合成譜中構造代數與障礙理論的門檻。</li>
+<li>連結：<a href="zotero://select/library/items/GW4CX6RR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.03257" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-cyclotomic-extensions-in-stable-homotopy-theory2026">6. Cyclotomic extensions in stable homotopy theory（2026）</h4>
+<ul>
+<li>作者與出處：Douglas C. Ravenel · <em>arXiv</em></li>
+<li>核心問題：Burklund、Hahn、Levy 與 Schlank (BHLS) 最近解決了困擾同倫論多年的望遠鏡猜想，其證明深度依賴割圓譜與交換環譜的割圓擴張，亟需將此高階機制與古典數論的 Galois 理論對照梳理。</li>
+<li>關鍵做法：這篇闡釋性論文系統剖析穩定同倫論中交換環譜的高階割圓擴張，指出其結構類比於在 <span class="math inline">p</span>-進數域（或其整數環）中加入單位根所得到的 Galois 擴張，藉此照亮 BHLS 證明望遠鏡猜想的關鍵步驟。</li>
+<li>跨領域啟發：把數論中的割圓 Galois 理論與高階跡方法連結回 <a class="wl" href="14B_%E7%A9%A9%E5%AE%9A%E5%90%8C%E5%80%AB%E8%AB%96%E3%80%81%E8%89%B2%E5%B1%A4%E5%90%8C%E5%80%AB%E8%AB%96%E8%88%87%E6%8B%93%E6%92%B2%E6%A8%A1%E5%BD%A2%E5%BC%8FTMF.html">穩定同倫論、色層同倫論與拓撲模形式TMF</a> 的色層局部化核心問題。</li>
+<li>連結：<a href="zotero://select/library/items/SIRNJETM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.08166" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-15-篇">G5｜本子方向全量文獻泛讀清單（共 15 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 15 篇文獻（含開放存取 PDF 15 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進10-篇">A. 奠基經典、專著與核心演進（10 篇）</h3>
+<ul>
+<li><strong>2019｜C_2-equivariant stable homotopy from real motivic stable homotopy</strong>，Mark Behrens, Jay Shah（<em>Ann. K-Th. 5 (2020) 411-464</em>，25 引）：給出由實數體 <span class="math inline">\mathbb{R}</span> 上 <span class="math inline">p</span>-完備胞腔動機譜（cellular motivic spectrum）的動機同倫群計算其 Betti 實現之 <span class="math inline">C_2</span>-等變同倫群的方法，並證明 Betti 實現將 <span class="math inline">C_2</span>-等變 <span class="math inline">p</span>-完備穩定同倫範疇表為實胞腔動機穩定同倫範疇的局部化。 <a href="zotero://select/library/items/9ZSNBFCU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1908.08378" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Proper equivariant stable homotopy theory</strong>，Dieter Degrijse et al.（<em>Memoirs of the American Mathematical Society 288 (2023), No. 1432</em>，12 引）：一本專著，為一般李群（不限於緊群，藉由緊子群族檢驗等價）建立具備轉移與 Wirthmüller 同構的真恰當等變穩定同倫論。 <a href="zotero://select/library/items/NG7EDCV2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1908.00779" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Rigidity in Equivariant Stable Homotopy Theory</strong>，Irakli Patchkoria（<em>Algebr. Geom. Topol. 16 (2016) 2159-2227</em>，5 引）：證明對任意有限群 <span class="math inline">G</span>，<span class="math inline">2</span>-局部真 <span class="math inline">G</span>-等變穩定同倫範疇只有唯一的模型範疇實現（剛性定理）。也就是說，懸置、餘纖維序列與穩定 Burnside 範疇完全決定所有高階同倫資訊。 <a href="zotero://select/library/items/QSG6ZINS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1403.5191" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Goodwillie Calculus and Geometric Stacks</strong>，Renaud Gauthier（<em>arXiv</em>）：揭示 Goodwillie 函子微積分的 Taylor 塔與 <span class="math inline">n</span>-幾何 <span class="math inline">D^-</span>-疊的 Postnikov 塔之間的結構平行性，建立連接映射同倫纖維、多項式與逐點逼近以及塔重構等平行定理。 <a href="zotero://select/library/items/KF7RGJX5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.12604" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Goodwillie Calculus</strong>，Gregory Arone, Michael Ching（<em>arXiv</em>）：作為代數拓撲與同倫論領域的綜述文獻，系統介紹 Goodwillie 同倫函子微積分（Goodwillie's calculus of homotopy functors）的理論架構、相關主題與應用。 <a href="zotero://select/library/items/NJVS4CHD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1902.00803" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Smashing Localizations in Equivariant Stable Homotopy</strong>，Christian Carrick（<em>arXiv</em>）：研究等變穩定同倫論中壓碎（smashing）Bousfield 局部化在等變函子下的行為，證明實 Johnson–Wilson 理論 <span class="math inline">E_{\mathbb{R}}(n)</span> 與 <span class="math inline">C_{2^n}</span> 等變版本的壓碎積及色層收斂定理僅在 Borel 完備化後成立，並刻畫誘導局部化對 <span class="math inline">N_\infty</span> 代數範數的提升及在 <span class="math inline">E_\infty</span> 環擬 Galois 擴張上的推廣。 <a href="zotero://select/library/items/2HD36IHS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1909.08771" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Freeness and equivariant stable homotopy</strong>，Michael A. Hill（<em>arXiv</em>）：引入 <span class="math inline">RO</span>-分次等變廣義同調的自由性，證明同調分解為誘導虛擬表示球面同調楔和的譜範疇對等變運算封閉，並細化出類同純譜與等向譜的譜類以簡化 Bredon 同調計算，所得同調具餘 Tambara 函子結構。 <a href="zotero://select/library/items/S2TEZSXS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.00664" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Relative homological algebra via truncations</strong>，Wojciech Chacholski et al.（<em>arXiv</em>）：在任意阿貝爾範疇的相對同調代數設定下重新詮釋 Spaltenstein 的無界鏈複形消解構造，透過無界鏈複形與非正分次複形塔之間的 Quillen 伴隨函子對刻畫截斷、局部消解與黏合過程。 <a href="zotero://select/library/items/QE4B64CQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1702.05357" rel="noopener">官方連結</a></li>
+<li><strong>2004｜Goodwillie towers and chromatic homotopy: an overview</strong>，Nicholas J Kuhn（<em>Geom. Topol. Monogr. 10 (2007) 245-279</em>）：綜述 Goodwillie 為拓撲模型範疇間連續函子構造的泰勒塔（Goodwillie towers）理論，並探討該函子微積分架構在週期同倫論（chromatic homotopy）中的應用。 <a href="zotero://select/library/items/E8PWJG8V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0410342" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Spectra and symmetric spectra in general model categories</strong>，Mark Hovey（<em>arXiv</em>）：給出從不穩定至穩定同倫論的兩種通用模型範疇構造（分別基於 Boardman 譜與保留么半結構時的對稱譜），使一般自函子 <span class="math inline">G</span> 成為 Quillen 等價，可適用於空間與概形的動機同倫論。 <a href="zotero://select/library/items/IB2ZJ8PR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0004051" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2026｜The inflation functor in pluripotential homological algebra</strong>，Pedro Magalhães, Anna Sopena-Gilboy（<em>arXiv</em>）：構造從上鏈復形至雙復形的膨脹函子，證明其將擬同構映為多重位勢弱等價且為對應 Bott-Chern 與 Aeppli 上同調的 Quillen 伴隨左端，進而用於多重位勢 Koszul 對偶與雙復形無窮範疇建構。 <a href="zotero://select/library/items/KPAPZS4A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.22418" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Cyclotomic extensions in stable homotopy theory</strong>，Douglas C. Ravenel（<em>arXiv</em>）：作為望遠鏡猜想最新證明的導讀伴隨論文，闡述穩定同倫論中交換環譜的高階分圓擴張理論，類比 <span class="math inline">p</span>-進域添加單位根的 Galois 擴張以解析該構造在 Burklund 等人證明中的角色。 <a href="zotero://select/library/items/SIRNJETM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.08166" rel="noopener">官方連結</a></li>
+<li><strong>2025｜An introduction to filtered and synthetic spectra</strong>，Sven van Nigtevecht（<em>arXiv</em>）：這篇講義介紹譜序列、過濾譜與合成譜的基礎理論，並聚焦於過濾譜設定下所產生的 <span class="math inline">\tau</span> 形式化架構。 <a href="zotero://select/library/items/I288CKBC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.21127" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Synthetic spectra are (usually) cellular</strong>，Tyler Lawson（<em>arXiv</em>）：證明當 <span class="math inline">E</span> 為連通環譜時，Pstragowski 所定義的 <span class="math inline">E</span>-合成譜範疇 <span class="math inline">Syn_E</span> 由雙分次球面 <span class="math inline">S^{i,j}</span> 所生成，從而等價於某個過濾環譜上的模範疇。 <a href="zotero://select/library/items/GW4CX6RR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.03257" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Cyclotomic synthetic spectra</strong>，Benjamin Antieau, Noah Riggenbach（<em>arXiv</em>）：定義<span class="math inline">p</span>-典型分圓合成譜的<span class="math inline">\infty</span>-範疇<span class="math inline">\mathrm{CycSyn}</span>，證明擬合成與色層擬合成環上拓撲Hochschild同調的motivic濾過自然具此結構，並給出連通環譜syntomic上同調新界。 <a href="zotero://select/library/items/PQZ49GD7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.19929" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f2ee9060">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/14_%E4%BB%A3%E6%95%B8%E6%8B%93%E6%92%B2.html">代數拓撲</a><span class="rs">代數拓撲把可以任意拉扯扭曲的連續幾何形狀，轉換成剛性的離散代數不變量，像是替形狀取指紋。</span></li><li><a href="14A_%E8%AD%9C%E5%BA%8F%E5%88%97%E3%80%81Adams%E8%AD%9C%E5%BA%8F%E5%88%97%E8%88%87%E4%B8%8A%E5%90%8C%E8%AA%BF%E9%81%8B%E7%AE%97.html">譜序列、Adams譜序列與上同調運算</a></li><li><a href="14B_%E7%A9%A9%E5%AE%9A%E5%90%8C%E5%80%AB%E8%AB%96%E3%80%81%E8%89%B2%E5%B1%A4%E5%90%8C%E5%80%AB%E8%AB%96%E8%88%87%E6%8B%93%E6%92%B2%E6%A8%A1%E5%BD%A2%E5%BC%8FTMF.html">穩定同倫論、色層同倫論與拓撲模形式TMF</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

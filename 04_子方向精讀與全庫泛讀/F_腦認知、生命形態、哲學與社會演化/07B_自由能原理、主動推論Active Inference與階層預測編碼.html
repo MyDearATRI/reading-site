@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>07B｜自由能原理、主動推論Active Inference與階層預測編碼 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-3f97608b" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 腦認知、生命形態、哲學與社會演化</span>
+<article>
+
+<h1 id="07b自由能原理主動推論active-inference與階層預測編碼">07B｜自由能原理、主動推論Active Inference與階層預測編碼</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">發展式學習：持續學習、主動推論、內在動機與開放式演化</a>
+同領域子方向：<a class="wl" href="07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a> · <a class="wl" href="07C_%E5%85%A7%E5%9C%A8%E5%8B%95%E6%A9%9F%E5%A5%BD%E5%A5%87%E5%BF%83%E3%80%81%E8%AA%B2%E7%A8%8B%E5%AD%B8%E7%BF%92%E8%88%87%E9%96%8B%E6%94%BE%E5%BC%8F%E6%BC%94%E5%8C%96Open-Endedness.html">內在動機好奇心、課程學習與開放式演化Open-Endedness</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">發展式學習：持續學習、主動推論、內在動機與開放式演化</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A511_%E4%BA%92%E8%A3%9C%E8%A8%98%E6%86%B6%E7%B3%BB%E7%B5%B1%E3%80%81%E4%B8%BB%E5%8B%95%E6%8E%A8%E8%AB%96%E3%80%81%E7%94%9F%E7%89%A9%E9%9B%BB%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E4%BA%BA%E5%B7%A5%E6%84%8F%E8%AD%98%E5%88%A4%E6%BA%96.html">互補記憶系統、主動推論、生物電形態發生與人工意識判準</a>
+課程章節：<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD04_%E9%9B%A3%E5%BA%A6%E6%9B%B2%E7%B7%9A%E8%88%87%E5%BF%83%E6%B5%81.html">難度曲線與心流</a> · <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD05_%E5%8B%95%E6%A9%9F.html">動機</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向隸屬 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">發展式學習：持續學習、主動推論、內在動機與開放式演化</a>，圍繞自由能原理、主動推論與階層預測編碼展開，探討智慧體如何僅透過局部預測誤差動態同時完成知覺推論、動作控制與突觸學習。演進主線從皮質視覺抑制作為神經證據、連續時間控制理論化約出發，推進到 2025–2026 年解決深層預測編碼信用傳播衰減、精度矩陣簡化與貝氏參數不確定性的新演算法。</p>
+</aside>
+<ul>
+<li>核心問題：標準反向傳播（BP）依賴全域誤差回傳、前向與反向階段分離以及集中式記憶體存取，在生物神經系統與低功耗分散硬體上皆難以實作。然而，傳統預測編碼網路（PCN）常將精度矩陣簡化為單位矩陣，並依賴緩慢的擴散式狀態能量最小化，導致推論疊代耗時、深層窄網路信用訊號隨層數呈指數衰減，且難以量化參數層級的認知不確定性。</li>
+<li>直覺模型：可以把階層預測編碼想像成公司各層主管與基層之間的對話：上層只向下層傳送「預期會有什麼資料」的預測，下層只向上回報「與預期不符的殘差」，且回報音量大小取決於下層對訊號可靠度（精度）的信心。主動推論則進一步表示，當預測與感官不合時，除了修正內心猜測，也能直接伸手改變外在環境，讓感官輸入符合自己的預期。</li>
+<li>分階段閱讀路線：建議依三階段研讀：先讀 Harrison et al. (2006) 與 Baltieri 與 Buckley (2019)，前者以 fMRI 驗證視覺皮質由上而下的抑制性預測編碼效應，後者證明線性生成模型下的連續時間主動推論可直接對應經典 PID 控制器；再讀 Priorelli et al. (2023) 與 Tschantz et al. (2025)，掌握連續時間運動控制、主動感測，以及保留局部赫布（Hebbian）更新的貝氏預測編碼（BPC）；最後讀 Baskakovs et al. (2026) 與 Seely 與 Gould (2026)，了解如何透過階層高斯濾波器（HGF）恢復閉式精度加權傳遞，以及利用增廣拉格朗日乘數（PC-ALM）在 128 層深網中實現彈道式信用傳播。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;變分自由能原理與局部預測誤差&quot;] --&gt; B[&quot;皮質階層預測編碼 fMRI 抑制驗證&quot;]
+  A --&gt; C[&quot;連續時間主動推論與廣義座標運動控制&quot;]
+  C --&gt; D[&quot;線性生成模型化約為 PID 控制律&quot;]
+  B --&gt; E[&quot;貝氏預測編碼 BPC 參數後驗與赫布更新&quot;]
+  B --&gt; F[&quot;階層高斯濾波器 HGF 閉式精度加權&quot;]
+  B --&gt; G[&quot;增廣拉格朗日 PC-ALM 彈道式信用傳播&quot;]
+  C --&gt; H[&quot;分佈強健自由能 DR-FREE 環境偏移決策&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>變分自由能最小化與階層預測編碼（Variational Free Energy &amp; Hierarchical Predictive Coding）</strong></p>
+<ul>
+<li>直覺理解：神經網路的每一層同時維持狀態活動與預測誤差兩個局部變數，透過相鄰層之間的局部訊息交換降低整體自由能，無需全域反向誤差鏈。</li>
+<li>機制或核心表達式：給定觀測 <span class="math inline">o</span> 與隱變量 <span class="math inline">s</span> 的生成模型 <span class="math inline">p(o, s)</span>，變分自由能定義為 <span class="math inline">F = \mathbb{E}_{q(s)}[\ln q(s) - \ln p(o, s)] = D_{\mathrm{KL}}(q(s) \| p(s \mid o)) - \ln p(o)</span>。在多層高斯架構下，第 <span class="math inline">\ell</span> 層的精度加權預測誤差為 <span class="math inline">\varepsilon_\ell = \Pi_\ell (x_\ell - g_\ell(\mu_{\ell+1}))</span>，快速推論動力學 <span class="math inline">\dot{\mu}_\ell</span> 與慢速突觸學習皆僅依賴相鄰層活動與誤差（Harrison et al., 2006；Oh, 2026）。Tschantz et al. (2025) 進一步對權重本身估計後驗分佈，得到具認知不確定性且維持閉式赫布更新的貝氏預測編碼（BPC）。</li>
+<li>能做到什麼，代價是什麼：擺脫權重傳輸問題並天然支援雙向生成與判別（Kinman 與 Zilic, 2026），但當精度矩陣 <span class="math inline">\Pi_\ell</span> 被固定為單位矩陣且依賴多步疊代推論時，訓練速度落後於反向傳播且在深層表現退化（Baskakovs et al., 2026）。</li>
+</ul>
+</li>
+<li>
+<p><strong>主動推論與廣義座標控制（Active Inference &amp; Generalized Coordinates）</strong></p>
+<ul>
+<li>直覺理解：知覺修正內部模型來貼近世界，行動則改變世界狀態來貼近內部預期，兩者共用同一個變分自由能目標函數。</li>
+<li>機制或核心表達式：在連續時間公式中，隱狀態以運動的廣義座標 <span class="math inline">\tilde{\mu} = (\mu, \mu', \mu'', \dots)</span> 表示，動作變數 <span class="math inline">a</span> 透過感官流對動作的靈敏度梯度下降自由能：<span class="math inline">\dot{a} = -\nabla_a F = -(\partial_a \tilde{o})^\top \tilde{\Pi} \tilde{\varepsilon}_o</span>。當生成模型為線性時，針對位置、速度與加速度的預測誤差會直接化約為比例、積分與微分（PID）控制律（Baltieri 與 Buckley, 2019；Priorelli et al., 2023）。面對訓練與實際環境分佈不一致時，DR-FREE 在自由能目標中融入分佈強健優化，避免微調失配導致行為崩潰（Shafiei et al., 2025）。</li>
+<li>能做到什麼，代價是什麼：將目標導向伸手控制、主動感測與多感官衝突消解統一為單一推論過程，代價是需明確構造環境生成模型並協調感官精度參數。</li>
+</ul>
+</li>
+<li>
+<p><strong>精度加權訊息傳遞與彈道式信用傳播（Precision-Weighted Message Passing &amp; Ballistic Credit Propagation）</strong></p>
+<ul>
+<li>直覺理解：傳統預測編碼像熱擴散般逐層滲透誤差，訊號越深越微弱；引入動態精度矩陣或逐層拉格朗日乘數後，信用訊號能直達深層而不衰減。</li>
+<li>機制或核心表達式：Baskakovs et al. (2026) 將預測編碼網路表徵為深層階層高斯濾波器（HGF），恢復逐層動態精度加權訊息傳遞，在單一自由能目標下免疊代與免自動微分同時學習激活、權重與精度。另一方面，PC-ALM 將每層約束誤差累積至層內局部拉格朗日乘數 <span class="math inline">\lambda_\ell</span>，把純量能量的擴散熱流改寫為增廣拉格朗日對偶上升，於線性網路收斂至精確 BP 梯度並在 128 層非線性深窄網路維持與 BP 相當的效能（Seely 與 Gould, 2026）；Kinman 與 Zilic (2026) 則透過誤差重參數化（ePC）配合全域範數梯度裁切使深層 4-bit 量化 PCN 得以穩定訓練。</li>
+<li>能做到什麼，代價是什麼：克服了傳統狀態型 PC 在深層與低精度硬體上的信號指數衰減，但對偶上升與誤差重參數化會引入額外循環動力學，需控制步長與梯度範數以防振盪。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>深層預測編碼網路（PCN）為何會出現深度退化與慢速收斂</strong>：傳統狀態型預測編碼網路在深層窄架構上常大幅落後於反向傳播（BP），根據 2026 年的理論與演算法進展，造成此退化的兩個獨立根源分別是什麼？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>可從精度簡化與信用傳播動力學兩方面作答。第一，Baskakovs et al. (2026) 指出多數 PC 實作將精度矩陣固定為單位矩陣，捨棄變分推導原生的精度加權預測誤差，改以階層高斯濾波器（HGF）恢復動態精度後即可免疊代並加速收斂。第二，Seely 與 Gould (2026) 與 Kinman 與 Zilic (2026) 指出標準狀態能量最小化屬於擴散式熱流傳播，誤差訊號隨深度呈指數衰減；透過局部拉格朗日乘數（PC-ALM）的彈道式傳播或誤差重參數化（ePC），才能讓深層取得等價於 BP 的有效梯度。</p>
+</details>
+<ol start="2">
+<li><strong>主動推論如何將傳統 PID 控制器納入自由能框架</strong>：在沒有顯式獎勵函數或外在誤差定義的情況下，線性生成模型下的連續時間主動推論如何產生類似 PID（比例–積分–微分）的控制行為？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>參考 Baltieri 與 Buckley (2019) 及 Priorelli et al. (2023)。連續時間主動推論在運動的廣義座標 <span class="math inline">\tilde{\mu} = (\mu, \mu', \mu'', \dots)</span> 上定義感官與動態預期，目標狀態被編碼為強先驗預期。當動作 <span class="math inline">a</span> 沿著最小化廣義座標預測誤差 <span class="math inline">\tilde{\varepsilon}_o</span> 的方向更新時，零階位置誤差、一階速度誤差與更高階（或累積誤差）項目在線性生成模型下恰好對應 PID 控制器中的比例、微分與積分項。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>類比硬體與數位定點基板上非線性預測編碼的物理實現限制</strong>：標準非線性 PC 在推論與學習時都需計算激活函數導數，對實體類比電路與固定排程 RTL 數位硬體構成障礙。雖然 Innocenti (2026) 提出激活匹配 Bregman PC 以鏡像下降免除導數計算，且 Oh (2026) 展示確定性 RTL 實作，但如何在大型多模態任務與超低位元量化（如 4-bit）下維持不輸 BP 的擴展性仍待實證檢驗。</li>
+<li><strong>線上多時間尺度濾波與混沌非線性環境中的不確定性校正</strong>：真實感知需要對潛在狀態快速更新、同時對參數與精度慢速追蹤。Bazargani et al. (2026) 的線上廣義濾波（ODEM）透過時間尺度分離處理非線性乃至混沌生成模型，而 Oliviers et al. (2026) 則以目標對齊度（target alignment）解析 PC 相較 BP 的樣本效率優勢；但將精確的後驗不確定性估計（Tschantz et al., 2025）無縫整合進大規模世界模型（Burchi 與 Timofte, 2025）與強化學習仍是未竟課題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>精度加權預測誤差與局部學習向抗災難性遺忘遷移</strong>：BPC 對網路權重維護局部後驗精度（Tschantz et al., 2025）與 HGF 動態精度傳遞（Baskakovs et al., 2026）在數學上與費雪資訊曲率約束同源，可直接遷移至 <a class="wl" href="07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a> 與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A511_%E4%BA%92%E8%A3%9C%E8%A8%98%E6%86%B6%E7%B3%BB%E7%B5%B1%E3%80%81%E4%B8%BB%E5%8B%95%E6%8E%A8%E8%AB%96%E3%80%81%E7%94%9F%E7%89%A9%E9%9B%BB%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E4%BA%BA%E5%B7%A5%E6%84%8F%E8%AD%98%E5%88%A4%E6%BA%96.html">互補記憶系統、主動推論、生物電形態發生與人工意識判準</a>，作為局部突觸可塑性保護與快慢記憶鞏固的共同介面。</li>
+<li><strong>認知資訊增益與拓撲簡化向好奇心驅動與難度課程遷移</strong>：主動推論預期自由能中的認知探索項與 Shaw et al. (2026) 透過持續同調（persistent homology）觀測到 PCN 比對應 MLP 晚 3.6 層才摺疊連通分量的表徵結構，可遷移至 <a class="wl" href="07C_%E5%85%A7%E5%9C%A8%E5%8B%95%E6%A9%9F%E5%A5%BD%E5%A5%87%E5%BF%83%E3%80%81%E8%AA%B2%E7%A8%8B%E5%AD%B8%E7%BF%92%E8%88%87%E9%96%8B%E6%94%BE%E5%BC%8F%E6%BC%94%E5%8C%96Open-Endedness.html">內在動機好奇心、課程學習與開放式演化Open-Endedness</a>、<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD04_%E9%9B%A3%E5%BA%A6%E6%9B%B2%E7%B7%9A%E8%88%87%E5%BF%83%E6%B5%81.html">難度曲線與心流</a> 與 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD05_%E5%8B%95%E6%A9%9F.html">動機</a>，用來設計兼具好奇心資訊增益與可控預測誤差區間的課程排程。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-extra-classical-receptive-field-effects-measured-in-striate-cortex-with-fmri2006">1. Extra-classical receptive field effects measured in striate cortex with fMRI（2006）</h4>
+<ul>
+<li>作者與出處：Lee M. Harrison, Klaas Enno Stephan, Geraint E. Rees, Karl John Friston · <em>NeuroImage</em></li>
+<li>核心問題：理論預測編碼主張高層皮質的由上而下預測應抑制低階視覺皮質對可預期訊號的反應，但過去實驗常難排除 V1 內部側向連結的干擾。本文需要隔離並檢驗純粹由後向連結介導的經典感受野外部效應。</li>
+<li>關鍵做法：採用稀疏刺激陣列使單一元素無法同時落入初級視覺皮質（V1）同一經典感受野內（排除 V1 局部側向交互作用），並利用 fMRI 量測全域一致運動與不一致運動下的皮質反應；結果證實一致運動確實顯著抑制紋狀皮質活化。</li>
+<li>跨領域啟發：提供階層預測編碼最直接的神經科學實驗支撐，釐清高層先驗與低階殘差訊號的雙向分工。</li>
+<li>連結：<a href="zotero://select/library/items/ZPSUXWWB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neuroimage.2006.10.017" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-pid-control-as-a-process-of-active-inference-with-linear-generative-models2019">2. PID Control as a Process of Active Inference with Linear Generative Models（2019）</h4>
+<ul>
+<li>作者與出處：Manuel Baltieri, Christopher L. Buckley · <em>Entropy</em></li>
+<li>核心問題：自由能原理與主動推論雖被主張為生物認知與行為的統一框架，但長期缺乏與生物系統中常見經典控制理論（如分子網絡與細菌趨化性廣泛採用的 PID 控制）之間的嚴格對應關係。本文橋接這兩套理論語言。</li>
+<li>關鍵做法：在線性生成模型與廣義運動座標設定下展開連續時間主動推論的自由能梯度流推導，證明最小化預測誤差所導出的動作更新規則直接等價於經典比例–積分–微分（PID）控制器的各階增益結構。</li>
+<li>跨領域啟發：讓原本抽象的變分推論與傳統控制論接軌，說明主動推論可視為帶有可學習生成模型的廣義控制器。</li>
+<li>連結：<a href="zotero://select/library/items/TRZG86EJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/e21030257" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-modeling-motor-control-in-continuous-time-active-inference-a-survey2023">3. Modeling motor control in continuous-time Active Inference: a survey（2023）</h4>
+<ul>
+<li>作者與出處：Matteo Priorelli, Federico Maggiore, Antonella Maselli, Francesco Donnarumma, Domenico Maisto · <em>IEEE Transactions on Cognitive and Developmental Systems 2024</em></li>
+<li>核心問題：不同於最優控制透過刺激–反應映射直接極小化成本函數，意動理論與控制論認為動作是由內部預測與感官持續匹配所驅動，但連續時間主動推論在多樣運動任務上的建模方式仍分散各處。本文系統整理此領域技術架構。</li>
+<li>關鍵做法：技術性回顧連續時間主動推論如何以同一個自由能最小化過程，同時解決目標導向伸手動作控制、主動感測、運動中多感官衝突消解，以及決策與運動控制的整合這四類問題。</li>
+<li>跨領域啟發：建立從感官推論通往實體動作迴圈的全景圖，並可延伸至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A511_%E4%BA%92%E8%A3%9C%E8%A8%98%E6%86%B6%E7%B3%BB%E7%B5%B1%E3%80%81%E4%B8%BB%E5%8B%95%E6%8E%A8%E8%AB%96%E3%80%81%E7%94%9F%E7%89%A9%E9%9B%BB%E5%BD%A2%E6%85%8B%E7%99%BC%E7%94%9F%E8%88%87%E4%BA%BA%E5%B7%A5%E6%84%8F%E8%AD%98%E5%88%A4%E6%BA%96.html">互補記憶系統、主動推論、生物電形態發生與人工意識判準</a>。</li>
+<li>連結：<a href="zotero://select/library/items/GAARP5DE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.05144" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-bayesian-predictive-coding2025">4. Bayesian Predictive Coding（2025）</h4>
+<ul>
+<li>作者與出處：Alexander Tschantz, Magnus Koudahl, Hampus Linander, Lancelot Da Costa, Conor Heins · <em>arXiv</em></li>
+<li>核心問題：現有預測編碼實作多對隱狀態做最大後驗（MAP）估計並對參數做最大似然（ML）點估計，因此無法量化認知不確定性。本文在維持預測編碼局部性的前提下，將參數估計推進至完整貝氏後驗推論。</li>
+<li>關鍵做法：提出貝氏預測編碼（BPC），對網路參數估計後驗分佈且推導出完全局部的閉式赫布（Hebbian）權重更新規則；在全批次下比標準 PC 收斂更少輪次，小批次具競爭力，並提供與貝氏深度學習相當的不確定性量化。</li>
+<li>跨領域啟發：同時補足標準 PC 欠缺的權重不確定性與緩慢收斂問題，也與 <a class="wl" href="07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a> 的參數後驗保護思路相通。</li>
+<li>連結：<a href="zotero://select/library/items/XQCJKWHU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.24016" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-closed-form-predictive-coding-via-hierarchical-gaussian-filters2026">5. Closed-form predictive coding via hierarchical Gaussian filters（2026）</h4>
+<ul>
+<li>作者與出處：Aleksandrs Baskakovs, Sylvain Estebe, Kenneth Enevoldsen, Kristoffer Nielbo, Chris Mathys · <em>arXiv</em></li>
+<li>核心問題：預測編碼雖是具生物合理性的局部學習替代方案，卻長期受困於訓練慢與深層效能急劇惡化。本文將這兩個缺陷追溯至同一項簡化假設並加以修正。</li>
+<li>關鍵做法：指出現行 PC 網路將精度矩陣固定為單位矩陣而丟棄了精度加權預測誤差，於是將 PCN 改寫為深層階層高斯濾波器（HGF），恢復動態不確定性估計與局部赫布更新，無需疊代推論或自動微分即可在單一自由能目標下同步學習激活、權重與精度，在 FashionMNIST 以更少輪次逼近 BP 耗時並勝出線上資料場景。</li>
+<li>跨領域啟發：證明不依賴全域反向傳播也能實現快速深層學習，關鍵在於還原變分推導原生的精度訊息傳遞。</li>
+<li>連結：<a href="zotero://select/library/items/EKUBM3HV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.20293" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-augmented-lagrangian-predictive-coding2026">6. Augmented Lagrangian Predictive Coding（2026）</h4>
+<ul>
+<li>作者與出處：Jeffrey Seely, Julian Gould · <em>arXiv</em></li>
+<li>核心問題：傳統狀態型預測編碼在深層窄網路中信用傳播表現像緩慢的熱擴散，無法把輸出誤差有效傳遞到前端各層。本文在不增加推論預算的情況下對齊局部權重更新與 BP 梯度。</li>
+<li>關鍵做法：提出增廣拉格朗日預測編碼（PC-ALM），將每層約束誤差累積進層內局部拉格朗日乘數並進行對偶上升，於線性網路中以純層內更新收斂至精確 BP 梯度，在深度達 128 層的非線性網路中實現均勻分佈於各層的「彈道式」信用傳播，跨寬深設定均匹配 BP 效能。</li>
+<li>跨領域啟發：解除預測編碼的深度上限，使其具備與現代深層架構正面競爭的工程可行性。</li>
+<li>連結：<a href="zotero://select/library/items/ZPZHPRI4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.31022" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-83-篇">G5｜本子方向全量文獻泛讀清單（共 83 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 83 篇文獻（含開放存取 PDF 79 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進60-篇">A. 奠基經典、專著與核心演進（60 篇）</h3>
+<ul>
+<li><strong>1999｜Predictive coding in the visual cortex: a functional interpretation of some extra-classical receptive-field effects</strong>，Rajesh P. N. Rao, Dana H. Ballard（<em>Nature Neuroscience</em>，5471 引）：預測編碼的開創論文：首次證明視覺皮質的非古典感受野效應，來自高層往下傳預測、底層只回傳殘差誤差的階層生成架構。 <a href="zotero://select/library/items/RJZ46836" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/4580" rel="noopener">官方連結</a></li>
+<li><strong>2006｜Extra-classical receptive field effects measured in striate cortex with fMRI</strong>，Lee M. Harrison et al.（<em>NeuroImage</em>，89 引）：Lee M. Harrison, Karl John Friston et al.，<em>Extra-classical receptive field effects measured in striate cortex with fMRI</em>（<em>NeuroImage</em>，89 引）：用人腦 fMRI 實證檢驗預測編碼假說。結果顯示，全局連貫運動產生由上而下的預測時，初級視覺皮質的反應會被抑制。書目索引。 <a href="zotero://select/library/items/ZPSUXWWB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neuroimage.2006.10.017" rel="noopener">官方連結</a></li>
+<li><strong>2021｜The Markov blanket trick: On the scope of the free energy principle and active inference</strong>，Vicente Raja et al.（<em>Physics of Life Reviews</em>，82 引）：從哲學與數學兩面批判自由能原理：分析馬可夫毯假設在真實開放生命系統中的適用邊界，以及過度延伸的風險。 <a href="zotero://select/library/items/9WFFRIAD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.plrev.2021.09.001" rel="noopener">官方連結</a></li>
+<li><strong>2019｜PID Control as a Process of Active Inference with Linear Generative Models</strong>，Manuel Baltieri, Christopher L. Buckley（<em>Entropy</em>，71 引）：Manuel Baltieri &amp; Christopher L. Buckley，<em>PID Control as a Process of Active Inference with Linear Generative Models</em>（<em>Entropy</em>，71 引）：證明工業界的經典 PID 控制器，在數學上等價於線性生成模型下的主動推論過程，把控制論和貝氏腦理論接了起來。書目索引。 <a href="zotero://select/library/items/TRZG86EJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/e21030257" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Modeling motor control in continuous-time Active Inference: a survey</strong>，Matteo Priorelli et al.（<em>IEEE Transactions on Cognitive and Developmental Systems 2024</em>，16 引）：Matteo Priorelli et al.，<em>Modeling motor control in continuous-time Active Inference: a survey</em>（<em>IEEE TCDS</em>，16 引）：系統整理連續時間主動推論怎麼取代傳統最優控制的成本函數，改用本體感覺的預測匹配來做生物運動控制。OA PDF。 <a href="zotero://select/library/items/GAARP5DE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.05144" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Tactile Active Inference Reinforcement Learning for Efficient Robotic Manipulation Skill Acquisition</strong>，Zihao Liu et al.（<em>IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS)</em>，3 引）：Zihao Liu et al.，<em>Tactile Active Inference Reinforcement Learning for Efficient Robotic Manipulation Skill Acquisition</em>（<em>IROS</em>）：結合觸覺感知的主動推論與強化學習，大幅提高機器人在開放環境中靈巧操作的樣本效率。OA PDF。 <a href="zotero://select/library/items/G7QM3JVX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2311.11287" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Sequential Memory with Temporal Predictive Coding</strong>，Mufeng Tang, Helen Barron, Rafal Bogacz（<em>arXiv</em>）：提出用於序列記憶的時間預測編碼模型 tPC，證明其具備生物可信神經實作，並在解析上等價於帶有隱式統計白化過程的非對稱 Hopfield 網路，能穩定記憶結構化序列。 <a href="zotero://select/library/items/A7FBJ6D3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.11982" rel="noopener">官方連結</a></li>
+<li><strong>2023｜A Neural Network Implementation for Free Energy Principle</strong>，Jingwei Liu（<em>arXiv</em>）：嘗試以古典變分神經網路 Helmholtz 機作為橋樑，將大腦理論中的自由能原理轉譯至機器學習實作，探討透過最小化與自由能原理同構的變分自由能目標來訓練神經網路的可行性。 <a href="zotero://select/library/items/IK5GPKV6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.06792" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Predictive Coding beyond Correlations</strong>，Tommaso Salvatori et al.（<em>arXiv</em>）：拓展預測編碼至因果推論任務，證明僅需微調推論過程即可免除圖切分直接計算介入操作，亦能從觀測資料推斷未知因果圖，在實證上並有助提升預測編碼於影像分類的表現。 <a href="zotero://select/library/items/8JSPMZHS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.15479" rel="noopener">官方連結</a></li>
+<li><strong>2023｜On efficient computation in active inference</strong>，Aswin Paul et al.（<em>arXiv</em>）：針對主動推論在複雜環境模擬中計算成本高昂與目標分佈難設定的限制，引入基於 Bellman 最佳性原理的動態規劃有限時域規劃演算法，並借鏡控制論 Z-learning 簡化目標分佈構建。 <a href="zotero://select/library/items/DBRHAEBZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2307.00504" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Goal-Conditioned Predictive Coding for Offline Reinforcement Learning</strong>，Zilai Zeng et al.（<em>arXiv</em>）：提出用於離線強化學習的兩階段序列建模框架與目標條件預測編碼方法 GCPC，先以序列模型將軌跡凝練為軌跡層級表徵，再據此訓練目標條件策略並統一現有多種監督式離線強化學習方法。 <a href="zotero://select/library/items/HMDRB56A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2307.03406" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Brain-inspired Computational Intelligence via Predictive Coding</strong>，Tommaso Salvatori et al.（<em>arXiv</em>）：綜述受神經科學啟發且具變分推論數學基礎的預測編碼理論，探討其作為誤差反向傳播之生物可信替代學習演算法，如何以非同步計算機制應用於大腦資訊處理模型、機器人與控制領域。 <a href="zotero://select/library/items/M8WFF8M5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2308.07870" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Contrastive Difference Predictive Coding</strong>，Chongyi Zheng, Ruslan Salakhutdinov, Benjamin Eysenbach（<em>arXiv</em>）：提出結合時間差分的對比差分預測編碼方法，透過拼接不同時間序列片段以降低學習長程依賴表徵所需資料量，並據此推導離線策略目標條件強化學習演算法使任務成功率中位數倍增。 <a href="zotero://select/library/items/AT2EHFP7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2310.20141" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Hybrid Predictive Coding: Inferring, Fast and Slow</strong>，Alexander Tschantz et al.（<em>arXiv</em>）：針對預測編碼需多輪循環卻難解釋快速前饋視覺辨識的矛盾，提出混合預測編碼網路，以雙重優化觀點將前饋掃描詮釋為攤銷推論並有系統地結合循環迭代推論。 <a href="zotero://select/library/items/3W8F9GG3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2204.02169" rel="noopener">官方連結</a></li>
+<li><strong>2022｜BayesPCN: A Continually Learnable Predictive Coding Associative Memory</strong>，Jason Yoo, Frank Wood（<em>arXiv</em>）：提出階層式預測編碼關聯記憶 BayesPCN，無需元學習即可執行持續單次記憶寫入並逐步遺忘舊觀測以釋放空間，能在高維獨立同分佈資料經歷數百至上千步後維持穩定回憶能力。 <a href="zotero://select/library/items/E3BABVQX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2205.09930" rel="noopener">官方連結</a></li>
+<li><strong>2022｜The Free Energy Principle for Perception and Action: A Deep Learning Perspective</strong>，Pietro Mazzaglia et al.（<em>Entropy 2022</em>）：從深度學習視角闡述自由能原理與主動推論（active inference），利用變分推論與攤銷規劃說明其實作機制，並綜述結合機器學習與主動推論的人工智能體研究進展。 <a href="zotero://select/library/items/HI4F9RC2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2207.06415" rel="noopener">官方連結</a></li>
+<li><strong>2022｜The Free Energy Principle drives neuromorphic development</strong>，Chris Fields et al.（<em>Neuromorphic Computing and Engineering 2, 042002 (2022)</em>）：論證具形態自由度且局域自由能受限的系統在自由能原理約束下會演化出階層式神經形態構造，並藉由錐餘錐圖（CCCD）建立與拓撲量子神經網路的形式聯繫。 <a href="zotero://select/library/items/CUCUEF2X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2207.09734" rel="noopener">官方連結</a></li>
+<li><strong>2022｜One person's modus ponens...: Comment on &quot;The Markov blanket trick: On the scope of the free energy principle and active inference&quot; by Raja and colleagues (2021)</strong>，Maxwell J. D Ramstead（<em>arXiv</em>）：針對 Raja 等人（2021）批評自由能原理與主動推論範疇的論文發表評論，指出其論證形式雖有效但存在有缺陷的前提，並說明後續發表的 FEP 文獻足以回應其提出的疑義。 <a href="zotero://select/library/items/UAZUVQAU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2208.04275" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Object-based active inference</strong>，Ruben S. van Bergen, Pablo L. Lanillos（<em>arXiv</em>）：將主動推論（AIF）與深度物件導向神經網路結合提出 OBAI，以獨立變分信念表徵個別物件並透過選擇性注意力路由輸入與模擬物件各自基於動作的動態，從經驗中學習整體生成模型。 <a href="zotero://select/library/items/9G7PVH9N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2209.01258" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Predictive Coding beyond Gaussian Distributions</strong>，Luca Pinchetti et al.（<em>arXiv</em>）：將受神經科學啟發的預測編碼 (PC) 從階層高斯生成模型推廣至任意機率分佈，使該局部推論規則得以訓練 Transformer 等複雜層結構與激活函數，並評估其與反向傳播的差距。 <a href="zotero://select/library/items/9KIZ6EVX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.03481" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Robust Graph Representation Learning via Predictive Coding</strong>，Billy Byiringiro, Tommaso Salvatori, Thomas Lukasiewicz（<em>arXiv</em>）：針對圖神經網路易受對抗攻擊與分佈外泛化不足的問題，借鏡腦資訊處理的預測編碼訊息傳遞機制，在權重更新前先使神經活動收斂，建構具相同圖網路結構的穩健圖表徵學習模型。 <a href="zotero://select/library/items/R46J4BNR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.04656" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Reverse Differentiation via Predictive Coding</strong>，Tommaso Salvatori et al.（<em>arXiv</em>）：探討更具生物合理性的預測編碼（PC）框架如何作為反向傳播演算法的局部近似機制，分析預測編碼在多層感知器及更廣神經架構中實現反向自動微分的能力與誤差邊界。 <a href="zotero://select/library/items/R29EVHS4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.04689" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A synapse-centric account of the free energy principle</strong>，David Kappel, Christian Tetzlaff（<em>arXiv</em>）：將自由能原理自第一原理應用於單一興奮性突觸微迴路，以極少假設推導出突觸學習律，預測突觸會藉隨機遞質釋放與逆向傳播動作電位探測並調控突觸後神經元反應。 <a href="zotero://select/library/items/FP4RIAM5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2103.12649" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Bidirectional Interaction between Visual and Motor Generative Models using Predictive Coding and Active Inference</strong>，Louis Annabi, Alexandre Pitti, Mathias Quoy（<em>arXiv</em>）：結合主動推論與預測編碼架構，將感官預測與運動軌跡兩個生成模型雙向耦合，使感官預測序列引導運動學習與線上適應，並在模擬機械臂手寫字母控制任務完成驗證。 <a href="zotero://select/library/items/CCG2NAGC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.09163" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Aligned Contrastive Predictive Coding</strong>，Jan Chorowski et al.（<em>arXiv</em>）：提出對齊對比預測編碼（ACPC），讓預測頭輸出少於未來幀數的預測序列並與目標對齊，藉此迫使編碼器萃取緩慢變化的分段常數潛在語音表徵，在語音編碼任務提升音素預測率與訓練速度。 <a href="zotero://select/library/items/QAZ4638K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.11946" rel="noopener">官方連結</a></li>
+<li><strong>2021｜How particular is the physics of the free energy principle?</strong>，Miguel Aguilera et al.（<em>Physics of Life Reviews. Volume 40, March 2022, Pages 24-50</em>）：在弱耦合非平衡線性隨機系統中檢視自由能原理 FEP 的推導前提，發現馬可夫毯與螺線流限制僅在極狹窄參數空間成立，且要求感知與行動間無直接耦合。 <a href="zotero://select/library/items/WZ43RAAI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2105.11203" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Goal-Directed Planning by Reinforcement Learning and Active Inference</strong>，Dongqi Han, Kenji Doya, Jun Tani（<em>arXiv</em>）：在單一神經網路中結合強化學習與主動推論，分別以隨機潛狀態 <span class="math inline">z</span> 的先驗與變分自由能最小化後驗表徵習慣行為與目標導向規劃，並於視覺導航驗證。 <a href="zotero://select/library/items/2FRIJCJ8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.09938" rel="noopener">官方連結</a></li>
+<li><strong>2021｜On the relationship between predictive coding and backpropagation</strong>，Robert Rosenbaum（<em>arXiv</em>）：綜述並擴展監督式前饋網路中預測編碼與誤差反向傳播的數學等價關係，探討其作為生物皮質學習模型之意涵，並釋出 PyTorch 實作庫 Torch2PC。 <a href="zotero://select/library/items/KKUQKXUJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2106.13082" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Contrastive Predictive Coding for Anomaly Detection</strong>，Puck de Haan, Sindy Löwe（<em>arXiv</em>）：將對比預測編碼 CPC 的局部區塊對比損失直接詮釋為異常分數，在無需異常標註資料下同時實現影像異常偵測與像素級異常分割遮罩生成。 <a href="zotero://select/library/items/VRM4QQD7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.07820" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Reinforced Imitation Learning by Free Energy Principle</strong>，Ryoya Ogishima, Izumi Karino, Yasuo Kuniyoshi（<em>arXiv</em>）：基於自由能原理 FEP 統一強化學習與模仿學習，使代理學習內化專家示範的世界模型並同時推論最大化回報的狀態與行動，兼顧探索效率與超越專家表現。 <a href="zotero://select/library/items/6HGTFWWD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.11811" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Predictive Coding: a Theoretical and Experimental Review</strong>，Beren Millidge, Anil Seth, Christopher L Buckley（<em>arXiv</em>）：全面綜述預測編碼理論與實證進展，梳理其作為大腦最小化預測誤差的貝氏生成模型框架，並檢視衍生數學模型、生物可實現性與神經生理實驗預測。 <a href="zotero://select/library/items/TKICEPA5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2107.12979" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Communication-Efficient Federated Learning via Predictive Coding</strong>，Kai Yue et al.（<em>arXiv</em>）：提出基於預測編碼的聯邦學習通訊壓縮方案，透過裝置間共享預測函數傳輸壓縮殘差向量，並依率失真代價選取預測器與量化器，最高可減少 99% 通訊開銷。 <a href="zotero://select/library/items/SCT8R56T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2108.00918" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Mathematical Walkthrough and Discussion of the Free Energy Principle</strong>，Beren Millidge, Anil Seth, Christopher L Buckley（<em>arXiv</em>）：逐步驟推導並剖析自由能原理 FEP 的數學架構，釐清自組織非平衡穩態系統之隨機熱力學如何與變分貝氏推論連結，並討論其在神經科學與 ML 的爭議。 <a href="zotero://select/library/items/B267X6EZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2108.13343" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Habitual and Reflective Control in Hierarchical Predictive Coding</strong>，Paul F. Kinghorn, Beren Millidge, Christopher L. Buckley（<em>arXiv</em>）：論證階層預測編碼 HPC 可於同一多層網路中連續實現習慣性快速反應與深思型控制，無須分離神經迴路，依任務需求逐級調用低層或高層表徵。 <a href="zotero://select/library/items/HFKXAR37" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2109.00866" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Associative Memories via Predictive Coding</strong>，Tommaso Salvatori et al.（<em>arXiv</em>）：構建受皮質啟發以預測編碼訓練的階層生成網路作為聯想記憶模型，能從含噪或殘缺線索恢復完整資料，並實現跨模態的異質聯想記憶檢索。 <a href="zotero://select/library/items/8IJHICCU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2109.08063" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Contrastive Active Inference</strong>，Pietro Mazzaglia, Tim Verbelen, Bart Dhoedt（<em>arXiv</em>）：針對主動推論在複雜環境中計算負擔過重的瓶頸，提出對比學習目標取代傳統似然估計以學習生成世界模型並規劃行動，顯著降低控制任務推論開銷。 <a href="zotero://select/library/items/DB7ZZIES" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2110.10083" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Emergence of sensory attenuation based upon the free-energy principle</strong>，Hayato Idei et al.（<em>arXiv</em>）：建構基於變分自由能最小化的多模態階層循環網路，模擬區分自產與外部感知經驗，揭示人類無法自我搔癢的感覺衰減效應可由頂層預測精確度與底層誤差交互習得。 <a href="zotero://select/library/items/TS4MDH6Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.02666" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Predictive coding, precision and natural gradients</strong>，Andre Ofner et al.（<em>arXiv</em>）：探討預測編碼網路中的精確度加權機制與深層類神經網路自然梯度下降間的數學對應，論證此分散式局域更新規則於大參數規模不確定性最佳化的潛力。 <a href="zotero://select/library/items/9MGDAX3B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.06942" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Differentiable Generalised Predictive Coding</strong>，André Ofner, Sebastian Stober（<em>arXiv</em>）：將自動微分與深度非線性狀態參數化引入梯度式預測編碼，透過局域精確度加權誤差同時最佳化階層結構與時間動力學潛狀態預測，連結神經過程理論與深度學習。 <a href="zotero://select/library/items/W3AAVX69" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.03378" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Predictive Coding Theories of Cortical Function</strong>，Linxing Preston Jiang, Rajesh P. N. Rao（<em>arXiv</em>）：綜述大腦新皮質功能的預測編碼理論，闡釋由上而下預測回饋與由下而上誤差前饋如何實現階層式貝氏推論，統一解釋知覺、行動與皮質微迴路組織。 <a href="zotero://select/library/items/79TDB6K2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.10048" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A free energy principle for generic quantum systems</strong>，Chris Fields et al.（<em>Progress in Biophysics and Molecular Biology 173: 36-59, 2022</em>）：在無時空背景且尺度無關的量子資訊理論架構下重構自由能原理，論證一般量子系統作為觀察者代理如何透過局域交互最小化變分自由能與貝氏預測誤差。 <a href="zotero://select/library/items/7MI3IQ8F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.15242" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Some interesting observations on the free energy principle</strong>，Karl Friston, Lancelot Da Costa, Thomas Parr（<em>arXiv</em>）：回應 Biehl 等人對 2013 年自由能原理早期表述的討論，釐清具備 Markov 毯（Markov blanket）的稀疏耦合系統中不同狀態子集間的螺線管耦合（solenoidal coupling）假設，並辨析貝氏力學下精確與近似貝氏推論的差異。 <a href="zotero://select/library/items/HMJSIHHG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.04501" rel="noopener">官方連結</a></li>
+<li><strong>2020｜A Free-Energy Principle for Representation Learning</strong>，Yansong Gao, Pratik Chaudhari（<em>arXiv</em>）：連結表徵學習與熱力學，指出模型的率、失真與分類損失位於凸平衡曲面上，並設計保持分類損失不變而權衡率與失真的等分類動力學過程，於影像分類任務驗證跨資料集表徵遷移。 <a href="zotero://select/library/items/3C3S8F37" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.12406" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Reinforcement Learning through Active Inference</strong>，Alexander Tschantz et al.（<em>arXiv</em>）：將計算神經科學的主動推論（active inference）引入強化學習，提出「預期未來自由能」（free energy of the expected future）決策目標以最大化偏置生成模型的證據下界，在稀疏回饋、稠密回饋與無外部回饋的基準環境中平衡探索與利用。 <a href="zotero://select/library/items/UAHAS6SG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2002.12636" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Predictive Coding for Locally-Linear Control</strong>，Rui Shu et al.（<em>arXiv</em>）：針對高維觀測與未知動力學下的可控嵌入學習（LCE）問題，提出資訊理論視角的局部線性控制方法，從理論上證明可用預測編碼（predictive coding）取代高維觀測重建解碼器，直接在低維潛在空間學習可預測動力學並執行控制。 <a href="zotero://select/library/items/SI33V88B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2003.01086" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Hierarchical Predictive Coding Models in a Deep-Learning Framework</strong>，Matin Hosseini, Anthony Maida（<em>arXiv</em>）：綜述貝氏階層預測編碼模型的模組連接結構與資訊傳遞模式，歸納由上而下重建機制與預測誤差驅動表徵更新的共通原則，並梳理近期將階層預測編碼納入深度學習框架的建模方法。 <a href="zotero://select/library/items/82PXW8FA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.03230" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Vector-Quantized Autoregressive Predictive Coding</strong>，Yu-An Chung, Hao Tang, James Glass（<em>arXiv</em>）：提出向量量化自迴歸預測編碼（VQ-APC），藉由離散量化顯式控制自監督表徵所編碼的資訊容量。透過在遞減容量模型序列上結合探針任務與互資訊分析，揭示模型在容量受限時優先保留的語音資訊成分。 <a href="zotero://select/library/items/TIGNJEWQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.08392" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Predictive Coding Approximates Backprop along Arbitrary Computation Graphs</strong>，Beren Millidge, Alexander Tschantz, Christopher L. Buckley（<em>arXiv</em>）：將預測編碼對反向傳播的生物合理近似從多層感知器推廣至任意可微計算圖上的自動微分，證明僅依賴局部學習規則的預測編碼在任意計算圖上能漸近（且在實務上快速）收斂至精確的反向傳播梯度。 <a href="zotero://select/library/items/J24DIBAD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2006.04182" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Multi-label Contrastive Predictive Coding</strong>，Jiaming Song, Stefano Ermon（<em>arXiv</em>）：針對多類別對比預測編碼互資訊估計受限於 <span class="math inline">\log m</span> 上界的問題，提出基於多標籤分類的判別器同時辨識多個正樣本，在相同負樣本數下突破 <span class="math inline">\log m</span> 限制且維持有效的互資訊下界。 <a href="zotero://select/library/items/BNDSMJXD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2007.09852" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Neural and phenotypic representation under the free-energy principle</strong>，Maxwell J. D. Ramstead et al.（<em>arXiv</em>）：基於自由能原理與主動推論，利用馬可夫毯形式化將生物系統劃分為內部、外部、感覺與主動狀態，解釋分散式神經與表型表徵如何自感官因果推論中湧現。 <a href="zotero://select/library/items/CCZ5QD2V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2008.03238" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Relaxing the Constraints on Predictive Coding Models</strong>，Beren Millidge et al.（<em>arXiv</em>）：檢視近似誤差反向傳播的預測編碼模型中前向與反向權重對稱、非線性導數回傳及一對一誤差單元連結等不符神經生理的限制，論證這些假設可予以放寬。 <a href="zotero://select/library/items/NQVFQMXV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2010.01047" rel="noopener">官方連結</a></li>
+<li><strong>2019｜A free energy principle for a particular physics</strong>，Karl Friston（<em>arXiv</em>）：以馬可夫毯（Markov blankets）刻畫統計上可區分之系統的跨尺度遞迴組合，連結量子、統計與古典力學及自主系統的貝氏力學，並推導自組織至非平衡穩態所對應的資訊幾何與自由能原理。 <a href="zotero://select/library/items/S434ZTCZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1906.10184" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Scaling active inference</strong>，Alexander Tschantz et al.（<em>arXiv</em>）：將統一推論、學習與行動的主動推論（active inference）框架擴展至高維強化學習任務，藉由最大化世界模型貝氏證據引導探索，在部分可觀測與不確定環境中取得高出無模型基準方法一個數量級的樣本效率。 <a href="zotero://select/library/items/5Z83BEFN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1911.10601" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Representation Learning with Contrastive Predictive Coding</strong>，Aaron van den Oord, Yazhe Li, Oriol Vinyals（<em>arXiv</em>）：提出對比預測編碼（CPC）通用無監督表徵學習方法，利用自回歸模型在潛在空間預測未來表徵並透過負採樣機率對比損失迫使潛在空間擷取預測未來樣本所需的最大共享資訊，適用於多種高維資料模態。 <a href="zotero://select/library/items/ZDT8SIWZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1807.03748" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Hybrid Active Inference</strong>，André Ofner, Sebastian Stober（<em>arXiv</em>）：提出跨人機協同執行階層式主動推論（Active Inference）的混合認知架構，由機器端聯合解釋環境生理多模態感測與腦訊號以最小化預測驚奇度，在持續整合中提升腦訊號可預測性與高階自監督能力。 <a href="zotero://select/library/items/ARGSAHZT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1810.02647" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Predictive Coding-based Deep Dynamic Neural Network for Visuomotor Learning</strong>，Jungsik Hwang et al.（<em>arXiv</em>）：基於預測編碼架構擴展深度動態神經網路，使機器人透過最小化預測誤差同時學習視覺與本體感覺時序模式並推論動作背後的意圖狀態，在模擬手勢模仿實驗中展現由意圖驅動的心智模擬能力。 <a href="zotero://select/library/items/A88MCPMR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.02444" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Deep Active Inference</strong>，Kai Ueltzhöffer（<em>arXiv</em>）：結合自由能原理、主動推論與深度生成模型中的變分推論及演化策略，建構以深度與循環神經網路實作內部動力學的「深度主動推論」代理人，透過最小化變分自由能上界整合感知學習與主動環境採樣。 <a href="zotero://select/library/items/GFK4IU6R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1709.02341" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Deep Predictive Coding Networks for Video Prediction and Unsupervised Learning</strong>，William Lotter, Gabriel Kreiman, David Cox（<em>arXiv</em>）：受神經科學預測編碼理論啟發提出深度預測編碼網路 PredNet，使各網路層進行局部預測並僅向上層傳遞預測誤差，在無監督條件下學習預測合成渲染物體的影片後續影格動態。 <a href="zotero://select/library/items/QBZHQDE4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1605.08104" rel="noopener">官方連結</a></li>
+<li><strong>2015｜A predictive coding account of OCD</strong>，P. J. Moore（<em>arXiv</em>）：將預測編碼模型擴充為由感官資料推論認知狀態序列的「形式敘事」階層以解釋強迫症（OCD）：患者全域視角完整但次語言層級出現辨識功能障礙，使外在世界產生「不太對勁」感並觸發自動修正而表現為強迫行為。 <a href="zotero://select/library/items/9C8WHN86" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1504.06732" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Deep Predictive Coding Networks</strong>，Rakesh Chalasani, Jose C. Principe（<em>arXiv</em>）：提出深度預測編碼網路（DPCN），透過頂層向下的動態調制隨語境更新隱含表示的先驗分佈，結合稀疏動態狀態推論與局部不變池化算子，並應用於自然視訊資料的特徵萃取。 <a href="zotero://select/library/items/5VJXIJ9H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1301.3541" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻23-篇">B. 2024–2026 近期推進與前沿文獻（23 篇）</h3>
+<ul>
+<li><strong>2026｜A Synthesizable RTL Implementation of Predictive Coding Networks</strong>，Timothy Oh（<em>arXiv</em>）：針對反向傳播難於分散式硬體實現的限制，提出可綜合的確定性 RTL 數位硬體架構直接執行離散時間預測編碼更新，各神經核心僅與相鄰層硬線通訊，並以統一神經元箝位原語支援推論與監督學習。 <a href="zotero://select/library/items/RIQZ2UFS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.18066" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Online Generalised Predictive Coding</strong>，Mehran H. Z. Bazargani et al.（<em>arXiv</em>）：針對需同時推斷隱狀態、模型參數與觀測雜訊精度的三重估計問題，將動態期望最大化 (DEM) 與廣義預測編碼特化為線上資料同化架構，透過時間尺度分離讓慢速參數更新為快速貝氏信念更新提供脈絡。 <a href="zotero://select/library/items/VEPJFRZS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.02675" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Understanding Sample Efficiency in Predictive Coding</strong>，Gaspard Oliviers, Elene Lominadze, Rafal Bogacz（<em>arXiv</em>）：以輸出變化與預測誤差一致性的「目標對齊」指標比較預測編碼 (PC) 與反向傳播 (BP) 的樣本效率，在深度線性網路推導解析式證明 PC 較 BP 具更高對齊度（尤於深窄與預訓練網路中）並給出最優條件。 <a href="zotero://select/library/items/Z8J3A4JC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.11911" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Closed-form predictive coding via hierarchical Gaussian filters</strong>，Aleksandrs Baskakovs et al.（<em>arXiv</em>）：針對預測編碼網路固定精度矩陣導致訓練緩慢與深層衰退的問題，將其表徵為深層階層高斯濾波器並恢復精度加權訊息傳遞，於單一自由能目標下以純局部規則同步學習激發、權重與精度。 <a href="zotero://select/library/items/EKUBM3HV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.20293" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Augmented Lagrangian Predictive Coding</strong>，Jeffrey Seely, Julian Gould（<em>arXiv</em>）：提出擴增拉格朗日預測編碼 PC-ALM，透過層內拉格朗日乘子累積約束誤差使局部權重更新對齊反向傳播梯度，不僅在線性情況收斂至精確 BP 梯度，亦在深達 128 層的非線性深窄網路追平 BP 表現。 <a href="zotero://select/library/items/ZPZHPRI4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.31022" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Topological Simplification in Predictive Coding Networks</strong>，Adam Shaw et al.（<em>arXiv</em>）：以逐層持續同調分析預測編碼網路表徵拓撲演化，在合成資料與 MNIST 發現較小網路較早塌縮連通分量（<span class="math inline">\rho\in[0.72,0.79]</span>），且拓撲簡化較晚發生的架構重建誤差較低（<span class="math inline">\rho=-0.58</span>）。 <a href="zotero://select/library/items/EV24884K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.02816" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Analog-Friendly Predictive Coding without Activation Derivatives</strong>，Francesco Innocenti（<em>arXiv</em>）：為解決類比硬體實作非線性預測編碼（PC）時難以計算激活函數導數的限制，提出激活匹配 Bregman PC 與鏡像下降推論，完全消除激活導數需求且於數位實驗保持與標準 PC 及反向傳播相當的效能。 <a href="zotero://select/library/items/HISWWABZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.32350" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Error-Based Bidirectional Predictive Coding Enables Deep, 4-Bit Predictive Coding Networks</strong>，Garrett Kinman, Zeljko Zilic（<em>arXiv</em>）：針對傳統狀態導向預測編碼網路因推論訊號隨深度指數衰減而難以訓練深層或低位元量化模型的瓶頸，結合雙向預測編碼（bPC）與誤差重參數化（ePC），成功將兼具判別與生成能力的模型推進至深層 4-bit 運作區間。 <a href="zotero://select/library/items/84RE5B9B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.15933" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Learning Transformer-based World Models with Contrastive Predictive Coding</strong>，Maxime Burchi, Radu Timofte（<em>arXiv (Cornell University)</em>）：探討基於 Transformer 的世界模型在表現上受限於下一狀態預測目標的問題，指出僅預測單步狀態不足以發揮自注意力架構的動態表徵能力，進而結合對比預測編碼改進世界模型學習。 <a href="zotero://select/library/items/PKE5FQ8H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.04416" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Distributionally Robust Free Energy Principle for Decision-Making</strong>，Allahkaram Shafiei et al.（<em>arXiv</em>）：針對訓練與部署環境存在分佈不匹配時自主智能體容易失效的問題，將分佈強健性結合自由能原理提出 DR-FREE 決策模型，將抗環境歧義能力內建於決策機制中並在多項基準測試下穩定完成任務。 <a href="zotero://select/library/items/7CT7F2CF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.13223" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Bayesian Predictive Coding</strong>，Alexander Tschantz et al.（<em>arXiv</em>）：針對傳統預測編碼僅執行點估計而缺乏認知不確定性量化的不足，提出估計網路參數後驗分佈的貝氏預測編碼（BPC），保留局部性與閉式 Hebbian 權重更新規則，且在全批次訓練下以更少迭代次數收斂。 <a href="zotero://select/library/items/XQCJKWHU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.24016" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Attachment: a predictive coding approach</strong>，Anthony Lin（<em>arXiv</em>）：結合動態成熟依附模型（DMM）與具身預測內感受編碼神經模型（EPIC），建構研究依附理論的預測編碼統一框架，闡明神經預測處理機制如何塑造依附策略，以及早期依附經驗如何反過來塑形該神經迴路過程。 <a href="zotero://select/library/items/4SJJKVJZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.05476" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Bridging Predictive Coding and MDL: A Two-Part Code Framework for Deep Learning</strong>，Benjamin Prada et al.（<em>arXiv (Cornell University)</em>）：在深度網路中建立生物啟發的預測編碼（PC）與最小描述長度（MDL）原則的理論橋樑，證明逐層 PC 實質執行 MDL 兩部分碼目標的塊坐標下降，進而推導泛化誤差上界並證明每次更新皆單調縮減碼長。 <a href="zotero://select/library/items/87NZISGV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.14635" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Self-orthogonalizing attractor neural networks emerging from the free energy principle</strong>，Tamas Spisak, Karl Friston（<em>Neurocomputing (2026): 133472</em>）：形式化推導自由能原理如何應用於隨機動力系統的通用劃分以湧現自組織吸引子網路，無需外加學習規則即可自然產生多層級貝氏主動推論與耦合微調動力學。 <a href="zotero://select/library/items/SS9T56UT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.22749" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Bidirectional predictive coding</strong>，Gaspard Oliviers, Mufeng Tang, Rafal Bogacz（<em>arXiv</em>）：提出雙向預測編碼（bPC）模型，在具生物合理性的神經迴路架構下同時整合自上而下的生成推論與前饋判別推論，在各自單向任務與雙向處理任務中皆達到或超越單向預測編碼模型。 <a href="zotero://select/library/items/PZB36R6A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.23415" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Introduction to Predictive Coding Networks for Machine Learning</strong>，Mikko Stenlund（<em>arXiv</em>）：面向機器學習實踐者撰寫的預測編碼網路（PCN）入門指南，系統介紹其基礎網路架構、推論與學習更新規則及演算法實作，並提供基於 CIFAR-10 影像分類的 PyTorch 實作範例。 <a href="zotero://select/library/items/76W5P5TE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.06332" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Shared Spatial Memory Through Predictive Coding</strong>，Zhengru Fang et al.（<em>arXiv</em>）：提出透過資訊瓶頸最小化互不確定性的多智能體預測編碼框架，使智能體從自監督運動預測中自發形成類網格細胞空間編碼與類海馬迴社會位置細胞，進而學會高頻寬效率的空間協作通訊。 <a href="zotero://select/library/items/GAZVFGRP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.04235" rel="noopener">官方連結</a></li>
+<li><strong>2024｜CogDPM: Diffusion Probabilistic Models via Cognitive Predictive Coding</strong>，Kaiyuan Chen et al.（<em>arXiv</em>）：提出認知擴散機率模型 CogDPM，連結擴散機率模型與認知科學預測編碼理論，在既有階層殘差修正機制之外納入精確度加權（precision weighting）機制以改善真實時空預測表現。 <a href="zotero://select/library/items/H6BFZMHE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.02384" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Benchmarking Predictive Coding Networks -- Made Simple</strong>，Luca Pinchetti et al.（<em>arXiv</em>）：針對預測編碼網路（PCN）過往欠缺統一比較基準與小規模測試限制，開發高效開源函式庫 PCX 與標準基準套件，得以在較大型網路與複雜資料集上系統評測各類生物啟發學習演算法。 <a href="zotero://select/library/items/VK99W96T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.01163" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Divide-and-Conquer Predictive Coding: a structured Bayesian inference algorithm</strong>，Eli Sennesh, Hao Wu, Tommaso Salvatori（<em>arXiv</em>）：針對傳統預測編碼在高維結構化推論表現不及變分法的問題，提出分治預測編碼演算法 DCPC，在維持生物合理性下尊重生成模型相關結構並從理論上證明其可執行最大似然參數更新。 <a href="zotero://select/library/items/Z2W2M8UU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.05834" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Learning grid cells by predictive coding</strong>，Mufeng Tang, Helen Barron, Rafal Bogacz（<em>arXiv</em>）：提出生物可信的預測編碼可塑性規則可從空間輸入訓練神經網路發展出哺乳動物內嗅皮質（MEC）的六邊形網格細胞表徵，並在靜動態環境中驗證其穩健湧現。 <a href="zotero://select/library/items/ZV4WPREW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.01022" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Predictive Coding for Decision Transformer</strong>，Tung M. Luu, Donghoon Lee, Chang D. Yoo（<em>arXiv</em>）：針對Decision Transformer在次優資料與長視野稀疏獎勵目標條件RL任務中難以學習時間組合性的限制，提出基於廣義未來條件的預測編碼框架PCDT。 <a href="zotero://select/library/items/EC6MWMPV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.03408" rel="noopener">官方連結</a></li>
+<li><strong>2024｜pyhgf: A neural network library for predictive coding</strong>，Nicolas Legrand et al.（<em>arXiv</em>）：針對階層預測編碼模型依賴局部精度加權誤差計算、難以直接嵌入傳統深度學習編譯與微分後端的挑戰，開發專用神經網路函式庫pyhgf以支援貝氏認知與具身智慧模擬。 <a href="zotero://select/library/items/DXWRFDK5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.09206" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-3f97608b">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">發展式學習：持續學習、主動推論、內在動機與開放式演化</a><span class="rs">發展式學習研究的是：一個能力受限的具身智能體，處在沒有固定題庫、沒有外部獎勵、世界又持續變動的開放環境裡，怎麼靠預測誤差最小化和內在好奇心驅動自…</span></li><li><a href="07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a></li><li><a href="07C_%E5%85%A7%E5%9C%A8%E5%8B%95%E6%A9%9F%E5%A5%BD%E5%A5%87%E5%BF%83%E3%80%81%E8%AA%B2%E7%A8%8B%E5%AD%B8%E7%BF%92%E8%88%87%E9%96%8B%E6%94%BE%E5%BC%8F%E6%BC%94%E5%8C%96Open-Endedness.html">內在動機好奇心、課程學習與開放式演化Open-Endedness</a></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD04_%E9%9B%A3%E5%BA%A6%E6%9B%B2%E7%B7%9A%E8%88%87%E5%BF%83%E6%B5%81.html">難度曲線與心流</a><span class="tag-plan">計劃</span><span class="rs">難度曲線與心流（Csikszentmihalyi 的心流條件；Sweetser &amp; Wyeth 2005 GameFlow）</span></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD05_%E5%8B%95%E6%A9%9F.html">動機</a><span class="tag-plan">計劃</span><span class="rs">動機（Ryan, Rigby, Przybylski 2006；Malone 1981）</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

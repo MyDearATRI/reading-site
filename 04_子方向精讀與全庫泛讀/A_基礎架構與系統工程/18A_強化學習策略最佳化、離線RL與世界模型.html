@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>18A｜強化學習策略最佳化、離線RL與世界模型 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-415689df" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="18a強化學習策略最佳化離線rl與世界模型">18A｜強化學習策略最佳化、離線RL與世界模型</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a>
+同領域子方向：<a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a> · <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>
+課程章節：<a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a> · <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a> 的決策控制與互動基礎層，涵蓋從連續控制策略梯度、自對弈搜尋與離線資料集學習，到世界模型動態模擬以及面向大型語言模型推理與對齊的強化學習演算法。核心演進主線圍繞兩個張力展開：一是樣本效率、更新穩定性與探索多樣性之間的平衡，二是將互動學習從需要即時環境試錯的線上設定，擴展至離線靜態軌跡、預訓練影片世界模擬器以及語言模型可驗證獎勵推理（RLVR）。</p>
+</aside>
+<ul>
+<li>核心問題：經典策略梯度方法雖能直接最佳化累積回報並結合神經網路近似器，卻受困於高變異數估計、資料非平穩性引發的更新崩潰以及高昂的環境互動取樣成本；當切換至不允許線上採樣的離線強化學習（Offline RL）設定時，值函數對分布外動作（OOD Actions）的高估與自舉外推誤差會導致策略迅速發散。此外，將強化學習導入大型語言模型後訓練與影片生成式世界模型時，還面臨獎勵訊號稀缺、KL 散度與策略崩潰的穩定性權衡，以及長程動作控制下動態轉移一致性難以維持的瓶頸。</li>
+<li>直覺模型：可以把強化學習策略最佳化想成在濃霧山區尋找下山路徑的登山隊：線上策略梯度與信賴域方法（如 GAE 與 PPO）規定每走一步都要先用過去經驗估出坡度方向，並用安全繩限制單步跨距，避免一腳踏空；離線強化學習則是隊伍禁止再出門探路，只能靠前人留下的舊地圖做決策，這時最危險的是把地圖沒標註過的懸崖地帶誤判成捷徑；而世界模型就像在營帳裡先用沙盤模擬地形變化，確認動作後果再實際邁步。</li>
+<li>分階段閱讀路線：第一步先讀 Schulman et al. (2015)（GAE）與 Schulman et al. (2017)（PPO），建立優勢函數變異數縮減與代理目標截斷的數學直覺，再讀 Haarnoja et al. (2018)（SAC）理解最大熵離線策略演員評論家（Actor-Critic）架構，並以 Silver et al. (2017)（AlphaZero）掌握自對弈與搜尋結合的範式。第二步精讀 Levine et al. (2020) 的離線 RL 綜述掌握分布偏移與外推誤差的核心問題，接著讀 Cao et al. (2024) 了解 LLM 如何作為資訊處理器、獎勵設計者、決策者與生成器反向賦能 RL。第三步進入 2025–2026 年前沿：讀 He et al. (2025) 如何將預訓練影片生成模型改造為動作可控的世界模擬器，並透過 Srivastava &amp; Aggarwal (2025)、Liu et al. (2025) 與 Yu et al. (2026) 系統掌握 PPO、DPO、GRPO、RLVR 及資料稀缺條件下的 LLM 強化學習演進。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;策略梯度與信賴域：GAE / PPO（Schulman 2015 / 2017）&quot;] --&gt; B[&quot;離線策略最大熵框架：SAC（Haarnoja 2018）&quot;]
+  A --&gt; C[&quot;自對弈搜尋：AlphaZero（Silver 2017）&quot;]
+  B --&gt; D[&quot;離線 RL 與分布外誤差（Levine 2020）&quot;]
+  A --&gt; E[&quot;LLM 對齊與推理：RLHF / DPO / GRPO / RLVR（Srivastava 2025 / Liu 2025）&quot;]
+  E --&gt; F[&quot;資料稀缺下的 LLM RL（Yu 2026）&quot;]
+  D --&gt; G[&quot;動作可控影片世界模擬器（He 2025）&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>廣義優勢估計與近端策略最佳化（GAE &amp; PPO）</strong></p>
+<ul>
+<li>直覺理解：直接用整條軌跡的總回報來算梯度雖然無偏，但噪聲太大；若只看單步時序差分又容易帶偏。GAE 用指數衰減權重把所有多步誤差混在一起調控偏差與變異數，而 PPO 則透過截斷策略比率防止單次更新步幅過大。</li>
+<li>機制或核心表達式：令時序差分殘差為 <span class="math inline">\delta_t^V = r_t + \gamma V(s_{t+1}) - V(s_t)</span>，Schulman et al. (2015) 定義 <span class="math inline">\text{GAE}(\gamma, \lambda)</span> 為指數加權和 <span class="math inline">\hat{A}_t^{\text{GAE}(\gamma,\lambda)} = \sum_{l=0}^{\infty} (\gamma \lambda)^l \delta_{t+l}^V</span>，當 <span class="math inline">\lambda=0</span> 時退化為單步 TD，當 <span class="math inline">\lambda=1</span> 時還原為高變異數的蒙地卡羅優勢估計。在此基礎上，Schulman et al. (2017) 的 PPO 以機率比 <span class="math inline">r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{\text{old}}}(a_t \mid s_t)}</span> 取代二階信賴域約束，最佳化截斷代理目標 <span class="math inline">L^{\text{CLIP}}(\theta) = \hat{\mathbb{E}}_t [\min(r_t(\theta)\hat{A}_t, \text{clip}(r_t(\theta), 1-\epsilon, 1+\epsilon)\hat{A}_t)]</span>，支援在同一批採樣資料上進行多個 epoch 的小批次更新。</li>
+<li>能做到什麼，代價是什麼：PPO 與 GAE 在實作簡潔度、計算時間與樣本效率之間取得平衡，成為連續控制與後續 LLM 對齊（RLHF）的基礎引擎。代價是仍屬於線上策略（on-policy）主導的更新結構，大量互動樣本無法直接重複跨輪次利用，且超參數 <span class="math inline">\lambda</span>、<span class="math inline">\epsilon</span> 與價值網路訓練品質對最終穩定性仍有高度影響。</li>
+</ul>
+</li>
+<li>
+<p><strong>最大熵強化學習與離線分布偏移（Maximum Entropy RL &amp; Offline Distributional Shift）</strong></p>
+<ul>
+<li>直覺理解：與其讓策略只學出一條確定性捷徑，最大熵架構要求智能體在拿高分的同時盡可能保持動作隨機性以利探索；然而一旦切換到只能讀歷史資料集的離線環境，價值函數會因為沒見過未知動作的真實後果而過度樂觀。</li>
+<li>機制或核心表達式：Haarnoja et al. (2018) 的 Soft Actor-Critic（SAC）在標準期望回報目標中加入策略熵正則項：<span class="math inline">J(\pi) = \sum_{t=0}^T \mathbb{E}_{(s_t, a_t) \sim \rho_\pi}[r(s_t, a_t) + \alpha \mathcal{H}(\pi(\cdot \mid s_t))]</span>，並採用離線策略演員評論家（Actor-Critic）結構穩定更新。當完全移除線上互動、僅使用靜態資料集 <span class="math inline">\mathcal{D}</span> 時（Levine et al., 2020），貝爾曼備份 <span class="math inline">\hat{\mathcal{B}}^\pi Q(s,a) = r(s,a) + \gamma \mathbb{E}_{s', a' \sim \pi(\cdot \mid s')}[Q(s', a')]</span> 會在下一狀態查詢不在行為策略 <span class="math inline">\pi_\beta</span> 支撐集內的分布外動作 <span class="math inline">a'</span>；由於學習到的策略 <span class="math inline">\pi</span> 主動最大化 <span class="math inline">Q</span> 值，微小的正向函數近似誤差會透過自舉遞迴不斷放大，導致價值估計嚴重高估。</li>
+<li>能做到什麼，代價是什麼：最大熵離線策略能重複利用經驗重播緩衝區大幅提升樣本效率，但在純離線設定下若不配合行為策略約束、保守正則化或不確定性懲罰，策略容易崩潰於分布外動作；相反地，過度保守約束又會限制策略超越歷史行為策略 <span class="math inline">\pi_\beta</span> 的潛力。</li>
+</ul>
+</li>
+<li>
+<p><strong>語言模型強化學習範式演化與動作可控世界模擬器（LLM RL: PPO/DPO/GRPO/RLVR &amp; Action-Conditioned World Simulators）</strong></p>
+<ul>
+<li>直覺理解：當 RL 被搬到語言模型與影片生成器時，環境與動作的邊界重新被定義：在語言模型中，去掉額外價值網路改用組內相對分數（GRPO）或可驗證對錯獎勵（RLVR）能壓低記憶體與穩定性風險；在影片模型中，加入輕量動作模組與動態強化損失就能把被動播片變成可互動的沙盤。</li>
+<li>機制或核心表達式：依據 Srivastava &amp; Aggarwal (2025) 與 Liu et al. (2025) 的技術梳理，語言模型 RL 經歷了從基於獎勵模型與評論家網路的 PPO（RLHF/RLAIF）、將獎勵隱式參數化為閉式對數機率比最佳化的 DPO，演化至以組內採樣平均回報取代獨立價值網路來估計優勢的 GRPO，以及在數學與程式碼任務上直接以確定性驗證結果作為訊號的 RLVR。在環境建模端，He et al. (2025) 的動態世界模擬（DWS）將預訓練影片生成模型改造為世界模擬器，透過整合輕量級通用動作條件模組並引入運動強化損失（motion-reinforced loss），強迫模型專注於跨時間步的動態轉移一致性而非單純靜態畫質。</li>
+<li>能做到什麼，代價是什麼：DPO 與 GRPO 分別透過消除獨立策略滾出或價值網路降低了顯存與調參負擔，RLVR 則減緩了學習獎勵模型的獎勵駭客風險，但在資料稀缺條件下（Yu et al., 2026）仍受限於外部高品質監督與模型自生成經驗容量；而影片世界模擬器雖能復用網路影片先驗，長序列 rollout 下的累積視覺漂移與物理因果一致性仍是主要瓶頸。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>離線 RL 中分布外動作高估的自舉機制</strong>：為何在純離線強化學習（Levine et al., 2020）中使用標準 Q-learning 或離線策略 Actor-Critic 會出現比標準監督學習更嚴重的誤差放大？這個問題與貝爾曼方程中的哪一個運算直接相關？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>在監督學習中，誤差僅存在於單點預測且不會回饋進訓練目標；但在離線 RL 中，貝爾曼算子需要在下一狀態對當前學習策略 <span class="math inline">\pi</span>（或 <span class="math inline">\max_{a'}</span>）取樣估計目標值。如果該動作 <span class="math inline">a'</span> 未出現在靜態資料集 <span class="math inline">\mathcal{D}</span> 中，任何正偏差都會被策略選中並透過時序差分目標寫回當前狀態的 <span class="math inline">Q</span> 值，形成正回饋高估迴路且無法透過線上環境互動得到負反饋修正。</p>
+</details>
+<ol start="2">
+<li><strong>PPO、DPO 與 GRPO 在系統架構與偏差和變異數上的取捨</strong>：根據 Srivastava &amp; Aggarwal (2025) 對語言模型 RL 演算法的比較，從 PPO 演化到 DPO 與 GRPO 時，分別拿掉了標準 Actor-Critic 架構中的哪幾個組件？這些簡化各自帶來了什麼樣的系統優勢與演算法代價？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>首先檢視 PPO-RLHF 必須同時在記憶體維護策略、參考策略、獎勵模型與價值網路四個模型。DPO 利用配對偏好資料上的解析對數機率比關係，直接省去了顯式獎勵模型訓練與線上採樣滾出，代價是可能面臨離線偏好分布偏移；GRPO 則保留線上採樣，但以同一提示詞下多個生成樣本的組內正規化回報取代獨立的價值網路（Critic），大幅節省顯存並避開價值函數冷啟動誤差，但優勢估計的準確度會更依賴每組採樣數量與組內報酬變異。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>資料稀缺條件下的經驗生成瓶頸與獎勵穩定性</strong>：儘管 RLVR 與 GRPO 推動了語言模型推理能力提升，Yu et al. (2026) 指出 LLM 的強化學習正遭遇嚴重的資料稀缺限制：高品質外部驗證任務有限，而模型在訓練早期或高難度問題上能產生的有效正向探索軌跡同樣受限。如何在有限外部監督與受限探索經驗下維持策略梯度訊號不致退化，是資料中心、訓練中心與框架中心三個層面共同面對的開放問題。</li>
+<li><strong>預訓練影片世界模擬器的長程動態一致性與動作控制精準度</strong>：He et al. (2025) 證實透過動作條件模組與運動強化損失能賦予預訓練影片模型可控的動態轉移能力，但將此類世界模擬器直接用於高精度的長程策略規劃（例如連貫執行數十步物理操作或機器人控制）時，如何在不重訓龐大影片骨幹且不犧牲物理因果保真度的前提下壓低累積模擬誤差，仍缺乏系統性的理論保證。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>策略最佳化與世界模擬器向具身 VLA 與多模態指令微調的遷移</strong>：本子方向的動態世界模擬（He et al., 2025）、SAC 最大熵控制與離線 RL 保守更新機制，直接為 <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a> 的長程動作規劃與軌跡訓練提供演算法骨架；而針對語言模型的 GRPO 與 RLVR 訓練管線，亦為 <a class="wl" href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a> 中抑制多模態幻覺與強化區域推理提供後訓練範式。</li>
+<li><strong>搜尋、離線資料與演算法博弈向遊戲 AI 及多智能體治理的遷移</strong>：AlphaZero（Silver et al., 2017）的策略價值網路結合樹搜尋結構，可直接對照 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a> 的啟發式搜尋問題與 <a class="wl" href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a> 的可控內容生成評估；此外，從單一智能體信賴域更新到多樣本相對優化（GRPO），其激勵相容與均衡收斂性質可遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a> 分析。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-high-dimensional-continuous-control-using-generalized-advantage-estimation2015">1. High-Dimensional Continuous Control Using Generalized Advantage Estimation（2015）</h4>
+<ul>
+<li>作者與出處：John Schulman, Philipp Moritz, Sergey Levine, Michael Jordan, Pieter Abbeel · <em>arXiv (2015)</em></li>
+<li>核心問題：策略梯度方法在高維連續控制上面臨兩大難題：需要極大量環境互動樣本，以及輸入資料非平穩性導致訓練過程難以穩定單調改進。</li>
+<li>關鍵做法：作者提出類似 <span class="math inline">\text{TD}(\lambda)</span> 的指數加權優勢函數估計器（GAE），以可控偏差換取策略梯度變異數的大幅下降，並對神經網路表示的策略與價值函數同時施用信賴域最佳化，在模擬雙足與四足 3D 運動控制任務上學出複雜奔跑與起身步態。</li>
+<li>跨領域啟發：GAE 的偏差與變異數折衷公式至今仍是幾乎所有線上演員評論家（Actor-Critic）與 LLM RLHF 訓練管線的預設優勢估計器。</li>
+<li>連結：<a href="zotero://select/library/items/K98SZ6NB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1506.02438" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-proximal-policy-optimization-algorithms2017">2. Proximal Policy Optimization Algorithms（2017）</h4>
+<ul>
+<li>作者與出處：John Schulman, Filip Wolski, Prafulla Dhariwal, Alec Radford, Oleg Klimov · <em>arXiv (2017)</em></li>
+<li>核心問題：標準策略梯度每筆採樣僅能做一次梯度更新而樣本效率低落，而 TRPO 雖有信賴域保證，卻依賴計算繁複的共軛梯度與二階自然梯度近似，不易擴展至多架構系統。</li>
+<li>關鍵做法：作者設計具有截斷機率比的代理目標函數（Proximal Policy Optimization, PPO），在單純一階隨機梯度最佳化下即可支援多輪小批次更新，在模擬機器人運動與 Atari 遊戲中兼具簡單實作、較佳樣本複雜度與運行時間。</li>
+<li>跨領域啟發：成為連接經典深度強化學習與大型語言模型人類回饋對齊（RLHF）的核心最佳化演算法。</li>
+<li>連結：<a href="zotero://select/library/items/NHSAXHSH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1707.06347" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-soft-actor-critic-off-policy-maximum-entropy-deep-reinforcement-learning-with-a-stochastic-actor2018">3. Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor（2018）</h4>
+<ul>
+<li>作者與出處：Tuomas Haarnoja, Aurick Zhou, Pieter Abbeel, Sergey Levine · <em>arXiv (2018)</em></li>
+<li>核心問題：無模型深度強化學習通常面臨樣本複雜度過高以及收斂脆弱、極度依賴超參數微調的限制，阻礙其應用於真實物理系統。</li>
+<li>關鍵做法：作者提出 Soft Actor-Critic（SAC），在最大熵強化學習框架下要求隨機策略在最大化預期獎勵的同時最大化策略熵，並採用離線策略（off-policy）演員評論家更新結構，在連續控制基準上穩定超越先前的線上與離線方法。</li>
+<li>跨領域啟發：奠定了離線策略連續控制的標準基線，並為後續離線 RL 與具身機器人策略學習中的熵正則化設計提供數學基礎。</li>
+<li>連結：<a href="zotero://select/library/items/UU37T9KI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1801.01290" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-offline-reinforcement-learning-tutorial-review-and-perspectives-on-open-problems2020">4. Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems（2020）</h4>
+<ul>
+<li>作者與出處：Sergey Levine, Aviral Kumar, George Tucker, Justin Fu · <em>arXiv (2020)</em></li>
+<li>核心問題：在醫療、教育與機器人等領域往往已有大量歷史決策日誌但禁止線上試錯，然而將標準深度 RL 演算法直接套用於靜態資料集會因分布外動作高估而失敗。</li>
+<li>關鍵做法：本篇系統性教學綜述定義了離線強化學習的核心難題，特別是行為策略與學習策略之間的分布偏移以及自舉過程中的外推誤差，並梳理透過策略約束、保守價值估計等方向緩解上述失效機制的演算法路線與開放問題。</li>
+<li>跨領域啟發：建立從靜態資料集學習決策的統一理論詞彙，並可對照預訓練資料選擇研究中所討論的靜態語料分布設計問題。</li>
+<li>連結：<a href="zotero://select/library/items/AEC4AUSN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.01643" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-pre-trained-video-generative-models-as-world-simulators2025">5. Pre-Trained Video Generative Models as World Simulators（2025）</h4>
+<ul>
+<li>作者與出處：Haoran He, Yang Zhang, Liang Lin, Zhongwen Xu, Ling Pan · <em>Proceedings of the AAAI Conference on Artificial Intelligence (2025)</em></li>
+<li>核心問題：在大型網路影片資料上預訓練的生成模型雖能產出逼真畫面，但通常僅依據靜態文字或圖片提示生成片段，缺乏依指定動作軌跡進行互動式動態推演的能力。</li>
+<li>關鍵做法：作者提出動態世界模擬（DWS），為既有影片生成模型接入輕量級通用動作條件模組，並證明一致的動態轉移建模比繁複視覺細節更重要，進一步引入運動強化損失（motion-reinforced loss）提升動作對齊控制精度。</li>
+<li>跨領域啟發：將影片生成模型轉化為互動式環境模擬器，直接架起強化學習策略最佳化與 <a class="wl" href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a> 之間的橋樑。</li>
+<li>連結：<a href="zotero://select/library/items/M9D84M77" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.07825" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-a-technical-survey-of-reinforcement-learning-techniques-for-large-language-models2025">6. A Technical Survey of Reinforcement Learning Techniques for Large Language Models（2025）</h4>
+<ul>
+<li>作者與出處：Saksham Sahai Srivastava, Vaneet Aggarwal · <em>ACM Transactions on Intelligent Systems and Technology (2025)</em></li>
+<li>核心問題：強化學習與大型語言模型的結合衍生出眾多對齊與推理演算法，但學界常停留在應用層面比較，缺乏對不同回饋機制與最佳化結構失效模式的嚴格數學分析。</li>
+<li>關鍵做法：本文從 PPO、Q-Learning 與 Actor-Critic 基礎出發，技術性剖析 RLHF、RLAIF、DPO 與 GRPO 在程式碼生成與工具增強推理中的表現，並建立依獎勵建模、回饋機制與最佳化策略分類的統一框架，形式化分析策略最佳化的結構性瓶頸與穩定性權衡。</li>
+<li>跨領域啟發：把傳統策略梯度穩定性理論直接映射到現代語言模型後訓練演算法，有助於釐清何時該選用顯式獎勵模型、隱式偏好最佳化或可驗證結果獎勵。</li>
+<li>連結：<a href="zotero://select/library/items/PZ8WZW2B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.04136" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-13-篇">G5｜本子方向全量文獻泛讀清單（共 13 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 13 篇文獻（含開放存取 PDF 10 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進8-篇">A. 奠基經典、專著與核心演進（8 篇）</h3>
+<ul>
+<li><strong>2015｜High-Dimensional Continuous Control Using Generalized Advantage Estimation</strong>，John Schulman et al.（<em>arXiv (Cornell University)</em>，2013 引）：強化學習的必讀基礎論文（逾 2,000 引）：提出 GAE(<span class="math inline">\gamma,\lambda</span>) 指數加權優勢估計，處理高維連續控制策略梯度在偏差與變異數之間的兩難。 <a href="zotero://select/library/items/K98SZ6NB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1506.02438" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Mastering Chess and Shogi by Self-Play with a General Reinforcement Learning Algorithm</strong>，David Silver et al.（<em>arXiv (Cornell University)</em>，1053 引）：AlphaZero 論文：不用任何人類棋譜與領域手工特徵，只靠單一通用的自我博弈強化學習加 MCTS，就在西洋棋、將棋與圍棋上都勝出。 <a href="zotero://select/library/items/S4VHXASZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.01815" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Offline Reinforcement Learning: Tutorial, Review, and Perspectives on Open Problems</strong>，Sergey Levine et al.（<em>arXiv (Cornell University)</em>，824 引）：離線強化學習的標準參考文獻：分析靜態數據決策中分布偏移與反事實價值高估的根源，並統整策略約束與保守價值兩類方法。 <a href="zotero://select/library/items/AEC4AUSN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.01643" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Reinforcement Learning and Deep Reinforcement Learning</strong>，F. Richard Yu, Ying He（<em>SpringerBriefs in Electrical and Computer Engineering</em>，8 引）：選自 2019 年電機與電腦工程簡訊叢書的章節，系統介紹強化學習（RL）與深度強化學習（DRL）的策略最佳化基礎理論與演算法架構。 <a href="zotero://select/library/items/KAIJ88N7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-10546-4_2" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Reinforcement Learning</strong>，Unknown Author（<em>Data-Driven Science and Engineering</em>，4 引）：收錄於教科書 Data-Driven Science and Engineering 的專章「Reinforcement Learning」，系統介紹資料驅動科學與工程脈絡下的強化學習基礎理論與策略最佳化。 <a href="zotero://select/library/items/5QRJ3ZDC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/9781009089517.016" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Teaching Reinforcement Learning Agents via Reinforcement Learning</strong>，Kun Yang, Chengshuai Shi, Cong Shen（<em>2023 57th Annual Conference on Information Sciences and Systems (CISS)</em>）：發表於 CISS 2023，研究以強化學習作為教學策略來引導與訓練另一強化學習智能體的雙層學習框架（未附摘要）。 <a href="zotero://select/library/items/HSE79KV9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/ciss56502.2023.10089695" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Soft Actor-Critic: Off-Policy Maximum Entropy Deep Reinforcement Learning with a Stochastic Actor</strong>，Tuomas Haarnoja et al.（<em>arXiv</em>）：提出基於最大熵強化學習架構的離線策略演算法 Soft Actor-Critic（SAC），使策略在最大化預期回報的同時最大化動作熵，藉由結合離線更新與隨機 Actor-Critic 結構改善樣本複雜度與收斂穩定性。 <a href="zotero://select/library/items/UU37T9KI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1801.01290" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Proximal Policy Optimization Algorithms</strong>，John Schulman et al.（<em>arXiv</em>）：提出近端策略最佳化（PPO）強化學習演算法，透過代理目標函數支援同批取樣資料的多輪小批次隨機梯度更新，在保留 TRPO 穩定性的同時大幅簡化實作並在機器人運動與 Atari 遊戲取得優良樣本效率。 <a href="zotero://select/library/items/NHSAXHSH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1707.06347" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2024｜Survey on Large Language Model-Enhanced Reinforcement Learning: Concept, Taxonomy, and Methods</strong>，Yuji Cao et al.（<em>IEEE Transactions on Neural Networks and Learning Systems</em>，171 引）：Survey on Large Language Model-Enhanced Reinforcement Learning: Concept, Taxonomy, and Methods，Yuji Cao et al.（<em>IEEE TNNLS</em> 高引用綜述：把大語言模型在強化學習中扮演的資訊處理器、獎勵設計者、決策者與世界生成器四種角色整理成標準分類法，171 引）。 <a href="zotero://select/library/items/E6HWG36S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.00282" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Pre-Trained Video Generative Models as World Simulators</strong>，Haoran He et al.（<em>Proceedings of the AAAI Conference on Artificial Intelligence</em>，5 引）：提出動態世界模擬（DWS）方法，透過輕量通用的動作條件化模組將預訓練影片生成模型轉化為可控世界模擬器，聚焦於一致性動態狀態轉移建模使生成畫面準確對應指定動作軌跡。 <a href="zotero://select/library/items/M9D84M77" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.07825" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Technical Survey of Reinforcement Learning Techniques for Large Language Models</strong>，Saksham Sahai Srivastava, Vaneet Aggarwal（<em>ACM Transactions on Intelligent Systems and Technology</em>，3 引）：全面綜述結合強化學習與大型語言模型的技術進展，涵蓋 PPO、RLHF、RLAIF、DPO 與 GRPO 等演算法於程式及工具推理的應用，並從數學層面剖析策略最佳化的失效模式與穩定性權衡。 <a href="zotero://select/library/items/PZ8WZW2B" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.04136" rel="noopener">官方連結</a></li>
+<li><strong>2026｜A Survey of Reinforcement Learning for Large Language Models under Data Scarcity: Challenges and Solutions</strong>，Zhiyin Yu et al.（<em>arXiv</em>）：A Survey of Reinforcement Learning for Large Language Models under Data Scarcity: Challenges and Solutions，Zhiyin Yu et al.（首篇針對大模型強化學習後訓練中高品質監督稀缺與模型自生經驗受限這兩個瓶頸的資料高效 RL 綜述）。 <a href="zotero://select/library/items/8WTGXBE7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.17312" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Reinforcement Learning Meets Large Language Models: A Survey of Advancements and Applications Across the LLM Lifecycle</strong>，Keliang Liu et al.（<em>arXiv</em>）：系統性梳理強化學習貫穿大型語言模型全生命週期（預訓練、對齊微調與強化推理）的理論與實務進展，並重點評析可驗證獎勵強化學習（RLVR）在提升推理能力上的應用策略。 <a href="zotero://select/library/items/2B6KGXNC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.16679" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-415689df">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a><span class="rs">這個領域把看懂物理世界（多模態感知）和在世界中行動並承擔後果（序貫強化學習）合成一個閉環智能體。</span></li><li><a href="18C_%E5%85%B7%E8%BA%AB%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E5%8B%95%E4%BD%9CVLA%E8%88%87%E6%93%B4%E6%95%A3Transformer%E5%A4%9A%E6%A8%A1%E6%85%8B%E7%94%9F%E6%88%90.html">具身視覺語言動作VLA與擴散Transformer多模態生成</a></li><li><a href="18B_%E8%A6%96%E8%A6%BA%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8BVLM%E3%80%81%E8%B7%A8%E6%A8%A1%E6%85%8B%E6%8C%87%E4%BB%A4%E5%BE%AE%E8%AA%BF%E8%88%87%E6%84%9F%E7%9F%A5%E5%B0%8D%E9%BD%8A.html">視覺語言模型VLM、跨模態指令微調與感知對齊</a></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD38_AI%20%E8%88%87%E5%B0%8B%E8%B7%AF.html">AI 與尋路</a><span class="tag-plan">計劃</span><span class="rs">AI 與尋路（Millington 選章；Red Blob Games 的 A*）</span></li><li><a href="../../NOTES/07_%E9%81%8A%E6%88%B2%E9%96%8B%E7%99%BC/GD39_%E7%A8%8B%E5%BA%8F%E7%94%9F%E6%88%90%EF%BC%88%E9%81%B8%E8%AE%80%EF%BC%89.html">程序生成（選讀）</a><span class="tag-plan">計劃</span><span class="rs">選讀：程序生成（Shaker, Togelius, Nelson 選章；Togelius 等 2011）</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

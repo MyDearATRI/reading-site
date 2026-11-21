@@ -3,9 +3,8 @@
    Two modes, decided once when the page loads:
 
    Standalone (the page is the whole tab)
-     - Cmd-K (Ctrl-K off Apple) goes to the Reading OS search: index.html#k.
-     - Note pages (body[data-note]) get one more header link, "Open in Reading OS" (index.html#r=<id>).
-     Nothing else changes.
+     - Nothing changes: the site's own header and search (assets/search.js, Cmd-K) handle everything.
+       Reading OS is optional now and lives at os.html.
 
    Embedded (inside a Reader window: window.top !== window and top.ATLAS.reading exists, same origin)
      - header.bar and footer.site are hidden; the window title bar replaces them.
@@ -39,7 +38,7 @@
     return new URL(".", location.href).href;
   })();
   var rootPath = new URL(root).pathname;
-  var OS_INDEX = root + "index.html";
+  var OS_INDEX = root + "os.html";
 
   // ---- the Reading OS around this page, if any
   function host() {
@@ -88,7 +87,7 @@
   function osRoute(u) {
     if (u.origin !== location.origin) return null;
     var p = u.pathname;
-    var isIndex = p === rootPath || p === rootPath + "index.html";
+    var isIndex = p === rootPath + "os.html";   // the OS page; index.html is the plain Today page now
     var isShelf = p === rootPath + "shelf.html";
     if (!isIndex && !isShelf) return null;
     var A = host();
@@ -121,26 +120,7 @@
   }
 
   // ---------- standalone ----------
-  if (!embedded) {
-    window.addEventListener("keydown", function (e) {
-      if (e.defaultPrevented || !isCmdK(e)) return;
-      e.preventDefault();
-      location.href = OS_INDEX + "#k";
-    }, true);
-
-    var noteId = document.body && document.body.getAttribute("data-note");
-    var bar = document.querySelector("header.bar");
-    if (noteId && bar && !bar.querySelector("a.rdg-os")) {
-      addStyle(".bar a.rdg-os { padding-left: 16px; color: var(--ink); }");
-      var link = document.createElement("a");
-      link.className = "rdg-os";
-      link.href = OS_INDEX + "#r=" + encodeURIComponent(noteId);
-      link.textContent = "Open in Reading OS";
-      if (!bar.querySelector(".find")) link.style.marginLeft = "auto";
-      bar.appendChild(link);
-    }
-    return;
-  }
+  if (!embedded) return;   // standalone: search.js owns Cmd-K, the header owns navigation
 
   // ---------- embedded in a Reader window ----------
   document.documentElement.classList.add("rdg-embedded");

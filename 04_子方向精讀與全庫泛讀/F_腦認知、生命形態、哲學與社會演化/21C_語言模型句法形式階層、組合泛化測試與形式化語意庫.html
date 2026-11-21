@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>21C｜語言模型句法形式階層、組合泛化測試與形式化語意庫 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-75121aac" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 腦認知、生命形態、哲學與社會演化</span>
+<article>
+
+<h1 id="21c語言模型句法形式階層組合泛化測試與形式化語意庫">21C｜語言模型句法形式階層、組合泛化測試與形式化語意庫</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a>
+同領域子方向：<a class="wl" href="21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a> · <a class="wl" href="21B_%E7%90%86%E6%80%A7%E8%A8%80%E8%AA%9E%E8%A1%8C%E7%82%BARSA%E3%80%81%E6%A9%9F%E7%8E%87%E8%AA%9E%E7%94%A8%E5%AD%B8%E8%88%87%E8%84%88%E7%B5%A1%E6%8E%A8%E7%90%86.html">理性言語行為RSA、機率語用學與脈絡推理</a>
+跨領域關聯子方向：<a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A512_%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94%E6%BC%94%E5%8C%96%E5%8D%9A%E5%BC%88%E3%80%81%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%AA%9E%E7%94%A8%E8%88%87%E7%A7%91%E5%AD%B8%E7%9F%A5%E8%AD%98%E6%B2%BB%E7%90%86.html">多智能體演化博弈、形式語意語用與科學知識治理</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S32_%E7%AF%84%E7%96%87%E9%82%8F%E8%BC%AF%E3%80%81%E5%9E%8B%E5%88%A5%E8%AB%96%E8%88%87%E7%B5%84%E5%90%88%E6%80%A7.html">範疇邏輯、型別論與組合性</a> · <a class="wl" href="../../NOTES/02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/T-S3H_%E5%B8%83%E6%9E%97%E5%BC%8F%E8%A6%8F%E7%B4%84%E3%80%81%E7%AF%84%E5%BC%8F%E8%88%87%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">布林式規約、範式與組合語意</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a> 的經驗檢驗、計算複雜度邊界與幾何表徵交叉口，上承 <a class="wl" href="21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a> 的形式文法並橫向連結 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a>。研究主線涵蓋兩端：一端以形式語言理論與線性邏輯刻畫類型邏輯文法的識別複雜度階層（如 <span class="math inline">\mathrm{NLIN}</span> 與 <span class="math inline">\mathrm{NP}</span>-complete 邊界），另一端透過表徵探針、受控語料干預與跨模態組合基準，拆解大語言模型在形式語言能力、記憶與功能組合上的結構極限。</p>
+</aside>
+<ul>
+<li>核心問題：大型語言與多模態模型雖然在提示式基準測試上表現亮眼，但其內部的形式語言能力極不均質（對部分語法結構近乎完全掌握，對另一些結構卻長期低於隨機猜測水準），且把「語法能力」與「內部事實記憶」混同在單一參數空間中，掩蓋了組合泛化（compositional generalization）與多任務組合的系統性退化。同時，在純形式端，具備抽取（extraction）與中綴（infixation）能力的類型邏輯文法究竟落在哪個形式語言與時間複雜度階層，亦長期缺乏精確的上下界定位。</li>
+<li>直覺模型：可以把語言模型想像成一位同時背了整座圖書館百科、又學過文法規則的學生：當考卷只看最後答案時，你分不清他是靠記憶背出常見句型，還是真的理解結構規則。本子方向的測驗與探針工具就像一套設計精密的積木拼裝考題與神經掃描儀，把「記得多少條目」「會不會按句法結構重組沒見過的詞組」以及「語法系統本身在計算複雜度地圖上佔據多大空間」分開量測。</li>
+<li>分階段閱讀路線：第一階段先讀 Gärdenfors (2000) 建立概念空間與凸區域的幾何表徵基礎，再讀 Yu et al. (2023) 與 Waldis et al. (2024)（Holmes 基準），釐清零樣本功能組合測試以及如何用分類器探針將語言能力與指令遵循分離。第二階段閱讀 Collado-Montañez et al. (2025) 與 Peng, Chai and Søgaard (2025)，掌握模型規模對語言能力與事實記憶的異速成長規律，以及子詞（subword）組合的層間演化模式。第三階段讀 2026 年前沿論文：形式語言理論端讀 Moot (2026) 的類型邏輯文法 <span class="math inline">\mathrm{NP}</span> 完全性與 <span class="math inline">\mathrm{NLIN}</span> 模擬證明；實證診斷端依序讀 Merlo et al. (2026)（BLM）、Renduchintala and Bhatia (2026)（BLiMP 資料干預）、Liu et al. (2026)（語音語言模型組合落差）與 Vaish et al. (2026)（歐氏至雙曲流形的原始概念組合）。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;2000 Gärdenfors 概念空間與凸性幾何&quot;] --&gt; B[&quot;2026 Vaish 等人 歐氏與雙曲 GDE 原始組合&quot;]
+  C[&quot;2023 Yu 等人 零樣本功能組合測試&quot;] --&gt; D[&quot;2024 Waldis 等人 Holmes 分類器探針基準&quot;]
+  D --&gt; E[&quot;2025 Collado-Montañez 等人 FLM 規模與記憶分離&quot;]
+  D --&gt; F[&quot;2025 Peng 等人 子詞組合層間演化&quot;]
+  E --&gt; G[&quot;2026 Renduchintala 等人 BLiMP 干預與 Merlo BLM&quot;]
+  H[&quot;類型邏輯文法與一階線性邏輯&quot;] --&gt; I[&quot;2026 Moot NP 完全性與 NLIN 形式語言階層&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>類型邏輯文法的形式語言階層與 NLIN 模擬 (Complexity Hierarchy of Type-Logical Grammars)</strong></p>
+<ul>
+<li>直覺理解：當類型邏輯文法允許詞序重排、抽取與中綴時，它的表達能力會跨越傳統適度上下文敏感（mildly context-sensitive）與半線性（semilinear）邊界，直接對應非決定性線性時間圖靈機可識別的語言類別。</li>
+<li>機制或核心表達式：Moot (2026) 結合 Pshenitsyn (2025) 對一階線性邏輯（first-order linear logic）的研究，證明包含乘積、結合律、抽取（extraction）與中綴（infixation）規則的類型邏輯文法，不僅因對交集運算封閉而不再滿足半線性性質，其固定文法識別問題更屬 <span class="math inline">\mathrm{NP}</span>-complete。進一步地，Moot 證明一階線性邏輯文法可以模擬 Book 與 Greibach (1970) 提出的準線性文法（quasi-linear grammars），即非決定性線性時間／空間複雜度類別 <span class="math inline">\mathrm{NLIN}</span> / <span class="math inline">\mathrm{NSPACE}(n)</span>。作者主張 <span class="math inline">\mathrm{NLIN}</span> 可作為自然語言形式系統時間複雜度的自然上界，對應空間複雜度上界 <span class="math inline">\mathrm{LOGCFL}</span>。</li>
+<li>能做到什麼，代價是什麼：賦予類型邏輯文法足以涵蓋複雜跨列與非連續句法現象的理論表達力；代價是固定識別複雜度升至 <span class="math inline">\mathrm{NP}</span>-complete，使一般化剖析必須依賴剪枝策略或約束子片段。</li>
+</ul>
+</li>
+<li>
+<p><strong>語言能力探針與記憶–結構異速分離 (Probing Linguistic Competence vs. Factual Memorization)</strong></p>
+<ul>
+<li>直覺理解：大模型的表面流利度常來自把龐大事實記憶和指令模板混在同一個神經網路裡；一旦用層間分類探針或受控的 1% 合成句法資料去做干預實驗，就能看清哪些語法失敗只是語料稀缺，哪些則受限於模型架構。</li>
+<li>機制或核心表達式：Waldis et al. (2024) 整合逾 270 項探針研究與 200 多個資料集建立 Holmes（及輕量化 FlashHolmes），以線性／分類器探針量測句法、構詞、語意、推論與篇章表徵，排除提示詞工程與指令遵循干擾。Collado-Montañez et al. (2025) 在 135M 至 32B 參數範圍內量測語言能力、外部工具檢索知識與內部記憶知識，顯示內部事實記憶隨參數規模成長遠快於核心語言能力，進而提出模組化的 Fundamental Language Models（FLM）構想。針對特定形式語法盲區，Renduchintala and Bhatia (2026) 在 100M 詞元的 FineWeb 樣本上預訓練 GPT-2 Small（124M），並注入僅 1% 的針對性合成語法資料：結果在最差的 9 個 BLiMP 範式中改善了 8 個（如 <code>only_npi_scope</code> 準確率從 <span class="math inline">20.9\%</span> 躍升至 <span class="math inline">69.4\%</span>），但 <code>principle_A_c_command</code> 仍低於隨機水準，揭示了資料稀缺與架構限制之間的明確分界。</li>
+<li>能做到什麼，代價是什麼：分類器探針與最小受控干預（minimal intervention）能定位因果瓶頸而不需重訓千億參數模型；代價是探針準確率仍受線性可分性假設與多層表徵纏結影響。</li>
+</ul>
+</li>
+<li>
+<p><strong>幾何概念空間與多模態組合泛化落差 (Geometric Conceptual Spaces and Compositional Gaps)</strong></p>
+<ul>
+<li>直覺理解：如果語言和視覺概念在幾何空間裡各自佔據明確的凸區域或切空間向量方向，理論上只要把屬性和物體向量相加就能認出沒見過的新組合；但在實際語音與跨任務模型裡，這套組合機制經常失靈。</li>
+<li>機制或核心表達式：Gärdenfors (2000) 提出以品質維度（quality dimensions）中的凸區域定義性質、以 Voronoi 鑲嵌（Voronoi tessellation）定義概念的幾何框架。在現代多模態實作中，Vaish et al. (2026) 研究歐氏、球面與雙曲視覺語言模型（CLIP、DINOv2、MERU、HyCoCLIP）在組合零樣本學習（CZSL）的表現，利用分佈 Fréchet 均值處的切空間基底（Geodesically Decomposable Embeddings, GDE）直接以分解後的原始概念方向進行組合評分，顯示無需顯式重組屬性–物體對即可辨識未見組合。相反地，在音訊與跨任務端，Liu et al. (2026) 測試大型音訊語言模型（LALM）整合聲學線索識別、片段選擇與下游 ASR／問答的能力，發現組合問答準確率在 40 個測試設定中有 39 個下降（平均下降 26.7 個百分點），ASR 詞錯率亦在 40 個設定中有 39 個上升（平均增加 28.5 個百分點）；Yu et al. (2023) 亦在 GPT-2 與 T5 上觀察到類似的零樣本功能組合缺口。</li>
+<li>能做到什麼，代價是什麼：切空間測地線分解可在多種彎曲流形上避免額外組合參數開銷；但當跨模態或多步推理需要精確順序控制與特徵路由時，現有端到端多模態架構仍會出現顯著的組合退化。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>BLiMP 合成資料干預實驗如何區分「資料瓶頸」與「架構瓶頸」</strong>：Renduchintala and Bhatia (2026) 僅在 100M 詞元的 FineWeb 預訓練語料中注入 1% 的合成句法資料，結果 <code>only_npi_scope</code> 從 20.9% 提升至 69.4%，而 <code>principle_A_c_command</code> 依然低於隨機基準。這組對照結果各自說明了什麼？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考兩類失敗的成因差異。當僅加入 1% 合成樣本即大幅修復 9 個最差 BLiMP 範式中的 8 個時，代表標準 Transformer 架構其實具備表徵這類句法約束的計算能力，原本的失敗主要源於自然網路語料中相關正負例過於稀少（資料分佈瓶頸）。相對地，針對性注入樣本後 <code>principle_A_c_command</code> 仍無法超越隨機猜測，則指出模型在層級樹狀支配關係（c-command）的歸納偏置或注意力路由上可能存在實質的架構或表徵瓶頸。</p>
+</details>
+<ol start="2">
+<li><strong>為何類型邏輯文法與一階線性邏輯的連結會打破半線性（Semilinearity）</strong>：在傳統形式語言理論中，為何許多自然語言文法形式化試圖停留在「適度上下文敏感」與半線性類別之內，而 Moot (2026) 與 Pshenitsyn (2025) 對一階線性邏輯類型文法的分析又帶來什麼複雜度啟示？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>上下文無關文法與典型適度上下文敏感文法滿足 Parikh 定理（語詞計數向量構成半線性集）並具備多項式時間識別演算法。Moot (2026) 指出包含乘積、結合律、抽取與中綴的類型邏輯文法可經由一階線性邏輯對交集封閉，因而失去半線性並能模擬 <span class="math inline">\mathrm{NLIN} = \mathrm{NSPACE}(n)</span> 的準線性文法，使固定識別問題成為 <span class="math inline">\mathrm{NP}</span>-complete；這顯示為換取語言學上非連續構式的簡潔表達，形式系統在最壞情況下的時間複雜度將跨越多項式邊界。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>規模擴展究竟在學習語言結構還是壓縮事實記憶</strong>：Collado-Montañez et al. (2025) 觀察到模型參數從 135M 增至 32B 時，內部事實知識的增長速度遠高於形式語言能力；同時 Peng et al. (2025) 發現不同 LLM 家族在層間子詞組合策略上分化為三種截然不同的模式。如何在架構層級將核心語言算子與可檢索記憶模組化拆分（即 FLM 路線），同時維持端到端流利度，仍缺乏統一的設計標準。</li>
+<li><strong>能力具備卻無法組合的跨任務／跨模態路由失靈</strong>：Liu et al. (2026) 證實大型音訊語言模型在單項任務表現優異，卻在兩段話語的線索條件化組合下全面退化；Merlo et al. (2026) 的 Blackbird Language Matrices 亦顯示語言能力與結構系統性推理之間存在細微交互誤差。為何擁有單項能力的表徵無法在內部穩定進行函數複合（Yu et al., 2023），尚待機制層面的形式解釋。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>凸區域概念空間與雙曲切空間原始組合</strong>：Gärdenfors (2000) 的品質維度凸性判準與 Vaish et al. (2026) 在歐氏、球面及雙曲流形 Fréchet 均值切空間建立的 Geodesically Decomposable Embeddings，直接與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a> 共用幾何原語與流形分類結構。</li>
+<li><strong>一階線性邏輯與 Montague–Lambek 類型系統的雙向對照</strong>：Moot (2026) 關於抽取與中綴規則導致 <span class="math inline">\mathrm{NP}</span>-complete 識別邊界的證明，可為 <a class="wl" href="21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a> 及 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S32_%E7%AF%84%E7%96%87%E9%82%8F%E8%BC%AF%E3%80%81%E5%9E%8B%E5%88%A5%E8%AB%96%E8%88%87%E7%B5%84%E5%90%88%E6%80%A7.html">範疇邏輯、型別論與組合性</a> 劃定文法規則擴充時的計算可行性紅線。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-conceptual-spaces-the-geometry-of-thought2000">1. Conceptual Spaces: The Geometry of Thought（2000）</h4>
+<ul>
+<li>作者與出處：Peter Gärdenfors · <em>MIT Press</em></li>
+<li>核心問題：符號規則與類神經連結主義表徵長期割裂，缺乏一個能同時支援概念幾何相似度計算與邏輯分類的統一中間表徵層。</li>
+<li>關鍵做法：提出概念空間（Conceptual Spaces）理論，在品質維度構成的幾何空間中將自然性質形式化為凸區域（convex regions），並利用 Voronoi 鑲嵌刻畫概念邊界與原型結構。</li>
+<li>跨領域啟發：奠定本子方向幾何語意測試的理論原點，並直接連接至 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a>。</li>
+<li>連結：<a href="zotero://select/library/items/W4VEHHRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7551/mitpress/2076.001.0001" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-holmes-a-benchmark-to-assess-the-linguistic-competence-of-language-models2024">2. Holmes: A Benchmark to Assess the Linguistic Competence of Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Andreas Waldis, Yotam Perlitz, Leshem Choshen, Yufang Hou, Iryna Gurevych · <em>arXiv</em></li>
+<li>核心問題：基於提示詞的評測容易把語言模型的「無意識語言能力」與指令遵循或推理技巧混為一談，導致評估結果失真。</li>
+<li>關鍵做法：整合逾 270 篇探針文獻與超過 200 個資料集建構 Holmes 基準（及快速版 FlashHolmes），透過分類器探針橫跨構詞、句法、語意、推論與篇章檢驗 50 餘個語言模型內部表徵，發現架構與指令微調對構詞與句法仍有顯著影響。</li>
+<li>跨領域啟發：建立剝離提示工程干擾的標準化表徵測量工具，協助對接 <a class="wl" href="21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a> 的形式語法檢驗。</li>
+<li>連結：<a href="zotero://select/library/items/S5G7C7H5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.18923" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-towards-fundamental-language-models-does-linguistic-competence-scale-with-model-size2025">3. Towards Fundamental Language Models: Does Linguistic Competence Scale with Model Size?（2025）</h4>
+<ul>
+<li>作者與出處：Jaime Collado-Montañez, L. Alfonso Ureña-López, Arturo Montejo-Ráez · <em>arXiv</em></li>
+<li>核心問題：單體大語言模型將語言能力與海量事實記憶綁定在同一組參數中，導致幻覺、隱私風險與高昂計算成本。</li>
+<li>關鍵做法：橫跨 135M 至 32B 參數規模的模型，分別評測語言能力、外部事實知識與內部事實知識，發現內部事實記憶隨規模增長顯著快於核心語言能力，據此論證以小型語言精通模型搭配外部檢索工具的 Fundamental Language Model（FLM）模組化架構。</li>
+<li>跨領域啟發：從縮放律尺度區分語法組合機制與參數記憶，呼應 <a class="wl" href="../../NOTES/02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/T-S3H_%E5%B8%83%E6%9E%97%E5%BC%8F%E8%A6%8F%E7%B4%84%E3%80%81%E7%AF%84%E5%BC%8F%E8%88%87%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">布林式規約、範式與組合語意</a> 的規約分離思維。</li>
+<li>連結：<a href="zotero://select/library/items/34XF7HPQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.02225" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-type-logical-grammars-and-formal-languages2026">4. Type-logical grammars and formal languages（2026）</h4>
+<ul>
+<li>作者與出處：Richard Moot · <em>arXiv</em></li>
+<li>核心問題：引入乘積、結合律、抽取與中綴等規則的類型邏輯文法，其形式語言類別與最壞情況計算複雜度上界亟待釐清。</li>
+<li>關鍵做法：改寫 Pshenitsyn (2025) 的一階線性邏輯構造，證明上述類型邏輯文法的固定識別問題為 <span class="math inline">\mathrm{NP}</span>-complete，且因對交集封閉而不具半線性與適度上下文敏感性；進一步證明一階線性邏輯文法可模擬 Book–Greibach (1970) 準線性文法，對應複雜度類 <span class="math inline">\mathrm{NLIN}</span> / <span class="math inline">\mathrm{NSPACE}(n)</span>。</li>
+<li>跨領域啟發：為類型邏輯語法確立 <span class="math inline">\mathrm{NLIN}</span> 時間複雜度邊界，直接對話 <a class="wl" href="21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a> 與 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S32_%E7%AF%84%E7%96%87%E9%82%8F%E8%BC%AF%E3%80%81%E5%9E%8B%E5%88%A5%E8%AB%96%E8%88%87%E7%B5%84%E5%90%88%E6%80%A7.html">範疇邏輯、型別論與組合性</a>。</li>
+<li>連結：<a href="zotero://select/library/items/KBW9GNEP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.12618" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-heterogeneity-in-formal-linguistic-competence-of-language-models-is-data-the-real-bottleneck2026">5. Heterogeneity in Formal Linguistic Competence of Language Models: Is Data the Real Bottleneck?（2026）</h4>
+<ul>
+<li>作者與出處：H S V N S Kowndinya Renduchintala, Sumit Bhatia · <em>arXiv</em></li>
+<li>核心問題：大型語言模型在經過數兆詞元訓練後，仍對某些形式語言現象表現低於隨機水準，亟需區分這是語料分佈稀缺還是模型架構先天限制。</li>
+<li>關鍵做法：在 100M 詞元的 FineWeb 子集上預訓練 GPT-2 Small（124M），並注入僅 1% 針對弱項語法的合成資料；結果 9 個最差 BLiMP 範式中有 8 個大幅提升（如 <code>only_npi_scope</code> 由 20.9% 升至 69.4%），但 <code>principle_A_c_command</code> 仍低於隨機猜測。</li>
+<li>跨領域啟發：提供區分資料瓶頸與注意力架構極限的受控干預實驗模板。</li>
+<li>連結：<a href="zotero://select/library/items/SVFNDH8D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.17930" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-compositionality-with-primitives-a-unified-view-from-euclidean-to-hyperbolic-vision-language-models2026">6. Compositionality with Primitives: A Unified View from Euclidean to Hyperbolic Vision-Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Puru Vaish, Meelad Dashti, Christoph Brune, Pascal Mettes, Tatiana Tommasi · <em>arXiv</em></li>
+<li>核心問題：組合零樣本學習（CZSL）常假設模型必須顯式重組「屬性–物體」對才能泛化至未見組合，且不同彎曲流形幾何對組合推理的影響缺乏統一視角。</li>
+<li>關鍵做法：採用 Geodesically Decomposable Embeddings（GDE）框架，在分佈 Fréchet 均值處的切空間識別原始視覺概念方向，橫跨歐氏、球面與雙曲視覺語言模型（CLIP、DINOv2、MERU、HyCoCLIP）設計新組合評分函數，證明直接利用分解原始方向即足以識別未見組合。</li>
+<li>跨領域啟發：把 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a> 的幾何組合觀點推進至黎曼流形切空間，補全多模態表徵的組合機制分析。</li>
+<li>連結：<a href="zotero://select/library/items/QHQPH8S6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29811" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-12-篇">G5｜本子方向全量文獻泛讀清單（共 12 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 12 篇文獻（含開放存取 PDF 10 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進3-篇">A. 奠基經典、專著與核心演進（3 篇）</h3>
+<ul>
+<li><strong>2000｜Conceptual Spaces: The Geometry of Thought</strong>，Peter Gärdenfors（<em>MIT Press</em>，1141 引）：在符號邏輯與神經網路之間提出第三層，即幾何概念空間，用性質維度上的凸區域與 Voronoi 分割解釋詞義習得與概念組合。 <a href="zotero://select/library/items/W4VEHHRM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7551/mitpress/2076.001.0001" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Towards Zero-Shot Functional Compositionality of Language Models</strong>，Hangyeol Yu et al.（<em>arXiv</em>）：指出預訓練語言模型雖擅長單一任務卻缺乏「功能組合性」（即直接組合已學任務，如不經中繼翻譯將英文文件摘要為法文），論述零樣本功能組合作為核心公開問題的研究必要性。 <a href="zotero://select/library/items/57QQZXGI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.03103" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Using Modes to Ensure Subject Reduction for Typed Logic Programs with Subtyping</strong>，Jan-Georg Smaus, Francois Fages, Pierre Deransart（<em>arXiv</em>）：研究具參數多型與一般子類型關係的規定性類型邏輯程式，引入模式（modes）固定資料流並給出確保主語歸約（subject reduction）一致性成立的語法條件。 <a href="zotero://select/library/items/9NPXTBU3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/cs/0010029" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻9-篇">B. 2024–2026 近期推進與前沿文獻（9 篇）</h3>
+<ul>
+<li><strong>2024｜Explainability and Semantics - Bridging Natural Language Flexibility and Formal Precision: Toward a Semantic Framework for Large Language Models</strong>，Paul Bilokon（<em>SSRN Electronic Journal</em>，3 引）：發表於 SSRN 的預印本論文，探討如何設計兼具自然語言靈活性與形式邏輯精確度的語意表徵框架，藉以提升大型語言模型推論過程的可解釋性與語意一致性。 <a href="zotero://select/library/items/TXQ34C2X" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.4971198" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Blackbird Language Matrices: A Framework to Investigate the Linguistic Competence of Language Models</strong>，Paola Merlo et al.（<em>arXiv</em>）：Paola Merlo et al.，<em>Blackbird Language Matrices: A Framework to Investigate the Linguistic Competence of Language Models</em>（<em>arXiv</em>）：借鑑智力測驗矩陣，設計多層級的結構化自然語言基準 <code>BLM</code>，專門測試大模型的組塊化（Chunking）與系統性。OA PDF。 <a href="zotero://select/library/items/E6BRJSXN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.20966" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Heterogeneity in Formal Linguistic Competence of Language Models: Is Data the Real Bottleneck?</strong>，H S V N S Kowndinya Renduchintala, Sumit Bhatia（<em>arXiv</em>）：H S V N S Kowndinya Renduchintala &amp; Sumit Bhatia，<em>Heterogeneity in Formal Linguistic Competence of Language Models: Is Data the Real Bottleneck?</em>（<em>arXiv</em>）：用受控的一億詞預訓練實驗，分析大模型形式語法能力兩極分化的原因是語料構式稀疏度還是架構瓶頸。OA PDF。 <a href="zotero://select/library/items/SVFNDH8D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.17930" rel="noopener">官方連結</a></li>
+<li><strong>2026｜When Capabilities Fail to Compose: Diagnosing the Compositionality Gap in Large Audio-Language Models</strong>，Chien-Feng Liu et al.（<em>arXiv</em>）：建構帶有雙段聲學線索的受控診斷基準，要求模型同時整合音訊屬性識別、線索條件片段選擇與下游問答，藉此找出多模態能力組合是在哪個環節斷掉的。 <a href="zotero://select/library/items/5ER8JHJH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.36921" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Compositionality with Primitives: A Unified View from Euclidean to Hyperbolic Vision-Language Models</strong>，Puru Vaish et al.（<em>arXiv</em>）：提出從歐氏到雙曲視覺語言模型的統一原語組合視角（Compositionality with Primitives），並推廣測地線可分解嵌入（GDE）框架。在流形 Fréchet 均值切空間與雙曲階層空間中提取視覺原語方向，再重組出未見的「屬性＋物體」概念。 <a href="zotero://select/library/items/QHQPH8S6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29811" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Type-logical grammars and formal languages</strong>，Richard Moot（<em>arXiv</em>）：Pshenitsyn（2025）曾針對一階線性邏輯給出一個構造，證明它對交集封閉，因此既非半線性，也非溫和脈絡敏感。本文改編這個構造，嚴格證明：配備乘積、結合律、抽離與中綴標準規則的型態邏輯語法，其固定語言識別問題是 NP-完備（NP-complete）的。作者再把結果加強，證明一階線性邏輯語法能精確模擬 Book &amp; Greibach（1970）的準線性語法（Quasi-linear Grammars），也就是可在非確定性線性時間（<code>NLIN</code> / <code>NSPACE(n)</code>）內識別的語法類。作者的論點是：<code>LOGCFL</code> 是衡量自然語言形式體系很有用的空間複雜度上界，<code>NLIN</code> 同樣是很有參考價值的時間複雜度上界。由此，一階線性邏輯可以統一看作「非確定性線性時間字串語言、圖語言與自動機之內在邏輯」。 <a href="zotero://select/library/items/KBW9GNEP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.12618" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Understanding Subword Compositionality of Large Language Models</strong>，Qiwei Peng, Yekun Chai, Anders Søgaard（<em>arXiv</em>）：從結構相似度、語意可分解性與詞形保留三個維度逐層探測五個大型語言模型家族如何將子詞組合成整詞表徵，發現各模型依其底層組合策略的演化模式可明確劃分為三大類群。 <a href="zotero://select/library/items/DFS9C64A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.17953" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Towards Fundamental Language Models: Does Linguistic Competence Scale with Model Size?</strong>，Jaime Collado-Montañez, L. Alfonso Ureña-López, Arturo Montejo-Ráez（<em>arXiv</em>）：評測 135M 至 32B 參數規模模型在語言能力、外部知識與內部事實記憶的表現，發現模型規模主要驅動內部知識記憶而非語言能力，據此提出將檢索外包的輕量基礎語言模型（FLM）範式。 <a href="zotero://select/library/items/34XF7HPQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.02225" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Holmes: A Benchmark to Assess the Linguistic Competence of Language Models</strong>，Andreas Waldis et al.（<em>arXiv</em>）：彙整逾 270 項探針研究與 200 個資料集建構 Holmes 基準，以分類器探針拆解語言能力與指令遵循能力，評測逾 50 個語言模型在句法、構詞、語意、推理與言談的表徵差異。 <a href="zotero://select/library/items/S5G7C7H5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.18923" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-75121aac">在地圖上查看</a><div class="rg"><h3>相關<span class="n">6</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a><span class="rs">形式語意與語言學研究兩件事：有限的詞彙怎麼靠嚴格的代數結構拼出無限多的精確意義（組合性），以及統計向量空間怎麼和邏輯真值、社會博弈語用（言外之意…</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a></li><li><a href="21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a></li><li><a href="21B_%E7%90%86%E6%80%A7%E8%A8%80%E8%AA%9E%E8%A1%8C%E7%82%BARSA%E3%80%81%E6%A9%9F%E7%8E%87%E8%AA%9E%E7%94%A8%E5%AD%B8%E8%88%87%E8%84%88%E7%B5%A1%E6%8E%A8%E7%90%86.html">理性言語行為RSA、機率語用學與脈絡推理</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S32_%E7%AF%84%E7%96%87%E9%82%8F%E8%BC%AF%E3%80%81%E5%9E%8B%E5%88%A5%E8%AB%96%E8%88%87%E7%B5%84%E5%90%88%E6%80%A7.html">範疇邏輯、型別論與組合性</a><span class="tag-plan">計劃</span><span class="rs">S3 候選方向，題目到時由學習者選。路線檔註記：主脊 2；接理想語言</span></li><li><a href="../../NOTES/02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/T-S3H_%E5%B8%83%E6%9E%97%E5%BC%8F%E8%A6%8F%E7%B4%84%E3%80%81%E7%AF%84%E5%BC%8F%E8%88%87%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F.html">布林式規約、範式與組合語意</a><span class="tag-plan">計劃</span><span class="rs">S3 候選方向，題目到時由學習者選</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>01C｜稀疏混合專家與條件計算路由 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-58dca6d2" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="01c稀疏混合專家與條件計算路由">01C｜稀疏混合專家與條件計算路由</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a>
+同領域子方向：<a class="wl" href="01A_%E8%87%AA%E6%B3%A8%E6%84%8F%E5%8A%9B%E6%A9%9F%E5%88%B6%E3%80%81%E9%95%B7%E8%84%88%E7%B5%A1%E5%A4%96%E6%8E%A8%E8%88%87%E4%BD%8D%E7%BD%AE%E5%B9%BE%E4%BD%95.html">自注意力機制、長脈絡外推與位置幾何</a> · <a class="wl" href="01B_IO%E6%84%9F%E7%9F%A5%E6%A0%B8%E5%BF%83%E3%80%81KV%E5%BF%AB%E5%8F%96%E5%A3%93%E7%B8%AE%E8%88%87%E6%8E%A8%E6%B8%AC%E8%A7%A3%E7%A2%BC.html">IO感知核心、KV快取壓縮與推測解碼</a> · <a class="wl" href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> 將模型參數容量與單詞元計算成本解耦的條件計算模組。演進主線從早期的雜訊 top-k 稀疏門控網路出發，經由 Switch Transformer 的 top-1 簡化與 bfloat16 穩定化，走向 DeepSeekMoE 的細粒度與共享專家專業化分解，並延伸至頻域適配、貝氏不確定度校準與矩陣最佳化器訓練穩定性。</p>
+</aside>
+<ul>
+<li>核心問題：傳統稠密前饋網路對每個輸入詞元都啟用全部參數，使計算量與總參數量同步線性膨脹，限制了模型吸收大量知識的容量上限。然而，若改採稀疏混合專家（MoE），系統與訓練立即面臨跨裝置通訊開銷、負載不均引發的專家崩塌（routing collapse）、bfloat16 低精度訓練不穩定、粗粒度路由導致的專家知識重疊，以及近期採用 Muon 系列正交化最佳化器時在路由專家上出現的劇烈損失尖峰（loss spikes）。</li>
+<li>直覺模型：稠密模型像一家所有員工每次都要同時開會處理每份文件的公司，規模一大就全員過載；MoE 則改由一位分流櫃台（router）為每份文件只指派少數最對口的專科部門（experts）處理，同時保留少數通識部門（shared experts）處理共通基礎作業，讓公司總人數大幅擴張而每份文件的處理成本維持固定。</li>
+<li>分階段閱讀路線：第一階段先讀 Shazeer et al. (2017) 與 Fedus, Zoph, Shazeer (2021)，掌握雜訊 top-k 門控設計、Switch 的 top-1 簡化路由、容量係數與 bfloat16 穩定訓練配方。第二階段閱讀 Dai et al. (2024)（DeepSeekMoE）與 Cai et al. (2024) 的系統綜述（亦可對照 Zhang et al. 2025），理解細粒度專家切分與共享專家隔離如何消除知識冗餘並構築完整的演算法與系統分類學。第三階段閱讀 2025–2026 前沿論文 Dialameh et al. (2025)（Bayesian-MoE）與 Fujitake (2026)（EnergyCal）（另可參考 Jiang et al. 2026 的 FourierMoE 與 Jing et al. 2025 的 EvoMoE），深入後訓練曲率不確定度估計與 Muon 系列最佳化器的能量校準穩定機制。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;2017 Shazeer et al. 稀疏門控 top-k MoE&quot;] --&gt; B[&quot;2021 Fedus et al. Switch top-1 路由與穩定化&quot;]
+  B --&gt; C[&quot;2024 Dai et al. DeepSeekMoE 細粒度與共享專家&quot;]
+  B --&gt; D[&quot;2024 Cai et al. MoE 演算法與系統綜述&quot;]
+  C --&gt; E[&quot;2025 Dialameh et al. Bayesian-MoE 後驗校準&quot;]
+  C --&gt; F[&quot;2026 Fujitake EnergyCal 抑制 Muon 損失尖峰&quot;]
+  D --&gt; G[&quot;2026 Jiang et al. FourierMoE 頻域專家適配&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>稀疏門控與負載平衡損失 (Sparsely-Gated Routing and Load Balancing)</strong></p>
+<ul>
+<li>直覺理解：路由器依詞元向量計算各專家的親和分數並只挑前 k 名啟用，但若不加約束，早期表現較好的專家會吸走全部流量並讓其餘專家無法更新，因此必須透過雜訊探索與輔助平衡損失把工作分散開來。</li>
+<li>機制或核心表達式：標準稀疏 MoE 層輸出為 <span class="math inline">y = \sum_{i=1}^{N} G(x)_i E_i(x)</span>，其中門控權重 <span class="math inline">G(x) = \mathrm{Softmax}(\mathrm{KeepTopK}(H(x), k))</span>，而 Shazeer et al. (2017) 在選取前加入可調變異數雜訊 <span class="math inline">H(x)_i = (x W_g)_i + \epsilon \cdot \mathrm{Softplus}((x W_{\text{noise}})_i)</span> 以維持負載探索。為防止專家容量溢位與路由崩塌，Switch Transformer 簡化為 <span class="math inline">k=1</span> 單專家路由並搭配輔助平衡損失 <span class="math inline">\mathcal{L}_{\text{aux}} = \alpha N \sum_{i=1}^{N} f_i P_i</span>，其中 <span class="math inline">f_i</span> 為分配給第 <span class="math inline">i</span> 個專家的詞元比例，<span class="math inline">P_i</span> 為路由器指派給該專家的平均機率質量。</li>
+<li>能做到什麼，代價是什麼：以極少額外運算大幅擴張總參數量（Switch 在同計算量下較 T5 取得最高 7 倍預訓練加速）；但權杖丟棄（token dropping）、All-to-All 跨節點通訊成本與輔助損失權重 <span class="math inline">\alpha</span> 對主語言建模目標的干擾之間存在持續權衡。</li>
+</ul>
+</li>
+<li>
+<p><strong>細粒度專家切分與共享專家隔離 (Fine-Grained Segmentation and Shared Experts)</strong></p>
+<ul>
+<li>直覺理解：若大專家數量有限且每次必選兩名，每個專家都必須同時學會語法、標點等共通知識而產生重複；把每位大專家切分成數個小專家並把共通知識撥給固定啟用的共享專家，就能讓剩餘的路由專家專心分工。</li>
+<li>機制或核心表達式：DeepSeekMoE (Dai et al., 2024) 針對傳統 GShard 從 <span class="math inline">N</span> 個專家中選 top-<span class="math inline">K</span> 的結構重疊問題提出兩項分解：將每個 FFN 專家細分為 <span class="math inline">m</span> 份共得 <span class="math inline">mN</span> 個小專家並啟用其中 <span class="math inline">mK</span> 個，使可激活的專家組合數由 <span class="math inline">\binom{N}{K}</span> 擴增為 <span class="math inline">\binom{mN}{mK}</span>；同時隔離出 <span class="math inline">K_s</span> 個常駐啟用的共享專家以承擔跨脈絡共通知識，路由後的層輸出為 <span class="math inline">h' = u + \sum_{i=1}^{K_s} \mathrm{FFN}_i^{(s)}(u) + \sum_{i=K_s+1}^{mN} g_i \mathrm{FFN}_i^{(r)}(u)</span>。</li>
+<li>能做到什麼，代價是什麼：DeepSeekMoE 2B 以接近同參數稠密模型的表現追平 1.5 倍計算量與專家參數的 GShard 2.9B；代價是更多小專家增加了細粒度張量切分與核函數排程的系統複雜度，若直接用於多模態微調仍需處理專家同質化與靜態線性路由器對視覺與文字詞元的區分僵化（如 EvoMoE 所指出）。</li>
+</ul>
+</li>
+<li>
+<p><strong>MoE 的訓練穩定性與後驗不確定度校準 (Training Stability and Post-Hoc Uncertainty)</strong></p>
+<ul>
+<li>直覺理解：由於不同專家收到的梯度批次稀疏且不均，對單一矩陣做譜正交化的新世代最佳化器容易讓稀疏專家的更新幅度突然放大引發損失尖峰；另一方面，MoE 天然的模組化結構也恰好讓每個專家各自進行區塊級貝氏曲率近似成為可能。</li>
+<li>機制或核心表達式：在最佳化穩定性上，Fujitake (2026) 觀察到 Muon 系列最佳化器在稀疏 MoE 上會引發劇烈損失尖峰，因此提出 EnergyCal，依有限步 Newton–Schulz 正交化方向的正規化 Frobenius 範數平方直接衰減路由專家更新步長，不改變譜變換也不增加額外持久最佳化器狀態。在不確定度估計上，Dialameh et al. (2025) 提出 Bayesian-MoE，對每個已訓練專家的第二層線性權重施加結構化 Laplace 近似，並以 Kronecker 分解低秩近似建模海森曲率，在不修改預訓練流程與不增加參數的前提下推導預測不確定度與邊際似然。</li>
+<li>能做到什麼，代價是什麼：EnergyCal 在 4B MoE 模型上相較低學習率 MuonH 減少 99.51% 的損失尖峰負擔並改善 4.06% 幾何平均困惑度，僅伴隨輕微吞吐代價；Bayesian-MoE 無需重訓即可改善期望校準誤差（ECE）與負對數似然（NLL），但仍假設專家層間曲率可呈區塊對角獨立近似。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>細粒度專家切分如何改變有效表達組合數與負載冗餘</strong>：在保持總專家參數量與單詞元實際啟用的 FLOPs 完全不變的前提下，將 <span class="math inline">N=8</span> 個專家啟用 <span class="math inline">K=2</span> 個的配置，改為細分因子 <span class="math inline">m=4</span>（即 <span class="math inline">32</span> 個小專家啟用 <span class="math inline">8</span> 個）並隔離 <span class="math inline">K_s=2</span> 個共享專家、從剩餘 <span class="math inline">30</span> 個路由專家中選 <span class="math inline">6</span> 個，這在組合空間與表徵分工上帶來什麼具體差異？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>先計算路由組合數：原本 <span class="math inline">\binom{8}{2} = 28</span> 種組合，拆分成從 30 個路由專家中選 6 個時可達 <span class="math inline">\binom{30}{6} = 593,775</span> 種組合（Dai et al., 2024）；再思考共享專家的梯度來源：共享專家對每個詞元皆啟用，能穩定吸收高頻共性語義，使路由專家不再需要把各自有限的參數浪費在重複記憶基礎語法上。</p>
+</details>
+<ol start="2">
+<li><strong>為何稀疏專家路徑在 Muon 系列最佳化器下較容易產生損失尖峰</strong>：根據 Fujitake (2026) 對 Muon 與 EnergyCal 的實驗分析，為何針對矩陣進行 Newton–Schulz 譜正交化的更新規則在稀疏 MoE 路由專家上需要額外依據方向範數做能量衰減？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考路由專家與稠密層的梯度結構差異：稀疏路由下個別專家在單一訓練步可能只收到少數詞元的梯度，其原始動量梯度訊號雜訊比或低秩結構與稠密層不同，經過有限步 Newton–Schulz 正交化將奇異值拉平至接近等幅後，可能對低有效訊號的路由專家施加過大能量更新；EnergyCal 透過正規化 Frobenius 範數平方衡量更新能量並進行輕量縮放，在不額外儲存最佳化器狀態下壓低尖峰。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>多模態與多任務情境下的專家同質化與路由器僵化</strong>：Jing et al. (2025) 指出直接將稠密 LLM 的 FFN 複製初始化為多個 MoE 專家容易導致專家功能同質化（expert uniformity），且靜態線性路由器難以區分視覺與文字詞元的分佈差異而使兩者流向相似的專家分佈；在頻域上，Jiang et al. (2026) 也顯示不同任務具截然不同的頻率能量分佈。如何同時設計具多樣性的專家初始化、模態或頻率敏感路由與低冗餘參數共享仍在活躍演化。</li>
+<li><strong>稀疏激活比例、訓練穩定性與擴展律的統一刻畫</strong>：如 Zhang et al. (2025) 與 Cai et al. (2024) 綜述所指出，MoE 雖能在相同推論算力下大幅增加容量並展現優於等價貝氏方法的能力，但稀疏率提高往往加劇訓練不穩定性、低精度數值震盪（需 bfloat16 專有技巧或 EnergyCal 類更新衰減）與推論期分散式通訊瓶頸，目前對總參數量、活躍參數量、路由粒度與資料量之間的聯合最優擴展律仍缺乏如稠密模型般穩固的標準配方。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>自適應路由與 KV 快取預算、注意力頭的聯合分配</strong>：MoE 基於詞元級重要度動態分派算力的條件計算思想，已開始與 <a class="wl" href="01B_IO%E6%84%9F%E7%9F%A5%E6%A0%B8%E5%BF%83%E3%80%81KV%E5%BF%AB%E5%8F%96%E5%A3%93%E7%B8%AE%E8%88%87%E6%8E%A8%E6%B8%AC%E8%A7%A3%E7%A2%BC.html">IO感知核心、KV快取壓縮與推測解碼</a> 結合，例如依路由器提示進行 MoE 剪枝或依專家路由決策協調 KV 快取分配與壓縮。</li>
+<li><strong>矩陣正交化最佳化器與低秩頻域適配的交叉融合</strong>：EnergyCal 針對 Muon 在稀疏專家上的有限步 Newton–Schulz 更新穩定化（Fujitake, 2026），直接對應 <a class="wl" href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a> 中將 Adam 自適應步長與正交化動量結合的矩陣最佳化理論（如 NAMO）；而 FourierMoE 則把 MoE 路由與反離散傅立葉變換引入參數高效低秩微調。</li>
+<li><strong>離散條件路由與連續時間選擇性門控的結構對照</strong>：MoE 透過離散 top-k 門控對空間維度做條件計算，而 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 的選擇性狀態空間模型則是沿時間軸對狀態轉移步長與輸入矩陣做連續條件調變，兩者皆在探討如何依輸入內容動態分配模型容量。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-outrageously-large-neural-networks-the-sparsely-gated-mixture-of-experts-layer2017">1. Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer（2017）</h4>
+<ul>
+<li>作者與出處：Noam Shazeer, Azalia Mirhoseini, Krzysztof Maziarz, Andy Davis, Quoc Le · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：傳統神經網路的知識吸收容量受制於固定參數數量，而過去理論上提出的條件計算在 GPU 叢集上面臨演算法不連續性、負載不平衡與系統執行效率低落等實作障礙。</li>
+<li>關鍵做法：提出由多達數千個前饋子網路組成的稀疏門控混合專家層（Sparsely-Gated MoE），以可訓練的雜訊門控網路為每個樣本稀疏選取少量專家組合，在語言建模與機器翻譯任務上實現逾千倍容量擴張並僅損失極少 GPU 計算效率。</li>
+<li>跨領域啟發：奠定現代大規模稀疏條件計算的數學與系統原型，開啟參數容量與單步算力脫鉤的演進路線。</li>
+<li>連結：<a href="zotero://select/library/items/TPIEQZCU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1701.06538" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-switch-transformers-scaling-to-trillion-parameter-models-with-simple-and-efficient-sparsity2021">2. Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity（2021）</h4>
+<ul>
+<li>作者與出處：William Fedus, Barret Zoph, Noam Shazeer · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：早期的 top-k MoE 因需同時將詞元送往多個專家而產生高昂的跨裝置通訊成本與複雜實作，且大尺度稀疏模型極易發生訓練發散與低精度數值不穩定。</li>
+<li>關鍵做法：提出 Switch Transformer，將路由簡化為僅啟用單一專家的 top-1 機制以大幅減少通訊與運算，並設計穩定化訓練技巧使大型稀疏模型首次能在 bfloat16 格式下訓練。在 T5-Base 與 T5-Large 上以等量算力獲得最高 7 倍預訓練加速，並在 101 種語言的多語言測試超越 mT5-Base。</li>
+<li>跨領域啟發：驗證極簡路由與低精度訓練在大型稀疏架構上的可行性，成為後續億級至兆級參數 MoE 系統的基礎設計範本。</li>
+<li>連結：<a href="zotero://select/library/items/B2TAJKV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.03961" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-deepseekmoe-towards-ultimate-expert-specialization-in-mixture-of-experts-language-models2024">3. DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Damai Dai, Chengqi Deng, Chenggang Zhao, R. X. Xu, Huazuo Gao · <em>ACL</em></li>
+<li>核心問題：傳統如 GShard 的 top-K 路由容易讓不同專家學到大量重複的基礎知識，導致專家專業化不足與參數利用冗餘。</li>
+<li>關鍵做法：提出 DeepSeekMoE 架構，透過將專家細分為 <span class="math inline">mN</span> 個並激活其中 <span class="math inline">mK</span> 個來大幅提升專家組合彈性，同時隔離出 <span class="math inline">K_s</span> 個共享專家專門承載共通知識。實驗顯示 DeepSeekMoE 2B 即可取得與擁有 1.5 倍專家參數及計算量的 GShard 2.9B 相當的效果，並接近同總參數量稠密模型的表現。</li>
+<li>跨領域啟發：明確分離共通知識與專精知識的幾何機制，成為近年高效率開源大模型 MoE 層的主流構造。</li>
+<li>連結：<a href="zotero://select/library/items/B3VGTUK9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.06066" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-a-survey-on-mixture-of-experts-in-large-language-models2024">4. A Survey on Mixture of Experts in Large Language Models（2024）</h4>
+<ul>
+<li>作者與出處：Weilin Cai, Juyong Jiang, Fan Wang, Jing Tang, Sunghun Kim · <em>IEEE TKDE 2025</em></li>
+<li>核心問題：隨著 MoE 在大語言模型與多模態系統快速普及，學界缺乏橫跨基礎架構設計、路由演算法與分散式系統工程的統一分類體系。</li>
+<li>關鍵做法：從 MoE 層數學結構切入，建立新的分類法並系統整理多代 MoE 模型的演算法設計（門控機制、負載均衡、專家專業化）與系統工程實作細節，為研究者提供對照比較框架。</li>
+<li>跨領域啟發：提供連結演算法門控選擇與底層分散式系統通訊排程的全面地圖。</li>
+<li>連結：<a href="zotero://select/library/items/64K8CRRZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.06204" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-bayesian-mixture-of-experts-for-large-language-models2025">5. Bayesian Mixture of Experts For Large Language Models（2025）</h4>
+<ul>
+<li>作者與出處：Maryam Dialameh, Hossein Rajabzadeh, Weiwei Zhang, Walid Ahmed, Hyock Ju Kwon · <em>arXiv</em></li>
+<li>核心問題：既有的 LLM 不確定度估計方法多仰賴外加配適器模組或更改訓練過程，忽略了 MoE 本身已具備的模組化專家通路結構。</li>
+<li>關鍵做法：提出免重訓且不增新參數的後處理架構 Bayesian-MoE，直接對每個微調後專家的第二層線性層套用結構化 Laplace 近似，並使用 Kronecker 分解低秩近似估計海森曲率，得出可擴展的預測不確定度與邊際似然；在 Qwen1.5-MoE 與 DeepSeek-MoE 常識推理基準上有效降低 ECE 與 NLL。</li>
+<li>跨領域啟發：展示稀疏專家結構如何讓區塊對角曲率近似與貝氏不確定度校準直接落地，避免整體模型的高維海森矩陣困境。</li>
+<li>連結：<a href="zotero://select/library/items/55DRD8SP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.08968" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-energycal-taming-loss-spikes-in-muon-family-optimizers-for-sparse-moe-training2026">6. EnergyCal: Taming Loss Spikes in Muon-Family Optimizers for Sparse MoE Training（2026）</h4>
+<ul>
+<li>作者與出處：Masato Fujitake · <em>arXiv</em></li>
+<li>核心問題：當採用近期興起的 Muon 系列正交化最佳化器訓練稀疏 MoE 語言模型時，路由專家容易出現劇烈的損失尖峰（loss spikes）而破壞收斂品質。</li>
+<li>關鍵做法：提出輕量級更新衰減規則 EnergyCal，依據有限步 Newton–Schulz 正交化方向的正規化 Frobenius 範數平方來調控路由專家的更新幅度，不更動譜變換也不增添持久最佳化器狀態。在 4B MoE 模型上，EnergyCal-MuonH 較低學習率 MuonH 降低 99.51% 平均閾值化損失尖峰負擔並改善 4.06% 幾何平均困惑度，用於標準 Muon 亦平均降低 95.98% 尖峰負擔。</li>
+<li>跨領域啟發：直接把 <a class="wl" href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a> 的矩陣譜最佳化理論引入稀疏條件計算，揭示正交化更新在稀疏梯度下的能量失調問題。</li>
+<li>連結：<a href="zotero://select/library/items/6D85DB3V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.37062" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-14-篇">G5｜本子方向全量文獻泛讀清單（共 14 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 14 篇文獻（含開放存取 PDF 14 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進2-篇">A. 奠基經典、專著與核心演進（2 篇）</h3>
+<ul>
+<li><strong>2021｜Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity</strong>，William Fedus, Barret Zoph, Noam Shazeer（<em>arXiv (Cornell University)</em>，987 引）：Switch Transformers: Scaling to Trillion Parameter Models with Simple and Efficient Sparsity，William Fedus, Barret Zoph, Noam Shazeer（把 MoE 簡化為單專家 Top-1 路由，解決通訊開銷與訓練不穩定，並擴展到兆級參數，987 引）。 <a href="zotero://select/library/items/B2TAJKV4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.03961" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer</strong>，Noam Shazeer et al.（<em>arXiv (Cornell University)</em>，622 引）：Outrageously Large Neural Networks: The Sparsely-Gated Mixture-of-Experts Layer，Noam Shazeer et al.（現代神經網路稀疏門控 MoE 的開創論文，確立按樣本條件激活的機制，讓容量不再和算力線性綁定，622 引）。 <a href="zotero://select/library/items/TPIEQZCU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1701.06538" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻12-篇">B. 2024–2026 近期推進與前沿文獻（12 篇）</h3>
+<ul>
+<li><strong>2024｜DeepSeekMoE: Towards Ultimate Expert Specialization in Mixture-of-Experts Language Models</strong>，Damai Dai et al.（<em>Annual Meeting of the Association for Computational Linguistics (ACL)</em>，287 引）：用細粒度專家切分，加上常駐共享專家來隔離通用知識，解決傳統 MoE 的專家知識重疊與路由退化問題。 <a href="zotero://select/library/items/B3VGTUK9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.06066" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Survey on Mixture of Experts in Large Language Models</strong>，Weilin Cai et al.（<em>IEEE Transactions on Knowledge and Data Engineering (TKDE) 2025</em>，166 引）：系統性綜述大型語言模型中的混合專家（MoE）架構文獻，整理如何透過條件式稀疏激活機制在不成比例增加運算開銷的前提下大幅擴展模型容量，並剖析其架構演進與關鍵技術細節。 <a href="zotero://select/library/items/64K8CRRZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.06204" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Mixture-of-Experts in Remote Sensing: A Survey</strong>，Yongchuan Cui, Peng Liu, Lajiao Chen（<em>https://www.icck.org/article/abs/jgrs.2025.140654</em>，1 引）：整理混合專家模型（MoE）在遙測領域的路由機制、專家特化分工與跨模態融合策略，說明動態稀疏激活如何依地物語意與感測器特性，把輸入分配給專屬的子網路。 <a href="zotero://select/library/items/TGFP8GCA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.03342" rel="noopener">官方連結</a></li>
+<li><strong>2026｜FourierMoE: Fourier Mixture-of-Experts Adaptation of Large Language Models</strong>，Juyong Jiang et al.（<em>arXiv</em>）：透過頻譜分析發現不同任務具特定頻率能量分佈且 LLM 各層頻率敏感度各異，遂從空間域轉向頻譜域設計參數高效微調架構 FourierMoE，將混合專家路由與適配融入頻域以降低多任務干擾與參數量。 <a href="zotero://select/library/items/88G74K6R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.01762" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Tackling Multimodal Learning Challenges with Mixture-of-Expert: A Survey</strong>，Liangwei Nathan Zheng et al.（<em>International Joint Conference on Artificial Intelligence</em>）：針對多模態與 MoE 研究各自獨立而缺乏交互視角的現況，此綜述從選擇性專家激發解耦算力成長與跨模態表徵學習等維度，系統梳理 MoE 解決多模態學習挑戰的設計機制。 <a href="zotero://select/library/items/RDU2NWQ2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.27431" rel="noopener">官方連結</a></li>
+<li><strong>2026｜EnergyCal: Taming Loss Spikes in Muon-Family Optimizers for Sparse MoE Training</strong>，Masato Fujitake（<em>arXiv</em>）：針對 Muon 系列最佳化器訓練稀疏 MoE 易出現損失尖峰的問題，提出無額外狀態的輕量規則 EnergyCal，依有限步 Newton–Schulz 方向歸一化平方範數衰減路由專家更新，於 4B MoE 減少逾 95% 尖峰負擔。 <a href="zotero://select/library/items/6D85DB3V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.37062" rel="noopener">官方連結</a></li>
+<li><strong>2025｜EvoMoE: Expert Evolution in Mixture of Experts for Multimodal Large Language Models</strong>，Linglin Jing et al.（<em>arXiv</em>）：針對多模態混合專家模型（MoE）微調中因複製 FFN 權重導致的專家同質化及靜態線性路由器難以區分視覺與文本標記的僵化問題，提出 EvoMoE 架構以促進專家分化與模態適應路由。 <a href="zotero://select/library/items/2HR9QW9G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.23830" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Mixture of Experts in Large Language Models</strong>，Danyang Zhang et al.（<em>arXiv</em>）：全面回顧大型語言模型中混合專家（MoE）架構的理論基礎與核心設計，系統整理閘控與路由機制、階層與稀疏結構、元學習、多模態與多任務應用以及實務部署與專家多樣性挑戰。 <a href="zotero://select/library/items/5JXA36GD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.11181" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Bayesian Mixture of Experts For Large Language Models</strong>，Maryam Dialameh et al.（<em>arXiv</em>）：提出適用於混合專家大模型的後設不確定性估計框架 Bayesian-MoE，無需重訓或新增參數即以 Kronecker 分解低秩 Laplace 近似各專家第二層線性權重的後驗曲率，並在 Qwen1.5-MoE 與 DeepSeek-MoE 驗證校準效果。 <a href="zotero://select/library/items/55DRD8SP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.08968" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Closer Look into Mixture-of-Experts in Large Language Models</strong>，Ka Man Lo et al.（<em>arXiv</em>）：實證剖析三款主流混合專家（MoE）大型語言模型的參數與路由行為特性，觀察到神經元運作類似細粒度專家、MoE 路由器偏好選擇輸出範數較大的專家等內部機制。 <a href="zotero://select/library/items/TKC9DM9G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.18219" rel="noopener">官方連結</a></li>
+<li><strong>2024｜SciDFM: A Large Language Model with Mixture-of-Experts for Science</strong>，Liangtai Sun et al.（<em>arXiv</em>）：從頭預訓練並指令微調科學混合專家大語言模型SciDFM，整合多學科論文書籍與化學分子、胺基酸序列等領域資料庫，提升科學推理與專業表徵理解力。 <a href="zotero://select/library/items/V8W4D63S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.18412" rel="noopener">官方連結</a></li>
+<li><strong>2024｜MoE-Pruner: Pruning Mixture-of-Experts Large Language Model using the Hints from Its Router</strong>，Yanyue Xie et al.（<em>arXiv</em>）：提出免重訓的一次性剪枝法MoE-Pruner，依據權重乘以輸入激活與路由器權重的乘積對神經元剪枝，在Mixtral-8x7B與8x22B上優於既有方法並支援蒸餾。 <a href="zotero://select/library/items/EV6VVNNR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.12013" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-58dca6d2">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a><span class="rs">這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 O(1)。</span></li><li><a href="01B_IO%E6%84%9F%E7%9F%A5%E6%A0%B8%E5%BF%83%E3%80%81KV%E5%BF%AB%E5%8F%96%E5%A3%93%E7%B8%AE%E8%88%87%E6%8E%A8%E6%B8%AC%E8%A7%A3%E7%A2%BC.html">IO感知核心、KV快取壓縮與推測解碼</a></li><li><a href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

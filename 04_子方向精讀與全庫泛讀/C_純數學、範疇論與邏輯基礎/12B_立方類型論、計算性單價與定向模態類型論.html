@@ -1,0 +1,206 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>12B｜立方類型論、計算性單價與定向模態類型論 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-9224bff5" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="12b立方類型論計算性單價與定向模態類型論">12B｜立方類型論、計算性單價與定向模態類型論</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a>
+同領域子方向：<a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> · <a class="wl" href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a>
+跨領域關聯子方向：<a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> · <a class="wl" href="30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a> · <a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M-S32_%E7%AF%84%E7%96%87%E9%82%8F%E8%BC%AF%E3%80%81%E5%9E%8B%E5%88%A5%E8%AB%96%E8%88%87%E7%B5%84%E5%90%88%E6%80%A7.html">範疇邏輯、型別論與組合性</a> · <a class="wl" href="../../NOTES/02_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F/T44_Lean%204%20%E5%87%BD%E6%95%B8%E5%BC%8F%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88.html">Lean 4 函數式程式設計</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向延伸 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a>，處理 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a> 從「可縮與對稱公理」走向「可計算執行與非對稱脈絡控制」的核心轉折。主線涵蓋三條匯流軌道：以抽象區間取代外部公理並恢復正規性（canonicity）的立方計算型別論、以多區脈絡與分級模態追蹤變數極性或時序的模態型別論，以及打破路徑可逆對稱性以充當 <span class="math inline">(\infty,1)</span>-範疇內部語言的定向型別論，並與 <a class="wl" href="30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a> 及 <a class="wl" href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a> 直接接軌。</p>
+</aside>
+<ul>
+<li>核心問題：在標準內涵 HoTT 中，單價公理只是外部假設，導致閉合項卡在未化簡的傳輸運算子而無法算出具體布林或自然數；同時，所有認同路徑天然具備可逆對稱性，無法在類型論內部直接表達不可逆的態射、協變與逆變依賴或單向演化。此外，元程式設計與內聚幾何需要在語境裡嚴格區分不同極性、時階或離散度的變數，單一扁平的依賴脈絡無法防止不合法的變數替換與相干失配。</li>
+<li>直覺模型：可以把標準 HoTT 的路徑想成一條沒有單行道標誌的雙向橡皮筋，無論怎麼拉扯都能反方向走回去，因此只能描述對稱的拓撲空間；立方類型論則給每個橡皮筋裝上帶座標刻度的「區間滑軌」，讓沿路徑搬運資料變成可逐幀執行的機械步進。定向與模態型別論則進一步在脈絡裡加上單向箭頭與通行權限標籤，規定哪些變數只能順向推進、哪些能逆向依賴，哪些只能在特定時間或離散層級下被讀取。</li>
+<li>分階段閱讀路線：第一階段先讀 Angiuli、Hou 與 Harper (2018) 掌握笛卡爾立方計算型別論的雙層結構與正規性證明，並讀 Murase、Nishiwaki 與 Igarashi (2018) 理解脈絡模態型別論如何處理多型語境與參數化代碼。第二階段讀 Neumann (2025) 建立以中性與極性雙脈絡構造定向型別論的判斷式框架及雙 CwF 語意。第三階段精讀 2026 年前沿：先看 Cavallo 與 Sattler (2026) 以扭轉構造證明從立方型別論消除區間反轉運算的保守性，再讀 Chu Rivera 與 North (2026) 的 Twisted Type Theory 與雙邊纖維化，以及 Lossin (2026) 在實驗性證明助理 rzk 中形式化的餘笛卡爾纖維化。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;單價公理缺乏計算正規性&quot;] --&gt; B[&quot;笛卡爾立方雙層型別論 (Angiuli et al. 2018)&quot;]
+  B --&gt; C[&quot;區間反轉消除與扭轉構造 (Cavallo-Sattler 2026)&quot;]
+  D[&quot;脈絡模態與分級語境 (Murase et al. 2018)&quot;] --&gt; E[&quot;雙區判斷式定向型別論 (Neumann 2025)&quot;]
+  E --&gt; F[&quot;Twisted型別論與D2SFib (Chu Rivera-North 2026)&quot;]
+  E --&gt; G[&quot;單純定向餘笛卡爾纖維化 (Lossin 2026)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>笛卡爾立方計算型別論與雙層正規性（Cartesian Cubical Computational Type Theory and Two-Level Canonicity）</strong></p>
+<ul>
+<li>直覺理解：把等式路徑改寫為從抽象單位區間映入型別的函數，就能透過邊界條件、面與對角線運算直接化簡單價傳輸，同時把嚴格等式留在非纖維層而互不干擾。</li>
+<li>機制或核心表達式：在 Angiuli 等人 (2018) 的理論中，維度脈絡 <span class="math inline">\Psi</span> 由區間變數 <span class="math inline">r \in \mathbb{I}</span> 組成並支援笛卡爾操作（面映射 <span class="math inline">r=0,1</span>、退化與對角線）。路徑型別表現為依賴邊界限制的區間函數 <span class="math inline">\mathrm{Path}_A(a,b)</span>，配合 Kan 強制轉換與組合運算使纖維片段驗證單價公理與圓周 <span class="math inline">S^1</span>，同時容納滿足等式反射的非纖維嚴格等式片段；在立方部分等價關係（cubical PER）語意下，所有閉合布林項皆歸約至 <span class="math inline">\mathrm{true}</span> 或 <span class="math inline">\mathrm{false}</span>。針對不同區間代數的等價性，Cavallo 與 Sattler (2026) 構造 <span class="math inline">I \times I^{\mathrm{op}}</span> 扭轉區間，證明對自對偶區間理論加入反轉運算子屬於保守擴展。</li>
+<li>能做到什麼，代價是什麼：計算性單價讓正規形式提取與程式執行成為可能（如 Huang 2026 系統整理的立方正規形式），但區間代數的細微差異（最小兩端點、笛卡爾對角線、De Morgan 連接）會影響高階歸納類型的定義與正規化演算法的實作複雜度。</li>
+</ul>
+</li>
+<li>
+<p><strong>多重脈絡與分級模態型別論（Contextual and Graded Modal Type Theories）</strong></p>
+<ul>
+<li>直覺理解：模態詞在型別論裡相當於把變數分區加上鎖扣或刻度：脈絡模態記錄代碼依賴哪些自由變數，分級模態則把資源次數或量子脈衝的時間偏移寫進型別判斷。</li>
+<li>機制或核心表達式：在 Murase 等人 (2018) 提出的 <span class="math inline">\lambda_{\forall[]}</span> 中，模態代碼型別顯式標註自由變數脈絡 <span class="math inline">[\Psi]A</span> 並允許對單一脈絡的多個片段進行參數多型抽象，透過 <span class="math inline">\beta</span>-歸約達成主體歸約（subject reduction）、強正規化與匯流性。在 GRAMPUS（Adams 等人 2025）中，變數標註時序等級 <span class="math inline">x :^g Q</span>（如正負奈秒偏移），以分級模態型別強制量子控制脈衝排程的因果時序。在幾何側，<a class="wl" href="30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a> 與 Schreiber (2013) 則使用離散與餘離散伴隨模態表達內聚結構。</li>
+<li>能做到什麼，代價是什麼：顯式脈絡分區與分級半環提供細粒度的語法不變量保證，但若多個模態同時交互或引入依賴等級，替換律與相等檢查需要額外的雙模態結構（如 dual CwF 或模態鎖扣）維持可判定性。</li>
+</ul>
+</li>
+<li>
+<p><strong>定向型別論與雙邊纖維化語意（Directed Type Theory and 2-Sided Fibration Semantics）</strong></p>
+<ul>
+<li>直覺理解：要讓類型論描述一般範疇而非僅限可逆群胚，就必須追蹤變數出現的位置是協變還是逆變；一旦引入扭轉算子或極性分區，混合變異性就能安全地轉化成可推理的單向態射族。</li>
+<li>機制或核心表達式：Neumann (2025) 仿照 Pfenning–Davies 將脈絡拆為「中性」（neutral）與「極性」（polar）兩區以賦予不同的函子性條件，並在合成預序上定義重寫與雙 CwF（dual CwF）語意。針對同時包含逆變與協變依賴的型別族，Chu Rivera 與 North (2026) 在 Twisted Type Theory (TTT) 中引入扭轉（twisting）運算把雙向依賴轉成純協變依賴，並以推廣 Street 理論的依賴雙邊纖維化（D2SFibs）及直化–反直化定理（straightening–unstraightening）給出語意。在單純類型論實作側，Lossin (2026) 利用 LARI 伴隨與初始截面（initial sections）的等價性建立餘笛卡爾纖維化及其閉包性質，並在 rzk 中完成形式化。</li>
+<li>能做到什麼，代價是什麼：定向型別論能直接在內部語言表達合成 <span class="math inline">(\infty,1)</span>-範疇與重寫系統，但相較於對稱的立方系統，如何同時支援定向單價、變異性推導與可計算的正規化仍在發展早期。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>雙層立方型別論中纖維型別與非纖維型別的邊界隔離</strong>：在 Angiuli 等人 (2018) 的笛卡爾立方計算型別論裡，系統同時包含滿足單價公理的纖維型別（fibrant types）與滿足等式反射（equality reflection）的嚴格等式非纖維型別。為什麼不能直接對所有纖維型別套用等式反射規則，系統如何確保兩者共存不破壞正規性？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>如果在滿足單價公理的纖維型別上允許等式反射，單價產生的非平凡等價路徑（例如布林取反）就會被強制升級為定義相等，立即造成邏輯矛盾與型別檢查失控。雙層架構透過區分兩個宇宙層級來隔離：纖維層只允許沿路徑做計算性傳輸而不具等式反射，嚴格層雖有精確等式但不能將其無條件投影為纖維層的路徑消去，並以立方 PER 語意確保閉合纖維布林項仍滿足正規性。</p>
+</details>
+<ol start="2">
+<li><strong>定向型別論為何需要極性脈絡或扭轉運算來處理混合變異性</strong>：考慮表達一個範疇 <span class="math inline">\mathcal{C}</span> 的態射型別族 <span class="math inline">\mathrm{Hom}_{\mathcal{C}}(x, y)</span>。當 <span class="math inline">x</span> 與 <span class="math inline">y</span> 都是語境中的自由變數時，如果對兩者使用相同的共變替換規則會出現什麼障礙，Twisted Type Theory（Chu Rivera 與 North 2026）如何處理這種依賴？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>態射集合 <span class="math inline">\mathrm{Hom}_{\mathcal{C}}(x, y)</span> 對第一變數 <span class="math inline">x</span> 呈現逆變（contravariant）而對第二變數 <span class="math inline">y</span> 呈現協變（covariant），因此當 <span class="math inline">x</span> 沿著態射 <span class="math inline">x' \to x</span> 移動時，<span class="math inline">\mathrm{Hom}_{\mathcal{C}}</span> 的映射方向與 <span class="math inline">y</span> 沿著 <span class="math inline">y \to y'</span> 相反。若僅用單純協變脈絡就無法直接替換或形成一般依賴乘積。Twisted Type Theory 引入「扭轉」運算將同時具逆變與協變依賴的型別轉成純協變依賴型別，並由依賴雙邊纖維化（D2SFibs）的直化–反直化定理保證語意一致。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>計算性立方結構與定向單價的整合</strong>：目前立方型別論已能有效計算無窮群胚上的單價（Angiuli 等人 2018；Kapulkin 與 Li 2025 透過宇宙範疇框連接單純與笛卡爾立方集合），而定向型別論則分別沿單純型別論（Lossin 2026）與雙邊纖維化（Chu Rivera 與 North 2026）發展；能否構造一套同時具備正規化計算性與定向單價的立方定向型別論尚無標準答案。</li>
+<li><strong>立方正規化與模態分級規則在證明助理中的互動效能</strong>：在實際證明助理中，立方路徑的定義相等檢查常因邊界條件展開與正則形式膨脹（Huang 2026）導致型別檢查變慢，若進一步結合多層級脈絡模態（Murase 等人 2018）或分級資源標籤，如何設計兼顧人類可讀性與低開銷的定義相等演算法仍屬工程與元理論難題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>極性脈絡、線性邏輯與博弈互動語意</strong>：Girard (2001) 在 Ludics 中透過極性（polarity）與正交設計重構邏輯規則，與定向型別論利用中性／極性雙脈絡區分協變與逆變依賴（Neumann 2025）具有同源的資源控制觀點，相關極性分解技巧可遷移至 <a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a>。</li>
+<li><strong>內聚模態與微分上同調的內部語言化</strong>：雙脈絡與多重模態的語境控制機制（Murase 等人 2018；Neumann 2025）與 <a class="wl" href="30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a>（Schreiber 2013）中的離散／光滑伴隨模態結構一致，可遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A507_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E3%80%81%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E8%88%87%E5%87%9D%E8%81%9A%E5%90%88%E6%88%90%E5%B9%BE%E4%BD%95.html">高階範疇、同倫類型論與凝聚合成幾何</a> 作為計算內聚上同調的型別系統介面，並補充 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 的內部語言實作。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-cartesian-cubical-computational-type-theory-constructive-reasoning-with-paths-and-equalities2018">1. Cartesian cubical computational type theory: Constructive reasoning with paths and equalities（2018）</h4>
+<ul>
+<li>作者與出處：Carlo Angiuli, Kuen-Bang Hou, Robert W. Harper · <em>DROPS (Schloss Dagstuhl – Leibniz Center for Informatics)</em></li>
+<li>核心問題：如何在保留精確等式反射的雙層系統中，以笛卡爾立方座標賦予單價公理直接的計算意義，並保證閉合布林項的可計算正規性。</li>
+<li>關鍵做法：作者以帶面、退化與對角線的笛卡爾立方組織依賴型別論，劃分驗證單價與圓周型別的纖維片段以及具嚴格等式反射的非纖維片段，並以立方部分等價關係建立首個滿足正規性（canonicity）的雙層型別論。</li>
+<li>跨領域啟發：為 <a class="wl" href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a> 的單價基礎補上運算引擎，並引導 <a class="wl" href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a> 中的雙層證明器設計。</li>
+<li>連結：<a href="zotero://select/library/items/FWD78T2Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.01800" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-contextual-modal-type-theory-with-polymorphic-contexts2018">2. Contextual Modal Type Theory with Polymorphic Contexts（2018）</h4>
+<ul>
+<li>作者與出處：Yuito Murase, Yuichi Nishiwaki, Atsushi Igarashi · <em>Lecture notes in computer science</em></li>
+<li>核心問題：在把程式代碼當作一等值的模態型別系統裡，既有上下文模態型別論缺乏跨同一脈絡多個片段的參數多型抽象能力。</li>
+<li>關鍵做法：作者提出擴展型別系統 <span class="math inline">\lambda_{\forall[]}</span>，以帶有自由變數脈絡索引的模態型別支援對單一脈絡多處進行參數多型抽象，給出 <span class="math inline">\beta</span>-歸約操作語意並證明主體歸約、強正規化與匯流性。</li>
+<li>跨領域啟發：建立精細脈絡控制的形式化藍本，可對照 <a class="wl" href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a> 的多模態嵌入技術。</li>
+<li>連結：<a href="zotero://select/library/items/7SPID7UJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1801.09225" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-a-judgmental-construction-of-directed-type-theory2025">3. A Judgmental Construction of Directed Type Theory（2025）</h4>
+<ul>
+<li>作者與出處：Jacob Neumann · <em>arXiv</em></li>
+<li>核心問題：既有定向型別論與單純型別論的語法相對複雜，缺乏類似 Pfenning–Davies 模態邏輯那樣由判斷式與脈絡分區直接生成的簡潔演算。</li>
+<li>關鍵做法：作者將定向型別論改寫為帶「中性」與「極性」兩種變數區域的多區邏輯演算以施加不同函子性要求，在合成預序層級應用於重寫理論，並提出雙 CwF（dual CwF）作為雙脈絡系統的統一範疇語意基礎。</li>
+<li>跨領域啟發：以雙脈絡分區連接模態邏輯與定向範疇語法，亦可與 <a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a> 的極性結構互相參照。</li>
+<li>連結：<a href="zotero://select/library/items/GIN9PFKP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2510.17494" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-eliminating-reversals-from-cubical-type-theories2026">4. Eliminating reversals from cubical type theories（2026）</h4>
+<ul>
+<li>作者與出處：Evan Cavallo, Christian Sattler · <em>arXiv</em></li>
+<li>核心問題：不同立方型別論會在抽象單位區間上加入不同運算子，加入交換兩端點的對合反轉運算（reversal）是否會實質改變理論強度或破壞原有模型？</li>
+<li>關鍵做法：作者提出「扭轉構造」（將區間與其對偶的積賦予座標交換反轉），證明對具自對偶區間理論的「不透明」立方型別論擴展反轉運算具有保守性，並在無反轉的立方集合範疇中構造出帶反轉嚴格立方型別論的模型。</li>
+<li>跨領域啟發：釐清區間幾何運算子的最小依賴集合，協助 <a class="wl" href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a> 的立方核心實作簡化規格。</li>
+<li>連結：<a href="zotero://select/library/items/79BJXBH9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.15080" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-directed-type-theory-with-a-twist2026">5. Directed type theory, with a twist（2026）</h4>
+<ul>
+<li>作者與出處：Fernando Rafael Chu Rivera, Paige Randall North · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：將 HoTT 推廣為以範疇而非群胚為語意的定向型別論時，依賴型別族常同時包含逆變與協變變數，如何在單一系統裡統一處理這類混合依賴？</li>
+<li>關鍵做法：作者提出 Twisted Type Theory (TTT)，透過「扭轉」操作把同時逆變與協變依賴的型別轉換為純協變依賴型別；在語意上定義推廣 Street 雙邊纖維化的依賴雙邊纖維化（D2SFibs），並以直化–反直化定理完整刻畫其結構。</li>
+<li>跨領域啟發：從纖維化層面補齊定向依賴型別的語意基礎，與 <a class="wl" href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a> 的雙邊纖維化及直化理論呼應。</li>
+<li>連結：<a href="zotero://select/library/items/QXRAE9DH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.17480" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-fibrations-in-directed-type-theory2026">6. Fibrations in Directed Type Theory（2026）</h4>
+<ul>
+<li>作者與出處：Benno Lossin · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：在 Riehl–Shulman 的單純同倫型別論框架中，如何嚴格定義合成 <span class="math inline">(\infty,1)</span>-範疇的餘笛卡爾纖維化並建立可機檢的閉包性質證明？</li>
+<li>關鍵做法：作者利用 LARI 伴隨與初始截面之間的新穎等價關係定義並證明餘笛卡爾纖維化的各項閉包性質，且使用實驗性證明助理 rzk 完成形式化並匯回社群主線程式碼庫。</li>
+<li>跨領域啟發：展現定向合成範疇論如何落地於實際證明助理，直接連接 <a class="wl" href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a> 的證明工程實踐。</li>
+<li>連結：<a href="zotero://select/library/items/PUAPUKIN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.18668" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-31-篇">G5｜本子方向全量文獻泛讀清單（共 31 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 31 篇文獻（含開放存取 PDF 31 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進19-篇">A. 奠基經典、專著與核心演進（19 篇）</h3>
+<ul>
+<li><strong>2013｜Differential cohomology in a cohesive infinity-topos</strong>，Urs Schreiber（<em>arXiv / Mathematical Physics &amp; Higher Topos Theory</em>，83 引）：在內聚 <span class="math inline">(\infty,1)</span>-Topos 內以合成方式重構微分幾何、高階規範場與微分上同調，顯示高階範疇可以當作理論物理的基礎語言。 <a href="zotero://select/library/items/GUT2JUF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1310.7930" rel="noopener">官方連結</a></li>
+<li><strong>2001｜Locus Solum: From the rules of logic to the logic of rules</strong>，Jean-Yves Girard（<em>Mathematical Structures in Computer Science</em>，268 引）：線性邏輯創始人 Girard 推翻自己舊框架的一部不尋常的哲學與數學著作（被引 268 次）：提出跡論（Ludics），從純粹的互動位址與正交對偶重新導出邏輯規則。 <a href="zotero://select/library/items/XEPMW4DN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/math/0004088" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Cartesian cubical computational type theory: Constructive reasoning with paths and equalities</strong>，Carlo Angiuli, Kuen-Bang Hou, Robert W. Harper（<em>DROPS (Schloss Dagstuhl – Leibniz Center for Informatics)</em>，30 引）：基於笛卡兒立方體建構同時支援纖維類型（驗證單價公理並含圓類型）與非纖維類型（支援嚴格相等反射）的依賴類型論；藉立方部分等價關係給出計算語意，為首個滿足布林閉項規範性（canonicity）的雙層類型論。 <a href="zotero://select/library/items/FWD78T2Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.01800" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Contextual Modal Type Theory with Polymorphic Contexts</strong>，Yuito Murase, Yuichi Nishiwaki, Atsushi Igarashi（<em>Lecture notes in computer science</em>，5 引）：提出具上下文參數多態性的上下文模態類型論 <span class="math inline">λ_{\forall[]}</span>，相較既有方案允許對單一上下文中的多個片段進行抽象，藉以更細緻地表達與控制元程式設計（metaprogramming）程式碼值內的自由變數與型別。 <a href="zotero://select/library/items/7SPID7UJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1801.09225" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Naive cubical type theory</strong>，Bruno Bentzen（<em>Mathematical Structures in Computer Science, 31, pp. 1205-1231, 2021</em>，1 引）：提出以非形式化數學語言進行立方類型論（cubical type theory）推理的方案，以笛卡兒立方類型論為隱式基礎取代《同倫類型論》中的公理化單價設定，推導函數外延性、弱連結、路徑歸納、類型的廣群結構及 Eckmann–Hilton 對偶等基本結果。 <a href="zotero://select/library/items/88H4UQQT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1911.05844" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Layered Modal Type Theories</strong>，Jason Z. S. Hu, Brigitte Pientka（<em>arXiv</em>）：將分層概念引入模態類型論，建立兼具簡潔直觀語意與類型安全的理論基礎，從而支援元程式設計中對程式碼結構進行模式匹配。 <a href="zotero://select/library/items/G32D35NC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.06548" rel="noopener">官方連結</a></li>
+<li><strong>2022｜An Investigation of Kripke-style Modal Type Theories</strong>，Jason Z. S. Hu, Brigitte Pientka（<em>arXiv</em>）：系統考察簡單類型與依賴類型的 Kripke 風格模態類型論，檢驗其基本元理論性質，發展對應的代換演算（substitution calculi），並給出正規化求值（NbE）演算法。 <a href="zotero://select/library/items/6GGZTIGR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.07823" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Computing Cohomology Rings in Cubical Agda</strong>，Thomas Lamiaux, Axel Ljungström, Anders Mörtberg（<em>arXiv</em>）：在同倫類型論中運用高階歸納類型與單價性提出首個完全機械化的上同調環定義，定義直和、分次環與杯積乘法並於 Cubical Agda 中構造性計算球面與 Klein 瓶的上同調環。 <a href="zotero://select/library/items/3QUWDZKX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.04182" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Implementation of Two Layers Type Theory in Dedukti and Application to Cubical Type Theory</strong>，Bruno Barras, Valentin Maestracci（<em>EPTCS 332, 2021, pp. 54-67</em>）：為在邏輯框架 Dedukti 中編碼立方類型論（CTT）以避開 De Morgan 代數重寫規則限制，先在 Dedukti 中實現雙層類型論（2LTT），再於 2LTT 內部分編碼 CTT。 <a href="zotero://select/library/items/UZI7J8MN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.03810" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Normalization for Cubical Type Theory</strong>，Jonathan Sterling, Carlo Angiuli（<em>2021 36th Annual ACM/IEEE Symposium on Logic in Computer Science (LICS), 2021, pp. 1-15</em>）：為單價笛卡兒立方類型論建立無歸約（reduction-free）正規化證明，在項等價類與 <span class="math inline">\beta/\eta</span>-範式間建構雙射，進而推得判斷等式的可判定性與類型建構子的單射性。 <a href="zotero://select/library/items/H4CM5CH9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2101.11479" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Internal Parametricity for Cubical Type Theory</strong>，Evan Cavallo, Robert Harper（<em>Logical Methods in Computer Science, Volume 17, Issue 4 (November 3, 2021) lmcs:6503</em>）：建構結合笛卡兒立方類型論與內部參數性（internal parametricity）原語的計算類型論，同時支援單價性及其關係對應性質（relativity）。藉此分析高階歸納類型間的多型函數，並為其形式計算介面建立預層模型。 <a href="zotero://select/library/items/Q7CNB6X7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.11290" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Parametric Cubical Type Theory</strong>，Evan Cavallo, Robert Harper（<em>arXiv</em>）：結合笛卡兒立方類型論的高維路徑結構與參數化類型論的內部參數性原語，提出同時支援單價公理及其關聯等價「相對性（relativity）」的計算類型論，並應用於刻劃高階歸納類型間多型函數的關聯詮釋。 <a href="zotero://select/library/items/UHKFKFDZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1901.00489" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Canonicity and homotopy canonicity for cubical type theory</strong>，Thierry Coquand, Simon Huber, Christian Sattler（<em>Logical Methods in Computer Science, Volume 18, Issue 1 (February 3, 2022) lmcs:6309</em>）：在立方類型論預層模型中運用 sconing 論證證明兩項規範性定理：移除型別結構上路徑提升算子的定義方程可得「同倫規範性」（自然數路徑等於數值），保留該方程則可得嚴格規範性。 <a href="zotero://select/library/items/8T58IVVG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1902.06572" rel="noopener">官方連結</a></li>
+<li><strong>2017｜A Model of Parametric Dependent Type Theory in Bridge/Path Cubical Sets</strong>，Andreas Nuyts（<em>arXiv</em>）：透過定義橋與路徑立方（bridge/path cubes）的底範疇 BPCube 並於其上建構預層模型與宇宙階層，為具有參數化量詞的依賴類型論給出完備語意模型與技術證明。 <a href="zotero://select/library/items/WJGTT7Q3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.04383" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Axioms for Modelling Cubical Type Theory in a Topos</strong>，Ian Orton, Andrew M. Pitts（<em>Logical Methods in Computer Science, Volume 14, Issue 4 (December 11, 2018) lmcs:4491</em>）：探討如何將 Cohen–Coquand–Huber–Mörtberg 的立方預層模型表達於任意 Topos 的內部類型論中，針對區間對象 <span class="math inline">I</span> 辨識出一組弱公理，藉此釐清構造性單價公理核心中的均勻 Kan 填充性質。 <a href="zotero://select/library/items/IBDBV6F3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.04864" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Guarded Cubical Type Theory: Path Equality for Guarded Recursion</strong>，Lars Birkedal et al.（<em>arXiv</em>）：將防衛式依賴類型論（GDTT）與立方類型論（CTT）結合為防衛式立方類型論，以抽象路徑取代等價類型，為防衛式遞迴構造提供函數外延性的計算性詮釋並保留類型檢查可判定性。 <a href="zotero://select/library/items/3ZJQDCXT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.05223" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Canonicity for Cubical Type Theory</strong>，Simon Huber（<em>arXiv</em>）：針對證明單價公理的立方類型論，建構帶類型的確定性操作語意並結合預層架構下的可計算性論證，證明其規範性定理（canonicity）：僅含名稱變數脈絡下的自然數皆判定等價於具體數詞。 <a href="zotero://select/library/items/G2AJA2G7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1607.04156" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Guarded Cubical Type Theory</strong>，Lars Birkedal et al.（<em>arXiv</em>）：結合受衛依賴類型論（GDTT）與立方類型論（CTT）提出受衛立方類型論（GCTT），以抽象路徑取代等同類型，為受衛遞迴與餘歸納構造的外延性提供具計算語意的處理方式。 <a href="zotero://select/library/items/M3ZBMF7W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1611.09263" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Denotation of syntax and metaprogramming in contextual modal type theory (CMTT)</strong>，Murdoch Gabbay, Aleksandar Nanevski（<em>arXiv</em>）：為源自模態邏輯 <span class="math inline">\mathsf{S4}</span> Curry–Howard 對應的語境模態類型論（<span class="math inline">\mathrm{CMTT}</span>）建立指稱語意，將模態方框類型詮釋為演算系統的閉語法（closed syntax），並據以證明系統的後設理論性質。 <a href="zotero://select/library/items/2PQ9FJHG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1202.0904" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻12-篇">B. 2024–2026 近期推進與前沿文獻（12 篇）</h3>
+<ul>
+<li><strong>2026｜Directed type theory, with a twist</strong>，Fernando Rafael Chu Rivera, Paige Randall North（<em>arXiv (Cornell University)</em>）：提出帶扭轉的有向類型論（Directed Type Theory, with a twist），用上下文極性與扭轉構造，在類型語法內部自然地表達協變／反變函子性與有向同態射語意。 <a href="zotero://select/library/items/QXRAE9DH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.17480" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Normal forms in cubical type theory</strong>，Xu Huang（<em>arXiv</em>）：系統整理並以傳統形式化風格明確給出立方類型論 (cubical type theory) 中正規型 (normal forms) 的完整規格定義，將原有蘊含於正規化證明中的結構抽離出來作為理論與實作參考基準。 <a href="zotero://select/library/items/P74FQWH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.24923" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Fibrations in Directed Type Theory</strong>，Benno Lossin（<em>arXiv (Cornell University)</em>）：在實驗性證明助手 <code>rzk</code> 中形式化 Riehl–Shulman 合成 <span class="math inline">\infty</span>-範疇的餘笛卡爾纖維化及其封閉性質。 <a href="zotero://select/library/items/PUAPUKIN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.18668" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Eliminating reversals from cubical type theories</strong>，Evan Cavallo, Christian Sattler（<em>arXiv</em>）：證明對於具有自對偶區間理論（如最小雙端點區間或有界分配格）的立方類型論，外加反轉算子是保守擴展（Conservative Extension）。也就是說，可以消去區間反轉，不損失單價性與表達力。 <a href="zotero://select/library/items/79BJXBH9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.15080" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Graded Modal Type Theory for Pulse Schedules</strong>，Robin Adams et al.（<em>arXiv</em>）：針對超導量子硬體微波脈衝排程缺乏形式語意的問題，提出分級模態類型論 GRAMPUS，以類型等級編碼精確時間資訊（如未來特定奈秒的量子位元狀態）來規範各通道脈衝操作。 <a href="zotero://select/library/items/SV9XISAZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2510.03130" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Judgmental Construction of Directed Type Theory</strong>，Jacob Neumann（<em>arXiv</em>）：仿效 Pfenning–Davies 多語境區設計將定向類型論重構為區分「中性」與「極性」兩類變數的邏輯演算，於預序層級應用至重寫理論，並提出對偶 CwF 作為此類雙語境邏輯的範疇語意基礎。 <a href="zotero://select/library/items/GIN9PFKP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2510.17494" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Yet another cubical type theory, but via a semantic approach</strong>，Chris Kapulkin, Yufeng Li（<em>arXiv</em>）：提出一種簡化的立方類型論並運用類同於 Uemura 可表態射範疇的宇宙範疇框架研究其語意，證明該類型論可同時在單純集合與笛卡兒立方集合等多種設定中獲得模型解釋。 <a href="zotero://select/library/items/CGJ3HASD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.17548" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Automating Boundary Filling in Cubical Type Theories</strong>，Maximilian Doré, Evan Cavallo, Anders Mörtberg（<em>Logical Methods in Computer Science, Volume 22, Issue 2 (June 15, 2026) lmcs:16282</em>）：針對立方類型論中建構指定邊界高維立方體的繁複組合操作，提出簡化立方語言並形式化兩類自動化證明搜尋問題：扭曲求解（contortion solving）與更一般的 Kan 求解。 <a href="zotero://select/library/items/E7NSTGVG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.12169" rel="noopener">官方連結</a></li>
+<li><strong>2024｜DeLaM: A Dependent Layered Modal Type Theory for Meta-programming</strong>，Jason Z. S. Hu, Brigitte Pientka（<em>arXiv</em>）：將分層模態類型論擴展至依賴類型提出 DeLaM，在單一類型論中同時支援程式碼組合執行與類型及項的內涵分析，使證明輔助器能以一般程式庫撰寫類型安全的策略元程式。 <a href="zotero://select/library/items/QQA3CNK7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.17065" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Di- is for Directed: First-Order Directed Type Theory via Dinaturality</strong>，Andrea Laretto, Fosco Loregian, Niccolò Veltri（<em>arXiv</em>）：利用雙自然性解釋以範疇為類型的定向類型論，給出類比<span class="math inline">J</span>-rule的消去原則，以相對伴隨刻畫<span class="math inline">\hom</span>-函子定向相等，並以端與餘端解釋量詞。 <a href="zotero://select/library/items/CAEEPG5F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.10237" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Synthetic 1-Categories in Directed Type Theory</strong>，Thorsten Altenkirch, Jacob Neumann（<em>arXiv (Cornell University)</em>）：為範疇模型建構基於廣義代數理論的定向類型論，以非對稱<span class="math inline">\hom</span>-類型取代對稱等價類型，結合變異模態與定向<span class="math inline">J</span>-規則在合成1-範疇論中完成多項形式構造。 <a href="zotero://select/library/items/TWQRSW5V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.19520" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Intrinsically Correct Sorting in Cubical Agda</strong>，Cass Alexandru et al.（<em>arXiv</em>）：將Hinze等人的雙代數語意與分配律排序演算法框架推廣至Cubical Agda，以多重集（multisets）作為資料類型索引，直接由分配律證明插入、選擇、快速與樹排序的內在正確性。 <a href="zotero://select/library/items/RN8C44GF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.08362" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-9224bff5">在地圖上查看</a><div class="rg"><h3>相關<span class="n">6</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/12_HoTT%E8%88%87%E9%A1%9E%E5%9E%8B%E8%AB%96.html">HoTT與類型論</a><span class="rs">同倫類型論（HoTT）把三樣東西合而為一：程式／資料型別、邏輯命題／證明、拓撲空間／連續路徑，影響遍及邏輯、計算機科學與幾何學。</span></li><li><a href="11B_%E9%AB%98%E9%9A%8ETopos%E3%80%81%E7%A9%A9%E5%AE%9A%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E3%80%81t%E7%B5%90%E6%A7%8B%E8%88%87%E7%84%A1%E7%AA%AEOperad.html">高階Topos、穩定無窮範疇、t結構與無窮Operad</a></li><li><a href="12A_%E5%90%8C%E5%80%AB%E9%A1%9E%E5%9E%8B%E8%AB%96%E3%80%81%E5%96%AE%E5%83%B9%E5%85%AC%E7%90%86%E8%88%87%E9%AB%98%E9%9A%8E%E6%AD%B8%E7%B4%8D%E9%A1%9E%E5%9E%8BHIT.html">同倫類型論、單價公理與高階歸納類型HIT</a></li><li><a href="30C_%E5%85%A7%E8%81%9A%E7%84%A1%E7%AA%AETopos%E3%80%81%E5%BE%AE%E5%88%86%E4%B8%8A%E5%90%8C%E8%AA%BF%E8%88%87%E9%AB%98%E9%9A%8E%E8%A6%8F%E7%AF%84%E5%A0%B4%E5%B9%BE%E4%BD%95.html">內聚無窮Topos、微分上同調與高階規範場幾何</a></li><li><a href="12C_%E4%BE%9D%E8%B3%B4%E9%A1%9E%E5%9E%8B%E8%AB%96%E7%AF%84%E7%96%87%E8%AA%9E%E6%84%8F%E8%88%87Agda%E5%8F%8ARocq%E8%AD%89%E6%98%8E%E5%B7%A5%E7%A8%8B.html">依賴類型論範疇語意與Agda及Rocq證明工程</a></li><li><a href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>39C｜微分線性邏輯、定量分級模態類型與資源敏感演算 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-a87db73d" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="39c微分線性邏輯定量分級模態類型與資源敏感演算">39C｜微分線性邏輯、定量分級模態類型與資源敏感演算</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a>
+同領域子方向：<a class="wl" href="39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a> · <a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a> 的解析微積分與定量資源擴展端，建立在 <a class="wl" href="39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a> 的指數模態（<span class="math inline">!</span>）對稱結構之上。核心處理的矛盾在於：線性邏輯雖然區分了單次線性函數與可重複使用的非線性函數，但經典指數規則只允許「從線性展開到多份使用」，缺少「對非線性資源取一階線性近似（微分）」的逆向規則，且加法與微分的引入往往迫使計算語意落入無限制的非確定性；演進主線從 Ehrhard 的微分線性邏輯（DiLL）餘結構規則與反導數公理，延伸至逆向導數範疇（自動微分）、流形射流（Jets）與泛函變分演算、多代理人資源共享超相繼式系統，再發展到相干微分（Coherent Differentiation）的確定性求和約束與同倫跨距（homotopy span）洗牌構造。</p>
+</aside>
+<ul>
+<li>核心問題：在標準線性邏輯與一般 <span class="math inline">\lambda</span> 演算中，函數只能作為黑盒整體輸入並依資源倍率展開，無法在語法與證明網層次對程式執行泰勒展開或提取某個特定輸入位置的一階線性變化率（即線性逼近）；同時，傳統自動微分的反向傳播與偏微分方程變分結構也缺少與線性邏輯同構的範疇公理化。另一方面，一旦依照萊布尼茲乘積法則在語法中加入「證明相加」以承載微分後的項之和，整個計算系統便會引入強非確定性疊加，破壞純函數式的確定性執行；此外，當指數資源需同時刻畫多代理人共享語意時，直接強化模態會意外導出全域弱化公理而失去細粒度資源控制。</li>
+<li>直覺模型：標準線性邏輯的儲存模態 <span class="math inline">!A</span> 就像把元件放進無限量供應倉，要拿幾份就拿幾份；微分線性邏輯則替這個倉庫加上一組「逆向操作把手」：原本是把一份零件複寫成很多份，現在反過來只精準抽出一份輸入，讓它走過系統看輸出會改變多少，其餘輸入則給定基點或歸零（這就是微分）。若將這種微擾視角搬到機器學習與多維空間上，順向計算線性變化率對應切空間上的前向自動微分，把線性映射加上對偶反轉結構（dagger）沿反方向推回，就是反向自動微分；而相干微分則像替這種「路徑疊加」裝上安全限流閥，只允許彼此相容、不會發生意義衝突的分支相加，使帶有微分的程式依然保持確定性。</li>
+<li>分階段閱讀路線：第一階段先讀 Ehrhard (2016) 與 Kurokawa and Kushida (2020)，前者建立微分線性邏輯相對於遺棄、弱化與縮約的對偶微分規則、證明網與有限性空間（finiteness spaces）模型，後者示範如何透過超相繼式演算處理帶 S5 資源共享模態的線性邏輯及其可判定性。第二階段精讀 Cockett et al. (2019) 與 Wallbridge (2020)，掌握逆向導數範疇如何透過線性映射子範疇上的劍標雙積（dagger biproducts）統一前向與反向自動微分，以及向量叢上的射流餘單子（jet comonad）與分布餘單子複合如何將微分線性邏輯連結至非線性偏微分方程與泛函導數。第三階段讀 2024–2026 前沿論文 Ehrhard (2024) 與 Melliès, Olimpieri and Vaux Auclair (2026)，深入理解相干微分如何以可加和性（summability）將微分限制回確定性領域，以及如何用分離纖維化跨距（separately fibrant spans）與洗牌結構顯式建造同倫跨距模型。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;2016 Ehrhard 微分線性邏輯證明網與反導數&quot;] --&gt; B[&quot;2019 Cockett et al. 逆向導數範疇與劍標結構&quot;]
+  A --&gt; C[&quot;2020 Wallbridge 射流餘單子與泛函偏微分&quot;]
+  A --&gt; D[&quot;2024 Ehrhard 相干微分與可加和確定性&quot;]
+  A --&gt; E[&quot;2026 Melliès et al. 同倫跨距模型與洗牌構造&quot;]
+  F[&quot;2020 Kurokawa 與 Kushida 資源共享超相繼式 RSLL&quot;] --&gt; G[&quot;定量資源管理與神經理論分化應用&quot;]
+  B --&gt; G
+  D --&gt; G
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>微分線性邏輯對偶結構規則與反導數 (Co-structural Rules and Antiderivatives in DiLL)</strong></p>
+<ul>
+<li>直覺理解：在傳統指數模態 <span class="math inline">!A</span> 中，我們能把一個資源丟棄（弱化）、取出一份來用（解遺棄）或複製多份（縮約）；微分線性邏輯把這三個規則的箭頭全部反轉，允許在證明中「注入一個無窮小擾動」並計算輸出對該輸入的線性導數。</li>
+<li>機制或核心表達式：在傳統線性邏輯為指數連接詞配備弱化、解遺棄（dereliction）與縮約的基礎上，DiLL 新增對偶的三條規則：餘弱化（coweakening）、餘解遺棄（codereliction，對應於 <span class="math inline">0</span> 點求導 <span class="math inline">\frac{df}{dx}(0)</span>）與餘縮約（cocontraction），使 <span class="math inline">!A</span> 形成雙代數結構並配合萊布尼茲法則產生證明之和。Ehrhard (2016) 給出 DiLL 證明網語法與範疇公理化（在集合與關係模型以及有限性空間上具體實現），並提出一條簡潔的範疇條件使一般化的反導數（antiderivative）運算（對應於泰勒積分還原原函數）在模型中成為可能。</li>
+<li>能做到什麼，代價是什麼：讓邏輯證明與 <span class="math inline">\lambda</span> 項直接具備微積分運算及泰勒級數展開能力；代價是標準 DiLL 為了滿足萊布尼茲法則必須允許無約束的證明求和，使語意與歸約呈現非確定性疊加。</li>
+</ul>
+</li>
+<li>
+<p><strong>逆向導數範疇與流形射流語意 (Reverse Derivative Categories and Jet Comonads)</strong></p>
+<ul>
+<li>直覺理解：前向微分告訴你輸入變動一點點會如何帶動輸出，反向微分（即機器學習的反向傳播）則讓你從輸出誤差倒推每個參數該如何調整；在範疇幾何上，這正好差在線性映射子範疇是否配備了「反轉箭頭並相加」的劍標（dagger）雙積結構。</li>
+<li>機制或核心表達式：Cockett et al. (2019) 公理化逆向導數範疇（Reverse Derivative Categories），證明每個逆向導數範疇都自動誘匯出一個前向導數（對應笛卡兒微分範疇），但反之不成立：逆向導數精確等價於前向導數加上其線性映射子範疇上的劍標結構（<span class="math inline">\dagger</span>），且這些線性映射構成具劍標雙積（dagger biproducts）的加法豐富範疇。在連續分析端，Wallbridge (2020) 證明固定光滑流形上的向量叢及其對應便利模範疇構成直覺式 DiLL 模型：將 Kleisli 態射為線性微分算子的射流餘單子（jet comonad）與對應光滑映射的分布餘單子（distributional comonad）複合後，複合 Kleisli 態射即為光滑局部泛函（等價於光滑偏微分算子），且餘解遺棄映射誘導出變分法中的泛函導數。</li>
+<li>能做到什麼，代價是什麼：為自動微分與變分偏微分方程提供了與程式語法分離的嚴謹範疇定理；但將空間限定於具備平滑線性雙積或便利向量叢結構時，對離散控制流或非光滑分段函數的原生支持仍需額外擴展。</li>
+</ul>
+</li>
+<li>
+<p><strong>相干微分、同倫跨距洗牌與資源共享模態 (Coherent Differentiation, Homotopy Spans, and Resource Sharing)</strong></p>
+<ul>
+<li>直覺理解：為了避免微分帶來的「證明隨意相加」讓程式變成非確定性猜謎，相干微分限制只有相容分支能加總；而同倫跨距模型與資源共享邏輯則分別從範疇等價與多代理人共享角度重構指數模態的對稱性與限制。</li>
+<li>機制或核心表達式：Ehrhard (2024) 的相干微分（Coherent Differentiation）引入「可加和性（summability）」結構，規定語法與模型中僅允許滿足可加和條件的導數進行求和，藉此把微分線性邏輯與微分 <span class="math inline">\lambda</span> 演算保留在確定性範疇之內。Melliès, Olimpieri and Vaux Auclair (2026) 在小範疇自然 Quillen 模型結構下，將原初基於纖維化跨距（fibrant spans）的 DiLL 同倫模型放寬為分離纖維化跨距（separately fibrant spans），使公理與切消連結解釋為單位跨距，並以顯式洗牌（shuffle）結構刻畫指數模態的對稱性。另一方面，Kurokawa and Kushida (2020) 提出資源共享線性邏輯（RSLL），以強化 S5 模態表達多代理人共享資源，針對加強模態在 Hilbert 體系下容易推導出弱化公理的問題，改以原生帶有弱化的超相繼式演算重建，證明相語意完備性、語法切消定理與並行式計算模型可判定性。</li>
+<li>能做到什麼，代價是什麼：相干微分消除了非確定性干擾而保留微分能力，分離纖維化跨距則大幅簡化高階同倫模型中的公理與切消解釋；但引入可加和性檢查與超相繼式規則會提升靜態類型檢查或證明搜尋的複雜度。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>前向導數範疇與逆向導數範疇之間的結構落差</strong>：根據 Cockett et al. (2019)，任何逆向導數範疇都必然具備前向導數（笛卡兒微分範疇結構），為何反過來前向導數範疇不一定能做逆向微分（反向傳播）？到底缺少了哪一個關鍵範疇結構？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>前向微分在每個點產生的 Jacobian 線性映射方向與原函數一致（<span class="math inline">A \to B</span>），僅需加法結構與鏈鎖律即可在切空間向前推導；但逆向微分需要把餘切空間上的敏感度從輸出 <span class="math inline">B</span> 反向拉回輸入 <span class="math inline">A</span>（<span class="math inline">B \to A</span>）。Cockett et al. (2019) 證明這正對應於在線性映射子範疇上缺少一個逆變對合函子「劍標結構（dagger structure）」，具體來說，逆向導數範疇等價於前向導數範疇加上其線性映射子範疇具備劍標雙積（dagger biproducts）的加法豐富結構。</p>
+</details>
+<ol start="2">
+<li><strong>相干微分如何化解微分演算與確定性計算之間的衝突</strong>：為何標準微分線性邏輯與微分 <span class="math inline">\lambda</span> 演算無法維持純粹的確定性求值，而 Ehrhard (2024) 的相干微分（Coherent Differentiation）如何同時保有微分算子與確定性？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>檢視微積分的萊布尼茲乘積法則 <span class="math inline">(f \circ g)'(x) = f'(g(x)) \cdot g'(x)</span> 以及多元鏈鎖律展開：為了對高階或複合項求導，語法與歸約必須支持將多個導數項「加起來」（proof/term addition），在操作語意上這通常等同於非確定性選擇或疊加。相干微分的核心作法是引入「可加和性（summability）」作為一階相干約束，規定只有滿足可加和條件（彼此正交或相容）的項與導數才能相加，從而將求和嚴格關進確定性的可觀測範圍內。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>確定性相干微分與一般非線性自動微分語言的語法對齊</strong>：Ehrhard (2024) 透過可加和性使微分線性邏輯重回確定性，而 Cockett et al. (2019) 則以逆向導數範疇公理化機器學習中的反向自動微分。如何把帶有嚴格可加和性限制的相干微分系統直接結合劍標逆向導數構造與控制流（條件分支、遞迴），以用於高階函數式可微程式語言的健全類型檢查，仍在活躍探索中。</li>
+<li><strong>同倫高維模型與偏微分算子計算理論的統一</strong>：Wallbridge (2020) 指出射流與分布餘單子的複合把微分線性邏輯導向非線性偏微分方程的泛函計算理論，而 Melliès, Olimpieri and Vaux Auclair (2026) 則在自然 Quillen 模型結構下用分離纖維化跨距與洗牌構造精簡了同倫語意。這兩條一條面向連續分析算子、一條面向高維範疇同倫的微分模型路線之間，如何建立直接的函子關聯與定量資源類型對應，尚缺乏系統性橋梁。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>逆向導數劍標結構向實值神經符號最佳化的遷移</strong>：逆向導數範疇對線性映射子範疇賦予劍標雙積以實作精確梯度反向傳播（Cockett et al., 2019），其把邏輯推導與可微參數空間透過函子連結的模式，可直接遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a>，為可微模糊／剩餘格邏輯損失設計提供範疇語意保證。</li>
+<li><strong>與證明網代數和互動幾何路徑展開的內部連結</strong>：本子方向的餘結構規則與同倫洗牌對稱性直接承接自 <a class="wl" href="39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a> 的指數盒與證明網規範；而泰勒展開中單項式對資源使用次數的定量計數，亦對應 <a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a> 中玩家造訪同一位址（locus）的對局複製次數。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-an-introduction-to-differential-linear-logic-proof-nets-models-and-antiderivatives2016">1. An introduction to Differential Linear Logic: proof-nets, models and antiderivatives（2016）</h4>
+<ul>
+<li>作者與出處：Thomas Ehrhard · <em>arXiv</em></li>
+<li>核心問題：標準線性邏輯只有向內展開資源的指數規則，無法在證明論與指稱語意中對非線性函數進行局部線性逼近（求導）與積分還原（反導數）。</li>
+<li>關鍵做法：為線性邏輯指數連接詞增補與解遺棄、弱化及縮約對偶的三條微分規則，呈現微分線性邏輯的證明網語法與範疇公理化，在集合與關係以及有限性空間模型上具體展示，並給出保證一般反導數運算存在的簡潔範疇條件。</li>
+<li>跨領域啟發：建立微分線性邏輯的完整標準入門框架，是後續理解自動微分範疇化與確定性微分演算的必讀基石。</li>
+<li>連結：<a href="zotero://select/library/items/VD9NH5G8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.01642" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-reverse-derivative-categories2019">2. Reverse Derivative Categories（2019）</h4>
+<ul>
+<li>作者與出處：Robin Cockett, G. S. H. Cruttwell, Jonathan Gallagher, Jean-Simon Pacaud Lemay, Benjamin MacAdam · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：機器學習中的反向自動微分（反向傳播）在計算上與前向自動微分截然不同，但既有基於笛卡兒微分範疇的理論只刻畫了前向導數，尚未給出反向導數的直接範疇公理與兩者關係。</li>
+<li>關鍵做法：公理化具有逆向導數運算的範疇，證明凡具備逆向導數的範疇必同時擁有前向導數，而前向導數升級為逆向導數所欠缺的結構，精確等同於在其線性映射子範疇上賦予劍標（dagger）結構並形成具備劍標雙積的加法豐富範疇。</li>
+<li>跨領域啟發：把程式語言微分邏輯與機器學習反向傳播的數學差距壓縮為一個清晰的範疇構造定理，能對接 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> 的可微推理架構。</li>
+<li>連結：<a href="zotero://select/library/items/U99JFPJJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.07065" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-jets-and-differential-linear-logic2020">3. Jets and differential linear logic（2020）</h4>
+<ul>
+<li>作者與出處：James Wallbridge · <em>Mathematical Structures in Computer Science</em></li>
+<li>核心問題：微分線性邏輯多在代數或有限性空間等離散或線性拓撲空間討論，如何將其指稱語意與光滑流形上的幾何分析、偏微分算子及變分法緊密結合仍待建立。</li>
+<li>關鍵做法：證明固定光滑流形上的向量叢及其對應便利模範疇為直覺式微分線性邏輯之模型，透過複合射流餘單子（Kleisli 態射為線性微分算子）與分布餘單子（Kleisli 態射為光滑映射）構造指數模態，使 Kleisli 態射成為光滑局部泛函／光滑偏微分算子且餘解遺棄對應泛函導數。</li>
+<li>跨領域啟發：將抽象微分線性邏輯連結至非線性偏微分方程與變分計算理論，展示邏輯餘單子與微分幾何射流束之間的精確同構。</li>
+<li>連結：<a href="zotero://select/library/items/J3N3WWT4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.06235" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-resource-sharing-linear-logic2020">4. Resource sharing linear logic（2020）</h4>
+<ul>
+<li>作者與出處：Hidenori Kurokawa, Hirohiko Kushida · <em>Journal of Logic and Computation</em></li>
+<li>核心問題：線性邏輯區分一次性資源與無限資源，但難以表達多代理人之間「共享資源」的模態邏輯；直接在 Hilbert 系統中將模態強化為 S5 型模態又會不當導出全域弱化公理。</li>
+<li>關鍵做法：提出資源共享線性邏輯（RSLL），改採以原生弱化為規則的超相繼式演算（hypersequent calculus）重建類仿射結構，證明其相語意完備性、語法切消定理，並經由 Kopylov 計算模型的並行推廣證明系統可判定性。</li>
+<li>跨領域啟發：補充資源敏感邏輯在多代理人共享與超相繼式切消技術上的關鍵視角，與 <a class="wl" href="39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a> 的相語意和顯示演算相互照應。</li>
+<li>連結：<a href="zotero://select/library/items/H42S4KRZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/logcom/exaa013" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-from-differential-linear-logic-to-coherent-differentiation2024">5. From Differential Linear Logic to Coherent Differentiation（2024）</h4>
+<ul>
+<li>作者與出處：Thomas Ehrhard · <em>arXiv</em></li>
+<li>核心問題：由於微分萊布尼茲法則會產生項與證明之和，經典微分線性邏輯與微分 <span class="math inline">\lambda</span> 演算在操作語意上表現為強非確定性系統，難以用於需要確定性語意的程式設計與指稱模型。</li>
+<li>關鍵做法：以綜述形式統一梳理「相干微分（Coherent Differentiation）」的範疇與語法設定，透過定義可加和性（summability）對模型與語法中允許書寫的導數施加和限制，證明微分系統完全可以維持在確定性計算領域內。</li>
+<li>跨領域啟發：解決微分程式理論與確定性函數式語意長期並存的根本衝突，為設計兼具高階確定性與梯度推導的類型語言奠定基礎。</li>
+<li>連結：<a href="zotero://select/library/items/4I6D2BIG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.14834" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-an-explicit-shuffle-construction-of-the-homotopy-span-model-of-differential-linear-logic2026">6. An explicit shuffle construction of the homotopy span model of differential linear logic（2026）</h4>
+<ul>
+<li>作者與出處：Paul-André Melliès, Federico Olimpieri, Lionel Vaux Auclair · <em>arXiv</em></li>
+<li>核心問題：Melliès 原始基於小範疇 Quillen 模型結構（以範疇等價為弱同倫等價）建構的線性邏輯同倫跨距模型依賴較受限的纖維化跨距（fibrant spans），結構表現繁複且對指數對稱性的計算刻畫不夠直觀。</li>
+<li>關鍵做法：將證明解釋放寬為分離纖維化跨距（separately fibrant spans），給出微分線性邏輯同倫跨距模型的直接顯式構造，使公理與切消連結簡化為單位跨距，並以洗牌（shuffle）結構精確描述指數模態在證明解釋上的對稱性。</li>
+<li>跨領域啟發：將微分線性邏輯與抽象同倫論及範疇洗牌組合數學結合，讓高維證明物件的對稱展開具有直接的幾何直觀。</li>
+<li>連結：<a href="zotero://select/library/items/5V5JPZT7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.10789" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-7-篇">G5｜本子方向全量文獻泛讀清單（共 7 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 7 篇文獻（含開放存取 PDF 5 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進5-篇">A. 奠基經典、專著與核心演進（5 篇）</h3>
+<ul>
+<li><strong>2019｜Reverse Derivative Categories</strong>，Robin Cockett et al.（<em>arXiv (Cornell University)</em>，53 引）：機器學習理論研究者必讀：直接給出深度學習反向傳播（Reverse-mode AD）的範疇公理化，並證明反向導數與匕首線性對偶的等價性。 <a href="zotero://select/library/items/U99JFPJJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1910.07065" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Jets and differential linear logic</strong>，James Wallbridge（<em>Mathematical Structures in Computer Science</em>，2 引）：證明光滑流形上的向量叢範疇與對應便利模範疇構成直覺主義微分線性邏輯模型，藉由合成噴流餘單子與分佈餘單子詮釋指數模態，使 Kleisli 態射對應光滑局部泛函（偏微分算子）且餘退化映射誘導泛函導數。 <a href="zotero://select/library/items/J3N3WWT4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.06235" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Resource sharing linear logic</strong>，Hidenori Kurokawa, Hirohiko Kushida（<em>Journal of Logic and Computation</em>）：提出資源共享線性邏輯（RSLL），引入 S5 模態表達跨主體共享的資源，並以含原始弱化規則的超矢列演算重構系統，進而證明其相語意完備性與語法切消定理。 <a href="zotero://select/library/items/H42S4KRZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/logcom/exaa013" rel="noopener">官方連結</a></li>
+<li><strong>2016｜An introduction to Differential Linear Logic: proof-nets, models and antiderivatives</strong>，Thomas Ehrhard（<em>arXiv</em>）：系統介紹為線性邏輯指數連接詞添加對偶微分規則的微分線性邏輯，說明其證明網語法、指稱模型的範疇公理化與反導數運算存在條件，並詳述有限性空間（finiteness spaces）模型。 <a href="zotero://select/library/items/VD9NH5G8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1606.01642" rel="noopener">官方連結</a></li>
+<li><strong>2003｜Quantum Computation, Categorical Semantics and Linear Logic</strong>，André van Tonder, Miquel Dorca（<em>arXiv</em>）：這篇原標題探討量子計算、範疇語意學與線性邏輯（對應資源敏感演算領域）之間聯繫的預印本文章，目前已經由作者於 arXiv 平台正式撤回（withdrawn）。 <a href="zotero://select/library/items/KUHZDPAK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/quant-ph/0312174" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻2-篇">B. 2024–2026 近期推進與前沿文獻（2 篇）</h3>
+<ul>
+<li><strong>2026｜An explicit shuffle construction of the homotopy span model of differential linear logic</strong>，Paul-André Melliès, Federico Olimpieri, Lionel Vaux Auclair（<em>arXiv</em>）：在小範疇的自然 Quillen 模型結構上，用顯式的「洗牌構造（Shuffle Construction）」直接建出微分線性邏輯的同倫跨度模型（Homotopy Span Model），把公式詮釋為同倫等價意義下的小範疇。 <a href="zotero://select/library/items/5V5JPZT7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.10789" rel="noopener">官方連結</a></li>
+<li><strong>2024｜From Differential Linear Logic to Coherent Differentiation</strong>，Thomas Ehrhard（<em>arXiv</em>）：綜述相干微分（coherent differentiation）的範疇與語法基礎，說明如何透過引入可加性（summability）約束，使微分線性邏輯與微分 <span class="math inline">\lambda</span>-演算中的加法運算能與確定性計算相容。 <a href="zotero://select/library/items/4I6D2BIG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.14834" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-a87db73d">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a><span class="rs">線性邏輯與博弈語意學把數理邏輯改寫成一套講資源、講互動的理論。Jean-Yves Girard 重新分析古典蘊含 A → B，把假設從可以免費無…</span></li><li><a href="39A_Girard%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E8%AD%89%E6%98%8E%E7%B6%B2Proof%20Nets%E8%88%87%E7%9B%B8%E7%A9%BA%E9%96%93%E4%BB%A3%E6%95%B8%E8%AA%9E%E6%84%8F.html">Girard線性邏輯、證明網Proof Nets與相空間代數語意</a></li><li><a href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

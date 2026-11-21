@@ -1,0 +1,191 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>01A｜自注意力機制、長脈絡外推與位置幾何 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-be2b496d" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="01a自注意力機制長脈絡外推與位置幾何">01A｜自注意力機制、長脈絡外推與位置幾何</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a>
+同領域子方向：<a class="wl" href="01B_IO%E6%84%9F%E7%9F%A5%E6%A0%B8%E5%BF%83%E3%80%81KV%E5%BF%AB%E5%8F%96%E5%A3%93%E7%B8%AE%E8%88%87%E6%8E%A8%E6%B8%AC%E8%A7%A3%E7%A2%BC.html">IO感知核心、KV快取壓縮與推測解碼</a> · <a class="wl" href="01C_%E7%A8%80%E7%96%8F%E6%B7%B7%E5%90%88%E5%B0%88%E5%AE%B6%E8%88%87%E6%A2%9D%E4%BB%B6%E8%A8%88%E7%AE%97%E8%B7%AF%E7%94%B1.html">稀疏混合專家與條件計算路由</a> · <a class="wl" href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> 的表示基礎層，處理無迴圈架構如何表示序列拓撲這個根本問題。演進主線從早期基於置換等變性的縮放點積與絕對位置編碼，走向以旋轉矩陣將相對距離寫入內積的幾何設計，再發展到長脈絡頻率外推與次平方時間近似演算法。</p>
+</aside>
+<ul>
+<li>核心問題：標準自注意力機制 <span class="math inline">\mathrm{softmax}(QK^\top / \sqrt{d_k})V</span> 本身對詞元順序具備置換等變性，計算與記憶體複雜度隨序列長度 <span class="math inline">L</span> 呈 <span class="math inline">\mathcal{O}(L^2)</span> 成長。當測試序列超過預訓練視窗時，未見過的高低頻相位組合會使注意力權重失真而無法外推；另一方面，多數去除 softmax 的線性注意力核方法無法保留 3D 或高維旋轉位置編碼的正交相對位置結構，導致長距離依賴或空間距離感在極端稀疏下失效。</li>
+<li>直覺模型：可以把自注意力想像成一場不分座次的圓桌會議，每個詞元同時向全場廣播查詢並接收回應。旋轉位置編碼（RoPE）為每個席位裝上多組不同轉速的時鐘指針，兩個詞元互動的強度只取決於它們指針之間的角度差；長脈絡外推就是調整這批時鐘的齒輪比與刻度精度，避免走太遠時指針轉過一圈重疊或因刻度太細而無法分辨步長。</li>
+<li>分階段閱讀路線：第一階段先讀 Vaswani et al. (2017)（可搭配深度筆記 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_01_2017_Vaswani_Attention_Is_All_You_Need.html">Attention Is All You Need</a>）與 Su et al. (2021)，掌握無迴圈注意力架構以及如何用區塊對角旋轉矩陣將絕對位置轉為相對位置內積。第二階段閱讀 Peng et al. (2023)（YaRN）與 Li et al. (2024)（SBA-RoPE），理解為何僅靠線性位置內插會損失高頻細節，以及如何透過分段頻率調整延伸視窗。第三階段讀 2025–2026 前沿論文 Alman and Song (2025)、Liu (2026) 與 Liu et al. (2026)（亦可延伸閱讀 Li (2026) 的多模態 RIG-RoPE），深入線性時間多項式逼近、相位調製理論邊界與稀疏低秩分解。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;2017 Vaswani 自注意力與絕對位置編碼&quot;] --&gt; B[&quot;2021 Su RoPE 旋轉位置幾何&quot;]
+  B --&gt; C[&quot;2023 Peng YaRN 頻率分帶上下文延伸&quot;]
+  B --&gt; D[&quot;2024 Li SBA-RoPE 分段基底調整&quot;]
+  B --&gt; E[&quot;2025 Alman 與 Song 多項式配 FFT 快速 RoPE 注意力&quot;]
+  C --&gt; F[&quot;2026 Liu 相位調製理論上下界&quot;]
+  B --&gt; G[&quot;2026 Liu et al. RoPeSLR 稀疏低秩與 Li RIG-RoPE 多模態座標&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>縮放點積自注意力與置換等變性 (Scaled Dot-Product Attention and Permutation Equivariance)</strong></p>
+<ul>
+<li>直覺理解：自注意力將序列中每個位置都視為圖上的完全連通節點，依內容相似度動態分配權重；由於沒有時間步遞迴，所有位置可平行計算，但必須外加位置偏置才能區分詞序。</li>
+<li>機制或核心表達式：給定查詢 <span class="math inline">Q \in \mathbb{R}^{L \times d_k}</span>、鍵 <span class="math inline">K \in \mathbb{R}^{L \times d_k}</span> 與值 <span class="math inline">V \in \mathbb{R}^{L \times d_v}</span>，單頭注意力定義為 <span class="math inline">\mathrm{Attention}(Q, K, V) = \mathrm{softmax}\left(\frac{QK^\top}{\sqrt{d_k}}\right)V</span>。多頭機制將投影拆分為 <span class="math inline">h</span> 個低維子空間各自計算再串接。若輸入序列經過置換矩陣 <span class="math inline">\Pi</span> 重排且無位置編碼，輸出滿足 <span class="math inline">\mathrm{Attention}(\Pi Q, \Pi K, \Pi V) = \Pi \mathrm{Attention}(Q, K, V)</span>。</li>
+<li>能做到什麼，代價是什麼：消除了 RNN 的序列相依瓶頸，大幅提升訓練平行度；代價是 <span class="math inline">QK^\top</span> 矩陣計算與儲存皆為 <span class="math inline">\mathcal{O}(L^2)</span>，且僅靠加法注入的絕對位置編碼較難自然外推至未見過的相對距離。</li>
+</ul>
+</li>
+<li>
+<p><strong>旋轉位置編碼與相位調製邊界 (Rotary Position Embedding and Phase Modulation Bounds)</strong></p>
+<ul>
+<li>直覺理解：把特徵向量每兩個維度配成一組複數平面向量，位置 <span class="math inline">m</span> 就等於將該平面旋轉 <span class="math inline">m\theta_i</span> 角度；兩向量作內積時，幾何夾角只剩下 <span class="math inline">n - m</span> 的差值，既保留絕對位置旋轉，又在內積中呈現純相對位置依賴。</li>
+<li>機制或核心表達式：對於維度 <span class="math inline">d</span>（偶數），定義區塊對角旋轉矩陣 <span class="math inline">R_{\Theta, m}^d = \bigoplus_{i=1}^{d/2} \begin{pmatrix} \cos m\theta_i &amp; -\sin m\theta_i \\ \sin m\theta_i &amp; \cos m\theta_i \end{pmatrix}</span>，其中頻率 <span class="math inline">\theta_i = b^{-2(i-1)/d}</span>。查詢與鍵內積滿足 <span class="math inline">(R_{\Theta, m}^d q)^\top (R_{\Theta, n}^d k) = q^\top R_{\Theta, n-m}^d k</span>，且隨相對距離增大呈現衰減趨勢。Liu (2026) 將其視為一組複數振盪器的相位調製，給出目標長度 <span class="math inline">L</span> 下基底 <span class="math inline">b</span> 的理論下界（類比 Nyquist 取樣的防混疊下界與低頻直流模態相位漂移穩定界），並指出多層堆疊會放大角度失準而收緊基底要求，同時受限於浮點數表示精度存在一個基底上界。</li>
+<li>能做到什麼，代價是什麼：RoPE 具備長度彈性與自然相對衰減，並與線性注意力相容性優於不可分離的偏置；但基底 <span class="math inline">b</span> 過小會在長序列產生混疊與低頻相位失真，基底過大則會使相鄰位置的增量相位低於浮點數最小解析度而退化。</li>
+</ul>
+</li>
+<li>
+<p><strong>頻率分帶外推與次平方結構逼近 (Context Extrapolation and Sub-Quadratic RoPE Approximation)</strong></p>
+<ul>
+<li>直覺理解：高頻維度像秒針一樣轉得快，負責局部語法；低頻維度像時針，負責長程跨度。外推時不能把所有指針等比例放慢，而需按頻率分區調整或針對高維模態重建幾何結構。</li>
+<li>機制或核心表達式：YaRN (Peng et al., 2023) 與 SBA-RoPE (Li et al., 2024) 針對不同維度分段調整頻率縮放與旋轉基底，以遠少於從頭預訓練的資料步數擴展 LLaMA 或 Pythia 的脈絡視窗。在計算加速上，Alman and Song (2025) 指出在有界輸入條件下（無界時受強指數時間假設 SETH 限制無法達成近線性時間），結合多項式展開法與快速傅立葉變換（FFT）可突破 RoPE 對一般快速注意力演算法的破壞。針對影片擴散 Transformer（DiT），RoPeSLR (Liu et al., 2026) 證明 3D RoPE 注意力流形可解耦為 <span class="math inline">\mathcal{O}(L^{3/2})</span> 稀疏度的高頻語義尖峰與 <span class="math inline">\mathcal{O}(d_h \log L)</span> 極低秩的背景連續體，並結合頭級低秩參數化與可學習 3D 絕對位置注入。</li>
+<li>能做到什麼，代價是什麼：頻率分帶與分段基底調整可在微調階段快速拉長視窗，但仍需考量極長序列下的多層相位誤差累積；稀疏加低秩分解與多項式 FFT 則以假設流形結構或數值有界性為代價，換取次平方複雜度與 3D 距離保留。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何 RoPE 基底不能無限制放大來換取無限長上下文</strong>：既然較大的 RoPE 基底 <span class="math inline">b</span> 能降低低頻維度的旋轉角速度 <span class="math inline">\theta_i = b^{-2(i-1)/d}</span> 並推遲相位混疊，實務上為何不能將 <span class="math inline">b</span> 直接設成極大數值（例如 <span class="math inline">10^{12}</span>）來支援任意長脈絡？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考角度一：從低頻維度的空間解析度看，當 <span class="math inline">\theta_i</span> 極小時，相鄰幾個詞元之間的旋轉角差 <span class="math inline">m\theta_i</span> 是否還能區分位置？思考角度二：參考 Liu (2026) 的浮點精度分析，在有限位元浮點數（如 BF16 或 FP32）下，當基底超過精確度決定的上界時，增量相位更新會因捨入誤差而喪失數值解析度，導致不同位置獲得幾乎相同的旋轉表示。</p>
+</details>
+<ol start="2">
+<li><strong>RoPE 對線性注意力加速演算法構成的結構障礙</strong>：為何標準線性注意力可以直接透過特徵映射 <span class="math inline">\phi(q_m)^\top \phi(k_n)</span> 改變矩陣乘法順序達成 <span class="math inline">\mathcal{O}(L)</span> 複雜度，加入 RoPE 後卻容易出現所謂的 RoPE Dilemma，而 Alman and Song (2025) 與 RoPeSLR (2026) 分別從什麼角度繞過這個障礙？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>線性注意力依賴核分解把距離相依項從 <span class="math inline">\mathrm{softmax}</span> 中拆成兩端獨立特徵，但高維或 3D 旋轉矩陣 <span class="math inline">R_{\Theta, n-m}</span> 的正交相對結構會在非線性核映射或截斷後失效，使注意力失去對相對距離的敏感度。Alman and Song (2025) 在有界輸入假設下用多項式逼近配合 FFT 處理位置相依的卷積／乘法結構；RoPeSLR (2026) 則放棄純線性注意力，改以 <span class="math inline">\mathcal{O}(L^{3/2})</span> 稀疏語義尖峰搭配低秩背景與 3D 絕對位置注入來保留長距離結構。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>長上下文視窗擴展中的理論邊界與有限精度張力</strong>：Liu (2026) 證明隨著脈絡長度 <span class="math inline">L</span> 與模型深度增加，防混疊與低頻相位穩定性要求提高 RoPE 基底下界，但浮點數解析度又對基底設下嚴格上界。當目標長度走向百萬級別且訓練與推論普遍採用 FP8／BF16 低精度格式時，上下界之間的可行視窗不斷收窄，如何設計超越單一幾何數列旋轉的新型位置參數化仍是開放難題。</li>
+<li><strong>多模態交錯序列中的位置圖譜與平移不變性</strong>：Li (2026) 在 RIG-RoPE 中指出，將時間、高度與寬度相位套用於交錯的文字、圖像與影片詞元時，前處理坐標圖譜的選擇會導致跨實例空間位移產生歧義，且純依賴坐標極值的純量推進難以反映表徵層級的語義跨度。如何統一離散文字序列與連續／平行視覺區塊的幾何推進律，而不破壞既有預訓練語言權重的文字路徑，尚無共識方案。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>KV 快取驅逐與稀疏注意力的結構協同</strong>：自注意力頭級稀疏性與位置幾何直接決定長脈絡推論時哪些鍵值對可被安全剪除，本子方向的位置相位衰減與稀疏尖峰分析可遷移至 <a class="wl" href="01B_IO%E6%84%9F%E7%9F%A5%E6%A0%B8%E5%BF%83%E3%80%81KV%E5%BF%AB%E5%8F%96%E5%A3%93%E7%B8%AE%E8%88%87%E6%8E%A8%E6%B8%AC%E8%A7%A3%E7%A2%BC.html">IO感知核心、KV快取壓縮與推測解碼</a> 中的無重訓練快取驅逐（如 SAGE-KV）與底層 IO 感知分塊核心。</li>
+<li><strong>複數振盪器相位動力學與連續時間狀態空間的對偶</strong>：將 RoPE 視為複數振盪器上的離散相位調製（Liu, 2026），在數學形式上對應連續時間線性時不變系統的頻域特徵值旋轉，可直接橋接至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 的對角複數狀態轉移矩陣設計。</li>
+<li><strong>低秩背景加稀疏尖峰的矩陣分解視角</strong>：RoPeSLR 將注意力流形拆分為 <span class="math inline">\mathcal{O}(L^{3/2})</span> 稀疏高頻項與 <span class="math inline">\mathcal{O}(d_h \log L)</span> 低秩連續體的思路，與 <a class="wl" href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a> 中利用低秩結構配合離群值隔離（outlier isolation）來壓縮權重與激活值的幾何手段相通。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-attention-is-all-you-need2017">1. Attention Is All You Need（2017）</h4>
+<ul>
+<li>作者與出處：Ashish Vaswani, Noam Shazeer, Niki Parmar, Jakob Uszkoreit, Llion Jones et al. · <em>arXiv</em></li>
+<li>核心問題：傳統序列轉導模型高度依賴迴圈神經網路或卷積網路，導致無法在單條序列內跨時間步平行訓練，且長距離依賴路徑長度隨距離線性成長。論文探索完全捨棄迴圈與卷積、僅以注意力機制構建序列模型的可行性。</li>
+<li>關鍵做法：提出基於縮放點積與多頭自注意力的 Transformer 編碼器解碼器架構，在 WMT 2014 英德翻譯取得 28.4 BLEU（超越包含集成模型在內的既有最佳結果逾 2 BLEU），並在英法翻譯以 8 顆 GPU 訓練 3.5 天達到單模型 41.8 BLEU，同時成功遷移至英文成分句法分析。</li>
+<li>跨領域啟發：建立整個 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> 的基礎算子與平行計算典範，也是評估後續一切位置幾何、稀疏化與系統最佳化的對照基準（詳見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_01_2017_Vaswani_Attention_Is_All_You_Need.html">Attention Is All You Need</a>）。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_01_2017_Vaswani_Attention_Is_All_You_Need.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/CT7B2X44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.03762" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-roformer-enhanced-transformer-with-rotary-position-embedding2021">2. RoFormer: Enhanced Transformer with Rotary Position Embedding（2021）</h4>
+<ul>
+<li>作者與出處：Jianlin Su, Yu Lu, Shengfeng Pan, Ahmed Murtadha, Bo Wen · <em>Neurocomputing</em></li>
+<li>核心問題：既有絕對位置編碼直接加在詞向量上，難以在自注意力內積中自然呈現清晰的相對位置依賴；相對位置編碼則常需修改注意力矩陣偏置，無法相容線性自注意力。論文尋找一種能統一絕對編碼實作便利與相對位置幾何性質的機制。</li>
+<li>關鍵做法：提出旋轉位置編碼（RoPE），對查詢與鍵向量乘以依位置索引決定的旋轉矩陣，使注意力內積自然成為相對位置差的函數。該結構具備序列長度彈性、相對距離增大時詞元依賴自然衰減的特性，且可為線性自注意力注入相對位置資訊，在多項長文本分類基準上展現穩定優勢。</li>
+<li>跨領域啟發：確立現代大語言模型的位置幾何標準，後續所有上下文擴展與高維模態變體皆建立於其複數旋轉結構之上。</li>
+<li>連結：<a href="zotero://select/library/items/MVMESXFD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.09864" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-yarn-efficient-context-window-extension-of-large-language-models2023">3. YaRN: Efficient Context Window Extension of Large Language Models（2023）</h4>
+<ul>
+<li>作者與出處：Bowen Peng, Jeffrey Quesnelle, Honglu Fan, Enrico Shippole · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：基於 RoPE 的預訓練語言模型在超出訓練序列長度後效能會急遽崩壞，而早期的全域位置內插雖能延伸視窗卻會壓縮高頻局部解析度並消耗大量繼續訓練算力。</li>
+<li>關鍵做法：提出 YaRN（Yet another RoPE extensioN method），結合與頻率相關的維度調整策略來擴展 RoPE 模型的上下文視窗，僅需先前方法十分之一的詞元數量與 2.5 倍少的訓練步數，即可讓 LLaMA 系列模型有效外推並使用遠超原始預訓練與微調資料長度的脈絡。</li>
+<li>跨領域啟發：示範了頻率分帶處理在長脈絡外推中的有效性，銜接了預訓練位置幾何與推論端長文本需求。</li>
+<li>連結：<a href="zotero://select/library/items/ERKNV3BD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.00071" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-fast-rope-attention-combining-the-polynomial-method-and-fast-fourier-transform2025">4. Fast RoPE Attention: Combining the Polynomial Method and Fast Fourier Transform（2025）</h4>
+<ul>
+<li>作者與出處：Josh Alman, Zhao Song · <em>arXiv</em></li>
+<li>核心問題：前人已證明在輸入條目有界的情況下，標準自注意力存在近線性時間近似演算法（且無界時受強指數時間假設 SETH 限制無法加速），但引入 RoPE 後破壞了原本依賴的靜態多項式近似結構，使既往快速演算法失效。</li>
+<li>關鍵做法：將多項式方法（polynomial method）與快速傅立葉變換（FFT）結合，克服旋轉矩陣引入的位置相依耦合，重新在理論上設計出針對 RoPE 注意力的快速近似計算演算法。</li>
+<li>跨領域啟發：從計算複雜度理論建立 RoPE 注意力在數值有界情境下的演算法加速基礎，連結了位置幾何設計與理論電腦科學的快速矩陣逼近。</li>
+<li>連結：<a href="zotero://select/library/items/JITQCMEV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.11892" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-rotary-positional-embeddings-as-phase-modulation-theoretical-bounds-on-the-rope-base-for-long-context-transformers2026">5. Rotary Positional Embeddings as Phase Modulation: Theoretical Bounds on the RoPE Base for Long-Context Transformers（2026）</h4>
+<ul>
+<li>作者與出處：Feilong Liu · <em>arXiv</em></li>
+<li>核心問題：RoPE 雖被廣泛採用，但其在長脈絡下的基底參數選擇多依經驗調參，缺乏從訊號處理與數值分析出發的嚴謹上下界刻畫。</li>
+<li>關鍵做法：將 RoPE 形式化為施加於複數振盪器組上的相位調製，推導維持位置相干性的 RoPE 基底原則性下界（包含類比 Nyquist 極限的防混疊界與限制低頻漂移的直流穩定界），證明深度疊加會因旋轉誤差累積而收緊下界，同時推導受限於有限浮點解析度的基底上界。</li>
+<li>跨領域啟發：將經驗性的長脈絡調參轉化為訊號處理與浮點數值誤差的分析框架，並可直接對話 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 的複數相位動態。</li>
+<li>連結：<a href="zotero://select/library/items/7UB2V8F5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.10959" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-ropeslr-3d-rope-driven-sparse-lowrank-attention-for-efficient-diffusion-transformers2026">6. RoPeSLR: 3D RoPE-driven Sparse-LowRank Attention for Efficient Diffusion Transformers（2026）</h4>
+<ul>
+<li>作者與出處：Yuxi Liu, Zekun Zhang, Yixiang Cai, Renjia Deng, Yutong He · <em>arXiv</em></li>
+<li>核心問題：影片生成擴散 Transformer（DiT）受限於 <span class="math inline">\mathcal{O}(L^2)</span> 注意力複雜度，而既有的稀疏線性混合注意力在極高稀疏率下會陷入 RoPE Dilemma，因為標準線性注意力無法保留 3D RoPE 的正交相對位置結構。</li>
+<li>關鍵做法：提出 RoPeSLR 框架，先實證並論證 DiT 注意力流形可解耦為稀疏度上界 <span class="math inline">\mathcal{O}(L^{3/2})</span> 的高頻語義尖峰集與 <span class="math inline">\mathcal{O}(d_h \log L)</span> 極低秩的背景連續體，進而以結合可學習 3D 絕對位置注入的頭級低秩參數化取代標準線性注意力。</li>
+<li>跨領域啟發：揭示高維 3D RoPE 與次平方注意力融合的幾何衝突解法，其中的稀疏尖峰加低秩背景拆分亦與 <a class="wl" href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a> 的矩陣結構利用相互呼應。</li>
+<li>連結：<a href="zotero://select/library/items/CWGSQIXM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.20659" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-15-篇">G5｜本子方向全量文獻泛讀清單（共 15 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 15 篇文獻（含開放存取 PDF 11 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進3-篇">A. 奠基經典、專著與核心演進（3 篇）</h3>
+<ul>
+<li><strong>2017｜Attention Is All You Need</strong>，Ashish Vaswani et al.（<em>arXiv</em>，78258 引）：🏆 L5 深度審核完成：以縮放點積自注意力與多頭子空間取代循環與卷積，把遠距依賴路徑壓到 <span class="math inline">O(1)</span>，是現代 AI 的奠基論文。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_01_2017_Vaswani_Attention_Is_All_You_Need.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/CT7B2X44" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.03762" rel="noopener">官方連結</a></li>
+<li><strong>2021｜RoFormer: Enhanced Transformer with Rotary Position Embedding</strong>，Jianlin Su et al.（<em>Neurocomputing</em>，1934 引）：用複平面上的正交旋轉，把絕對位置轉成內積中的精確相對距離，現在幾乎所有主流開源大模型都用它做位置編碼。 <a href="zotero://select/library/items/MVMESXFD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.09864" rel="noopener">官方連結</a></li>
+<li><strong>2023｜YaRN: Efficient Context Window Extension of Large Language Models</strong>，Bowen Peng et al.（<em>arXiv (Cornell University)</em>，21 引）：提出針對旋轉位置編碼 RoPE 的高效上下文視窗擴展方法 YaRN，僅需先前方法十分之一的資料量與二點五分之一的訓練步數即可使 LLaMA 模型突破預訓練及微調長度限制進行長脈絡外推。 <a href="zotero://select/library/items/ERKNV3BD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.00071" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻12-篇">B. 2024–2026 近期推進與前沿文獻（12 篇）</h3>
+<ul>
+<li><strong>2024｜Extending Context Window in Large Language Models with Segmented Base Adjustment for Rotary Position Embeddings</strong>，Rongsheng Li et al.（<em>Applied Sciences</em>，13 引）：提出分段基底調整旋轉位置嵌入方法 SBA-RoPE，依不同維度區段調整 RoPE 頻率基底以擴展大型語言模型脈絡視窗，並以於 PG-19 資料集微調後的 Pythia-2.8B 模型在鍵值檢索與困惑度實驗上驗證其長文本外推能力。 <a href="zotero://select/library/items/TKPJPVB7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/app14073076" rel="noopener">官方連結</a></li>
+<li><strong>2027｜A Hybrid Deep Learning Framework Based on ResNet and Vision Transformer for Pneumonia Detection from Chest X-ray Images</strong>，Samira Mavaddati（<em>International Journal of Engineering</em>）：作者將客製化 ResNet 與 Vision Transformer（ViT）結合，設計一套互補的特徵融合策略，把 ResNet 的局部空間編碼與 ViT 的全局自注意力表徵整合在一起。在基準 CXR 資料集上達到 97.03% 準確率，靈敏度與特異度皆高於單獨的 CNN 或 Transformer 模型，並透過注意力視覺化標出關鍵肺炎區域以提供臨床判讀依據。 <a href="zotero://select/library/items/G5MPKWSK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5829/ije.2027.40.02b.06" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Rotary Positional Embeddings as Phase Modulation: Theoretical Bounds on the RoPE Base for Long-Context Transformers</strong>，Feilong Liu（<em>arXiv</em>）：將旋轉位置嵌入 (RoPE) 重新詮釋為複數振盪器的相位調變，推導維持長上下文位置一致性的 RoPE 底數理論下界（含混疊界與直流分量穩定界），並揭示深層網路會加劇層間角度偏移。 <a href="zotero://select/library/items/7UB2V8F5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.10959" rel="noopener">官方連結</a></li>
+<li><strong>2026｜RoPeSLR: 3D RoPE-driven Sparse-LowRank Attention for Efficient Diffusion Transformers</strong>，Yuxi Liu et al.（<em>arXiv</em>）：針對長序列 DiT 結合線性注意力時破壞 3D RoPE 相對位置結構的問題，提出 RoPeSLR 注意力框架，將注意力矩陣解耦為 <span class="math inline">\mathcal{O}(L^{3/2})</span> 稀疏高頻語義尖峰與 <span class="math inline">\mathcal{O}(d_h \log L)</span> 低秩背景連續體。 <a href="zotero://select/library/items/CWGSQIXM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.20659" rel="noopener">官方連結</a></li>
+<li><strong>2026｜RIG-RoPE: Relation-Stratified Multimodal Attention with Instance-Local Rotary Geometry and Representation-Aware Traversal Coordinates</strong>，Donggen Li（<em>arXiv</em>）：針對多模態 RoPE 依賴前處理座標與極值推進的歧義，提出結合實例局部旋轉幾何、關係分層注意力及表徵感知遍歷座標的 RIG-RoPE，依文字遞增與影像同步等特性歸一化注意分數。 <a href="zotero://select/library/items/K3KEWJKW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.05154" rel="noopener">官方連結</a></li>
+<li><strong>2026｜MelanoFusion: An Explainable and Uncertainty-Aware Hybrid CNN–Transformer Framework for Dermoscopic Melanoma Detection</strong>，V. Purushothama Raju et al.（<em>Research Square</em>）：提出混合雙編碼器框架 <code>MelanoFusion</code>，整合可解釋性、不確定性估計與公平性導向表徵。前端先對 <span class="math inline">224 \times 224</span> 皮膚鏡影像做毛髮去除、中值濾波、對比增強、色彩標準化與分水嶺病灶先驗處理，並用 U-Net 分割病灶（在 HAM10000 與 PH² 上的 Dice 係數分別是 0.878 與 0.830）。骨幹融合 <code>EfficientNetV2-S</code> 的局部卷積特徵與 <code>Swin Transformer</code> 的視窗階層注意力，搭配交叉注意力、病灶注意力、特徵金字塔、多尺度 Transformer 層與專屬的不確定性預測頭。在 HAM10000、ISIC 2018 與 PH² 三個基準上和五種主流 CNN／視覺 Transformer 基線比較，ROC-AUC 分別是 0.687、0.740 與 0.844；在 HAM10000 上機率校準良好（ECE = 0.116），預測不確定性與分類錯誤呈顯著正相關。子群體審計顯示不同年齡層之間有顯著敏感度差異（性別間則無顯著差異）。作者也如實說明，消融實驗中部分疊加模組並沒有提升判別力，並強調臨床部署前必須做外部驗證與多維度聯合評估。 <a href="zotero://select/library/items/F76JAJXP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.21203/rs.3.rs-11208377/v1" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Causal Localization of Process Anomalies in Biopharmaceutical Fermentation</strong>，Lukas Schneider, Anna Meier（<em>The Journal of Health Science and Medical Technology</em>）：作者結合領域約束因果發現（引入進料對生長依賴、氧傳遞與溫控回饋等製程約束）、時間注意力機制與干預殘差評分，以因果預期值替換疑似異常變數來計算貢獻度排名。在涵蓋 1,120 批次、7,200 萬筆紀錄與 1,380 段專家標註異常的資料集上，中位異常變數定位時間從純重建 Transformer 基線的 16.9 分鐘縮短至 5.4 分鐘，誤報率降至每批次 1.8 件，事件邊界平均誤差減少 12.7 分鐘，單張 GPU 完成整批評估需 4.6 分鐘。 <a href="zotero://select/library/items/5WKUTIWM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.64744/tjhsmt.2026.266" rel="noopener">官方連結</a></li>
+<li><strong>2025｜LLMs Know What to Drop: Self-Attention Guided KV Cache Eviction for Efficient Long-Context Inference</strong>，Guangtao Wang et al.（<em>arXiv</em>）：觀察到長文本推論時注意力具稀疏性且模型在預填充後即隱含分辨可棄詞元的訊號，提出自注意力引導驅逐方法 SAGE-KV，於頭與詞元層級執行單次 top-k 篩選壓縮 KV 快取並於 LongBench 驗證效能。 <a href="zotero://select/library/items/VUZXCC3T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.08879" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Self-Reported Confidence of Large Language Models in Gastroenterology: Analysis of Commercial, Open-Source, and Quantized Models</strong>，Nariman Naderi et al.（<em>npj Gut and Liver 3, 6 (2026)</em>）：發表於《npj Gut and Liver》，以 300 道腸胃科專科考題評測多款商業、開源與量化大語言模型的自評信心度，發現頂級模型雖達 Brier 分數 0.15–0.2 與 AUROC 0.6，但所有受測模型均呈現一致的過度自信傾向。 <a href="zotero://select/library/items/2TDGB7E8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.18562" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Fast RoPE Attention: Combining the Polynomial Method and Fast Fourier Transform</strong>，Josh Alman, Zhao Song（<em>arXiv</em>）：結合多項式方法（polynomial method）與快速傅立葉變換（FFT），將有界元素條件下的近線性時間注意力近似演算法推廣至採用旋轉位置編碼（RoPE）的 Transformer 架構，突破傳統位置編碼與加速演算法的整合限制。 <a href="zotero://select/library/items/JITQCMEV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.11892" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Rotary Position Embedding for Vision Transformer</strong>，Byeongho Heo et al.（<em>arXiv</em>）：系統分析二維旋轉位置編碼（RoPE）應用於視覺 Transformer（ViT）的效果，證實其在推論期提升影像解析度時具備優異外推能力且幾無額外開銷，並在 ImageNet-1k、COCO 與 ADE-20k 等任務全面提升基準表現。 <a href="zotero://select/library/items/HW7N3AGZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.13298" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Theoretical Constraints on the Expressive Power of <span class="math inline">\mathsf{RoPE}</span>-based Tensor Attention Transformers</strong>，Xiaoyu Li et al.（<em>arXiv</em>）：研究張量注意力與基於旋轉位置編碼（<span class="math inline">\mathsf{RoPE}</span>）張量注意力Transformer的電路複雜度，證明在常數深度與線性或次線性隱藏維度下，若<span class="math inline">\mathsf{TC}^0\neq\mathsf{NC}^1</span>則無法求解固定成員與閉包問題。 <a href="zotero://select/library/items/KN6PTRN6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.18040" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-be2b496d">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a><span class="rs">這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 O(1)。</span></li><li><a href="01B_IO%E6%84%9F%E7%9F%A5%E6%A0%B8%E5%BF%83%E3%80%81KV%E5%BF%AB%E5%8F%96%E5%A3%93%E7%B8%AE%E8%88%87%E6%8E%A8%E6%B8%AC%E8%A7%A3%E7%A2%BC.html">IO感知核心、KV快取壓縮與推測解碼</a></li><li><a href="01D_%E4%BD%8E%E7%A7%A9%E5%BE%AE%E8%AA%BF%E3%80%81%E4%BD%8E%E4%BD%8D%E5%85%83%E9%87%8F%E5%8C%96%E3%80%81%E6%93%B4%E5%B1%95%E5%BE%8B%E8%88%87%E7%9F%A9%E9%99%A3%E6%9C%80%E4%BD%B3%E5%8C%96.html">低秩微調、低位元量化、擴展律與矩陣最佳化</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>36B｜Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-95bed839" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 最優傳輸、計算複雜度與演算法資訊</span>
+<article>
+
+<h1 id="36bknothe-rosenblatt三角測度傳輸與stein變分梯度下降svgd">36B｜Knothe-Rosenblatt三角測度傳輸與Stein變分梯度下降SVGD</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a>
+同領域子方向：<a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> · <a class="wl" href="36C_%E6%93%B4%E6%95%A3%E5%BE%8C%E9%A9%97%E6%8A%BD%E6%A8%A3%E8%88%87%E7%89%A9%E7%90%86%E7%B4%84%E6%9D%9F%E9%80%86%E5%95%8F%E9%A1%8C%E7%94%9F%E6%88%90%E6%B1%82%E8%A7%A3.html">擴散後驗抽樣與物理約束逆問題生成求解</a>
+跨領域關聯子方向：<a class="wl" href="OTB_%E7%86%B5%E6%AD%A3%E5%89%87%E5%8C%96%E3%80%81Sinkhorn%E7%B8%AE%E6%94%BE%E8%88%87%E7%A5%9E%E7%B6%93%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E6%B1%82%E8%A7%A3%E5%99%A8.html">熵正則化、Sinkhorn縮放與神經最優傳輸求解器</a> · <a class="wl" href="OTC_Otto%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81JKO%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E5%8B%95%E6%85%8B%E6%B5%81%E9%AB%94%E9%87%8D%E6%A7%8B.html">Otto微積分、JKO變分梯度流與動態流體重構</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M37_Statistical%20Rethinking%20%E9%9A%8E%E5%B1%A4%E6%A8%A1%E5%9E%8B.html">Statistical Rethinking 階層模型</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a> 中以確定性幾何變形與互動粒子梯度流取代隨機漫步 MCMC 的核心方法論，在理論上與 <a class="wl" href="OTB_%E7%86%B5%E6%AD%A3%E5%89%87%E5%8C%96%E3%80%81Sinkhorn%E7%B8%AE%E6%94%BE%E8%88%87%E7%A5%9E%E7%B6%93%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E6%B1%82%E8%A7%A3%E5%99%A8.html">熵正則化、Sinkhorn縮放與神經最優傳輸求解器</a> 的傳輸映射計算及 <a class="wl" href="OTC_Otto%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81JKO%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E5%8B%95%E6%85%8B%E6%B5%81%E9%AB%94%E9%87%8D%E6%A7%8B.html">Otto微積分、JKO變分梯度流與動態流體重構</a> 的 Wasserstein 梯度流直接相通。演進主線涵蓋兩大分支：一是將最優傳輸與 Knothe–Rosenblatt 下三角重排引入變分推論與攤銷代理模型，二是以再生核希爾伯特空間（RKHS）加權梯度流建立 Stein 變分梯度下降（SVGD）並解決其有限粒子收斂率與指數收斂不等式。</p>
+</aside>
+<ul>
+<li>核心問題：傳統馬可夫鏈蒙地卡羅（如 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a>）產生的樣本具有時間自相關，面對高維非高斯多峰後驗時混合時間極長，且難以直接計算邊際似然與獨立同分布樣本；另一方面，若要直接構造把先驗推前至後驗的確定性映射，任意雙射在一般維度下求解 Monge–Ampère 雅可比行列式代價高昂，而標準參數化傳輸映射在正向模型（PtO）求值昂貴時亦面臨維度與計算瓶頸，SVGD 在高維粒子系統中的有限粒子收斂率與連續 PDE 指數衰減則長期缺乏非漸近理論保證。</li>
+<li>直覺模型：如果說 MCMC 像蒙眼在複雜地形中隨機試步並記錄足跡，測度傳輸就像打造一副可逆的彈力模具，把形狀單純的標準高斯黏土直接壓塑成目標後驗的模樣，之後每壓一次就能產出一個完全獨立的樣本；Knothe–Rosenblatt 三角映射是把這道壓塑拆成逐維遞迴調整的條件變形以簡化行列式計算，而 SVGD 則是放出一群帶著核函數斥力與對數似然引力的粒子，一邊沿最速下降方向往高機率山谷滑動，一邊靠彼此推開防止全部擠在同一座峰頂。</li>
+<li>分階段閱讀路線：第一階段先讀 El Moselhy and Marzouk (2011) 與 Marzouk, Moselhy, Parno, and Spantini (2016)，建立以推前測度傳輸映射取代 MCMC 的變分框架、Knothe–Rosenblatt 三角結構與最優傳輸存在唯一性基礎。第二階段閱讀 Liu and Wang (2016) 與 Shi and Mackey (2022)，掌握 SVGD 作為 RKHS 中 KL 散度最速下降的確定性粒子流機制，以及早期次對數階有限粒子收斂率證明的困難所在。第三階段精讀本子方向收錄的 2024 前沿論文 Banerjee, Balasubramanian, and Ghosal (2024)、Carrillo, Skrzeczkowski, and Warnett (2024) 與 Cao et al. (2024)（LazyDINO），深入相對熵時間導數分解所得的 <span class="math inline">O(1/\sqrt{N})</span> 有限粒子率、Fourier 對偶導出的 Stein–log-Sobolev 指數收斂，以及結合導數資訊神經代理模型的高維攤銷逆問題求解。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;El Moselhy 與 Marzouk 2011 最優傳輸映射替代 MCMC&quot;] --&gt; B[&quot;Marzouk et al. 2016 Knothe-Rosenblatt 三角重排&quot;]
+  B --&gt; C[&quot;Mendoza 2018 與 Baptista 2022 無似然與平行傳輸應用&quot;]
+  B --&gt; D[&quot;Cao et al. 2024 LazyDINO 導數代理攤銷懶映射&quot;]
+  A --&gt; E[&quot;Liu 與 Wang 2016 SVGD 核化 KL 梯度流&quot;]
+  E --&gt; F[&quot;Shi 與 Mackey 2022 有限粒子次對數 KSD 收斂率&quot;]
+  F --&gt; G[&quot;Banerjee et al. 2024 1/sqrt N 收斂與雙線性核 W2 界&quot;]
+  E --&gt; H[&quot;Carrillo et al. 2024 Stein-log-Sobolev 指數衰減&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>Knothe–Rosenblatt 三角單調測度傳輸 (Knothe–Rosenblatt Triangular Measure Transport)</strong></p>
+<ul>
+<li>直覺理解：將高維空間的複雜聯合分佈逐維拆解成一連串一維條件分佈的單調拉縮：第一個分量只管自己，第 <span class="math inline">k</span> 個分量只需根據前 <span class="math inline">k-1</span> 個已固定的座標決定如何單調拉伸，就能確保整體映射可逆且雅可比矩陣呈下三角形式。</li>
+<li>機制或核心表達式：給定易於抽樣的參考測度 <span class="math inline">\eta</span>（如標準常態）與目標後驗測度 <span class="math inline">\mu^y</span>，尋找下三角單調映射 <span class="math inline">S(z) = (S_1(z_1), S_2(z_1,z_2), \dots, S_d(z_{1:d}))^\top</span>（滿足 <span class="math inline">\partial_{z_k} S_k &gt; 0</span>）使得推前測度 <span class="math inline">S_\# \eta \approx \mu^y</span>。其變分目標最小化反向 KL 散度 <span class="math inline">\mathrm{KL}(S_\# \eta \| \mu^y) = \mathbb{E}_{z \sim \eta}[\Phi(S(z);y) - \log \pi_0(S(z)) - \sum_{k=1}^d \log \partial_{z_k} S_k(z_{1:k})] + \mathrm{const}</span>，不依賴未知的正規化常數 <span class="math inline">Z(y)</span>。在結構化高維逆問題中，LazyDINO（Cao et al., 2024）進一步將離線階段透過聯合樣本與 Jacobian 訓練的導數資訊神經代理模型結合低維非線性的懶映射（lazy map），證明導數降階基底能極小化代理後驗近似期望誤差的上界。</li>
+<li>能做到什麼，代價是什麼：下三角構造把高維行列式計算量壓縮為對角元乘積，訓練完成後即可無須額外正向模型求值產生任意數量的獨立樣本、解析評估後驗矩與邊際似然；代價是表現力依賴變數排序與基底參數化，缺乏結構降維或稀疏性利用時高維近似成本仍高。</li>
+</ul>
+</li>
+<li>
+<p><strong>Stein 變分梯度下降與 Stein–log-Sobolev 指數收斂 (SVGD and Stein–log-Sobolev Exponential Convergence)</strong></p>
+<ul>
+<li>直覺理解：讓一群有限粒子依核函數加權的對數後驗梯度加上排斥力共同移動，相當於在 RKHS 限制的速度場集合中沿著讓 KL 散度下降最快的方向推動整團分佈。</li>
+<li>機制或核心表達式：Liu and Wang (2016) 推導出 SVGD 的連續時間平均場速度場：<span class="math inline">v_\rho(x) = \mathbb{E}_{x' \sim \rho}[k(x', x) \nabla_{x'} \log \pi(x') + \nabla_{x'} k(x', x)]</span>，它是 Wasserstein 梯度流在再生核希爾伯特空間（RKHS）中的核化投影，對應於核化 Stein 差異（<span class="math inline">\mathsf{KSD}^2</span>）沿時間遞減的 KL 散度耗散。針對有限 <span class="math inline">N</span> 粒子系統，Banerjee et al. (2024) 將 <span class="math inline">N</span> 粒子聯合密度與 <span class="math inline">N</span> 重乘積目標測度的相對熵時間導數拆解為與 <span class="math inline">N \cdot \mathbb{E}[\mathsf{KSD}^2]</span> 成正比的主導負項與較小正項，取得連續與離散時間皆為 <span class="math inline">O(1/\sqrt{N})</span> 的 <span class="math inline">\mathsf{KSD}</span> 速率（相較 Shi and Mackey 2022 的 <span class="math inline">O(1/\sqrt{\log\log n})</span> 呈雙重指數改進且維度依賴為多項式級），並證明加入雙線性分量（如雙線性加 Matérn 核）可進一步得出 Wasserstein-2 收斂。在連續 PDE 層面，Carrillo et al. (2024) 將 Stein–Fisher 資訊（即平方 Stein 差異）詮釋為 <span class="math inline">H^{-1}(\mathbb{R}^d)</span> 與 <span class="math inline">H^1(\mathbb{R}^d)</span> 之間的對偶配對，利用 Fourier 變換對任意維度下傅立葉變換具無窮遠二次衰減且局部上下界皆離零有界的核證明了 Stein–log-Sobolev 不等式，從而建立弱解趨向平衡態的指數衰減速率。</li>
+<li>能做到什麼，代價是什麼：無須訓練參數化反演網路亦無須求取 Jacobian 行列式即可進行確定性平行抽樣；代價是核函數選擇會主宰高維排斥力強度與尾部分辨能力，且在有限粒子非線性互動下對核頻譜與位勢正則性有特定要求。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何 Knothe–Rosenblatt 三角映射比一般自由形式雙射更適合變分測度傳輸</strong>：在透過最小化 <span class="math inline">\mathrm{KL}(S_\# \eta \| \mu^y)</span> 建構將參考測度 <span class="math inline">\eta</span> 推前至後驗測度 <span class="math inline">\mu^y</span> 的映射 <span class="math inline">S</span> 時，為何 Marzouk 等人採用下三角單調結構 <span class="math inline">S_k(z_1, \dots, z_k)</span> 而非一般全連通映射？這與獨立樣本生成有何關聯？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>變數變換公式需要計算推前密度中的雅可比行列式 <span class="math inline">\det \nabla S(z)</span> 及其梯度。對於一般無結構映射，計算 <span class="math inline">d \times d</span> 行列式需 <span class="math inline">O(d^3)</span> 複雜度且難以保證全局可逆；下三角映射的雅可比矩陣自動呈下三角，行列式簡化為對角線元素乘積 <span class="math inline">\prod_{k=1}^d \partial_{z_k} S_k(z_{1:k})</span>，只需施加正偏導條件 <span class="math inline">\partial_{z_k} S_k &gt; 0</span> 即保證全域單射可逆。優化收斂後，由於輸入 <span class="math inline">z \sim \eta</span> 各分量獨立同分布，只需重複取樣 <span class="math inline">z</span> 並做確定性前向映射 <span class="math inline">S(z)</span>，就能零自相關地生成大量獨立後驗樣本且無須再呼叫正向模型。</p>
+</details>
+<ol start="2">
+<li><strong>SVGD 在有限粒子率與連續時間指數收斂上各自依賴什麼核函數條件</strong>：比較 Banerjee et al. (2024) 與 Carrillo et al. (2024) 兩項理論突破：在從次對數收斂進展到 <span class="math inline">O(1/\sqrt{N})</span> 速率、Wasserstein-2 距離收斂以及連續 PDE 指數衰減時，核函數 <span class="math inline">k</span> 的結構各自扮演什麼關鍵角色？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>在有限粒子分析中，Banerjee et al. (2024) 利用 <span class="math inline">N</span> 粒子聯合相對熵的負耗散主導拆分獲得 <span class="math inline">O(1/\sqrt{N})</span> 的 <span class="math inline">\mathsf{KSD}</span> 收斂率，但一般有界核僅能控制弱幾何下的 Stein 差異；若要得到 Wasserstein-2 收斂，必須在核函數中加入雙線性分量（例如 bilinear + Matérn 核）來控制一階與二階矩的尾部增長。在連續 PDE 層面，Carrillo et al. (2024) 把平方 Stein 差異轉寫為 <span class="math inline">H^{-1}</span> 與 <span class="math inline">H^1</span> 的對偶配對，要求核的 Fourier 變換在無窮遠處具二次衰減且在有界域外離零有界，使 Stein–Fisher 資訊能控制標準 Fisher 資訊進而證明 Stein–log-Sobolev 不等式。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>極高維非線性物理逆問題中傳輸映射維度縮減與攤銷誤差的平衡</strong>：如 Cao et al. (2024) 在 LazyDINO 中所指出的，面對計算昂貴的參數到觀測（PtO）映射，離線端訓練導數資訊神經代理模型需要同時收集正向場與 Jacobian 樣本以控制代理後驗的期望誤差上界。當觀測雜訊極小、後驗集中於高度彎曲的狹窄流形，或正向模型無法輕易提供精確 Jacobian 樣本時，如何在有限離線預算與線上懶映射表達力之間取得平衡，仍是測度傳輸走向超高維工程反演的關鍵限制。</li>
+<li><strong>離散時間有限粒子 SVGD 的維度依賴與非對數凹多峰抽樣瓶頸</strong>：儘管 Banerjee et al. (2024) 將有限粒子 KSD 收斂率推進至 <span class="math inline">O(1/\sqrt{N})</span> 且維度依賴為多項式階，Carrillo et al. (2024) 也建立了連續時間的 Stein–log-Sobolev 指數收斂，但這些幾何不等式仍以目標分佈滿足特定尾條件、Lipschitz 分數或傅立葉核衰減為前提。當後驗呈現強非對數凹、遠距分離的多峰結構時，核化粒子流的局部排斥力依然容易出現模態間質量比例失衡或粒子停滯現象。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>從三角傳輸與 SVGD 遷移至神經最優傳輸與 Otto 梯度流</strong>：Knothe–Rosenblatt 映射本質上是沿座標順序給出單調耦合，若要進一步極小化傳輸總代價並與 Brenier 凸勢映射接軌，可將本子方向的變分目標直接對照 <a class="wl" href="OTB_%E7%86%B5%E6%AD%A3%E5%89%87%E5%8C%96%E3%80%81Sinkhorn%E7%B8%AE%E6%94%BE%E8%88%87%E7%A5%9E%E7%B6%93%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E6%B1%82%E8%A7%A3%E5%99%A8.html">熵正則化、Sinkhorn縮放與神經最優傳輸求解器</a>；而將 SVGD 視為 RKHS 加權的 Wasserstein 梯度流，則提供了將 <a class="wl" href="OTC_Otto%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81JKO%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E5%8B%95%E6%85%8B%E6%B5%81%E9%AB%94%E9%87%8D%E6%A7%8B.html">Otto微積分、JKO變分梯度流與動態流體重構</a> 中的偏微分方程變分結構離散化為確定性粒子演算法的具體範例。</li>
+<li><strong>結合導數代理與條件生成擴散的逆問題跨分支互補</strong>：LazyDINO 透過離線導數代理實現線上快速攤銷後驗評估的結構，與 <a class="wl" href="36C_%E6%93%B4%E6%95%A3%E5%BE%8C%E9%A9%97%E6%8A%BD%E6%A8%A3%E8%88%87%E7%89%A9%E7%90%86%E7%B4%84%E6%9D%9F%E9%80%86%E5%95%8F%E9%A1%8C%E7%94%9F%E6%88%90%E6%B1%82%E8%A7%A3.html">擴散後驗抽樣與物理約束逆問題生成求解</a> 的離線先驗學習／線上條件引導形成互補路線；同時本子方向的確定性非高斯粒子框架，也能修補 <a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> 中純高斯協方差更新在多峰分佈下產生的模態平均偏差，並共同匯入 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-bayesian-inference-with-optimal-maps2011">1. Bayesian Inference with Optimal Maps（2011）</h4>
+<ul>
+<li>作者與出處：Tarek A. El Moselhy, Youssef M. Marzouk · <em>Journal of Computational Physics</em></li>
+<li>核心問題：傳統馬可夫鏈蒙地卡羅（MCMC）產生的樣本具有相關性且收斂判準不易判定，往往需消耗極大量的正向模型與似然求值。</li>
+<li>關鍵做法：提出以最優傳輸理論建構將先驗測度直接推前至後驗測度的確定性映射，確立映射的存在與唯一性，並討論明確參數化與結合正向梯度資訊的變分最佳化演算法。映射建立後可獲得解析後驗矩、免額外正向求解生成任意數量獨立樣本，並利用邊際似然進行模型選擇。</li>
+<li>跨領域啟發：奠定確定性測度傳輸替代 MCMC 做貝氏推論的基礎架構，直接連接 <a class="wl" href="OTB_%E7%86%B5%E6%AD%A3%E5%89%87%E5%8C%96%E3%80%81Sinkhorn%E7%B8%AE%E6%94%BE%E8%88%87%E7%A5%9E%E7%B6%93%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E6%B1%82%E8%A7%A3%E5%99%A8.html">熵正則化、Sinkhorn縮放與神經最優傳輸求解器</a> 與 <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a>。</li>
+<li>連結：<a href="zotero://select/library/items/VSZWPCST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1109.1516" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-sampling-via-measure-transport-an-introduction2016">2. Sampling via Measure Transport: An Introduction（2016）</h4>
+<ul>
+<li>作者與出處：Youssef Marzouk, Tarek Moselhy, Matthew Parno, Alessio Spantini · <em>Handbook of Uncertainty Quantification</em></li>
+<li>核心問題：需要一套系統化的數學與演算法導論，說明如何把抽象的確定性耦合與最優傳輸理論具體落地到非高斯貝氏推論與動態資料同化。</li>
+<li>關鍵做法：系統介紹確定性耦合、Knothe–Rosenblatt 下三角重排與最優傳輸映射的變分構造，展示三角構造如何化簡雅可比行列式計算，並將此幾何方法延伸至循序資料同化與非高斯濾波問題。</li>
+<li>跨領域啟發：是學習三角傳輸映射實作與條件獨立稀疏結構的首選入門文獻，與 <a class="wl" href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a> 的集合濾波方法形成對比。</li>
+<li>連結：<a href="zotero://select/library/items/FHU3P88W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1602.05023" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-stein-variational-gradient-descent-a-general-purpose-bayesian-inference-algorithm2016">3. Stein Variational Gradient Descent: A General Purpose Bayesian Inference Algorithm（2016）</h4>
+<ul>
+<li>作者與出處：Qiang Liu, Dilin Wang · <em>NeurIPS 2016</em></li>
+<li>核心問題：標準變分推論受限於參數族表達力而容易低估後驗變異數，MCMC 則缺乏確定性幾何收斂效率，亟需結合兩者優點的通用非參數粒子演算法。</li>
+<li>關鍵做法：推導 Stein 變分梯度下降（SVGD），證明該確定性粒子傳輸演算法在每一步皆沿再生核希爾伯特空間（RKHS）中的最速下降方向極小化 KL 散度，形式上等價於 RKHS 加權的 Wasserstein 梯度流。</li>
+<li>跨領域啟發：將 Stein 恆等式與 <a class="wl" href="OTC_Otto%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81JKO%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E5%8B%95%E6%85%8B%E6%B5%81%E9%AB%94%E9%87%8D%E6%A7%8B.html">Otto微積分、JKO變分梯度流與動態流體重構</a> 的梯度流幾何結合，開啟無須計算行列式的粒子測度傳輸分支。</li>
+<li>連結：<a href="zotero://select/library/items/IXE6X6HT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1608.04471" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-improved-finite-particle-convergence-rates-for-stein-variational-gradient-descent2024">4. Improved Finite-Particle Convergence Rates for Stein Variational Gradient Descent（2024）</h4>
+<ul>
+<li>作者與出處：Sayan Banerjee, Krishnakumar Balasubramanian, Promit Ghosal · <em>arXiv</em></li>
+<li>核心問題：既有 SVGD 理論中，Shi and Mackey (2022) 給出的有限粒子收斂率僅為緩慢的 <span class="math inline">O(1/\sqrt{\log\log n})</span>，與實務上觀察到的粒子效率差距極大，且缺乏 Wasserstein-2 收斂界。</li>
+<li>關鍵做法：把 <span class="math inline">N</span> 粒子聯合密度與 <span class="math inline">N</span> 重乘積目標測度之間的相對熵時間導數拆分為正比於 <span class="math inline">N \cdot \mathbb{E}[\mathsf{KSD}^2]</span> 的主導負項與較小正項，藉此在連續與離散時間皆推得 <span class="math inline">O(1/\sqrt{N})</span> 的 <span class="math inline">\mathsf{KSD}</span> 收斂率（呈雙重指數改進且維度依賴為多項式級）；並在核中加入雙線性分量（如 bilinear + Matérn 核）進一步建立連續時間 Wasserstein-2 收斂。</li>
+<li>跨領域啟發：首次在有限粒子尺度下確立 SVGD 匹配獨立同分布取樣的 <span class="math inline">1/\sqrt{N}</span> 收斂速度，釐清核函數尾部與矩控制對幾何度量的決定性影響。</li>
+<li>連結：<a href="zotero://select/library/items/48EMIACJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.08469" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-the-stein-log-sobolev-inequality-and-the-exponential-rate-of-convergence-for-the-continuous-stein-variational-gradient-descent-method2024">5. The Stein-log-Sobolev inequality and the exponential rate of convergence for the continuous Stein variational gradient descent method（2024）</h4>
+<ul>
+<li>作者與出處：José A. Carrillo, Jakub Skrzeczkowski, Jethro Warnett · <em>arXiv</em></li>
+<li>核心問題：連續時間 SVGD 偏微分方程能否對一般維度建立類似經典 Fokker–Planck 方程的對數 Sobolev 不等式進而證明指數收斂率，長期以來仍是未解問題。</li>
+<li>關鍵做法：將平方 Stein 差異（Stein–Fisher 資訊）重新詮釋為 <span class="math inline">H^{-1}(\mathbb{R}^d)</span> 與 <span class="math inline">H^1(\mathbb{R}^d)</span> 之間的對偶配對並引入 Fourier 變換，在任意維度下針對傅立葉變換具有無窮遠二次衰減且局部上下界離零有界的核函數證明了 Stein–log-Sobolev 不等式，進而構造滿足指數收斂至平衡態的 PDE 弱解。</li>
+<li>跨領域啟發：補齊 SVGD 平均場 PDE 層面的指數穩定性理論缺口，其 Sobolev 對偶與傅立葉分析工具可直接與 <a class="wl" href="OTC_Otto%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81JKO%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E5%8B%95%E6%85%8B%E6%B5%81%E9%AB%94%E9%87%8D%E6%A7%8B.html">Otto微積分、JKO變分梯度流與動態流體重構</a> 的耗散不等式互補。</li>
+<li>連結：<a href="zotero://select/library/items/3U2RTBAZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.10295" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-lazydino-fast-scalable-and-efficiently-amortized-bayesian-inversion-via-structure-exploiting-and-surrogate-driven-measure-transport2024">6. LazyDINO: Fast, scalable, and efficiently amortized Bayesian inversion via structure-exploiting and surrogate-driven measure transport（2024）</h4>
+<ul>
+<li>作者與出處：Lianghao Cao, Joshua Chen, Michael Brennan, Thomas O'Leary-Roseberry, Youssef Marzouk · <em>arXiv</em></li>
+<li>核心問題：將傳輸映射變分推論應用於高維非線性貝氏逆問題時，若參數到觀測（PtO）映射求值極度昂貴，每批新觀測資料都重新訓練高維傳輸映射將造成難以承受的線上計算延遲。</li>
+<li>關鍵做法：提出 LazyDINO 兩階段架構：離線階段利用 PtO 映射與其 Jacobian 的聯合樣本建構導數資訊神經代理模型；線上階段接收到觀測資料後，透過代理驅動訓練具備低維非線性結構的懶映射（lazy map）快速產生後驗樣本或密度估計，並證明導數降階基底能極小化代理後驗近似期望誤差的上界。</li>
+<li>跨領域啟發：把導數資訊降階算子學習與結構化三角傳輸映射融為一體，提供可遷移至 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 的高速攤銷反演設計。</li>
+<li>連結：<a href="zotero://select/library/items/W3AQ64KZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.12726" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-9-篇">G5｜本子方向全量文獻泛讀清單（共 9 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 9 篇文獻（含開放存取 PDF 9 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進6-篇">A. 奠基經典、專著與核心演進（6 篇）</h3>
+<ul>
+<li><strong>2016｜Sampling via Measure Transport: An Introduction</strong>，Youssef Marzouk et al.（<em>Handbook of Uncertainty Quantification</em>，40 引）：確定性耦合與三角傳輸映射的入門教材，一步步串起 Knothe–Rosenblatt 重排、稀疏條件圖結構與非高斯濾波。 <a href="zotero://select/library/items/FHU3P88W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1602.05023" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Bayesian Inference with Optimal Maps</strong>，Tarek A. El Moselhy, Youssef M. Marzouk（<em>Journal of Computational Physics</em>，267 引）：用測度傳輸做貝氏推論的開創論文：不模擬馬可夫鏈，改用變分最佳化直接構造把先驗推前至後驗的最優傳輸映射。 <a href="zotero://select/library/items/VSZWPCST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1109.1516" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Bayesian model calibration for block copolymer self-assembly: Likelihood-free inference and expected information gain computation via measure transport</strong>，Ricardo Baptista et al.（<em>arXiv</em>）：針對嵌段共聚物自組裝影像校準中含隨機無序輔助變數導致概似函數難計算的問題，結合測度傳輸與影像摘要統計量執行無概似貝氏推論，並低成本計算預期資訊增益（EIG）。 <a href="zotero://select/library/items/EDRUUP7H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2206.11343" rel="noopener">官方連結</a></li>
+<li><strong>2022｜A Finite-Particle Convergence Rate for Stein Variational Gradient Descent</strong>，Jiaxin Shi, Lester Mackey（<em>arXiv</em>）：給出 Stein 變分梯度下降 (SVGD) 的有限粒子收斂速率，證明當目標分佈為次高斯且具 Lipschitz 分數函數時，<span class="math inline">n</span> 粒子 SVGD 可依 <span class="math inline">1/\sqrt{\log\log n}</span> 階速率將核 Stein 差異趨近於零。 <a href="zotero://select/library/items/C9GKQ9ME" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.09721" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Bayesian Lasso Posterior Sampling via Parallelized Measure Transport</strong>，Marcela Mendoza, Alexis Allegra, Todd P. Coleman（<em>arXiv</em>）：針對貝氏 Lasso 後驗採樣中 Gibbs 採樣擴展性差與樣本相關問題，提出平行化測度傳輸法構造從拉普拉斯先驗映至後驗的傳輸映射，將映射建構分解為平行求解 Lasso 與閉式線性代數更新以產生獨立同分佈樣本。 <a href="zotero://select/library/items/C7HXMFIC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1801.02106" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Stein Variational Gradient Descent: A General Purpose Bayesian Inference Algorithm</strong>，Qiang Liu, Dilin Wang（<em>NeurIPS 2016</em>）：推導 Stein 變分梯度下降（SVGD）通用貝氏推論演算法，將其表述為在再生核希爾伯特空間（RKHS）中沿 KL 散度最陡下降方向傳輸確定性粒子群的核加權 Wasserstein 梯度流。 <a href="zotero://select/library/items/IXE6X6HT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1608.04471" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻3-篇">B. 2024–2026 近期推進與前沿文獻（3 篇）</h3>
+<ul>
+<li><strong>2024｜Improved Finite-Particle Convergence Rates for Stein Variational Gradient Descent</strong>，Sayan Banerjee, Krishnakumar Balasubramanian, Promit Ghosal（<em>arXiv</em>）：分析相對熵時間導數分解，證明SVGD在<span class="math inline">\mathsf{KSD}</span>與Wasserstein-2度量下具<span class="math inline">1/\sqrt{N}</span>有限粒子收斂率，且界隨維度<span class="math inline">d</span>多項式增長。 <a href="zotero://select/library/items/48EMIACJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.08469" rel="noopener">官方連結</a></li>
+<li><strong>2024｜LazyDINO: Fast, scalable, and efficiently amortized Bayesian inversion via structure-exploiting and surrogate-driven measure transport</strong>，Lianghao Cao et al.（<em>arXiv</em>）：提出高維非線性貝氏逆問題的平攤變分推論方法LazyDINO，離線建構PtO映射與Jacobian的導數資訊代理模型，線上驅動低維非線性lazy傳輸映射快速採樣後驗。 <a href="zotero://select/library/items/W3AQ64KZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.12726" rel="noopener">官方連結</a></li>
+<li><strong>2024｜The Stein-log-Sobolev inequality and the exponential rate of convergence for the continuous Stein variational gradient descent method</strong>，José A. Carrillo, Jakub Skrzeczkowski, Jethro Warnett（<em>arXiv</em>）：證明各維度下若核函數傅立葉變換具二次衰減且局部有界離零與無窮，即滿足Stein-log-Sobolev不等式，藉此建立連續SVGD的指數收斂率與弱解構造。 <a href="zotero://select/library/items/3U2RTBAZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2412.10295" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-95bed839">在地圖上查看</a><div class="rg"><h3>相關<span class="n">7</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/36_%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">貝氏逆問題與測度傳輸</a><span class="rs">從稀疏、含噪的觀測反推無窮維的隱藏物理場，是病態的不適定問題。貝氏逆問題把它改寫成函數空間上對先驗測度的平滑加權更新，測度傳輸則用確定性最優傳輸…</span></li><li><a href="36A_%E7%84%A1%E7%AA%AE%E7%B6%AD%E5%87%BD%E6%95%B8%E7%A9%BA%E9%96%93%E8%B2%9D%E6%B0%8F%E9%80%86%E5%95%8F%E9%A1%8C%E8%88%87%E9%9B%86%E5%90%88%E5%8D%A1%E7%88%BE%E6%9B%BC%E8%B3%87%E6%96%99%E5%90%8C%E5%8C%96EKI.html">無窮維函數空間貝氏逆問題與集合卡爾曼資料同化EKI</a></li><li><a href="OTB_%E7%86%B5%E6%AD%A3%E5%89%87%E5%8C%96%E3%80%81Sinkhorn%E7%B8%AE%E6%94%BE%E8%88%87%E7%A5%9E%E7%B6%93%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E6%B1%82%E8%A7%A3%E5%99%A8.html">熵正則化、Sinkhorn縮放與神經最優傳輸求解器</a></li><li><a href="OTC_Otto%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81JKO%E8%AE%8A%E5%88%86%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E5%8B%95%E6%85%8B%E6%B5%81%E9%AB%94%E9%87%8D%E6%A7%8B.html">Otto微積分、JKO變分梯度流與動態流體重構</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M43_Markov%20%E9%8F%88%E3%80%81MCMC%E3%80%81Poisson%20%E9%81%8E%E7%A8%8B.html">Markov 鏈、MCMC、Poisson 過程</a><span class="tag-plan">計劃</span><span class="rs">Blitzstein &amp; Hwang 第 11–13 章：Markov 鏈、MCMC、Poisson 過程</span></li><li><a href="36C_%E6%93%B4%E6%95%A3%E5%BE%8C%E9%A9%97%E6%8A%BD%E6%A8%A3%E8%88%87%E7%89%A9%E7%90%86%E7%B4%84%E6%9D%9F%E9%80%86%E5%95%8F%E9%A1%8C%E7%94%9F%E6%88%90%E6%B1%82%E8%A7%A3.html">擴散後驗抽樣與物理約束逆問題生成求解</a></li><li><a href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M32_%E7%B5%B1%E8%A8%88%E6%8E%A8%E8%AB%96%E3%80%81%E8%BF%B4%E6%AD%B8%E8%88%87%E6%BD%9B%E5%9C%A8%E7%B5%90%E6%9E%9C.html">統計推論、迴歸與潛在結果</a><span class="tag-plan">計劃</span><span class="rs">Wasserman 其餘：第 7–8 章（CDF 估計、Bootstrap）、第 9 章其餘、第 11–14 章（Bayes 推論、決策理論、線…</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

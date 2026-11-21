@@ -12,20 +12,20 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-c408f8c8">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">經濟</a><a class="find" href="../../index.html#n=n-c408f8c8">Find on board</a></header>
+<body class="doc" data-note="n-c408f8c8" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 經濟</span>
 <article>
 
 <h1 id="e49連續時間隨機微積分">E49｜連續時間隨機微積分</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">E48 離散時間隨機微積分</a> ｜ 下一章：<a class="wl" href="E50_%E8%B3%87%E7%94%A2%E5%AE%9A%E5%83%B9%EF%BC%88Cochrane%EF%BC%89.html">E50 資產定價（Cochrane）</a>
 本線先備：<a class="wl" href="E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">E48 離散時間隨機微積分</a>
 別線先備：<a class="wl" href="../01_%E6%95%B8%E5%AD%B8/00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a>（細節見下方「路線上的計劃」）
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">35_分數階微積分與非局域擴散</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">非平衡態統計力學與隨機熱力學</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/08-economics.md:179</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -61,10 +61,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">1</span></h3><ul><li><a href="E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a><span class="tag-plan">計劃</span><span class="rs">Shreve，*Stochastic Calculus for Finance I*（離散時間）</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">1</span></h3><ul><li><a href="E51_%E5%8B%95%E6%85%8B%E8%B3%87%E7%94%A2%E5%AE%9A%E5%83%B9%E7%90%86%E8%AB%96.html">動態資產定價理論</a><span class="tag-plan">計劃</span><span class="rs">Duffie，*Dynamic Asset Pricing Theory* 選章</span></li></ul></div><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a><span class="rs">牛頓與萊布尼茲的微積分和布朗運動有兩個簡化假設：只看無窮小的鄰居（空間局域性），以及下一秒就忘記過去（馬可夫無記憶性）。</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35B_L%C3%A9vy%E9%A3%9B%E8%A1%8C%E3%80%81%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E6%BC%AB%E6%AD%A5%E8%88%87%E5%8F%8D%E5%B8%B8%E6%93%B4%E6%95%A3%E5%88%86%E6%95%B8%E9%9A%8EFokker-Planck.html">Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35C_%E9%9D%9E%E5%B1%80%E5%9F%9F%E5%90%91%E9%87%8F%E5%BE%AE%E7%A9%8D%E5%88%86%E3%80%81%E8%BF%91%E5%A0%B4%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%88%86%E6%95%B8%E9%9A%8E%E7%89%A9%E7%90%86%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90.html">非局域向量微積分、近場動力學與分數階物理神經算子</a></li><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">非平衡態統計力學與隨機熱力學</a><span class="rs">十九世紀的古典熱力學第二定律是一條不等式（Δ S_{tot} ≥ 0），只適用於巨觀、緩慢、平衡態的系統。</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

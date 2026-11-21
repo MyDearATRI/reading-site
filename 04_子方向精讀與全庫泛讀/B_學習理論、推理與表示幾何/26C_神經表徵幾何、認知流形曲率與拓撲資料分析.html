@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>26C｜神經表徵幾何、認知流形曲率與拓撲資料分析 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-e4a500ac" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="26c神經表徵幾何認知流形曲率與拓撲資料分析">26C｜神經表徵幾何、認知流形曲率與拓撲資料分析</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a>
+同領域子方向：<a class="wl" href="26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a> · <a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a>
+跨領域關聯子方向：<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08A_%E6%B5%B7%E9%A6%AC%E8%BF%B4%E8%88%87%E6%96%B0%E7%9A%AE%E8%B3%AA%E4%BA%92%E8%A3%9C%E5%AD%B8%E7%BF%92%E7%B3%BB%E7%B5%B1CLS%E3%80%81%E7%9D%A1%E7%9C%A0%E9%87%8D%E6%92%AD%E8%88%87%E7%9B%B8%E4%BD%8D%E8%A8%98%E6%86%B6%E7%B7%A8%E7%A2%BC.html">海馬迴與新皮質互補學習系統CLS、睡眠重播與相位記憶編碼</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a> 的系統與實證端，將 <a class="wl" href="26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a> 的規範性原型幾何與 <a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a> 的高維子空間編碼，推進至群體神經活動與認知流形的全局幾何與拓撲性質。它處理的核心矛盾是：不同網路實例或大腦區域如何以異質的神經元調諧曲線，實現等價的表徵相似性矩陣，並在流形曲率、有效維度與同調拓撲層面平衡跨任務泛化與特徵干擾。研究主線由單神經元 Fisher 資訊與表徵相似性分析（RSA）出發，延伸至訓練動態中的維度塌縮與曲率平滑化、腦機對齊，以及上下文指令對流形拓撲型態的即時重組。</p>
+</aside>
+<ul>
+<li>核心問題：傳統神經科學依賴單細胞調諧曲線與 Fisher 資訊量測局部刺激敏感度，但同一幾何結構可由多組完全不同的單神經元調諧函數誘導生成，單細胞視角無法捕捉線性解碼器在群體層面真正能讀取的資訊。在深度學習側，權重參數與訓練路徑高度不唯一，單純比較權重或低階統計量無法解釋不同架構為何學會相同的輸入輸出行為，也難以在缺乏領域外標籤時預警分佈外泛化失效或語意組合錯誤。此外，當表徵受限於低維流形或非線性結構時，線性距離與靜態向量相似性會忽略流形彎曲、有效維度瓶頸，以及上下文規格對拓撲連通性（例如環狀與樹狀圖結構）的動態改寫。</li>
+<li>直覺模型：想像大腦或神經網路不是把每個概念存進固定抽屜，而是在高維空間裡鋪設一張可彎折的彈性網面：每個點代表一個刺激或詞彙，點與點之間的幾何距離與角度決定了讀出層能多輕易分辨它們。即便兩套系統把整張網面旋轉或鏡射成不同座標（對應不同的神經元調諧），只要網面的相對距離、曲率與拓撲洞數維持不變，它們執行的認知計算就是等價的；而當我們給出新的上下文規則時，模型能當場把同一組詞彙重新拉成圓環或展開成樹枝。</li>
+<li>分階段閱讀路線：第一步先讀 Kriegeskorte 與 Wei（2021）以及 Lu 等人（2018），建立單神經元調諧、Fisher 資訊與群體表徵幾何之間的數學對應，並理解不同非線性網路透過正交變換共享同一表徵幾何的現象。第二步研讀 Liu 等人（2026）與 Kazanskii（2026），掌握如何利用熵、流形曲率與有效維度作為診斷與控制訊號，分別預測語言模型與人腦語言網路的對齊程度，以及調控延遲泛化（grokking）相變。第三步聚焦 2026 年前沿：閱讀 Lu 等人（2026）從線性幾何干擾預測組合任務失敗的對抗式搜尋，以及 David 與 Fomin（2026）展示上下文宣告式規則如何壓過預訓練先驗、直接重組流形拓撲類型的因果干預研究。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;單神經元調諧與 Fisher 資訊&quot;] --&gt; B[&quot;群體表徵幾何與相似性矩陣 RSA&quot;]
+  B --&gt; C[&quot;跨網路正交等價與共享表徵&quot;]
+  B --&gt; D[&quot;曲率平滑化與有效維度指標&quot;]
+  D --&gt; E[&quot;腦區 fMRI 對齊與模組化&quot;]
+  D --&gt; F[&quot;維度塌縮與 Grokking 譜正則控制&quot;]
+  C --&gt; G[&quot;特徵鄰近干擾與組合失效預測&quot;]
+  D --&gt; H[&quot;上下文規則驅動之拓撲重組&quot;]
+  G --&gt; H
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>神經調諧與表徵幾何的等價類（Neural Tuning vs. Representational Geometry）</strong></p>
+<ul>
+<li>直覺理解：個別神經元對刺激的偏好曲線只是表徵的「座標系選擇」，真正決定線性讀出效能與行為判別極限的，是刺激點在群體反應空間裡構成的相對距離與幾何形狀。</li>
+<li>機制或核心表達式：依據 Kriegeskorte 與 Wei（2021）的框架，設刺激 <span class="math inline">s \in \mathcal{S}</span> 誘發的群體平均反應向量為 <span class="math inline">f(s) \in \mathbb{R}^N</span>，在雜訊協方差 <span class="math inline">\Sigma(s)</span> 下，其對刺激微小變化的敏感度由 Fisher 資訊矩陣決定：<span class="math inline">I_F(s) = J_f(s)^\top \Sigma(s)^{-1} J_f(s)</span>（在等向高斯雜訊下正比於局部幾何度量張量）。對於任意正交矩陣 <span class="math inline">Q \in O(N)</span>，變換後的調諧曲線 <span class="math inline">\tilde{f}(s) = Q f(s)</span> 具有截然不同的單細胞調諧峰，卻保持表徵相似性矩陣（RSM）<span class="math inline">G_{ij} = \langle f(s_i), f(s_j) \rangle</span> 與所有成對距離 <span class="math inline">\|f(s_i) - f(s_j)\|_2</span> 不變。Lu 等人（2018）進一步透過共享反應模型（SRM）證明，不同 CNN 與 ResNet 訓練實例學得的內部表徵近似滿足 <span class="math inline">H^{(1)} \approx Q H^{(2)}</span> 的正交等價關係。</li>
+<li>能做到什麼，代價是什麼：正交不變幾何能有效比較跨被試、跨腦區與跨架構的演算法相似性，而不受神經元排列或旋轉模糊度干擾；然而 RSM 僅保留二階內積結構，無法反映高階非線性流形拓撲（例如環面孔洞）或對特定下游線性讀出軸以外的幾何細節加以區分。</li>
+</ul>
+</li>
+<li>
+<p><strong>有效維度、流形曲率與幾何控制訊號（Effective Dimensionality, Curvature &amp; Geometric Control）</strong></p>
+<ul>
+<li>直覺理解：神經網路在學習或泛化過程中，其隱藏層點雲並非靜止不變，而是會經歷曲率拉直、低複雜度模組分化與維度塌縮；量測並正則化這些譜幾何指標，能直接預測腦對齊或加速泛化相變。</li>
+<li>機制或核心表達式：設批樣本隱藏層表徵矩陣為 <span class="math inline">H \in \mathbb{R}^{n \times d}</span>，中心化協方差矩陣為 <span class="math inline">\Sigma_H</span>，特徵值為 <span class="math inline">\{\lambda_j\}_{j=1}^d</span>。表徵有效維度（參與比，Participation Ratio）定義為 <span class="math inline">d_{\mathrm{eff}} = \frac{(\sum_j \lambda_j)^2}{\sum_j \lambda_j^2}</span>；序列軌跡曲率則可由相鄰狀態差分向量的夾角餘弦或局部二階差分衡量。Liu 等人（2026）在 Pythia 訓練過程中發現網路層會自組織為低複雜度（低熵、低曲率）與高複雜度叢集，且降低曲率能獨立於訓練進度穩健預測人類語言腦區 fMRI 編碼表現。Kazanskii（2026）則證明延遲泛化（grokking）發生前均伴隨有效維度塌縮，並提出幾何維度正則化（GeomDR），透過在損失函數中加入譜正則項調控 <span class="math inline">d_{\mathrm{eff}}</span>，在模運算與置換群合成任務中將 grokking 加速最高達 52 倍。</li>
+<li>能做到什麼，代價是什麼：曲率與有效維度提供了無須任務外標籤即可監控訓練狀態與分佈外風險（Chou 等人 2026）的頂層生物標記；但若過度壓縮維度，在持續學習任務相似度較低或需要高維正交容量時（Korte 等人 2026），會加劇跨任務干擾並損害可塑性。</li>
+</ul>
+</li>
+<li>
+<p><strong>上下文誘導拓撲重組與幾何干擾（In-Context Topological Restructuring &amp; Feature Interference）</strong></p>
+<ul>
+<li>直覺理解：語言模型的概念幾何並不是一成不變的靜態地圖：當概念方向在空間中靠得太近時，多概念組合會因訊號干擾而失敗；而明確的上下文規則甚至能暫時推翻預訓練幾何，把同一批詞彙現場編排成圓環或分支樹。</li>
+<li>機制或核心表達式：在概念組合層面，Lu 等人（2026）假設兩概念分別對應特徵方向 <span class="math inline">v_a, v_b</span>，當內積餘弦 <span class="math inline">|\cos(v_a, v_b)|</span> 接近 0（近正交）時模型能穩定執行組合推理，而當兩者線性編碼靠近產生較大重疊時，幹擾誤差上升並直接預示多跳推理與跨語召回的組合失敗。在拓撲動態層面，David 與 Fomin（2026）在 Gemma 與 Qwen 中測試宣告式上下文規則，發現即使使用無先驗語意的任意記號，模型也能根據指令在激活中建立環狀（cycle）或樹狀（tree）關係流形；當上下文與強預訓練先驗衝突時，激活與施加結構的 RSA 達 0.6–0.9 而與原先驗接近 0，且透過激活置換（activation patching）可因果性地改變後繼輸出。</li>
+<li>能做到什麼，代價是什麼：這種依賴上下文的流形重組賦予大模型高度的任務適應彈性，但也揭示表徵幾何具有強烈的狀態依賴性：靜態基準測得的心理物理規律（如 Cacioli 2026 測得數值表徵普遍符合對數壓縮的 Weber 定律，RSA 達 0.68–0.96，卻與行為辨別率分離）未必直接等價於模型在特定推理流程中實際調用的因果幾何。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何兩組單神經元調諧曲線完全不同的神經網路，行為極限卻可能一致</strong>：依據 Kriegeskorte 與 Wei（2021）及 Lu 等人（2018），若網路 A 的神經元呈現稀疏局部調諧，網路 B 呈現分散混合調諧，在什麼數學轉換條件下兩者對理想線性觀察者具有相同的刺激辨別能力與互資訊？此條件在什麼情況下會被打破？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>分析關鍵在於刺激反應流形 <span class="math inline">f(s)</span> 與雜訊協方差 <span class="math inline">\Sigma(s)</span> 之間的聯合不變性。若網路 B 與網路 A 滿足全局線性正交等價 <span class="math inline">\tilde{f}(s) = Q f(s) + b</span> 且雜訊也隨之旋轉 <span class="math inline">\tilde{\Sigma}(s) = Q \Sigma(s) Q^\top</span>（或本身為等向雜訊 <span class="math inline">\sigma^2 I</span>），則兩者的 Fisher 資訊矩陣 <span class="math inline">I_F(s)</span> 與表徵相似性矩陣完全相同，因此線性解碼器與理想觀察者的錯誤率完全一致。反之，若變換為非等距拉伸（各向異性縮放）、神經元反應受限於非負錐或存在與軸對齊的獨立讀出雜訊，調諧曲線的具體基底方向就會改變可解碼資訊。</p>
+</details>
+<ol start="2">
+<li><strong>幾何生物標記（低曲率、對數壓縮）與因果行為之間為何會出現分離</strong>：Liu 等人（2026）顯示降低曲率能預測模型與大腦語言網路的 fMRI 對齊，但 Cacioli（2026）卻發現 7–9B 模型在數值表徵上高度符合對數 Weber 定律（RSA 0.68–0.96），在時空比較任務上行為卻僅達隨機水準。這說明幾何探針量測與因果機制之間存在什麼落差？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>這涉及「表徵存在」與「下游因果調用」兩個層次的區分。RSA 與流形曲率量測的是激活點雲在整個高維空間中的幾何結構，這些結構可能只存在於淺層或非讀出子空間（如 Cacioli 2026 的逐層因果干預所揭示的層間分離），並未對齊最終輸出頭所需的決策子空間。相反地，David 與 Fomin（2026）採用激活置換（activation patching）直接置換實體狀態並檢驗後繼輸出是否依施加拓撲改變，才是驗證某一表徵幾何是否具備因果功能（而非僅為統計伴隨物）的必要步驟。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>表徵幾何在「跨任務共享流形」與「正交子空間隔離」之間的動態切換機制</strong>：認知科學長期爭論概念表徵究竟收斂至共享流形以支持遷移，抑或分離至正交子空間以避免干擾。Hu 等人（2026）指出數概念在不同任務中分處獨立子空間，卻可透過線性映射轉換而共享關係結構；Korte 等人（2026）則顯示模組化架構是否影響持續學習幾何取決於有效維度高低。大腦與大模型如何在訓練與上下文執行期間動態切換這兩種機制（可對照 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08A_%E6%B5%B7%E9%A6%AC%E8%BF%B4%E8%88%87%E6%96%B0%E7%9A%AE%E8%B3%AA%E4%BA%92%E8%A3%9C%E5%AD%B8%E7%BF%92%E7%B3%BB%E7%B5%B1CLS%E3%80%81%E7%9D%A1%E7%9C%A0%E9%87%8D%E6%92%AD%E8%88%87%E7%9B%B8%E4%BD%8D%E8%A8%98%E6%86%B6%E7%B7%A8%E7%A2%BC.html">海馬迴與新皮質互補學習系統CLS、睡眠重播與相位記憶編碼</a> 的快慢雙系統互補記憶），仍缺乏統一的動力學理論。</li>
+<li><strong>離散圖拓撲結構與連續光滑流形幾何如何統一於同一神經運算框架</strong>：David 與 Fomin（2026）證實上下文可即時指定環狀或樹狀圖拓撲，Hosseini 等人（2026）卻發現神經軌跡拉直現象在連續預測任務明顯、在離散少樣本結構預測則不一致；同時 Ishant（2026）主張以巢狀情節狀態拓撲（NEST）的帶型圖架構刻畫工作記憶與長期信念圖的互動。連續流形曲率分析與離散持久同調／圖拓撲演算該如何接軌（參見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>），仍是核心開放議題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>有效維度塌縮與譜正則化遷移至線性表示假說容量調控</strong>：Kazanskii（2026）透過參與比 <span class="math inline">d_{\mathrm{eff}}</span> 捕捉訓練期維度塌縮並施加 GeomDR 控制相變的譜正則技術，以及 Korte 等人（2026）對高維與低維制度下模組化效應的分界分析，可直接遷移至 <a class="wl" href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a>，用來研究概念疊加態在訓練中何時從稀疏高維表示轉向緊緻低維組合結構。</li>
+<li><strong>上下文拓撲重組與記憶子空間切換遷移至互補學習系統研究</strong>：David 與 Fomin（2026）觀察到的上下文宣告式拓撲覆寫（在不改動權重下壓過預訓練先驗並於激活層建構新關係圖），以及 Hu 等人（2026）跨任務子空間線性同構映射，能為 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08A_%E6%B5%B7%E9%A6%AC%E8%BF%B4%E8%88%87%E6%96%B0%E7%9A%AE%E8%B3%AA%E4%BA%92%E8%A3%9C%E5%AD%B8%E7%BF%92%E7%B3%BB%E7%B5%B1CLS%E3%80%81%E7%9D%A1%E7%9C%A0%E9%87%8D%E6%92%AD%E8%88%87%E7%9B%B8%E4%BD%8D%E8%A8%98%E6%86%B6%E7%B7%A8%E7%A2%BC.html">海馬迴與新皮質互補學習系統CLS、睡眠重播與相位記憶編碼</a> 中的工作記憶快速編碼與皮質慢速結構鞏固提供可計算的幾何對照模型。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-neural-tuning-and-representational-geometry2021">1. Neural tuning and representational geometry（2021）</h4>
+<ul>
+<li>作者與出處：Nikolaus Kriegeskorte, Xue-Xin Wei · <em>Nature Reviews Neuroscience (2021)</em></li>
+<li>核心問題：系統神經科學同時使用單神經元調諧曲線（Fisher 資訊）與群體多變量表徵相似性矩陣（RSA）兩種視角，兩者在資訊論與線性解碼層面的嚴格數學關係過去常被混用。本文旨在釐清調諧與幾何之間的轉換結構。</li>
+<li>關鍵做法：形式化推導神經元調諧如何誘導群體表徵幾何，並證明多組不同的單神經元調諧配置可生成完全相同的表徵幾何。進一步闡明表徵幾何直接決定了 Fisher 資訊、互資訊以及理想觀察者在心理物理任務中的行為上限。</li>
+<li>跨領域啟發：奠定群體表徵幾何分析的理論基礎，使人工神經網路與生物腦區得以在正交不變的幾何層面上進行對齊比較。</li>
+<li>連結：<a href="zotero://select/library/items/DQRI8TF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.09743" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-shared-representational-geometry-across-neural-networks2018">2. Shared Representational Geometry Across Neural Networks（2018）</h4>
+<ul>
+<li>作者與出處：Qihong Lu, Po-Hsuan Chen, Jonathan W. Pillow, Peter J. Ramadge, Kenneth A. Norman · <em>arXiv 2018</em></li>
+<li>核心問題：以不同隨機種子初始化的非線性深度網路在相同資料集上會學得截然不同的權重，但輸入輸出函數相近。本文檢驗不同非線性網路實例之間是否仍存在與線性網路類似的幾何等價性。</li>
+<li>關鍵做法：採用共享反應模型（Shared Response Model）對 CIFAR-10 與 CIFAR-100 上訓練的標準捲積網路與殘差網路進行對齊分析。實驗證實不同非線性網路對同一輸入樣本的內部活動模式，可視為同一個底層共享表徵經由不同正交變換後的投影。</li>
+<li>跨領域啟發：把神經影像學的跨被試功能對齊方法引入深度學習，說明權重差異背後的幾何不變性。</li>
+<li>連結：<a href="zotero://select/library/items/GE3QPTBP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.11684" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-training-driven-representational-geometry-modularization-predicts-brain-alignment-in-language-models2026">3. Training-Driven Representational Geometry Modularization Predicts Brain Alignment in Language Models（2026）</h4>
+<ul>
+<li>作者與出處：Yixuan Liu, Zhiyuan Ma, Likai Tang, Runmin Gan, Xinche Zhang · <em>CogSci 2026</em></li>
+<li>核心問題：大型語言模型與人類大腦語言網路之間的編碼對齊度為何隨訓練與規模提升，過去多從詞預測準確率歸因，缺乏內部幾何演化的機制解釋。本文從表徵幾何動態追蹤模型與人腦對齊的結構訊號。</li>
+<li>關鍵做法：在 Pythia（70M–1B）訓練全過程中量測各層表徵熵、序列曲率與人類 fMRI 編碼分數，發現網路層自發分化為低複雜度與高複雜度模組；即使控制訓練進度，低曲率仍顯著預測語言腦區（尤其顳葉與額葉呈現快慢異質軌跡）的對齊程度。</li>
+<li>跨領域啟發：將序列流形曲率平滑化連結至腦機對齊與功能區域時間尺度分化，呼應神經計算中的高效編碼原則。</li>
+<li>連結：<a href="zotero://select/library/items/UIBGNVWK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.07539" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-how-to-tame-grokking-representation-geometry-as-a-control-signal2026">4. How to Tame Grokking: Representation Geometry as a Control Signal（2026）</h4>
+<ul>
+<li>作者與出處：Maksim A Kazanskii · <em>arXiv 2026</em></li>
+<li>核心問題：神經網路在延遲泛化（grokking）中會先長時間記憶訓練集再突然泛化，但其幾何前兆與可控調節訊號尚未完全明確。本文檢驗隱藏層有效維度與泛化相變之間的因果關聯。</li>
+<li>關鍵做法：在模加法、模除法與置換合成任務中觀察到有效維度塌縮穩定先於 grokking 發生；據此提出幾何維度正則化（GeomDR），透過譜正則項直接調控訓練期隱藏表徵的有效維度，在多項設定下將 grokking 出現時間相較標準 AdamW 加速最高達 52 倍。</li>
+<li>跨領域啟發：示範表徵幾何不只是事後診斷指標，更可轉化為直接調控優化相變與泛化速度的幾何控制變數。</li>
+<li>連結：<a href="zotero://select/library/items/HRXJAJGH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.11666" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-adversarial-concept-search-predicting-compositional-errors-from-feature-geometry2026">5. Adversarial Concept Search: Predicting Compositional Errors From Feature Geometry（2026）</h4>
+<ul>
+<li>作者與出處：Jennifer Meng Lu, Ruochen Zhang, Isabelle Lee, David Alvarez-Melis, Ellie Pavlick · <em>arXiv 2026</em></li>
+<li>核心問題：開發者通常透過人工設計難題或大規模基準事後發現大模型在多概念組合上的錯誤，缺乏無須逐筆輸入測試的事前風險預測工具。本文探索能否直接從特徵幾何預測組合失效。</li>
+<li>關鍵做法：在程式合成、多跳推理與多語言事實召回任務中檢驗概念線性編碼的幾何夾角。結果顯示當一對概念呈現近正交編碼時模型能穩定組合，而當其線性向量在空間中過於接近並產生干擾時模型即無法正確組合，據此建構主動壓力測試的對抗式概念搜尋方法。</li>
+<li>跨領域啟發：把特徵疊加與幾何干擾直接連結至系統性組合泛化失敗，為高風險輸入篩選提供無標籤幾何判準。</li>
+<li>連結：<a href="zotero://select/library/items/W7628SWZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.13934" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-context-is-king-how-in-context-specification-shapes-the-geometry-of-concepts2026">6. Context Is King: How In-Context Specification Shapes the Geometry of Concepts（2026）</h4>
+<ul>
+<li>作者與出處：Elad David, Max Fomin · <em>arXiv 2026</em></li>
+<li>核心問題：既有研究常將大模型中觀察到的星期圓環或月份圓環等流形視為權重內固化的世界模型查表結構，但這無法解釋模型如何處理全新或違反常識的上下文結構。本文檢驗上下文規則對概念幾何拓撲的主導能力。</li>
+<li>關鍵做法：在 Gemma 與 Qwen 上以宣告式規則要求模型將相同詞彙或無意義任意記號組織成環狀或分支樹狀結構，並與預訓練強先驗正面衝突；結果顯示激活空間表徵與施加結構的 RSA 達 0.6–0.9（對原先驗接近 0），且激活置換實驗證實該動態拓撲直接因果主導模型的後繼預測。</li>
+<li>跨領域啟發：揭示大模型內部概念幾何具有即時可程式化的拓撲可塑性，與海馬迴／工作記憶的快速結構綁定機制相呼應。</li>
+<li>連結：<a href="zotero://select/library/items/CTSMCJ6D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.24425" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-39-篇">G5｜本子方向全量文獻泛讀清單（共 39 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 39 篇文獻（含開放存取 PDF 39 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進13-篇">A. 奠基經典、專著與核心演進（13 篇）</h3>
+<ul>
+<li><strong>2021｜Neural tuning and representational geometry</strong>，Nikolaus Kriegeskorte, Xue-Xin Wei（<em>Nature reviews. Neuroscience</em>，187 引）：<em>Nature Reviews Neuroscience</em> 的經典文章：說明單神經元調諧曲線、Fisher 資訊與群體神經表徵流形幾何如何相連，可當這個主題的指南（187 引）。 <a href="zotero://select/library/items/DQRI8TF2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.09743" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Shared Representational Geometry Across Neural Networks</strong>，Qihong Lu et al.（<em>arXiv (Cornell University)</em>，10 引）：以共享響應模型分析同資料集上不同權重非線性網路的表徵幾何，在 CIFAR-10 與 CIFAR-100 的卷積網路與殘差網路上證實，不同網路實例將輸入編碼為同一底層共享表徵的不同正交變換。 <a href="zotero://select/library/items/GE3QPTBP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.11684" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Analyzing the Representational Geometry of Acoustic Word Embeddings</strong>，Badr M. Abdullah, Dietrich Klakow（<em>arXiv</em>）：借鏡機器學習與神經科學分析工具研究英語聲學詞嵌入 (AWE) 的表徵幾何結構，系統探討不同訓練目標函數與網路架構如何塑造語音詞彙在嵌入空間中的幾何分佈特性。 <a href="zotero://select/library/items/JNIED6FT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2301.03012" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Topological data analysis suggests human brain networks reconfiguration in the transition from a resting state to cognitive load</strong>，Ilya Ernston, Arsenii Onuchin, Timofey Adamovich（<em>arXiv</em>）：透過拓撲資料分析檢視人在靜息態與執行 Sternberg 項目辨識作業認知負荷下的腦電圖功能網路，發現認知負荷時腦網路呈現更高整合度，且拓撲特徵隨認知作業類型重組。 <a href="zotero://select/library/items/7WGJHET9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.12491" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Topology of cognitive maps</strong>，Konstantin Sorokin et al.（<em>arXiv</em>）：結合大腦認知圖 (Cognitome) 理論與小鼠海馬迴 CA1 區神經放電記錄，測試位置細胞識別與降維方法，並比較神經定理與點雲拓撲重建技術如何從神經活動恢復物理空間拓撲。 <a href="zotero://select/library/items/KHCGB93V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2211.08718" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Cognitive and Cultural Topology of Linguistic Categories:A Semantic-Pragmatic Metric Approach</strong>，Eugene Yu Ji（<em>arXiv</em>）：提出基於詞共現的幾何度量將語言基本範疇的認知語意典型性與社會文化語用顯著性映射至二維雙曲空間，其幾何結構優於傳統認知語意基準測試。 <a href="zotero://select/library/items/MAKVE8RV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.06876" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Statistical inference on representational geometries</strong>，Heiko H. Schütt et al.（<em>arXiv</em>）：針對神經表徵幾何模型評估易對受試者或刺激條件過擬合的問題，提出雙因子交叉驗證與拔靴法統計推論框架，實現對未知受試者與新條件的同時泛化檢定。 <a href="zotero://select/library/items/ZTRB4FW5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2112.09200" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Givenness Hierarchy Theoretic Cognitive Status Filtering</strong>，Poulomi Pal et al.（<em>arXiv</em>）：基於語言學已知度階層（Givenness Hierarchy）理論研究人機自然語言互動中的代名詞指涉機制，在既有規則式記憶結構的基礎上提出認知狀態濾波方法，以評估對話夥伴心智中候選指涉對象的認知狀態。 <a href="zotero://select/library/items/WTBE4DFR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2005.11267" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Elements of Consciousness and Cognition. Biology, Mathematic, Physics and Panpsychism: an Information Topology Perspective</strong>，Pierre Baudot（<em>arXiv</em>）：從生物、神經科學、物理與數學視角綜述意識與認知的定量與定性研究，提出以「資訊拓撲」統一各類意識理論與跨尺度適應性學習機制，並探討電動力學類比編碼假說與認知邏輯公理化。 <a href="zotero://select/library/items/QHG7PFNG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1807.04520" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Replays of spatial memories suppress topological fluctuations in cognitive map</strong>，Andrey Babichev, Dmitriy Morozov, Yuri Dabaghian（<em>arXiv</em>）：建立海馬迴位置細胞放電與內源性路徑記憶重播（memory replays）強化海馬傍回突觸的計算模型，證明空間記憶重播能抑制認知地圖中的拓撲漲落並穩定環境的拓撲空間表徵。 <a href="zotero://select/library/items/6B5TH58V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1811.00941" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Functional brain networks reveal the existence of cognitive reserve and the interplay between network topology and dynamics</strong>，Johann H. Martínez et al.（<em>arXiv</em>）：透過 20 位高、低認知儲備（CR）長者在記憶任務中的腦磁圖（MEG）功能網路，發現全腦同步與 CR 呈負相關且最短路徑與網路觸及存在差異；高 CR 者僅需較少連結即可完成任務，低 CR 群則呈現高能耗補償與網路受損並存。 <a href="zotero://select/library/items/V27BV37K" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.00462" rel="noopener">官方連結</a></li>
+<li><strong>2015｜A specialized face-processing network consistent with the representational geometry of monkey face patches</strong>，Amirhossein Farzmahdi et al.（<em>arXiv</em>）：針對靈長類人臉辨識對倒置、錯位與遮擋敏感的整體處理（holistic processing）特性，建立階層式人臉處理神經網路計算模型，使其內部表徵幾何與獼猴腦內人臉專區（face patches）一致。 <a href="zotero://select/library/items/JGWM7R8D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1502.01241" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Topological schemas of cognitive maps and spatial learning in the hippocampus</strong>，A. Babichev, S. Cheng, Yu. Dabaghian（<em>arXiv</em>）：提出將個別神經元脈衝訊號整合為空間認知地圖的拓撲基模框架，定義四種不同拓撲關係構成的基模及其大尺度環境特徵（基模積分），並分析其空間學習速率。 <a href="zotero://select/library/items/VQ2XV652" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1509.00171" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻26-篇">B. 2024–2026 近期推進與前沿文獻（26 篇）</h3>
+<ul>
+<li><strong>2026｜The Representational Geometry of Number</strong>，Zhimin Hu, Lanhao Niu, Sashank Varma（<em>arXiv (Cornell University)</em>，1 引）：以數概念（Number Concepts）作為理想的實驗對象，證明跨任務真正共享的是概念之間的相對幾何關係結構，不是概念點本身的絕對座標。子空間旋轉可以消除任務干擾，同時完整保留內在的關係拓撲。 <a href="zotero://select/library/items/FQ3AFR33" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.06843" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Context Structure Reshapes the Representational Geometry of Language Models</strong>，Eghbal A. Hosseini et al.（<em>arXiv</em>）：檢驗 Gemma 2 模型在上下文學習過程中是否出現神經表徵軌跡變直現象，發現在自然語言與網格世界遍歷等連續預測任務中，增加上下文長度會提高表徵軌跡的直線性。 <a href="zotero://select/library/items/6SIW434V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.22364" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Training-Driven Representational Geometry Modularization Predicts Brain Alignment in Language Models</strong>，Yixuan Liu et al.（<em>Proceedings of the Annual Meeting of the Cognitive Science Society, 48 (2026), 167-174</em>）：追蹤 Pythia (70M–1B) 訓練過程的熵、曲率與 fMRI 編碼分數（CogSci 2026），發現網路層自組織為高低複雜度群集，且低曲率與低熵模組能穩定預測人類語言腦區活動，控制訓練進度後仍顯著相關。 <a href="zotero://select/library/items/UIBGNVWK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.07539" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Diagnosing Generalization Failures from Representational Geometry Markers</strong>，Chi-Ning Chou et al.（<em>arXiv</em>）：借鑑醫學生物標記提出由上而下的泛化失效診斷思路，設計並驗證系統層級神經表徵幾何標記作為模型部署前瞻效能的預後指標，藉以在無須逐一逆向工程內部電路下預警未知情境下的泛化失敗。 <a href="zotero://select/library/items/49U6HAMF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.01879" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Weber's Law in Transformer Magnitude Representations: Efficient Coding, Representational Geometry, and Psychophysical Laws in Language Models</strong>，Jon-Paul Cacioli（<em>arXiv</em>）：運用心理物理學四種實驗典範檢驗 7–9B Llama、Mistral 與 Qwen 模型的數值表徵幾何，發現表徵一致呈現對數壓縮（與 Weber 定律矩陣 RSA 相關達 .68–.96），但外部行為測得的 Weber 分數卻與內部幾何分離。 <a href="zotero://select/library/items/5QKVDA85" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.20642" rel="noopener">官方連結</a></li>
+<li><strong>2026｜When Does Structure Matter in Continual Learning? Dimensionality Controls When Modularity Shapes Representational Geometry</strong>，Kathrin Korte et al.（<em>arXiv</em>）：以任務相似度與權重初始化尺度調節表徵維度，比較任務分區模組化循環網路與單模組在序列學習下的表現，釐清維度如何決定結構分離對穩定與可塑性權衡的影響。 <a href="zotero://select/library/items/5G3J32T8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2604.27656" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Large language models reorganize representational geometry during in-context learning</strong>，Hua-Dong Xiong et al.（<em>arXiv</em>）：透過將 LLM 自身表徵投影至不同軸向建構皆線性可分的二元分類任務，發現其上下文學習難易度隨軸向呈現系統性差異，並揭示成功的 ICL 伴隨模型內部表徵幾何的顯著重組。 <a href="zotero://select/library/items/STSCIUSQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.28854" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Striding Across Reynolds Numbers: Representation Geometry in Neural PDE Generalisation</strong>，Jianing Shi（<em>arXiv</em>）：分析神經 PDE 求解器跨 10 倍雷諾數偏移的泛化瓶頸，提出於源域卷積自編碼器潛空間匹配狀態並借用動態軌跡的 ConvAE-Relay，無需目標域擬合即在 2D Navier-Stokes 將誤差自 46.68% 降至 38.34%。 <a href="zotero://select/library/items/WGA57BFG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.30112" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Adversarial Concept Search: Predicting Compositional Errors From Feature Geometry</strong>，Jennifer Meng Lu et al.（<em>arXiv</em>）：根據 LLM 表徵幾何預測組合推理失敗模式，將失敗歸因於顯著特徵間的干擾；在程式、多跳推理與多語言事實檢索中發現正交編碼的概念能穩定組合，而線性編碼過於接近的概念容易引發組合失效。 <a href="zotero://select/library/items/W7628SWZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.13934" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Robust for the Wrong Reasons: The Representational Geometry of LLM Robustness to Science Skepticism</strong>，Minjong Cheon（<em>arXiv</em>）：結合行為測試、線性探針與激發修補檢驗 Llama-3.1-8B、Qwen2.5-7B 與 Mistral-7B 在氣候、疫苗與演化議題面對質疑時是否迎合退讓，發現模型未見諂媚退縮，而是分別呈現反應式強化主張、表面語氣軟化但立場不變及拒絕回應三種策略。 <a href="zotero://select/library/items/99FT6Q64" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.01951" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Nested Episodic State Topology (NEST): A Graph-Theoretic Architecture of Cognitive States</strong>，Ishant（<em>arXiv</em>）：提出圖論認知表徵架構 NEST，以含子圖載荷與因果、時序等六類關係邊的帶權有向圖表徵概念與情節，並分離持久信念圖與工作記憶圖以規範信念衝突檢驗與修正流程。 <a href="zotero://select/library/items/E8HTAXUK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.06055" rel="noopener">官方連結</a></li>
+<li><strong>2026｜How to Tame Grokking: Representation Geometry as a Control Signal</strong>，Maksim A Kazanskii（<em>arXiv</em>）：發現神經網路出現頓悟前皆先發生表徵維度塌縮，進而提出幾何維度正則化 GeomDR 調控訓練期隱藏表徵有效維度，在模運算與置換組合任務顯著改變並加速泛化起始點。 <a href="zotero://select/library/items/HRXJAJGH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.11666" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Context Is King: How In-Context Specification Shapes the Geometry of Concepts</strong>，Elad David, Max Fomin（<em>arXiv</em>）：在 Gemma 與 Qwen 家族驗證上下文宣告規則可直接設定概念流形拓撲（如圓環或樹狀），即使在無意義 token 上亦能構造，且當與預訓練先驗衝突時上下文幾何主導模型表徵。 <a href="zotero://select/library/items/CTSMCJ6D" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.24425" rel="noopener">官方連結</a></li>
+<li><strong>2026｜On the Representational Geometry of Dynamic Programs</strong>，Richard F. M. Lim, Ruriko Yoshida（<em>arXiv</em>）：證明有限 min-plus 動態規劃、DAG 最短路徑與熱帶多項式擴展牛頓多面體在形式與函數兩層次構成同構半環，並給出兩項結構性否定結果，從幾何上解釋神經網路難以對 DP 進行長度外推的原因。 <a href="zotero://select/library/items/IFFRW8RE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.25034" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Parameter Symmetries Determine Representational Geometry in Overparameterized Nonlinear Networks</strong>，Marvin Theiss et al.（<em>arXiv</em>）：證明過參數化非線性網路中廣泛存在的函數不變參數對稱性僅透過加法、複製與縮放三種基本特徵變換作用於表徵空間，據此給出將表徵幾何分解為本質成分與輔助成分的閉式解析表達。 <a href="zotero://select/library/items/M7P976N9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.39078" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Operational Abstractions of Neural Network Concepts via Topological Representations</strong>，Mathieu Pont, Christoph Garth（<em>arXiv (Cornell University)</em>）：現有的概念編輯方法各做各的，缺少一張統一、可操作的概念地圖。本文提出拓撲概念表徵（TCR），在訓練後一次抽出拓撲抽象骨架，同時刻畫概念本身與概念之間的關係網路，支援直觀的全局檢視與結構化概念編輯。 <a href="zotero://select/library/items/HQK9JWKF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.05017" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Projecting Assumptions: The Duality Between Sparse Autoencoders and Concept Geometry</strong>，Sai Sumedh R. Hindupur et al.（<em>arXiv</em>）：將稀疏自編碼器（SAE）重構為雙層最佳化問題，揭示不同 SAE 架構對概念編碼皆隱含幾何結構假設而無法互換，並從玩具模型到真實大規模激活系統性檢驗其概念擷取偏誤。 <a href="zotero://select/library/items/EUD3JDIV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.01822" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Neural Manifolds and Cognitive Consistency: A New Approach to Memory Consolidation in Artificial Systems</strong>，Phuong-Nam Nguyen（<em>arXiv</em>）：結合神經群體動力學、海馬迴尖波漣漪（SpWR）與 Heider 認知一致性理論提出數學框架，以低維流形捕捉神經漂移並藉平衡能量函數約束突觸交互，成功在模擬中重現 SpWR 特徵並提升網路可解釋性。 <a href="zotero://select/library/items/97MJHIJR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.01867" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Feature Learning beyond the Lazy-Rich Dichotomy: Insights from Representational Geometry</strong>，Chi-Ning Chou et al.（<em>arXiv</em>）：針對神經網路訓練僅分為惰性（lazy）與豐富（rich）兩種機制的二分法過於簡化，提出從表徵流形幾何演化分析特徵學習的框架，於理論與實證上揭示架構、演算法與資料特性所塑造的多元學習譜系。 <a href="zotero://select/library/items/MKXZB5XN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2503.18114" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Sparsification and Reconstruction from the Perspective of Representation Geometry</strong>，Wenjie Sun et al.（<em>arXiv</em>）：從表徵幾何視角提出 SAEMA 分析架構，透過觀測殘差流加入雜訊時展開模態張量對應對稱半正定（SSPD）矩陣的秩變化，探討稀疏自編碼器如何組織分層表徵並影響特徵解耦與重建。 <a href="zotero://select/library/items/KUVQ8QER" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.22506" rel="noopener">官方連結</a></li>
+<li><strong>2025｜CHBench: A Cognitive Hierarchy Benchmark for Evaluating Strategic Reasoning Capability of LLMs</strong>，Hongtao Liu et al.（<em>arXiv</em>）：借鏡行為經濟學認知層級模型提出 CHBench，透過 15 種正規型賽局與三階段評估框架量化六個前沿 LLM 的有限理性推理深度，發現模型面對多樣對手時展現穩定的策略層級。 <a href="zotero://select/library/items/P9IPEGSR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2508.11944" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Tracing the Representation Geometry of Language Models from Pretraining to Post-training</strong>，Melody Zixuan Li et al.（<em>arXiv</em>）：以有效秩 RankMe 與特徵譜衰減 <span class="math inline">\alpha</span>-ReQ 追蹤 OLMo 與 Pythia 模型於預訓練至後訓練的表徵幾何，揭示預訓練呈現三階段非單調演化：暖機坍縮、尋熵維度擴張，以及尋壓縮的各向異性收斂。 <a href="zotero://select/library/items/V44RU99P" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.23024" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Evaluating Embedding Generalization: How LLMs, LoRA, and SLERP Shape Representational Geometry</strong>，Siyaxolisa Kabane（<em>arXiv</em>）：以數論性質對短數列進行聚類與分類作為受控測試，系統比較非 LLM 編碼器與採 LoRA 微調或結合球面線性插值 SLERP 融合後的 LLM 嵌入骨幹在跨任務泛化與表徵幾何上的演化差異。 <a href="zotero://select/library/items/8HTMJ8KU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.21703" rel="noopener">官方連結</a></li>
+<li><strong>2025｜External Hippocampus: Topological Cognitive Maps for Guiding Large Language Model Reasoning</strong>，Jian Yan（<em>arXiv</em>）：將語言模型推理建模為語意空間中的資訊能量流，提出 External Hippocampus 建構降維拓撲認知地圖以在測試時引導推理並避開「認知漩渦」停滯，於 7B 以下模型達成 81.20% 準確率（相對基線 +16.80%）並加速逾 15 倍。 <a href="zotero://select/library/items/47M9ZBEU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.18190" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Counterfactual Basis Extension and Representational Geometry: An MDL-Constrained Model of Conceptual Growth</strong>，Chainarong Amornbunchornvej（<em>arXiv</em>）：探討現有表徵基底無法解釋經驗時概念空間如何選擇性擴張，提出將概念成長建模為在最小描述長度 MDL 準則下針對系統性表徵殘差執行的低秩容許基底擴展。 <a href="zotero://select/library/items/AFNPHBGX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.18732" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Task structure and nonlinearity jointly determine learned representational geometry</strong>，Matteo Alleman, Jack W Lindsey, Stefano Fusi（<em>arXiv</em>）：研究單隱藏層網路的學習動力學並分析權重空間演化，發現非線性激活函數顯著影響學得的表徵幾何：Tanh 網路傾向反映目標輸出結構，而 ReLU 網路則保留更多原始輸入的幾何特徵。 <a href="zotero://select/library/items/JTTK3FK7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.13558" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-e4a500ac">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/26_%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E5%B9%BE%E4%BD%95%E8%88%87%E8%AA%8D%E7%9F%A5%E6%8B%93%E6%92%B2.html">概念空間幾何與認知拓撲</a><span class="rs">在離散的邏輯符號和低階的神經脈衝之間，這個領域建立第三層描述語言，也就是幾何。</span></li><li><a href="26A_G%C3%A4rdenfors%E6%A6%82%E5%BF%B5%E7%A9%BA%E9%96%93%E3%80%81%E5%87%B8%E6%80%A7%E5%88%A4%E6%BA%96%E8%88%87%E5%8E%9F%E5%9E%8B%E5%B9%BE%E4%BD%95.html">Gärdenfors概念空間、凸性判準與原型幾何</a></li><li><a href="26B_%E7%B7%9A%E6%80%A7%E8%A1%A8%E7%A4%BA%E5%81%87%E8%AA%AA%E3%80%81%E8%AA%9E%E6%84%8F%E5%A4%9A%E8%83%9E%E5%BD%A2%E8%88%87%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%A6%82%E5%BF%B5%E5%AD%90%E7%A9%BA%E9%96%93.html">線性表示假說、語意多胞形與大模型概念子空間</a></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08A_%E6%B5%B7%E9%A6%AC%E8%BF%B4%E8%88%87%E6%96%B0%E7%9A%AE%E8%B3%AA%E4%BA%92%E8%A3%9C%E5%AD%B8%E7%BF%92%E7%B3%BB%E7%B5%B1CLS%E3%80%81%E7%9D%A1%E7%9C%A0%E9%87%8D%E6%92%AD%E8%88%87%E7%9B%B8%E4%BD%8D%E8%A8%98%E6%86%B6%E7%B7%A8%E7%A2%BC.html">海馬迴與新皮質互補學習系統CLS、睡眠重播與相位記憶編碼</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

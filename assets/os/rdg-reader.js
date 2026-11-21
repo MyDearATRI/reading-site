@@ -103,7 +103,8 @@
   function isOsUrl(url) {
     var u = sitePage(url); if (!u) return false;
     var rootPath = new URL(BASE).pathname, p = u.pathname;
-    return p === rootPath || p === rootPath + "index.html" || p === rootPath + "shelf.html";
+    // the OS lives at os.html now; index.html is the plain Today page and opens in a Reader like any page
+    return p === rootPath + "os.html" || p === rootPath + "shelf.html";
   }
   function relOf(url) { return url && url.indexOf(BASE) === 0 ? url.slice(BASE.length) : null; }
   function bare(url) { var i = String(url || "").indexOf("#"); return i < 0 ? String(url || "") : String(url).slice(0, i); }

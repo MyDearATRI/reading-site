@@ -12,20 +12,20 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-b221cf8e">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">經濟</a><a class="find" href="../../index.html#n=n-b221cf8e">Find on board</a></header>
+<body class="doc" data-note="n-b221cf8e" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 經濟</span>
 <article>
 
 <h1 id="e17消費者理論與-slutsky-方程">E17｜消費者理論與 Slutsky 方程</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%B6%93%E6%BF%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">經濟路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="E16_%E5%A4%B1%E6%A5%AD%E3%80%81%E9%96%8B%E6%94%BE%E7%B6%93%E6%BF%9F%E8%88%87%E7%9F%AD%E6%9C%9F%E6%B3%A2%E5%8B%95.html">E16 失業、開放經濟與短期波動</a> ｜ 下一章：<a class="wl" href="E18_%E8%B7%A8%E6%9C%9F%E9%81%B8%E6%93%87%E3%80%81%E4%B8%8D%E7%A2%BA%E5%AE%9A%E6%80%A7%E8%88%87%E5%B8%82%E5%A0%B4%E5%9D%87%E8%A1%A1.html">E18 跨期選擇、不確定性與市場均衡</a>
 本線先備：<a class="wl" href="E02_%E5%8F%97%E9%99%90%E9%81%B8%E6%93%87.html">E02 受限選擇</a>
 別線先備：<a class="wl" href="../01_%E6%95%B8%E5%AD%B8/00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a>（細節見下方「路線上的計劃」）
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/08-economics.md:129</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -61,10 +61,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">1</span></h3><ul><li><a href="E02_%E5%8F%97%E9%99%90%E9%81%B8%E6%93%87.html">受限選擇</a><span class="tag-plan">計劃</span><span class="rs">可行集、無異曲線、邊際替代率與邊際轉換率。CORE Micro Unit 3</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">4</span></h3><ul><li><a href="E18_%E8%B7%A8%E6%9C%9F%E9%81%B8%E6%93%87%E3%80%81%E4%B8%8D%E7%A2%BA%E5%AE%9A%E6%80%A7%E8%88%87%E5%B8%82%E5%A0%B4%E5%9D%87%E8%A1%A1.html">跨期選擇、不確定性與市場均衡</a><span class="tag-plan">計劃</span><span class="rs">第 9–16 章：買賣、跨期選擇、資產市場、不確定性、風險資產、消費者剩餘、市場需求、均衡</span></li><li><a href="E19_%E6%8A%80%E8%A1%93%E3%80%81%E6%88%90%E6%9C%AC%E8%88%87%E5%BB%A0%E5%95%86%E4%BE%9B%E7%B5%A6.html">技術、成本與廠商供給</a><span class="tag-plan">計劃</span><span class="rs">第 18–24 章：拍賣、技術、利潤最大化、成本最小化、成本曲線、廠商與產業供給</span></li><li><a href="E28_S1%20%E7%B8%BD%E7%9B%B2%E6%B8%AC%E8%88%87%E5%9C%8B%E5%AF%8C%E8%AB%96.html">S1 總盲測與國富論</a><span class="tag-plan">計劃</span><span class="rs">S1 全部核心節點盲測；配讀 Smith，*The Wealth of Nations* 第一卷第 1–3 章</span></li><li><a href="E33_MWG%20%E9%81%B8%E6%93%87%E3%80%81%E6%B6%88%E8%B2%BB%E8%80%85%E8%88%87%E7%94%9F%E7%94%A2.html">MWG 選擇、消費者與生產</a><span class="tag-plan">計劃</span><span class="rs">Mas-Colell, Whinston, Green 第 1–6 章（選擇、消費者、加總需求、生產、不確定下的選擇）與數學附錄</span></li></ul></div><div class="rg"><h3>相關<span class="n">1</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a><span class="rs">這個領域為所有學習系統劃出三條數學邊界：有限樣本下需要多少資訊才能保證結論不是自欺（泛化理論），有限梯度步數下能多快找到好解（最佳化理論），以及…</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>02E｜脈衝神經網路與神經形態事件計算 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-a9f49b52" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="02e脈衝神經網路與神經形態事件計算">02E｜脈衝神經網路與神經形態事件計算</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a>
+同領域子方向：<a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> · <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> · <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> · <a class="wl" href="02D_Kolmogorov-Arnold%E7%B6%B2%E8%B7%AF%E8%88%87%E5%87%BD%E6%95%B8%E5%9F%BA%E5%BA%95%E5%AD%B8%E7%BF%92.html">Kolmogorov-Arnold網路與函數基底學習</a> · <a class="wl" href="02F_%E8%B6%85%E7%B6%AD%E8%A8%88%E7%AE%97%E3%80%81%E5%90%91%E9%87%8F%E7%AC%A6%E8%99%9F%E6%9E%B6%E6%A7%8B%E8%88%87%E9%9D%9E%E8%87%AA%E8%BF%B4%E6%AD%B8%E6%BD%9B%E9%A0%90%E6%B8%ACJEPA.html">超維計算、向量符號架構與非自迴歸潛預測JEPA</a>
+跨領域關聯子方向：<a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> · <a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> · <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/05D_%E7%A8%8B%E5%BC%8F%E5%90%88%E6%88%90%E3%80%81%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E6%8E%A8%E7%90%86%E8%88%87%E5%9B%A0%E6%9E%9C%E8%A1%A8%E7%A4%BA%E5%8F%AF%E8%AD%98%E5%88%A5%E6%80%A7.html">程式合成、神經符號推理與因果表示可識別性</a> · <a class="wl" href="../C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/31C_%E8%AA%8D%E8%AD%98%E8%A6%8F%E5%8A%83%E3%80%81%E5%A4%9A%E4%B8%BB%E9%AB%94%E5%BF%83%E6%99%BA%E7%90%86%E8%AB%96%E8%88%87%E8%87%AA%E5%9B%9E%E6%AD%B8%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">認識規劃、多主體心智理論與自回歸信念修正</a> · <a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>在 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a> 中，本子方向以離散脈衝事件與非同步薄膜動力學取代連續張量的稠密矩陣乘法，藉事件驅動的稀疏累積計算降低時間序列推論功耗。研究主線由早期固定儲層與局部突觸可塑性的液態狀態機（<a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a>），推進至代理梯度（Surrogate Gradient）、時間前向傳播（FPTT）以及結合液態時間常數（<a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a>）與神經迴路策略（<a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a>）的可訓練深層與硬體協同架構。</p>
+</aside>
+<ul>
+<li>核心問題：脈衝神經網路以二值脈衝函數 <span class="math inline">S(t) = \Theta(U(t) - U_{\mathrm{th}})</span> 觸發通訊，該階躍函數在閾值處導數為狄拉克函數且其餘位置為零，使標準反向傳播的鏈式法則無法直接傳遞誤差訊號。此外，傳統沿時間反向傳播（BPTT）在序列長度 <span class="math inline">T</span> 下需保存完整時間步狀態，記憶體隨序列線性膨脹，與邊緣端線上學習相衝突；而傳統液態狀態機雖免除儲層訓練，卻常依賴離線嶺回歸儲存中間狀態，並在映射至憶阻器或突觸電晶體陣列時受限於非線性電導更新與元件變異。</li>
+<li>直覺模型：可以把標準神經網路想成整支樂團在每個固定節拍同時看譜齊奏，不論聲部有無旋律都得消耗算力；脈衝神經網路則像只在氣壓超過門檻時才吐出一個音符的管風琴，平時各音管隨時間漏氣衰減。系統接收外部事件流後，僅在少數神經元跨過閾值時發出短脈衝給下游，運算量與記憶體讀寫便集中在事件發生的瞬間與局部突觸上。</li>
+<li>分階段閱讀路線：第一步先讀 Eshraghian 等人（2023）的綜述建立脈衝編碼、代理梯度與時間反向傳播和 STDP 之間的聯繫，搭配 Zhang 等人（2015）理解數位液態狀態機如何在 VLSI 上以局部線上學習取代離線嶺回歸；第二步精讀 Yin 等人（2023）的 Forward-Propagation-Through-Time（FPTT）與液態時間常數脈衝神經元，以及 Yu 等人（2023）的多尺度多模態混合脈衝位置辨識系統，掌握長序列線上訓練與非同步感測融合；第三步切入 2025–2026 前沿，依序閱讀 Talukder 等人（2025）的四萬神經元光子延遲秩次編碼網路與 Cao 等人（2026）針對氧化物突觸電晶體陣列與 NCP 的軟硬體協同更新協議（可同時對照 Bai 等人 2026 的叢集化輕量 NCP-SNN 風機監測）。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;事件流與感測編碼 延遲與秩次編碼&quot;] --&gt; B[&quot;離散脈衝動力學 LIF 與修正 Ikeda 映射&quot;]
+  B --&gt; C[&quot;固定隨機儲層 LSM 局部連通液態集&quot;]
+  B --&gt; D[&quot;端對端可訓練 SNN 代理梯度平滑近似&quot;]
+  C --&gt; E[&quot;局部線上可塑性 樹突重佈線與無離線儲存&quot;]
+  D --&gt; F[&quot;FPTT 線上學習 結合液態時間常數 LTC&quot;]
+  E --&gt; G[&quot;邊緣應用 雷達手勢與多模態機器人定位&quot;]
+  F --&gt; H[&quot;物理載體協同 光子 40k 陣列與三端突觸電晶體&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>漏積分發放動力學與代理梯度（LIF Dynamics and Surrogate Gradient）</strong></p>
+<ul>
+<li>直覺理解：神經元薄膜電位像一個會緩慢漏水的桶，輸入脈衝每次注入一點水量，水位越過門檻就放出一枚脈衝並重設電位；反向傳播時把階躍門檻換成平滑函數，讓梯度得以穿過不可微的發放瞬間。</li>
+<li>機制或核心表達式：離散時間步 <span class="math inline">\Delta t</span> 下，LIF 薄膜電位 <span class="math inline">U[t]</span> 與脈衝輸出 <span class="math inline">S[t]</span> 滿足 <span class="math inline">U[t] = \beta U[t-1] + W X[t] - S[t-1] U_{\mathrm{th}}</span>，其中衰減因子 <span class="math inline">\beta = \exp(-\Delta t / \tau_{\mathrm{mem}})</span>，發放規則為 <span class="math inline">S[t] = \Theta(U[t] - U_{\mathrm{th}})</span>。反向傳播計算 <span class="math inline">\frac{\partial L}{\partial W}</span> 時，將奇異導數 <span class="math inline">\frac{\partial S[t]}{\partial U[t]} = \delta(U[t] - U_{\mathrm{th}})</span> 替換為平滑代理導數 <span class="math inline">\sigma'(U[t] - U_{\mathrm{th}})</span>（例如快速 Sigmoid 或反正切導數），保持前向二值稀疏性並恢復非零梯度。</li>
+<li>能做到什麼，代價是什麼：能直接沿用深度學習框架訓練多層脈衝網路並保留推論時的加法累積（AC）稀疏性；代價是代理梯度屬於有偏估計子，代理函數斜率過大易引起梯度不穩、過小則導致梯度消失，且標準 BPTT 仍需隨時間步長線性增長的記憶體。</li>
+</ul>
+</li>
+<li>
+<p><strong>時間前向傳播與液態時間常數脈衝神經元（FPTT and LTC Spiking Neurons）</strong></p>
+<ul>
+<li>直覺理解：沿時間反向傳播必須把整段序列狀態記到結尾才能回頭更新權重；FPTT 改為每走一步就用動態追蹤的參數正則項即時更新權重，讓時間常數可調的脈衝神經元也能邊看邊學。</li>
+<li>機制或核心表達式：依據 Yin 等人（2023），FPTT 將整段序列的時間優化問題拆解為每個時間步 <span class="math inline">t</span> 的線上子問題，透過即時損失 <span class="math inline">L_t(\theta)</span> 加上追蹤參數歷史軌跡的動態二次正則懲罰項進行單步更新，使展開梯度所需的快取與序列長度 <span class="math inline">T</span> 無關，空間複雜度降為 <span class="math inline">O(1)</span> 時間步。搭配具備輸入相依動態衰減特性的液態時間常數（LTC）脈衝神經元，網路可在不依賴高記憶體 BPTT 的情況下處理長序列相依性。</li>
+<li>能做到什麼，代價是什麼：消除了 BPTT 的 <span class="math inline">O(T)</span> 記憶體瓶頸，支援深層物件定位與超長序列線上學習；代價是每個時間步都要執行參數更新與追蹤狀態維護，對步長與正則係數的設定較為敏感。</li>
+</ul>
+</li>
+<li>
+<p><strong>稀疏脈衝編碼與差分電導陣列映射（Sparse Spike Coding and Differential Conductance Mapping）</strong></p>
+<ul>
+<li>直覺理解：除了計算發放次數，更省電的做法是把資訊放在神經元發放的先後次序中；在實體電晶體陣列上則用一正一負兩個元件的電導差值表示突觸權重，並濾除極性錯位的更新脈衝。</li>
+<li>機制或核心表達式：在延遲編碼與秩次編碼下，較強的輸入特徵對應較早的脈衝時刻或較高發放序位，如 Talukder 等人（2025）在受修改型 Ikeda 映射支配的四萬神經元光子 SNN 中加入慢速抑制反饋，只動用 8.5% 至 22% 的神經元即可完成影像分類。在氧化物三端突觸電晶體陣列上，Cao 等人（2026）採用差分電導對映射 <span class="math inline">W = G^+ - G^-</span>，結合指數型 LTP/LTD 更新規則與事後篩選機制 isValid，要求 <span class="math inline">G^+</span> 與 <span class="math inline">G^-</span> 通道的更新極性必須嚴格匹配所屬權重矩陣的角色。</li>
+<li>能做到什麼，代價是什麼：極低活躍度可同時壓低光子與電子硬體的能量延遲乘積；代價是實體元件具有電導上下界、寫入非線性與週期變異，若演算法更新極性與差分通道設計錯位，誤差會在多層動力學迴路中放大。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>BPTT 與 FPTT 在長序列脈衝訓練的記憶體與梯度邊界</strong>：為何標準 BPTT 難以線上訓練帶有動態液態時間常數的長序列深層 SNN，而 Yin 等人（2023）結合 FPTT 與 LTC 脈衝神經元如何繞過此限制？在極度依賴結尾延遲獎勵的序列任務上，這類逐步線上方法可能面臨什麼限制？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>先從計算圖空間複雜度出發：BPTT 必須快取 <span class="math inline">T</span> 個時間步的薄膜電位、時間常數狀態與脈衝歷史以計算跨步鏈式導數，對多狀態神經元記憶體負擔成倍放大。FPTT 將時序目標改寫為每個時間步配合動態參數正則項的即時最佳化，使記憶體降為常數時間步，再藉 LTC 神經元的自適應衰減記憶跨步資訊。若任務監督訊號僅在序列終端出現且中間步驟無即時損失，缺乏局部誤差訊號會限制前段時間步的參數更新品質。</p>
+</details>
+<ol start="2">
+<li><strong>局部儲層分段與三端突觸電晶體差分極性對齊</strong>：對照 Wijesinghe 等人（2019）與 Cao 等人（2026）：(1) 將單一大型液態儲層切分為多個局部連通的子液態集合（Liquid Ensembles），如何同時影響推論延遲與表徵能力？(2) 在 <span class="math inline">W = G^+ - G^-</span> 的差分電導陣列模擬 Neural Circuit Policies 網路時，為何必須限制 <span class="math inline">G^-</span> 通道的更新方向並引入 isValid 篩選？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>第一小題從圖連接半徑切入：限制遠距隨機連線並拆分多個較小儲層，能減少單步突觸扇出與傳播延遲，同時由各子液態維持不同動力學特徵供讀出層融合。第二小題從元件物理非線性切入：三端電晶體的 LTP/LTD 更新呈現指數飽和且受限於高低電導邊界，若直接套用兩端憶阻器對稱規則而不按矩陣角色與 <span class="math inline">G^-</span> 通道方向做約束並濾除越界更新，正負通道會發生單邊飽和或非線性抵消。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>深層 SNN 線上局部學習與全域信用分配的理論落差</strong>：雖然 FPTT（Yin et al., 2023）解決了長序列記憶展開的空間瓶頸，數位 LSM 局部規則（Zhang et al., 2015）與樹突重佈線（Roy et al., 2014）也在淺層儲層上免除了全域誤差回傳，但在缺乏每步密集監督訊號的深層結構中，純局部突觸可塑性何時能收斂至與端對端代理梯度相當的解，仍缺少一般性理論保證。</li>
+<li><strong>單元件校準與陣列級系統非理想特性的跨尺度落差</strong>：Cao 等人（2026）指出既有神經形態模擬常將單一代表元件參數套用於整面陣列，或把兩端憶阻器更新策略移用到三端突觸電晶體，忽略了電導邊界與非線性在 NCP 等緊湊迴路中的累積效應；同樣地，光子 SNN（Talukder et al., 2025）雖展示 40,000 神經元規模，仍受制於空間光調變器與 CMOS 相機間的光電轉換延遲。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>液態時間常數與狀態空間連續動力學離散化</strong>：Yin 等人（2023）在脈衝神經元中引入的 LTC 動態衰減特性，與 <a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> 的輸入相依時間常數 <span class="math inline">\tau(x)</span> 同源，其離散化積分結構可透過 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 與 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 的選擇性狀態空間算子互相對照與遷移。</li>
+<li><strong>神經迴路策略（NCP）稀疏拓撲與儲層讀出融合</strong>：Cao 等人（2026）與 Bai 等人（2026）採用的 NCP 稀疏連線架構可與 <a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a> 及 <a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> 結合，將分層稀疏控制拓撲作為脈衝讀出或邊緣監測網路的結構先驗。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-training-spiking-neural-networks-using-lessons-from-deep-learning2023">1. Training Spiking Neural Networks Using Lessons From Deep Learning（2023）</h4>
+<ul>
+<li>作者與出處：Jason K. Eshraghian, Max Ward, Emre Ozgur Neftci, Xinxin Wang, Gregor Lenz · <em>Proceedings of the IEEE</em></li>
+<li>核心問題：傳統深度學習依賴連續可微激活與稠密矩陣計算，直接將梯度下降用於離散脈衝神經網路會遭遇閾值導數為零與編碼方式耦合的障礙。本文整理如何將深度學習訓練框架引入具生物合理性的脈衝系統。</li>
+<li>關鍵做法：文章分析資料編碼為脈衝序列對學習的影響，並說明代理梯度在解決不可微發放函數上的作用，同時探討時間反向傳播與脈衝時序依賴可塑性（STDP）之間的聯繫，附帶 snnTorch 的互動教學實作。</li>
+<li>跨領域啟發：建立 SNN 梯度訓練與編碼的基礎詞彙，並可對照 <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> 的連續時間系統建模視角。</li>
+<li>連結：<a href="zotero://select/library/items/WT7M3DG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jproc.2023.3308088" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-digital-liquid-state-machine-with-biologically-inspired-learning-and-its-application-to-speech-recognition2015">2. A Digital Liquid State Machine With Biologically Inspired Learning and Its Application to Speech Recognition（2015）</h4>
+<ul>
+<li>作者與出處：Yong Zhang, Peng Li, Yingyezhe Jin, Yoonsuck Choe · <em>IEEE Transactions on Neural Networks and Learning Systems</em></li>
+<li>核心問題：傳統液態狀態機的讀出層常依賴嶺回歸等離線訓練，需要大量記憶體暫存中間活動狀態；而全域誤差反向傳播需要跨網路通訊，不利於低功耗 VLSI 硬體實作。</li>
+<li>關鍵做法：作者提出一套受生物啟發的數位 LSM 線上學習規則，每個突觸權重更新只依據突觸前與突觸後神經元的發放活動，消除全域通訊與中間資料儲存需求，並在 TI46 語音資料集上評估精簡模型複雜度後的辨識表現。</li>
+<li>跨領域啟發：提供儲層計算從離線讀出轉向硬體局部即時學習的早期基準，可與 <a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> 並讀。</li>
+<li>連結：<a href="zotero://select/library/items/UF7GTKDW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tnnls.2015.2388544" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-accurate-online-training-of-dynamical-spiking-neural-networks-through-forward-propagation-through-time2023">3. Accurate online training of dynamical spiking neural networks through Forward Propagation Through Time（2023）</h4>
+<ul>
+<li>作者與出處：Bojian Yin, Federico Corradi, Sander M. Bohté · <em>Nature Machine Intelligence</em></li>
+<li>核心問題：現有遞迴脈衝神經網路學習演算法在面對長時序時需要龐大記憶體，且難以訓練複雜動力學神經元並與線上學習相容。</li>
+<li>關鍵做法：作者結合 Forward-Propagation-Through-Time（FPTT）線上學習與 Liquid Time-Constant（LTC）脈衝神經元，將序列優化分解為無需展開長計算圖的逐步更新。該方法在超長序列時序分類上超越既有線上方法並逼近或超越離線訓練，並完成端對端深層物件定位與辨識 SNN 的訓練。</li>
+<li>跨領域啟發：把 <a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> 的動態時間常數引入可擴展脈衝網路，是 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a> 的核心代表作。</li>
+<li>連結：<a href="zotero://select/library/items/HNZ57WVI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s42256-023-00650-4" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-brain-inspired-multimodal-hybrid-neural-network-for-robot-place-recognition2023">4. Brain-inspired multimodal hybrid neural network for robot place recognition（2023）</h4>
+<ul>
+<li>作者與出處：Fangwen Yu, Yujie Wu, Songchen Ma, Mingkun Xu, Hongyi Li · <em>Science Robotics</em></li>
+<li>核心問題：機器人在變動自然環境與嚴格資源限制下執行空間位置辨識時，常受限於感測雜訊與傳統同步融合架構的功耗。</li>
+<li>關鍵做法：作者提出腦啟發多模態混合神經網路 NeuroGPR，建構空間視圖細胞、位置細胞、頭向細胞與時間細胞網路來編碼傳統與神經形態感測器輸入，並以多尺度液態狀態機非同步地整合跨模態時空線索。</li>
+<li>跨領域啟發：展現多尺度 LSM 作為非同步感測融合骨幹在機器人空間智能中的作用，補充 <a class="wl" href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a> 的應用視角。</li>
+<li>連結：<a href="zotero://select/library/items/SQTUII9Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1126/scirobotics.abm6996" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-a-spiking-photonic-neural-network-of-40-000-neurons-trained-with-latency-and-rank-order-coding-for-leveraging-sparsity2025">5. A spiking photonic neural network of 40 000 neurons, trained with latency and rank-order coding for leveraging sparsity（2025）</h4>
+<ul>
+<li>作者與出處：Ria Talukder, Anas Skalli, Xavier Porté, Simon J. Thorpe, Daniel Brunner · <em>Neuromorphic Computing and Engineering</em></li>
+<li>核心問題：CMOS 電子脈衝硬體在神經元數量擴張與大規模平行訊號傳輸上仍面臨互連瓶頸，限制大型 SNN 的物理實作速度與規模。</li>
+<li>關鍵做法：作者利用空間光調變器與 CMOS 相機建立 40,000 神經元的光子 SNN，由加入慢速抑制反饋的修改型 Ikeda 映射產生類生物興奮性動力學。透過延遲與秩次編碼利用稀疏性，系統僅使用 22% 神經元即在 MNIST 取得 83.5% 準確率，使用 8.5% 神經元則為 77.5%。</li>
+<li>跨領域啟發：驗證時間序稀疏編碼與光學類比動力學的相容性，拓展神經形態計算在電子晶片之外的物理載體路線。</li>
+<li>連結：<a href="zotero://select/library/items/X33K7822" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.19209" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-hardwarealgorithm-co-optimization-of-weight-update-protocols-in-oxide-based-synaptic-transistor-arrays-for-neuromorphic-systems2026">6. Hardware–Algorithm Co-Optimization of Weight-Update Protocols in Oxide-Based Synaptic Transistor Arrays for Neuromorphic Systems（2026）</h4>
+<ul>
+<li>作者與出處：Yixin Cao, Jingsong Xia, Xiangyi Ding, Xin Wang, Jin Liu · <em>Micromachines</em></li>
+<li>核心問題：三端突觸電晶體在陣列級神經形態模擬中常直接套用單元件平均參數或兩端憶阻器更新規則，無法準確刻畫元件非線性與電導邊界對網路計算效率的影響。</li>
+<li>關鍵做法：作者基於實驗校準的差分電導對映射（<span class="math inline">W = G^+ - G^-</span>）建立行為級模擬框架，整合指數型 LTP/LTD 更新與事後篩選機制 isValid，系統評估更新極性、步長與電導上下界。在 Neural Circuit Policies 網路的模擬中證實更新方向必須嚴格對齊矩陣角色與 <span class="math inline">G^-</span> 通道極性。</li>
+<li>跨領域啟發：連接半導體突觸元件物理與 <a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a> 的稀疏迴路設計，示範軟硬體邊界條件的協同最佳化。</li>
+<li>連結：<a href="zotero://select/library/items/F47TVFH7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/mi17091049" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-48-篇">G5｜本子方向全量文獻泛讀清單（共 48 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 48 篇文獻（含開放存取 PDF 19 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進33-篇">A. 奠基經典、專著與核心演進（33 篇）</h3>
+<ul>
+<li><strong>2019｜Artificial Neural Networks-Based Machine Learning for Wireless Networks: A Tutorial</strong>，Mingzhe Chen et al.（<em>IEEE Communications Surveys &amp; Tutorials</em>，1527 引）：Artificial Neural Networks-Based Machine Learning for Wireless Networks: A Tutorial，Mingzhe Chen et al.（無線與物聯網邊緣通訊神經架構的完整教程，涵蓋回聲狀態網路、脈衝網路與超低延遲時序控制，1527 引）。 <a href="zotero://select/library/items/XZH32SCR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1710.02913" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Training Spiking Neural Networks Using Lessons From Deep Learning</strong>，Jason K. Eshraghian et al.（<em>Proceedings of the IEEE</em>，801 引）：Training Spiking Neural Networks Using Lessons From Deep Learning，Jason K. Eshraghian et al.（現代脈衝神經網路 SNN 的代表性長文，完整銜接神經科學的膜電位動力學、代理梯度反向傳播與神經形態硬體部署，801 引）。 <a href="zotero://select/library/items/WT7M3DG5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/jproc.2023.3308088" rel="noopener">官方連結</a></li>
+<li><strong>2015｜A Digital Liquid State Machine With Biologically Inspired Learning and Its Application to Speech Recognition</strong>，Yong Zhang et al.（<em>IEEE Transactions on Neural Networks and Learning Systems</em>，215 引）：針對低功耗 VLSI 應用提出具生物啟發式線上學習規則的數位液態狀態機（LSM），僅依賴前後突觸脈衝活動進行局部權重更新而無須全域通訊與離線儲存，適用於平行硬體實作與語音辨識。 <a href="zotero://select/library/items/UF7GTKDW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tnnls.2015.2388544" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Accurate online training of dynamical spiking neural networks through Forward Propagation Through Time</strong>，Bojian Yin, Federico Corradi, Sander M. Bohté（<em>Nature Machine Intelligence</em>，117 引）：將時間前向傳播學習演算法 FPTT 與液態時間常數（LTC）脈衝神經元結合，克服傳統循環脈衝網路記憶體負擔大與無法線上訓練長序列的限制，在時序分類任務上超越現有線上學習方法。 <a href="zotero://select/library/items/HNZ57WVI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1038/s42256-023-00650-4" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Brain-inspired multimodal hybrid neural network for robot place recognition</strong>，Fangwen Yu et al.（<em>Science Robotics</em>，100 引）：發表於《Science Robotics》，提出類腦多模態混合神經網路機器人地點辨識系統 NeuroGPR，整合傳統與神經形態感測器，並建構模擬空間視野細胞與位置細胞的時空神經網路完成環境辨識。 <a href="zotero://select/library/items/SQTUII9Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1126/scirobotics.abm6996" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Deep Liquid State Machines With Neural Plasticity for Video Activity Recognition</strong>，Nicholas Soures, Dhireesha Kudithipudi（<em>Frontiers in Neuroscience</em>，68 引）：針對受尺寸、重量與功耗限制的邊緣裝置第一人稱視角影片動作辨識需求，提出結合神經可塑性的深層液態狀態機（deep-LSM）脈衝網路，在維持低運算開銷下捕捉多時間尺度動態資訊。 <a href="zotero://select/library/items/95UMZ44E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnins.2019.00686" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Radar-Based Hand Gesture Recognition Using Spiking Neural Networks</strong>，Ing Jyh Tsang et al.（<em>Electronics</em>，67 引）：將 FMCW 毫米波雷達都卜勒訊號轉換為脈衝序列輸入少於 1,000 個神經元的液態狀態機（LSM）脈衝儲層，再將讀出脈衝送入 SVM 等分類器進行手勢辨識，在兩個公開基準資料集上均取得逾 98% 的十折交叉驗證準確率。 <a href="zotero://select/library/items/IGVK66VX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/electronics10121405" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Analysis of Liquid Ensembles for Enhancing the Performance and Accuracy of Liquid State Machines</strong>，Parami Wijesinghe et al.（<em>Frontiers in Neuroscience</em>，66 引）：受生物神經元偏好與空間鄰近神經元密集連結的特性啟發，提出以多組區域連結的脈衝儲層整合（liquid ensembles）取代單一全域儲層的架構，藉以改善液態狀態機（LSM）的動態表徵與分類準確率。 <a href="zotero://select/library/items/SZPKENAJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnins.2019.00504" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Liquid State Machine With Dendritically Enhanced Readout for Low-Power, Neuromorphic VLSI Implementations</strong>，Subhrajit Roy, Amitava Banerjee, Arindam Basu（<em>IEEE Transactions on Biomedical Circuits and Systems</em>，57 引）：為液態狀態機（LSM）設計具集總非線性多樹突（雙室模型）的讀出架構與學習演算法，相較於 p-delta 平行感知器能以更少突觸連接達成更佳表現，適合低功耗神經形態 VLSI 實作。 <a href="zotero://select/library/items/8A69XN9N" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1411.5458" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Sitting Posture Recognition Using a Spiking Neural Network</strong>，Jianquan Wang et al.（<em>IEEE Sensors Journal</em>，50 引）：結合表面壓力感測智慧座椅、餘弦秩稀疏編碼與液態狀態機 (LSM) 脈衝神經網路辨識 15 種坐姿，並輔以邏輯迴歸分類器，在 19 名受試者實驗中達到 88.52% 的預測精確率。 <a href="zotero://select/library/items/XQZIWCDN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.12908" rel="noopener">官方連結</a></li>
+<li><strong>2018｜SpiLinC: Spiking Liquid-Ensemble Computing for Unsupervised Speech and Image Recognition</strong>，Gopalakrishnan Srinivasan, Priyadarshini Panda, Kaushik Roy（<em>Frontiers in Neuroscience</em>，49 引）：提出用於無監督語音與影像辨識的脈衝液態整合計算模型 SpiLinC，利用脈衝時序依賴可塑性（STDP）自適應調整輸入層與液態儲層間的突觸權重，無須監督式讀出層即可直接依儲層脈衝活動推斷類別。 <a href="zotero://select/library/items/GJIAX3HG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnins.2018.00524" rel="noopener">官方連結</a></li>
+<li><strong>2020｜Surrogate-Assisted Evolutionary Search of Spiking Neural Architectures in Liquid State Machines</strong>，Yan Zhou, Yaochu Jin, Jinliang Ding（<em>Neurocomputing</em>，47 引）：發表於 Neurocomputing，提出代理模型輔助的演化搜尋方法來最佳化液態狀態機（LSM）中的脈衝神經網路架構，對應 42C 與 02E 主題。 <a href="zotero://select/library/items/FFRDE8HP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neucom.2020.04.079" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Extended liquid state machines for speech recognition</strong>，Lucas Deckers et al.（<em>Frontiers in Neuroscience</em>，43 引）：針對語音辨識任務提出擴展液態狀態機（ELSM），透過維持興奮抑制平衡使系統運作於混沌邊緣、引入脈衝頻率適應（SFA）增強記憶能力，並加入神經元時間常數異質性以豐富儲層動力學響應。 <a href="zotero://select/library/items/NCI6TRST" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnins.2022.1023470" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Computational capability of liquid state machines with spike-timing-dependent plasticity</strong>，Fangzheng Xue, Zhicheng Hou, Xiumin Li（<em>Neurocomputing</em>，40 引）：發表於 Neurocomputing，研究引入脈衝時序依賴可塑性（STDP）學習機制後液態狀態機（LSM）的計算能力與動態記憶表現，對應 42C 主題。 <a href="zotero://select/library/items/34FSZSKQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neucom.2013.06.019" rel="noopener">官方連結</a></li>
+<li><strong>2022｜LSMCore: A 69k-Synapse/mm 2 Single-Core Digital Neuromorphic Processor for Liquid State Machine</strong>，Lei Wang et al.（<em>IEEE Transactions on Circuits and Systems I Regular Papers</em>，38 引）：設計專為液態狀態機（LSM）打造的數位神經形態處理器 LSMCore，整合 256 個輸入神經元、1024 個液態神經元與 131 萬個突觸（密度達每平方公釐 69k 突觸），同時支援片上訓練與推論加速。 <a href="zotero://select/library/items/TBC54QAF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tcsi.2022.3147380" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Liquid State Machine on SpiNNaker for Spatio-Temporal Classification Tasks</strong>，Alberto Patiño-Saucedo et al.（<em>Frontiers in Neuroscience</em>，36 引）：在大規模神經形態硬體 SpiNNaker 處理器上實作離線訓練的液態狀態機（LSM），利用改編的隨時間反向傳播方法訓練讀出層以處理事件視覺資料流，並在事件相機基準資料集 N-MNIST 上取得當時領先效能。 <a href="zotero://select/library/items/RI3QHAZX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3389/fnins.2022.819063" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Increasing Liquid State Machine Performance with Edge-of-Chaos Dynamics Organized by Astrocyte-modulated Plasticity</strong>，Ivanov, Vladimir A., Konstantinos P. Michmizos（<em>arXiv (Cornell University)</em>，33 引）：借鏡星狀膠質細胞調控突觸可塑性的神經機制提出 NALSM，使液態狀態機儲層在無須誤差反向傳播下自組織趨近有序與混沌邊緣的臨界相變點，改善分類效能。 <a href="zotero://select/library/items/DIUMTNCG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.01760" rel="noopener">官方連結</a></li>
+<li><strong>2015｜High-Density Liquid-State Machine Circuitry for Time-Series Forecasting</strong>，Josep L. Rosselló et al.（<em>International Journal of Neural Systems</em>，33 引）：結合機率計算概念與布林邏輯閘設計低成本高密度液態狀態機（LSM）硬體電路，大幅減少硬體資源需求並提升單晶片神經元容量，進而應用於高速時間序列預測。 <a href="zotero://select/library/items/SS57XRGA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1142/s0129065715500367" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Reinforcement Learning With Low-Complexity Liquid State Machines</strong>，Wachirawit Ponghiran, Gopalakrishnan Srinivasan, Kaushik Roy（<em>Frontiers in Neuroscience</em>，25 引）：提出基於低複雜度液態狀態機（LSM）的強化學習架構，透過系統化初始化稀疏隨機連接的遞迴與前饋脈衝神經元將時序脈絡映射為高維表徵，僅需以 Q-learning 訓練讀出層參數即可學習 Atari 遊戲等控制任務。 <a href="zotero://select/library/items/VHSQ39CQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1906.01695" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Energy-efficient FPGA Spiking Neural Accelerators with Supervised and Unsupervised Spike-timing-dependent-Plasticity</strong>，Yu Liu, Sai Sourabh Yenamachintala, Peng Li（<em>ACM Journal on Emerging Technologies in Computing Systems</em>，22 引）：設計具片上可塑性學習的節能 FPGA 液態狀態機（LSM）脈衝加速器，分別採用監督式 STDP 訓練輸出層與利於硬體實作的非監督式 STDP 訓練循環儲層，以提升事件驅動模式分類效能。 <a href="zotero://select/library/items/UF2UAR5F" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3313866" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Surrogate-Assisted Cooperative Co-evolutionary Reservoir Architecture Search for Liquid State Machines</strong>，Yan Zhou et al.（<em>IEEE Transactions on Emerging Topics in Computational Intelligence</em>，19 引）：針對液態狀態機（LSM）複雜儲層拓樸難以最佳化的問題，提出代理輔助協同演化演算法搜尋生成式儲層架構，並同步結合突觸可塑性規則調整網路權重。 <a href="zotero://select/library/items/M84CB8HJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tetci.2022.3228538" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Optimizing the Neural Structure and Hyperparameters of Liquid State Machines Based on Evolutionary Membrane Algorithm</strong>，Chuang Liu et al.（<em>Mathematics</em>，18 引）：針對液態狀態機（LSM）網路拓撲與超參數調校困難的問題，提出基於演化膜演算法（evolutionary membrane algorithm）的結構與參數聯合最佳化方法，透過設計對應 LSM 結構的膜反應規則搜尋最優儲層配置。 <a href="zotero://select/library/items/B2BQSZ8R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/math10111844" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Spiking Reservoir Networks: Brain-Inspired Recurrent Algorithms That Use Random, Fixed Synaptic Strengths</strong>，Nicholas Soures, Dhireesha Kudithipudi（<em>IEEE Signal Processing Magazine</em>，18 引）：綜述以隨機固定突觸權重運作的脈衝儲層網路與液態狀態機（LSM），剖析其運算機制、設計評估指標與神經形態硬體實現，並討論結合局部可塑性規則與階層結構的擴展變體。 <a href="zotero://select/library/items/QRJMVDXK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/msp.2019.2931479" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Online Adaptation and Energy Minimization for Hardware Recurrent Spiking Neural Networks</strong>，Yu Liu, Yingyezhe Jin, Peng Li（<em>ACM Journal on Emerging Technologies in Computing Systems</em>，18 引）：從演算法與硬體協同角度優化液態狀態機（LSM）脈衝處理器能效，提出利於硬體實作的線上 STDP 可塑性微調機制，並設計執行期相關性神經元門控策略以最小化功耗。 <a href="zotero://select/library/items/DE7QA8PK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3145479" rel="noopener">官方連結</a></li>
+<li><strong>2016｜An Online Structural Plasticity Rule for Generating Better Reservoirs</strong>，Subhrajit Roy, Arindam Basu（<em>Neural Computation</em>，18 引）：受生物結構可塑性啟發，提出透過形成與消除突觸連結訓練液態狀態機（LSM）脈衝儲層的低解析度線上無監督規則，結合 AER 位址事件協定實現，使類間分離度提升約 1.36 倍。 <a href="zotero://select/library/items/UJ596HBG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1604.05459" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Biological modelling of a computational spiking neural network with neuronal avalanches</strong>，Xiumin Li, Qing Chen, Fangzheng Xue（<em>Philosophical Transactions of the Royal Society A Mathematical Physical and Engineering Sciences</em>，17 引）：以液態狀態機為基礎建構脈衝神經網路（SNN），研究網路自組織至「神經元雪崩」臨界狀態及結合脈衝時序依賴可塑性（STDP）後，對即時神經計算表現的影響。 <a href="zotero://select/library/items/NTRTNI89" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1098/rsta.2016.0286" rel="noopener">官方連結</a></li>
+<li><strong>2009｜The Application of Liquid State Machines in Robot Path Planning</strong>，Yanduo Zhang, Kun Wang（<em>Journal of Computers</em>，17 引）：結合液態狀態機（LSM）、脈衝神經網路與平行 Delta 規則（Parallel Delta Rule）求解機器人路徑規劃最佳化問題，並透過 Matlab 模擬驗證其求解成效。 <a href="zotero://select/library/items/RJPJGSAS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4304/jcp.4.11.1182-1186" rel="noopener">官方連結</a></li>
+<li><strong>2023｜DNN-SNN Co-Learning for Sustainable Symbol Detection in 5G Systems on Loihi Chip</strong>，Shiya Liu, Yibin Liang, Yang Yi（<em>IEEE Transactions on Sustainable Computing</em>，16 引）：於 Intel Loihi 神經形態晶片實作液態狀態機（LSM）以執行 5G MIMO-OFDM 符號偵測，並提出雙向 DNN–SNN 協同學習知識蒸餾演算法與脈衝解碼器，彌補脈衝網路與深度網路間的準確度落差。 <a href="zotero://select/library/items/IS7ZU4HS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tsusc.2023.3324339" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Adaptive structure evolution and biologically plausible synaptic plasticity for recurrent spiking neural networks</strong>，Wenxuan Pan et al.（<em>Scientific Reports</em>，15 引）：針對現有液態狀態機 (LSM) 缺乏大腦多尺度學習與結構演化啟發的不足，提出整合自適應結構演化與生物合理性多尺度突觸可塑性規則的遞迴脈衝神經網路學習模型。 <a href="zotero://select/library/items/MFTEGJU5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2304.01015" rel="noopener">官方連結</a></li>
+<li><strong>2021｜A Brain-Inspired Approach for Collision-Free Movement Planning in the Small Operational Space</strong>，Dengpeng Xing et al.（<em>IEEE Transactions on Neural Networks and Learning Systems</em>，15 引）：針對微介觀狹小作業空間的無碰撞運動規劃，以脈衝神經網路模擬視覺皮層提取距離狀態，並在前額葉模組結合多組液態狀態機（LSM）預測未來軌跡距離與興奮–抑制前饋網路規劃無碰路徑。 <a href="zotero://select/library/items/CRXJIWQH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tnnls.2021.3111051" rel="noopener">官方連結</a></li>
+<li><strong>2022｜PLSM: A Parallelized Liquid State Machine for Unintentional Action Detection</strong>，Siladittya Manna et al.（<em>IEEE Transactions on Emerging Topics in Computing</em>，14 引）：提出結合時空讀出層與語意約束的並行化液態狀態機 PLSM，設計相容 GPU 的並行脈衝神經網路實作演算法，並於 Oops 資料集驗證非故意動作分類。 <a href="zotero://select/library/items/TBCK9DMC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2105.09909" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Chaotic Liquid State Machine</strong>，Mario Antoine Aoun, Mounir Boukadoum（<em>International Journal of Cognitive Informatics and Natural Intelligence</em>，14 引）：以混沌脈衝神經元池搭配突觸可塑性機制建構液態狀態機（LSM），使其具備僅靠正樣本訓練即可學習時變輸入類別的單類分類能力，並應用於線上簽名驗證任務。 <a href="zotero://select/library/items/AIZ4FTUE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4018/ijcini.2015100101" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Process-Voltage-Temperature Variability Estimation of Tunneling Current for Band-to-Band-Tunneling-Based Neuron</strong>，Shubham V. Patil et al.（<em>IEEE Transactions on Electron Devices</em>，10 引）：針對用於液態狀態機 LSM 的帶間穿隧神經元，評估製程、電壓與溫度（PVT）變異對其穿隧電流的影響，並將其與同電晶體在亞閾值及導通區間的變異敏感度進行基準比較。 <a href="zotero://select/library/items/3BGWIXWT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2306.11640" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻15-篇">B. 2024–2026 近期推進與前沿文獻（15 篇）</h3>
+<ul>
+<li><strong>未知年份｜1Liquid State Machine with Dendritically Enhanced Readout for Low-power, Neuromorphic VLSI Implementations</strong>，Subhrajit Roy et al.（<em>Academic Venue</em>，38 引）：受生物樹突非線性啟發，為液態狀態機（LSM）設計具多樹突分支的雙室神經元讀出級，相較 p-delta 平行感知器大幅減少突觸資源需求以實現低功耗神經形態 VLSI 硬體部署。 <a href="zotero://select/library/items/835FEMJN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.761.955" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Fault diagnosis using liquid state machine with spiking-timing-dependent plasticity learning rule</strong>，Yi Wan, Shaoping Wang, Di Liu（<em>Expert Systems with Applications</em>，27 引）：發表於 Expert Systems with Applications，探討將脈衝時序依賴可塑性（STDP）學習規則結合液態狀態機（LSM），用於工程系統的故障診斷問題。 <a href="zotero://select/library/items/M4QZKCH4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.eswa.2025.126736" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Exploring Liquid Neural Networks on Loihi-2</strong>，Wiktoria Agata Pawlak et al.（<em>arXiv (Cornell University)</em>，25 引）：分析液態狀態機並將液態神經網路（LNN）部署至神經形態硬體 Loihi-2 ASIC 晶片，在 CIFAR-10 影像分類任務上達成 91.3% 準確率，且每幀推論能耗僅 213 微焦耳。 <a href="zotero://select/library/items/59W6J74Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.20590" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Emergence of brain-inspired small-world spiking neural network through neuroevolution</strong>，Wenxuan Pan et al.（<em>iScience</em>，23 引）：提出融合小世界係數與臨界性的多目標演化液態狀態機 ELSM，演化具樞紐節點與短程路徑的類腦脈衝網路，於 NMNIST、MNIST 與 Fashion-MNIST 達 97.23%、98.12% 與 88.81% 準確率。 <a href="zotero://select/library/items/MI49FCVD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.isci.2024.108845" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Ghost Reservoir: A Memory-Efficient Low-Power and Real-Time Neuromorphic Processor of Liquid State Machine With On-Chip Learning</strong>，Cong Shi et al.（<em>IEEE Transactions on Circuits &amp; Systems II Express Briefs</em>，21 引）：提出具片上 BP-STDP 學習能力的低功耗 LSM 神經形態處理器 Ghost Reservoir，儲層採無狀態神經元與即時權重重生成以省去膜電位及權重儲存，讀出層則採隨機權重更新降低記憶體開銷。 <a href="zotero://select/library/items/NHZHJVWB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tcsii.2024.3395415" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Unsupervised spiking neural network based on liquid state machine and self-organizing map</strong>，Youdong Zhang et al.（<em>Neurocomputing</em>，16 引）：發表於 Neurocomputing，研究結合液態狀態機（LSM）與自組織映射（self-organizing map）的無監督脈衝神經網路學習架構，對應 42C 與 02E 主題。 <a href="zotero://select/library/items/XGPZVJA6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neucom.2024.129120" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Biological plausible algorithm for seizure detection: Toward AI-enabled electroceuticals at the edge</strong>，Luis Fernando Herbozo Contreras et al.（<em>APL Machine Learning</em>，15 引）：針對頭皮下 EEG 與 ECoG 閉迴路癲癇發作偵測的低功耗與即時邊緣持續訓練需求，採用具生物合理性的液態時間常數網路（LTC）演算法推進智慧電療裝置應用。 <a href="zotero://select/library/items/KNE35UKU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1063/5.0192875" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A spiking photonic neural network of 40 000 neurons, trained with latency and rank-order coding for leveraging sparsity</strong>，Ria Talukder et al.（<em>Neuromorphic Computing and Engineering</em>，12 引）：利用空間光調變器與CMOS相機建構4萬個神經元的光子脈衝神經網路，系統由具慢速抑制回饋的修正Ikeda映射控制以模擬生物可興奮性，並以延遲與秩次編碼利用稀疏性。 <a href="zotero://select/library/items/X33K7822" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.19209" rel="noopener">官方連結</a></li>
+<li><strong>2024｜LSM-Based Hotspot Prediction and Hotspot-Aware Routing in NoC-Based Neuromorphic Processor</strong>，Ziyang Kang et al.（<em>IEEE Transactions on Very Large Scale Integration (VLSI) Systems</em>，12 引）：針對晶片上網路（NoC）神經形態處理器的隨機脈衝流量熱點問題，設計具可配置 LIF 神經元的液態狀態機熱點預測器 HP-LSM，並結合熱點感知路徑多播路由演算法 HaPM 引導封包繞行。 <a href="zotero://select/library/items/J73MFMMP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tvlsi.2024.3370850" rel="noopener">官方連結</a></li>
+<li><strong>2024｜On-device edge-learning for cardiac abnormality detection using a bio-inspired and spiking shallow network</strong>，Zhaojing Huang et al.（<em>APL Machine Learning</em>，10 引）：將脈衝 ConvLSTM2D 與 CfC 結合為 sCCfC 模型進行裝置端心律異常偵測，取得 F1 0.82 與 AUROC 0.91，在模擬 Loihi 神經形態晶片上每次推論功耗估計為 4.68 μJ（對比傳統處理器 ConvCfC 的 450 μJ）。 <a href="zotero://select/library/items/P6C7DPNK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1063/5.0191571" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A novel hybrid liquid neural network with time dependent neuromorphic and transformer encoder based reservoir dynamics for respiratory sound classification</strong>，Narin Aslan（<em>Engineering Applications of Artificial Intelligence</em>，8 引）：發表於 Engineering Applications of Artificial Intelligence，結合時變神經形態與 Transformer 編碼器儲層動力學建立混合液態神經網路，用於呼吸音分類。 <a href="zotero://select/library/items/PQCIZHMQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.engappai.2025.112728" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Energy-Efficient Spiking Recurrent Neural Network for Gesture Recognition on Embedded GPUs</strong>，Marzieh Varposhti, Mahyar Shahsavari, Marcel A. J. van Gerven（<em>arXiv (Cornell University)</em>，8 引）：在 NVIDIA Jetson Nano 嵌入式 GPU 部署結合液態時間常數神經元的脈衝循環神經網路（SRNN）進行手勢辨識，相較傳統 GPU 達成 14 倍能效提升，並證實批次處理可在維持高準確率下顯著提高幀率。 <a href="zotero://select/library/items/NM6AJPK8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.12978" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Neural Circuit Policy-Driven Spiking Neural Network: A Clustered and Lightweight Method for Wind Farm Condition Monitoring</strong>，Xinjian Bai et al.（<em>SSRN Electronic Journal</em>，1 引）：發表於 SSRN 的預印本論文，提出結合神經迴路策略（NCP）與脈衝神經網路（SNN）的叢集輕量級架構，探討其在風力發電場設備狀態監測上的應用。 <a href="zotero://select/library/items/UWWDUZE4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2139/ssrn.5356458" rel="noopener">官方連結</a></li>
+<li><strong>2026｜An Efficient Wind Farm Condition Monitoring Method Balancing Complexity and Performance</strong>，Xinjian Bai et al.（<em>IEEE Transactions on Industrial Informatics</em>）：提出兼顧規模與效能的風場狀態監測方法，先依據時序特徵與資料相關性對風機分群以選出中心代表機組，再於代表機組上訓練輕量級神經迴路策略（NCP）驅動的脈衝神經網路進行早期故障預警。 <a href="zotero://select/library/items/QQKKA8GJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tii.2026.3673932" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Hardware–Algorithm Co-Optimization of Weight-Update Protocols in Oxide-Based Synaptic Transistor Arrays for Neuromorphic Systems</strong>，Yixin Cao et al.（<em>Micromachines</em>）：針對三端氧化物突觸電晶體陣列的硬體演算法協同最佳化，建立基於差分電導對映射（<span class="math inline">W = G^+ - G^-</span>）與指數型 LTP/LTD 更新規則的行為模擬框架，探討更新極性、步長與非線性度對網路效率的影響。 <a href="zotero://select/library/items/F47TVFH7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/mi17091049" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-a9f49b52">在地圖上查看</a><div class="rg"><h3>相關<span class="n">6</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a><span class="rs">這個領域的架構不走「先把一切切成離散詞元，再做 O(N^2) 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊…</span></li><li><a href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a></li><li><a href="42C_%E6%B6%B2%E6%85%8B%E7%8B%80%E6%85%8B%E6%A9%9FLSM%E8%88%87%E7%94%9F%E7%89%A9%E8%84%88%E8%A1%9D%E5%84%B2%E5%B1%A4%E5%8B%95%E5%8A%9B%E5%AD%B8.html">液態狀態機LSM與生物脈衝儲層動力學</a></li><li><a href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a></li><li><a href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a></li><li><a href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

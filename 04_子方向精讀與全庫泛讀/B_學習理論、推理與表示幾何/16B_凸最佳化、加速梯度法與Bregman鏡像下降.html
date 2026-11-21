@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>16B｜凸最佳化、加速梯度法與Bregman鏡像下降 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-5fb8f357" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 學習理論、推理與表示幾何</span>
+<article>
+
+<h1 id="16b凸最佳化加速梯度法與bregman鏡像下降">16B｜凸最佳化、加速梯度法與Bregman鏡像下降</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a>
+同領域子方向：<a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> · <a class="wl" href="16C_%E9%9D%9E%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E9%9E%8D%E9%BB%9E%E9%80%83%E9%80%B8%E3%80%81%E9%9A%A8%E6%A9%9F%E8%BF%91%E4%BC%BC%E8%88%87%E6%B5%81%E5%BD%A2%E6%94%B6%E6%96%82%E7%90%86%E8%AB%96.html">非凸最佳化鞍點逃逸、隨機近似與流形收斂理論</a>
+跨領域關聯子方向：<a class="wl" href="05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a> · <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41G_PCP%E6%A9%9F%E7%8E%87%E5%8F%AF%E6%AA%A2%E9%A9%97%E8%AD%89%E6%98%8E%E3%80%81Sum-of-Squares%E9%9A%8E%E5%B1%A4%E8%88%87%E4%B8%8D%E5%8F%AF%E8%BF%91%E4%BC%BC%E4%B8%8B%E7%95%8C.html">PCP機率可檢驗證明、Sum-of-Squares階層與不可近似下界</a> · <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34A_%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E8%AD%9C%E7%90%86%E8%AB%96%E3%80%81Wigner%E5%8D%8A%E5%9C%93%E5%BE%8B%E3%80%81Marchenko-Pastur%E8%88%87%E8%87%AA%E7%94%B1%E6%A9%9F%E7%8E%87.html">隨機矩陣譜理論、Wigner半圓律、Marchenko-Pastur與自由機率</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A505_%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A%E8%AB%96%E3%80%81%E5%A3%93%E7%B8%AE%E9%A0%90%E6%B8%AC%E8%88%87%E5%85%83%E8%A4%87%E9%9B%9C%E5%BA%A6.html">演算法資訊論、壓縮預測與元複雜度</a> · <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a>
+課程章節：<a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M16_%E5%81%8F%E5%B0%8E%E6%95%B8%E3%80%81Hessian%20%E8%88%87%20Lagrange%20%E4%B9%98%E5%AD%90.html">偏導數、Hessian 與 Lagrange 乘子</a> · <a class="wl" href="../../NOTES/01_%E6%95%B8%E5%AD%B8/M63_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%EF%BC%9APAC%20%E8%88%87%20VC%20%E7%B6%AD.html">學習理論：PAC 與 VC 維</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E17_%E6%B6%88%E8%B2%BB%E8%80%85%E7%90%86%E8%AB%96%E8%88%87%20Slutsky%20%E6%96%B9%E7%A8%8B.html">消費者理論與 Slutsky 方程</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E33_MWG%20%E9%81%B8%E6%93%87%E3%80%81%E6%B6%88%E8%B2%BB%E8%80%85%E8%88%87%E7%94%9F%E7%94%A2.html">MWG 選擇、消費者與生產</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向隸屬 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a>，承接 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 所界定的學習目標，並為 <a class="wl" href="16C_%E9%9D%9E%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E9%9E%8D%E9%BB%9E%E9%80%83%E9%80%B8%E3%80%81%E9%9A%A8%E6%A9%9F%E8%BF%91%E4%BC%BC%E8%88%87%E6%B5%81%E5%BD%A2%E6%94%B6%E6%96%82%E7%90%86%E8%AB%96.html">非凸最佳化鞍點逃逸、隨機近似與流形收斂理論</a> 提供理論基線與算法組件。核心脈絡從一階黑盒神諭（oracle）下界出發，經由 Nesterov 加速梯度、FISTA 結構化分裂與非歐氏空間上的 Bregman 鏡像下降（Mirror Descent）確立凸問題的最優收斂率，再延伸至高維凸鬆弛的複雜度極限、序列凸逼近與分散式原始–對偶曲率加速。</p>
+</aside>
+<ul>
+<li>核心問題：普通梯度下降在病態條件數 <span class="math inline">\kappa = L/\mu</span> 下僅能達到線性收斂速率 <span class="math inline">1 - 1/\kappa</span>，在無強凸性的 <span class="math inline">L</span>-光滑問題上僅達 <span class="math inline">O(1/T)</span>，離黑盒複雜度下界仍有顯著落差；同時歐氏投影步在單純形、核範數球或高維結構約束上常帶來 <span class="math inline">O(d)</span> 維度懲罰或昂貴的投影開銷。另一方面，許多結構化機器學習問題（如稀疏恢復、低秩分解與物理資訊學習）本質上屬於非凸或 NP 困難問題，凸鬆弛雖能套用高效凸演算法，卻面臨統計損失或 PCP 不可近似門檻的理論約束。</li>
+<li>直覺模型：可以把普通梯度下降想像成沿著狹長山谷的等高線垂直方向慢慢曲折下山，每一步都在峽谷兩壁間來回震盪；Nesterov 加速加上了動量前瞻，讓球體沿谷底長軸累積速度。Bregman 鏡像下降則是換掉腳下的量尺，把山谷放到對偶空間（例如以負熵誘導 KL 幾何代替歐氏距離）中拉平方向比例，使迭代步自然貼合機率單純形或矩陣譜域的邊界幾何。</li>
+<li>分階段閱讀路線：第一階段精讀 Bubeck (2014) 系統掌握黑盒複雜度下界、割平面法、Nesterov 加速梯度、Frank–Wolfe、鏡像下降、FISTA 與鞍點 Mirror Prox，並搭配 Anderson、Guionnet 與 Zeitouni (2009) 理解隨機矩陣譜律如何決定高維 Hessian 條件數分佈。第二階段讀 Håstad (2001)（對應 L5 筆記 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_09_2001_Hastad_Some_Optimal_Inapproximability_Results.html">Some Optimal Inapproximability Results</a>）與 Jain 與 Kar (2017)，釐清凸鬆弛與直接非凸方法在稀疏／低秩問題與 NP 困難門檻之間的取捨。第三階段讀 2025 年前沿論文：Yi、Yang、Cui 與 Lai (2025) 展示如何將物理資訊機器學習轉化為序列 B 樣條凸問題，Yi、Zeng 與 Freris (2025) 則展示分散式原始–對偶系統如何以線性成本擬牛頓求解器引入二階曲率加速。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;微積分、Hessian 與對偶乘子基礎&quot;] --&gt; B[&quot;一階黑盒神諭下界與 Nesterov 加速 (Bubeck 2014)&quot;]
+  B --&gt; C[&quot;複合結構優化 FISTA 與 Mirror Prox&quot;]
+  B --&gt; D[&quot;非歐幾何與 Bregman 鏡像下降&quot;]
+  E[&quot;隨機矩陣譜律與條件數幾何 (Anderson 等人 2009)&quot;] --&gt; B
+  F[&quot;PCP 不可近似下界 (Håstad 2001)&quot;] --&gt; G[&quot;凸鬆弛與直接非凸優化之權衡 (Jain 與 Kar 2017)&quot;]
+  C --&gt; H[&quot;序列凸逼近 Convex-PIML 與原始對偶曲率加速 (2025)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>黑盒神諭複雜度與 Nesterov 加速梯度法（Black-Box Complexity &amp; Nesterov Acceleration）</strong></p>
+<ul>
+<li>直覺理解：在一階資訊只給我們函數值與梯度的限制下，標準梯度下降並未用盡過去幾步的幾何記憶；透過線性組合當前梯度步與歷史外推點，收斂階數可以達到資訊論極限。</li>
+<li>機制或核心表達式：對於 <span class="math inline">L</span>-光滑凸函數 <span class="math inline">f</span>（<span class="math inline">\|\nabla f(x) - \nabla f(y)\|_2 \le L\|x - y\|_2</span>），黑盒一階神諭在高維（<span class="math inline">d \gg T</span>）下存在 <span class="math inline">\Omega(L\|x_0 - x^*\|_2^2 / T^2)</span> 的最壞情況下界。普通梯度下降僅達 <span class="math inline">O(1/T)</span>，而 Nesterov 加速梯度法維護兩組序列 <span class="math inline">x_t, y_t</span>：令 <span class="math inline">y_{t+1} = x_t - \frac{1}{L}\nabla f(x_t)</span>、<span class="math inline">x_{t+1} = y_{t+1} + \beta_t (y_{t+1} - y_t)</span>，即可實現最優率 <span class="math inline">O(L R^2 / T^2)</span>；若具 <span class="math inline">\mu</span>-強凸性，條件數依賴從 <span class="math inline">O(\kappa \ln(1/\varepsilon))</span> 改善為 <span class="math inline">O(\sqrt{\kappa}\ln(1/\varepsilon))</span>。對複合問題 <span class="math inline">\min_x f(x) + g(x)</span>（其中 <span class="math inline">g</span> 具簡單近端算子），FISTA（Beck–Teboulle；見 Bubeck 2014）將同一加速外推套用於近端梯度步，保持 <span class="math inline">O(1/T^2)</span> 速率。</li>
+<li>能做到什麼，代價是什麼：不需計算二階 Hessian 矩陣即達最優加速階；代價是加速軌跡未必單調下降（會出現振盪），且在隨機梯度噪聲未受控制時，外推會放大梯度變異數。</li>
+</ul>
+</li>
+<li>
+<p><strong>Bregman 散度、鏡像下降與對偶平均（Bregman Divergence, Mirror Descent &amp; Dual Averaging）</strong></p>
+<ul>
+<li>直覺理解：不同約束集合天然適合不同的距離量尺；與其強行用歐氏球做投影，不如先將梯度映射到對偶空間累加更新，再透過凸共軛的鏡像映射送回原空間。</li>
+<li>機制或核心表達式：選取對定義域 <span class="math inline">\mathcal{X}</span> 上關於某範數 <span class="math inline">\|\cdot\|</span> 為 <span class="math inline">1</span>-強凸的鏡像映射（mirror map）<span class="math inline">\Phi</span>，定義 Bregman 散度 <span class="math inline">D_\Phi(x, y) = \Phi(x) - \Phi(y) - \langle \nabla \Phi(y), x - y \rangle</span>。鏡像下降執行 <span class="math inline">\nabla \Phi(y_{t+1}) = \nabla \Phi(x_t) - \eta_t g_t</span> 與 Bregman 投影 <span class="math inline">x_{t+1} = \arg\min_{x \in \mathcal{X}} D_\Phi(x, y_{t+1})</span>。當 <span class="math inline">\mathcal{X}</span> 為 <span class="math inline">d</span> 維機率單純形 <span class="math inline">\Delta^d</span> 且取負熵 <span class="math inline">\Phi(x) = \sum_{i=1}^d x_i \ln x_i</span> 時，<span class="math inline">D_\Phi</span> 化為 KL 散度，更新變成指數權重，使次梯度下降的維度依賴從 <span class="math inline">O(\sqrt{d/T})</span> 降至 <span class="math inline">O(\sqrt{\ln d / T})</span>。對鞍點問題，Nemirovski 的 Mirror Prox 以兩步外梯度在變分不等式上實現 <span class="math inline">O(1/T)</span> 速率（Bubeck 2014）。</li>
+<li>能做到什麼，代價是什麼：能在非歐幾何約束（單純形、跡範數球）中將維度因子壓縮為對數級，且免去投影難題時亦可改用無投影的 Frank–Wolfe 法；代價是每類約束必須找到光滑強凸且易解 Bregman 投影的勢能函數 <span class="math inline">\Phi</span>。</li>
+</ul>
+</li>
+<li>
+<p><strong>凸鬆弛邊界與序列／原始–對偶凸轉化（Convex Relaxation Limits &amp; Primal-Dual Curvature Methods）</strong></p>
+<ul>
+<li>直覺理解：面對無法直接求解的非凸模型，一條路線是用凸問題包絡或逐步替換局部非凸項，另一條路線則透過原始–對偶分解在局部子問題引入低成本曲率校正。</li>
+<li>機制或核心表達式：Jain 與 Kar (2017) 系統比對將稀疏或低秩等非凸問題鬆弛為凸規劃（如 <span class="math inline">\ell_1</span> 或核範數鬆弛）與直接非凸求解的差異，而 Håstad (2001) 藉 3-查詢 PCP 與有限交換群離散傅立葉分析證明 MAX-E3-LIN-2（門檻 <span class="math inline">1/2+\varepsilon</span>）與 MAX-E3-SAT（門檻 <span class="math inline">7/8+\varepsilon</span>）在 <span class="math inline">P \neq NP</span> 下的最優不可近似性，限制了多項式時間凸／半定規劃鬆弛所能達到的近似比。在數值求解上，Yi 等人 (2025) 提出的 Convex-PIML 以 B 樣條線性組合逼近資料，並將物理資訊學習中的非凸損失項代換為一系列逐步精煉的近似凸優化子問題；Yi、Zeng 與 Freris (2025) 則對多智能體分散式學習採用原始–對偶框架，局部以模型維度線性成本的擬牛頓法引入二階曲率，且每輪僅需廣播一次局部模型。</li>
+<li>能做到什麼，代價是什麼：序列凸逼近與原始–對偶曲率方法能將成熟的凸優化收斂保證與通信效率帶入科學機器學習與分散式訓練；但其全局最優性仍受限於初始線性化或近似凸化造成的函數逼近誤差。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>單純形幾何下鏡像下降與歐氏梯度下降的維度依賴</strong>：在 <span class="math inline">d</span> 維機率單純形 <span class="math inline">\Delta^d</span> 上極小化 <span class="math inline">L</span>-Lipschitz 凸函數（關於 <span class="math inline">\ell_1</span> 範數有界，即對偶 <span class="math inline">\ell_\infty</span> 次梯度滿足 <span class="math inline">\|g_t\|_\infty \le G</span>）時，為何採用負熵鏡像映射的鏡像下降優於標準歐氏投影梯度下降？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>檢驗兩者在距離生成函數上的強凸常數與定義域直徑平方：歐氏距離 <span class="math inline">\frac{1}{2}\|x\|_2^2</span> 雖然在 <span class="math inline">\ell_2</span> 範數下為 <span class="math inline">1</span>-強凸，但當次梯度僅在 <span class="math inline">\ell_\infty</span> 有界時，<span class="math inline">\|g_t\|_2</span> 可達 <span class="math inline">\sqrt{d}G</span>，使上界出現 <span class="math inline">\sqrt{d}</span> 因子。反之，負熵 <span class="math inline">\Phi(x) = \sum_i x_i \ln x_i</span> 依 Pinsker 不等式相對於 <span class="math inline">\ell_1</span> 範數為 <span class="math inline">1</span>-強凸，而單純形上 KL 散度的定義域直徑上界為 <span class="math inline">\ln d</span>，因此將總誤差維度依賴從 <span class="math inline">\sqrt{d}</span> 縮減為 <span class="math inline">\sqrt{\ln d}</span>。</p>
+</details>
+<ol start="2">
+<li><strong>Nesterov 加速外推與隨機噪聲或非凸性的衝突</strong>：為何在決定性光滑凸問題中可將速率由 <span class="math inline">O(1/T)</span> 提升至 <span class="math inline">O(1/T^2)</span> 的 Nesterov 加速法，在隨機一階神諭（SGD）或非單純凸逼近情境下通常不能直接保持 <span class="math inline">O(1/T^2)</span> 而不需額外調整？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>分析隨機梯度中的變異數累積與非凸曲率影響：確定性 Nesterov 加速依賴精確梯度的動量抵銷來達成二次李雅普諾夫勢能下降，但在隨機設定下每次外推步都會把過去的隨機梯度噪聲以權重係數累加放大，使得變異數項仍受限於統計下界 <span class="math inline">\Omega(\sigma/\sqrt{T})</span>。若目標是非凸或序列凸逼近（如 Convex-PIML 內層外層交錯），精確動量條件一旦失效，外推甚至可能越過局部鞍點或破壞全局穩定性，須搭配重新啟動（restart）或變異數縮減。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>凸鬆弛的計算複雜度門檻與現實資料結構之落差</strong>：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_09_2001_Hastad_Some_Optimal_Inapproximability_Results.html">Some Optimal Inapproximability Results</a> 與 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41G_PCP%E6%A9%9F%E7%8E%87%E5%8F%AF%E6%AA%A2%E9%A9%97%E8%AD%89%E6%98%8E%E3%80%81Sum-of-Squares%E9%9A%8E%E5%B1%A4%E8%88%87%E4%B8%8D%E5%8F%AF%E8%BF%91%E4%BC%BC%E4%B8%8B%E7%95%8C.html">PCP機率可檢驗證明、Sum-of-Squares階層與不可近似下界</a> 揭示了最壞情況下多項式時間凸／SOS 鬆弛無法跨越的硬下界，而 Jain 與 Kar (2017) 及 Kunder 與 Kotari (2024) 則指出深度學習與張量分解中直接非凸方法常在實際資料分佈上表現良好。如何刻畫「平均情況資料幾何何時使非凸損失表現如同良態凸問題」仍持續連接 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a>。</li>
+<li><strong>非歐氏／原始–對偶加速演算法的自動化證明與二階擴展</strong>：Nesterov 加速、Mirror Prox 與分散式擬牛頓原始–對偶演算法（Yi、Zeng 與 Freris 2025）的收斂證明常仰賴精巧構造的李雅普諾夫勢能函數；如何借助 <a class="wl" href="05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a> 中的性能估計問題（PEP）或機器輔助驗證工具來自動生成並校驗高維二階與分散式架構的緊緻界，是演算法理論的活躍課題。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>隨機矩陣譜分佈與高維條件數控制</strong>：高維線性回歸與廣義線性模型的凸損失 Hessian 譜分佈（最小與最大特徵值之比 <span class="math inline">\kappa</span>）由 Marchenko–Pastur 定律等 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34A_%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E8%AD%9C%E7%90%86%E8%AB%96%E3%80%81Wigner%E5%8D%8A%E5%9C%93%E5%BE%8B%E3%80%81Marchenko-Pastur%E8%88%87%E8%87%AA%E7%94%B1%E6%A9%9F%E7%8E%87.html">隨機矩陣譜理論、Wigner半圓律、Marchenko-Pastur與自由機率</a> 結果控制，決定了 Nesterov 加速與預條件器能獲得多少實際加速幅度。</li>
+<li><strong>不可近似下界、PAC-Bayes 相對熵規劃與微觀經濟均衡</strong>：Bregman 鏡像下降中的相對熵極小化結構直接對應 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 中線性或有限策略空間的 PAC-Bayes 相對熵凸規劃；而鞍點 Mirror Prox 則可遷移至 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E33_MWG%20%E9%81%B8%E6%93%87%E3%80%81%E6%B6%88%E8%B2%BB%E8%80%85%E8%88%87%E7%94%9F%E7%94%A2.html">MWG 選擇、消費者與生產</a> 的雙人零和博弈與一般均衡計算，並以 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41G_PCP%E6%A9%9F%E7%8E%87%E5%8F%AF%E6%AA%A2%E9%A9%97%E8%AD%89%E6%98%8E%E3%80%81Sum-of-Squares%E9%9A%8E%E5%B1%A4%E8%88%87%E4%B8%8D%E5%8F%AF%E8%BF%91%E4%BC%BC%E4%B8%8B%E7%95%8C.html">PCP機率可檢驗證明、Sum-of-Squares階層與不可近似下界</a> 界定求解複雜度上限。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-convex-optimization-algorithms-and-complexity2014">1. Convex Optimization: Algorithms and Complexity（2014）</h4>
+<ul>
+<li>作者與出處：Sébastien Bubeck · <em>Foundations and Trends in Machine Learning</em></li>
+<li>核心問題：機器學習中的凸優化散落於割平面法、加速梯度、非歐氏鏡像下降與隨機近似等分支，需要一套統一的黑盒複雜度下界與演算法分析視角。</li>
+<li>關鍵做法：專書從黑盒神諭複雜度定理出發，系統講述割平面法與（加速）梯度下降，深入處理 Frank–Wolfe、鏡像下降與對偶平均等非歐氏演算法，並涵蓋 FISTA、鞍點 Mirror Prox、內點法以及隨機梯度下降與隨機座標下降。</li>
+<li>跨領域啟發：本子方向的骨幹教材，將連續優化速率與 <a class="wl" href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a> 的在線學習 regrets 直接貫通。</li>
+<li>連結：<a href="zotero://select/library/items/IV2GZ3ZH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1405.4980" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-an-introduction-to-random-matrices2009">2. An Introduction to Random Matrices（2009）</h4>
+<ul>
+<li>作者與出處：Greg W. Anderson, Alice Guionnet, Ofer Zeitouni · <em>Cambridge University Press</em></li>
+<li>核心問題：高維凸優化演算法的收斂速度取決於隨機設計矩陣與經驗協方差矩陣的特徵值分佈，需藉隨機矩陣譜理論給出漸近極限與尾端界。</li>
+<li>關鍵做法：專著系統推導 Wigner 半圓律、Marchenko–Pastur 定律、行列式點過程、大偏差原理以及 Voiculescu 自由機率論，提供計算大型隨機矩陣極值特徵值與條件數分佈的標準工具。</li>
+<li>跨領域啟發：連結 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34A_%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E8%AD%9C%E7%90%86%E8%AB%96%E3%80%81Wigner%E5%8D%8A%E5%9C%93%E5%BE%8B%E3%80%81Marchenko-Pastur%E8%88%87%E8%87%AA%E7%94%B1%E6%A9%9F%E7%8E%87.html">隨機矩陣譜理論、Wigner半圓律、Marchenko-Pastur與自由機率</a> 與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A509_%E9%AB%98%E7%B6%AD%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E3%80%81%E8%87%AA%E6%97%8B%E7%8E%BB%E7%92%83OGP%E8%88%87%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E7%9B%B8%E8%AE%8A.html">高維隨機矩陣、自旋玻璃 OGP 與學習動力學相變</a>，精確量化高維優化的條件數行為。</li>
+<li>連結：<a href="zotero://select/library/items/P3CZHES3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/CBO9780511801334" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-some-optimal-inapproximability-results2001">3. Some Optimal Inapproximability Results（2001）</h4>
+<ul>
+<li>作者與出處：Johan Håstad · <em>Journal of the ACM</em></li>
+<li>核心問題：許多組合與結構化優化問題常藉由線性規劃或半定規劃凸鬆弛求解，需要明確的理論下界以判別多項式時間演算法究竟能逼近到何種程度。</li>
+<li>關鍵做法：作者結合 3-查詢機率可檢驗證明（PCPs）、Long Code、摺疊技巧與有限交換群上的離散傅立葉分析，在 <span class="math inline">P \neq \mathrm{NP}</span> 假設下證得 MAX-E3-LIN-2（<span class="math inline">1/2+\varepsilon</span>）、MAX-E3-SAT（<span class="math inline">7/8+\varepsilon</span>）與 Label Cover 等問題的最優不可近似性門檻。</li>
+<li>跨領域啟發：對應 L5 筆記 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_09_2001_Hastad_Some_Optimal_Inapproximability_Results.html">Some Optimal Inapproximability Results</a>，為 <a class="wl" href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41G_PCP%E6%A9%9F%E7%8E%87%E5%8F%AF%E6%AA%A2%E9%A9%97%E8%AD%89%E6%98%8E%E3%80%81Sum-of-Squares%E9%9A%8E%E5%B1%A4%E8%88%87%E4%B8%8D%E5%8F%AF%E8%BF%91%E4%BC%BC%E4%B8%8B%E7%95%8C.html">PCP機率可檢驗證明、Sum-of-Squares階層與不可近似下界</a> 與凸鬆弛極限劃定計算複雜度邊界。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_09_2001_Hastad_Some_Optimal_Inapproximability_Results.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/N689ZC5T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://people.kth.se/~johanh/optimalinap.pdf" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-non-convex-optimization-for-machine-learning2017">4. Non-convex Optimization for Machine Learning（2017）</h4>
+<ul>
+<li>作者與出處：Prateek Jain, Purushottam Kar · <em>Foundations and Trends in Machine Learning</em></li>
+<li>核心問題：稀疏、低秩與張量等高維機器學習問題若維持原生非凸形式往往屬 NP 困難，而轉化為凸鬆弛雖可行卻可能引入統計偏差與大規模計算瓶頸。</li>
+<li>關鍵做法：專論全面對比「先鬆弛為凸規劃再以傳統凸演算法求解」與「直接針對結構化目標設計非凸演算法」兩種範式，解析兩者在建模能力、統計誤差與大規模可擴展性上的數學權衡。</li>
+<li>跨領域啟發：構成從本子方向過渡到 <a class="wl" href="16C_%E9%9D%9E%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E9%9E%8D%E9%BB%9E%E9%80%83%E9%80%B8%E3%80%81%E9%9A%A8%E6%A9%9F%E8%BF%91%E4%BC%BC%E8%88%87%E6%B5%81%E5%BD%A2%E6%94%B6%E6%96%82%E7%90%86%E8%AB%96.html">非凸最佳化鞍點逃逸、隨機近似與流形收斂理論</a> 的直接橋樑。</li>
+<li>連結：<a href="zotero://select/library/items/9B23Q6E3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.07897" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-transforming-physics-informed-machine-learning-to-convex-optimization2025">5. Transforming physics-informed machine learning to convex optimization（2025）</h4>
+<ul>
+<li>作者與出處：Letian Yi, Siyuan Yang, Ying Cui, Zhilu Lai · <em>Engineering Applications of Artificial Intelligence</em></li>
+<li>核心問題：物理資訊機器學習（PIML）雖能結合資料與物理定律進行參數估計與方程發現，但高度非凸的損失地形與頻譜偏差嚴重限制其優化穩定性。</li>
+<li>關鍵做法：作者提出 Convex-PIML 框架，以 B 樣條線性組合逼近資料以促進目標函數凸性，將損失中的非凸組件代換為一連串逐步精煉的近似凸優化問題從而套用標準凸演算法，並引入基於誤差估計的適應性節點優化以緩解頻譜偏差。</li>
+<li>跨領域啟發：展現 2025 年如何藉由基函數參數化與序列凸逼近，把科學計算中的困難非凸問題拉回凸優化架構內求解。</li>
+<li>連結：<a href="zotero://select/library/items/2Q7I56FU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.01047" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-curvature-accelerated-decentralized-non-convex-optimization-for-high-dimensional-machine-learning-problems2025">6. Curvature accelerated decentralized non-convex optimization for high-dimensional machine learning problems（2025）</h4>
+<ul>
+<li>作者與出處：Dingran Yi, Fanhao Zeng, Nikolaos M. Freris · <em>arXiv</em></li>
+<li>核心問題：多智能體分散式訓練高維非凸模型時，局部訓練的一階收斂緩慢與節點間高維參數通訊開銷形成雙重瓶頸。</li>
+<li>關鍵做法：作者提出一套原始–對偶分散式優化方法，在局部訓練子問題中透過計算成本對模型維度呈線性的擬牛頓求解器納入二階曲率資訊以加速收斂，且每輪僅需廣播一次局部模型以節省通訊，並嚴格證明演算法收斂性。</li>
+<li>跨領域啟發：示範原始–對偶分裂與低成本二階曲率加速如何從凸對偶理論延伸到高維分散式機器學習。</li>
+<li>連結：<a href="zotero://select/library/items/2BUP6IW9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.04073" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-8-篇">G5｜本子方向全量文獻泛讀清單（共 8 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 8 篇文獻（含開放存取 PDF 5 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進5-篇">A. 奠基經典、專著與核心演進（5 篇）</h3>
+<ul>
+<li><strong>2001｜Some Optimal Inapproximability Results</strong>，Johan Håstad（<em>Journal of the ACM (JACM), Vol. 48, No. 4, pp. 798-859 (STOC 1997; Gödel Prize 2011)</em>，1966 引）：🏆 L5 深度審核完成：獲哥德爾獎的論文，用 3-query PCP 與有限群傅立葉分析證出 MAX-E3-SAT（<span class="math inline">7/8+\varepsilon</span>）等緊不可近似硬界。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_09_2001_Hastad_Some_Optimal_Inapproximability_Results.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/N689ZC5T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://people.kth.se/~johanh/optimalinap.pdf" rel="noopener">官方連結</a></li>
+<li><strong>2009｜An Introduction to Random Matrices</strong>，Greg W. Anderson, Alice Guionnet, Ofer Zeitouni（<em>Cambridge University Press</em>，1317 引）：數學界公認的隨機矩陣理論標準參考書：嚴格建立 Wigner 半圓律、行列式點過程（Determinantal Point Processes）、大偏差原理與 Voiculescu 自由機率論。 <a href="zotero://select/library/items/P3CZHES3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/CBO9780511801334" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Convex Optimization: Algorithms and Complexity</strong>，Sébastien Bubeck（<em>In Foundations and Trends in Machine Learning, Vol. 8: No. 3-4, pp 231-357, 2015</em>，1242 引）：很精煉的凸最佳化複雜度專著：用百餘頁篇幅講完黑箱下界、切割平面、加速梯度、鏡像下降與隨機近似（1242 引）。 <a href="zotero://select/library/items/IV2GZ3ZH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1405.4980" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Non-convex Optimization for Machine Learning</strong>，Prateek Jain, Purushottam Kar（<em>Foundations and Trends in Machine Learning: Vol. 10: No. 3-4, pp 142-336 (2017)</em>，364 引）：系統綜述機器學習中非凸最佳化的理論與方法，針對稀疏、低秩約束及張量與深度網路等凸鬆弛可能失真或計算昂貴的問題，分析直接處理非凸最佳化目標的演算法設計與性質。 <a href="zotero://select/library/items/9B23Q6E3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1712.07897" rel="noopener">官方連結</a></li>
+<li><strong>2018｜@Bizarro1303 I think the definition (both then and now) is that set forward by Claude Shannon in 1948 in &quot;A Mathematical Theory of Communication&quot;. Shannon</strong>，Chris Aldrich（<em>Unknown</em>）：網路討論摘錄條目，引用 Claude Shannon 於 1948 年發表的《A Mathematical Theory of Communication》一文來界定通訊與資訊理論中相關術語的定義。 <a href="zotero://select/library/items/X7E6PW2V" class="zotero">📚 Zotero 開啟</a> ｜ <a href="http://stream.boffosocko.com/2018/bizarro1303-i-think-the-definition-both-then-and-now-is" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻3-篇">B. 2024–2026 近期推進與前沿文獻（3 篇）</h3>
+<ul>
+<li><strong>2025｜Curvature accelerated decentralized non-convex optimization for high-dimensional machine learning problems</strong>，Dingran Yi, Fanhao Zeng, Nikolaos M. Freris（<em>arXiv</em>）：針對高維多智能體非凸分散式最佳化瓶頸，提出引入二階曲率資訊的原始對偶方法，本地採線性成本擬牛頓求解器加速且每輪僅廣播一次模型，並嚴格證明收斂性。 <a href="zotero://select/library/items/2BUP6IW9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.04073" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Transforming physics-informed machine learning to convex optimization</strong>，Letian Yi et al.（<em>Eng.Appl.Artif.Intell. 161 (2025): 112149</em>）：發表於《Engineering Applications of Artificial Intelligence》，提出 Convex-PIML 框架以克服物理資訊機器學習非凸最佳化瓶頸，利用 B-spline 線性組合逼近資料並將非凸損失代換為一連串逐步精化的凸最佳化子問題求解。 <a href="zotero://select/library/items/2Q7I56FU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.01047" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Challenges In Sustainable Non-Convex Optimization For Deep Learning Applications</strong>，Harish Kunder, Manjunath Kotari（<em>International Journal of Environmental Sciences</em>）：討論深度學習應用於多領域資料集時面臨的非凸最佳化困難，剖析局部極小值與計算難度對全域最優解求解的影響，並整理 DC 集合系統中處理非凸性的後續研究方向。 <a href="zotero://select/library/items/GR3T6XXA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.64252/5eqefz33" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-5fb8f357">在地圖上查看</a><div class="rg"><h3>相關<span class="n">7</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a><span class="rs">這個領域為所有學習系統劃出三條數學邊界：有限樣本下需要多少資訊才能保證結論不是自欺（泛化理論），有限梯度步數下能多快找到好解（最佳化理論），以及…</span></li><li><a href="16A_%E7%B5%B1%E8%A8%88%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81Rademacher%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87PAC-Bayes%E6%B3%9B%E5%8C%96%E7%95%8C.html">統計學習理論、Rademacher複雜度與PAC-Bayes泛化界</a></li><li><a href="16C_%E9%9D%9E%E5%87%B8%E6%9C%80%E4%BD%B3%E5%8C%96%E9%9E%8D%E9%BB%9E%E9%80%83%E9%80%B8%E3%80%81%E9%9A%A8%E6%A9%9F%E8%BF%91%E4%BC%BC%E8%88%87%E6%B5%81%E5%BD%A2%E6%94%B6%E6%96%82%E7%90%86%E8%AB%96.html">非凸最佳化鞍點逃逸、隨機近似與流形收斂理論</a></li><li><a href="../D_%E6%9C%80%E5%84%AA%E5%82%B3%E8%BC%B8%E3%80%81%E8%A8%88%E7%AE%97%E8%A4%87%E9%9B%9C%E5%BA%A6%E8%88%87%E6%BC%94%E7%AE%97%E6%B3%95%E8%B3%87%E8%A8%8A/41G_PCP%E6%A9%9F%E7%8E%87%E5%8F%AF%E6%AA%A2%E9%A9%97%E8%AD%89%E6%98%8E%E3%80%81Sum-of-Squares%E9%9A%8E%E5%B1%A4%E8%88%87%E4%B8%8D%E5%8F%AF%E8%BF%91%E4%BC%BC%E4%B8%8B%E7%95%8C.html">PCP機率可檢驗證明、Sum-of-Squares階層與不可近似下界</a></li><li><a href="05B_%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96Autoformalization%E8%88%87%E8%AB%96%E6%96%87%E7%B4%9A%E8%AD%89%E6%98%8E%E7%B7%A8%E8%AD%AF.html">自動形式化Autoformalization與論文級證明編譯</a></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34A_%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3%E8%AD%9C%E7%90%86%E8%AB%96%E3%80%81Wigner%E5%8D%8A%E5%9C%93%E5%BE%8B%E3%80%81Marchenko-Pastur%E8%88%87%E8%87%AA%E7%94%B1%E6%A9%9F%E7%8E%87.html">隨機矩陣譜理論、Wigner半圓律、Marchenko-Pastur與自由機率</a></li><li><a href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E33_MWG%20%E9%81%B8%E6%93%87%E3%80%81%E6%B6%88%E8%B2%BB%E8%80%85%E8%88%87%E7%94%9F%E7%94%A2.html">MWG 選擇、消費者與生產</a><span class="tag-plan">計劃</span><span class="rs">Mas-Colell, Whinston, Green 第 1–6 章（選擇、消費者、加總需求、生產、不確定下的選擇）與數學附錄</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

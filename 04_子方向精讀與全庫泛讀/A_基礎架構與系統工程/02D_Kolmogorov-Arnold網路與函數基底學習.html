@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>02D｜Kolmogorov-Arnold網路與函數基底學習 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-187ebc0e" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="02dkolmogorov-arnold網路與函數基底學習">02D｜Kolmogorov-Arnold網路與函數基底學習</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a>
+同領域子方向：<a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> · <a class="wl" href="02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a> · <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> · <a class="wl" href="02E_%E8%84%88%E8%A1%9D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E7%A5%9E%E7%B6%93%E5%BD%A2%E6%85%8B%E4%BA%8B%E4%BB%B6%E8%A8%88%E7%AE%97.html">脈衝神經網路與神經形態事件計算</a> · <a class="wl" href="02F_%E8%B6%85%E7%B6%AD%E8%A8%88%E7%AE%97%E3%80%81%E5%90%91%E9%87%8F%E7%AC%A6%E8%99%9F%E6%9E%B6%E6%A7%8B%E8%88%87%E9%9D%9E%E8%87%AA%E8%BF%B4%E6%AD%B8%E6%BD%9B%E9%A0%90%E6%B8%ACJEPA.html">超維計算、向量符號架構與非自迴歸潛預測JEPA</a>
+跨領域關聯子方向：<a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a> · <a class="wl" href="42B_%E7%A5%9E%E7%B6%93%E8%BF%B4%E8%B7%AF%E7%AD%96%E7%95%A5NCP%E3%80%81Liquid-S4%E8%88%87%E6%B6%B2%E6%85%8B%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">神經迴路策略NCP、Liquid-S4與液態基礎模型</a> · <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向在 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a> 中代表從固定節點激活轉向邊上函數基底學習的結構化分支，涵蓋 Kolmogorov–Arnold 網路（KAN）及其樣條、多層級網格、幾何度規與儲層計算變體。演進主線聚焦於如何將偏微分方程數值逼近與符號可解釋性導入神經網路，同時克服逐邊單變數展開帶來的收斂緩慢與算力開銷問題。</p>
+</aside>
+<ul>
+<li>核心問題：傳統多層感知機（MLP）在每個神經元節點放置固定的非線性激活函數（如 ReLU 或 GELU）並僅學習線性矩陣權重，其全域超平面分割缺乏局部函數支撐與科學方程式的符號分解結構，在低維偏微分方程與物理規律發現上往往需要龐大參數且不易解釋。然而，最初的樣條 KAN 雖提升精度與可讀性，卻面臨逐邊評估高計算成本、訓練收斂偏慢與高維基底擴張困難的工程限制。</li>
+<li>直覺模型：MLP 像用大量固定形狀的直線折板（權重配固定激活）共同拼湊出一座曲面，要修補局部細節時常牽動整片折板；KAN 則把每條連接線都換成一條可自由彎曲的彈性樣條尺，節點只負責把彎曲後的數值單純相加，因此能用少數幾條彈性曲線精準貼合複雜物理場並直接讀出近似公式。</li>
+<li>分階段閱讀路線：第一階段先讀 Liu et al. (2024) 的 KAN 奠基論文，掌握 Kolmogorov–Arnold 表示定理到多層邊上樣條網路的架構設計與符號化交互流程；第二階段依序讀 Southworth et al. (2026) 的多層級訓練、Menon 與 Jagtap (2026) 的 FEKAN 以及 Sen et al. (2026) 的 GeoKAN，理解樣條 KAN 與多通道冪次 ReLU MLP 的基底變換等價性、無額外參數的特徵豐富化加速，以及對角黎曼度規對座標解析度的重分配；第三階段讀 Karn 與 Kumar (2026) 的 Holomorphic KAN-ODE 與 Huang, Kurths 與 Tang (2026) 的 KARC，觀察 KAN 如何嵌入連續複動力學微分方程與閉式儲層計算。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;Kolmogorov-Arnold 表示定理&quot;] --&gt; B[&quot;KAN 邊上可學習 B 樣條激活&quot;]
+  B --&gt; C[&quot;基底變換等價與多層級節點細化&quot;]
+  B --&gt; D[&quot;FEKAN 特徵豐富化加速收斂&quot;]
+  B --&gt; E[&quot;GeoKAN 對角黎曼度規座標扭曲&quot;]
+  B --&gt; F[&quot;Holomorphic KAN-ODE 符號動力發現&quot;]
+  B --&gt; G[&quot;KARC 顯式基底與閉式儲層訓練&quot;]
+  E --&gt; H[&quot;科學計算 PDE 與神經算子代理&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>Kolmogorov–Arnold 表示定理與邊上樣條參數化（KAN Edge Spline Parameterization）</strong></p>
+<ul>
+<li>直覺理解：把傳統神經網路「線性權重矩陣乘以固定節點激活」的順序顛倒，讓每條邊各自學習一條平滑的單變數樣條曲線，節點僅做加法彙總。</li>
+<li>機制或核心表達式：依據 Kolmogorov–Arnold 表示定理，任意連續多變數函數 <span class="math inline">f: [0,1]^n \to \mathbb{R}</span> 可寫為雙層單變數函數複合：<span class="math inline">f(\mathbf{x}) = \sum_{q=1}^{2n+1} \Phi_q\left(\sum_{p=1}^{n} \phi_{q,p}(x_p)\right)</span>。KAN 將此形式推廣為任意深度 <span class="math inline">L</span> 與寬度矩陣 <span class="math inline">\Phi_l</span>，每條邊上的單變數函數參數化為殘差基底與 B 樣條線性組合 <span class="math inline">\phi_{l,j,i}(x_i) = w_b \sigma(x_i) + w_s \sum_k c_k B_k(x_i)</span>，並透過樣條網格細化與符號函數擬合支援科學規律重發現。</li>
+<li>能做到什麼，代價是什麼：在低維科學資料擬合與 PDE 求解上可用遠少於 MLP 的參數量獲得更陡峭的神經縮放律與視覺化可解釋性；但因每條邊需獨立查詢分段多項式基底，無法直接複用稠密 GEMM 核心，單步 FLOPs 與訓練時間高於同尺寸 MLP。</li>
+</ul>
+</li>
+<li>
+<p><strong>基底變換等價與多層級節點細化（Change-of-Basis Equivalence &amp; Multilevel Training）</strong></p>
+<ul>
+<li>直覺理解：透過線性基底變換把 B 樣條 KAN 精確改寫為多通道冪次 ReLU MLP，揭示兩者的幾何關聯，並利用粗網格到細網格的幾何插值加速梯度訓練。</li>
+<li>機制或核心表達式：Southworth et al. (2026) 證明採用樣條基底的 KAN 可經由線性基底變換等價於具冪次 ReLU（power ReLU）激活函數的多通道 MLP，並據此分析優化損失面隨樣條節點（knots）分布的幾何結構。當樣條節點均勻細化時，形成嚴格嵌套的函數空間階層 <span class="math inline">V_0 \subset V_1 \subset \dots \subset V_K</span>，層間透過解析幾何插值算子無損傳遞參數，從而在多層級訓練流程中先於低解析度快速收斂再逐步加密。</li>
+<li>能做到什麼，代價是什麼：將數值偏微分方程的多重網格（multigrid）理念無縫引入 KAN 訓練並顯著降低收斂步數；但均勻細化網格在高維輸入或層數加深時仍需控管參數量成長。</li>
+</ul>
+</li>
+<li>
+<p><strong>黎曼度規扭曲與閉式基底儲層（Riemannian Metric Warping &amp; Basis Reservoir Computing）</strong></p>
+<ul>
+<li>直覺理解：先學習如何拉伸或壓縮輸入座標空間讓基底自動聚焦於劇變區域，或直接將顯式單變數基底展開交給線性閉式迴歸讀出，避開高昂的反向傳播成本。</li>
+<li>機制或核心表達式：GeoKAN（Sen et al., 2026）在基底展開前學習一個對角黎曼度規 <span class="math inline">g(\mathbf{x})</span>，透過局部長度縮放與體積扭曲將歐氏座標映射至適應任務的幾何座標系（包含 RBF、Wavelet 與 Fourier 版本），在函數急遽變化處自動放大解析度並壓縮平滑區域。另一方面，KARC（Huang, Kurths 與 Tang, 2026）將隨機循環儲層替換為受 Kolmogorov–Arnold 表示定理啟發的顯式基底函數展開，保留逼近能力並利用儲層計算的閉式線性解完成訓練。</li>
+<li>能做到什麼，代價是什麼：幾何扭曲與顯式基底儲層大幅提升 PDE 代理精度與訓練速度，但引進了度規正則化超參數選擇（GeoKAN）與無迴歸時依賴展開基底維度的空間成本（KARC）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>樣條局部支撐對梯度干涉與遺忘的影響</strong>：MLP 的線性權重搭配全局激活函數在訓練或持續學習時容易互相干擾，為何 B 樣條參數化的 KAN 邊函數較容易維持局部修正而不破壞遠離該輸入區間的擬合結果？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>檢視 <span class="math inline">k</span> 階 B 樣條基底函數 <span class="math inline">B_k(x)</span> 的支撐集（support）性質。每一條 B 樣條僅在相鄰少數幾個網格節點構成的緊緻子區間內非零，區間外嚴格為零。因此當輸入樣本落在某一局部區域時，梯度更新只會作用於對應位置少數幾個控制係數 <span class="math inline">c_k</span>，不會像全局超平面權重那樣同時改動整個輸入定義域上的輸出。</p>
+</details>
+<ol start="2">
+<li><strong>為何 GeoKAN 的對角黎曼度規在物理知情設定下能重新分配解析度</strong>：在求解帶有陡峭邊界層或局部高頻振盪的偏微分方程時，均勻樣條網格為何效率有限？GeoKAN 學習對角黎曼度規後如何同時影響基底展開與微商結構？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>均勻網格把固定密度的基底函數平均攤在平滑區與劇變區，導致平滑區參數浪費而劇變區欠擬合。GeoKAN 在進入基底展開前透過對角度規誘導座標變換，拉伸梯度的劇變區使更多局部基底落入該區域；同時在物理知情神經網路（PINN）計算 PDE 殘差時，透過鏈鎖律將度規縮放因子帶入空間微分算子，使網路自動調整各處的微分靈敏度。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>高維擴展下的運算密度與通用硬體效率瓶頸</strong>：如 Menon 與 Jagtap (2026) 在 FEKAN 中指出，樣條、小波與徑向基底 KAN 相較傳統 MLP 仍承受更高的計算開銷與較慢的收斂速度；即便多層級訓練（Southworth et al., 2026）與無增參特徵豐富化有效緩解了訓練週期，如何在大型多模態或深層表徵任務中讓 KAN 在 GPU 張量核心上達到接近稠密 GEMM 的吞吐率，仍是核心架構張力。</li>
+<li><strong>結構化先驗與過擬合之間的正則化平衡</strong>：當網路採用複分析正則化（如 Holomorphic KAN-ODE 引入 Cauchy–Riemann 條件並以 280 個參數還原符號動力系統）或可變黎曼度規（GeoKAN）時，幾何約束雖能壓縮參數規模並提升符號可解釋性，但若真實數據不完全符合平滑或全純假設，強幾何先驗反而可能限制函數空間涵蓋率；如何自動偵測並切換合適的基底族仍未解決。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>局部樣條支撐與持續學習抗災難性遺忘</strong>：B 樣條基底的緊緻局部支撐使參數更新自然限定於特定輸入區域，大幅減輕新任務對舊知識的全域權重覆寫。這項結構特性與 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a> 的突觸鞏固與正交子空間防護高度互補。</li>
+<li><strong>可解釋單變數基底嵌入連續時間動力學與液態網路</strong>：Karn 與 Kumar (2026) 將 B 樣條 KAN 取代 MLP 嵌入 Neural ODE 構成 Holomorphic KAN-ODE，從時間序列數據直接辨識出動力學符號族；這種以緊緻邊函數替換向量場 MLP 的作法可直接遷移至 <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> 與 <a class="wl" href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a>，用於發現物理控制系統的閉式解析規律。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-kan-kolmogorov-arnold-networks2024">1. KAN: Kolmogorov-Arnold Networks（2024）</h4>
+<ul>
+<li>作者與出處：Ziming Liu, Yixuan Wang, Sachin Vaidya, Fabian Ruehle, James Halverson · <em>arXiv (2024)</em></li>
+<li>核心問題：傳統 MLP 在節點放置固定激活函數並學習線性權重，導致在大規模科學計算與符號規律重現上參數量過高且內部機制缺乏直觀可讀性。</li>
+<li>關鍵做法：受 Kolmogorov–Arnold 表示定理啟發提出 KAN，將線性權重全面替換為邊上可學習的單變數樣條函數。理論與實證顯示較小規模的 KAN 在資料擬合與 PDE 求解上可達優於大型 MLP 的精度與更快的神經縮放律，並支援視覺化互動以重新發現數學與物理定律。</li>
+<li>跨領域啟發：奠定邊上函數基底學習範式，開啟後續多層級訓練、幾何扭曲與將 KAN 嵌入 <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> 及 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 混合架構的研究分支。</li>
+<li>連結：<a href="zotero://select/library/items/TSA73J6U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.19756" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-multilevel-training-for-kolmogorov-arnold-networks2026">2. Multilevel Training for Kolmogorov Arnold Networks（2026）</h4>
+<ul>
+<li>作者與出處：Ben S. Southworth, Jonas A. Actor, Graham Harper, Eric C. Cyr · <em>arXiv (2026)</em></li>
+<li>核心問題：一般神經網路缺乏結構保證而難以設計高階數值加速演算法；KAN 雖具基底展開結構，但其樣條節點優化幾何性質與快速訓練演算法尚未充分建立。</li>
+<li>關鍵做法：透過線性基底變換證明樣條 KAN 與具冪次 ReLU 激活的多通道 MLP 等價，進而剖析樣條節點在梯度優化中的幾何特性，並據此提出多層級訓練架構：利用均勻細化樣條節點構成的嵌套架構階層與解析幾何插值算子，顯著加速 KAN 收斂。</li>
+<li>跨領域啟發：打散了樣條模型與 ReLU MLP 之間的理論隔閡，為 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a> 的網路架構比較提供精確的基底變換工具。</li>
+<li>連結：<a href="zotero://select/library/items/PU7HAQPM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.04827" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-fekan-feature-enriched-kolmogorov-arnold-networks2026">3. FEKAN: Feature-Enriched Kolmogorov-Arnold Networks（2026）</h4>
+<ul>
+<li>作者與出處：Sidharth S. Menon, Ameya D. Jagtap · <em>arXiv (2026)</em></li>
+<li>核心問題：現有樣條、小波與徑向基底 KAN 普遍面臨計算成本高與收斂速度慢的限制，阻礙其擴展到大型物理知情 PDE 與算子學習任務。</li>
+<li>關鍵做法：提出特徵豐富化 Kolmogorov–Arnold 網路（FEKAN），在不增加可訓練參數數量的前提下透過特徵豐富化擴充表示容量與加速梯度收斂，並在函數逼近、多種物理知情 PDE 公式與神經算子基準測試中大幅減輕計算負擔。</li>
+<li>跨領域啟發：示範無增參特徵工程對基底展開模型的加速效應，可與神經算子及 <a class="wl" href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a> 中的頻域通道特徵設計對照。</li>
+<li>連結：<a href="zotero://select/library/items/77S9XSI5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.16530" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-geometric-kolmogorov--arnold-network-geokan2026">4. Geometric Kolmogorov--Arnold Network (GeoKAN)（2026）</h4>
+<ul>
+<li>作者與出處：Abhijit Sen, Bikram Keshari Parida, Giridas Maiti, Mahima Arya, Denys I. Bondar · <em>arXiv (2026)</em></li>
+<li>核心問題：標準 KAN 在固定歐氏輸入座標上均勻進行基底展開，當目標函數存在局部急劇變化或邊界層時，難以自動將有限表達資源集中到關鍵區域。</li>
+<li>關鍵做法：提出幾何 KAN（GeoKAN），在基底展開與特徵混合前學習一個對角黎曼度規以扭曲輸入座標，透過拉伸急變區與壓縮平滑區動態重分配解析度，並發展出 GeoKAN-NNMetric、GeoKAN-<span class="math inline">\gamma</span> 與涵蓋 RBF、小波及傅立葉基底的 LM-KAN 變體。</li>
+<li>跨領域啟發：把黎曼幾何度規學習引入單變數基底展開，其座標適應策略與 PDE 代理及 <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a> 的流形向量場分析密切相通。</li>
+<li>連結：<a href="zotero://select/library/items/WR5JDBFX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.06740" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-holomorphic-neural-odes-with-kolmogorov-arnold-networks-for-interpretable-discovery-of-complex-dynamics2026">5. Holomorphic Neural ODEs with Kolmogorov-Arnold Networks for Interpretable Discovery of Complex Dynamics（2026）</h4>
+<ul>
+<li>作者與出處：Bhaskar Ranjan Karn, Dinesh Kumar · <em>arXiv (2026)</em></li>
+<li>核心問題：以傳統 MLP 構造的 Neural ODE 缺乏複分析幾何先驗，容易違反 Cauchy–Riemann 條件且無法從碎形等敏感複動力系統數據中萃取可解釋控制方程。</li>
+<li>關鍵做法：提出全純 KAN-ODE，以邊上 B 樣條激活的 KAN 取代 Neural ODE 內的 MLP，並加入 Cauchy–Riemann 方程作為可微正則項。在六類多項式與超越函數複動力系統上僅以 <span class="math inline">280</span> 個參數（比 MLP 基線少 <span class="math inline">16\times</span>）達成全數速度場 <span class="math inline">R^2 &gt; 0.95</span> 並正確辨識全數六個符號控制方程族。</li>
+<li>跨領域啟發：將 KAN 的緊緻符號表達力直接植入 <a class="wl" href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a>，展示科學動力學重發現的高參數效率典範。</li>
+<li>連結：<a href="zotero://select/library/items/SRDT8VPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.22235" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-kolmogorov-arnold-reservoir-computing2026">6. Kolmogorov-Arnold Reservoir Computing（2026）</h4>
+<ul>
+<li>作者與出處：Juntian Huang, Jürgen Kurths, Ying Tang · <em>arXiv (2026)</em></li>
+<li>核心問題：傳統儲層計算（RC）仰賴超參數敏感的固定隨機儲層，長期依賴容量受限；下一代 RC 雖去除循環卻面臨特徵維度快速膨脹的困擾。</li>
+<li>關鍵做法：提出 Kolmogorov–Arnold 儲層計算（KARC），以受 Kolmogorov–Arnold 表示定理啟發的顯式基底函數展開取代固定儲層，在數學上保留 KAN 表達容量的同時維持儲層計算的高效閉式訓練，在 PDE 基準超越既有 RC 方法並可整合進擴散生成模型。</li>
+<li>跨領域啟發：架起基底展開網路與 儲層計算之間的橋樑，證明無須昂貴反向傳播也能萃取 KAN 的函數分解優勢。</li>
+<li>連結：<a href="zotero://select/library/items/GJFKAPIZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.19984" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-58-篇">G5｜本子方向全量文獻泛讀清單（共 58 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 58 篇文獻（含開放存取 PDF 56 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進2-篇">A. 奠基經典、專著與核心演進（2 篇）</h3>
+<ul>
+<li><strong>2021｜Probabilistic Kolmogorov-Arnold Network</strong>，Andrew Polar, Michael Poluektov（<em>arXiv</em>）：針對具隨機不確定性（aleatoric uncertainty）的實驗迴歸資料，將 Kolmogorov–Arnold 網路（KAN）擴展為機率版本，使其能直接估計依賴輸入的完整輸出機率分佈而非僅止於期望值。 <a href="zotero://select/library/items/ZQVTPKX2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2104.01714" rel="noopener">官方連結</a></li>
+<li><strong>2020｜The Kolmogorov-Arnold representation theorem revisited</strong>，Johannes Schmidt-Hieber（<em>arXiv</em>）：修正 Kolmogorov–Arnold 表示定理使目標函式的平滑性得以傳遞至外層函式，並證明其能被多層 ReLU 深度網路良好逼近，主張其結構更接近深層網路而非僅兩層隱藏層。 <a href="zotero://select/library/items/2IV2CRF8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2007.15884" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻56-篇">B. 2024–2026 近期推進與前沿文獻（56 篇）</h3>
+<ul>
+<li><strong>2024｜KAN: Kolmogorov-Arnold Networks</strong>，Ziming Liu et al.（<em>arXiv (Cornell University)</em>，851 引）：用邊上的可學習單變數 B-樣條取代 MLP 的固定激活與線性權重，在科學公式發現與微分方程求解上精確度高，而且是可讀的白盒。 <a href="zotero://select/library/items/TSA73J6U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2404.19756" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Abnormality Detection in Time-Series Bio-Signals using Kolmogorov-Arnold Networks (KANs) Based Models for Resource-Constrained Devices</strong>，Zhaojing Huang et al.（<em>medRxiv</em>，22 引）：將 Kolmogorov–Arnold 網路（KAN）應用於資源受限設備的心電圖異常檢測，單隱藏層 64 神經元模型在 TNMG 與 CPSC 2018 資料集分別取得 0.95 與 0.84 的 AUROC，並結合 Conv2dLSTM 提出 CKAN 變體。 <a href="zotero://select/library/items/9SCJVF99" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1101/2024.06.04.24308428" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Multi-Link Prediction for mmWave Wireless Communication Systems Using Liquid Time-Constant Networks, Long Short- Term Memory, and Interpretation Using Symbolic Regression</strong>，Vishnu S. Pendyala, Milind S. Patil（<em>Electronics</em>，16 引）：針對 5G/6G 毫米波與亞太赫茲通訊系統因遮擋引發的多波束鏈路品質劇烈波動，提出以液態時間常數網路（LTC）取代傳統 LSTM 進行多方向鏈路品質預測，並搭配符號迴歸方法解析模型決策機制。 <a href="zotero://select/library/items/E8GAI42U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3390/electronics13142736" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Continuous Monitoring and Modeling of High-Frequency EM Pollution Using Cutting-Edge Regression Techniques</strong>，I. Can Dikmen（<em>IEEE Access</em>，4 引）：利用都會區半年期 2 Hz 全天候高頻電磁波污染量測資料，比較 LTC、CNN、LSTM、GRU 與 KAN 五種回歸模型對電場強度的預測效能，結果顯示液態時間常數網路（LTC）測試準確度最高。 <a href="zotero://select/library/items/5HMHX9N8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/access.2025.3548841" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Innovative Energy Prediction using Kolmogorov-Arnold Networks (KAN) and Liquid Neural Networks (LNN) for Smart Grids</strong>，Harish Morwani（<em>Communications on Applied Nonlinear Analysis</em>，4 引）：針對智慧電網複雜且隨時間變動的用電預測問題，結合 Kolmogorov–Arnold 網路（KAN）的函數逼近能力與液態神經網路（LNN）的連續動態適應性建立混合預測模型。 <a href="zotero://select/library/items/AIII7MAI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.52783/cana.v31.1160" rel="noopener">官方連結</a></li>
+<li><strong>2026｜ABFR-KAN: Kolmogorov-Arnold Networks for Functional Brain Analysis</strong>，Tyler Ward, Abdullah-Al-Zubaer Imran（<em>The Journal of Machine Learning for Biomedical Imaging</em>）：針對傳統腦圖譜易引入結構偏誤的問題，提出結合解剖自適應功能表徵與 Kolmogorov–Arnold 網路的 Transformer 框架 ABFR-KAN，在 ABIDE I 與 II 靜息態 fMRI 資料集上提升功能連接估計與跨站點診斷效能。 <a href="zotero://select/library/items/4HSC9XTP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2601.00416" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Clifford Kolmogorov-Arnold Networks</strong>，Matthias Wolff et al.（<em>arXiv</em>）：提出適用於任意 Clifford 代數空間函數逼近的 Clifford Kolmogorov-Arnold 網路 (ClKAN)，以隨機擬蒙地卡羅網格克服高維代數指數擴展，並設計變動定義域批次歸一化，於合成與物理任務驗證。 <a href="zotero://select/library/items/MMUGF74H" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.05977" rel="noopener">官方連結</a></li>
+<li><strong>2026｜FEKAN: Feature-Enriched Kolmogorov-Arnold Networks</strong>，Sidharth S. Menon, Ameya D. Jagtap（<em>arXiv</em>）：針對樣條與小波等既有 KAN 架構計算開銷高且收斂慢的問題，提出特徵增強 KAN (FEKAN)，在不增加可訓練參數數量的前提下透過特徵擴充加快收斂速度並提升函數表示能力。 <a href="zotero://select/library/items/77S9XSI5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.16530" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Multilevel Training for Kolmogorov Arnold Networks</strong>，Ben S. Southworth et al.（<em>arXiv</em>）：透過線性基底變換建立樣條 KAN 與多通道冪次 ReLU MLP 之間的等價關係，分析樣條節點對梯度最佳化幾何的影響，進而提出多層級網格解析度的 KAN 訓練演算法以加速收斂。 <a href="zotero://select/library/items/PU7HAQPM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.04827" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Kolmogorov-Arnold causal generative models</strong>，Alejandro Almodóvar et al.（<em>arXiv</em>）：針對混合型態表格資料提出可審計因果生成模型 KaCGM，以 Kolmogorov–Arnold 網路 (KAN) 參數化每條結構因果方程以支援符號逼近與親子關係視覺化，並設計僅憑觀測資料的外生變數獨立性檢定流程。 <a href="zotero://select/library/items/MBUE358U" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.20184" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Generative Quantum-inspired Kolmogorov-Arnold Eigensolver</strong>，Yu-Cheng Lin et al.（<em>arXiv</em>）：發表用於量子化學基態求解的生成式啟發 Kolmogorov–Arnold 特徵求解器 (GQKAE)，以採單量子位元資料重上傳激活的混合量子啟發 KAN 模組替換 GPT 式前饋層組成 HQKANsformer，於 <span class="math inline">\mathrm{H}_4</span> 至 <span class="math inline">\mathrm{H}_2\mathrm{O}</span> 等分子驗證。 <a href="zotero://select/library/items/H6A3M99A" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.04604" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Geometric Kolmogorov--Arnold Network (GeoKAN)</strong>，Abhijit Sen et al.（<em>arXiv</em>）：提出幾何 Kolmogorov–Arnold 網路 (GeoKAN)，在基底展開前先學習對角黎曼度量將輸入扭曲至幾何適配座標以引入局部尺度與體積畸變歸納偏置，並建構 GeoKAN-NNMetric、GeoKAN-<span class="math inline">\gamma</span> 與 LM-KAN 三種變體。 <a href="zotero://select/library/items/WR5JDBFX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.06740" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Holomorphic Neural ODEs with Kolmogorov-Arnold Networks for Interpretable Discovery of Complex Dynamics</strong>，Bhaskar Ranjan Karn, Dinesh Kumar（<em>arXiv</em>）：針對複動力系統難以透過標準 MLP 神經 ODE 保持全純幾何結構的問題，提出 Holomorphic KAN-ODE，以可學習 B-spline 邊激發的 KAN 結合 Cauchy–Riemann 可微正則項，於六類複動力系統評估可解釋探索。 <a href="zotero://select/library/items/SRDT8VPP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.22235" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Kolmogorov-Arnold Reservoir Computing</strong>，Juntian Huang, Jürgen Kurths, Ying Tang（<em>arXiv</em>）：提出結合儲層計算與 Kolmogorov-Arnold 表示定理的 KARC 框架，以顯式基底函數展開取代傳統固定儲層，在保留 KAN 表達潛力的同時維持儲層計算的高效閉式求解訓練，於動態系統預測優於既有儲層方法。 <a href="zotero://select/library/items/GJFKAPIZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.19984" rel="noopener">官方連結</a></li>
+<li><strong>2026｜DPD-KAN: Kolmogorov-Arnold Networks for Low Complexity Digital Predistortion in 5G Analog Radio-over-Fiber Systems</strong>，Bilal Khalid et al.（<em>arXiv (Cornell University)</em>）：將 KAN 應用於 5G 類比光纖無線電前傳鏈路的數位預失真模型 DPD-KAN，在同等位元運算量下誤差向量幅度 (EVM) 較 MLP 降低 24.2%、較 Volterra GMP 降低 29.6%，且達成 2% 以下 EVM 所需運算量減少約 52%。 <a href="zotero://select/library/items/RWGQ76D7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.21178" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Kolmogorov--Arnold against bounded translations</strong>，Sviatoslav V. Dzhenzher（<em>arXiv</em>）：探討 Kolmogorov–Arnold 表示定理（KART）在隱藏層遭遇有界對抗性平移擾動時的穩定性，以固定分段線性內層函數與單一不受擾動影響的統一外層函數，給出構造性的近似表示證明。 <a href="zotero://select/library/items/G3K966ZR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.30710" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Kolmogorov--Arnold stability for discontinuous functions</strong>，Sviatoslav V. Dzhenzher（<em>arXiv</em>）：研究多變數不連續且無界函數在隱藏層遭受對抗性重參數化時 Kolmogorov–Arnold 表示定理（KART）的穩定性，為 Kolmogorov–Arnold 網路（KAN）在此類非光滑設定下的結構穩健性提供理論基礎。 <a href="zotero://select/library/items/PAE6NQGV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.07240" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Kolmogorov-Arnold Classifier Systems as Universal Approximators</strong>，Hiroki Shiraishi, Hisao Ishibuchi, Masaya Nakata（<em>IEEE Transactions on Evolutionary Computation (2026)</em>）：針對傳統學習分類器系統規則數量隨輸入維度 <span class="math inline">n</span> 呈 <span class="math inline">\mathcal{O}(m^n)</span> 指數爆炸的瓶頸，依 Kolmogorov–Arnold 表示定理將高維逼近拆解為一維規則集（KACS），將最壞情況規則數降至 <span class="math inline">\mathcal{O}(mn^2)</span>。 <a href="zotero://select/library/items/WT532WHX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.37958" rel="noopener">官方連結</a></li>
+<li><strong>2026｜SW-KAN: Kolmogorov-Arnold Networks with Stieltjes-Wigert q-Orthogonal Polynomials</strong>，Amirhosein Azarpour, Seyyed Moein Kazemi（<em>arXiv (Cornell University)</em>）：針對多項式 KAN 面臨無界實數輸入與正交多項式定義域不匹配的限制，採用定義於半無窮區間 <span class="math inline">(0,\infty)</span> 的 Stieltjes–Wigert <span class="math inline">q</span>-正交多項式並搭配平滑 <span class="math inline">\exp(\tanh)</span> 映射構築 SW-KAN，兼顧梯度穩定性。 <a href="zotero://select/library/items/37E562UG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.00050" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Sample-Efficiency of Kolmogorov-Arnold Networks</strong>，Kevin Riehl et al.（<em>arXiv</em>）：在 Feynman 資料集與 Gymnasium 強化學習基準上系統對比 Kolmogorov–Arnold 網路（KAN）與 MLP 的樣本效率，證實 KAN 可節省 40% 訓練樣本達同等表現、訓練期相對效能提升達 50% 且對獎勵雜訊具穩健性。 <a href="zotero://select/library/items/MC4TVZIF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.10627" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Tractable Inference with Kolmogorov-Arnold Networks</strong>，Juan Diego Toscano et al.（<em>arXiv</em>）：提出具可處理推論特性的 TOUCKAN 架構，藉有限次多項式外層函數建構可分解的和積表示，在可分解輸入測度下將期望值、高階動差與守恆積分代數化簡為一維葉節點積分遞迴並證得萬有逼近性。 <a href="zotero://select/library/items/VRUC35UC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.29909" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Spatiotemporal Prediction of Lake Water Quality Using Kriging, Geographically Weighted Regression, and Spatial Gating</strong>，Mustafa Kamal et al.（<em>International journal of intelligent engineering and systems</em>）：作者將克里金與 GWR 特徵結合時間感知架構及空間門控模組，在嚴格防洩漏的時間切分下，與 Kolmogorov-Arnold Network（KAN）及混合 PINN 共 144 組受控配置進行對照。雖然排序聚合顯示 Temporal + Kriging 與 Temporal + GWR 分別在葉綠素 a 與溶氧取得最低平均 RMSE 排名，但經 Bonferroni 與 Benjamini-Hochberg 校正的配對 Wilcoxon 檢定顯示，沒有任何空間整合方案顯著優於純時間基線（僅純空間配置顯著較差），克里金特徵實質上僅扮演營養狀態脈絡先驗。 <a href="zotero://select/library/items/99GWRCAT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.22266/ijies2026.1130.27" rel="noopener">官方連結</a></li>
+<li><strong>2026｜GRU-KAN: A Hybrid Recurrent–Kolmogorov–Arnold Network for Low-latency 3D Hand Gesture Classification Using Direct Kinematic Features from Skeletal Data</strong>，Israa F. Fatih, Wisam S. Hacham, Muhannad K. Sabir（<em>International journal of intelligent engineering and systems</em>）：框架直接從原始三維骨架串流擷取 14 項輕量運動學描述子，並以門控循環單元（GRU）建模時序、搭配可學習 B-spline 活化函數與跳躍連接的 KAN 分類器（GRU-KAN）避免梯度消失。在 350 段七類手勢資料的留出測試集上達到 90.0% 準確率，CPU 單段推論延遲為 57.06 毫秒，比同編碼器設定的 GRU-MLP 基線（85.71%）高出 4.29 個百分點；在 45 類變長基準 FPHA 上亦取得 66.81%（對比 GRU-MLP 的 64.68%）。 <a href="zotero://select/library/items/AXWGRGNR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.22266/ijies2026.1130.62" rel="noopener">官方連結</a></li>
+<li><strong>2025｜PRKAN: Parameter-Reduced Kolmogorov-Arnold Networks</strong>，Hoang-Thang Ta et al.（<em>arXiv</em>）：針對既有KAN網路層參數量遠高於MLP的限制，提出參數縮減的PRKAN方法使參數量降至與MLP相當，於MNIST與Fashion-MNIST資料集驗證優於多數既有KAN且可結合注意力機制。 <a href="zotero://select/library/items/DGR28QBZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2501.07032" rel="noopener">官方連結</a></li>
+<li><strong>2025｜CVKAN: Complex-Valued Kolmogorov-Arnold Networks</strong>，Matthias Wolff, Florian Eilers, Xiaoyi Jiang（<em>arXiv</em>）：將 Kolmogorov-Arnold 網路擴展至複數域提出 CVKAN，結合 KAN 的可解釋性與複數神經網路特性；在符號複函數擬合、物理公式與紐結理論資料集上以更少參數與較淺架構達更穩定表現。 <a href="zotero://select/library/items/U82UQNFG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.02417" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Kolmogorov-Arnold Fourier Networks</strong>，Jusheng Zhang et al.（<em>arXiv</em>）：針對 KAN 在高維任務的參數膨脹與高頻擬合限制，提出 Kolmogorov-Arnold Fourier Network（KAF），以全局可訓練隨機傅立葉特徵（RFF）與譜對齊初始化取代局部 B-spline，將參數複雜度由 <span class="math inline">O(G)</span> 降至 <span class="math inline">O(1)</span>。 <a href="zotero://select/library/items/TAX3X2RT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.06018" rel="noopener">官方連結</a></li>
+<li><strong>2025｜MatrixKAN: Parallelized Kolmogorov-Arnold Network</strong>，Cale Coffman, Lizhong Chen（<em>arXiv</em>）：針對 Kolmogorov-Arnold 網路中 B-spline 遞迴運算難以平行化導致高階時推論緩慢的問題，提出 MatrixKAN，將 B-spline 求值轉寫為矩陣表示與運算以實現平行計算並改善計算時間擴展性。 <a href="zotero://select/library/items/AR2DE2T8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.07176" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Geometric Kolmogorov-Arnold Superposition Theorem</strong>，Francesco Alesiani et al.（<em>arXiv</em>）：針對經典 Kolmogorov-Arnold 疊加定理（KST）與 KAN 缺乏物理幾何對稱性的不足，提出幾何擴展版定理與網路結構，使架構能內生滿足 <span class="math inline">E(3)</span> 等變性與不變性以利科學與物理系統建模。 <a href="zotero://select/library/items/CIHF95CK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2502.16664" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Kolmogorov--Arnold stability</strong>，Sviatoslav V. Dzhenzher, Michael H. Freedman（<em>arXiv</em>）：將 Kolmogorov–Arnold（KA）表示定理視為函數表達演算法並分析其對隱藏空間再參數化的穩定性，證明 KA 外函數在可數個連續再參數化下具穩定性，但指出等度連續性問題仍阻礙其對連續變換群取極限。 <a href="zotero://select/library/items/JPUPA75I" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2504.05255" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Degree-Optimized Cumulative Polynomial Kolmogorov-Arnold Networks</strong>，Mathew Vanherreweghe, Lirandë Pira, Patrick Rebentrost（<em>arXiv</em>）：提出結合 Chebyshev 多項式基底與二次無約束二元最佳化（QUBO）的累積多項式 KAN（CP-KAN），將神經元多項式階數選擇重構為 QUBO 問題而使每層複雜度從 <span class="math inline">O(D^N)</span> 降至單步最佳化，在少樣本迴歸與金融時間序列上表現穩健。 <a href="zotero://select/library/items/E6NGRIHU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.15228" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Input Convex Kolmogorov Arnold Networks</strong>，Thomas Deschatre, Xavier Warin（<em>arXiv</em>）：提出輸入凸 Kolmogorov–Arnold 網路（ICKAN），包含具萬有逼近定理的分段線性版與三次樣條版，並將其應用於需凸函數近似的最優傳輸問題，取得與傳統輸入凸神經網路（ICNN）相當的表現。 <a href="zotero://select/library/items/FFAUENGJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2505.21208" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Structured Kolmogorov-Arnold Neural ODEs for Interpretable Learning and Symbolic Discovery of Nonlinear Dynamics</strong>，Wei Liu et al.（<em>arXiv</em>）：提出結構化 Kolmogorov–Arnold 神經常微分方程（SKANODE），將 KAN 作為萬有函數逼近器嵌入結構化狀態空間模型，在重建具物理意義的位移與速度潛在狀態同時透過符號回歸萃取系統控制方程。 <a href="zotero://select/library/items/K4PT66SM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2506.18339" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Variational Kolmogorov-Arnold Network</strong>，Francesco Alesiani, Henrik Christiansen, Federico Errica（<em>arXiv</em>）：針對 KAN 需手動設定每層基底函數數量的限制，提出變分推論框架 InfinityKAN，將基底數建模為截斷指數先驗的潛在變數並透過可微加權進行梯度最佳化，同時證明目標函數具 Lipschitz 連續性。 <a href="zotero://select/library/items/VBPNDRNC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.02466" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Kolmogorov Arnold Network Autoencoder in Medicine</strong>，Ugo Lomoio, Pierangelo Veltri, Pietro Hiram Guzzi（<em>arXiv</em>）：探討將邊緣具備可學習激活函數的 Kolmogorov–Arnold 網路（KAN）結合自編碼器與 KAN 卷積網路（KCN）應用於醫學資料分析，並對醫學場景下的 KAN 自編碼器架構進行基準評測。 <a href="zotero://select/library/items/64MEI6Z6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.19524" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Scientific Machine Learning with Kolmogorov-Arnold Networks</strong>，Salah A. Faroughi et al.（<em>arXiv</em>）：從資料驅動學習、物理資訊建模與深度算子學習三個視角，全面回顧 Kolmogorov–Arnold 網路（KAN）在科學機器學習中的最新進展，系統比較其與傳統多層感知器在架構設計、訓練策略與可解釋性上的差異。 <a href="zotero://select/library/items/NUQDDDEW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2507.22959" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Lookup multivariate Kolmogorov-Arnold Networks</strong>，Sergey Pozdnyakov, Philippe Schwaller（<em>arXiv</em>）：提出查表式多元 Kolmogorov–Arnold 網路（lmKAN）作為線性層的直接替代方案，透過以樣條查表實作的低維多元可訓練函數表達高維映射，在維持與 MLP 相當靈活度下將推論浮點運算減少達 6 倍。 <a href="zotero://select/library/items/S4SSNVNA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.07103" rel="noopener">官方連結</a></li>
+<li><strong>2025｜KANO: Kolmogorov-Arnold Neural Operator</strong>，Jin Lee et al.（<em>arXiv</em>）：提出雙域參數化且具符號可解釋性的 Kolmogorov–Arnold 神經算子（KANO），以頻譜與空間雙基底克服 FNO 在變係數偏微分方程上的限制，並在量子哈密頓學習基準重建精確至小數點後四位的閉式算符。 <a href="zotero://select/library/items/PPNUDD7W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2509.16825" rel="noopener">官方連結</a></li>
+<li><strong>2025｜A Practitioner's Guide to Kolmogorov-Arnold Networks</strong>，Amir Noorizadegan et al.（<em>arXiv</em>）：系統綜述 Kolmogorov–Arnold 網路（KAN），釐清其與 Kolmogorov 疊加定理、MLP 及核方法的理論關聯，分析基底函數設計軸線與正則收斂進展，並提供實務選型指南。 <a href="zotero://select/library/items/MFBRHNDC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2510.25781" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Catastrophic Forgetting in Kolmogorov-Arnold Networks</strong>，Mohammad Marufur Rahman et al.（<em>arXiv</em>）：系統檢驗具備局域樣條激活的 Kolmogorov–Arnold 網路在持續學習中的災難性遺忘行為，建立將遺忘程度與激活支撐重疊度及資料內在維度連結的理論框架並以實驗驗證。 <a href="zotero://select/library/items/AWCREUM5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2511.12828" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Softly Symbolifying Kolmogorov-Arnold Networks</strong>，James Bagrow, Josh Bongard（<em>arXiv</em>）：針對 Kolmogorov–Arnold 網路常學得缺乏符號可解釋性的病態激活函數，提出 S2KAN 將符號基元與稠密樣條並置於字典中，並以受最小描述長度啟發的可微閘控在訓練期端到端稀疏化為簡潔符號表式。 <a href="zotero://select/library/items/Q7ZXKBEG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.07875" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Optimized Architectures for Kolmogorov-Arnold Networks</strong>，James Bagrow, Josh Bongard（<em>arXiv</em>）：在過配資源的 Kolmogorov–Arnold 網路中整合可微稀疏化、深度監督與深度選擇，並於最小描述長度目標下聯合優化激活、結構與層數，證實搭配深度選擇方能學得兼顧高精度與緊湊可解釋的模型。 <a href="zotero://select/library/items/JFQSHPCD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2512.12448" rel="noopener">官方連結</a></li>
+<li><strong>2024｜TKAN: Temporal Kolmogorov-Arnold Networks</strong>，Remi Genet, Hugo Inzirillo（<em>arXiv</em>）：結合 Kolmogorov–Arnold 網路（KAN）與 LSTM 提出時序 KAN（TKAN），透過具記憶管理機制的循環 KAN 層（RKAN）處理複雜序列模式，提升多步時間序列預測的準確度與效率。 <a href="zotero://select/library/items/4HVTFRQU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.07344" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Wav-KAN: Wavelet Kolmogorov-Arnold Networks</strong>，Zavareh Bozorgasl, Hao Chen（<em>arXiv</em>）：將正交或半正交小波函數引入 Kolmogorov–Arnold 網路結構提出 Wav-KAN，使網路兼顧高低頻資料成分的捕捉與抗噪平衡，相較 MLP 與 Spl-KAN 改善可解釋性、訓練速度與強健性。 <a href="zotero://select/library/items/VZKCUKI4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.12832" rel="noopener">官方連結</a></li>
+<li><strong>2024｜GKAN: Graph Kolmogorov-Arnold Networks</strong>，Mehrdad Kiamari, Mohammad Kiamari, Bhaskar Krishnamachari（<em>arXiv</em>）：將 Kolmogorov–Arnold 網路的可學習單變數樣條函數擴展至圖結構資料提出 GKAN，取代傳統圖卷積網路的固定權重線性變換，並設計於鄰域聚合前或後套用 KAN 層的兩種架構。 <a href="zotero://select/library/items/3IWJZ5N5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.06470" rel="noopener">官方連結</a></li>
+<li><strong>2024｜rKAN: Rational Kolmogorov-Arnold Networks</strong>，Alireza Afzal Aghaei（<em>arXiv</em>）：針對原始 KAN 採用 B-樣條基底實作複雜的問題，提出以 Padé 近似與有理 Jacobi 函數作為可訓練基底函數的有理 Kolmogorov–Arnold 網路（rKAN），並於深度學習及物理資訊任務驗證其函數近似效果。 <a href="zotero://select/library/items/VB4BE4VG" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.14495" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Kolmogorov-Arnold Graph Neural Networks</strong>，Gianluca De Carlo, Andrea Mastropietro, Aris Anagnostopoulos（<em>arXiv</em>）：提出在圖邊上採用樣條基底激活函數的圖 Kolmogorov–Arnold 網路（GKAN），在節點分類、連結預測與圖分類等五項基準超越現有 GNN，並免除事後解釋技術即可直接呈現決策依據。 <a href="zotero://select/library/items/6EAH3TD4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2406.18354" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Gaussian Process Kolmogorov-Arnold Networks</strong>，Andrew Siyuan Chen（<em>arXiv</em>）：將高斯過程（GP）引入 Kolmogorov–Arnold 網路作為非線性神經元提出 GP-KAN，透過函數內積解析傳遞分佈以直接最佳化對數似然並提供不確定性估計，僅用 8 萬參數即在 MNIST 達 98.5% 準確率。 <a href="zotero://select/library/items/RA35ZXN4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.18397" rel="noopener">官方連結</a></li>
+<li><strong>2024｜F-KANs: Federated Kolmogorov-Arnold Networks</strong>，Engin Zeydan et al.（<em>arXiv</em>）：將具備自適應激活函數特性的 Kolmogorov–Arnold 網路導入聯邦學習架構提出 F-KANs，在保護資料隱私的前提下用於分類任務，於準確率、精確率、召回率、F1 分數與穩定性均顯著優於聯邦 MLP。 <a href="zotero://select/library/items/TFUUJSV7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.20100" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Activation Space Selectable Kolmogorov-Arnold Networks</strong>，Zhuoqin Yang et al.（<em>arXiv</em>）：針對單一激活函數空間限制 Kolmogorov–Arnold 網路跨任務表現的問題，提出激活空間可選網路 S-KAN，於每個前饋節點自適應挑選激活模式，在七項函數擬合任務優於基準且以同參數量大幅超越 MLP。 <a href="zotero://select/library/items/59PVQ43Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2408.08338" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Kolmogorov-Arnold Transformer</strong>，Xingyi Yang, Xinchao Wang（<em>arXiv</em>）：提出以KAN層替換傳統Transformer中通道混合MLP層的Kolmogorov-Arnold Transformer（KAT），並針對B-spline硬體平行運算慢、參數量龐大與權重初始化三大擴展瓶頸提出改進。 <a href="zotero://select/library/items/8N6S7THH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.10594" rel="noopener">官方連結</a></li>
+<li><strong>2024｜MonoKAN: Certified Monotonic Kolmogorov-Arnold Network</strong>，Alejandro Polo-Molina, David Alfaya, Jose Portela（<em>arXiv</em>）：針對傳統MLP單調網路難以兼顧可解釋性與嚴格部分單調性的問題，提出基於樣條參數化可學習激活函數的MonoKAN架構，實現具可認證部分單調性的模型。 <a href="zotero://select/library/items/2S88283R" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2409.11078" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Kolmogorov-Arnold Network Autoencoders</strong>，Mohammadamin Moradi et al.（<em>arXiv</em>）：將基於邊上可學習樣條激活函數的KAN應用於自編碼器資料表徵，在MNIST、SVHN與CIFAR-10資料集上對比傳統CNN，驗證KAN自編碼器在重建精度上的可行性。 <a href="zotero://select/library/items/NHKDNSWQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.02077" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Multifidelity Kolmogorov-Arnold Networks</strong>，Amanda A. Howard, Bruno Jacob, Panos Stinis（<em>arXiv</em>）：提出多傳真度Kolmogorov-Arnold網路（MFKAN），利用低傳真模型與少量高傳真資料的關聯減少高傳真資料需求，並在不依賴訓練資料下提升PIKAN精度。 <a href="zotero://select/library/items/37A7TVRJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2410.14764" rel="noopener">官方連結</a></li>
+<li><strong>2024｜On Training of Kolmogorov-Arnold Networks</strong>，Shairoz Sohail（<em>arXiv</em>）：比較多種初始化、最佳化器與HSIC瓶頸等方法下的KAN與MLP訓練動力學，發現KAN在高維資料具參數效率優勢但訓練較不穩定，並給出穩定化建議。 <a href="zotero://select/library/items/9WWRH5CB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.05296" rel="noopener">官方連結</a></li>
+<li><strong>2024｜A Survey on Kolmogorov-Arnold Network</strong>，Shriyank Somvanshi et al.（<em>arXiv</em>）：系統綜述Kolmogorov-Arnold網路（KAN）理論與演進，涵蓋邊上可學習樣條激活、參數效率及Temporal-KAN、FastKAN、PDE-KAN在時序與生醫等領域應用。 <a href="zotero://select/library/items/RZB3EJFW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.06078" rel="noopener">官方連結</a></li>
+<li><strong>2024｜GrokFormer: Graph Fourier Kolmogorov-Arnold Transformers</strong>，Guoguo Ai et al.（<em>arXiv</em>）：針對Graph Transformer自注意力僅保留低頻訊號與既定頻譜濾波器靈活性不足的問題，提出GrokFormer，透過基於可學習激活函數的傅立葉級數建模自適應學習圖譜濾波器。 <a href="zotero://select/library/items/QTUWQIJ4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2411.17296" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-187ebc0e">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a><span class="rs">這個領域的架構不走「先把一切切成離散詞元，再做 O(N^2) 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊…</span></li><li><a href="02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07A_%E6%8C%81%E7%BA%8C%E5%AD%B8%E7%BF%92%E3%80%81%E7%AA%81%E8%A7%B8%E9%9E%8F%E5%9B%BAEWC%E8%88%87%E6%8A%97%E7%81%BD%E9%9B%A3%E6%80%A7%E9%81%BA%E5%BF%98%E6%AD%A3%E4%BA%A4%E6%8A%95%E5%BD%B1.html">持續學習、突觸鞏固EWC與抗災難性遺忘正交投影</a></li><li><a href="02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a></li><li><a href="42A_%E6%B6%B2%E6%85%8B%E6%99%82%E9%96%93%E5%B8%B8%E6%95%B8%E7%B6%B2%E8%B7%AFLTC%E8%88%87%E9%96%89%E5%BC%8F%E9%80%A3%E7%BA%8C%E5%8B%95%E5%8A%9B%E5%AD%B8CfC.html">液態時間常數網路LTC與閉式連續動力學CfC</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

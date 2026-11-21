@@ -13,24 +13,24 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-f8b21081">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a><a class="find" href="../../index.html#n=n-f8b21081">Find on board</a></header>
+<body class="doc" data-note="n-f8b21081" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
-<span class="kicker">領域分級精讀 · A_基礎架構與系統工程</span>
+<span class="kicker">領域分級精讀 · 基礎架構與系統工程</span>
 <article>
 
 <h1 id="02非-transformer-架構狀態空間-mamba連續微分方程kanjepa脈衝與超維計算">02｜非 Transformer 架構（狀態空間 Mamba、連續微分方程、KAN、JEPA、脈衝與超維計算）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">00_每日精讀索引</a>
-相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> ｜ <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">28_非平衡態統計力學與隨機熱力學</a></p>
-</aside>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 所屬星系：<code>星系 A：基礎架構與系統工程</code> ｜ 每日新知：<a class="wl" href="../../01_%E6%AF%8F%E6%97%A5%E8%B7%A8%E9%A0%98%E5%9F%9F%E7%B2%BE%E8%AE%80/00_%E6%AF%8F%E6%97%A5%E7%B2%BE%E8%AE%80%E7%B4%A2%E5%BC%95.html">每日跨領域精讀索引</a>
+相關領域：<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> ｜ <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a> ｜ <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a> ｜ <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> ｜ <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</a> ｜ <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/28_%E9%9D%9E%E5%B9%B3%E8%A1%A1%E6%85%8B%E7%B5%B1%E8%A8%88%E5%8A%9B%E5%AD%B8%E8%88%87%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8.html">非平衡態統計力學與隨機熱力學</a></p>
+</details>
 <h2 id="g13-分鐘速覽">G1｜3 分鐘速覽</h2>
 <aside class="callout" data-kind="abstract"><p class="callout-title">一句話說明</p>
 <p>這個領域的架構不走「先把一切切成離散詞元，再做 <span class="math inline">O(N^2)</span> 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊樣條函數逼近（KAN）、抽象潛空間預測（JEPA）與物理事件驅動／超維代數計算（SNN / Reservoir / HDC）。它們靠 <span class="math inline">O(1)</span> 的推論狀態複雜度和貼近物理的先驗，來處理長序列與世界模型。</p>
 </aside>
 <ul>
 <li>這個領域要解決什麼問題？
-<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 在離散自然語言上是主流，但到了真實的物理與生物世界，有四個結構上不合用的地方：
+<a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> 在離散自然語言上是主流，但到了真實的物理與生物世界，有四個結構上不合用的地方：
 <ol>
 <li><strong>超長連續訊號的二次方成本</strong>：面對百萬步基因組、高頻無線電通道、車聯網封包流或時間戳不規則的醫療波形，KV Cache 會不斷膨脹，在邊緣端維護不起。</li>
 <li><strong>逐像素／逐詞元生成把算力花在不可預測的雜訊上</strong>：世界上到處是隨風晃動的樹葉、醫學影像的底噪。要生成模型在原始像素空間猜出每個細節，反而模糊了高層語意與解剖結構。</li>
@@ -48,7 +48,7 @@
 </ol>
 </li>
 <li>其他領域的研究者為什麼要關心它？它和哪些領域相接？
-這個領域用動力學把 AI 和真實物理世界接起來。連續深度微分方程與時變液態網路通往 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">27_算子學習與PDE基礎模型</a>（如 2026 的 <code>LNN-PINN</code>）。HiPPO 正交多項式記憶與 Kolmogorov–Arnold 表示定理的數學根基在 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">03_數學結構化ML</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">16_ML數學地基</a>。JEPA 非生成世界模型、脈衝神經網路與 Kanerva 超維向量代數，則是 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>（預測編碼與大腦海馬記憶）與 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">20_硬體與系統</a>（神經形態與光子晶片）交會的地方。</li>
+這個領域用動力學把 AI 和真實物理世界接起來。連續深度微分方程與時變液態網路通往 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a> 與 <a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a>（如 2026 的 <code>LNN-PINN</code>）。HiPPO 正交多項式記憶與 Kolmogorov–Arnold 表示定理的數學根基在 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a> 與 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a>。JEPA 非生成世界模型、脈衝神經網路與 Kanerva 超維向量代數，則是 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</a>（預測編碼與大腦海馬記憶）與 <a class="wl" href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>（神經形態與光子晶片）交會的地方。</li>
 </ul>
 <h2 id="g215-分鐘主要概念與演進脈絡">G2｜15 分鐘：主要概念與演進脈絡</h2>
 <pre class="mermaid">flowchart TD
@@ -76,7 +76,7 @@
 <li>
 <p><strong>連續深度微分方程與時變液態動力系統（Neural ODE, LTC &amp; CfC）</strong></p>
 <ul>
-<li>直覺理解：殘差網路 <span class="math inline">h_{t+1} = h_t + f(h_t, \theta_t)</span> 就是用固定步長 <span class="math inline">\Delta t = 1</span> 走歐拉法（Euler discretization）。Chen 等人（2018）把層數推到無窮連續的極限：不堆疊離散層，讓神經網路直接學狀態演化的速度向量場，再由自適應微分方程求解器決定步長，平緩處跨大步，劇烈轉折處走小步。Hasani 等人接著引入受生物突觸啟發的液態時間常數（LTC）與閉式解（CfC），讓系統的記憶時間尺度隨當下輸入強度即時伸縮（詳見專章 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">42_LNN液態與邏輯神經網路</a>）。</li>
+<li>直覺理解：殘差網路 <span class="math inline">h_{t+1} = h_t + f(h_t, \theta_t)</span> 就是用固定步長 <span class="math inline">\Delta t = 1</span> 走歐拉法（Euler discretization）。Chen 等人（2018）把層數推到無窮連續的極限：不堆疊離散層，讓神經網路直接學狀態演化的速度向量場，再由自適應微分方程求解器決定步長，平緩處跨大步，劇烈轉折處走小步。Hasani 等人接著引入受生物突觸啟發的液態時間常數（LTC）與閉式解（CfC），讓系統的記憶時間尺度隨當下輸入強度即時伸縮（詳見專章 <a class="wl" href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a>）。</li>
 <li>機制或核心表達式：Neural ODE（Chen et al., 2018，🏆 L5）把連續向量場參數化為 <span class="math inline">\frac{\mathrm{d}h(t)}{\mathrm{d}t} = f(h(t), t, \theta)</span>，再用龐特里亞金伴隨靈敏度法（Adjoint Sensitivity Method）逆向積分伴隨狀態 <span class="math inline">a(t) = \frac{\partial \mathcal{L}}{\partial h(t)}</span>。這樣不必儲存中間層激活值就能算出參數梯度：
 <div class="math inline">\frac{\mathrm{d}a(t)}{\mathrm{d}t} = -a(t)^\top \frac{\partial f(h(t), t, \theta)}{\partial h}, \qquad \frac{\mathrm{d}\mathcal{L}}{\mathrm{d}\theta} = -\int_{t_1}^{t_0} a(t)^\top \frac{\partial f(h(t), t, \theta)}{\partial \theta}\,\mathrm{d}t</div>
 2026 年的 <code>LNN-PINN</code>（Tao et al., 2026）把時變液態殘差塊嵌進純物理微分算子損失，不需要觀測標籤，就能自適應地化解剛性（Stiff）PDE 的多尺度梯度失衡。</li>
@@ -115,21 +115,21 @@
 <aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
 <p></p>
 <ol>
-<li><strong>固定維度循環狀態的無損精確回憶上界，與混血架構（Hybrid SSM / Liquid-Transformer）</strong>：理論與實證都顯示，不論是 Mamba、RWKV 或 CfC，只要把長度 <span class="math inline">N</span> 的歷史壓進固定大小的狀態 <span class="math inline">O(d)</span>，依鴿籠原理與資訊瓶頸，就無法像保留完整 KV Cache 的 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">01_Transformer核心</a> 那樣，對任意早期的冷門細節做零誤差的精確查表。2026 年的研究已不再堅持用純架構取代注意力。現在的做法是大部分層用線性狀態空間／液態層處理連續時序動態，少數關鍵層穿插注意力做全局精準錨定（如伺服機構少樣本增量故障診斷的 <code>Liquid-Transformer</code>，Zhang et al., 2026）。</li>
+<li><strong>固定維度循環狀態的無損精確回憶上界，與混血架構（Hybrid SSM / Liquid-Transformer）</strong>：理論與實證都顯示，不論是 Mamba、RWKV 或 CfC，只要把長度 <span class="math inline">N</span> 的歷史壓進固定大小的狀態 <span class="math inline">O(d)</span>，依鴿籠原理與資訊瓶頸，就無法像保留完整 KV Cache 的 <a class="wl" href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a> 那樣，對任意早期的冷門細節做零誤差的精確查表。2026 年的研究已不再堅持用純架構取代注意力。現在的做法是大部分層用線性狀態空間／液態層處理連續時序動態，少數關鍵層穿插注意力做全局精準錨定（如伺服機構少樣本增量故障診斷的 <code>Liquid-Transformer</code>，Zhang et al., 2026）。</li>
 <li><strong>潛空間世界模型（JEPA）的表徵崩塌、局域微弱訊號漏檢與對抗脆弱性</strong>：JEPA 避開了像素空間的雜訊，但也少了「能不能重建出合理影像」這個直觀的檢驗。本領域收錄的兩篇 2026 L5 審核論文各指出一個問題。<code>AG-JEPA</code>（Singh et al., 2026）證實通用 JEPA 會忽略輕度認知障礙（MCI）轉化期只出現在少數腦區的微弱萎縮訊號，必須注入解剖學先驗遮罩。<code>Cracks in Embeddings</code>（Mansur et al., 2026）在近八萬張胸腔 X 光上發現，JEPA 嵌入空間在邊界黑盒攻擊與亮度／對比度臨床偏移下會發生結構性漂移。怎麼在非生成潛空間內建立可驗證的幾何穩定保證，是高風險醫療與自動駕駛世界模型急需解決的問題。</li>
 </ol>
 </aside>
 <aside class="callout" data-kind="tip"><p class="callout-title">可以借到其他領域的結構</p>
 <p></p>
 <ul>
-<li><strong>HiPPO 線上正交函數基底投影 → 持續學習與非平穩長時序記憶</strong>：Gu 等人（2021）用一組常微分方程，即時維護歷史訊號在 Legendre／Laguerre 多項式上的最優逼近係數。這種有界維度、滾動視窗與指數衰減的連續函數投影，可以直接搬到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">07_發展式學習</a> 的抗災難性遺忘記憶緩衝區，以及金融高頻微結構建模。</li>
-<li><strong>在抽象不變量空間預測，不在觀測雜訊空間重建（JEPA 原則）</strong>：面對高雜訊的分子動力學軌跡、腦電圖或社會輿論演化（<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">09_社會與多智能體</a>、<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">08_情感腦認知</a>），不去預測微觀隨機漲落，改成預測慢變數（Slow Collective Variables）的潛表徵，樣本效率會高很多。</li>
-<li><strong>萬維擬正交全息綁定（Kanerva HDC 向量符號架構）→ 機械可解釋性與神經符號橋接</strong>：<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">34_高維機率與隨機矩陣</a> 的測度集中保證，<span class="math inline">D</span> 維球面上可以放進指數級數量 <span class="math inline">\exp(c \varepsilon^2 D)</span> 個近似正交的概念向量。這是超維計算的數學根基，也替 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">06_學習動力學與可解釋性</a> 中的特徵疊加態（Superposition Hypothesis）提供了一個構造性模型。</li>
+<li><strong>HiPPO 線上正交函數基底投影 → 持續學習與非平穩長時序記憶</strong>：Gu 等人（2021）用一組常微分方程，即時維護歷史訊號在 Legendre／Laguerre 多項式上的最優逼近係數。這種有界維度、滾動視窗與指數衰減的連續函數投影，可以直接搬到 <a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">發展式學習：持續學習、主動推論、內在動機與開放式演化</a> 的抗災難性遺忘記憶緩衝區，以及金融高頻微結構建模。</li>
+<li><strong>在抽象不變量空間預測，不在觀測雜訊空間重建（JEPA 原則）</strong>：面對高雜訊的分子動力學軌跡、腦電圖或社會輿論演化（<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇</a>、<a class="wl" href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</a>），不去預測微觀隨機漲落，改成預測慢變數（Slow Collective Variables）的潛表徵，樣本效率會高很多。</li>
+<li><strong>萬維擬正交全息綁定（Kanerva HDC 向量符號架構）→ 機械可解釋性與神經符號橋接</strong>：<a class="wl" href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">高維機率與隨機矩陣</a> 的測度集中保證，<span class="math inline">D</span> 維球面上可以放進指數級數量 <span class="math inline">\exp(c \varepsilon^2 D)</span> 個近似正交的概念向量。這是超維計算的數學根基，也替 <a class="wl" href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a> 中的特徵疊加態（Superposition Hypothesis）提供了一個構造性模型。</li>
 </ul>
 </aside>
 <h2 id="g4單篇深讀書單">G4｜單篇深讀書單</h2>
 <aside class="callout" data-kind="info"><p class="callout-title">怎麼選讀</p>
-<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">00_已深度解析旗艦論文索引</a>。</p>
+<p>原始 PDF 都收在隱藏庫並綁定到 Zotero，不會出現在本機 Spotlight。上面讀到想深究的問題時，點下方的 <code>📚 Zotero 開啟</code>，就能在 Zotero 讀原文 PDF。做過 L5 深度審核的論文，也可以讀它的導讀，見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>。</p>
 </aside>
 <!-- SUBTOPIC_MAP_START -->
 <h3 id="0-本領域細分子方向與全量文獻精讀泛讀導航共-469-篇">0. 本領域細分子方向與全量文獻精讀／泛讀導航（共 469 篇）</h3>
@@ -147,42 +147,42 @@
 <tbody>
 <tr>
 <td style="text-align:center">1</td>
-<td><span class="wl-missing">02A_結構化與選擇性狀態空間模型SSM與Mamba</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a></td>
 <td style="text-align:center">101（OA 73）</td>
 <td style="text-align:center">經典 27 / 近期 74</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">2</td>
-<td><span class="wl-missing">02B_線性循環注意力、RWKV、xLSTM與混合序列骨幹</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02B_%E7%B7%9A%E6%80%A7%E5%BE%AA%E7%92%B0%E6%B3%A8%E6%84%8F%E5%8A%9B%E3%80%81RWKV%E3%80%81xLSTM%E8%88%87%E6%B7%B7%E5%90%88%E5%BA%8F%E5%88%97%E9%AA%A8%E5%B9%B9.html">線性循環注意力、RWKV、xLSTM與混合序列骨幹</a></td>
 <td style="text-align:center">67（OA 51）</td>
 <td style="text-align:center">經典 7 / 近期 60</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">3</td>
-<td><span class="wl-missing">02C_神經常微分方程、連續深度模型與流控制</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02C_%E7%A5%9E%E7%B6%93%E5%B8%B8%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B%E3%80%81%E9%80%A3%E7%BA%8C%E6%B7%B1%E5%BA%A6%E6%A8%A1%E5%9E%8B%E8%88%87%E6%B5%81%E6%8E%A7%E5%88%B6.html">神經常微分方程、連續深度模型與流控制</a></td>
 <td style="text-align:center">166（OA 74）</td>
 <td style="text-align:center">經典 50 / 近期 116</td>
 <td>🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_02_2018_Chen_Neural_Ordinary_Differential_Equations.html">L5_02</a>、🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_03_2020_Hasani_Liquid_Time_constant_Networks.html">L5_03</a>、🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_04_2022_Hasani_Closed_form_continuous_time_neural_networks.html">L5_04</a></td>
 </tr>
 <tr>
 <td style="text-align:center">4</td>
-<td><span class="wl-missing">02D_Kolmogorov-Arnold網路與函數基底學習</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02D_Kolmogorov-Arnold%E7%B6%B2%E8%B7%AF%E8%88%87%E5%87%BD%E6%95%B8%E5%9F%BA%E5%BA%95%E5%AD%B8%E7%BF%92.html">Kolmogorov-Arnold網路與函數基底學習</a></td>
 <td style="text-align:center">58（OA 56）</td>
 <td style="text-align:center">經典 48 / 近期 10</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">5</td>
-<td><span class="wl-missing">02E_脈衝神經網路與神經形態事件計算</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02E_%E8%84%88%E8%A1%9D%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF%E8%88%87%E7%A5%9E%E7%B6%93%E5%BD%A2%E6%85%8B%E4%BA%8B%E4%BB%B6%E8%A8%88%E7%AE%97.html">脈衝神經網路與神經形態事件計算</a></td>
 <td style="text-align:center">48（OA 19）</td>
 <td style="text-align:center">經典 39 / 近期 9</td>
 <td>無</td>
 </tr>
 <tr>
 <td style="text-align:center">6</td>
-<td><span class="wl-missing">02F_超維計算、向量符號架構與非自迴歸潛預測JEPA</span></td>
+<td><a class="wl" href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02F_%E8%B6%85%E7%B6%AD%E8%A8%88%E7%AE%97%E3%80%81%E5%90%91%E9%87%8F%E7%AC%A6%E8%99%9F%E6%9E%B6%E6%A7%8B%E8%88%87%E9%9D%9E%E8%87%AA%E8%BF%B4%E6%AD%B8%E6%BD%9B%E9%A0%90%E6%B8%ACJEPA.html">超維計算、向量符號架構與非自迴歸潛預測JEPA</a></td>
 <td style="text-align:center">29（OA 25）</td>
 <td style="text-align:center">經典 9 / 近期 20</td>
 <td>🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_06_2026_Mansur_Cracks_in_Embeddings_Robustness_and_Stability.html">L5_06</a>、🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_05_2026_Singh_AG_JEPA_Anatomically_Guided_Joint_Embedding.html">L5_05</a></td>
@@ -190,7 +190,7 @@
 </tbody>
 </table>
 <ul>
-<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">橋接02_連續時間動力學、狀態空間與液態神經網路</a></li>
+<li>跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></li>
 </ul>
 <!-- SUBTOPIC_MAP_END -->
 <h3 id="a-必讀奠基論文">A. 必讀奠基論文</h3>
@@ -338,11 +338,15 @@
 </ul>
 <!-- DAILY_UPDATES_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f8b21081">在地圖上查看</a><div class="rg"><h3>相關<span class="n">19</span></h3><ul><li><a href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a><span class="rs">這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 O(1)。</span></li><li><a href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a><span class="rs">這個領域收的是當代 AI 裡兩支都簡稱 LNN 的學派。兩者著力的層面不同，但都不走龐大黑盒模型的路。</span></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/27_%E7%AE%97%E5%AD%90%E5%AD%B8%E7%BF%92%E8%88%87PDE%E5%9F%BA%E7%A4%8E%E6%A8%A1%E5%9E%8B.html">算子學習與 PDE 基礎模型</a><span class="rs">把深度學習從有限維固定像素網格上的向量擬合（R^n → R^m），推廣為無窮維函數空間之間的連續算子映射（G^dagger: A → U）。</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/03_%E6%95%B8%E5%AD%B8%E7%B5%90%E6%A7%8B%E5%8C%96ML.html">數學結構化機器學習（幾何、層論、最優傳輸流與奇異學習理論）</a><span class="rs">這個領域不把神經網路當成在平坦歐氏空間裡硬擬合曲線的黑盒。它把對稱群、層論黏合（Sheaf）、拓撲不變量、最優傳輸黎曼幾何、無窮維算子與代數幾何…</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/16_ML%E6%95%B8%E5%AD%B8%E5%9C%B0%E5%9F%BA.html">機器學習數學地基</a><span class="rs">這個領域為所有學習系統劃出三條數學邊界：有限樣本下需要多少資訊才能保證結論不是自欺（泛化理論），有限梯度步數下能多快找到好解（最佳化理論），以及…</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/08_%E6%83%85%E6%84%9F%E8%85%A6%E8%AA%8D%E7%9F%A5.html">情感腦認知：互補學習系統、評價理論、貝氏認知與 NeuroAI</a><span class="rs">情感腦認知（Affective &amp; Cognitive Neuroscience / NeuroAI）研究人類大腦怎麼在樣本極少、風險又高的社交…</span></li><li><a href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/07_%E7%99%BC%E5%B1%95%E5%BC%8F%E5%AD%B8%E7%BF%92.html">發展式學習：持續學習、主動推論、內在動機與開放式演化</a><span class="rs">發展式學習研究的是：一個能力受限的具身智能體，處在沒有固定題庫、沒有外部獎勵、世界又持續變動的開放環境裡，怎麼靠預測誤差最小化和內在好奇心驅動自…</span></li><li><a href="../F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/09_%E7%A4%BE%E6%9C%83%E8%88%87%E5%A4%9A%E6%99%BA%E8%83%BD%E9%AB%94.html">社會與多智能體：MARL、生成式社會模擬、平均場賽局與計算社會選擇</a><span class="rs">社會與多智能體研究的是：成百上千個各有局部資訊、私人偏好與策略適應能力的智能體同時互動時，怎麼克服環境非平穩性與維度災難，進而理解、預測甚至設計…</span></li><li><a href="../E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/34_%E9%AB%98%E7%B6%AD%E6%A9%9F%E7%8E%87%E8%88%87%E9%9A%A8%E6%A9%9F%E7%9F%A9%E9%99%A3.html">高維機率與隨機矩陣</a><span class="rs">空間維度 d 與矩陣尺寸 N 大到數千乃至數十億時，我們在二、三維世界養成的幾何直覺不再成立，取而代之的是兩種確定性的規律。</span></li><li><a href="../B_%E5%AD%B8%E7%BF%92%E7%90%86%E8%AB%96%E3%80%81%E6%8E%A8%E7%90%86%E8%88%87%E8%A1%A8%E7%A4%BA%E5%B9%BE%E4%BD%95/06_%E5%AD%B8%E7%BF%92%E5%8B%95%E5%8A%9B%E5%AD%B8%E8%88%87%E5%8F%AF%E8%A7%A3%E9%87%8B%E6%80%A7.html">學習動力學與可解釋性（雙重下降、頓悟相變、疊加態與稀疏自編碼器解剖學）</a><span class="rs">這個領域一方面追蹤深度神經網路在訓練時間軸上的非線性相變（雙重下降與頓悟 Grokking），另一方面用稀疏自編碼器（SAE）與因果特徵電路，把…</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/02A_%E7%B5%90%E6%A7%8B%E5%8C%96%E8%88%87%E9%81%B8%E6%93%87%E6%80%A7%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E6%A8%A1%E5%9E%8BSSM%E8%88%87Mamba.html">結構化與選擇性狀態空間模型SSM與Mamba</a></li></ul><p class="more">另有 7 篇</p></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
 <script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
 <script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>

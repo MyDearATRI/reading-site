@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>38C｜本體語意對齊、偏序盒嵌入Box Embeddings與神經概念階層 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-45305fc9" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="38c本體語意對齊偏序盒嵌入box-embeddings與神經概念階層">38C｜本體語意對齊、偏序盒嵌入Box Embeddings與神經概念階層</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a>
+同領域子方向：<a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> · <a class="wl" href="38B_%E6%A8%A1%E7%B3%8A%E8%88%87%E4%B8%89%E6%94%AF%E6%A6%82%E5%BF%B5%E6%A0%BC%E3%80%81Chu%E7%A9%BA%E9%96%93%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E7%90%86%E8%AB%96KST.html">模糊與三支概念格、Chu空間與知識空間理論KST</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a> 的幾何化與神經符號前沿，銜接 <a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> 的離散概念格與連續向量空間表示。核心處理的矛盾在於：傳統歐氏點向量嵌入以對稱內積度量相似度，無法忠實保持概念階層的反對稱偏序、邏輯互斥與本體蘊涵結構；演進主線從早期錐體序嵌入與密度封裝，發展至具備負相關表達力的盒格測度，再推進到結合範疇論飽和構造的描述邏輯本體格嵌入與算子域保序定理。</p>
+</aside>
+<ul>
+<li>核心問題：傳統知識圖譜嵌入或本體圖嵌入（如把 OWL 本體化約為三元組圖）會丟失描述邏輯中的存在量詞、否定與聯集語意，且歐氏點嵌入滿足對稱性，無法自然刻畫傳遞性的蘊涵偏序（<span class="math inline">A \sqsubseteq B</span>）。即便引入單側序嵌入（Order Embeddings）並為其賦予單調機率測度，Vilnis et al. (2018) 指出該類模型在數學上永遠無法表徵概念間的負相關與互斥關係；而在高表現力描述邏輯 <span class="math inline">\mathcal{ALC}</span> 中，許多現實領域（如生醫）本體缺乏個體（individuals），導致依賴實例採樣的語意嵌入方法失效。</li>
+<li>直覺模型：可以把標準點向量嵌入想成在地圖上標記城市座標，兩個城市誰包含誰無法只靠距離看出來。序嵌入把每個概念畫成無限延伸的直角扇形（錐體），大概念的扇形完全包住小概念，但所有扇形在無窮遠處終究會重疊，永遠分不出兩個概念「彼此互斥」。盒嵌入（Box Embeddings）則把每個概念畫成有邊界的矩形盒子，盒子之間可以大盒包小盒（蘊涵）、部分交疊（條件機率）或完全分離（負相關與互斥），而本體飽和嵌入則是先把邏輯推論展開成一張完整的上下位格網，再把格網塞進這些幾何區域裡。</li>
+<li>分階段閱讀路線：第一階段先讀 Courcelle (2021) 與 Athiwaratkun and Wilson (2018)，前者釐清偏序與樹結構中保序與介於性（betweenness）的邏輯定義邊界，後者展示如何以機率密度封裝建模詞彙上下位蘊涵與不確定性。第二階段精讀 Vilnis et al. (2018)，掌握單調序嵌入機率測度無法表現負相關的限制，以及盒格（Box Lattice）與其體積機率測度的構造。第三階段讀 2025–2026 前沿論文 Zhapa-Camacho and Hoehndorf (2025) 與 Semrl (2026)，理解如何將無個體的 <span class="math inline">\mathcal{ALC}</span> 描述邏輯本體透過範疇論飽和物化為概念格再作保序嵌入，並從實對稱矩陣域上的保序映射了解非歐氏序結構的剛性。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;2018 Athiwaratkun 與 Wilson 密度封裝序嵌入&quot;] --&gt; B[&quot;2018 Vilnis et al. 盒格測度與負相關建模&quot;]
+  C[&quot;2021 Courcelle 偏序樹介於性與單子二階邏輯&quot;] --&gt; D[&quot;格結構保序與邏輯可定義性基礎&quot;]
+  B --&gt; E[&quot;2025 Zhapa-Camacho 與 Hoehndorf ALC 本體飽和格嵌入&quot;]
+  D --&gt; E
+  D --&gt; F[&quot;2026 Semrl 實對稱矩陣域保序嵌入&quot;]
+  E --&gt; G[&quot;神經符號本體推理與跨空間概念對齊&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>序嵌入與密度封裝 (Order Embeddings and Density Encapsulation)</strong></p>
+<ul>
+<li>直覺理解：點向量內積天然對稱，無法直接區分父概念與子概念的方向；將概念映為高維正象限錐體或機率密度函數後，概念蘊涵就轉化為空間區域的單向包含或密度封裝。</li>
+<li>機制或核心表達式：在歐氏序嵌入中，每個概念 <span class="math inline">u</span> 映至 <span class="math inline">\mathbb{R}_{\ge 0}^d</span> 中的向量 <span class="math inline">x_u</span>，並以座標逐點偏序 <span class="math inline">u \preceq v \iff \forall i \in \{1,\dots,d\}, x_{v,i} \le x_{u,i}</span> 表達傳遞性上下位關係。Athiwaratkun and Wilson (2018) 進一步提出階層密度序嵌入，將詞彙或概念表徵為機率密度 <span class="math inline">p_u</span>，設計不對稱距離度量與圖負採樣策略，使泛化概念（如 entity）對應較寬廣的分布並封裝特化概念（如 animal）的密度。</li>
+<li>能做到什麼，代價是什麼：保序映射強制執行了傳遞性與反對稱性歸納偏置，密度封裝亦能保留語意不確定性；但單純在開放錐體序嵌入上定義機率測度時，缺乏有界支撐集的分離能力，無法對互斥或負相關概念建模。</li>
+</ul>
+</li>
+<li>
+<p><strong>盒格測度與反相關表徵 (Box Lattice Measures and Anticorrelation)</strong></p>
+<ul>
+<li>直覺理解：把每個概念從無限延伸的錐體改為有界超矩形盒子，盒子在交集運算下自然閉合形成格結構，且兩個盒子可以完全分開以表達「互斥」，也能透過交集體積直接讀出聯合機率與條件機率。</li>
+<li>機制或核心表達式：Vilnis et al. (2018) 在單位超立方體 <span class="math inline">[0,1]^d</span>（或有界空間）中將概念 <span class="math inline">u</span> 參數化為超矩形 <span class="math inline">B(u) = \prod_{i=1}^d [l_{u,i}, u_{u,i}]</span>。兩個盒子的交會運算定義為 <span class="math inline">B(u) \sqcap B(v) = \prod_{i=1}^d [\max(l_{u,i}, l_{v,i}), \min(u_{u,i}, u_{v,i})]</span>，若任一維度下界大於上界則交集為空。配合體積型測度 <span class="math inline">\mu</span> 定義機率 <span class="math inline">P(u) = \mu(B(u))</span>，聯合與條件機率為 <span class="math inline">P(u \sqcap v) = \mu(B(u) \sqcap B(v))</span> 與 <span class="math inline">P(u \mid v) = \mu(B(u) \sqcap B(v)) / \mu(B(v))</span>，可表示負相關 <span class="math inline">P(u \sqcap v) &lt; P(u)P(v)</span> 與完全互斥 <span class="math inline">P(u \sqcap v) = 0</span>。</li>
+<li>能做到什麼，代價是什麼：克服了一般單調序嵌入無法表達負相關的理論瓶頸，支援聯合與條件查詢以及從期望值中學習；但當兩個盒子不相交時，精確交集體積及其梯度為零，實務訓練常需處理稀疏梯度與非凸邊界最佳化。</li>
+</ul>
+</li>
+<li>
+<p><strong>本體概念格飽和與保序嵌入 (Ontology Lattice Saturation and Order-Preserving Maps)</strong></p>
+<ul>
+<li>直覺理解：只看本體中的實體關係三元組會遺漏邏輯規則本身的階層結構；先把描述邏輯的概念表達式依據範疇論對應展開（飽和）成完整的概念格，再對格結構做保序嵌入，便能在沒有任何個體實例的本體上學出符合語意的向量表示。</li>
+<li>機制或核心表達式：面對包含否定與全稱量詞的描述邏輯 <span class="math inline">\mathcal{ALC}</span>，Zhapa-Camacho and Hoehndorf (2025) 運用描述邏輯與範疇論之間的聯繫，透過飽和計算把本體公理隱含的概念描述偏序物化為明確的格結構 <span class="math inline">(L, \sqsubseteq, \sqcap, \sqcup)</span>，隨後對此格應用保序嵌入以保持蘊涵方向。而在更一般的數學序理論層面，Semrl (2026) 針對 <span class="math inline">n \times n</span> 實對稱矩陣空間 <span class="math inline">S_n</span>（<span class="math inline">n \neq 1</span>）上的連通開集 <span class="math inline">U \subset S_n</span>，刻畫了滿足 <span class="math inline">X \le Y \iff \phi(X) \le \phi(Y)</span> 的保序嵌入 <span class="math inline">\phi: U \to S_n</span> 之一般形式；Courcelle (2021) 則透過單子二階邏輯（monadic second-order logic）分析樹狀偏序中的三元介於性 <span class="math inline">B(x,y,z)</span> 與誘導子結構。</li>
+<li>能做到什麼，代價是什麼：飽和格嵌入讓無個體（individual-free）的 <span class="math inline">\mathcal{ALC}</span> 本體也能保留完整邏輯語意並在缺失事實預測上超越僅支援 <span class="math inline">\mathcal{EL}^{++}</span> 或純圖的方法；代價是概念格物化與飽和階段會隨本體公理規模增長而產生額外前處理時間與記憶體開銷。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>為何單調序嵌入的機率擴展無法表徵負相關</strong>：在傳統序嵌入（Order Embeddings）中，每個概念對應 <span class="math inline">\mathbb{R}_{\ge 0}^d</span> 中往無窮遠延伸的錐體區域，為何即使為這種空間加上校準後的機率測度，仍無法表達兩個概念互斥或負相關，而盒格（Box Lattice）如何解決這件事？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考兩個往同一方向（例如座標全趨近正無窮）延伸的無界錐體，它們的交集是否可能為空？在 Vilnis et al. (2018) 的分析中，這類無界正象限錐體交集必然非空，且若測度在整個空間積分為 1 並單調擴張，兩個概念往往呈現正相關下界。改用有上下界限的超矩形 <span class="math inline">B(u) = \prod_i [l_{u,i}, u_{u,i}]</span> 後，只要在任一維度滿足 <span class="math inline">u_{a,i} &lt; l_{b,i}</span>，兩者交集測度即可嚴格為 <span class="math inline">0</span>（或遠小於 <span class="math inline">P(a)P(b)</span>），從而同時編碼互斥與負相關。</p>
+</details>
+<ol start="2">
+<li><strong>無個體 <span class="math inline">\mathcal{ALC}</span> 本體在幾何嵌入上的困難與飽和解法</strong>：許多面向 <span class="math inline">\mathcal{EL}^{++}</span> 或 <span class="math inline">\mathcal{ALC}</span> 的語意本體嵌入方法若遇到「完全沒有個體（individuals），只有概念公理（TBox）」的真實生物醫學本體時為何會失效，Zhapa-Camacho and Hoehndorf (2025) 如何利用概念格結構繞過這個限制？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>許多嵌入方法需要把公理映射到個體集合上的實例成員關係或透過實例採樣來約束幾何區域（例如超球交集或模型構造），一旦本體缺少實例（ABox 為空），這類約束便失去錨點。Zhapa-Camacho and Hoehndorf (2025) 改為直接考察概念描述本身的代數與範疇論結構，透過飽和程序推導並物化概念之間的偏序格，再以保序嵌入將此概念格映入向量空間，無需依賴具體個體即可保留 <span class="math inline">\mathcal{ALC}</span> 語意。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>高表現力描述邏輯的可擴展性與飽和計算瓶頸</strong>：Zhapa-Camacho and Hoehndorf (2025) 透過物化 <span class="math inline">\mathcal{ALC}</span> 概念格解決了無個體本體的語意損失問題，但對大型現實本體進行邏輯飽和與格構造時，概念描述組合數可能急遽膨脹。如何在不喪失 <span class="math inline">\mathcal{ALC}</span> 邏輯完備性的前提下進行近似飽和或增量格嵌入，仍待進一步研究。</li>
+<li><strong>盒嵌入的離散邏輯閉合與連續最佳化張力</strong>：盒格測度雖然在數學上支援精確的交集、包含與負相關，但在神經網路反向傳播下，不相交盒子的零測度區間會造成梯度消失；另一方面，若改用連續密度封裝（Athiwaratkun &amp; Wilson, 2018）或平滑近似，又可能削弱嚴格邏輯互斥與傳遞閉合的硬約束。如何在高維空間中兼顧幾何可微性與格代數精確性，是神經符號嵌入的核心張力。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>從離散形式概念格到幾何多胞形表示</strong>：本子方向對本體概念格進行飽和與保序盒嵌入的做法，可直接為 <a class="wl" href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a> 產生的離散概念格提供連續幾何實現，並與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a> 中研究概念凸多胞形與跨空間表示對齊的方法相互對接。</li>
+<li><strong>非經典格結構與機率化不確定性擴展</strong>：盒格測度把嚴格偏序包含推廣為可容許部分重疊與條件機率的定量結構，在概念邊界軟化與不確定性處理的數學目標上，與 <a class="wl" href="38B_%E6%A8%A1%E7%B3%8A%E8%88%87%E4%B8%89%E6%94%AF%E6%A6%82%E5%BF%B5%E6%A0%BC%E3%80%81Chu%E7%A9%BA%E9%96%93%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E7%90%86%E8%AB%96KST.html">模糊與三支概念格、Chu空間與知識空間理論KST</a> 中的模糊概念格及三支決策邊界域互為補充。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-induced-betweenness-in-order-theoretic-trees2021">1. Induced betweenness in order-theoretic trees（2021）</h4>
+<ul>
+<li>作者與出處：Bruno Courcelle · <em>arXiv</em></li>
+<li>核心問題：在偏序集與序理論樹（order-theoretic trees）中，如何透過三元介於性關係 <span class="math inline">B(x,y,z)</span> 刻畫元素的階層位置，並判定其誘導子結構在邏輯語言中的可定義性。傳統研究多集中於線性序的介於性，對一般樹狀偏序誘導子結構的邏輯刻畫尚不完整。</li>
+<li>關鍵做法：利用不可比元素的最小上界 <span class="math inline">x \sqcup z</span> 定義序理論樹上的介於性 <span class="math inline">B(x,y,z)</span>，在既有的單子二階邏輯（MSO）可定義性結果基礎上，進一步證明其誘導子結構類的相關邏輯與結構性質。</li>
+<li>跨領域啟發：為本子方向提供偏序、上確界與樹狀階層的基礎形式邏輯語言，幫助理解保序結構究竟在何種邏輯層次上可被完整刻畫。</li>
+<li>連結：<a href="zotero://select/library/items/42ATAWNK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.15357" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-hierarchical-density-order-embeddings2018">2. Hierarchical Density Order Embeddings（2018）</h4>
+<ul>
+<li>作者與出處：Ben Athiwaratkun, Andrew Gordon Wilson · <em>arXiv</em></li>
+<li>核心問題：點向量詞嵌入難以表達詞彙多義性與上下位蘊涵的不對稱方向，特別是泛化詞（如 entity）與特化詞（如 animal）之間的大小與不確定性差異。</li>
+<li>關鍵做法：提出階層密度序嵌入（Density Order Embeddings），以機率密度函數表示概念並透過密度封裝（encapsulation）建構蘊涵關係，設計對應的損失函數、距離度量以及基於圖結構的負採樣方案，在 WordNet 上位詞預測與 HyperLex 詞彙蘊涵基準取得當代最優表現。</li>
+<li>跨領域啟發：示範了將離散偏序蘊涵轉寫為連續分布包含關係的早期神經表示方案，是理解序嵌入走向機率空間的必讀過渡。</li>
+<li>連結：<a href="zotero://select/library/items/KAMWXQHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1804.09843" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-probabilistic-embedding-of-knowledge-graphs-with-box-lattice-measures2018">3. Probabilistic Embedding of Knowledge Graphs with Box Lattice Measures（2018）</h4>
+<ul>
+<li>作者與出處：Luke Vilnis, Xiang Li, Shikhar Murty, Andrew McCallum · <em>Proceedings of the conference - Association for Computational Linguistics. Meeting</em></li>
+<li>核心問題：確定性的序嵌入限制了不確定性建模與查詢表現力，而現有針對序嵌入的機率化擴展雖能校準邊緣機率，卻在數學結構上無法表徵現實知識中常見的概念負相關與互斥。</li>
+<li>關鍵做法：證明一大類基於序嵌入賦予機率測度的模型永遠無法捕捉負相關，進而構造盒格（Box Lattice）及其配套機率測度，使盒子交集直接對應聯合事件並能表現反相關與互斥概念，同時保留聯合與條件機率推論能力。</li>
+<li>跨領域啟發：確立盒嵌入作為連接格論交並運算與現代神經知識圖譜機率推理的基礎幾何原語，可對接 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A508_%E5%B9%BE%E4%BD%95%E6%8B%93%E6%92%B2%E6%B7%B1%E5%BA%A6%E5%AD%B8%E7%BF%92%E3%80%81%E8%B7%A8%E7%A9%BA%E9%96%93%E8%A1%A8%E7%A4%BA%E5%B0%8D%E9%BD%8A%E8%88%87%E6%A6%82%E5%BF%B5%E5%A4%9A%E8%83%9E%E5%BD%A2.html">幾何拓撲深度學習、跨空間表示對齊與概念多胞形（層論網路、柏拉圖表示與概念格）</a>。</li>
+<li>連結：<a href="zotero://select/library/items/33XVBAS8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1805.06627" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-lattice-based-alc-ontology-embeddings-with-saturation2025">4. Lattice-Based ALC Ontology Embeddings With Saturation（2025）</h4>
+<ul>
+<li>作者與出處：Fernando Zhapa-Camacho, Robert Hoehndorf · <em>Neurosymbolic Artificial Intelligence</em></li>
+<li>核心問題：既有 OWL 本體嵌入若只轉成圖結構會忽略描述邏輯（DL）語意，語意保留方法多侷限於輕量級 <span class="math inline">\mathcal{EL}^{++}</span>，而針對高表現力 <span class="math inline">\mathcal{ALC}</span> 的方法常依賴本體中存在個體，在大量無個體的真實生醫本體上無法運作。</li>
+<li>關鍵做法：利用描述邏輯與範疇論的聯繫，對 <span class="math inline">\mathcal{ALC}</span> 概念描述進行飽和（saturation）以物化其背後的格結構，再透過保序嵌入方法將概念格映入表示空間，並在無個體本體的缺失事實預測任務上優於既有基準。</li>
+<li>跨領域啟發：將抽象代數格論、範疇論與神經符號本體嵌入直接結合，為 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a> 開啟高表現力邏輯推論的現代應用途徑。</li>
+<li>連結：<a href="zotero://select/library/items/XBVHICXS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.07163" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-order-embeddings-of-real-matrix-domains2026">5. Order embeddings of real matrix domains（2026）</h4>
+<ul>
+<li>作者與出處：Peter Semrl · <em>arXiv</em></li>
+<li>核心問題：在非向量空間的算子偏序結構中（例如 <span class="math inline">n \times n</span> 實對稱矩陣空間 <span class="math inline">S_n</span> 下的 Loewner 偏序），究竟哪些映射能嚴格保持偏序雙向等價關係（<span class="math inline">X \le Y \iff \phi(X) \le \phi(Y)</span>），其結構形式尚未在一般連通開矩陣域上完全給出。</li>
+<li>關鍵做法：針對 <span class="math inline">n \neq 1</span> 時 <span class="math inline">S_n</span> 中的連通開非空子集（矩陣域）<span class="math inline">U \subset S_n</span>，完整刻畫雙向保序嵌入 <span class="math inline">\phi: U \to S_n</span> 的一般數學形式。</li>
+<li>跨領域啟發：揭示保序嵌入在正半定與對稱矩陣錐體等高維非交換幾何空間中的剛性結構，為高維概念空間的非線性保序變換提供算子理論參照。</li>
+<li>連結：<a href="zotero://select/library/items/W5DU6X98" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.20126" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-9-篇">G5｜本子方向全量文獻泛讀清單（共 9 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 9 篇文獻（含開放存取 PDF 6 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進7-篇">A. 奠基經典、專著與核心演進（7 篇）</h3>
+<ul>
+<li><strong>2006｜Ontology-based concept similarity in Formal Concept Analysis</strong>，Anna Formica（<em>Information Sciences</em>，137 引）：結合領域本體論的語意權重與 FCA 外延／內涵重疊度，建立高精度的形式概念相似度度量。 <a href="zotero://select/library/items/CEJNKAIV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.ins.2005.11.014" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Probabilistic Embedding of Knowledge Graphs with Box Lattice Measures</strong>，Luke Vilnis et al.（<em>Proceedings of the conference - Association for Computational Linguistics. Meeting</em>，130 引）：把格論引入深度學習的代表作（被引 130 次）：用高維長方體盒子的體積表達概念格的交運算與條件蘊含機率。 <a href="zotero://select/library/items/33XVBAS8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1805.06627" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Concept Learning Using Vague Concept Lattice</strong>，Prem Kumar Singh（<em>Neural Processing Letters</em>，17 引）：發表於 2018 年《神經處理快報》期刊的論文，探討運用含糊概念格（vague concept lattice）進行概念學習與偏序知識階層結構表示的理論方法。 <a href="zotero://select/library/items/FW92RPXI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/s11063-017-9699-y" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Induced betweenness in order-theoretic trees</strong>，Bruno Courcelle（<em>arXiv</em>）：研究偏序集與序理論樹中的三元居間關係 <span class="math inline">B(x,y,z)</span> 之邏輯可定義性，利用最小上界將線性序與偏序結構的居間性質推廣至任意有限或無限有根樹。 <a href="zotero://select/library/items/42ATAWNK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2111.15357" rel="noopener">官方連結</a></li>
+<li><strong>2020｜EMBEDDING OF CONCEPT LATTICE INTO ITS MIXED CONCEPT LATTICE</strong>，H. S. Ramananda, A. J. Harsha（<em>Advances in Mathematics: Scientific Journal</em>）：探討形式概念分析與格論中的代數結構性質，研究如何將一般概念格（concept lattice）嵌入其對應的混合概念格（mixed concept lattice）之中並分析其結構關係。 <a href="zotero://select/library/items/T5GGTCJB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.37418/amsj.9.7.9" rel="noopener">官方連結</a></li>
+<li><strong>2018｜Hierarchical Density Order Embeddings</strong>，Ben Athiwaratkun, Andrew Gordon Wilson（<em>arXiv</em>）：將詞彙表徵為機率密度而非點向量以透過密度包含關係學習階層蘊涵結構，設計對應損失函數、距離度量與基於圖的負樣本挑選策略，在 WordNet 上位詞預測與 HyperLex 詞彙蘊涵基準取得最優結果。 <a href="zotero://select/library/items/KAMWXQHC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1804.09843" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Asymptotic syzygies and higher order embeddings</strong>，Daniele Agostini（<em>arXiv</em>）：證明射影概形上線叢漸近第 <span class="math inline">p</span> 階合衝（syzygies）消沒蘊含其具 <span class="math inline">p</span>-甚豐沛性，利用 Bridgeland–King–Reid–Haiman 對應確立光滑曲面上小 <span class="math inline">p</span> 情形之逆命題，並將合衝理論應用於界定代數簇的非有理性指標。 <a href="zotero://select/library/items/IEFWRND8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.03508" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻2-篇">B. 2024–2026 近期推進與前沿文獻（2 篇）</h3>
+<ul>
+<li><strong>2025｜Lattice-Based ALC Ontology Embeddings With Saturation</strong>，Fernando Zhapa-Camacho, Robert Hoehndorf（<em>Neurosymbolic Artificial Intelligence</em>，2 引）：結合描述邏輯飽和推理與格結構嵌入，讓生物醫學等複雜 OWL 本體論在向量空間中忠實保留 <span class="math inline">\mathcal{ALC}</span> 邏輯語意。 <a href="zotero://select/library/items/XBVHICXS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.07163" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Order embeddings of real matrix domains</strong>，Peter Semrl（<em>arXiv</em>）：完整刻畫實矩陣域上保序嵌入（Order Embeddings）的一般代數解析形式（當 <span class="math inline">n \neq 1</span> 時），證明局部開連通域上的雙向矩陣偏序結構足以唯一決定映射的幾何與代數骨架。 <a href="zotero://select/library/items/W5DU6X98" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2606.20126" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-45305fc9">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/38_%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90%E8%88%87%E6%A0%BC%E8%AB%96.html">形式概念分析與格論</a><span class="rs">形式概念分析（FCA）與格論替人和機器的概念（Concept）給出一個零參數的代數定義。</span></li><li><a href="38A_Galois%E9%80%A3%E6%8E%A5%E3%80%81%E7%B6%93%E5%85%B8%E5%BD%A2%E5%BC%8F%E6%A6%82%E5%BF%B5%E5%88%86%E6%9E%90FCA%E8%88%87%E6%A6%82%E5%BF%B5%E6%A0%BC%E6%BC%94%E7%AE%97%E6%B3%95.html">Galois連接、經典形式概念分析FCA與概念格演算法</a></li><li><a href="38B_%E6%A8%A1%E7%B3%8A%E8%88%87%E4%B8%89%E6%94%AF%E6%A6%82%E5%BF%B5%E6%A0%BC%E3%80%81Chu%E7%A9%BA%E9%96%93%E8%88%87%E7%9F%A5%E8%AD%98%E7%A9%BA%E9%96%93%E7%90%86%E8%AB%96KST.html">模糊與三支概念格、Chu空間與知識空間理論KST</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

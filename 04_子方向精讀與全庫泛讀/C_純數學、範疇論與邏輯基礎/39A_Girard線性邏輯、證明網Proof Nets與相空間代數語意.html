@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>39A｜Girard線性邏輯、證明網Proof Nets與相空間代數語意 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-ef89a8f4" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 純數學、範疇論與邏輯基礎</span>
+<article>
+
+<h1 id="39agirard線性邏輯證明網proof-nets與相空間代數語意">39A｜Girard線性邏輯、證明網Proof Nets與相空間代數語意</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a>
+同領域子方向：<a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a> · <a class="wl" href="39C_%E5%BE%AE%E5%88%86%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E5%AE%9A%E9%87%8F%E5%88%86%E7%B4%9A%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%88%87%E8%B3%87%E6%BA%90%E6%95%8F%E6%84%9F%E6%BC%94%E7%AE%97.html">微分線性邏輯、定量分級模態類型與資源敏感演算</a>
+跨領域關聯子方向：<a class="wl" href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a> 的證明論與代數基礎核心，確立資源敏感推理的語法與語意公理。線性邏輯的核心矛盾在於如何在不犧牲經典邏輯對偶性（線性否定 <span class="math inline">(-)^\perp</span>）與計算建構性的前提下，消除傳統相繼式演算中結構規則造成的順序冗餘與資源浪費；演進主線從早期 Gentzen 式指數模態（<span class="math inline">!</span>, <span class="math inline">?</span>）與無語法順序的證明網（Proof Nets），延伸到顯示演算（Display Calculi）、Girard 代數子簇格結構，以及近年針對直覺式乘法線性邏輯典範證明網與么正量子高階程式的證明論建構。</p>
+</aside>
+<ul>
+<li>核心問題：在傳統經典與直覺式相繼式演算（如 LK、LJ）中，弱化（Weakening）與縮約（Contraction）兩條結構規則允許假設被任意複製或丟棄，致使邏輯無法區分「資源使用次數」，且相繼式推導樹會因獨立推理規則的排列順序不同而產生大量本質相同卻語法相異的證明（稱為語法官僚性 bureaucracy）。此外，如何為帶有對合否定、乘性與加性聯結詞的線性邏輯給出模組化切消定理（Cut Elimination）、等價代數語意以及無單元失真的多項式時間典範證明網，在各個片段上長期面臨結構性困難。</li>
+<li>直覺模型：可以把傳統邏輯看成「數位檔案庫」：一份資料可以免費複製無限次、用不著就刪掉。線性邏輯則把每個命題當成「實物貨幣或化學試劑」：假設 <span class="math inline">A \multimap B</span> 必須消耗掉一份 <span class="math inline">A</span> 來換取一份 <span class="math inline">B</span>，不能憑空多用或丟棄，除非替資源加上儲存模態標籤 <span class="math inline">!A</span>，才允許按需複製與捨棄。證明網則更進一步拆掉相繼式推導樹的「行進腳手架」，只保留命題之間真正的資料流配線圖，讓順序無關的推導步驟自然折疊成同一個幾何網路。</li>
+<li>分階段閱讀路線：第一階段先讀 Troelstra (1993) 與 Danos, Joinet and Schellinx (1997)，建立線性邏輯省略與受控恢復結構規則的基本語法、切消機制，以及如何透過修飾裝飾將經典二階邏輯強正規化歸約至線性邏輯證明網。第二階段閱讀 Greco and Palmigiano (2023) 與 Aglianò and Nedeljković (2026)（可配合深度筆記 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_08_2026_Aglian_Linear_Logic_via_algebra_I_Girard.html">Linear Logic via algebra I: Girard algebras</a>），前者掌握指數模態與非交換結構的恰當顯示演算與一致性切消方法，後者深入 <span class="math inline">\mathsf{MALL}</span> 等價代數語意 Girard 代數的子簇格原子結構與拓撲刻畫。第三階段讀 2026 年前沿論文 Acclavio, Heijltjes and Hughes (2026) 與 Lamiroy, Valiron and Vilmart (2026)（亦可延伸閱讀 Osorio-Valencia and Saurin (2026) 的循環證明插值），分別把握帶有單位元的直覺乘性證明網典範化與么正量子高階類型的證明論設計。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;1993 Troelstra 指數模態與切消基礎&quot;] --&gt; B[&quot;1997 Danos et al. 解構式證明網與正規化&quot;]
+  B --&gt; C[&quot;2026 Acclavio et al. 含單位元 IMLL 典範證明網&quot;]
+  A --&gt; D[&quot;2023 Greco 與 Palmigiano 恰當顯示演算&quot;]
+  A --&gt; E[&quot;2026 Aglianò 與 Nedeljković Girard 代數格&quot;]
+  B --&gt; F[&quot;2026 Osorio-Valencia 與 Saurin 循環證明插值&quot;]
+  B --&gt; G[&quot;2026 Lamiroy et al. 么正線性邏輯與量子高階&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>受控結構規則與指數模態 (Controlled Structural Rules and Exponentials)</strong></p>
+<ul>
+<li>直覺理解：線性邏輯並非全面禁止複製與丟棄命題，而是把原本隱含在所有推論中的「免費複製（縮約）」與「免費丟棄（弱化）」剝離出來，集中在儲存算子 <span class="math inline">!</span> 與餘儲存算子 <span class="math inline">?</span> 上顯式記帳。</li>
+<li>機制或核心表達式：在單邊或雙邊相繼式演算中，無指數的乘性加性片段（<span class="math inline">\mathsf{MALL}</span>）僅保留交換律，聯結詞分裂為資源相乘的乘性（<span class="math inline">\otimes, \parr, \multimap</span>）與共享分支的加性（<span class="math inline">\with, \oplus</span>），並滿足對合線性否定 <span class="math inline">(A^\perp)^\perp = A</span>。對指數命題 <span class="math inline">!A</span>（及對偶 <span class="math inline">?A</span>）則重新引入受控的弱化 <span class="math inline">\frac{\vdash \Gamma}{\vdash \Gamma, ?A}</span>、縮約 <span class="math inline">\frac{\vdash \Gamma, ?A, ?A}{\vdash \Gamma, ?A}</span> 與解遺棄（dereliction）<span class="math inline">\frac{\vdash \Gamma, A}{\vdash \Gamma, ?A}</span>。直覺邏輯與經典邏輯皆可透過 Girard 翻譯嵌回線性邏輯。</li>
+<li>能做到什麼，代價是什麼：能將直覺式與經典二階邏輯的強正規化與匯流性歸約為線性邏輯的局部歸約（Danos et al., 1997）；但指數模態的引入也帶來非局部的「盒（box）」邊界管理與較複雜的切消終止分析。</li>
+</ul>
+</li>
+<li>
+<p><strong>證明網與典範序列化 (Proof Nets and Canonical Sequentialization)</strong></p>
+<ul>
+<li>直覺理解：同一份證明在相繼式演算中常常只是獨立規則先後順序不同卻長出多棵不同的推導樹；證明網將規則拆解成連結資料流與公理連線的幾何圖，只要這張圖通過正確性判準（如 Danos–Regnier 無環連通判準），便能消去無謂的排列差異並還原回合法推導。</li>
+<li>機制或核心表達式：對於無加性的乘性片段，證明網將公式分解為連接圖與公理／切消連線。針對帶有單位元的直覺式乘性線性邏輯（IMLL with units），Acclavio, Heijltjes and Hughes (2026) 構造了典範且具備多項式時間序列化（sequentialization）程序的證明網定義，證明僅因獨立規則應用置換而相異的相繼式推導會映至完全相同的證明網，且相繼式與證明網之間的轉換互為嚴格逆映射。</li>
+<li>能做到什麼，代價是什麼：消除相繼式推導中的語法官僚性，使證明等價類成為精確的圖同構對象並可作為程序歸約的底層表示；但在經典線性邏輯加入單位元或加性疊加時，維持真正典範性與多項式時間正確性檢查仍有高度難度。</li>
+</ul>
+</li>
+<li>
+<p><strong>Girard 代數與顯示演算語意 (Girard Algebras and Proper Display Calculi)</strong></p>
+<ul>
+<li>直覺理解：一方面從普遍代數出發，把線性邏輯的命題推理對應到有序殘餘格方程類（Girard 代數）；另一方面從結構證明論出發，用多類型顯示演算統一打包多種線性邏輯擴張與其切消定理。</li>
+<li>機制或核心表達式：Girard 代數作為 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意，屬於帶對合的交換殘餘格簇。Aglianò and Nedeljković (2026) 證明 Girard 代數子簇格具有原子性（每個非平凡子簇都包含至少一個原子），且子簇格的原子精確對應於由常數生成的單純 Girard 代數所生之簇，能由常數自由代數的極大濾子統一表示，其原子支撐拓撲的閉包則精確刻畫任意並運算。在證明論端，Greco and Palmigiano (2023) 運用多類型（multi-type）方法論為直覺、雙直覺與經典線性邏輯（含指數）及帶指數 Lambek 演算建立恰當顯示演算（對參數部分均勻代換封閉），直接獲得可靠性、完備性、保守性與子公式性質。</li>
+<li>能做到什麼，代價是什麼：代數與多類型顯示理論能以單一模組化框架處理大量公理擴展與次結構邏輯變體，避免逐一重寫切消證明；代價是引入多層結構連接詞後，推導規則數目與對齊直覺式程式類型的學習門檻較高。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>乘性聯結詞與加性聯結詞在資源語意上的分界</strong>：假設你有資源 <span class="math inline">A</span>（一份）與資源規則 <span class="math inline">A \multimap B</span>、<span class="math inline">A \multimap C</span>，為何在線性邏輯中可以推導出 <span class="math inline">A \vdash B \with C</span>（加性合取），卻無法一般地推導出 <span class="math inline">A \vdash B \otimes C</span>（乘性合取）？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>區分「環境共用」與「環境分割」兩類推理規則。乘性合取 <span class="math inline">B \otimes C</span> 在右規則中必須把前提上下文 <span class="math inline">\Gamma</span> 切分為不相交的 <span class="math inline">\Gamma_1, \Gamma_2</span> 分別證明 <span class="math inline">B</span> 與 <span class="math inline">C</span>，單一資源 <span class="math inline">A</span> 不能同時供給兩側消耗；加性合取 <span class="math inline">B \with C</span> 則讓左右兩個分支共用同一份上下文 <span class="math inline">A</span>，象徵由使用者或環境「二選一」決定最終消耗 <span class="math inline">A</span> 來產生 <span class="math inline">B</span> 還是 <span class="math inline">C</span>，兩者不會同時兌現。</p>
+</details>
+<ol start="2">
+<li><strong>恰當顯示演算（Properness）與 IMLL 證明網典範性各自解決了什麼</strong>：為何 Greco and Palmigiano (2023) 強調顯示演算必須滿足「恰當性（properness）」，而 Acclavio et al. (2026) 則針對含單位元的 IMLL 追求相繼式轉換「互為逆映射」的證明網？兩者各自針對語法系統的哪種缺陷？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>恰當性指的是所有推理規則對參數部分（parametric parts）的均勻代換保持封閉，這使得 Belnap 式一般化切消定理得以無痛套用於各種含指數或非交換（如 Lambek 演算）的擴展，不必為每個新公理重證切消。相對地，證明網互為逆映射的典範性解決的是「證明等價判定」問題：它確保兩個僅在獨立規則順序上有差別的相繼式推導被壓平為唯一圖結構，消除語法官僚性並保證多項式時間可序列化。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>經典線性邏輯含單位元與指數片段的典範證明網</strong>：Acclavio, Heijltjes and Hughes (2026) 已證明含單位元的直覺式乘性片段（IMLL）存在多項式時間序列化且嚴格典範的證明網，但作者指出這與經典情形形成對比。在經典雙邊對稱架構加上乘性單位元（<span class="math inline">1, \bot</span>）或指數盒邊界後，如何兼顧無參數歧義的典範表示與多項式時間正確性判準，仍是證明論中的核心挑戰。</li>
+<li><strong>非良基循環證明與非正規化項的構造性插值與切消</strong>：Osorio-Valencia and Saurin (2026) 將 Maehara 的證明相關插值推廣到含切（cut）與固定點循環證明（circular proofs）的線性邏輯，並討論系統 L 中非正規化項的插值條件。這顯示在帶有歸納與餘歸納固定點的無窮（但正則）證明物件上，維持強有效性與切消相容的結構分析仍有廣闊的理論空間。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>從線性證明網與么正邏輯到量子弦圖演算</strong>：Lamiroy, Valiron and Vilmart (2026) 提出的直覺式么正線性邏輯（IULL）透過 Curry–Howard 對應為量子開關等非因果高階量子過程建立模組化類型與證明論基礎，其線性無複製約束與資源守恆性質可直接連結 <a class="wl" href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a> 的對稱么半弦圖推理。</li>
+<li><strong>代數與相空間語意對多值神經符號與動態對話證明的支撐</strong>：Girard 代數的殘餘格與濾子拓撲分析（Aglianò &amp; Nedeljković, 2026）可直接對接 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> 中的實值剩餘格結構；而線性邏輯證明網與相空間對偶的動態展開，則自然延伸為 <a class="wl" href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a> 的策略互動與 <a class="wl" href="39C_%E5%BE%AE%E5%88%86%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E5%AE%9A%E9%87%8F%E5%88%86%E7%B4%9A%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%88%87%E8%B3%87%E6%BA%90%E6%95%8F%E6%84%9F%E6%BC%94%E7%AE%97.html">微分線性邏輯、定量分級模態類型與資源敏感演算</a> 的微分資源演算。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-tutorial-on-linear-logic1993">1. Tutorial on Linear Logic（1993）</h4>
+<ul>
+<li>作者與出處：A. S. Troelstra · <em>Substructural Logics</em></li>
+<li>核心問題：傳統邏輯相繼式系統默認允許任意假設複製與丟棄，難以直接對應計算中的線性資源消耗與有限狀態管理，學習者需要從 Gentzen 系統出發理解線性限制的精確語法位置。</li>
+<li>關鍵做法：以初等導論形式建構線性邏輯的 Gentzen 相繼式體系，顯式移除弱化與縮約規則並透過儲存模態 <span class="math inline">!</span> 與餘儲存模態 <span class="math inline">?</span> 局部恢復，概述切消定理、向直覺邏輯的嵌入定理、代數語意完備性及計算解釋。</li>
+<li>跨領域啟發：建立 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a> 最標準的符號約定與入門切消直覺，是閱讀後續證明網與顯示演算前的前置基礎。</li>
+<li>連結：<a href="zotero://select/library/items/33A45TJV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/oso/9780198537779.003.0013" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-new-deconstructive-logic-linear-logic1997">2. A new deconstructive logic: linear logic（1997）</h4>
+<ul>
+<li>作者與出處：Vincent Danos, Jean-Baptiste Joinet, Harold Schellinx · <em>Journal of Symbolic Logic</em></li>
+<li>核心問題：為二階經典謂詞邏輯相繼式演算 <span class="math inline">\mathrm{LK}_2</span> 設計兼具 Noetherian（終止性）與匯流性的正規化程序十分困難，且直接把經典邏輯嵌進直覺邏輯 <span class="math inline">\mathrm{LJ}</span> 會破壞對稱性並引入過度限制。</li>
+<li>關鍵做法：提出稱為裝飾（decorations）的線性邏輯嵌入架構，將 <span class="math inline">\mathrm{LK}_2</span> 的強正規化與匯流性直接歸約至非加性線性邏輯證明網的對應性質，並藉此統一恢復 Girard 的 LC 與 Parigot 的 <span class="math inline">\lambda\mu</span> 等多種經典計算系統。</li>
+<li>跨領域啟發：展示線性邏輯作為比直覺邏輯更細緻的「解構底層（deconstructive logic）」如何揭示經典證明的計算內涵。</li>
+<li>連結：<a href="zotero://select/library/items/PIUH33CJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/2275572" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-linear-logic-properly-displayed2023">3. Linear Logic Properly Displayed（2023）</h4>
+<ul>
+<li>作者與出處：Giuseppe Greco, Alessandra Palmigiano · <em>ACM Transactions on Computational Logic</em></li>
+<li>核心問題：線性邏輯家族包含直覺、雙直覺、經典以及受限交換律／結合律（Lambek 演算）等多種帶指數變體，為每個系統單獨證明切消定理既繁瑣又缺乏模組化擴展能力。</li>
+<li>關鍵做法：基於代數與序理論分析並採用多類型（multi-type）設計準則，為多種帶指數的線性邏輯與指數 Lambek 演算建構恰當顯示演算（proper display calculi），在參數均勻代換封閉下統一獲得可靠性、完備性、保守性與切消及子公式性質。</li>
+<li>跨領域啟發：示範結構證明論與有序代數的對偶設計，為探討子結構與非交換資源系統提供一致的切消基礎設施。</li>
+<li>連結：<a href="zotero://select/library/items/TTR48Q7M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3570919" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-linear-logic-via-algebra-i-girard-algebras2026">4. Linear Logic via algebra I: Girard algebras（2026）</h4>
+<ul>
+<li>作者與出處：Paolo Aglianò, Mitar Nedeljković · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：作為乘性加性線性邏輯（<span class="math inline">\mathsf{MALL}</span>）等價代數語意的 Girard 代數簇，其子簇格底部的極小結構與生成元拓撲性質尚未被系統性地統一刻畫。</li>
+<li>關鍵做法：證明 Girard 代數子簇格具備原子性，且原子恰好對應由常數生成的單純 Girard 代數所產生的簇，進而以常數自由代數的極大濾子與原子支撐拓撲閉包完整表示子簇格的任意並運算與模性／非模性邊界案例。</li>
+<li>跨領域啟發：深度解析可見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_08_2026_Aglian_Linear_Logic_via_algebra_I_Girard.html">Linear Logic via algebra I: Girard algebras</a>；該代數格視角可與 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A504_%E7%A5%9E%E7%B6%93%E7%AC%A6%E8%99%9F%E5%AF%A6%E5%80%BC%E9%82%8F%E8%BC%AF%E3%80%81%E8%87%AA%E5%8B%95%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%88%87%E4%BF%A1%E5%BF%B5%E4%BF%AE%E6%AD%A3.html">神經符號實值邏輯、自動形式化與信念修正</a> 的剩餘格語意對照研讀。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_08_2026_Aglian_Linear_Logic_via_algebra_I_Girard.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.16804" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-canonical-proof-nets-for-intuitionistic-multiplicative-linear-logic2026">5. Canonical Proof Nets for Intuitionistic Multiplicative Linear Logic（2026）</h4>
+<ul>
+<li>作者與出處：Matteo Acclavio, Willem Heijltjes, Dominic J. D. Hughes · <em>arXiv</em></li>
+<li>核心問題：在含單位元的線性邏輯證明網中，如何在不引入過多圖同構歧義的前提下獲得「唯一典範表示」且同時保有低複雜度序列化演算法，在經典片段往往難以兼顧。</li>
+<li>關鍵做法：聚焦帶單位元的直覺式乘性線性邏輯（IMLL），給出兼顧典範性與高效率的新證明網定義以及多項式時間序列化程序，並證明僅差在獨立規則置換的相繼式推導會映至同一證明網，且雙向轉換互為逆映射。</li>
+<li>跨領域啟發：為程式等價檢查與資源型類型系統提供真正無冗餘的幾何標準型，直接銜接程式語言中的線性類型編譯。</li>
+<li>連結：<a href="zotero://select/library/items/NGU3EBMJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24235" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-intuitionistic-unitary-linear-logic-a-proof-theoretical-approach-to-purely-quantum-higher-order2026">6. Intuitionistic Unitary Linear Logic: A Proof-Theoretical Approach to Purely Quantum Higher-Order（2026）</h4>
+<ul>
+<li>作者與出處：Julien Lamiroy, Benoît Valiron, Renaud Vilmart · <em>arXiv</em></li>
+<li>核心問題：傳統量子線路模型無法表達如量子開關（quantum switch）等非因果高階量子過程，而既往依賴矩陣與線性代數的模型雖有表達力，卻僅提供靜態且單體式的描述，缺少組合式計算語意。</li>
+<li>關鍵做法：提出直覺式么正線性邏輯（Intuitionistic Unitary Linear Logic, IULL），透過 Curry–Howard 同構為保持高階項么正性（unitarity）建立組合與模組化的證明論詮釋，證明其相干性、相對於么正算子的完備性以及切消規則的可容許性。</li>
+<li>跨領域啟發：將線性邏輯的資源守恆與高階類型推導推進至非因果量子計算，直接與 <a class="wl" href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a> 的么半範疇量子語意形成跨領域呼應。</li>
+<li>連結：<a href="zotero://select/library/items/2VN2DQCT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.02661" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-47-篇">G5｜本子方向全量文獻泛讀清單（共 47 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 47 篇文獻（含開放存取 PDF 8 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進35-篇">A. 奠基經典、專著與核心演進（35 篇）</h3>
+<ul>
+<li><strong>1997｜A new deconstructive logic: linear logic</strong>，Vincent Danos, Jean-Baptiste Joinet, Harold Schellinx（<em>Journal of Symbolic Logic</em>，95 引）：提出 <code>LKT/LKQ</code> 極性聚焦染色嵌入，示範如何拿線性邏輯當顯微鏡，把二階古典邏輯拆解出傳名（Call-by-name）與傳值（Call-by-value）兩種計算語意。 <a href="zotero://select/library/items/PIUH33CJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/2275572" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Advances in Linear Logic</strong>，Unknown Author（<em>Cambridge University Press</em>，85 引）：首屆線性邏輯國際研討會的論文集，收錄證明網、互動網（Interaction Nets）與指稱語意的早期奠基文獻。 <a href="zotero://select/library/items/GHD5TVGQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9780511629150" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Linear logic as a logic of computations</strong>，Max I. Kanovich（<em>Annals of Pure and Applied Logic</em>，34 引）：發表於 Annals of Pure and Applied Logic，從計算邏輯的角度探討線性邏輯（linear logic）作為計算表達與推導體系的理論性質，屬 39A 線性邏輯方向。 <a href="zotero://select/library/items/RMR7FZGJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/0168-0072(94)90011-6" rel="noopener">官方連結</a></li>
+<li><strong>1989｜Linear logic displayed.</strong>，Nuel Belnap（<em>Notre Dame Journal of Formal Logic</em>，24 引）：發表於 Notre Dame Journal of Formal Logic 的證明論研究，運用顯示演算（Display Calculus）框架對線性邏輯進行結構化公理與推論規則的系統重構。 <a href="zotero://select/library/items/Z84D7RZW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1305/ndjfl/1093635329" rel="noopener">官方連結</a></li>
+<li><strong>1995｜Light linear logic</strong>，Jean-Yves Girard（<em>Lecture Notes in Computer Science</em>，19 引）：Jean-Yves Girard 於 1995 年發表在電腦科學講義叢書的論文，提出「輕線性邏輯（Light Linear Logic）」體系，屬於線性邏輯證明論與語意結構研究。 <a href="zotero://select/library/items/AFIBQR22" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/3-540-60178-3_83" rel="noopener">官方連結</a></li>
+<li><strong>1993｜Tutorial on Linear Logic</strong>，A S Troelstra（<em>Substructural Logics</em>，16 引）：線性邏輯入門導論，說明如何在 Gentzen 式矢列演算中移除收縮與弱化規則，並以儲存與反儲存模態（storage/costorage）有限度恢復資源複製，進而概述切消、直覺主義嵌入、代數完備性與計算詮釋。 <a href="zotero://select/library/items/33A45TJV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/oso/9780198537779.003.0013" rel="noopener">官方連結</a></li>
+<li><strong>1994｜A “linear logic” Quicksort</strong>，Henry G. Baker（<em>ACM SIGPLAN Notices</em>，9 引）：在受線性邏輯啟發的 Lisp 線性片段中實作串列與陣列快速排序以評估無垃圾回收的效能成本，結果顯示線性串列版與非線性版速度相當，線性向量版僅慢 3.5% 且有助於檢查程式錯誤。 <a href="zotero://select/library/items/FFFK96NH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/181748.181750" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Bounded Linear Logic, Revisited</strong>，Ugo Dal Lago, Martin Hofmann（<em>Logical Methods in Computer Science</em>，8 引）：發表於邏輯方法期刊 LMCS 的證明論與計算複雜度論文，重訪 Girard–Scedrov 提出的有界線性邏輯（Bounded Linear Logic），從語意與類型理論角度重新刻畫其與多項式時間可計算函數之間的對應關係。 <a href="zotero://select/library/items/QU9EWPX2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2168/lmcs-6(4:7)2010" rel="noopener">官方連結</a></li>
+<li><strong>1993｜Linear Logic: A Survey</strong>，Jean-Yves Girard（<em>Logic and Algebra of Specification</em>，8 引）：Jean-Yves Girard 於 1993 年發表的綜述文章，系統回顧線性邏輯（linear logic）的語法推導規則、證明網（proof nets）與相空間代數語意基礎。 <a href="zotero://select/library/items/4AQKNMWZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-642-58041-3_3" rel="noopener">官方連結</a></li>
+<li><strong>1987｜Linear logic and parallelism</strong>，Jean-Yves Girard（<em>Lecture Notes in Computer Science</em>，7 引）：Jean-Yves Girard 於 1987 年發表在電腦科學講義叢書的論文，探討線性邏輯（linear logic）與平行計算模型之間的對應關係及證明結構。 <a href="zotero://select/library/items/H67PGSKW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/3-540-18419-8_14" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Linear logic operators in transparent intensional logic</strong>，Liberios Vokorokos, Zuzana Bilanova, Daniel Mihalyi（<em>2017 IEEE 14th International Scientific Conference on Informatics</em>，5 引）：發表於 2017 年 IEEE Informatics 會議，探討將 Girard 線性邏輯算子引入透明內涵邏輯（Transparent Intensional Logic）的邏輯結合與運算表現（未附摘要）。 <a href="zotero://select/library/items/XNERA4P8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/informatics.2017.8327286" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Linear Logic and Exceptions</strong>，CHRISTOPHE FOUQUERÉ, JACQUELINE VAUZEILLES（<em>Journal of Logic and Computation</em>，5 引）：刊於《Journal of Logic and Computation》（1994），在線性邏輯與證明網的理論框架下，探討如何於線性邏輯系統中刻畫與處理例外（exceptions）機制（未附摘要）。 <a href="zotero://select/library/items/TDQPH7DI" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/logcom/4.6.859" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Hybrid linear logic, revisited</strong>，KAUSTUV CHAUDHURI et al.（<em>Mathematical Structures in Computer Science</em>，4 引）：重新檢視結合直覺主義線性邏輯與模態世界的混合線性邏輯 HyLL，證明其公理與推導規則可充分編碼進標準線性邏輯 LL，使 HyLL 證明能由 LL 聚焦推導精確模擬。 <a href="zotero://select/library/items/IWC3KI95" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/s0960129518000439" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Taking Linear Logic Apart</strong>，Wen Kokke, Fabrizio Montesi, Marco Peressotti（<em>Electronic Proceedings in Theoretical Computer Science</em>，4 引）：發表於《EPTCS》（2019）的論文，探討如何拆解線性邏輯（Linear Logic）的結構組成，分析其推理規則與語意成分之間的模組化關聯。 <a href="zotero://select/library/items/RIG9UDPZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4204/eptcs.292.5" rel="noopener">官方連結</a></li>
+<li><strong>2004｜Linear Logic and Intuitionistic Logic</strong>，Mitsuhiro Okada（<em>Revue internationale de philosophie</em>，4 引）：從語意與對偶性基礎出發，論證古典線性邏輯實質上可作為直覺主義邏輯的基礎，並透過「必然恆可構造」模態（modality）在底層語意中建立線性邏輯與直覺主義邏輯及古典對偶律之間的連結。 <a href="zotero://select/library/items/XNS3JSQP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3917/rip.230.0449" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Linear Logic Properly Displayed</strong>，Giuseppe Greco, Alessandra Palmigiano（<em>ACM Transactions on Computational Logic</em>，3 引）：為含指數算子的直覺主義、雙直覺主義與經典線性邏輯（及 Lambek 演算變體）建構具備統一替換封閉性的展示演算，從代數與序理論分析出發證明其健全性、完備性、切消與子公式性質。 <a href="zotero://select/library/items/TTR48Q7M" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/3570919" rel="noopener">官方連結</a></li>
+<li><strong>1996｜Linear logic automata</strong>，Max I. Kanovich（<em>Annals of Pure and Applied Logic</em>，3 引）：發表於 Annals of Pure and Applied Logic，研究線性邏輯與自動機模型之間的對應關係，探討線性邏輯自動機的理論結構與計算刻畫，屬 39A 方向。 <a href="zotero://select/library/items/NJ5JVCGD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/0168-0072(95)00035-6" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Quantum logic and linear logic</strong>，L. Rom�n（<em>International Journal of Theoretical Physics</em>，3 引）：發表於 1994 年《國際理論物理期刊》的論文，探討量子力學脈絡下的量子邏輯（quantum logic）結構與線性邏輯（linear logic）之間的代數及證明論對應關係。 <a href="zotero://select/library/items/KR79VRPA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bf00670783" rel="noopener">官方連結</a></li>
+<li><strong>1962｜Disjunctively Linear Logic Nets</strong>，Hisao Yamada（<em>IEEE Transactions on Electronic Computers</em>，3 引）：發表於《IEEE Transactions on Electronic Computers》（1962），研究析取線性邏輯網路（Disjunctively Linear Logic Nets）的開關函數與邏輯電路性質，屬早期邏輯電路理論文獻（未附摘要）。 <a href="zotero://select/library/items/PH2FNA3Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/tec.1962.5219423" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Causality in Linear Logic</strong>，Simon Castellan, Nobuko Yoshida（<em>Lecture Notes in Computer Science</em>，2 引）：將線性邏輯證明推導中的交換轉換依賴關係詮釋為因果不變量，基於一般事件結構建構博弈語意子模型，證明其對無單位元 <span class="math inline">\text{MALL}^-</span> 具完全完備性與單射性。 <a href="zotero://select/library/items/9VGBIIZD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-030-17127-8_9" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Linear Logic for Non-Linear Storytelling</strong>，Bosser Anne-Gwenn, Cavazza Marc, Champagnat Ronan（<em>Frontiers in Artificial Intelligence and Applications</em>，2 引）：為克服互動式敘事規劃缺乏嚴謹形式化的限制，採用線性邏輯（Linear Logic）作為資源消耗與因果推導邏輯，利用線性蘊涵精確刻畫劇情發展中的因果關係與情節資源消耗。 <a href="zotero://select/library/items/8PA8ETQ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.3233/978-1-60750-606-5-713" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Concurrency problem for Horn fragment of Girard's Linear Logic</strong>，Dmitry A. Archangelsky et al.（<em>Lecture notes in computer science</em>，2 引）：發表於 1994 年電腦科學講義叢書的論文，研究 Girard 線性邏輯 Horn 片段中的並行性判定與計算複雜度問題，屬於線性邏輯證明論與代數語意方向。 <a href="zotero://select/library/items/5MJXC4DR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/3-540-58140-5_3" rel="noopener">官方連結</a></li>
+<li><strong>1994｜Linear Logic as CSP</strong>，ERIC MONTEIRO（<em>Journal of Logic and Computation</em>，1 引）：刊於《Journal of Logic and Computation》（1994），在 Girard 線性邏輯與證明網的研究脈絡下，探討將線性邏輯對應並詮釋為 CSP（Communicating Sequential Processes）的形式架構（未附摘要）。 <a href="zotero://select/library/items/FVNCESJR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/logcom/4.4.405" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Dagger linear logic and categorical quantum mechanics</strong>，Priyaa Varshinee Srinivasan（<em>arXiv</em>）：博士論文發展非緊緻乘法匕首線性邏輯的範疇證明論，在線性分配範疇與 <span class="math inline">*</span>-自伴範疇基礎上建構「混合么正範疇」，藉此將僅適用有限維的範疇量子力學推廣至無窮維量子系統。 <a href="zotero://select/library/items/URCWMHXK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2303.14231" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Linear and Non-linear Logic</strong>，Peter Hulsroj（<em>What If We Don't Die?</em>）：選自 2015 年專書《What If We Don't Die?》的章節，從哲學與形式推論視角對照探討線性邏輯（linear logic）與非線性邏輯的推理特徵及資源概念。 <a href="zotero://select/library/items/6ZC88N63" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-319-19093-8_16" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Games and Full Completeness for Multiplicative Linear Logic</strong>，Samson Abramsky, Radha Jagadeesan（<em>Journal of Symbolic Logic (1994), volume 59 no. 2, pages 543-574</em>）：提出以公式指稱賽局、證明指稱無歷史（history-free）必勝策略的線性邏輯博弈語意學與範疇模型，連結互動幾何（GoI），並證明含 MIX 規則之乘法線性邏輯的完全完備性，使每個必勝策略唯一對應一個無切證明網。 <a href="zotero://select/library/items/37D7E7SZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1311.6057" rel="noopener">官方連結</a></li>
+<li><strong>2010｜Linear logic</strong>，Alex Wright（<em>Communications of the ACM</em>）：刊於《Communications of the ACM》（2010）的綜述短文，介紹計算邏輯領域中線性邏輯的核心概念及其在程式語言、證明網（Proof Nets）與系統安全領域的應用進展。 <a href="zotero://select/library/items/PAGSNZFU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1145/1831407.1831413" rel="noopener">官方連結</a></li>
+<li><strong>2000｜Modal and linear logic</strong>，Unknown Author（<em>Basic Proof Theory</em>）：收錄於教科書 Basic Proof Theory，從證明論與矢列演算體系的角度介紹模態邏輯與線性邏輯（linear logic）的形式推導規則與結構性質。 <a href="zotero://select/library/items/NPEGUHBT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9781139168717.010" rel="noopener">官方連結</a></li>
+<li><strong>1999｜Modal Logic, Linear Logic, Optimal Lambda-Reduction</strong>，Stefano Guerrini, Simone Martini, Andrea Masini（<em>Logic and Foundations of Mathematics</em>）：Guerrini、Martini 與 Masini 於 1999 年發表於邏輯與數學基礎文集的論文，探討模態邏輯、線性邏輯與最優 <span class="math inline">\lambda</span>-歸約策略之間的理論關聯。 <a href="zotero://select/library/items/3KIE64KB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-94-017-2109-7_20" rel="noopener">官方連結</a></li>
+<li><strong>1998｜Towards linear logic</strong>，Unknown Author（<em>Domains and Lambda-Calculi</em>）：收錄於 Domains and Lambda-Calculi，從域論與 <span class="math inline">\lambda</span>-演算的語意學視角過渡到線性邏輯（linear logic），闡述資源敏感邏輯與計算模型之關聯。 <a href="zotero://select/library/items/N9I5XHRS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9780511983504.015" rel="noopener">官方連結</a></li>
+<li><strong>1997｜Models of linear logic</strong>，M. Bergeron, W. Hatcher（<em>Journal of Mathematical Sciences</em>）：發表於 1997 年《Journal of Mathematical Sciences》的論文，探討線性邏輯（linear logic）的語意模型構造方法與對應的代數及範疇結構性質。 <a href="zotero://select/library/items/HM7PEQNH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bf02358992" rel="noopener">官方連結</a></li>
+<li><strong>1997｜Linear logic as logic programming: An abstract</strong>，Dale Miller（<em>Lecture Notes in Computer Science</em>）：Dale Miller 於 1997 年發表於電腦科學講義叢書的論文摘要，概述如何以線性邏輯（linear logic）作為邏輯程式設計（logic programming）語言基礎的運算詮釋。 <a href="zotero://select/library/items/98MGRPSD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bfb0052151" rel="noopener">官方連結</a></li>
+<li><strong>1996｜Induction in linear logic</strong>，Fumihiko Yamaguchi, Masakazu Nakanishi（<em>International Journal of Theoretical Physics</em>）：發表於 1996 年《國際理論物理期刊》的論文，探討如何在 Girard 線性邏輯（linear logic）的形式推導系統中引入並處理數學歸納法推理規則。 <a href="zotero://select/library/items/EACH76V4" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bf02302230" rel="noopener">官方連結</a></li>
+<li><strong>1993｜The other linear logic</strong>，M. Taitslin, D. Arkhangelsky（<em>Lecture Notes in Computer Science</em>）：發表於 1993 年電腦科學講義叢書的論文，探討非標準線性邏輯體系（the other linear logic）的形式構造方式、推導規則與證明論性質分析。 <a href="zotero://select/library/items/DM4T9XIM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bfb0039712" rel="noopener">官方連結</a></li>
+<li><strong>1952｜I. The Linear Logic</strong>，Unknown Author（<em>Emerson's Angle of Vision</em>）：收錄於文學評論專書《Emerson's Angle of Vision》（1952）的第一章，以「線性邏輯（The Linear Logic）」為題討論愛默生作品中的思維脈絡與論述結構。 <a href="zotero://select/library/items/SWV6CNWH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4159/harvard.9780674184046.c1" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻12-篇">B. 2024–2026 近期推進與前沿文獻（12 篇）</h3>
+<ul>
+<li><strong>2026｜Linear Logic via algebra I: Girard algebras</strong>，Paolo Aglianò, Mitar Nedeljković（<em>arXiv (Cornell University)</em>）：🏆 L5 深度審核完成（見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/00_%E5%B7%B2%E6%B7%B1%E5%BA%A6%E8%A7%A3%E6%9E%90%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B4%A2%E5%BC%95.html">已完成 L5 深度審核之旗艦論文導讀庫（29 篇雙重語意檢驗）</a>）：系統建立乘法加法線性邏輯 <span class="math inline">\mathsf{MALL}</span> 的等價代數語意「Girard 代數」，完整刻畫其子簇格底層的原子結構。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_08_2026_Aglian_Linear_Logic_via_algebra_I_Girard.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/JUC2DWB3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.16804" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Linear logic without boxes</strong>，G. Gonthier, M. Abadi, J.-J. Levy（<em>[1992] Proceedings of the Seventh Annual IEEE Symposium on Logic in Computer Science</em>，35 引）：去掉證明網中笨重的指數方框（Boxes），用純局部圖重寫實現 <span class="math inline">\lambda</span>-演算的 Lamping 最優歸約演算法。 <a href="zotero://select/library/items/NUJA4VZN" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lics.1992.185535" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Linear logic with boxes</strong>，I. Mackie（<em>Proceedings. Thirteenth Annual IEEE Symposium on Logic in Computer Science (Cat. No.98CB36226)</em>，2 引）：發表於 IEEE LICS 1998，在 Girard 線性邏輯與證明網（Proof Nets）的架構下，探討帶有箱（boxes）構造的線性邏輯形式系統與歸約性質（未附摘要）。 <a href="zotero://select/library/items/ZU7DMDM9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lics.1998.705667" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Linear proofs and linear logic</strong>，Bertram Fronhöfer（<em>Lecture Notes in Computer Science</em>，1 引）：發表於電腦科學講義叢書的論文，探討線性證明（linear proofs）的推導結構特徵與 Girard 線性邏輯（linear logic）形式推導之間的理論關聯。 <a href="zotero://select/library/items/8SX8ZMDA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bfb0023424" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Modal Linear Logic</strong>，Dimitry A. Archangelsky, Mikhail A. Taitslin（<em>Lecture Notes in Computer Science</em>，1 引）：發表於《Lecture Notes in Computer Science》的論文，探討結合模態運算子與線性邏輯的模態線性邏輯（Modal Linear Logic）推導系統及相關語意性質。 <a href="zotero://select/library/items/63XRZCMU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/bfb0023858" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Connectivity at the crossroad of intuitionistic and classical polarizations in linear logic</strong>，Raffaele Di Donna, Giulio Guerrieri, Lorenzo Tortora de Falco（<em>arXiv</em>）：作者對證明結構施加一種幾何限制，使上述必要條件同時成為可高效率判定的充分正確性準則，並藉此定義出結合古典極化與直覺主義極化的 MELL 片段 VMELL。文中將 bang calculus 的項翻譯為 VMELL 證明網，分解了 call-by-name 與 call-by-value <span class="math inline">\lambda</span>-演算在線性邏輯中的標準翻譯，證明切消去（Cut Elimination）能模擬 bang 歸約，並給出 bang calculus 項作為證明網的顯式刻畫。 <a href="zotero://select/library/items/IZ9SVXZ9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2607.20303" rel="noopener">官方連結</a></li>
+<li><strong>2026｜On the sphere spectrum from the viewpoint of linear logic</strong>，Ryo Horiuchi（<em>arXiv</em>）：作者證明配備球譜、粉碎乘積（Smash Product）與替換乘積（Substitution Product）的 <span class="math inline">\Gamma</span>-集範疇構成一個 isomix 線性分布範疇（Isomix Linearly Distributive Category），從而為線性邏輯的乘法片段提供範疇語意。文中並證明 Lydakis 在這兩種么半乘積之間構造的組裝映射（Assembly Map）恰對應到該結構中的 mixor。 <a href="zotero://select/library/items/GW5IJIMF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.13012" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Intuitionistic Unitary Linear Logic: A Proof-Theoretical Approach to Purely Quantum Higher-Order</strong>，Julien Lamiroy, Benoît Valiron, Renaud Vilmart（<em>arXiv</em>）：用純證明論建構直覺主義么正線性邏輯，首次不靠笨重的過程矩陣，就能組合式地刻畫「量子開關（Quantum Switch）」等非因果高階量子過程。 <a href="zotero://select/library/items/2VN2DQCT" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.02661" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Canonical Proof Nets for Intuitionistic Multiplicative Linear Logic</strong>，Matteo Acclavio, Willem Heijltjes, Dominic J. D. Hughes（<em>arXiv</em>）：答案和古典情況相反。含單位元的直覺主義乘法線性邏輯（<span class="math inline">\text{IMLL}_u</span>）容許一套既規範唯一（Canonical）又高效（Efficient）的證明網表示。作者明確定義了這個證明網結構，並給出多項式時間相繼式還原演算法（Polynomial-time Sequentialization Procedure）。任何兩個只因獨立規則施用順序置換而不同的相繼式推導，都會映射到同一個證明網，而且相繼式演算 <span class="math inline">\leftrightarrow</span> 證明網的雙向翻譯互為嚴格逆映射。 <a href="zotero://select/library/items/NGU3EBMJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24235" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Proof-Relevant Interpolation for Circular Proofs in Linear Logic</strong>，Daniel Osorio-Valencia, Alexis Saurin（<em>arXiv</em>）：作者把 Maehara 證明相關插值法往兩個方向推廣：含切（Non-cut-free）線性邏輯證明，以及帶不動點線性邏輯中的循環證明（Circular Proofs，即正則非良基證明物件）。他們設計了在循環分支與切結構上運作的證明相關分裂構造，並嚴格證明這個插值程序完整保持循環證明賴以成立的強有效性條件（Strong Validity，確保無窮路徑上存在無限次推進以排除惡性循環假證明）。作者還進一步刻畫了不處於正規形式（Non-normal Form）的 System L 項在什麼條件下可以直接做證明相關插值。 <a href="zotero://select/library/items/SGJWM2U9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.24722" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Linear Logic Programming</strong>，Unknown Author（<em>Proof Theory and Logic Programming</em>）：收錄於專書 Proof Theory and Logic Programming，闡述線性邏輯程式設計（Linear Logic Programming）的證明論基礎與資源敏感推導機制，對應 39A 線性邏輯主題。 <a href="zotero://select/library/items/CDUE9AGQ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/9781009561280.009" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Spatio-temporal Linear Logic</strong>，Unknown Author（<em>Encyclopedia of Computer Graphics and Games</em>）：收錄於 2024 年《Encyclopedia of Computer Graphics and Games》的詞條，介紹結合空間與時間資源維度約束的「時空線性邏輯」基本概念與理論定位。 <a href="zotero://select/library/items/5Q4KGP5G" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-3-031-23161-2_301134" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-ef89a8f4">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/39_%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E8%88%87%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8.html">線性邏輯與博弈語意學</a><span class="rs">線性邏輯與博弈語意學把數理邏輯改寫成一套講資源、講互動的理論。Jean-Yves Girard 重新分析古典蘊含 A → B，把假設從可以免費無…</span></li><li><a href="15A_%E5%BC%A6%E5%9C%96%E6%BC%94%E7%AE%97%E3%80%81%E5%B0%8D%E7%A8%B1%E4%B9%88%E5%8D%8A%E7%AF%84%E7%96%87%E8%88%87%E7%AF%84%E7%96%87%E9%87%8F%E5%AD%90%E5%8A%9B%E5%AD%B8ZX%E6%BC%94%E7%AE%97.html">弦圖演算、對稱么半範疇與範疇量子力學ZX演算</a></li><li><a href="39B_%E5%8D%9A%E5%BC%88%E8%AA%9E%E6%84%8F%E5%AD%B8%E3%80%81%E4%BA%92%E5%8B%95%E5%B9%BE%E4%BD%95GoI%E8%88%87Ludics%E5%B0%8D%E8%A9%B1%E8%AD%89%E6%98%8E.html">博弈語意學、互動幾何GoI與Ludics對話證明</a></li><li><a href="39C_%E5%BE%AE%E5%88%86%E7%B7%9A%E6%80%A7%E9%82%8F%E8%BC%AF%E3%80%81%E5%AE%9A%E9%87%8F%E5%88%86%E7%B4%9A%E6%A8%A1%E6%85%8B%E9%A1%9E%E5%9E%8B%E8%88%87%E8%B3%87%E6%BA%90%E6%95%8F%E6%84%9F%E6%BC%94%E7%AE%97.html">微分線性邏輯、定量分級模態類型與資源敏感演算</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

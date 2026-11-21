@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>35C｜非局域向量微積分、近場動力學與分數階物理神經算子 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-e4aecbc6" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 統計物理、複雜系統與PDE算子</span>
+<article>
+
+<h1 id="35c非局域向量微積分近場動力學與分數階物理神經算子">35C｜非局域向量微積分、近場動力學與分數階物理神經算子</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a>
+同領域子方向：<a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> · <a class="wl" href="35B_L%C3%A9vy%E9%A3%9B%E8%A1%8C%E3%80%81%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E6%BC%AB%E6%AD%A5%E8%88%87%E5%8F%8D%E5%B8%B8%E6%93%B4%E6%95%A3%E5%88%86%E6%95%B8%E9%9A%8EFokker-Planck.html">Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>
+課程章節：<a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a> · <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向是 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a> 從解析理論走向計算求解與高維統計學習的出口，承接 <a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> 的算子定義與 <a class="wl" href="35B_L%C3%A9vy%E9%A3%9B%E8%A1%8C%E3%80%81%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E6%BC%AB%E6%AD%A5%E8%88%87%E5%8F%8D%E5%B8%B8%E6%93%B4%E6%95%A3%E5%88%86%E6%95%B8%E9%9A%8EFokker-Planck.html">Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</a> 的重尾隨機過程基礎。研究主線涵蓋兩條匯流路徑：其一是把帶有相互作用半徑與體積約束的非局域算子（含近場動力學與度量圖分數階擴散）離散化或寫入物理資訊神經網路，其二是用重尾大偏差與 <span class="math inline">\alpha</span>-穩定 Lévy 隨機微分方程刻畫深度學習隨機梯度下降的逃逸與穩定機制。</p>
+</aside>
+<ul>
+<li>核心問題：傳統偏微分方程求解器假設微分算子具有空間局域性，有限元與有限差分生成的剛度矩陣呈稀疏帶狀，且邊界條件只需給定在 <span class="math inline">(d-1)</span> 維邊界面 <span class="math inline">\partial \Omega</span> 上。一旦進入非局域算子與分數階擴散，任意兩點之間透過奇異核或有限視野半徑 <span class="math inline">\delta</span> 直接耦合，邊界必須擴張為具正測度的外部體積層 <span class="math inline">\Omega_I</span>（exterior collar），傳統數值方法因而面臨稠密滿陣、奇異積分求積誤差與高維網格生成的瓶頸；同時在隨機優化領域，將 SGD 梯度雜訊簡化為高斯布朗運動的經典中央極限定理假設在深層網路中經常失效，無法解釋跨過狹窄局部極小值的非高斯跳躍動力學。</li>
+<li>直覺模型：可以把局域拉普拉斯算子想成只聽相鄰幾位同學傳話的課堂點名，邊界只要守住教室門口那一條線。非局域算子則像每個人都能直接和半徑 <span class="math inline">\delta</span> 內的所有人交換紙條，若要控制邊界溫度，就必須把牆外整圈走廊上的人一起固定狀態；當 <span class="math inline">\delta</span> 縮到零時大家只剩貼身傳話（退回局域擴散），當 <span class="math inline">\delta</span> 放到無窮大且權重按冪律衰減時，就成為全域分數階拉普拉斯算子，而偶爾出現的遠距大跳躍則如同從一個山谷直接跨過山脊落入另一處較寬盆地的 Lévy 飛行。</li>
+<li>分階段閱讀路線：第一階段先讀 Augeri (2017) 與 Şimşekli, Sagun, and Gürbüzbalaban (2019)，從重尾乘積測度下大偏差由平移主導的機制入手，理解為何深度網路梯度雜訊會依廣義中央極限定理收斂為 <span class="math inline">\alpha</span>-穩定隨機變數。第二階段閱讀 Şimşekli et al. (2019, multivariate discrete Lévy SDE) 與 Pang, D’Elia, Parks, and Karniadakis (2020)（可搭配深度筆記 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_15_2020_Pang_nPINNs_Nonlocal_physics_informed_neural_networks.html">nPINNs: Nonlocal physics-informed neural networks for a parametrized nonlocal universal Laplacian operator. Algorithms and applications</a>），掌握多維 Lévy 離散化與統一局域／分數階極限的參數化非局域算子 <span class="math inline">\mathcal{L}_{\alpha,\delta}</span> 及 nPINNs 免網格求解架構。第三階段閱讀 2026 前沿論文 Bolin, Riera-Segura, and Simas (2026) 與 Mustapha and Gregory (2026)，深入緊緻度量圖上分數階 Kirchhoff–Laplacian 的有理逼近誤差估計，以及有界域附帶外部領圈條件的非局域平流擴散穩定性分析。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;重尾乘積測度大偏差 Augeri 2017&quot;] --&gt; B[&quot;GCLT 與梯度雜訊 alpha-穩定過程 Simsekli 2019&quot;]
+  B --&gt; C[&quot;多維離散 Levy SDE 與寬極小值遷移 Simsekli 2019&quot;]
+  D[&quot;參數化通用非局域算子 L_{alpha,delta} Pang 2020&quot;] --&gt; E[&quot;nPINNs 免網格體積約束與湍流反演&quot;]
+  D --&gt; F[&quot;度量圖分數階有理逼近 Bolin 2026&quot;]
+  D --&gt; G[&quot;有界域外部領圈非局域穩定閾值 Mustapha 2026&quot;]
+  C --&gt; H[&quot;重尾優化動力學與非局域算子神經求解匯流&quot;]
+  E --&gt; H
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>參數化非局域通用拉普拉斯算子與 nPINNs (Parametrized Nonlocal Universal Laplacian and nPINNs)</strong></p>
+<ul>
+<li>直覺理解：在有限相互作用半徑 <span class="math inline">\delta</span> 內對位移差 <span class="math inline">u(y)-u(x)</span> 做冪律加權平均，能用同一組參數 <span class="math inline">(\alpha, \delta)</span> 連續接通經典二階擴散與全域分數階擴散，並由神經網路直接配點求解而不必切分高維奇異積分網格。</li>
+<li>機制或核心表達式：依據 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_15_2020_Pang_nPINNs_Nonlocal_physics_informed_neural_networks.html">nPINNs: Nonlocal physics-informed neural networks for a parametrized nonlocal universal Laplacian operator. Algorithms and applications</a> 對 Pang et al. (2020) 的形式化，緊支撐核函數 <span class="math inline">\gamma_{\alpha,\delta}</span> 定義的通用非局域算子 <span class="math inline">\mathcal{L}_{\alpha,\delta}u(x)</span> 在 <span class="math inline">u \in C_b^2(\mathbb{R}^d)</span> 時滿足兩個極限：<span class="math inline">\lim_{\delta \to 0} \mathcal{L}_{\alpha,\delta} u(x) = \Delta u(x)</span>（由球對稱二階 Taylor 展開給出），以及當 <span class="math inline">\alpha \in (0,1)</span> 且 <span class="math inline">\delta \to \infty</span> 時 <span class="math inline">\lim_{\delta \to \infty} \mathcal{L}_{\alpha,\delta} u(x) = -(-\Delta)^\alpha u(x)</span>。nPINNs 以神經網路 <span class="math inline">u_\theta(x)</span> 逼近解場，並結合內部配點的算子殘差與外部體積約束層 <span class="math inline">\Omega_I</span> 上的邊界殘差作為損失函數，同時可把未知階數 <span class="math inline">\alpha</span> 與視野半徑 <span class="math inline">\delta</span> 設為可訓練參數進行逆問題反演。</li>
+<li>能做到什麼，代價是什麼：免除了高維有限元素網格生成並能從稀疏觀測資料反演非局域參數（例如湍流 Couette 流的雷諾應力非局域建模）；代價是當 <span class="math inline">\alpha \to 1</span> 且 <span class="math inline">\delta</span> 較大時，核函數在原點的強奇異性會放大蒙地卡羅抽樣方差，需仰賴 Gauss–Jacobi 等特化求積規則控制誤差。</li>
+</ul>
+</li>
+<li>
+<p><strong>廣義中央極限定理與 SGD 的 Lévy 跳躍動力學 (GCLT and Heavy-Tailed Lévy Dynamics in SGD)</strong></p>
+<ul>
+<li>直覺理解：當隨機梯度的單步變異數發散或呈現重尾分布時，多步平均不會收斂到高斯白雜訊，而是會保留偶發的大幅度跳躍，讓參數有機會直接跨出狹窄的局部極小值。</li>
+<li>機制或核心表達式：Şimşekli 等人 (2019a, 2019b) 捨棄經典中央極限定理（CLT），改援引廣義中央極限定理（GCLT），將深度神經網路的隨機梯度雜訊建模為尾指數 <span class="math inline">\alpha \in (0, 2]</span> 的對稱 <span class="math inline">\alpha</span>-穩定隨機向量。對應的隨機梯度下降離散迭代可視為由 Lévy 運動驅動的隨機微分方程離散化；結合亞穩態理論（metastability theory），當 <span class="math inline">\alpha &lt; 2</span> 時，離散過程依靠重尾大跳躍從狹窄盆地遷移至較寬盆地，而非僅靠高斯擴散緩慢翻越勢壘高差。這在理論上與 Augeri (2017) 針對測度 <span class="math inline">\nu_\alpha = Y_\alpha^{-1} e^{-|x|^\alpha} dx</span>（<span class="math inline">\alpha \in (0,2]</span>）所得「重尾大偏差由平移機制產生」的結構相呼應。</li>
+<li>能做到什麼，代價是什麼：提供了非高斯隨機優化與寬極小值偏好之間可檢驗的尾指數指標 <span class="math inline">\alpha</span>（亦接續 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 與 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a>）；邊界在於嚴格亞穩態遷移時間依賴連續極限與小步長漸近，且實務上尾指數估計會受到批次大小與梯度裁剪等正規化技巧影響。</li>
+</ul>
+</li>
+<li>
+<p><strong>度量圖分數階有理逼近與有界域領圈穩定性 (Metric Graph Rational Solves and Bounded-Domain Collar Stability)</strong></p>
+<ul>
+<li>直覺理解：要在網路拓撲上算分數階擴散，直接求算子冪次成本過高，改用有理函數把非局域算子拆成幾組可平行求解的稀疏局域橢圓方程；而在生物組織癒合這類有界非局域模型中，牆外健康細胞領圈的厚度與空間大小共同決定系統能否穩定收斂。</li>
+<li>機制或核心表達式：Bolin et al. (2026) 在緊緻度量圖上研究偏移 Kirchhoff–Laplacian 的分數階冪次擴散方程，時間採向後 Euler 離散化、空間採有限元素法，並以有理逼近（rational approximation）將分數階算子作用化約為一串稀疏橢圓線性方程組求解，同步推導時間、空間與有理逼近三項誤差估計。Mustapha and Gregory (2026) 則在結合細胞隨機運動、增殖與有限感測半徑內細胞黏附的非局域平流擴散模型中，先由全直線色散關係推得臨界感測半徑與對應波長，再於有界區間設定外部領圈（exterior collar）固定健康細胞密度，給出解維持正有界性的條件、依賴空間區域大小的非線性指數穩定充分條件，以及線性譜問題的數值求解。</li>
+<li>能做到什麼，代價是什麼：有理逼近讓度量圖上的分數階演化保有稀疏矩陣求解的計算效率，外部領圈條件則為有界非局域生物模型建立了嚴格的適定與穩定門檻；代價分別是需要控制有理多項式極點數量與空間網格的平衡，以及非線性穩定判準強烈依賴擴散／增殖與黏附強度的參數比值。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>參數化非局域通用算子在兩端極限下的行為與數值困難</strong>：在 Pang et al. (2020) 的參數化非局域通用拉普拉斯算子 <span class="math inline">\mathcal{L}_{\alpha,\delta}</span> 中，為何 <span class="math inline">\delta \to 0</span> 能還原經典 Laplacian <span class="math inline">\Delta</span>，而 <span class="math inline">\delta \to \infty</span> 時 nPINNs 面臨的主要數值方差問題從何而來？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>第一步：對位移差 <span class="math inline">u(y)-u(x)</span> 在 <span class="math inline">x</span> 處做二階 Taylor 展開，由於相互作用球 <span class="math inline">B_\delta(x)</span> 具備球對稱性，一階導數奇函數項積分為零，二階混合交叉項亦因座標軸正交性抵消，只留各向同性的跡項經正規化後給出 <span class="math inline">\Delta u(x)</span>。第二步：當 <span class="math inline">\delta \to \infty</span> 且 <span class="math inline">\alpha \in (0,1)</span> 時，積分域擴展至全空間且核函數權重隨 <span class="math inline">\|x-y\|^{-(d+2\alpha)}</span> 發散，原點附近極強的奇異性會讓一般隨機配點或標準蒙地卡羅取樣的估計方差急劇放大，必須改採針對冪律權重設計的 Gauss–Jacobi 求積才能穩定訓練 nPINNs。</p>
+</details>
+<ol start="2">
+<li><strong>高斯與 <span class="math inline">\alpha</span>-穩定重尾梯度雜訊在亞穩態逃逸機制上的差異</strong>：為什麼 Şimşekli et al. (2019a, 2019b) 認為用經典高斯擴散 SDE 難以解釋 SGD 離開狹窄極小值並停在寬廣極小值的現象，而改用 <span class="math inline">\alpha</span>-穩定 Lévy 過程後逃逸行為發生了什麼變化？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>經典高斯／布朗運動驅動的過阻尼 Langevin 動力學滿足 Kramers 定律，跨越極小值所需的平均首次逃逸時間主要隨勢壘高度指數成長，較不區分極小值盆地的幾何寬度。引入廣義中央極限定理所得的 <span class="math inline">\alpha</span>-穩定 Lévy 運動（<span class="math inline">\alpha &lt; 2</span>）具備重尾單步大跳躍特性，過程不需爬過整座勢壘頂端即可藉由跳躍直接跨出狹窄盆地，使亞穩態停留時間與盆地寬度密切相關，進而偏向寬廣且平坦的極小值區域。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>非局域邊界奇異性與高維有理／神經算子逼近的精度權衡</strong>：在有界域與緊緻度量圖上，分數階與非局域問題必須透過外部體積約束（如 Pang et al. 2020 的 <span class="math inline">\Omega_I</span> 與 Mustapha and Gregory 2026 的 exterior collar）來維持良定性。當分數階次接近臨界或區域幾何複雜時，邊界層常出現低正則性或核奇異積分方差問題；如何在不依賴昂貴高階求積網格的前提下，讓 nPINNs 或有理有限元素法在任意不規則流形與圖拓撲上保有可控的漸近誤差估計，仍有許多技術細節尚待釐清。</li>
+<li><strong>重尾大偏差與離散時間有限樣本 SGD 泛化界之間的理論落差</strong>：Augeri (2017) 證明了特定重尾乘積測度下大偏差由平移機制主導，Şimşekli 等人 (2019a, 2019b) 也把深度網路梯度雜訊對應到離散化的 <span class="math inline">\alpha</span>-穩定 Lévy SDE；但在實際深度學習訓練中，學習率調度、動量項與資料非獨立同分布取樣會改變每步雜訊的相依結構，從連續時間 Lévy 亞穩態遷移到真實有限時間訓練的定量泛化界之間，仍存在理論假設與實證動態的張力。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>非局域神經算子與貝氏逆問題先驗建模的雙向銜接</strong>：nPINNs 從稀疏物理量測反演未知參數 <span class="math inline">(\alpha, \delta)</span> 與邊界場的做法，可進一步與測度傳輸與物理場不確定性量化結合，相關跨領域結構已系統整理於 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a>，並可與 <a class="wl" href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a> 中的變分逆問題相互對照。</li>
+<li><strong>重尾跳躍機制向非馬可夫隨機過程與離散隨機微積分的遷移</strong>：本子方向中將隨機梯度下降離散步驟視為 Lévy SDE 離散化、並結合重尾大偏差平移機制的分析路線，與 <a class="wl" href="35B_L%C3%A9vy%E9%A3%9B%E8%A1%8C%E3%80%81%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E6%BC%AB%E6%AD%A5%E8%88%87%E5%8F%8D%E5%B8%B8%E6%93%B4%E6%95%A3%E5%88%86%E6%95%B8%E9%9A%8EFokker-Planck.html">Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</a> 中的空間跳躍主導方程式同源，亦能藉助 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a> 與 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 的鞅與跳躍測度工具做更細緻的離散誤差分解。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-on-heavy-tail-phenomena-in-some-large-deviations-problems2017">1. On heavy-tail phenomena in some large deviations problems（2017）</h4>
+<ul>
+<li>作者與出處：Fanny Augeri · <em>arXiv</em></li>
+<li>核心問題：經典大偏差原理多半依賴高斯尾部或次高斯集中不等式，無法直接刻畫隨機矩陣與隨機多項式在次指數重尾權重下的罕見事件機率。論文探討 Wiener chaos 證明策略如何推廣至一般重尾乘積測度下的泛函。</li>
+<li>關鍵做法：針對形如 <span class="math inline">\nu_\alpha = Y_\alpha^{-1} e^{-|x|^\alpha} dx</span>（<span class="math inline">\alpha \in (0,2]</span>）的 <span class="math inline">n</span> 重乘積測度，證明一類映至度量空間的泛函 <span class="math inline">f_n : \mathbb{R}^n \to \mathcal{X}</span> 滿足由平移機制主導的大偏差原理，並將其應用於無高斯尾的 Wigner 矩陣（經驗譜測度、最大特徵值與多項式跡）以及對應權重下的最後通過時間問題。</li>
+<li>跨領域啟發：奠定理解非高斯重尾漲落由少數大位移或平移事件主導的機率基礎，有助銜接後續重尾梯度雜訊與非局域跳躍極限的數學機制。</li>
+<li>連結：<a href="zotero://select/library/items/TW6D7F68" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.06184" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-a-tail-index-analysis-of-stochastic-gradient-noise-in-deep-neural-networks2019">2. A Tail-Index Analysis of Stochastic Gradient Noise in Deep Neural Networks（2019）</h4>
+<ul>
+<li>作者與出處：Umut Şimşekli, Levent Sagun, Mert Gürbüzbalaban · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有隨機梯度下降（SGD）理論常假設梯度雜訊符合經典中央極限定理而近似高斯分布，以便化約為布朗運動驅動的隨機微分方程。作者指出這項假設在實際深度學習架構中未必成立，並會扭曲對逃逸行為的預測。</li>
+<li>關鍵做法：援引廣義中央極限定理（GCLT），主張深度網路中的梯度雜訊收斂至重尾 <span class="math inline">\alpha</span>-穩定隨機變數，進而將 SGD 建模為 Lévy 運動驅動的 SDE。依據既有亞穩態理論，Lévy 跳躍會迫使軌跡從狹窄極小值遷移至較寬極小值，並透過常見深度學習架構上的大量實驗驗證雜訊符合 <span class="math inline">\alpha</span>-穩定假設。</li>
+<li>跨領域啟發：將非局域跳躍擴散與重尾隨機微分方程引入深度學習優化動力學，串聯 <a class="wl" href="35B_L%C3%A9vy%E9%A3%9B%E8%A1%8C%E3%80%81%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E6%BC%AB%E6%AD%A5%E8%88%87%E5%8F%8D%E5%B8%B8%E6%93%B4%E6%95%A3%E5%88%86%E6%95%B8%E9%9A%8EFokker-Planck.html">Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</a> 與機器學習泛化分析。</li>
+<li>連結：<a href="zotero://select/library/items/PFA53V39" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1901.06053" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-on-the-heavy-tailed-theory-of-stochastic-gradient-descent-for-deep-neural-networks2019">3. On the Heavy-Tailed Theory of Stochastic Gradient Descent for Deep Neural Networks（2019）</h4>
+<ul>
+<li>作者與出處：Umut Şimşekli, Mert Gürbüzbalaban, Thanh Huy Nguyen, Gaël Richard A, Levent Sagun · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：高維參數空間中的隨機梯度雜訊屬於向量值隨機變數，僅靠一維標量尾指數分析不足以刻畫多維離散迭代在非凸損失地貌中的遷移性質。</li>
+<li>關鍵做法：在多元情境下透過廣義中央極限定理將梯度雜訊推導為尾指數 <span class="math inline">\alpha</span> 決定的重尾 <span class="math inline">\alpha</span>-穩定隨機向量，並把 SGD 正式視為 Lévy 運動驅動 SDE 的時間離散化，從亞穩態理論分析連續 SDE 與其離散化演算法如何從狹窄極小值跳躍遷移至較寬極小值。</li>
+<li>跨領域啟發：補強重尾連續 SDE 與離散化優化演算法之間的對應橋樑，呼應 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a> 與 <a class="wl" href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a> 的理論框架。</li>
+<li>連結：<a href="zotero://select/library/items/BITSGZVA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.00018" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-npinns-nonlocal-physics-informed-neural-networks-for-a-parametrized-nonlocal-universal-laplacian-operator-algorithms-and-applications2020">4. nPINNs: Nonlocal physics-informed neural networks for a parametrized nonlocal universal Laplacian operator. Algorithms and applications（2020）</h4>
+<ul>
+<li>作者與出處：Guofei Pang, Marta D’Elia, M. Parks, George Em Karniadakis · <em>Journal of Computational Physics</em></li>
+<li>核心問題：非局域擴散與分數階微積分能刻畫介質損傷、反常擴散與湍流長程相關性，但其奇異積分算子在傳統有限元素或有限差分法中面臨高昂網格生成成本，且邊界須處理具正測度的體積約束層。</li>
+<li>關鍵做法：提出帶相互作用半徑 <span class="math inline">\delta</span> 與分數階次 <span class="math inline">\alpha</span> 的參數化非局域通用拉普拉斯算子 <span class="math inline">\mathcal{L}_{\alpha,\delta}</span>（在 <span class="math inline">\delta \to 0</span> 與 <span class="math inline">\delta \to \infty</span> 時分別收斂至經典 <span class="math inline">\Delta</span> 與分數階拉普拉斯 <span class="math inline">-(-\Delta)^\alpha</span>），並構建整合體積約束 <span class="math inline">\Omega_I</span> 損失的非局域物理資訊神經網路 nPINNs，成功求解非局域 Poisson 問題並無須人為調整渦黏係數即預測 Couette 湍流速度剖面。</li>
+<li>跨領域啟發：本子方向物理神經算子的核心代表作（詳見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_15_2020_Pang_nPINNs_Nonlocal_physics_informed_neural_networks.html">nPINNs: Nonlocal physics-informed neural networks for a parametrized nonlocal universal Laplacian operator. Algorithms and applications</a>），亦為 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A510_%E7%A5%9E%E7%B6%93%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8E%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3%E8%88%87%E8%B2%9D%E6%B0%8F%E5%9B%A0%E6%9E%9C%E6%B8%AC%E5%BA%A6%E5%82%B3%E8%BC%B8.html">神經算子、分數階非局域擴散與貝氏因果測度傳輸</a> 的重要基礎。</li>
+<li>連結： 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_15_2020_Pang_nPINNs_Nonlocal_physics_informed_neural_networks.html">L5 深度導讀</a> ｜<a href="zotero://select/library/items/GZIFRZMK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2004.04276" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-numerical-approximation-of-fractional-diffusion-equations-on-metric-graphs2026">5. Numerical approximation of fractional diffusion equations on metric graphs（2026）</h4>
+<ul>
+<li>作者與出處：David Bolin, Lenin Riera-Segura, Alexandre B. Simas · <em>arXiv</em></li>
+<li>核心問題：緊緻度量圖上的分數階擴散由偏移 Kirchhoff–Laplacian 的分數階冪次控制，如何在保持數學收斂保證的同時高效計算稠密或非局域算子的作用，是一項數值瓶頸。</li>
+<li>關鍵做法：結合向後 Euler 時間步進與空間有限元素離散化，並引入有理逼近（rational approximation）來近似分數階算子作用，將整體問題化約為一連串稀疏橢圓方程求解以提升計算效率，同時推導時間、空間與有理逼近三項離散誤差估計並以數值實驗驗證收斂階。</li>
+<li>跨領域啟發：提供把圖／網路上非局域分數階算子轉為稀疏橢圓求解器的標準數值模板，補充純神經求解器在低維複雜拓撲上的精度與誤差理論。</li>
+<li>連結：<a href="zotero://select/library/items/MPDUH9RD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.01932" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-stability-analysis-and-critical-thresholds-in-a-nonlocal-advection-diffusion-model-of-wound-healing-on-bounded-domains2026">6. Stability analysis and critical thresholds in a nonlocal advection diffusion model of wound healing on bounded domains（2026）</h4>
+<ul>
+<li>作者與出處：Ilyas Mustapha, Mikayla Gregory · <em>arXiv</em></li>
+<li>核心問題：傷口癒合的非局域平流擴散模型同時包含細胞隨機移動、增殖與有限感測半徑內的細胞黏附；系統究竟收斂至完全癒合還是停在空間不均勻的持續狀態，取決於黏附強度、感測半徑與有界區域尺寸之間的交互作用。</li>
+<li>關鍵做法：先在全直線上推導色散關係以求得臨界感測半徑與對應波長，說明擴散與增殖具穩定作用而細胞黏附可誘發不穩定；隨後在外部領圈（exterior collar）固定為健康細胞密度的有界區間上，建立維持正有界密度的條件、依賴區域大小的非線性指數穩定充分條件，並構造且數值求解對應的線性譜問題。</li>
+<li>跨領域啟發：展示外部領圈體積邊界條件如何具體用於生物物理非局域 PDE 的適定性與區域穩定閾值分析，與 nPINNs 的體積約束幾何直接呼應。</li>
+<li>連結：<a href="zotero://select/library/items/6MHSM543" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25379" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-6-篇">G5｜本子方向全量文獻泛讀清單（共 6 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 6 篇文獻（含開放存取 PDF 6 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進4-篇">A. 奠基經典、專著與核心演進（4 篇）</h3>
+<ul>
+<li><strong>2020｜nPINNs: Nonlocal physics-informed neural networks for a parametrized nonlocal universal Laplacian operator. Algorithms and applications</strong>，Guofei Pang et al.（<em>Journal of Computational Physics</em>，183 引）：🏆 L5 已完成，把科學機器學習帶進非局域問題：提出統一的參數化普適非局域拉普拉斯算子與 nPINNs，直接從數據同時求解非局域正向方程，並反演未知的分數階數與視野半徑。 🏆 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/B_L5%E6%97%97%E8%89%A6%E8%AB%96%E6%96%87%E7%B2%BE%E8%AE%80%E5%BA%AB/L5_15_2020_Pang_nPINNs_Nonlocal_physics_informed_neural_networks.html">L5 深度導讀</a> ｜ <a href="zotero://select/library/items/GZIFRZMK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2004.04276" rel="noopener">官方連結</a></li>
+<li><strong>2019｜A Tail-Index Analysis of Stochastic Gradient Noise in Deep Neural Networks</strong>，Umut Şimşekli, Levent Sagun, Mert Gürbüzbalaban（<em>arXiv (Cornell University)</em>，134 引）：推翻「SGD 梯度雜訊是高斯布朗運動」這個傳統假設的代表作：實測深度網路梯度雜訊的重尾指數，並建立 Lévy 驅動的分數階逃逸理論，用來解釋平坦極小值偏好。 <a href="zotero://select/library/items/PFA53V39" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1901.06053" rel="noopener">官方連結</a></li>
+<li><strong>2019｜On the Heavy-Tailed Theory of Stochastic Gradient Descent for Deep Neural Networks</strong>，Umut Şimşekli et al.（<em>arXiv (Cornell University)</em>，82 引）：檢討深度神經網路隨機梯度下降（SGD）將梯度雜訊視為高斯分佈的假設，依廣義中央極限定理指出梯度雜訊可收斂至尾指數 <span class="math inline">\alpha</span> 的重尾 <span class="math inline">\alpha</span>-穩定隨機向量，據此將 SGD 建模為重尾隨機微分方程的離散化。 <a href="zotero://select/library/items/BITSGZVA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1912.00018" rel="noopener">官方連結</a></li>
+<li><strong>2017｜On heavy-tail phenomena in some large deviations problems</strong>，Fanny Augeri（<em>arXiv</em>）：重探 Wiener 混沌大偏差原理並將重尾大偏差機制歸因於平移操作，為服從 <span class="math inline">\nu_\alpha^n</span>（<span class="math inline">\alpha\in(0,2]</span>）測度之一般泛函建立大偏差原理，藉此重現非高斯尾部 Wigner 隨機矩陣譜測度與最大特徵值的大偏差結果。 <a href="zotero://select/library/items/TW6D7F68" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/1706.06184" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻2-篇">B. 2024–2026 近期推進與前沿文獻（2 篇）</h3>
+<ul>
+<li><strong>2026｜Numerical approximation of fractional diffusion equations on metric graphs</strong>，David Bolin, Lenin Riera-Segura, Alexandre B. Simas（<em>arXiv</em>）：為緊度量圖上的分數階擴散方程建立嚴格的泛函分析框架，並結合向後歐拉時間步進、有限元素空間離散，以及分數階算子的有理函數逼近（Rational Approximation）。這樣原本昂貴的非局域稠密算子求解，就化約成一系列可以獨立求解的稀疏移位線性系統。 <a href="zotero://select/library/items/MPDUH9RD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.01932" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Stability analysis and critical thresholds in a nonlocal advection diffusion model of wound healing on bounded domains</strong>，Ilyas Mustapha, Mikayla Gregory（<em>arXiv</em>）：作者先在全直線上推導色散關係，計算臨界感測半徑與失穩波長，確認擴散與增殖會穩定癒合態，過強的細胞黏附則引發聚集失穩。接著轉到更接近生理的有界區間設定（在外部環帶 Collar 把細胞密度固定為健康組織基準值），建立確保細胞密度維持正值有界的先驗條件，推導依賴於區域尺寸（Domain Size）的非線性指數穩定充分條件，並數值求解對應的非局域線性譜問題。分析與有限振幅擾動模擬一致顯示一個幾何閾值效應：縮小傷口區域尺寸，可以直接穩定在無界全直線模型下原本線性失穩的參數區間。 <a href="zotero://select/library/items/6MHSM543" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.25379" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-e4aecbc6">在地圖上查看</a><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/E_%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86%E3%80%81%E8%A4%87%E9%9B%9C%E7%B3%BB%E7%B5%B1%E8%88%87PDE%E7%AE%97%E5%AD%90/35_%E5%88%86%E6%95%B8%E9%9A%8E%E5%BE%AE%E7%A9%8D%E5%88%86%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E6%93%B4%E6%95%A3.html">分數階微積分與非局域擴散</a><span class="rs">牛頓與萊布尼茲的微積分和布朗運動有兩個簡化假設：只看無窮小的鄰居（空間局域性），以及下一秒就忘記過去（馬可夫無記憶性）。</span></li><li><a href="35A_%E5%88%86%E6%95%B8%E9%9A%8E%E6%8B%89%E6%99%AE%E6%8B%89%E6%96%AF%E7%AE%97%E5%AD%90%E3%80%81%E5%88%86%E6%95%B8%E9%9A%8ESobolev%E7%A9%BA%E9%96%93%E8%88%87%E9%9D%9E%E5%B1%80%E5%9F%9F%E8%AE%8A%E5%88%86%E5%81%8F%E5%BE%AE%E5%88%86%E6%96%B9%E7%A8%8B.html">分數階拉普拉斯算子、分數階Sobolev空間與非局域變分偏微分方程</a></li><li><a href="35B_L%C3%A9vy%E9%A3%9B%E8%A1%8C%E3%80%81%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E6%BC%AB%E6%AD%A5%E8%88%87%E5%8F%8D%E5%B8%B8%E6%93%B4%E6%95%A3%E5%88%86%E6%95%B8%E9%9A%8EFokker-Planck.html">Lévy飛行、連續時間隨機漫步與反常擴散分數階Fokker-Planck</a></li><li><a href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E49_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">連續時間隨機微積分</a><span class="tag-plan">計劃</span><span class="rs">Shreve，*Stochastic Calculus for Finance II*（布朗運動、Itô 積分、風險中性定價）</span></li><li><a href="../../NOTES/04_%E7%B6%93%E6%BF%9F/E48_%E9%9B%A2%E6%95%A3%E6%99%82%E9%96%93%E9%9A%A8%E6%A9%9F%E5%BE%AE%E7%A9%8D%E5%88%86.html">離散時間隨機微積分</a><span class="tag-plan">計劃</span><span class="rs">Shreve，*Stochastic Calculus for Finance I*（離散時間）</span></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>20A｜大模型推論服務、PagedAttention與預填充解碼分離 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-7bcc7617" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="20a大模型推論服務pagedattention與預填充解碼分離">20A｜大模型推論服務、PagedAttention與預填充解碼分離</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>
+同領域子方向：<a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a> · <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a> 的線上推論執行與調度層，負責將 <a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a> 產出的大型模型，在 <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 所刻畫的頻寬與記憶體上限內高效提供服務。演進主線從解決動態 KV 快取碎片化的虛擬分頁管理（PagedAttention / vLLM）與前綴樹重用（SGLang），推展至無停頓分塊預填充（Sarathi-Serve）與預填充與解碼分離（DistServe），並在 2026 年進一步擴展至分散式控制平面（llm-d）、分塊預填充稀疏選擇（CompactAttention）、虛擬管線並行（VPP）以及全模態統一服務執行期（vLLM-Omni）。</p>
+</aside>
+<ul>
+<li>核心問題：自回歸 Transformer 推論面臨兩組硬體與排程矛盾。第一，過去二十年間伺服器峰值算力每兩年成長約 3.0 倍，但 DRAM 頻寬與互連頻寬每兩年僅各成長 1.6 倍與 1.4 倍（Gholami 等人，2024），使逐詞元解碼受限於記憶體頻寬，且注意力層因每個請求各自生成互異的 KV 矩陣，無論批次多大仍維持低算術強度（Choi 等人，2023），而傳統連續預配置造成大量 KV 碎片與冗餘複製（Kwon 等人，2023）。第二，請求先經並行算力飽和的預填充（prefill，決定首字時間 TTFT）再進入記憶體受限的解碼（decode，決定每詞元產出時間 TPOT）；將兩階段混置在同一批 GPU 內不僅引發互相干擾，也會在長脈絡分塊預填充時造成各區塊延遲失衡與管線氣泡（Agrawal 等人，2024；Zhong 等人，2024；Shi 等人，2026）。</li>
+<li>直覺模型：可以把大模型推論服務比喻成同時承接「整本書籍排版（預填充）」與「逐行校對（解碼）」的印刷廠。若一開始就為每位客人保留固定大小的大型倉庫隔間（連續 KV 配置），絕大多數空間會因長度未滿或碎片而閒置；PagedAttention 把倉庫改成標準化小棧板配頁表索引，隨用隨配且可跨單共用。而分塊預填充與預填充與解碼分離，則是把厚書拆成小疊交錯處理或乾脆把排版室與校對室分開配置人力，避免一份長稿進來時讓所有正在校對的客人卡住。</li>
+<li>分階段閱讀路線：第一步先讀 Gholami 等人 (2024) 與 Kwon 等人 (2023)，從記憶體牆的硬體擴展落差理解為何解碼階段受頻寬約束，並掌握 vLLM 如何以作業系統虛擬記憶體分頁思維建構 PagedAttention。第二步閱讀 Zheng 等人 (2023)（SGLang）、Agrawal 等人 (2024)（Sarathi-Serve）與 Zhong 等人 (2024)（DistServe），比較前綴 Radix 樹快取重用、分塊預填充無停頓排程與預填充與解碼硬體分離對 TTFT/TPOT 與有效吞吐量（goodput）的影響。第三步精讀 2026 年前沿論文 Song 等人 (2026)（CompactAttention）、Shi 等人 (2026)（VPP）與 Sisodia (2026)（連接 vLLM 與 llm-d 控制平面），並可延伸參看 Ko 與 Chen (2026)（vLLM Hook）及 vLLM-Omni Team (2026)，掌握長脈絡稀疏選塊、虛擬階段管線平衡與機群層級調度。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+  A[&quot;記憶體牆與低算術強度 KV 解碼 Gholami 2024&quot;] --&gt; B[&quot;PagedAttention 分頁 KV 快取 Kwon 2023&quot;]
+  B --&gt; C[&quot;RadixAttention 前綴重用與 FSM 解碼 SGLang 2023&quot;]
+  B --&gt; D[&quot;分塊預填充無停頓排程 Sarathi-Serve 2024&quot;]
+  A --&gt; E[&quot;預填充與解碼分離架構 DistServe 2024&quot;]
+  D --&gt; F[&quot;GQA 區塊聯集 KV 選擇 CompactAttention 2026&quot;]
+  D --&gt; G[&quot;V 形虛擬管線並行 VPP 2026&quot;]
+  E --&gt; H[&quot;推論引擎與控制平面分離 llm-d 2026&quot;]
+  C --&gt; H
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>PagedAttention 與前綴樹 KV 快取重用 (PagedAttention and Radix KV Caching)</strong></p>
+<ul>
+<li>直覺理解：把每個請求龐大且長度動態變化的 KV 快取切分成固定大小的實體頁塊，透過邏輯頁表映射到非連續的 GPU 顯存位置，既消除了內部與外部碎片，也讓共享前綴或並列採樣的請求直接共用同一組實體頁塊。</li>
+<li>機制或核心表達式：在 PagedAttention（Kwon 等人，2023）中，將序列長度的鍵值對劃分為固定大小 <span class="math inline">B</span> 的 KV 區塊 <span class="math inline">K_j, V_j \in \mathbb{R}^{B \times d}</span>，每個請求僅維護邏輯區塊索引到實體位址的映射表 <span class="math inline">M(j) \mapsto (p_j, \text{ref\_cnt})</span>；注意力計算逐塊讀取非連續實體記憶並依寫入時複製（copy-on-write）處理分叉解碼。在此基礎上，SGLang 的 RadixAttention（Zheng 等人，2023）進一步以基數樹（radix tree）索引跨請求的多輪對話與少樣本共享前綴 KV 區塊，並搭配壓縮有限狀態機加速結構化輸出解碼。</li>
+<li>能做到什麼，代價是什麼：vLLM 幾乎消除了 KV 快取浪費並使吞吐量較 FasterTransformer 與 Orca 提升 2–4 倍，SGLang 則在複雜語言程式工作負載達到最高 6.4 倍吞吐；代價是注意力核心需承受間接區塊表尋址的額外負荷，且基數樹驅逐策略須在多租戶共享與記憶體回收之間取得平衡。</li>
+</ul>
+</li>
+<li>
+<p><strong>記憶體牆與 KV 注意力算術強度限制 (Memory Wall and KV Bandwidth Bottleneck)</strong></p>
+<ul>
+<li>直覺理解：生成階段每次只產出一個詞元，必須把龐大的模型權重與該請求專屬的 KV 歷史全部從記憶體搬進計算單元卻只做少許乘加，使得昂貴的 GPU 算力大多在等待資料搬運。</li>
+<li>機制或核心表達式：Gholami 等人 (2024) 彙整過去二十年趨勢，指出伺服器峰值 FLOPS 每兩年成長 3.0 倍，遠高於 DRAM 頻寬（1.6 倍）與互連頻寬（1.4 倍），定義了計算與記憶體之間的落差。Choi 等人 (2023) 進一步剖析批次推論中的注意力算子：線性投影權重可隨批次大小 <span class="math inline">b</span> 跨請求重用從而提高算術強度 <span class="math inline">I = \text{FLOPs} / \text{Bytes}</span>，但每個請求的歷史鍵值矩陣互不相同，使解碼注意力矩陣向量運算的操作位元組比維持在極低常數水準且不受 <span class="math inline">b</span> 放大，聚合 KV 容量甚至超過模型權重本身。</li>
+<li>能做到什麼，代價是什麼：批次化能攤平線性層權重的記憶體讀取成本，卻無法改變單請求解碼注意力的記憶體受限本質；這促使系統走向分組查詢注意力（GQA）、近記憶體運算架構（如 AttAcc）以及更緊緻的 KV 選擇與壓縮機制。</li>
+</ul>
+</li>
+<li>
+<p><strong>分塊預填充與預填充解碼分離 (Chunked Prefill and Prefill–Decode Disaggregation)</strong></p>
+<ul>
+<li>直覺理解：把長輸入提示切碎成小塊穿插進解碼批次裡，可以不中斷正在生成的請求；若算力與顯存條件允許，乾脆將負責吞吐長提示的 GPU 與負責穩定吐字的 GPU 拆成兩個獨立池子，各自採用最適合的並行配置。</li>
+<li>機制或核心表達式：Sarathi-Serve（Agrawal 等人，2024）將長預填充請求切分為近等長的區塊（chunks），在每次迭代將預填充塊與進行中的解碼詞元混合組成無停頓批次，讓計算受限的預填充與記憶體受限的解碼共享資源而不暫停現有解碼。相對地，DistServe（Zhong 等人，2024）將預填充池與解碼池物理分離至不同 GPU 群組，消除兩階段互相干擾，並依據應用程式的 TTFT 與 TPOT 服務目標分別獨立最佳化資源配置與張量／管線並行策略，藉此極大化系統有效吞吐量（goodput）。</li>
+<li>能做到什麼，代價是什麼：分塊預填充在單一執行個體群內即可維持高算力利用率與低解碼卡頓，無需跨節點傳輸 KV 快取；預填充與解碼分離完全解除了階段干擾與並行策略耦合，但代價是預填充完成後必須將整份 KV 快取透過高速互連遷移至解碼節點，對網路頻寬與調度器提出更高要求。</li>
+</ul>
+</li>
+<li>
+<p><strong>長脈絡分塊預填充核心與虛擬管線排程 (Block-Union KV Selection and Virtual Pipeline Parallelism)</strong></p>
+<ul>
+<li>直覺理解：等長切割預填充區塊會讓較晚到達的區塊必須回顧越來越長的前綴歷史，導致單一區塊計算時間膨脹且管線各級忙閒不均；透過區塊聯集把稀疏遮罩轉成群組 KV 表並改採 V 形虛擬管線走訪，能同時壓低注意力算量與管線氣泡。</li>
+<li>機制或核心表達式：針對分塊預填充下區塊稀疏核心因查詢長度受限於 chunk size 而低效的問題，CompactAttention（Song 等人，2026）將 2D 區塊稀疏遮罩視為 KV 選擇訊號，經由 Q-block union 與群組內聯集（intra-group union）轉換成感知 GQA 的每群組 KV 區塊表，免除 QUOKA 這類詞元級方法所需的顯式 KV 拷貝。在管線層面，VPP（Shi 等人，2026）保持固定分塊大小以避免動態調塊（DCPP）的排程開銷，透過 V 形虛擬階段走訪把每個區塊昂貴的中間計算階段與相鄰區塊較輕的首尾階段重疊，結合非同步通訊與管線封裝，在 16 顆 Ascend 910C NPU 上測試至 1M 詞元長度時，於長序列與混合工作負載分別較 DCPP 提升高達 13.1% 與 6.7% 吞吐量。</li>
+<li>能做到什麼，代價是什麼：這兩類方法在不放棄固定分塊排程簡潔性的前提下改善了百萬級長脈絡效率；代價是需要感知 GQA 群組結構的客製注意力索引與精密的跨級非同步排程協調。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>混置式分塊預填充與物理分離架構的選型邊界</strong>：Sarathi-Serve（Agrawal 等人，2024）與 DistServe（Zhong 等人，2024）都在解決預填充與解碼共存引發的延遲吞吐權衡。在什麼硬體互連條件與 TTFT／TPOT 約束下，混置分塊預填充會優於預填充與解碼物理分離，反之亦然？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>思考兩者各自的額外開銷來源。DistServe 將兩階段置於不同 GPU 後消除了計算干擾並允許獨立並行策略，但每次請求完成預填充後都必須跨越節點網路搬運完整的 KV 快取，若叢集缺少高頻寬 RDMA 互連或平均輸入極長而輸出極短，KV 傳輸延遲可能抵銷分離紅利。Sarathi-Serve 在本機混合預填充塊與解碼詞元，沒有跨機 KV 傳輸成本且適合中小規模叢集或寬鬆延遲場景，但當系統追求極嚴格的 TPOT 與 TTFT 服務等級目標（SLO）且兩階段對張量／管線並行需求迥異時，物理分離更能避免超額配置算力。</p>
+</details>
+<ol start="2">
+<li><strong>為何等長分塊預填充會在管線並行中製造延遲氣泡</strong>：在長脈絡推論採用分塊預填充管線並行（CPP）時，如果把輸入提示均勻切成相同長度的區塊，為什麼後段區塊會拖慢整條管線並形成氣泡？VPP（Shi 等人，2026）如何不改變區塊大小就緩和這個失衡？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>因果自注意力在預填充第 <span class="math inline">k</span> 個等長區塊時，查詢數雖固定為 <span class="math inline">c</span>，但必須對前面累積長度為 <span class="math inline">k \cdot c</span> 的所有歷史前綴 KV 執行注意力計算，因此越後面的區塊注意力計算量線性甚至超線性成長，導致管線各微步驟執行時間嚴重不均。動態調整區塊大小（DCPP）雖能拉平時間卻在超長序列引入高額重切排程成本；VPP 改用固定區塊配合 V 形虛擬階段走訪與非同步通訊重疊，讓昂貴的中間計算階段與鄰近請求較輕的頭尾階段錯峰執行，藉此填補氣泡。</p>
+</details>
+<ol start="3">
+<li><strong>為何大語言模型解碼的注意力層無法像線性層一樣靠增大批次提高算術強度</strong>：根據 Choi 等人 (2023) 的分析，當推論伺服器把批次大小 <span class="math inline">b</span> 放大時，前饋與投影線性層的運算效能通常隨之改善，為什麼標準解碼階段的多頭注意力運算卻依然呈現極低的操作位元組比？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>線性層對整個批次 <span class="math inline">b</span> 共用同一份權重矩陣 <span class="math inline">W</span>，因此從 DRAM 載入一次 <span class="math inline">W</span> 即可完成 <span class="math inline">b</span> 個向量的矩陣乘法，算術強度隨 <span class="math inline">b</span> 線性提升。然而在自回歸解碼的注意力計算中，批次內每個請求擁有各自獨立生成且互不重疊的歷史 KV 快取矩陣，針對每位使用者的單一查詢向量 <span class="math inline">q_i</span> 只能讀取該使用者專屬的 <span class="math inline">K_i, V_i</span> 並執行一次矩陣向量乘積，資料無法跨請求重用，導致算術強度在架構層面受限且不隨 <span class="math inline">b</span> 放大。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>從單機推論引擎走向機群級推論控制平面的調度一致性</strong>：Sisodia (2026) 整理了從 vLLM 這類引擎層向 llm-d 等分散式推論控制平面的演進，指出現代推論的稀缺資源已從純 FLOPS 轉向受管狀態（managed state）、階段放置、異質加速器與網路搬移的決策品質。當 KV 快取親和性、預填充與解碼動態擴縮容與跨節點路由同時運作時，如何避免局部引擎排程與全域控制決策產生振盪，仍是系統設計的開放議題。</li>
+<li><strong>統一執行期對全模態異構執行模式的支援</strong>：vLLM-Omni Team (2026) 指出智能體與多模態應用已不再是單一文本解碼迴圈，而包含多階段自回歸語音生成、疊代式擴散／流匹配影像視訊生成與長駐世界模型迴圈。如何在單一共享控制平面內同時協調自回歸 KV 快取管理與擴散去噪的並行排程及跨階段資料串流，目前仍處於早期架構整合階段。</li>
+<li><strong>高效能推論引擎與模型內部狀態可程式化之間的介面張力</strong>：Ko 與 Chen (2026) 在 vLLM Hook 中指出，高度最佳化的推論引擎通常封閉了內部激活與注意力張量的存取路徑，阻礙了測試期對齊（如激活引導與對抗提示偵測）的部署。如何在保留分頁記憶體、分塊預填充與 CUDA/NPU 圖優化的前提下，提供低開銷且安全的讀寫勾點（passive/active hooks），需要引擎與安全研究協同設計。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>記憶體牆剖析與異構記憶體階層核心的直接對接</strong>：本子方向關於解碼低算術強度、分頁 KV 區塊表與 GQA 群組選擇的系統需求，直接對應 <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 中的 Roofline 瓶頸診斷與 warp/block 級硬體抽象（如 ThunderKittens），兩者共同決定單卡及節點內的真實頻寬利用率。</li>
+<li><strong>管線並行排程技巧在訓練與推論之間的雙向遷移</strong>：VPP（Shi 等人，2026）為解決長脈絡分塊預填充管線氣泡而採用的虛擬階段走訪與非同步通訊重疊，與 <a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a> 中的交叉管線排程和微批次調度屬於同源的拓撲最佳化結構，差別僅在於推論無反向傳播且前綴長度逐塊遞增。</li>
+<li><strong>連續時間狀態空間模型對線性 KV 狀態推論的架構啟示</strong>：推論服務對龐大 KV 快取記憶體增長的焦慮（Gholami 等人，2024；Choi 等人，2023），在模型架構層對應固定維度隱藏狀態的狀態空間與連續時間動力系統，相關動態演進對比可參見 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A502_%E9%80%A3%E7%BA%8C%E6%99%82%E9%96%93%E5%8B%95%E5%8A%9B%E5%AD%B8%E3%80%81%E7%8B%80%E6%85%8B%E7%A9%BA%E9%96%93%E8%88%87%E6%B6%B2%E6%85%8B%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">連續時間動力學、狀態空間與液態神經網路</a>。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-ai-and-memory-wall2024">1. AI and Memory Wall（2024）</h4>
+<ul>
+<li>作者與出處：Amir Gholami, Zhewei Yao, Sehoon Kim, Coleman Hooper, Michael W. Mahoney · <em>IEEE Micro</em></li>
+<li>核心問題：大語言模型參數與算力需求因擴展律急遽上升，然而硬體運算峰值與記憶體頻寬之間的發展速度存在嚴重不對稱，使傳統以算力為中心的系統評估方法在推論服務上失準。</li>
+<li>關鍵做法：量化過去二十年伺服器硬體指標，顯示峰值 FLOPS 每兩年成長 3.0 倍，而 DRAM 頻寬與互連頻寬每兩年僅分別成長 1.6 倍與 1.4 倍；進一步剖析編碼器與解碼器 Transformer 的瓶頸差異，論證為何記憶體頻寬已成為解碼器推論服務的主導限制，並主張從模型架構、訓練與部署策略三端協同因應。</li>
+<li>跨領域啟發：建立整個推論服務系統最佳化的物理約束背景，直接連結 <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 的 Roofline 剖析視角。</li>
+<li>連結：<a href="zotero://select/library/items/BBVRMNHP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.14123" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-efficient-memory-management-for-large-language-model-serving-with-pagedattention2023">2. Efficient Memory Management for Large Language Model Serving with PagedAttention（2023）</h4>
+<ul>
+<li>作者與出處：Woosuk Kwon, Zhuohan Li, Siyuan Zhuang, Ying Sheng, Lianmin Zheng · <em>Symposium on Operating Systems Principles (SOSP)</em></li>
+<li>核心問題：提升 LLM 服務吞吐量需要高批次並行，但每個請求的 KV 快取體積龐大且長度動態增減，傳統連續配置造成嚴重的記憶體碎片與重複儲存浪費，直接限制最大可行批次大小。</li>
+<li>關鍵做法：借鏡作業系統虛擬記憶體與分頁技術提出 PagedAttention 演算法，並以此建構 vLLM 服務系統，達成近乎零浪費的 KV 快取記憶體管理與請求內／跨請求靈活共享。評估顯示在相同延遲水準下，vLLM 較 FasterTransformer 與 Orca 達成 2 至 4 倍吞吐量提升，且在更長序列與複雜解碼下優勢更明顯。</li>
+<li>跨領域啟發：奠定現代大模型推論引擎的記憶體虛擬化基礎，為後續前綴快取樹（SGLang）與分散式 KV 控制平面（llm-d）的共通底層。</li>
+<li>連結：<a href="zotero://select/library/items/PNX6AE5Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.06180" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-taming-throughput-latency-tradeoff-in-llm-inference-with-sarathi-serve2024">3. Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve（2024）</h4>
+<ul>
+<li>作者與出處：Amey Agrawal, Nitin Kedia, Ashish Panwar, Jayashree Mohan, Nipun Kwatra · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：預填充階段高延遲但算力飽和，解碼階段低延遲但算力利用率低；在連續批次處理中混入新請求的預填充疊代，會直接拖慢既有請求的解碼延遲，造成吞吐與延遲難以兼顧。</li>
+<li>關鍵做法：提出 Sarathi-Serve 排程器與分塊預填充（chunked-prefills）技術，將長預填充請求拆分為近乎等長的小區塊，設計無停頓排程（stall-free schedules）在不暫停進行中解碼的前提下吸納新請求進入批次。</li>
+<li>跨領域啟發：在單一共享 GPU 池內解決預填充阻斷解碼的實務解法，亦為 2026 年長脈絡分塊預填充核心與管線研究的前導基準。</li>
+<li>連結：<a href="zotero://select/library/items/9W8AUZV2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.02310" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-distserve-disaggregating-prefill-and-decoding-for-goodput-optimized-large-language-model-serving2024">4. DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving（2024）</h4>
+<ul>
+<li>作者與出處：Yinmin Zhong, Shengyu Liu, Junda Chen, Jianbo Hu, Yibo Zhu · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：既有服務系統將預填充與解碼共同放置於同一組 GPU 並混合批次計算，造成強烈的階段間干擾，同時強迫兩階段共用同一套資源配置與並行計畫，在嚴格 TTFT 與 TPOT 延遲要求下只能犧牲其一或過度配置硬體。</li>
+<li>關鍵做法：提出 DistServe 架構，將預填充與解碼計算分離指派至不同的 GPU 群組，消除兩者干擾，並依據應用的 TTFT 與 TPOT 延遲指標分別協同最佳化各階段的資源配比、並行策略與拓撲放置。</li>
+<li>跨領域啟發：確立預填充與解碼分離式（disaggregated）推論架構典範，推動後續控制平面調度與跨節點 KV 狀態傳輸研究。</li>
+<li>連結：<a href="zotero://select/library/items/I9BK7G39" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.09670" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-compactattention-accelerating-chunked-prefill-with-block-union-kv-selection2026">5. CompactAttention: Accelerating Chunked Prefill with Block-Union KV Selection（2026）</h4>
+<ul>
+<li>作者與出處：Jiwon Song, Dongwon Jo, Beomseok Kang, Jae-Joon Kim · <em>arXiv (Cornell University)</em></li>
+<li>核心問題：分塊預填充已成主串流長脈絡推論策略，但傳統針對單次預填充設計的區塊稀疏注意力核心在分塊長度受限時會失去效率，而既有分塊稀疏方法 QUOKA 依賴詞元級選擇又會遺漏特定查詢所需條目並引入顯式 KV 拷貝負擔。</li>
+<li>關鍵做法：提出 CompactAttention，將 2D 區塊稀疏遮罩轉為 KV 選擇訊號而非直接執行稀疏核心，透過 Q-block union 與群組內聯集（intra-group union）構造出感知 GQA 的每群組 KV 區塊表，在保持分塊預填充排程相容性的同時減少冗餘頻寬消耗。</li>
+<li>跨領域啟發：示範如何把演算法層級的稀疏模式與硬體分頁／GQA 記憶體配置結合，對應 <a class="wl" href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a> 的核心設計原則。</li>
+<li>連結：<a href="zotero://select/library/items/DEEJE8CJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.16839" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-vpp-virtual-pipeline-parallelism-for-efficient-chunked-prefill-in-long-context-llm-inference2026">6. VPP: Virtual Pipeline Parallelism for Efficient Chunked Prefill in Long-Context LLM Inference（2026）</h4>
+<ul>
+<li>作者與出處：Yan Shi, Xiaochao Wang, Jingchun Gao, Jintao Luo, Xinyi Zhou · <em>arXiv</em></li>
+<li>核心問題：在分塊預填充管線並行（CPP）中，等長區塊因越後段的區塊需注意越長的前綴 KV 快取而產生計算延遲失衡與管線氣泡；動態調整區塊長度（DCPP）雖能平衡負載卻在長序列上付出高昂排程代價。</li>
+<li>關鍵做法：提出虛擬管線並行（VPP），維持固定分塊大小並透過 V 形虛擬階段走訪最佳化管線布局，使各區塊昂貴的中間階段與鄰近區塊較輕的頭尾階段重疊，搭配非同步通訊與管線封裝消除通訊停頓。在 vLLM-Ascend 與 16 顆 Ascend 910C NPU 上對最高 1M 詞元的 MoE LLM 進行評估，較 DCPP 在長序列提升 13.1% 吞吐量、混合負載提升 6.7%。</li>
+<li>跨領域啟發：提供異質 NPU 上解決百萬詞元管線氣泡的排程範例，並將管線排程理論與 <a class="wl" href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a> 緊密連結。</li>
+<li>連結：<a href="zotero://select/library/items/QNNDEWDH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.26523" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-62-篇">G5｜本子方向全量文獻泛讀清單（共 62 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 62 篇文獻（含開放存取 PDF 17 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進44-篇">A. 奠基經典、專著與核心演進（44 篇）</h3>
+<ul>
+<li><strong>2023｜Efficient Memory Management for Large Language Model Serving with PagedAttention</strong>，Woosuk Kwon et al.（<em>Symposium on Operating Systems Principles</em>，1771 引）：SOSP 論文（<code>vLLM</code>，逾 1,770 引）：借用作業系統的虛擬記憶體分頁消除 KV Cache 的顯存碎片，改變了大模型推論服務的架構。 <a href="zotero://select/library/items/PNX6AE5Q" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2309.06180" rel="noopener">官方連結</a></li>
+<li><strong>2023｜SGLang: Efficient Execution of Structured Language Model Programs</strong>，Lianmin Zheng et al.（<em>neural information processing systems</em>，142 引）：NeurIPS 論文：用 <code>RadixAttention</code> 基數樹自動跨請求共享前綴 KV 快取，搭配壓縮有限狀態機，大幅加速多輪 Agent 與結構化生成。 <a href="zotero://select/library/items/3C5FI6QA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2312.07104" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Unleashing the Potential of PIM: Accelerating Large Batched Inference of Transformer-Based Generative Models</strong>，Jaewan Choi et al.（<em>IEEE Computer Architecture Letters</em>，17 引）：分析 Transformer 生成式模型在大批次推論時因各請求擁有獨立 KV 矩陣導致注意力層運算強度偏低，進而限制 GPU 效率，並探討利用記憶體內計算（PIM）架構加速大批次推論。 <a href="zotero://select/library/items/KIQBXAIM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1109/lca.2023.3305386" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Serving Black Communities at Hispanic Serving Institutions</strong>，Blanca E. Vega（<em>About Campus: Enriching the Student Learning Experience</em>，11 引）：發表於高等教育期刊 About Campus 的研究論文，探討在美國西語裔服務機構（HSI）的大學校園場域中，如何兼顧並支持非裔學生社群的學習體驗、歸屬感與校園服務制度設計。 <a href="zotero://select/library/items/KV26TJRA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1177/10864822221102944" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Serving Empire, Serving Nation</strong>，Jason Freitag（<em>BRILL</em>，11 引）：由 BRILL 出版的南亞史專書，考察帝國治理與民族國家建構交會時期的政治服務、忠誠認同與歷史敘事演變（原書無公開摘要，僅據書名與出版資訊記述其歷史研究主題）。 <a href="zotero://select/library/items/FZU7JX3W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1163/ej.9789004175945.i-230" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Serving citizens</strong>，Unknown Author（<em>OECD Working Papers on Public Governance</em>，7 引）：經濟合作暨發展組織（OECD）公共治理工作報告，探討政府公共服務體系的運作效能、公民滿意度評估與以民眾需求為導向的行政服務改革方向。 <a href="zotero://select/library/items/R4U2BVAK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1787/65223af7-en" rel="noopener">官方連結</a></li>
+<li><strong>2019｜Serving people</strong>，Mingdan Wu, Alfonso Del Percio（<em>Language, Culture and Society</em>，7 引）：發表於 Language, Culture and Society 的民族誌社會語言學研究，以倫敦星巴克咖啡店女性店員的日常勞動與監管體制為例，探討服務工作與階級、性別不平等的結構交織（因關鍵詞 serving 收入 20A）。 <a href="zotero://select/library/items/J535U4W9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1075/lcs.00016.wu" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Serving Society or Serving the Patient?</strong>，Niklas Juth, Christian Munthe（<em>International Library of Ethics, Law, and the New Medicine</em>，5 引）：選自 2012 年醫學倫理專書的章節，從醫療資源分配與公共衛生倫理視角探討服務社會群體與服務個別病患之間的優先順序及價值權衡問題。 <a href="zotero://select/library/items/VAX7CIKK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-94-007-2045-9_6" rel="noopener">官方連結</a></li>
+<li><strong>1992｜Serving all.</strong>，M Susser（<em>American Journal of Public Health</em>，4 引）：發表於美國公共衛生期刊（AJPH）的社論文章，從流行病學與公共衛生政策角度探討全民健康照護的可及性以及醫療服務體系公平覆蓋全體社群的實踐議題。 <a href="zotero://select/library/items/SE6QE85E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2105/ajph.82.4.521" rel="noopener">官方連結</a></li>
+<li><strong>1999｜Serving Farm Workers, Serving Farmers</strong>，Marietta Morrissey（<em>Aztlán: A Journal of Chicano Studies</em>，2 引）：分析俄亥俄州西北部季節性移工社會服務機構的運作機制，指出這些名義上服務農工的機構實際上透過招募與轉介協助農場主緩解缺工問題，並據此討論其在國家理論上的意涵。 <a href="zotero://select/library/items/2K89IWS8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1525/azt.1999.24.2.95" rel="noopener">官方連結</a></li>
+<li><strong>1997｜Serving Parliamentarians by Serving the Nation</strong>，Ivi Eenmaa（<em>Resource Sharing &amp; Information Networks</em>，2 引）：發表於圖書館資訊網路期刊的研究文章，探討議會圖書館與國家資訊服務機構如何透過跨館資源共享體系支援國會議員問政與國家公共資訊服務。 <a href="zotero://select/library/items/AWWFZ2UD" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1300/j121v12n02_10" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Serving Herself</strong>，Ashley Brown（<em>Oxford University PressNew York</em>，1 引）：牛津大學出版社專著，記述網球與高爾夫運動員 Althea Gibson 的生涯歷程，分析她在大遷徙、種族隔離與第二波女權運動背景下，如何周旋於各方體育協會與社會期待之間。 <a href="zotero://select/library/items/BFPRVPCH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/oso/9780197551752.001.0001" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Serving India</strong>，Amit Das Gupta（<em>Manohar Publishers &amp; Distributors</em>，1 引）：由 Manohar 出版的歷史與人物專書，透過印度外交與行政服務歷程的史料梳理，探討二十世紀印度國家建設與公共治理中的人物實踐及制度脈絡（原書無公開摘要，僅據題名與出處記錄）。 <a href="zotero://select/library/items/DPQP5UIR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1163/9789004752467" rel="noopener">官方連結</a></li>
+<li><strong>2023｜serving, adj.</strong>，Unknown Author（<em>Oxford English Dictionary</em>）：收錄於《Oxford English Dictionary》（2023）的英語辭書條目，記載形容詞 serving 的詞義與用法記錄，屬語言學詞典編纂資料而非推論服務系統研究（未附摘要）。 <a href="zotero://select/library/items/5IMGXQD3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1093/oed/5648611510" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Serving Money, Serving God</strong>，Sheryl Johnson（<em>Fortress Press</em>）：由 Fortress Press 出版的宗教倫理與經濟神學專書，考察宗教社群在財務管理、捐獻實踐與資本體制之間的倫理張力及信仰價值實踐（原書無公開摘要）。 <a href="zotero://select/library/items/95BCJ8E9" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/j.ctv2xkjp1j" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Serving the Eye, Serving the Soul:</strong>，Wenrui Zhao（<em>The Search for Wellbeing and Health between the Middle Ages and the Early Modern Period</em>）：收錄於中世紀至近代早期健康與醫療史專書的章節，探討歷史脈絡下視覺感官照護與身心靈健康觀念之間的文化與醫療連結（原章節無公開摘要）。 <a href="zotero://select/library/items/9MQIA6ZA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/jj.15136057.9" rel="noopener">官方連結</a></li>
+<li><strong>2023｜Serving Together</strong>，Julie Schmidt Hasson, Laura Estes-Swilley（<em>Lessons that Last</em>）：收錄於《Lessons that Last》（2023）一書的章節，以「共同服務（Serving Together）」為題討論教育、社群協作或實務參與經驗，非屬計算機系統推論服務研究。 <a href="zotero://select/library/items/HPV7ATUE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781003366423-112" rel="noopener">官方連結</a></li>
+<li><strong>2023｜serving-creature</strong>，Unknown Author（<em>The Arden Encyclopedia of Shakespeare’s Language</em>）：收錄於《The Arden Encyclopedia of Shakespeare’s Language》（2023）的莎士比亞語言詞彙條目，考證劇作中「serving-creature」一詞的語義內涵、文獻脈絡與歷史用法。 <a href="zotero://select/library/items/Q9ZKTCN6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9781350601529.13290" rel="noopener">官方連結</a></li>
+<li><strong>2022｜3 Serving</strong>，Unknown Author（<em>First Person Political</em>）：收錄於政治文化專書 First Person Political 的第三章，從第一人稱政治敘事與公共參與脈絡分析公民服務意識及社群行動經驗（原章節無公開摘要）。 <a href="zotero://select/library/items/7C265CCM" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.18574/nyu/9780814776858.003.0006" rel="noopener">官方連結</a></li>
+<li><strong>2021｜Serving Science versus Serving the Country</strong>，Tomasz Pudłocki（<em>Postwar Continuity and New Challenges in Central Europe, 1918–1923</em>）：收錄於歷史研究專書《Postwar Continuity and New Challenges in Central Europe, 1918–1923》的章節，探討 1918 至 1923 年間中歐科學界在服務學術與服務國家之間的張力。 <a href="zotero://select/library/items/DA8748PJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781003185017-25" rel="noopener">官方連結</a></li>
+<li><strong>2019｜SERVING NEIGHBORS, SERVING STRANGERS:</strong>，Unknown Author（<em>Hired Daughters</em>）：收錄於歷史文化專書 Hired Daughters 的章節，從家庭勞動與社會史角度探討對鄰里與外來者的服務規範及角色分工（原章節無公開摘要）。 <a href="zotero://select/library/items/NVM44KG7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/j.ctvd58tvd.10" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Media Serving</strong>，Mark Edward Soper（<em>Expanding Your Raspberry Pi</em>）：選自 2017 年《Expanding Your Raspberry Pi》的章節，介紹在樹莓派單板電腦硬體上建置與配置多媒體串流服務（media serving）的系統實作方式。 <a href="zotero://select/library/items/Z76SFQZ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/978-1-4842-2922-4_8" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Serving you; serving the AVMA; serving veterinary medicine</strong>，Unknown Author（<em>Journal of the American Veterinary Medical Association</em>）：發表於美國獸醫學會期刊（JAVMA）的學會事務短文，探討獸醫專業組織如何透過會員服務、學會治理與資源協調推進獸醫學專業發展（原條目無摘要）。 <a href="zotero://select/library/items/NN7WDG2S" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2460/javma.251.3.246" rel="noopener">官方連結</a></li>
+<li><strong>2017｜Serving Ethnicity</strong>，Simone Cinotto（<em>University of Illinois Press</em>）：收錄於伊利諾大學出版社專書的歷史研究章節，探討 1900 至 1940 年間紐約義大利裔餐飲業者如何透過飲食文化形塑族裔認同與市場形象，非屬計算機推論系統研究。 <a href="zotero://select/library/items/7N4V5QZE" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5406/illinois/9780252037733.003.0006" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Serving Neuroscience, serving IBRO, serving neuroscientists</strong>，J. Lerma（<em>Neuroscience</em>）：發表於 Neuroscience，為探討服務神經科學社群與 IBRO 組織發展的評論文章，因標題含有 serving 關鍵詞而被檢索收入 20A 推論服務分類清單。 <a href="zotero://select/library/items/SSQN22P6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1016/j.neuroscience.2015.11.036" rel="noopener">官方連結</a></li>
+<li><strong>2016｜Serving Beer</strong>，Unknown Author（<em>Beer FAQ</em>）：收錄於《Beer FAQ》（2016）一書的第十六章，介紹啤酒侍酒溫度、倒酒方式與杯具選擇等實務知識，非屬大模型推論服務研究。 <a href="zotero://select/library/items/57TQ2AAP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9798216546832.ch16" rel="noopener">官方連結</a></li>
+<li><strong>2015｜Serving Sizes</strong>，Unknown Author（<em>The SAGE Encyclopedia of Alcohol: Social, Cultural, and
+Historical Perspectives</em>）：收錄於《The SAGE Encyclopedia of Alcohol》（2015）的百科詞條，說明酒精飲品「份量標準（serving sizes）」在社會、文化與歷史面向上的界定與背景。 <a href="zotero://select/library/items/VSNKKFKJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4135/9781483331096.n433" rel="noopener">官方連結</a></li>
+<li><strong>2014｜Serving science or serving politics</strong>，Vyacheslav “Slava” Lukin（<em>Physics Today</em>）：發表於 Physics Today 的評論文章，討論科學研究服務科學界自身或服務政治政策之間的張力，因標題含 serving 一詞而收錄於 20A 相關檢索書目。 <a href="zotero://select/library/items/S3QP6KNX" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1063/pt.3.2397" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Serving the Emperor by Serving the Buddha:</strong>，GINA COGAN（<em>Family in Buddhism</em>）：收錄於佛教與家庭研究文集 Family in Buddhism 的章節，考察歷史時期佛教出家社群或信眾如何協調宗教奉獻與對皇權政治服務之間的關係（原章節無公開摘要）。 <a href="zotero://select/library/items/M5FCCKKW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/jj.18253532.5" rel="noopener">官方連結</a></li>
+<li><strong>2013｜Chapter Six: Serving Neighbors, Serving Jesus</strong>，Brenda Phillips（<em>Mennonite Disaster Service</em>）：收錄於《Mennonite Disaster Service》（2013）的專書第六章，探討門諾會災難服務組織在宗教信仰與社區救災實踐上的歷史經驗，非屬計算機系統推論服務研究。 <a href="zotero://select/library/items/XMJI6EJC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5771/9780739185469-103" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Serving Cities:</strong>，Unknown Author（<em>Building Colonial Cities of God</em>）：收錄於殖民城市史專書 Building Colonial Cities of God 的章節，探討殖民時期城市空間規劃與宗教或公共服務體制之間的歷史關聯（原章節無公開摘要）。 <a href="zotero://select/library/items/I6HIK7ZV" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/j.ctvqsdnw7.10" rel="noopener">官方連結</a></li>
+<li><strong>2012｜Serving Drills</strong>，Unknown Author（<em>The Volleyball Drill Book</em>）：收錄於《The Volleyball Drill Book》（2012）的章節，介紹排球運動中的「發球訓練（Serving Drills）」技術動作與訓練方案，非屬計算機系統研究。 <a href="zotero://select/library/items/ZV48BAP3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9781718219335.ch-002" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Serving Buchanan, Serving the Nation, 1857–1860</strong>，Elizabeth D. Leonard（<em>Lincoln's Forgotten Ally</em>）：收錄於歷史傳記《Lincoln's Forgotten Ally》（2011）的章節，探討 1857–1860 年間美國政治人物在布坎南政府任內的公職經歷與政局互動，非屬計算機系統研究。 <a href="zotero://select/library/items/8ECJUVDC" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5149/9780807869383_leonard.7" rel="noopener">官方連結</a></li>
+<li><strong>2011｜Serving shortDOIs</strong>，Martin Fenner（<em>Front Matter</em>）：介紹國際 DOI 基金會於 2010 年推出的 shortDOI 服務，說明如何將冗長的數位物件識別碼（DOI）轉換並提供短網址別名以利引用與存取，非屬大模型推論系統研究。 <a href="zotero://select/library/items/NBMPJA79" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.53731/r294649-6f79289-8cw67" rel="noopener">官方連結</a></li>
+<li><strong>2009｜Serving Others</strong>，Kristene Diggins（<em>Journal of Christian Nursing</em>）：發表於《Journal of Christian Nursing》（2009）的文章，從基督教護理實踐的視角探討服務他人的主題，屬護理與宗教倫理領域文獻，與大模型推論系統無關（未附摘要）。 <a href="zotero://select/library/items/QNSUH3KB" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1097/01.cnj.0000357436.52768.ca" rel="noopener">官方連結</a></li>
+<li><strong>2005｜Serving Hispanics</strong>，Unknown Author（<em>Designing the Best Call Center for Your Business</em>）：收錄於客服中心設計實務專書的章節，探討商業客服體系在服務西語裔客戶群體時的語言溝通規劃、文化適配及服務流程設計要點。 <a href="zotero://select/library/items/F79XJKKZ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1201/9781482280906-17" rel="noopener">官方連結</a></li>
+<li><strong>2005｜Serving Proudly</strong>，Unknown Author（<em>Reflections of Pearl Harbor</em>）：收錄於歷史文集《Reflections of Pearl Harbor》（2005）的章節，以「Serving Proudly」為題記錄珍珠港事件相關服役回憶與歷史敘事，非屬系統工程研究。 <a href="zotero://select/library/items/JFW9QG8Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9798216006404.0010" rel="noopener">官方連結</a></li>
+<li><strong>2004｜Serving Security</strong>，Robert D. McCrie（<em>Journal of Security Education</em>）：發表於 Journal of Security Education 的論述文章，探討安全管理教育領域的課程設計、專業倫理訓練與公共安全實務服務之間的連結。 <a href="zotero://select/library/items/6CQ3CIT8" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1300/j460v01n01_08" rel="noopener">官方連結</a></li>
+<li><strong>2001｜SERVING AUDIENCES</strong>，Unknown Author（<em>Media, Markets, and Democracy</em>）：收錄於 Media, Markets, and Democracy 的章節，探討媒體與民主架構下服務受眾（Serving audiences）的市場運作議題，因關鍵詞檢索納入 20A 書目。 <a href="zotero://select/library/items/59BCQEM2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1017/cbo9780511613227.002" rel="noopener">官方連結</a></li>
+<li><strong>2000｜serving arrangement</strong>，Martin H. Weik（<em>Computer Science and Communications Dictionary</em>）：收錄於 2000 年《電腦科學與通訊辭典》的詞條，界定電腦系統與推論服務架構中「服務配置（serving arrangement）」的基礎術語定義與範疇。 <a href="zotero://select/library/items/F5V6FZDU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1007/1-4020-0613-6_17134" rel="noopener">官方連結</a></li>
+<li><strong>1997｜Serving Communities</strong>，Clegg et al.（<em>October</em>）：發表於當代藝術與批判理論期刊 October 的藝術實踐文本，記錄九〇年代具社會參與取向的藝術團體在公共空間、檔案建置與社區服務脈絡下的展覽與創作對話（原條目無摘要）。 <a href="zotero://select/library/items/CHT6F4J7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/778814" rel="noopener">官方連結</a></li>
+<li><strong>1992｜Serving the Community by Serving Our Members</strong>，Michael P. Wolfe（<em>Kappa Delta Pi Record</em>）：發表於 Kappa Delta Pi Record 的教育組織評論文章，探討透過服務會員以服務整體社群的運作理念，因標題含有 serving 關鍵詞而收錄於 20A 書目。 <a href="zotero://select/library/items/VJ3INPWU" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.1080/00228958.1992.10517904" rel="noopener">官方連結</a></li>
+<li><strong>1992｜Serving Agriculture Is Serving Society</strong>，C Wayne Jordan（<em>Journal of Extension</em>）：發表於《Journal of Extension》（1992）的農業推廣評論文章，探討推廣機構在凝聚社會共識與爭取經費上的挑戰，因標題關鍵字被收錄，非屬系統推論服務研究。 <a href="zotero://select/library/items/ZMR5XMWR" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.66752/1077-5315.8256" rel="noopener">官方連結</a></li>
+<li><strong>1991｜Serving whom?</strong>，Unknown Author（<em>Nursing Standard</em>）：發表於護理期刊《Nursing Standard》（1991）的短評文章，以「Serving whom?」為題討論醫療與護理照護服務對象之議題，非屬系統工程與大模型推論服務研究。 <a href="zotero://select/library/items/52Q3M23J" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.7748/ns.5.16.3.s1" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻18-篇">B. 2024–2026 近期推進與前沿文獻（18 篇）</h3>
+<ul>
+<li><strong>2024｜AI and Memory Wall</strong>，Amir Gholami et al.（<em>IEEE Micro</em>，365 引）：<em>IEEE Micro</em> 的宏觀分析：用 20 年的硬體演進數據，指出算力（<span class="math inline">3.0\times</span>）與頻寬（<span class="math inline">1.6\times/1.4\times</span>）之間結構性的剪刀差，並說明後摩爾時代 AI 硬體與系統協同的方向。 <a href="zotero://select/library/items/BBVRMNHP" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.14123" rel="noopener">官方連結</a></li>
+<li><strong>2024｜SpotServe: Serving Generative Large Language Models on Preemptible Instances</strong>，Xupeng Miao et al.（<em>ACM International Conference on Architectural Support for Programming Languages and Operating Systems (ASPLOS)</em>，76 引）：SpotServe: Serving Generative Large Language Models on Preemptible Instances，Xupeng Miao et al.（ASPLOS 論文：雲端廉價的搶佔式 GPU 隨時會被中斷回收，本文用動態重並行與有狀態上下文的無縫遷移，大幅壓低推論服務成本，76 引）。 <a href="zotero://select/library/items/USFQWPXF" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2311.15566" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Taming Throughput-Latency Tradeoff in LLM Inference with Sarathi-Serve</strong>，Amey Agrawal et al.（<em>arXiv (Cornell University)</em>，24 引）：為解決大模型推論中批處理預填充與解碼階段交錯導致高吞吐與低延遲難以兼得的矛盾，提出推論排程器 Sarathi-Serve，透過分塊預填充（chunked-prefills）技術平衡延遲與運算資源利用率。 <a href="zotero://select/library/items/9W8AUZV2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2403.02310" rel="noopener">官方連結</a></li>
+<li><strong>2024｜DistServe: Disaggregating Prefill and Decoding for Goodput-optimized Large Language Model Serving</strong>，Yinmin Zhong et al.（<em>arXiv (Cornell University)</em>，23 引）：提出大語言模型推論服務系統 DistServe，將預填充（prefill）與解碼（decoding）階段分離部署至不同 GPU，消除兩者共存批處理產生的資源干擾，並分別最佳化首字延遲與逐字生成延遲。 <a href="zotero://select/library/items/I9BK7G39" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2401.09670" rel="noopener">官方連結</a></li>
+<li><strong>2026｜vLLM Hook v0: A Plug-in for Programming Model Internals on vLLM</strong>，Ching-Yun Ko, Pin-Yu Chen（<em>arXiv</em>）：開發外掛式框架 <code>vLLM Hook v0</code>，在不破壞生產級排程與高吞吐批次推論的前提下開放一組可程式化的介面，能讀取並即時修改已部署模型各層的內部激活態。 <a href="zotero://select/library/items/IKTEBHQ7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2603.06588" rel="noopener">官方連結</a></li>
+<li><strong>2026｜CompactAttention: Accelerating Chunked Prefill with Block-Union KV Selection</strong>，Jiwon Song et al.（<em>arXiv (Cornell University)</em>）：CompactAttention: Accelerating Chunked Prefill with Block-Union KV Selection，Jiwon Song et al.（傳統稀疏注意力在長文本分塊預填充 Chunked Prefill 的短查詢下硬體效率大跌，本文用區塊聯集 KV 選擇兼顧分塊排程與注意力加速）。 <a href="zotero://select/library/items/DEEJE8CJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2605.16839" rel="noopener">官方連結</a></li>
+<li><strong>2026｜VPP: Virtual Pipeline Parallelism for Efficient Chunked Prefill in Long-Context LLM Inference</strong>，Yan Shi et al.（<em>arXiv</em>）：針對長脈絡分塊預填充管線平行（CPP）因前綴 KV 快取增長導致的負載失衡與氣泡，提出固定分塊大小的虛擬管線平行（VPP），以 V 型虛擬階段遍歷與非同步通訊重疊高負載中間層與頭尾階段。 <a href="zotero://select/library/items/QNNDEWDH" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2608.26523" rel="noopener">官方連結</a></li>
+<li><strong>2026｜From Inference Engine to Inference Control Plane: Connecting vLLM, llm-d, and the Evolution of Efficient Distributed LLM Serving</strong>，Twinkll Sisodia（<em>arXiv</em>）：綜述 LLM 推論從單機引擎最佳化（如 vLLM 的 PagedAttention 與連續批處理）演進至分散式推論控制平面（如 llm-d 的狀態重用、階段調度與 SLO 管理）的系統架構脈絡與實務進展。 <a href="zotero://select/library/items/4XDCABZA" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2609.23130" rel="noopener">官方連結</a></li>
+<li><strong>2026｜vLLM-Omni Technical Report: A Unified Serving Runtime for Omni-Modality Generation</strong>，vLLM-Omni Team（<em>arXiv</em>）：發表全模態統一推論服務引擎 vLLM-Omni 技術報告，整合自回歸文字語音、疊代擴散流匹配生成與具狀態世界模型等異構多階段執行流程，提供跨階段傳輸、串流與會話級統一調度與資源控制平面。 <a href="zotero://select/library/items/B6RFIMJJ" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.09307" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TideKV: Delayed KV Eviction via Layer-Wise Chunked Prefill for Memory-Efficient Long-Context LLM Inference</strong>，Yu Wang et al.（<em>arXiv</em>）：TideKV: Delayed KV Eviction via Layer-Wise Chunked Prefill for Memory-Efficient Long-Context LLM Inference，Yu Wang et al.（長文本推論有個兩難：全量預填充會撐高顯存峰值，線上逐塊提早淘汰又傷精度。本文提出逐層分塊延遲 KV 淘汰機制，同時壓低預填充與解碼的峰值顯存）。 <a href="zotero://select/library/items/ZWDKKHH6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.24499" rel="noopener">官方連結</a></li>
+<li><strong>2026｜From Sessions to Serving: Integrating LLM-Based Embeddings into Retrieval for Production Content Recommendation</strong>，Zhixiong Hu et al.（<em>arXiv</em>）：提出 <code>LSER</code>（LLM Session Embedding Retrieval）系統，已在 <code>autodesk.com</code> 的生產環境上線。它用預訓練 LLM 從使用者當下的工作階段（Session）與歷史互動中提取語意嵌入，當作輔助特徵注入雙塔召回模型的使用者塔（User Tower），和既有的序列編碼器互補。為了兼顧即時行為的新鮮度與線上低延遲，工程團隊建了一條近線服務路徑（Nearline Serving Path），隨使用者的即時互動非同步刷新序列向量與 LLM 衍生向量，並寫入主推薦伺服器。跨全品類、多內容型態目錄的嚴格消融實驗顯示，LLM 語意訊號加上近線非同步架構，在工業級生產環境中可行，並穩定提升召回表現。 <a href="zotero://select/library/items/WEX6D2J7" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26096" rel="noopener">官方連結</a></li>
+<li><strong>2026｜TideCache: Efficient Hybrid LLM Serving with Transparent Cache Management and Layer-Wise Streaming</strong>，Jinbin Luo et al.（<em>arXiv</em>）：<code>TideCache</code> 是在 SGLang 上實作的混合推論服務系統，跑在 CPU–GPU 超級晶片（<code>GB300</code>、<code>GH200</code>）上，用三個組件協同調度 HBM 與主機記憶體：（1）透明快取池（Transparent Cache Pool），在固定虛擬位址背後動態重分配實體分頁給不同快取組件，不破壞既有的核心記憶體佈局與後端介面；（2）逐層快取串流器（Cache Streamer），利用有界狀態層正在計算的時間空檔，把下一個全域注意力層的前綴快取從主機記憶體預取（Prefetch）到跨全域注意力層共享的 GPU 槽位（新生成的 KV 則常駐 HBM），讓傳輸與計算重疊；（3）請求排程器（Request Scheduler），依請求大小與佇列負載動態切換常駐或串流執行，並調整容量配額。在 GB300 與 GH200 的七組模型／平台實測中，相較 SGLang + HiCache，最多可完成 2.04 倍的智能體對話輪次，整體 P50 每詞元延遲降低 20–59%，智能體 P50 首字延遲（TTFT）加速 1.40–3.05 倍。 <a href="zotero://select/library/items/XHJ54E2E" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2611.26619" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Serving time</strong>，Anna Graham（<em>The Role of Food in Resettlement and Rehabilitation</em>）：收錄於《The Role of Food in Resettlement and Rehabilitation》（2025）的章節，探討矯正體系與更生復歸歷程中「服刑期間（serving time）」與飲食角色的社會學議題。 <a href="zotero://select/library/items/UGMKGT7W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.4324/9781003374213-5" rel="noopener">官方連結</a></li>
+<li><strong>2025｜Serving Illusion</strong>，Unknown Author（<em>Phenomenology of Paint</em>）：收錄於《Phenomenology of Paint》（2025）的章節，以「Serving Illusion」為題從現象學與視覺藝術角度討論繪畫的幻象呈現，非屬系統工程研究。 <a href="zotero://select/library/items/G2TE8CM5" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.5040/9781350452053.0015" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Mooncake: A KVCache-centric Disaggregated Architecture for LLM Serving</strong>，Ruoyu Qin et al.（<em>arXiv</em>）：介紹 Kimi 推論平台 Mooncake 的 KVCache 分離式架構，將預填充與解碼叢集解耦並善用閒置 CPU、DRAM 與 SSD 資源，結合預測式早期拒絕策略在長上下文模擬場景提升最高 525% 吞吐量。 <a href="zotero://select/library/items/WU4SG96C" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2407.00079" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Serving style</strong>，Andrew McCarthy-McClean（<em>Optician</em>）：發表於視光產業刊物 Optician 的業界新品報導，預覽 EssilorLuxottica 集團於 2024 年春夏季度推出的眼鏡產品系列與設計方向。 <a href="zotero://select/library/items/8AQ8J24W" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.12968/opti.2024.269.6949.11" rel="noopener">官方連結</a></li>
+<li><strong>2024｜Serving the Jews, Serving the Empire:</strong>，Galina Zelenina（<em>New Trends in the Study of Haredi Culture and Society</em>）：收錄於哈雷迪猶太文化與社會研究文集的章節，探討特定歷史時期猶太社群領袖與組織在服務本族社群與配合帝國治理之間的互動角色（原章節無公開摘要）。 <a href="zotero://select/library/items/RPRM7CE6" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.2307/jj.22177844.6" rel="noopener">官方連結</a></li>
+<li><strong>未知年份｜Serving Dinner</strong>，Unknown Author（<em>Willamette University</em>）：典藏於威拉米特大學（Willamette University）檔案館的歷史文獻或圖像紀錄，主題涉及餐飲禮儀或社群生活史中的晚宴服務場景（原紀錄無公開摘要）。 <a href="zotero://select/library/items/PFRK6C5Z" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://doi.org/10.31096/wua044-vms_042a_box_1" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-7bcc7617">在地圖上查看</a><div class="rg"><h3>相關<span class="n">3</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。</span></li><li><a href="20B_%E5%A4%A7%E8%A6%8F%E6%A8%A1%E5%88%86%E6%95%A3%E5%BC%8F%E4%B8%A6%E8%A1%8C%E8%A8%93%E7%B7%B4%E3%80%81%E7%AE%A1%E7%B7%9A%E6%8E%92%E7%A8%8B%E8%88%87%E9%9B%86%E5%90%88%E9%80%9A%E8%A8%8A.html">大規模分散式並行訓練、管線排程與集合通訊</a></li><li><a href="20C_GPU%E8%A8%98%E6%86%B6%E9%AB%94%E9%9A%8E%E5%B1%A4%E3%80%81Roofline%E6%80%A7%E8%83%BD%E5%89%96%E6%9E%90%E8%88%87%E7%95%B0%E6%A7%8B%E5%8A%A0%E9%80%9F%E5%99%A8%E6%A0%B8%E5%BF%83.html">GPU記憶體階層、Roofline性能剖析與異構加速器核心</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>

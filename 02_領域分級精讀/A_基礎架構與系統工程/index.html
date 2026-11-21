@@ -3,32 +3,22 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#ecebe6">
-<title>A_基礎架構與系統工程 · Reading</title>
+<meta name="theme-color" content="#f7f6f0">
+<title>基礎架構與系統工程 · Reading</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
 <link rel="stylesheet" href="../../assets/style.css">
 </head>
-<body class="desk">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">領域分級精讀</a><span class="sep">/</span><a href="index.html">A_基礎架構與系統工程</a></header>
+<body class="doc lib" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html" aria-current="page">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
-<div class="sheet glass">
-<span class="kicker">8 notes</span>
-<h1>A_基礎架構與系統工程</h1>
-<section class="sec"><span class="lbl">Notes</span>
-<ul class="rows">
-<li><a href="01_Transformer%E6%A0%B8%E5%BF%83.html"><span class="num">01</span><span class="t">01｜Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</span></a></li>
-<li><a href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html"><span class="num">02</span><span class="t">02｜非 Transformer 架構（狀態空間 Mamba、連續微分方程、KAN、JEPA、脈衝與超維計算）</span></a></li>
-<li><a href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html"><span class="num">10</span><span class="t">10｜現代 AI 工具鏈（RAG／GraphRAG、擴散與流匹配生成、偏好對齊強化與自主工程智能體）</span></a></li>
-<li><a href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html"><span class="num">17</span><span class="t">17｜評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</span></a></li>
-<li><a href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html"><span class="num">18</span><span class="t">18｜RL與多模態（策略梯度與離線強化學習、統一視覺語言模型、世界模型與具身 VLA）</span></a></li>
-<li><a href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html"><span class="num">19</span><span class="t">19｜AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</span></a></li>
-<li><a href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html"><span class="num">20</span><span class="t">20｜硬體與系統（Roofline 與記憶體牆、3D 自動並行訓練、PagedAttention 與推論引擎）</span></a></li>
-<li><a href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html"><span class="num">42</span><span class="t">42｜LNN 液態與邏輯神經網路（MIT 連續時間液態動力學 LTC/CfC/NCP × IBM 實值區間全向邏輯推理）</span></a></li>
-</ul></section>
-</div>
+<span class="kicker">領域分級精讀</span>
+<h1 class="page-h">基礎架構與系統工程</h1>
+<p class="lede">8 篇筆記</p>
+<section class="lib"><h2>筆記</h2><ul class="rows-lib"><li><a href="01_Transformer%E6%A0%B8%E5%BF%83.html">Transformer 核心（注意力機制、位置幾何、稀疏專家、量化微調與計算擴展律）</a><span class="rs">這類模型不再按時間步一格一格傳遞記憶，改用自注意力（Self-Attention）依內容動態尋址，讓序列中任意兩點的通訊距離降到 O(1)。</span></li><li><a href="02_%E9%9D%9ETransformer%E6%9E%B6%E6%A7%8B.html">非 Transformer 架構</a><span class="rs">這個領域的架構不走「先把一切切成離散詞元，再做 O(N^2) 全域兩兩比對」這條路，改用連續時間動力系統（Neural ODE / SSM）、邊樣條函數逼近（K…</span></li><li><a href="10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a><span class="rs">工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。</span></li><li><a href="17_%E8%A9%95%E4%BC%B0%E8%88%87%E8%B3%87%E6%96%99.html">評估與資料（資料去重與配比最佳化、合成教科書、污染解剖與動態基準評測）</a><span class="rs">如果把模型架構比成引擎，預訓練資料配比就是決定基礎模型能力邊界的數位 DNA，基準評測則是儀表板，少了它就只能在古德哈特定律的迷霧裡盲飛。</span></li><li><a href="18_RL%E8%88%87%E5%A4%9A%E6%A8%A1%E6%85%8B.html">RL與多模態</a><span class="rs">這個領域把看懂物理世界（多模態感知）和在世界中行動並承擔後果（序貫強化學習）合成一個閉環智能體。感知這一邊，把影像、壓縮視訊流與自然語言對齊成統一的自迴歸詞元。</span></li><li><a href="19_AI%E5%AE%89%E5%85%A8%E6%94%BB%E9%98%B2.html">AI安全攻防（間接提示注入、自動化紅隊越獄、潛伏後門投毒與偏好對齊護欄）</a><span class="rs">自然語言計算從一開始就有一個根本問題：控制流與資料流混同（Instruction-Data Confusion）。</span></li><li><a href="20_%E7%A1%AC%E9%AB%94%E8%88%87%E7%B3%BB%E7%B5%B1.html">硬體與系統</a><span class="rs">這個領域處理的是怎麼在物理矽晶片的熱力學極限內，搬運和排程千億參數的數學圖。峰值算力每兩年成長 3.0×，DRAM 與跨卡互連頻寬卻只成長 1.6×／1.4×。</span></li><li><a href="42_LNN%E6%B6%B2%E6%85%8B%E8%88%87%E9%82%8F%E8%BC%AF%E7%A5%9E%E7%B6%93%E7%B6%B2%E8%B7%AF.html">LNN 液態與邏輯神經網路</a><span class="rs">這個領域收的是當代 AI 裡兩支都簡稱 LNN 的學派。兩者著力的層面不同，但都不走龐大黑盒模型的路。</span></li></ul></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 </body>
 </html>

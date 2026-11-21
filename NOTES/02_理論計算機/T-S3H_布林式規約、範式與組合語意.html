@@ -12,20 +12,20 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-ae3b30c6">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">理論計算機</a><a class="find" href="../../index.html#n=n-ae3b30c6">Find on board</a></header>
+<body class="doc" data-note="n-ae3b30c6" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 理論計算機</span>
 <article>
 
 <h1 id="t-s3h布林式規約範式與組合語意">T-S3H｜布林式規約、範式與組合語意</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E7%90%86%E8%AB%96%E8%A8%88%E7%AE%97%E6%A9%9F_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">理論計算機路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="T-S3G_%E8%A8%88%E7%AE%97%E7%9A%84%E7%B5%B1%E8%A8%88%E7%89%A9%E7%90%86.html">T-S3G 計算的統計物理</a>
 本線先備：<a class="wl" href="T46_%E5%8E%9F%E5%85%B8%EF%BC%9ABryant%201986%20%E8%88%87%20ROBDD.html">T46 原典：Bryant 1986 與 ROBDD</a> · <a class="wl" href="T45_%E9%A0%85%E6%94%B9%E5%AF%AB%EF%BC%9A%E6%AD%B8%E7%B4%84%E7%B3%BB%E7%B5%B1%E8%88%87%E7%B5%82%E6%AD%A2%E6%80%A7.html">T45 項改寫：歸約系統與終止性</a> · <a class="wl" href="T68_%E9%87%8F%E5%AD%90%E9%81%8E%E7%A8%8B%E5%9C%96%E7%A4%BA%EF%BC%88Coecke%E2%80%93Kissinger%EF%BC%89.html">T68 量子過程圖示（Coecke–Kissinger）</a>
 研究主脊：<a class="wl" href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A2_%E7%B5%84%E5%90%88%E6%80%A7%E8%88%87%E7%AF%84%E7%96%87.html">主脊2_組合性與範疇</a>
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">21_形式語意與語言學</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/02-tcs.md:263</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -64,10 +64,14 @@
 <h3 id="未來探索提示">未來探索提示</h3>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">3</span></h3><ul><li><a href="T46_%E5%8E%9F%E5%85%B8%EF%BC%9ABryant%201986%20%E8%88%87%20ROBDD.html">原典：Bryant 1986 與 ROBDD</a><span class="tag-plan">計劃</span><span class="rs">原典：Bryant 1986；用 Python 實作 ROBDD</span></li><li><a href="T45_%E9%A0%85%E6%94%B9%E5%AF%AB%EF%BC%9A%E6%AD%B8%E7%B4%84%E7%B3%BB%E7%B5%B1%E8%88%87%E7%B5%82%E6%AD%A2%E6%80%A7.html">項改寫：歸約系統與終止性</a><span class="tag-plan">計劃</span><span class="rs">Baader &amp; Nipkow 第 2 章（抽象歸約系統）、第 5 章（終止性）、第 6 章（合流與 Knuth–Bendix 完備化）；原典…</span></li><li><a href="T68_%E9%87%8F%E5%AD%90%E9%81%8E%E7%A8%8B%E5%9C%96%E7%A4%BA%EF%BC%88Coecke%E2%80%93Kissinger%EF%BC%89.html">量子過程圖示</a><span class="tag-plan">計劃</span><span class="rs">主脊 2：Coecke &amp; Kissinger，*Picturing Quantum Processes* 選章；圖示線性代數；理想語言的整理</span></li></ul></div><div class="rg"><h3>相關<span class="n">5</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21_%E5%BD%A2%E5%BC%8F%E8%AA%9E%E6%84%8F%E8%88%87%E8%AA%9E%E8%A8%80%E5%AD%B8.html">形式語意與語言學：範疇語法、形式分佈語意、組合性與理性言語行為</a><span class="rs">形式語意與語言學研究兩件事：有限的詞彙怎麼靠嚴格的代數結構拼出無限多的精確意義（組合性），以及統計向量空間怎麼和邏輯真值、社會博弈語用（言外之意…</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21A_Montague%E7%B5%84%E5%90%88%E8%AA%9E%E6%84%8F%E3%80%81%E7%AF%84%E7%96%87%E8%AA%9E%E6%B3%95%E8%88%87Lambek%E9%A1%9E%E5%9E%8B%E9%82%8F%E8%BC%AF%E6%BC%94%E7%AE%97.html">Montague組合語意、範疇語法與Lambek類型邏輯演算</a></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/F_%E8%85%A6%E8%AA%8D%E7%9F%A5%E3%80%81%E7%94%9F%E5%91%BD%E5%BD%A2%E6%85%8B%E3%80%81%E5%93%B2%E5%AD%B8%E8%88%87%E7%A4%BE%E6%9C%83%E6%BC%94%E5%8C%96/21C_%E8%AA%9E%E8%A8%80%E6%A8%A1%E5%9E%8B%E5%8F%A5%E6%B3%95%E5%BD%A2%E5%BC%8F%E9%9A%8E%E5%B1%A4%E3%80%81%E7%B5%84%E5%90%88%E6%B3%9B%E5%8C%96%E6%B8%AC%E8%A9%A6%E8%88%87%E5%BD%A2%E5%BC%8F%E5%8C%96%E8%AA%9E%E6%84%8F%E5%BA%AB.html">語言模型句法形式階層、組合泛化測試與形式化語意庫</a></li><li><a href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A2_%E7%B5%84%E5%90%88%E6%80%A7%E8%88%87%E7%AF%84%E7%96%87.html">主脊2_組合性與範疇</a><span class="rs">下面列出路線上與這條主脊相關的章節，依學習線分組。歸屬由路線檔的「主脊」標註與內容關鍵詞推定；寫正文時會再核對。</span></li><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a><span class="rs">範疇論曾被調侃為「抽象廢話（Abstract Nonsense）」，應用範疇論把它變成一門研究各種系統如何互連、開放系統如何組合的學問（Scie…</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

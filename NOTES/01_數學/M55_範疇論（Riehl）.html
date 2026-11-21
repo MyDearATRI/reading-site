@@ -12,20 +12,20 @@
 <link rel="stylesheet" href="../../assets/desk.css">
 <link rel="stylesheet" href="../../assets/depth.css">
 </head>
-<body class="doc" data-note="n-9548fcfd">
-<header class="bar glass"><a class="brand" href="../../index.html">Reading</a><span class="sep">/</span><a href="../index.html">NOTES</a><span class="sep">/</span><a href="index.html">數學</a><a class="find" href="../../index.html#n=n-9548fcfd">Find on board</a></header>
+<body class="doc" data-note="n-9548fcfd" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
 <main>
 <span class="kicker">NOTES · 數學</span>
 <article>
 
 <h1 id="m55範疇論riehl">M55｜範疇論（Riehl）</h1>
-<aside class="callout" data-kind="nav"><p class="callout-title">導航</p>
-<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">00_NOTES_學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">00_MOC_全域知識星圖</a>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>筆記星圖：<a class="wl" href="../00_NOTES_%E5%AD%B8%E7%BF%92%E7%AD%86%E8%A8%98%E6%98%9F%E5%9C%96.html">NOTES 學習筆記星圖</a> ｜ 本線：<a class="wl" href="00_%E6%95%B8%E5%AD%B8_%E8%B7%AF%E7%B7%9A%E7%B4%A2%E5%BC%95.html">數學路線索引</a> ｜ 閱讀庫總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a>
 上一章：<a class="wl" href="M54_%E4%BA%A4%E6%8F%9B%E4%BB%A3%E6%95%B8%EF%BC%88Atiyah%E2%80%93Macdonald%EF%BC%89.html">M54 交換代數（Atiyah–Macdonald）</a> ｜ 下一章：<a class="wl" href="M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">M56 層與拓撲斯</a>
 本線先備：<a class="wl" href="M48_%E5%9F%BA%E6%9C%AC%E7%AF%84%E7%96%87%E8%AB%96%EF%BC%88Leinster%EF%BC%89.html">M48 基本範疇論（Leinster）</a>
 研究主脊：<a class="wl" href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A2_%E7%B5%84%E5%90%88%E6%80%A7%E8%88%87%E7%AF%84%E7%96%87.html">主脊2_組合性與範疇</a>
-閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">15_應用範疇論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">11_高階範疇論</a></p>
-</aside>
+閱讀庫相關領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a> · <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a></p>
+</details>
 <aside class="callout" data-kind="info"><p class="callout-title">路線上的計劃（摘自 <code>Learning/curriculum/01-math.md:210</code>；這一格是計劃，不代表已學到）</p>
 <p></p>
 <ul>
@@ -61,10 +61,14 @@
 </ul>
 <!-- EXTENSION_END -->
 </article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><div class="rg"><h3>先讀<span class="n">1</span></h3><ul><li><a href="M48_%E5%9F%BA%E6%9C%AC%E7%AF%84%E7%96%87%E8%AB%96%EF%BC%88Leinster%EF%BC%89.html">基本範疇論</a><span class="tag-plan">計劃</span><span class="rs">Leinster，*Basic Category Theory*</span></li></ul></div><div class="rg"><h3>讀完可接<span class="n">3</span></h3><ul><li><a href="M56_%E5%B1%A4%E8%88%87%E6%8B%93%E6%92%B2%E6%96%AF.html">層與拓撲斯</a><span class="tag-plan">計劃</span><span class="rs">Mac Lane &amp; Moerdijk，*Sheaves in Geometry and Logic* 第 I–IV、VI 章</span></li><li><a href="M59_%E6%A6%82%E5%BD%A2%E8%AB%96%EF%BC%88Vakil%EF%BC%89.html">概形論</a><span class="tag-plan">計劃</span><span class="rs">Vakil，*The Rising Sea* 第 1–11 章選讀：層、概形、態射</span></li><li><a href="M64_%E6%95%B8%E5%AD%B8%E5%8E%9F%E5%85%B8%EF%BC%9AHilbert%E3%80%81G%C3%B6del%E3%80%81Grothendieck%E3%80%81Lawvere.html">數學原典：Hilbert、Gödel、Grothendieck、Lawvere</a><span class="tag-plan">計劃</span><span class="rs">數學原典：Hilbert 1900 年的 23 個問題；Gödel 1931（van Heijenoort 英譯）；Grothendieck 1…</span></li></ul></div><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11_%E9%AB%98%E9%9A%8E%E7%AF%84%E7%96%87%E8%AB%96.html">高階範疇論</a><span class="rs">兩個物件「以哪一種方式同構」（見證路徑、路徑之間的變形，乃至無窮階相容性），在數學裡到處出現，傳統集合論卻把它抹平。</span></li><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/15_%E6%87%89%E7%94%A8%E7%AF%84%E7%96%87%E8%AB%96.html">應用範疇論</a><span class="rs">範疇論曾被調侃為「抽象廢話（Abstract Nonsense）」，應用範疇論把它變成一門研究各種系統如何互連、開放系統如何組合的學問（Scie…</span></li><li><a href="../../04_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E5%85%A8%E5%BA%AB%E6%B3%9B%E8%AE%80/C_%E7%B4%94%E6%95%B8%E5%AD%B8%E3%80%81%E7%AF%84%E7%96%87%E8%AB%96%E8%88%87%E9%82%8F%E8%BC%AF%E5%9F%BA%E7%A4%8E/11A_%E6%93%AC%E7%AF%84%E7%96%87%E3%80%81%E5%AE%8C%E5%82%99Segal%E7%A9%BA%E9%96%93%E8%88%87%E7%84%A1%E7%AA%AE%E7%AF%84%E7%96%87%E6%A8%A1%E5%9E%8B%E7%8D%A8%E7%AB%8B%E5%9F%BA%E7%A4%8E.html">擬範疇、完備Segal空間與無窮範疇模型獨立基礎</a></li><li><a href="../00_%E7%A0%94%E7%A9%B6%E4%B8%BB%E8%84%8A/%E4%B8%BB%E8%84%8A2_%E7%B5%84%E5%90%88%E6%80%A7%E8%88%87%E7%AF%84%E7%96%87.html">主脊2_組合性與範疇</a><span class="rs">下面列出路線上與這條主脊相關的章節，依學習線分組。歸屬由路線檔的「主脊」標註與內容關鍵詞推定；寫正文時會再核對。</span></li></ul></div></section>
 </main>
-<footer class="site">Built 2026-11-20</footer>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
 <script defer src="../../assets/depth.js"></script>
 <script defer src="../../assets/desk.js"></script>
 <script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
 </body>
 </html>

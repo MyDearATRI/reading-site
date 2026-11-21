@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#f7f6f0">
+<title>10C｜偏好對齊DPO、RLHF與後訓練價值微調 · Reading</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" media="print" onload="this.media='all'"><noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"></noscript>
+<link rel="stylesheet" href="../../assets/style.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<link rel="stylesheet" href="../../assets/desk.css">
+<link rel="stylesheet" href="../../assets/depth.css">
+</head>
+<body class="doc" data-note="n-f25dfaef" data-root="../../">
+<header class="bar"><a class="brand" href="../../index.html">Reading</a><nav class="site-nav" aria-label="網站"><a href="../../index.html">今天</a><a href="../../library.html">書庫</a><a href="../../shelf.html">地圖</a></nav><button class="search-btn" type="button" data-search aria-label="搜尋（⌘K）"><span>搜尋</span><kbd>⌘K</kbd></button></header>
+<main>
+<span class="kicker">子方向精讀與全庫泛讀 · 基礎架構與系統工程</span>
+<article>
+
+<h1 id="10c偏好對齊dporlhf與後訓練價值微調">10C｜偏好對齊DPO、RLHF與後訓練價值微調</h1>
+<details class="callout" data-kind="nav"><summary>導航</summary>
+<p>全域總控台：<a class="wl" href="../../00_MOC_%E5%85%A8%E5%9F%9F%E7%9F%A5%E8%AD%98%E6%98%9F%E5%9C%96.html">全域知識星圖</a> ｜ 子方向總索引：<a class="wl" href="../00_%E5%AD%90%E6%96%B9%E5%90%91%E7%B2%BE%E8%AE%80%E8%88%87%E6%B3%9B%E8%AE%80%E7%B8%BD%E7%B4%A2%E5%BC%95.html">全庫 148 子方向精讀與泛讀總索引（覆蓋 7,989 篇文獻）</a> ｜ 所屬主領域：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a>
+同領域子方向：<a class="wl" href="10A_%E6%AA%A2%E7%B4%A2%E5%A2%9E%E5%BC%B7%E7%94%9F%E6%88%90RAG%E3%80%81%E5%9C%96%E8%AD%9C%E6%AA%A2%E7%B4%A2%E8%88%87%E9%95%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AD%89%E6%93%9A%E7%AF%A9%E9%81%B8.html">檢索增強生成RAG、圖譜檢索與長上下文證據篩選</a> · <a class="wl" href="10B_%E6%B5%81%E5%8C%B9%E9%85%8DFlow%20Matching%E3%80%81%E6%95%B4%E6%B5%81%E6%B5%81%E8%88%87%E9%80%A3%E7%BA%8C%E6%93%B4%E6%95%A3%E7%94%9F%E6%88%90.html">流匹配Flow Matching、整流流與連續擴散生成</a> · <a class="wl" href="10D_%E5%B7%A5%E5%85%B7%E8%AA%BF%E7%94%A8%E3%80%81%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%9C%96%E8%AD%9C%E8%88%87%E8%87%AA%E4%B8%BBSWE%E6%99%BA%E8%83%BD%E9%AB%94%E7%B3%BB%E7%B5%B1.html">工具調用、程式碼圖譜與自主SWE智能體系統</a>
+跨領域關聯子方向：<a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a>
+跨領域專題橋接：<a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A503_%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8%E3%80%81Wasserstein%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E7%94%9F%E6%88%90%E6%93%B4%E6%95%A3.html">隨機熱力學、Wasserstein 梯度流與生成擴散</a></p>
+</details>
+<h2 id="g13-分鐘泛讀速覽">G1｜3 分鐘泛讀速覽</h2>
+<aside class="callout" data-kind="abstract"><p class="callout-title">核心定位</p>
+<p>本子方向位於 <a class="wl" href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a> 的後訓練對齊階段，處理語言模型從詞元機率預測轉向遵循人類意圖與安全約束的最佳化問題。核心矛盾在於如何以低記憶體開銷與低估計變異數最佳化包含 KL 散度正則項的預期回饋目標，同時避免顯式獎勵模型造成的獎勵駭客行為與策略崩潰。演進主線從早期三階段 PPO 式 RLHF 與憲法式 RLAIF 出發，經由閉式重參數化的離線偏好最佳化（DPO、KTO、SimPO），推進至無評論家網路（critic-free）的群組相對策略最佳化（GRPO）及其約束對齊、聯邦訓練與抗噪應用。</p>
+</aside>
+<ul>
+<li>核心問題：預訓練自迴歸語言模型僅擬合語料統計分布，直接輸出容易產生幻覺、無益或有害內容，且對純文字提示缺乏行為可控性。傳統三階段 RLHF 先擬合 Bradley–Terry 獎勵模型再以 PPO 線上微調，需同時維護策略、參考、獎勵與價值四個大型模型，存在梯度估計變異數大與超參數敏感的限制。當面臨長序列對齊、僅有二元好壞標籤而無成對比較資料、需滿足多項安全約束或受限於資料隱私隔離時，單純成對最大似然或獎勵前置純量化都會產生獎勵尺度失真與計算瓶頸。</li>
+<li>直覺模型：傳統 RLHF 如同先訓練一位專職評審（獎勵模型），再讓寫作者（策略模型）每次試寫後由評審打分、由另一位教練（價值網路）估算基線來調整寫法，不僅團隊龐大，寫作者還可能學會迎合評審的盲點。DPO 發現寫作者相對於初學基準的機率對數比本身就能當作評分尺，於是直接用好壞範例對照本調整參數。GRPO 則不設專職教練，每次針對同一題讓寫作者產生一組草稿，直接以該組草稿的平均分與標準差作為相對基準，從組內差異中提取更新方向。</li>
+<li>分階段閱讀路線：第一步先讀 Ouyang 等人（2022）與 Bai 等人（2022），掌握監督微調、獎勵建模與 PPO 對齊的三階段 RLHF 基準架構，以及利用原則清單進行自我批改與 AI 偏好對齊的 RLAIF 流程。第二步精讀 Rafailov 等人（2023）、Ethayarajh 等人（2024）與 Meng 等人（2024），理解從 KL 約束獎勵最大化推導出的 DPO 閉式重參數化、結合展望理論效用函數的 KTO 以及以序列平均對數機率取代參考模型的 SimPO。第三步閱讀 Girgis 等人（2026）、Guo 等人（2026）與 Kumar 等人（2026），追蹤無評論家網路的 GRPO 如何處理多約束拉格朗日標準化耦合、聯邦環境下的獎賞統計校準以及偽標籤抗噪問題。</li>
+</ul>
+<h2 id="g215-分鐘可學習精讀骨架">G2｜15 分鐘可學習精讀骨架</h2>
+<pre class="mermaid">flowchart TD
+    A[&quot;SFT 監督微調基準策略&quot;] --&gt; B[&quot;三階段 RLHF 與 PPO (Ouyang 2022)&quot;]
+    A --&gt; C[&quot;Constitutional AI 與 RLAIF (Bai 2022)&quot;]
+    B --&gt; D[&quot;DPO 閉式獎勵重參數化 (Rafailov 2023)&quot;]
+    D --&gt; E[&quot;KTO 二元展望效用對齊 (Ethayarajh 2024)&quot;]
+    D --&gt; F[&quot;SimPO 無參考序列平均對數獎勵 (Meng 2024)&quot;]
+    B --&gt; G[&quot;GRPO 群組相對無評論家最佳化&quot;]
+    G --&gt; H[&quot;約束 GRPO、聯邦 GRPO 與偽標籤獎勵 (2026)&quot;]
+</pre>
+<h3 id="核心機制與推導要點">核心機制與推導要點</h3>
+<ol>
+<li>
+<p><strong>KL 約束獎勵最大化的閉式重參數化（DPO Reparameterization）</strong></p>
+<ul>
+<li>直覺理解：策略模型與參考模型在生成同一個回答時的對數機率比值，在最優條件下直接等價於隱藏的獎勵函數，因此可以用二元分類損失替代獎勵模型與 PPO 強化學習迴圈。</li>
+<li>機制或核心表達式：對於 KL 正則化目標 <span class="math inline">\max_{\pi_\theta} \mathbb{E}_{x \sim \mathcal{D}, y \sim \pi_\theta(y|x)}[r(x,y)] - \beta \mathbb{D}_{\mathrm{KL}}(\pi_\theta(\cdot|x) \| \pi_{\mathrm{ref}}(\cdot|x))</span>，其唯一最優策略滿足 <span class="math inline">\pi^*(y|x) = \frac{1}{Z(x)} \pi_{\mathrm{ref}}(y|x)\exp(\frac{1}{\beta}r(x,y))</span>。反解可得獎勵重參數化 <span class="math inline">r(x,y) = \beta \log \frac{\pi^*(y|x)}{\pi_{\mathrm{ref}}(y|x)} + \beta \log Z(x)</span>。代入 Bradley–Terry 偏好模型 <span class="math inline">p(y_w \succ y_l | x) = \sigma(r(x,y_w) - r(x,y_l))</span> 後，僅依賴提示 <span class="math inline">x</span> 的配分項 <span class="math inline">\beta \log Z(x)</span> 彼此抵消，目標化簡為 <span class="math inline">\mathcal{L}_{\mathrm{DPO}}(\pi_\theta; \pi_{\mathrm{ref}}) = -\mathbb{E}_{(x,y_w,y_l)}[\log \sigma(\beta \log \frac{\pi_\theta(y_w|x)}{\pi_{\mathrm{ref}}(y_w|x)} - \beta \log \frac{\pi_\theta(y_l|x)}{\pi_{\mathrm{ref}}(y_l|x)})]</span>。</li>
+<li>能做到什麼，代價是什麼：消除獎勵模型擬合與線上採樣的工程複雜度與訓練不穩定性，記憶體需求減半；代價是訓練期仍需計算參考模型 <span class="math inline">\pi_{\mathrm{ref}}</span> 的前向傳播，且離線優化在策略偏離資料分布後缺乏線上探索與反饋校正。</li>
+</ul>
+</li>
+<li>
+<p><strong>無參考序列平均對數獎勵與人類感知效用（SimPO &amp; KTO）</strong></p>
+<ul>
+<li>直覺理解：解碼階段模型是依據平均每個詞元的對數機率而非序列總和進行排序，且人類對損失的厭惡強於對等額收益的偏好，據此可設計免參考模型或免成對比較資料的對齊損失。</li>
+<li>機制或核心表達式：SimPO 直接使用長度歸一化的平均對數機率作為隱式獎勵 <span class="math inline">r_{\mathrm{SimPO}}(x,y) = \frac{\beta}{|y|}\log \pi_\theta(y|x) = \frac{\beta}{|y|}\sum_{i=1}^{|y|}\log \pi_\theta(y_i | x, y_{&lt;i})</span>，並在 Bradley–Terry 目標中引入目標邊際 <span class="math inline">\gamma &gt; 0</span>，最小化 <span class="math inline">-\mathbb{E}[\log \sigma(\frac{\beta}{|y_w|}\log\pi_\theta(y_w|x) - \frac{\beta}{|y_l|}\log\pi_\theta(y_l|x) - \gamma)]</span>。KTO 則在人類感知損失（HALO）框架下採用 Kahneman–Tversky 展望理論效用函數，直接針對單筆「合意／不合意」二元反饋最大化預期生成效用，在 1B 至 30B 規模上達到或超越成對偏好法。</li>
+<li>能做到什麼，代價是什麼：SimPO 移除 <span class="math inline">\pi_{\mathrm{ref}}</span> 進一步節省顯存並消除訓練與解碼指標不一致問題；KTO 將標註成本降為單邊二元標籤。限制在於兩者均依賴靜態離線樣本分布，且 <span class="math inline">\beta</span> 與邊際 <span class="math inline">\gamma</span> 需依資料噪聲與模型規模小心校準。</li>
+</ul>
+</li>
+<li>
+<p><strong>群組相對策略最佳化與優勢級純量化（GRPO &amp; Constrained GRPO）</strong></p>
+<ul>
+<li>直覺理解：捨棄獨立的價值網路，改為對同一提示採樣一組候選回答並以組內平均與標準差計算相對優勢；但在多目標約束問題中，先加總獎勵再標準化會讓單一拉格朗日乘子的調整連帶扭曲所有目標的比重。</li>
+<li>機制或核心表達式：對提示 <span class="math inline">x</span> 採樣群組輸出 <span class="math inline">\{y_1, \dots, y_G\}</span> 後，標準 GRPO 的相對優勢為 <span class="math inline">A_i = (R_i - \mathrm{mean}(\mathbf{R})) / \mathrm{std}(\mathbf{R})</span>。若在包含安全約束 <span class="math inline">c_k</span> 的拉格朗日最佳化中先純量化總獎勵 <span class="math inline">R_i = r_i - \sum_k \lambda_k c_{k,i}</span> 再做組內標準化，共享分母 <span class="math inline">\mathrm{std}(\mathbf{R})</span> 會同時包含各 <span class="math inline">\lambda_k</span> 的平方與共變異項，導致改變 <span class="math inline">\lambda_j</span> 即改變主獎勵與其他約束的相對權重。Constrained GRPO 改為先分別計算各訊號的組內標準化優勢 <span class="math inline">\hat{A}_{r,i}</span> 與 <span class="math inline">\hat{A}_{c_k,i}</span>，再做優勢級線性純量化：<span class="math inline">\tilde{A}_i = \hat{A}_{r,i} - \sum_k \lambda_k \hat{A}_{c_k,i}</span>。</li>
+<li>能做到什麼，代價是什麼：無需價值網路即可執行線上強化學習，且優勢級純量化恢復了多約束問題的條件數；代價是每個訓練步需為單一提示採樣多個 rollout，推論採樣開銷高，且當組內所有回覆獲得相同分數時獎勵標準差為零，梯度隨之消失。</li>
+</ul>
+</li>
+<li>
+<p><strong>偽標籤作為獎勵參考而非監督目標（On-Policy Rollout Filtering）</strong></p>
+<ul>
+<li>直覺理解：監督微調要求模型逐字背誦教師產生的偽標籤，會把錯字一併壓進策略分布；改把偽標籤當成 GRPO 的評分尺時，模型自己的採樣組內很少出現錯字，群組相對優勢便會傾向保留乾淨的轉錄結果。</li>
+<li>機制或核心表達式：在僅有無轉錄音訊的半監督語音辨識（ASR）中，教師生成的偽標籤 <span class="math inline">\hat{y}</span> 含有誤差。SFT 最小化 <span class="math inline">-\log \pi_\theta(\hat{y}|x)</span>，將誤差詞元強行寫入策略支撐集並使組內獎勵變異數坍縮。改採 GRPO 時，策略從當前分布採樣多個候選序列 <span class="math inline">\{y_i\}_{i=1}^G</span> 並以與 <span class="math inline">\hat{y}</span> 的距離作為獎勵參考；由於教師的錯誤詞元很少出現在線上採樣中，相對優勢仍對齊乾淨轉錄。</li>
+<li>能做到什麼，代價是什麼：在銀行領域測試中，GRPO 相較 SFT 取得 29.3% 至 56.2% 的相對詞錯率（WER）降幅，且教師錯誤傳遞率從接近 100% 降至 27%；前提是學生策略在微調初期已具備涵蓋正確詞彙的採樣能力。</li>
+</ul>
+</li>
+</ol>
+<h3 id="主動學習自測題">主動學習自測題</h3>
+<ol>
+<li><strong>DPO 配分函數消去與無參考長度歸一化的數學意義</strong>：在 DPO 的推導中，為何取決於提示 <span class="math inline">x</span> 的配分函數 <span class="math inline">Z(x)</span> 可以完全從損失函數中消去？如果我們像 SimPO 一樣直接移除參考模型 <span class="math inline">\pi_{\mathrm{ref}}</span>，但不加上序列長度倒數 <span class="math inline">1/|y|</span> 與目標邊際 <span class="math inline">\gamma</span>，最佳化過程會遇到什麼具體問題？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>由最優策略反解獎勵可得 <span class="math inline">r(x,y) = \beta \log \frac{\pi^*(y|x)}{\pi_{\mathrm{ref}}(y|x)} + \beta \log Z(x)</span>，因 Bradley–Terry 模型只對同一提示下的兩個輸出取差值 <span class="math inline">r(x,y_w) - r(x,y_l)</span>，只依賴 <span class="math inline">x</span> 的 <span class="math inline">\beta \log Z(x)</span> 剛好彼此相消。若直接移除 <span class="math inline">\pi_{\mathrm{ref}}</span> 且不做長度歸一化，長序列因連乘較多小於 <span class="math inline">1</span> 的詞元條件機率而總對數機率天然較低，使隱式獎勵與解碼時使用的序列平均對數似然不一致。加上 <span class="math inline">1/|y|</span> 才能將訓練目標對齊生成時的長度歸一化指標，而正邊際 <span class="math inline">\gamma</span> 則提供必要的分離推力。</p>
+</details>
+<ol start="2">
+<li><strong>多約束 GRPO 中的標準化順序與梯度權重耦合</strong>：在帶有安全約束 <span class="math inline">c_1, c_2</span> 的 GRPO 訓練中，為什麼「先算純量獎勵 <span class="math inline">R_i = r_i - \lambda_1 c_{1,i} - \lambda_2 c_{2,i}</span> 再做組內標準化」會導致改變 <span class="math inline">\lambda_1</span> 時同時影響 <span class="math inline">r</span> 與 <span class="math inline">c_2</span> 的實際梯度比重？改為先標準化再純量化為何能解決這個問題？</li>
+</ol>
+<details class="callout" data-kind="tip"><summary>參考思路</summary>
+<p>檢視組內標準化定義 <span class="math inline">A_i = (R_i - \bar{R}) / \sigma_R</span>，分母標準差 <span class="math inline">\sigma_R</span> 是由複合隨機變數 <span class="math inline">r - \lambda_1 c_1 - \lambda_2 c_2</span> 決定，其方差包含 <span class="math inline">\lambda_1^2 \mathrm{Var}(c_1)</span> 及交叉共變異數項。因此當對偶更新調大 <span class="math inline">\lambda_1</span> 時，<span class="math inline">\sigma_R</span> 隨之增大，進而縮放了分子中 <span class="math inline">r</span> 與 <span class="math inline">\lambda_2 c_2</span> 的有效權重，產生共享分母耦合。將步驟反轉為先各自計算無因次的標準化優勢 <span class="math inline">\hat{A}_r, \hat{A}_{c_1}, \hat{A}_{c_2}</span>，再以乘子線性相加 <span class="math inline">\hat{A}_r - \lambda_1 \hat{A}_{c_1} - \lambda_2 \hat{A}_{c_2}</span>，即可保證每個乘子只調節對應約束的比重。</p>
+</details>
+<h2 id="g3跨領域連結與開放問題">G3｜跨領域連結與開放問題</h2>
+<aside class="callout" data-kind="warning"><p class="callout-title">學界目前的爭論與未解問題</p>
+<p></p>
+<ol>
+<li><strong>離線偏好學習的分布偏移與線上群組採樣的訊號坍縮</strong>：DPO、KTO 與 SimPO 等離線方法避免了線上採樣與價值網路成本，但在靜態偏好資料集上反覆更新時容易脫離原始支撐集，出現勝出與落敗回答對數機率同步下降的現象。相對地，GRPO 依賴線上多軌跡採樣獲得乾淨的優勢估計，但當提示過於簡單或困難導致整組 rollout 回報一致時，獎勵標準差趨近零，有效樣本利用率與訊號穩定性之間的權衡仍未有統一解法。</li>
+<li><strong>非集中式異質獎勵與多約束對偶更新的收斂保證</strong>：在受隱私法規限制的場域，Fed-GRPO 必須以各客戶端回報的獎勵標準差權重與局部全域獎賞落差來聚合更新，當客戶端資料分布高度異質或存在錯誤偽標籤時，全域獎賞校準可能偏離真實目標。此外，在 Constrained GRPO 這類同時更新策略參數與拉格朗日乘子的雙層架構中，優勢標準化打破了傳統光滑無偏梯度假設，如何在非凸大型語言模型上嚴格保證可行域收斂仍待進一步分析。</li>
+</ol>
+</aside>
+<aside class="callout" data-kind="tip"><p class="callout-title">跨領域結構遷移</p>
+<p></p>
+<ul>
+<li><strong>KL 正則化極值變分與連續生成流匹配對偶</strong>：DPO 與 RLHF 所求解的 KL 散度約束獎勵最大化目標，在路徑與測度空間上的指數傾斜最優解 <span class="math inline">\pi^* \propto \pi_{\mathrm{ref}}\exp(r/\beta)</span>，與 <a class="wl" href="10B_%E6%B5%81%E5%8C%B9%E9%85%8DFlow%20Matching%E3%80%81%E6%95%B4%E6%B5%81%E6%B5%81%E8%88%87%E9%80%A3%E7%BA%8C%E6%93%B4%E6%95%A3%E7%94%9F%E6%88%90.html">流匹配Flow Matching、整流流與連續擴散生成</a> 中的獎勵引導生成採樣，以及 <a class="wl" href="../../03_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5%E8%88%87%E8%87%AA%E9%81%B8%E6%B7%B1%E8%AE%80%E5%BA%AB/A_%E8%B7%A8%E9%A0%98%E5%9F%9F%E5%B0%88%E9%A1%8C%E6%A9%8B%E6%8E%A5/%E6%A9%8B%E6%8E%A503_%E9%9A%A8%E6%A9%9F%E7%86%B1%E5%8A%9B%E5%AD%B8%E3%80%81Wasserstein%E6%A2%AF%E5%BA%A6%E6%B5%81%E8%88%87%E7%94%9F%E6%88%90%E6%93%B4%E6%95%A3.html">隨機熱力學、Wasserstein 梯度流與生成擴散</a> 的 Schrödinger 橋接和自由能極小化分享完全一致的變分對偶結構。</li>
+<li><strong>無價值網路群組優勢估計與可驗證智能體軌跡訓練</strong>：GRPO 以組內多軌跡相對標準化取代評論家網路、透過線上採樣支撐集過濾噪聲訊號以及按獎勵變異數調度訓練資源的技巧，可直接遷移至 <a class="wl" href="10D_%E5%B7%A5%E5%85%B7%E8%AA%BF%E7%94%A8%E3%80%81%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%9C%96%E8%AD%9C%E8%88%87%E8%87%AA%E4%B8%BBSWE%E6%99%BA%E8%83%BD%E9%AB%94%E7%B3%BB%E7%B5%B1.html">工具調用、程式碼圖譜與自主SWE智能體系統</a> 中以單元測試通過率作為可驗證獎勵的長軌跡程式碼修改與工具調用強化學習。</li>
+</ul>
+</aside>
+<h2 id="g4依學習順序排列的代表作精讀卡">G4｜依學習順序排列的代表作精讀卡</h2>
+<h4 id="1-training-language-models-to-follow-instructions-with-human-feedback2022">1. Training language models to follow instructions with human feedback（2022）</h4>
+<ul>
+<li>作者與出處：Long Ouyang, Jeff Wu, Xu Jiang, Diogo Almeida, Carroll L. Wainwright · <em>arXiv</em></li>
+<li>核心問題：預訓練大型語言模型雖然具備廣泛知識，但無法自然遵循人類使用者的真實意圖，容易生成不實、有毒或無益的回覆。需要一套可擴展的對齊訓練管線，使較小規模的模型也能在人類偏好上超越純預訓練的巨型模型。</li>
+<li>關鍵做法：提出三階段 InstructGPT 管線：先以標註員示範資料對 GPT-3 進行監督微調（SFT），再收集模型輸出排序資料訓練獎勵模型，最後使用 PPO 強化學習針對獎勵模型進行微調。人類評估顯示，經 RLHF 對齊的 1.3B 模型在偏好度上勝過 175B 的基礎 GPT-3 模型，且真實性有所提升。</li>
+<li>跨領域啟發：建立標準三階段 RLHF 與 KL 懲罰基線，為後續所有離線重參數化與無評論家最佳化方法提供比較基準。</li>
+<li>連結：<a href="zotero://select/library/items/BGKER6PS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.02155" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="2-constitutional-ai-harmlessness-from-ai-feedback2022">2. Constitutional AI: Harmlessness from AI Feedback（2022）</h4>
+<ul>
+<li>作者與出處：Yuntao Bai, Saurav Kadavath, Sandipan Kundu, Amanda Askell, Jackson Kernion · <em>arXiv</em></li>
+<li>核心問題：依賴大量人類標註員逐一標記有害輸出的人工回饋成本高昂且難以規模化。研究者需要探索如何僅透過一組明確的原則清單，讓模型自我監督並完成無害性對齊。</li>
+<li>關鍵做法：提出 Constitutional AI 兩階段流程：在監督階段由模型對初始回覆進行自我批評與改寫並據此微調；在強化學習階段由模型依據憲法原則自行評比成對樣本生成 AI 偏好資料集，進而訓練偏好模型並執行 RLAIF。此法在無需人類標記有害樣本的情況下，訓練出能解釋拒絕原因而非單純迴避的無害助理。</li>
+<li>跨領域啟發：將人類價值監督抽離為顯式原則清單與 AI 自我評估訊號，開啟可擴展合成偏好資料與推理鏈評審的路徑。</li>
+<li>連結：<a href="zotero://select/library/items/8ZFBVTXW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.08073" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="3-direct-preference-optimization-your-language-model-is-secretly-a-reward-model2023">3. Direct Preference Optimization: Your Language Model is Secretly a Reward Model（2023）</h4>
+<ul>
+<li>作者與出處：Rafael Rafailov, Archit Sharma, Eric Mitchell, Stefano Ermon, Christopher D. Manning · <em>arXiv</em></li>
+<li>核心問題：傳統 RLHF 必須先擬合顯式獎勵模型再透過不穩定的 PPO 強化學習進行策略最佳化，整體訓練流程複雜且需要大量的線上採樣與超參數調整。</li>
+<li>關鍵做法：利用 KL 約束獎勵最大化的最優解形式，建立獎勵函數與最優策略對數機率比之間的閉式重參數化，進而消除配分函數並將整個 RLHF 目標化簡為僅在離線偏好對上執行的二元分類交叉熵損失（DPO）。</li>
+<li>跨領域啟發：揭示策略機率本身即隱含獎勵模型，奠定後續離線偏好最佳化家族的數學推導基礎。</li>
+<li>連結：<a href="zotero://select/library/items/8RTCXFW2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.18290" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="4-simpo-simple-preference-optimization-with-a-reference-free-reward2024">4. SimPO: Simple Preference Optimization with a Reference-Free Reward（2024）</h4>
+<ul>
+<li>作者與出處：Yu Meng, Mengzhou Xia, Danqi Chen · <em>arXiv</em></li>
+<li>核心問題：DPO 雖免除顯式獎勵模型與 PPO，但訓練時仍需維持一個凍結的參考模型，增加計算與記憶體負擔，且其總對數機率比獎勵與生成時的長度歸一化指標存在不匹配。</li>
+<li>關鍵做法：提出 SimPO，直接以序列的平均對數機率作為隱式獎勵函數，完全移除對參考模型的依賴，並在 Bradley–Terry 目標中加入目標獎勵邊際以拉開勝敗回覆的差距。在 Mistral、Llama 3 與 Gemma 2 上的 AlpacaEval 2、MT-Bench 與 Arena-Hard 基準均取得優於 DPO 變體的表現。</li>
+<li>跨領域啟發：展示將訓練獎勵函數嚴格對齊解碼指標即可同時改善效能與系統記憶體效率。</li>
+<li>連結：<a href="zotero://select/library/items/RKKX5RXK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.14734" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="5-constrained-group-relative-policy-optimization2026">5. Constrained Group Relative Policy Optimization（2026）</h4>
+<ul>
+<li>作者與出處：Roger Girgis, Rodrigue de Schaetzen, Luke Rowe, Azalée Robitaille, Christopher Pal · <em>arXiv</em></li>
+<li>核心問題：GRPO 已成為無評論家網路微調大型語言與視覺語言模型的主流方法，但其在需要同時滿足多項安全條件的約束策略最佳化中的行為與相容性尚未受到系統性檢驗。</li>
+<li>關鍵做法：提出基於拉格朗日框架的 Constrained GRPO，並指出在獎勵層級先純量化再執行 GRPO 組內標準化會產生共享分母耦合：調整單一約束乘子會連帶改變主獎勵與其他約束的相對權重。作者改為先分別標準化各個訊號的優勢函數再進行純量化，從而改善最佳化條件數。</li>
+<li>跨領域啟發：示範組內統計歸一化與拉格朗日對偶更新之間非平凡的交互作用，對多目標後訓練具有重要方法論意義。</li>
+<li>連結：<a href="zotero://select/library/items/7D56F29T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.05863" rel="noopener">官方連結</a></li>
+</ul>
+<h4 id="6-pseudo-labels-as-rewards-not-targets-group-relative-policy-optimization-for-semi-supervised-asr2026">6. Pseudo-Labels as Rewards, Not Targets: Group-Relative Policy Optimization for Semi-Supervised ASR（2026）</h4>
+<ul>
+<li>作者與出處：Shashi Kumar, Yanis Labrak, Sergio Burdisso, Esaú Villatoro-Tello, Petr Motlicek · <em>arXiv</em></li>
+<li>核心問題：將自動語音辨識（ASR）遷移至無人工轉錄的領域時通常使用教師模型產生的偽標籤進行監督微調，但 SFT 會把每個偽標籤詞元當成真實目標，導致學生幾乎完全繼承教師的辨識錯誤。</li>
+<li>關鍵做法：改為將相同的教師偽標籤作為 GRPO 的獎勵參考而非監督目標。實驗顯示在銀行領域的 Whisper 偽標籤任務上，GRPO 相較 SFT 取得 29.3% 至 56.2% 的相對詞錯率改善，教師錯誤通過率從近 100% 降至 27%，原因在於錯誤偽標籤詞元極少出現在策略的線上 rollout 中，使群組優勢維持對齊乾淨轉錄。</li>
+<li>跨領域啟發：證明帶有雜訊的偽標籤適合充當強化學習獎勵而非交叉熵目標，這項洞察可推廣至半監督序列生成與自我改進任務。</li>
+<li>連結：<a href="zotero://select/library/items/FFN5K8T3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.32572" rel="noopener">官方連結</a></li>
+</ul>
+<h2 id="g5本子方向全量文獻泛讀清單共-8-篇">G5｜本子方向全量文獻泛讀清單（共 8 篇）</h2>
+<aside class="callout" data-kind="info"><p class="callout-title">泛讀與深讀切換</p>
+<p>以下完整列出本子方向收錄的全部 8 篇文獻（含開放存取 PDF 8 篇），每篇均附已驗證的 Zotero 條目連結。泛讀時直接掃描標題後的一句話重點；想看原文或推導細節時，點 <code>📚 Zotero 開啟</code> 即可在 Zotero 閱讀隱藏庫 PDF。</p>
+</aside>
+<h3 id="a-奠基經典專著與核心演進3-篇">A. 奠基經典、專著與核心演進（3 篇）</h3>
+<ul>
+<li><strong>2023｜Direct Preference Optimization: Your Language Model is Secretly a Reward Model</strong>，Rafael Rafailov et al.（<em>arXiv</em>）：提出 RLHF 獎勵模型的新參數化方式並以閉式解直接對應最佳策略，推導出直接偏好最佳化演算法 DPO，使語言模型無須擬合獨立獎勵模型或執行強化學習即可對齊人類偏好。 <a href="zotero://select/library/items/8RTCXFW2" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2305.18290" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Training language models to follow instructions with human feedback</strong>，Long Ouyang et al.（<em>arXiv</em>）：提出透過人類回饋強化學習（RLHF）將語言模型與使用者意圖對齊的 InstructGPT 訓練流程，結合人工示範監督微調與輸出排序獎勵模型，改善輸出真實性與指令遵循。 <a href="zotero://select/library/items/BGKER6PS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2203.02155" rel="noopener">官方連結</a></li>
+<li><strong>2022｜Constitutional AI: Harmlessness from AI Feedback</strong>，Yuntao Bai et al.（<em>arXiv</em>）：提出 Constitutional AI 方法，僅依據規則清單而不需人類標註有害輸出，先經監督式自我批判與修正微調，再以 AI 偏好模型作為獎勵訊號進行來自 AI 回饋的強化學習 (RLAIF) 以訓練無害助手。 <a href="zotero://select/library/items/8ZFBVTXW" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2212.08073" rel="noopener">官方連結</a></li>
+</ul>
+<h3 id="b-20242026-近期推進與前沿文獻5-篇">B. 2024–2026 近期推進與前沿文獻（5 篇）</h3>
+<ul>
+<li><strong>2026｜Constrained Group Relative Policy Optimization</strong>，Roger Girgis et al.（<em>arXiv</em>）：提出 Constrained GRPO。論文分析群組標準差正規化如何扭曲拉格朗日對偶梯度，然後把獎勵優勢的正規化與約束違反的懲罰解耦，在不用價值網路的前提下嚴格守住安全邊界。 <a href="zotero://select/library/items/7D56F29T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2602.05863" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Fed-GRPO: Reward-Signal-Driven Federated Group Relative Policy Optimization</strong>，Pengxin Guo et al.（<em>arXiv</em>）：為在隱私限制下進行聯邦推理強化學習微調，提出聯邦群組相對策略最佳化框架 Fed-GRPO，在不共享原始資料前提下直接利用 GRPO 訓練產生的獎勵標準差等零成本統計訊號驅動加權聚合與本地訓練。 <a href="zotero://select/library/items/H4BEZJUS" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.11502" rel="noopener">官方連結</a></li>
+<li><strong>2026｜Pseudo-Labels as Rewards, Not Targets: Group-Relative Policy Optimization for Semi-Supervised ASR</strong>，Shashi Kumar et al.（<em>arXiv</em>）：針對半監督語音辨識微調易直接繼承教師偽標籤錯誤的問題，改將偽標籤作為群組相對策略最佳化（GRPO）的獎勵參考而非監督目標，於金融領域較 SFT 降低 29.3–56.2% 詞錯率且教師錯誤傳遞率降至 27%。 <a href="zotero://select/library/items/FFN5K8T3" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2610.32572" rel="noopener">官方連結</a></li>
+<li><strong>2024｜KTO: Model Alignment as Prospect Theoretic Optimization</strong>，Kawin Ethayarajh et al.（<em>arXiv</em>）：基於 Kahneman–Tversky 前景理論提出人類感知損失（HALO）與 KTO 對齊演算法，直接最大化蘊含損失厭惡心理的生成效用而非成對偏好對數似然，在無須成對偏好標註下達到與 DPO 等方法相當或更佳的表現。 <a href="zotero://select/library/items/K9VSUD2T" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2402.01306" rel="noopener">官方連結</a></li>
+<li><strong>2024｜SimPO: Simple Preference Optimization with a Reference-Free Reward</strong>，Yu Meng, Mengzhou Xia, Danqi Chen（<em>arXiv</em>）：提出無須參考模型的偏好最佳化演算法 SimPO，改以序列平均對數機率作為隱式獎勵以貼合模型生成並節省記憶體與算力，同時在 Bradley–Terry 目標引入目標獎勵邊界以改善對齊表現。 <a href="zotero://select/library/items/RKKX5RXK" class="zotero">📚 Zotero 開啟</a> ｜ <a href="https://arxiv.org/abs/2405.14734" rel="noopener">官方連結</a></li>
+</ul>
+</article>
+<section class="relations" aria-label="關聯筆記"><h2>關聯</h2><a class="maplink" href="../../shelf.html#n=n-f25dfaef">在地圖上查看</a><div class="rg"><h3>相關<span class="n">4</span></h3><ul><li><a href="../../02_%E9%A0%98%E5%9F%9F%E5%88%86%E7%B4%9A%E7%B2%BE%E8%AE%80/A_%E5%9F%BA%E7%A4%8E%E6%9E%B6%E6%A7%8B%E8%88%87%E7%B3%BB%E7%B5%B1%E5%B7%A5%E7%A8%8B/10_%E5%B7%A5%E5%85%B7%E9%8F%88.html">現代 AI 工具鏈</a><span class="rs">工具鏈要做的事，是把只做過靜態預訓練的基座模型，變成可溯源、能做連續生成、守得住安全邊界、還能閉環行動的生產級系統。</span></li><li><a href="10A_%E6%AA%A2%E7%B4%A2%E5%A2%9E%E5%BC%B7%E7%94%9F%E6%88%90RAG%E3%80%81%E5%9C%96%E8%AD%9C%E6%AA%A2%E7%B4%A2%E8%88%87%E9%95%B7%E4%B8%8A%E4%B8%8B%E6%96%87%E8%AD%89%E6%93%9A%E7%AF%A9%E9%81%B8.html">檢索增強生成RAG、圖譜檢索與長上下文證據篩選</a></li><li><a href="10B_%E6%B5%81%E5%8C%B9%E9%85%8DFlow%20Matching%E3%80%81%E6%95%B4%E6%B5%81%E6%B5%81%E8%88%87%E9%80%A3%E7%BA%8C%E6%93%B4%E6%95%A3%E7%94%9F%E6%88%90.html">流匹配Flow Matching、整流流與連續擴散生成</a></li><li><a href="10D_%E5%B7%A5%E5%85%B7%E8%AA%BF%E7%94%A8%E3%80%81%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%9C%96%E8%AD%9C%E8%88%87%E8%87%AA%E4%B8%BBSWE%E6%99%BA%E8%83%BD%E9%AB%94%E7%B3%BB%E7%B5%B1.html">工具調用、程式碼圖譜與自主SWE智能體系統</a></li></ul></div></section>
+</main>
+<footer class="site">更新於 2026-11-20</footer>
+<script defer src="../../assets/search.js"></script>
+<script defer src="../../assets/depth.js"></script>
+<script defer src="../../assets/desk.js"></script>
+<script defer src="../../assets/embed.js"></script>
+<script defer src="../../assets/rdg-core.js"></script>
+<script defer src="../../assets/status.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script>addEventListener('DOMContentLoaded',function(){if(!window.katex)return;document.querySelectorAll('.math').forEach(function(el){try{katex.render(el.textContent,el,{displayMode:el.classList.contains('block'),throwOnError:false})}catch(e){}})});</script>
+<script type="module">import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11.4.1/dist/mermaid.esm.min.mjs';mermaid.initialize({startOnLoad:false,theme:'base',themeVariables:{fontFamily:'"Helvetica Neue",Helvetica,"PingFang TC",sans-serif',fontSize:'13px',background:'#ffffff',primaryColor:'#faf9f6',primaryBorderColor:'#8a8474',primaryTextColor:'#23221d',secondaryColor:'#f1efe9',tertiaryColor:'#ffffff',lineColor:'#9c988e',textColor:'#23221d',clusterBkg:'#faf9f6',clusterBorder:'#dedad1',edgeLabelBackground:'#ffffff',noteBkgColor:'#f1efe9',noteBorderColor:'#dedad1'}});mermaid.run();</script>
+</body>
+</html>
